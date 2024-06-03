@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7868147836065171542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4862755851070464285}
+  - component: {fileID: 6620747915740959476}
+  m_Layer: 3
+  m_Name: BossActions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4862755851070464285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868147836065171542}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.9, y: 23.189999, z: 0}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6620747915740959476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868147836065171542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8246637607eb5474b98ba032b8380bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meta: {fileID: 0}
+  bulletPrefab: {fileID: 333493663828317435, guid: 6ad0a9533621ea04baaa901e4861aae4, type: 3}
+  boss: {fileID: 0}
+  aim: {fileID: 6237041371063952720, guid: b6bbfcff6cf89804b9443133123812aa, type: 3}
+  jumpAudio: {fileID: 0}
+  meleePrefab: {fileID: 8619798365726432810, guid: 7913cdec1db1d224e8f25375d0131fd3, type: 3}
+  jumpState: 0
+  jump: 0
+  stopJump: 0
+  grabState: 0
+  stopGrab: 0
+  sprintSpeed: 6
+  sprintDuration: 1
+  sprintState: 0
+  stopSprint: 0
+  slideSpeed: 8
+  slideDuration: 0.7
+  slideState: 0
+  stopSlide: 0
+  knockbackDuration: 0.25
+  knockbackSpeed: 2
+  knockback: 0
+  knockbackState: 0
