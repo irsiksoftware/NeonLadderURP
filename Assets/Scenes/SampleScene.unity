@@ -772,6 +772,11 @@ PrefabInstance:
       propertyPath: m_TrackedObjectOffset.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5669524973949155612, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: attackDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6054133859628449912, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: orthographic

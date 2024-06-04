@@ -131,6 +131,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void ComputeVelocity()
         {
+
             if (controlEnabled)
             {
                 if (animator.GetInteger("animation") > 9000) //dances, non locomotion animations
@@ -140,7 +141,7 @@ namespace NeonLadder.Mechanics.Controllers
 
                 if (Math.Abs(velocity.x) < 0.1)
                 {
-                    animator.SetInteger("animation", 0);
+                    animator.SetInteger("animation", 1);
                 }
                 else if (Math.Abs(velocity.x) > 4)
                 {
@@ -160,7 +161,6 @@ namespace NeonLadder.Mechanics.Controllers
                 {
                     animator.SetInteger("animation", 23);
                 }
-
 
                 if (playerActions?.jump ?? false && IsGrounded)
                 {
