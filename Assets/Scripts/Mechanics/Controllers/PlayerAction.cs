@@ -135,20 +135,20 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnWeaponSwap(InputAction.CallbackContext context)
         {
-            //GameObject[] meleeWeaponGroups = GameObject.FindGameObjectsWithTag("MeleeWeaponGroup"); //there are two groups, one for each hand.
-            //GameObject[] rangedWeaponGroups = GameObject.FindGameObjectsWithTag("RangedWeaponGroup"); //there are two groups, one for each hand.
+            GameObject[] meleeWeaponGroups = GameObject.FindGameObjectsWithTag("MeleeWeapons"); //there are two groups, one for each hand.
+            GameObject[] rangedWeaponGroups = GameObject.FindGameObjectsWithTag("Firearms"); //there are two groups, one for each hand.
 
-            //if (isUsingMelee)
-            //{
-            //    SwapWeapons(meleeWeaponGroups, rangedWeaponGroups);
-            //}
-            //else
-            //{
-            //    SwapWeapons(rangedWeaponGroups, meleeWeaponGroups);
+            if (isUsingMelee)
+            {
+                SwapWeapons(meleeWeaponGroups, rangedWeaponGroups);
+            }
+            else
+            {
+                SwapWeapons(rangedWeaponGroups, meleeWeaponGroups);
 
-            //}
+            }
 
-            //isUsingMelee = !isUsingMelee;
+            isUsingMelee = !isUsingMelee;
         }
 
         private void SwapWeapons(GameObject[] currentWeapons, GameObject[] newWeapons)

@@ -978,6 +978,11 @@ PrefabInstance:
       propertyPath: m_FOVAxisMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6291838092990039470, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6517866322937790382, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_TagString
