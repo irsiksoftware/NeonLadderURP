@@ -21,7 +21,9 @@ namespace NeonLadder.Events
                 case "Player":
                     Schedule<PlayerDeath>();
                     break;
-                case "Enemy":
+                case "Boss":
+                case "Major":
+                case "Minor":
                     Schedule<EnemyDeath>();
                     break;
                 default:

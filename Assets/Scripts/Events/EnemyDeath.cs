@@ -14,7 +14,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            enemyGameObject = GameObject.Find("Karcinomorph_Tint4");
+            enemyGameObject = GameObject.Find("Karcinomorph_Tint1");
             enemyController = enemyGameObject.GetComponentInChildren<Monster>();
             enemyAnimator = enemyGameObject.GetComponent<Animator>();
 

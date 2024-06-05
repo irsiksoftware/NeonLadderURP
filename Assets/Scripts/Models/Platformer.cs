@@ -18,12 +18,10 @@ namespace NeonLadder.Models
         public Cinemachine.CinemachineVirtualCamera virtualCamera;
 
         /// <summary>
-        /// The main component which controls the player sprite, controlled 
-        /// by the user.
+        /// The main player component
         /// </summary>
-        public Player player => playerRoot.GetComponent<Player>();
+        public Player player;
 
-        public GameObject playerRoot;
 
         /// <summary>
         /// The spawn point in the scene.

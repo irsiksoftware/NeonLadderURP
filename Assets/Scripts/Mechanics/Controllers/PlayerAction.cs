@@ -391,8 +391,9 @@ namespace NeonLadder.Mechanics.Controllers
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, rayDirection, out hit, attackRange))
             {
+     
                 Debug.DrawRay(rayOrigin, rayDirection * attackRange, Color.red);
-                if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Boss"))
+                if ( hit.collider.CompareTag("Boss") || hit.collider.CompareTag("Major") || hit.collider.CompareTag("Minor"))
                 {
                     Health enemyHealth = hit.collider.GetComponent<Health>();
                     if (enemyHealth != null)
