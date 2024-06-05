@@ -10591,26 +10591,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Plate_Tetsing_Build01_SM_Plate_Tetsing_Build01_420
       objectReference: {fileID: 0}
-    - target: {fileID: 1030991406, guid: abc00000000009400821612043566218, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
-      propertyPath: m_RootOrder
-      value: 3130
-      objectReference: {fileID: 0}
-    - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
       propertyPath: m_LocalPosition.x
       value: -32.19583
@@ -10638,6 +10618,18 @@ PrefabInstance:
     - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030991407, guid: abc00000000009400821612043566218, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
