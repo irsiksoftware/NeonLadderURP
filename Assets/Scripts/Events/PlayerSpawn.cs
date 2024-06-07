@@ -16,7 +16,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            var player = model.player;
+            var player = model.Player;
             player.GetComponent<Collider>().enabled = true;
             player.controlEnabled = false;
             if (player.audioSource && player.respawnAudio)
@@ -26,8 +26,8 @@ namespace NeonLadder.Events
             player.Teleport(spawnPoint.transform.position);
             player.playerActions.jumpState = ActionStates.Ready;
             player.animator.SetBool("dead", false);
-            model.virtualCamera.m_Follow = player.transform;
-            model.virtualCamera.m_LookAt = player.transform;
+            model.VirtualCamera.m_Follow = player.transform;
+            model.VirtualCamera.m_LookAt = player.transform;
             Simulation.Schedule<EnablePlayerInput>(2f);
         }
     }

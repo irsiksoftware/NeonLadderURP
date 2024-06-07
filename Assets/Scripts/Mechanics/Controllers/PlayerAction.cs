@@ -15,6 +15,7 @@ namespace NeonLadder.Mechanics.Controllers
         private float sprintTimeAccumulator = 0f;
         public bool isClimbing { get; set; }
         private bool isUsingMelee = true;
+        public InputActionMap playerActionMap;
 
         #region Jumping
         [SerializeField]
@@ -53,7 +54,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponentInParent<Player>();
             ConfigureControls(player);
             initialAttackDuration = attackDuration; // Initialize the initial attack duration
         }
@@ -95,7 +96,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void ConfigureControls(Player player)
         {
-            var playerActionMap = player.controls.FindActionMap("Player");
+            playerActionMap = player.controls.FindActionMap("Player");
             playerActionMap.Enable();
 
             var jumpAction = playerActionMap.FindAction("Jump");

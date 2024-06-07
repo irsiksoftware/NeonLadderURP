@@ -39,7 +39,7 @@ public abstract class BasePowerUpManager : MonoBehaviour
     {
 
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        player = model.player;
+        player = model.Player;
         Mesh = GetComponent<TextMesh>();
         Collider = GetComponent<Collider2D>();
     }

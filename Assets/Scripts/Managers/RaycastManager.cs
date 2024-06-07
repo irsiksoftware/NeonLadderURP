@@ -12,7 +12,7 @@ public class RaycastManager : MonoBehaviour
     private void Awake()
     {
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        player = model.player;
+        player = model.Player;
         LineRenderer.startWidth = LineRenderer.endWidth = 0.05f; // Adjust this value as needed
     }
 

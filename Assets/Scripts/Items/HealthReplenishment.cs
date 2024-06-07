@@ -8,7 +8,7 @@ namespace NeonLadder.Items
 
         public override void OnCollect()
         {
-            var healthComponent = model.player.GetComponent<Health>();
+            var healthComponent = model.Player.GetComponent<Health>();
 
             if (healthComponent != null && healthComponent.IsAlive)
             {

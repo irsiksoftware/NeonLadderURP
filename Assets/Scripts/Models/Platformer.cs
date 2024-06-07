@@ -1,47 +1,68 @@
-
 using NeonLadder.Mechanics.Controllers;
 using UnityEngine;
 
 namespace NeonLadder.Models
 {
-    /// <summary>
-    /// The main model containing needed data to implement a platformer style 
-    /// game. This class should only contain data, and methods that operate 
-    /// on the data. It is initialised with data in the GameController class.
-    /// </summary>
     [System.Serializable]
     public class PlatformerModel
     {
-        /// <summary>
-        /// The virtual camera in the scene.
-        /// </summary>
-        public Cinemachine.CinemachineVirtualCamera virtualCamera;
+        [SerializeField]
+        private Cinemachine.CinemachineVirtualCamera virtualCamera;
+        public Cinemachine.CinemachineVirtualCamera VirtualCamera
+        {
+            get
+            {
+                if (virtualCamera == null)
+                {
+                    var cameraObject = GameObject.Find("PlayerCamera");
+                    if (cameraObject != null)
+                    {
+                        virtualCamera = cameraObject.GetComponent<Cinemachine.CinemachineVirtualCamera>();
+                    }
+                }
+                return virtualCamera;
+            }
+            set => virtualCamera = value;
+        }
 
-        /// <summary>
-        /// The main player component
-        /// </summary>
-        public Player player;
+        [SerializeField]
+        private Player player;
+        public Player Player
+        {
+            get => player ?? (player = Object.FindObjectOfType<Player>());
+            set => player = value;
+        }
 
+        [SerializeField]
+        private Transform spawnPoint;
+        public Transform SpawnPoint
+        {
+            get => spawnPoint ?? (spawnPoint = GameObject.FindWithTag("SpawnPoint")?.transform);
+            set => spawnPoint = value;
+        }
 
-        /// <summary>
-        /// The spawn point in the scene.
-        /// </summary>
-        public Transform spawnPoint;
+        [SerializeField]
+        private float jumpModifier = 1.5f;
+        public float JumpModifier
+        {
+            get => jumpModifier;
+            set => jumpModifier = value;
+        }
 
-        /// <summary>
-        /// A global jump modifier applied to all initial jump velocities.
-        /// </summary>
-        public float jumpModifier = 1.5f;
+        [SerializeField]
+        private float jumpDeceleration = 0.5f;
+        public float JumpDeceleration
+        {
+            get => jumpDeceleration;
+            set => jumpDeceleration = value;
+        }
 
-        /// <summary>
-        /// A global jump modifier applied to slow down an active jump when 
-        /// the user releases the jump input.
-        /// </summary>
-        public float jumpDeceleration = 0.5f;
-
-        /// <summary>
-        /// A global time scale multiplier applied to the game.
-        public float timeScaleMultiplier = 1f;
-
+        [SerializeField]
+        private float timeScaleMultiplier = 1f;
+        public float TimeScaleMultiplier
+        {
+            get => timeScaleMultiplier;
+            set => timeScaleMultiplier = value;
+        }
     }
 }

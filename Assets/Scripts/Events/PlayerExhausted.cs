@@ -9,7 +9,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            var player = model.player;
+            var player = model.Player;
             if (player.health.IsAlive)
             {
                 player.stamina.Deplete();

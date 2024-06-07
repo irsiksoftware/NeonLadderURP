@@ -12,16 +12,18 @@ namespace NeonLadder.Events
         float DeathAnimationDuration = 2.5f;
         public override void Execute()
         {
-            model.player.controlEnabled = false;
-            model.player.animator.SetInteger("animation", 5);
-            model.player.StartCoroutine(HandleDeathAnimation(model.player));
+            model.Player.controlEnabled = false;
+            model.Player.animator.SetInteger("animation", 5);
+            model.Player.StartCoroutine(HandleDeathAnimation(model.Player));
+            model.Player.controlEnabled = false;
+            model.Player.playerActions.playerActionMap.Disable();
         }
 
         private IEnumerator HandleDeathAnimation(Player player)
         {
             yield return new WaitForSeconds(DeathAnimationDuration);
             player.animator.enabled = false;
-
+            
             // Optionally, you can schedule a respawn or other event here
             // Simulation.Schedule<PlayerSpawn>(2);
         }

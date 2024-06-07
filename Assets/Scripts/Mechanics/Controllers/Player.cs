@@ -62,12 +62,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         void Awake()
         {
-            playerActions = GetComponent<PlayerAction>();
-            audioSource = GetComponentInParent<AudioSource>();
-            animator = GetComponentInParent<Animator>();
-            rigidbody = GetComponentInParent<Rigidbody>();
-            health = GetComponentInParent<Health>();
-            stamina = GetComponentInParent<Stamina>();
+            playerActions = GetComponentInChildren<PlayerAction>();
+            audioSource = GetComponent<AudioSource>();
+            animator = GetComponent<Animator>();
+            rigidbody = GetComponent<Rigidbody>();
+            health = GetComponent<Health>();
+            stamina = GetComponent<Stamina>();
         }
 
         public void OnCollisionEnter2D(Collision2D collision)

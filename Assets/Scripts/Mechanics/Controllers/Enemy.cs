@@ -1,11 +1,13 @@
 using Assets.Scripts;
 using NeonLadder.Events;
 using NeonLadder.Items;
+using NeonLadder.Core;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using NeonLadder.Models;
 using UnityEngine;
-using static NeonLadder.Core.Simulation;
+using Platformer.Mechanics;
+using System.Collections;
 
 namespace NeonLadder.Mechanics.Controllers
 {
@@ -15,8 +17,7 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
-        protected PlatformerModel model = GetModel<PlatformerModel>();
-        public Player target => model.player;
+        private Player target;
 
         public DropConfig dropConfig = null;
         public int moveDirection;
@@ -37,38 +38,47 @@ namespace NeonLadder.Mechanics.Controllers
         private float attackCooldown = 1.0f; // Cooldown time between attacks in seconds
         private float lastAttackTime = 0; // Timestamp of the last attack
 
-
         // Animation states
         public int idleAnimation = 0;
         public int walkForwardAnimation = 1;
         public int attackAnimation = 2;
         public int hurtAnimation = 3;
         public int deathAnimation = 4;
+        public int victoryAnimation = 5;
 
         public float deathAnimationDuration = 3.5f;
-
-
 
         public bool IsFacingLeft { get; private set; }
 
         [SerializeField]
         private MonsterStates currentState = MonsterStates.Idle;
 
+        private bool enableLogging = true; // Toggle this to enable/disable logging
+        private float logInterval = 1.0f; // Log every 1 second
+        private float lastLogTime = 0.0f; // Track time since last log
 
         void OnCollisionEnter(Collision collision)
         {
             var player = collision.gameObject.GetComponent<Player>();
             if (player != null)
             {
-                var ev = Schedule<PlayerEnemyCollision>();
+                var ev = Simulation.Schedule<PlayerEnemyCollision>();
                 ev.enemy = this;
+                if (enableLogging) Debug.Log("Collision with player detected.");
             }
         }
 
         protected void Awake()
         {
+
+            Debug.Log($"{nameof(Enemy)} - {this.gameObject.name} -> {nameof(Awake)}");
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
+            Simulation.Tick();
+            var model = Simulation.GetModel<PlatformerModel>();
+            var model2 = Game.Instance?.model;
+            target = model.Player;
+            
         }
 
         protected override void ComputeVelocity()
@@ -76,7 +86,6 @@ namespace NeonLadder.Mechanics.Controllers
             if (health.IsAlive)
             {
                 base.ComputeVelocity();  // Ensures that base class logic like physics calculations are still executed
-
                 if (moveDirection != 0)
                 {
                     animator.SetInteger("animation", walkForwardAnimation);
@@ -91,18 +100,29 @@ namespace NeonLadder.Mechanics.Controllers
         {
             base.Update();  // Ensures that base class Update is called
 
+            if (target == null)
+            {
+               LogMessage("Target is null");
+            }
+
+            if (target?.health == null)
+            {
+                LogMessage("Target health is null");
+            }
+            else
+            {
+                LogMessage(target?.health?.current.ToString());
+            }
+
+
+
             if (health.IsAlive)
             {
-                if (!target.health.IsAlive)
-                {
-                    currentState = MonsterStates.Idle;
-                    animator.SetInteger("animation", idleAnimation);
-                    return; // Early return to stop processing other states
-                }
-
-                else
+                if (target.health.IsAlive)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+                    //LogMessage($"Distance to target: {distanceToTarget}");
+
                     switch (currentState)
                     {
                         case MonsterStates.Idle:
@@ -110,10 +130,12 @@ namespace NeonLadder.Mechanics.Controllers
                             if (distanceToTarget > attackRange)
                             {
                                 currentState = MonsterStates.Approaching;
+                                LogMessage("Switching to Approaching state.");
                             }
                             else
                             {
                                 currentState = MonsterStates.Attacking;
+                                LogMessage("Switching to Attacking state.");
                             }
                             break;
                         case MonsterStates.Approaching:
@@ -123,6 +145,7 @@ namespace NeonLadder.Mechanics.Controllers
                                 moveDirection = 0;
                                 animator.SetInteger("animation", idleAnimation);
                                 currentState = MonsterStates.Reassessing;
+                                LogMessage("Reassessing before attack.");
                             }
                             else
                             {
@@ -135,11 +158,25 @@ namespace NeonLadder.Mechanics.Controllers
                                 AttackPlayer();
                                 // After attacking, reassess the situation
                                 currentState = MonsterStates.Reassessing;
+                                LogMessage("Attacked player. Reassessing.");
                             }
+
                             break;
                     }
                 }
+                else
+                {
+                    moveDirection = 0;
+                    animator.SetInteger("animation", victoryAnimation);
+                    StartCoroutine(PlayVictoryAnimation());
+                }
             }
+        }
+
+        private IEnumerator PlayVictoryAnimation()
+        {
+            yield return new WaitForSeconds(3);
+            animator.SetInteger("animation", idleAnimation);
         }
 
         public void DropItems()
@@ -151,6 +188,7 @@ namespace NeonLadder.Mechanics.Controllers
                     if (Random.Range(0f, 100f) <= dropItem.dropProbability)
                     {
                         Instantiate(dropItem.collectiblePrefab, transform.position, Quaternion.identity);
+                        if (enableLogging) Debug.Log($"Dropped item: {dropItem.collectiblePrefab.name}");
                     }
                 }
             }
@@ -158,6 +196,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void AttackPlayer()
         {
+            LogMessage("AttackPlayer called.");
             lastAttackTime = Time.time;
             target.health.Decrement(attackDamage);
             animator.SetInteger("animation", attackAnimation);
@@ -166,10 +205,20 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void ChasePlayer()
         {
-            var IsFacingLeft = (target.transform.position.x - transform.parent.position.x) < 0 ? true : false;
+            LogMessage("ChasePlayer called.");
+            IsFacingLeft = (target.transform.position.x - transform.parent.position.x) < 0 ? true : false;
             transform.parent.rotation = Quaternion.Euler(0, IsFacingLeft ? -90 : 90, 0);
             moveDirection = IsFacingLeft ? -1 : 1;
             animator.SetInteger("animation", walkForwardAnimation);
+        }
+
+        private void LogMessage(string message)
+        {
+            if (enableLogging && Time.time > lastLogTime + logInterval)
+            {
+                Debug.Log(message);
+                lastLogTime = Time.time;
+            }
         }
     }
 }

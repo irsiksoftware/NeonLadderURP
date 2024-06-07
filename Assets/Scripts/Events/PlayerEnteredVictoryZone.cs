@@ -13,8 +13,8 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            model.player.animator.SetTrigger("victory");
-            model.player.controlEnabled = false;
+            model.Player.animator.SetTrigger("victory");
+            model.Player.controlEnabled = false;
         }
     }
 }

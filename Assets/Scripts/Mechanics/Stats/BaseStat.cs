@@ -50,7 +50,6 @@ namespace NeonLadder.Mechanics.Stats
 
         protected virtual void Awake()
         {
-            //current = max;
             RestoreToMax();
         }
 

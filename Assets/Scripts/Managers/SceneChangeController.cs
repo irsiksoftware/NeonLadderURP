@@ -16,7 +16,7 @@ public class SceneChangeController : MonoBehaviour
     public AsyncOperation asyncLoad; // To handle the asynchronous scene loading
 
     private PlatformerModel platformerModel = Simulation.GetModel<PlatformerModel>();
-    private Player player => platformerModel.player;
+    private Player player => platformerModel.Player;
 
     private void Awake()
     {

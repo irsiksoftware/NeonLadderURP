@@ -7,7 +7,7 @@ namespace NeonLadder.Items
         public int amount;
         public override void OnCollect()
         {
-            model.player.AddPermanentCurrency(amount);
+            model.Player.AddPermanentCurrency(amount);
             Destroy(gameObject);
         }
     }
