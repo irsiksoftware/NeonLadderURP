@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8383141186732845002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4185943908559832658}
+  - component: {fileID: 8598125616256182611}
+  - component: {fileID: 4721412442788016091}
+  m_Layer: 0
+  m_Name: PlayerScripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4185943908559832658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383141186732845002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8598125616256182611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383141186732845002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03018d13bad052c41aa28b57fac7653b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minGroundNormalY: 0.65
+  gravityModifier: 1
+  velocity: {x: 0, y: 0, z: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  audioSource: {fileID: 0}
+  respawnAudio: {fileID: 8300000, guid: e18959d46b63f3c4c8cc020a433cf848, type: 3}
+  ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
+  jumpAudio: {fileID: 8300000, guid: 67975c08d56ceb147bad38572d805aa8, type: 3}
+  landOnGroundAudio: {fileID: 8300000, guid: dd6057fd464f77942a0bf39c54651b32, type: 3}
+  landOnEnemyAudio: {fileID: 8300000, guid: b7f741588644cd64bbee6387cb54a96d, type: 3}
+  controlEnabled: 0
+  controls: {fileID: 0}
+  staminaRegenTimer: 0
+--- !u!114 &4721412442788016091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383141186732845002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202bdf38278c7be4eb0c2e4d1ae16106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerActionsDebugText: {fileID: 0}
+  AnimationDebuggingText: {fileID: 0}
+  InputDebuggingText: {fileID: 0}
+  ControllerNameDebuggingText: {fileID: 0}
+  TouchScreenSupportDebuggingText: {fileID: 0}
+  jumpState: 0
+  jump: 0
+  stopJump: 0
+  sprintSpeed: 7
+  sprintDuration: 10
+  sprintState: 0
+  stopSprint: 0
+  attackDuration: 0
+  attackState: 0
+  stopAttack: 0

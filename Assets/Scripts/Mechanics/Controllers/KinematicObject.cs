@@ -16,6 +16,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected Vector3 targetVelocity;
         protected Vector3 groundNormal;
+        //https://github.com/Unity-Technologies/UnityCsReference/blob/master/Runtime/Export/Scripting/Component.deprecated.cs
         protected new Rigidbody rigidbody;
         protected RaycastHit[] hitBuffer = new RaycastHit[16];
 

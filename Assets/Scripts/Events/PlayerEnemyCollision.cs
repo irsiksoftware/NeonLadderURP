@@ -8,7 +8,7 @@ namespace NeonLadder.Events
 {
     public class PlayerEnemyCollision : Event<PlayerEnemyCollision>
     {
-        public Monster enemy;
+        public Enemy enemy;
         public Player player;
 
 
@@ -28,7 +28,7 @@ namespace NeonLadder.Events
                         enemyHealth.Decrement();
                         if (!enemyHealth.IsAlive)
                         {
-                            Schedule<EnemyDeath>().enemyController = enemy;
+                            Schedule<EnemyDeath>().enemy = enemy;
                             player.Bounce(2);
                         }
                         else
@@ -38,7 +38,7 @@ namespace NeonLadder.Events
                     }
                     else
                     {
-                        Schedule<EnemyDeath>().enemyController = enemy;
+                        Schedule<EnemyDeath>().enemy = enemy;
                         player.Bounce(2);
                     }
                 }

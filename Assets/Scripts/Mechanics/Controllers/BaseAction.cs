@@ -134,17 +134,17 @@ namespace NeonLadder.Mechanics.Controllers
         {
             bool isGrounded = player.IsGrounded;
             float verticalVelocity = player.velocity.y;
-            player.animator.SetFloat("velocityX", Mathf.Abs(player.velocity.x));
-            player.animator.SetFloat("velocityY", verticalVelocity);
-            player.animator.SetBool("grounded", isGrounded);
+            //player.animator.SetFloat("velocityX", Mathf.Abs(player.velocity.x));
+            //player.animator.SetFloat("velocityY", verticalVelocity);
+            //player.animator.SetBool("grounded", isGrounded);
             float fallingThreshold = -0.01f;
             if (!isGrounded && verticalVelocity < fallingThreshold)
             {
-                player?.animator.SetBool("isFalling", true);
+                //player?.animator.SetBool("isFalling", true);
             }
             else if (isGrounded)
             {
-                player?.animator.SetBool("isFalling", false);
+                //player?.animator.SetBool("isFalling", false);
             }
         }
     }

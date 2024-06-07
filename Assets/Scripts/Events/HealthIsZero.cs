@@ -1,3 +1,4 @@
+using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Stats;
 using UnityEngine;
 using static NeonLadder.Core.Simulation;
@@ -24,7 +25,8 @@ namespace NeonLadder.Events
                 case "Boss":
                 case "Major":
                 case "Minor":
-                    Schedule<EnemyDeath>();
+                    var ev = Schedule<EnemyDeath>();
+                    ev.enemy = health.gameObject.GetComponentInChildren<Enemy>();
                     break;
                 default:
                     Debug.Log(health.gameObject.tag);

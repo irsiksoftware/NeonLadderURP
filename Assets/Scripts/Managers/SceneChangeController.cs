@@ -15,12 +15,12 @@ public class SceneChangeController : MonoBehaviour
     public Directions Direction = Directions.East;
     public AsyncOperation asyncLoad; // To handle the asynchronous scene loading
 
-    private Player player;
+    private PlatformerModel platformerModel = Simulation.GetModel<PlatformerModel>();
+    private Player player => platformerModel.player;
 
     private void Awake()
     {
-        var model = Simulation.GetModel<PlatformerModel>();
-        player = model.player;
+
     }
 
     private void Start()
@@ -36,12 +36,7 @@ public class SceneChangeController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            player = collision.GetComponentInChildren<Player>();
-            if (textMeshPro != null)
-            {
-                StartLoadingScene(SceneName);
-                //textMeshPro.gameObject.SetActive(true);
-            }
+            StartLoadingScene(SceneName);
         }
     }
 
@@ -103,19 +98,19 @@ public class SceneChangeController : MonoBehaviour
                     player.Spawn(westSpawn.transform); // Spawn the player in the new scene
                     break;
                 case Directions.West:
-                    Player.Instance.Spawn(eastSpawn.transform);
+                    player.Spawn(eastSpawn.transform);
                     break;
                 case Directions.North:
-                    Player.Instance.Spawn(southSpawn.transform);
+                    player.Spawn(southSpawn.transform);
                     break;
                 case Directions.South:
-                    Player.Instance.Spawn(northSpawn.transform);
+                    player.Spawn(northSpawn.transform);
                     break;
             }
             SceneManager.sceneLoaded -= (scene, mode) => { }; // Remove the listener after the scene has been loaded
         };
 
-        
+
     }
 
     private void StartUnloadingScene(string sceneName)

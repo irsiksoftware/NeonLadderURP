@@ -60,26 +60,14 @@ namespace NeonLadder.Mechanics.Controllers
             transform.parent.position = location.position;
         }
 
-        public static Player Instance;
-
         void Awake()
         {
-            // Implement the Singleton pattern
-            if (Instance == null)
-            {
-                playerActions = GetComponent<PlayerAction>();
-                audioSource = GetComponentInParent<AudioSource>();
-                animator = GetComponentInParent<Animator>();
-                rigidbody = GetComponentInParent<Rigidbody>();
-                health = GetComponentInParent<Health>();
-                stamina = GetComponentInParent<Stamina>();
-                Instance = this;
-                DontDestroyOnLoad(gameObject); // Prevent the player from being destroyed on scene load
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            playerActions = GetComponent<PlayerAction>();
+            audioSource = GetComponentInParent<AudioSource>();
+            animator = GetComponentInParent<Animator>();
+            rigidbody = GetComponentInParent<Rigidbody>();
+            health = GetComponentInParent<Health>();
+            stamina = GetComponentInParent<Stamina>();
         }
 
         public void OnCollisionEnter2D(Collision2D collision)
@@ -217,15 +205,15 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void GroundedAnimation()
         {
-            animator.SetBool("grounded", IsGrounded);
-            animator.SetFloat("velocityY", Mathf.Abs(velocity.x) / Constants.DefaultMaxSpeed);
+            //animator.SetBool("grounded", IsGrounded);
+            //animator.SetFloat("velocityY", Mathf.Abs(velocity.x) / Constants.DefaultMaxSpeed);
         }
 
         public void JumpAnimation()
         {
-            animator.SetBool("grounded", !IsGrounded);
-            animator.SetFloat("velocityY", velocity.y);
-            animator.SetInteger("animation", 13);
+            //animator.SetBool("grounded", !IsGrounded);
+            //animator.SetFloat("velocityY", velocity.y);
+            //animator.SetInteger("animation", 13);
         }
 
 
@@ -255,6 +243,16 @@ namespace NeonLadder.Mechanics.Controllers
         {
 
             rigidbody.velocity = new Vector2(0f, rigidbody.velocity.y);
+        }
+
+        internal void AddMetaCurrency(int amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void AddPermanentCurrency(int amount)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -346,6 +346,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building4
       objectReference: {fileID: 0}
+    - target: {fileID: 8007165826120557407, guid: b181a57cf8ef0b7489d862718d8a4165,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.403457
+      objectReference: {fileID: 0}
     - target: {fileID: 9056000422499823181, guid: b181a57cf8ef0b7489d862718d8a4165,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -956,13 +961,18 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   respawnAudio: {fileID: 0}
   ouchAudio: {fileID: 0}
+  dropConfig: {fileID: 0}
   moveDirection: 0
   staminaRegenTimer: 0
-  targetHealth: {fileID: 0}
   attackDamage: 10
   attackRange: 3
   attackCooldown: 1
-  target: {fileID: 0}
+  animationIdle: 0
+  animationWalk: 1
+  animationAttack: 2
+  animationHurt: 3
+  animationDeath: 4
+  DeathAnimationDuration: 3.5
   currentState: 0
 --- !u!1001 &2088468219
 PrefabInstance:

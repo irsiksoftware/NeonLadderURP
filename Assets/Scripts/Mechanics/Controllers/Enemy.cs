@@ -1,18 +1,24 @@
 using Assets.Scripts;
 using NeonLadder.Events;
+using NeonLadder.Items;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
+using NeonLadder.Models;
 using UnityEngine;
 using static NeonLadder.Core.Simulation;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class Monster : KinematicObject
+    public class Enemy : KinematicObject
     {
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        protected PlatformerModel model = GetModel<PlatformerModel>();
+        public Player target => model.player;
+
+        public DropConfig dropConfig = null;
         public int moveDirection;
 
         public Health health { get; private set; }
@@ -22,9 +28,6 @@ namespace NeonLadder.Mechanics.Controllers
 
         public SpriteRenderer spriteRenderer { get; private set; }
         internal Animator animator;
-        public Health targetHealth;
-
-        private bool shouldChasePlayer = true;
 
         [SerializeField]
         private int attackDamage = 10; // Damage per attack
@@ -36,13 +39,15 @@ namespace NeonLadder.Mechanics.Controllers
 
 
         // Animation states
-        private int animationIdle = 0;
-        private int animationWalk = 1;
-        private int animationAttack = 2;
-        private int animationHurt = 3;
-        private int animationDeath = 4;
+        public int idleAnimation = 0;
+        public int walkForwardAnimation = 1;
+        public int attackAnimation = 2;
+        public int hurtAnimation = 3;
+        public int deathAnimation = 4;
 
-        public GameObject target;  // The main protagonist "player"
+        public float deathAnimationDuration = 3.5f;
+
+
 
         public bool IsFacingLeft { get; private set; }
 
@@ -64,13 +69,6 @@ namespace NeonLadder.Mechanics.Controllers
         {
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
-
-            if (target == null)
-            {
-                Debug.Log("Target not set, setting to player");
-                target = GameObject.Find(Constants.ProtagonistModel);
-                targetHealth = target.GetComponent<Health>();
-            }
         }
 
         protected override void ComputeVelocity()
@@ -81,7 +79,7 @@ namespace NeonLadder.Mechanics.Controllers
 
                 if (moveDirection != 0)
                 {
-                    animator.SetInteger("animation", animationWalk);
+                    animator.SetInteger("animation", walkForwardAnimation);
                     targetVelocity.x = moveDirection * Constants.DefaultMaxSpeed;
                 }
 
@@ -95,10 +93,10 @@ namespace NeonLadder.Mechanics.Controllers
 
             if (health.IsAlive)
             {
-                if (!targetHealth.IsAlive)
+                if (!target.health.IsAlive)
                 {
                     currentState = MonsterStates.Idle;
-                    animator.SetInteger("animation", animationIdle);
+                    animator.SetInteger("animation", idleAnimation);
                     return; // Early return to stop processing other states
                 }
 
@@ -123,7 +121,7 @@ namespace NeonLadder.Mechanics.Controllers
                             {
                                 // Stop and reassess before attacking
                                 moveDirection = 0;
-                                animator.SetInteger("animation", animationIdle);
+                                animator.SetInteger("animation", idleAnimation);
                                 currentState = MonsterStates.Reassessing;
                             }
                             else
@@ -144,12 +142,26 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
+        public void DropItems()
+        {
+            if (dropConfig != null)
+            {
+                foreach (var dropItem in dropConfig?.dropItems)
+                {
+                    if (Random.Range(0f, 100f) <= dropItem.dropProbability)
+                    {
+                        Instantiate(dropItem.collectiblePrefab, transform.position, Quaternion.identity);
+                    }
+                }
+            }
+        }
+
         private void AttackPlayer()
         {
-            lastAttackTime = Time.time; // Update the last attack time
-            targetHealth.Decrement(attackDamage); // Apply damage
-            animator.SetInteger("animation", animationAttack); // Trigger attack animation
-            currentState = MonsterStates.Reassessing; // Move to reassessing after attack
+            lastAttackTime = Time.time;
+            target.health.Decrement(attackDamage);
+            animator.SetInteger("animation", attackAnimation);
+            currentState = MonsterStates.Reassessing;
         }
 
         private void ChasePlayer()
@@ -157,7 +169,7 @@ namespace NeonLadder.Mechanics.Controllers
             var IsFacingLeft = (target.transform.position.x - transform.parent.position.x) < 0 ? true : false;
             transform.parent.rotation = Quaternion.Euler(0, IsFacingLeft ? -90 : 90, 0);
             moveDirection = IsFacingLeft ? -1 : 1;
-            animator.SetInteger("animation", animationWalk);
+            animator.SetInteger("animation", walkForwardAnimation);
         }
     }
 }

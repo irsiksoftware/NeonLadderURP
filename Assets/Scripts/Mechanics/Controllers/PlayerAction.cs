@@ -222,7 +222,6 @@ namespace NeonLadder.Mechanics.Controllers
                         if (sprintTimeAccumulator >= 0.1f)
                         {
                             player.stamina.Decrement(staminaCostPerTenthSecond); // Decrement stamina
-                            Player.Instance.stamina.Decrement(staminaCostPerTenthSecond); // Decrement global stamina
                             sprintTimeAccumulator -= 0.1f; // Subtract 0.1 seconds from the accumulator
                         }
 
@@ -252,7 +251,7 @@ namespace NeonLadder.Mechanics.Controllers
                     if (attackDuration > 0)
                     {
                         attackDuration -= Time.deltaTime;
-                        Debug.Log($"Attacking... {attackDuration} seconds remaining.");
+                        //Debug.Log($"Attacking... {attackDuration} seconds remaining.");
 
                         // Trigger the attack halfway through the attack duration
                         if (attackDuration <= initialAttackDuration / 2 && attackDuration > initialAttackDuration / 2 - Time.deltaTime)

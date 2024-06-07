@@ -1,6 +1,5 @@
 using NeonLadder.Core;
 using NeonLadder.Mechanics;
-using NeonLadder.Models;
 
 namespace NeonLadder.Events
 {
@@ -11,8 +10,6 @@ namespace NeonLadder.Events
     public class PlayerEnteredDeathZone : BaseGameEvent<PlayerEnteredDeathZone>
     {
         public DeathZone deathzone;
-
-        PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         public override void Execute()
         {

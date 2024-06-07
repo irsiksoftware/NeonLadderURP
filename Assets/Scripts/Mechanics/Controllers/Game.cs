@@ -7,6 +7,16 @@ public class Game : MonoBehaviour
 {
     void Awake()
     {
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         //AppLogger.Initialize();
         //AppLogger.Logger.Information("GameController Awake and logger initialized");
     }
