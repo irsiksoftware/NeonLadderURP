@@ -6,18 +6,27 @@ Download and install the latest version of Unity Hub from the [Official Unity We
 
 ## Clone the Repository
 Clone this repository to your local machine.
+by either running this command within a Command prompt with git installed
 
 `git clone https://github.com/DakotaIrsik/NeonLadderURP.git `
 
+or by clicking the "Code -> Download" button and extracting the repository. (Note the location the repository is located in)
+
 ## Open the Project in Unity Hub
 1. Open Unity Hub.
-2. Click on `Add` and select the cloned repository directory.
+2. Create your Unity Account (Single Sign On is easiest, ie Google))
+3. Click on `Add` withing the Unity Hub and select the cloned repository directory.
 
 ## Install Unity Editor
-1. Unity Hub will prompt you to install the necessary editor if not installed (2022.3.23f1). 
-2. Choose the platform you intend to run the game on, e.g., Windows.
+1. Unity Hub will prompt you to install the necessary editor if not installed (2022.3.31f1).
+2. Uncheck Visual Studio from installed components list
+3. Scroll down and Select "Windows Build Platform"
 
-## Open the Project
+> During the installation, UAC may prompt fo the installation, choose yes.
+
+## How to Open the Project
+Select Projects from Unity Hub
+Select NeonLadderURP-main
 Wait for the project to load. 
 If prompted "This project is using the new input system package but the native platform backends for the new input system are not enabled in the player settings. This meants that no input fro native devices will come through, Do you want to enable the backends? Doing so will "RESTART" the editor. Click - YES
 
