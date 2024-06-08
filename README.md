@@ -1,27 +1,26 @@
 # Project Setup
 
-## Install Unity Hub
+## How to Install Unity Hub
 Download and install the latest version of Unity Hub from the [Official Unity Website](https://unity.com/download).
 > Scroll down to select the download link for your Operating system (Windows, Linux, Mac)
 
-## Clone the Repository
+## How to Clone the Repository
 Clone this repository to your local machine.
 by either running this command within a Command prompt with git installed
 
 `git clone https://github.com/DakotaIrsik/NeonLadderURP.git `
 
-or by clicking the "Code -> Download" button and extracting the repository. (Note the location the repository is located in)
+or by clicking the "Code -> Download" button and extracting the repository. (Note the location you download / clone the repository to)
 
 ## Open the Project in Unity Hub
 1. Open Unity Hub.
-2. Create your Unity Account (Single Sign On is easiest, ie Google))
-3. Click on `Add` withing the Unity Hub and select the cloned repository directory.
+2. Create your Unity Account (Single-Sign-On is easiest, IE Google)
+3. Click on `Add` within the Unity Hub and select the directory which contains the repository
 
-## Install Unity Editor
+## How to Install Unity Editor
 1. Unity Hub will prompt you to install the necessary editor if not installed (2022.3.31f1).
-2. Uncheck Visual Studio from installed components list
-3. Scroll down and Select "Windows Build Platform"
-
+2. Uncheck Visual Studio from installed components list (unless you want it)
+3. Scroll down and Select the build platform for the operating system you're running on IE if you're on Windows choose "Windows Build Support (IL2CPP)"
 > During the installation, UAC may prompt fo the installation, choose yes.
 
 ## How to Open the Project
@@ -46,19 +45,19 @@ Once loaded, open the `SampleScene`:
 3. Follow the instructions provided in the `DownloadInstructions` files to download the asset.
 
 ## Relaunch Unity Editor
-1. Click the X at the top right of the Unity Editor to close the application.
+Exit the Unity Editor application by clicking the X at the top right of the Unity Editor application.
 > **Note:** You MUST RESTART the Unity Editor so that asset metadata refreshes the relationship between the source controlled animation controllers and the package-driven animations themselves, if you don't restart the game will NOT function as intended.
-3. Relaunch the game project from Unity Hub
+Relaunch the game project from Unity Hub
+1. Location the Unity Hub window (this should still be open, as we only closed the Unity Editor) if it was closed, relaunch Unity Hub
+2. Select Projects from Unity Hub
+3. Select project name (NeonLadderURP if you cloned via a shell, or NeonLadderURP-main if you downloaded and extracted)
+ Wait for the project to load.
 
 ## Play the Scene (again)
 You should now be ready to click the "Play" button once again within the Unity Editor and see the main protagonists idle animations and be able to move left and right with the A/D or <-/-> (arrow keys)
-
 
 ## Conclusion
 Repeat Download Additional Assets Steps for all remaining packages. making sure to restart before attempting to "Play" the game
 > **Note:** The import process for large packages, like the `LeartesStudios` package (~30 GB), may take HOURS depending on your PC specs.
 
 You should now experience the game as if it were deployed to a specified build platform.
-
-
-
