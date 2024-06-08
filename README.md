@@ -38,9 +38,10 @@ Once loaded, open the `SampleScene`:
 5. If prompted, choose to open with Unity Editor version 2022.3.23f1.
 6. Click `Import` on the `Import Unity Package` window that appears.
 
-## Relaunch Unity Editor.
+## Relaunch Unity Editor
 1. Click the X at the top right of the Unity Editor to close the application.
-2. Relaunch the game project from Unity Hub
+> **Note:** You MUST RESTART the Unity Editor so that asset metadata refreshes the relationship between the source controlled animation controllers and the package-driven animations themselves, if you don't restart the game will NOT function as intended.
+3. Relaunch the game project from Unity Hub
 
 ## Play the Scene (again)
 You should now be ready to click the "Play" button once again within the Unity Editor and see the main protagonists idle animations and be able to move left and right with the A/D or <-/-> (arrow keys)
