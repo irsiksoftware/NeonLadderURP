@@ -2,6 +2,7 @@
 
 ## Install Unity Hub
 Download and install the latest version of Unity Hub from the [Official Unity Website](https://unity.com/download).
+> Scroll down to select the download link for your Operating system (Windows, Linux, Mac)
 
 ## Clone the Repository
 Clone this repository to your local machine.
