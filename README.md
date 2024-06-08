@@ -44,9 +44,6 @@ Once loaded, open the `SampleScene`:
 1. In the Project tab's search bos, search for `DownloadInstructions`.
 2. Locate the DownloadInstructions.txt file which exists in the SURIYUN folder (you can see the full path of the DownloadInstructions at the bottom of the Editor, inicating the location of the path).
 3. Follow the instructions provided in the `DownloadInstructions` files to download the asset.
-4. After downloading, double-click the downloaded files (.unitypackage).
-5. If prompted, choose to open with Unity Editor version 2022.3.23f1.
-6. Click `Import` on the `Import Unity Package` window that appears.
 
 ## Relaunch Unity Editor
 1. Click the X at the top right of the Unity Editor to close the application.
