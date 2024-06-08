@@ -199,41 +199,50 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void DropLoot()
         {
-            if (lootTable != null)
+            if (lootTable == null)
+                return;
+
+            foreach (var dropGroup in lootTable.dropGroups)
             {
-                foreach (var dropGroup in lootTable.dropGroups)
+                int itemsToDrop = Random.Range(dropGroup.minDrops, dropGroup.maxDrops + 1);
+
+                foreach (var lootItem in dropGroup.lootItems)
                 {
-                    int itemsToDrop = Random.Range(dropGroup.minDrops, dropGroup.maxDrops + 1);
+                    if (itemsToDrop <= 0)
+                        break;
 
-                    foreach (var lootItem in dropGroup.lootItems)
+                    if (ShouldDropItem(lootItem))
                     {
-                        if (itemsToDrop <= 0)
-                            break;
-
-                        bool shouldDrop = lootItem.AlwaysDrop || Random.Range(0f, 100f) <= lootItem.dropProbability;
-
-                        if (!lootItem.AlwaysDrop && target.health.current / target.health.max > lootItem.healthThreshold)
-                        {
-                            shouldDrop = false;
-                        }
-
-                        if (shouldDrop)
-                        {
-                            Vector3 spawnPosition = transform.position;
-                            if (lootItem.collectiblePrefab != null)
-                            {
-                                spawnPosition += StandardizedLootDropTransformations(lootItem.collectiblePrefab);
-                            }
-
-                            int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
-                            lootItem.collectiblePrefab.amount = amountToDrop;
-                            Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
-                            itemsToDrop--;
-                            Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
-                        }
+                        DropItem(lootItem);
+                        itemsToDrop--;
                     }
                 }
             }
+        }
+
+        private bool ShouldDropItem(LootItem lootItem)
+        {
+            if (lootItem.AlwaysDrop)
+                return true;
+
+            bool passesDropChance = Random.Range(0f, 100f) <= lootItem.dropProbability;
+            bool belowHealthThreshold = target.health.current / target.health.max <= lootItem.healthThreshold;
+
+            return passesDropChance && belowHealthThreshold;
+        }
+
+        private void DropItem(LootItem lootItem)
+        {
+            Vector3 spawnPosition = transform.position;
+            if (lootItem.collectiblePrefab != null)
+            {
+                spawnPosition += StandardizedLootDropTransformations(lootItem.collectiblePrefab);
+            }
+
+            int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
+            lootItem.collectiblePrefab.amount = amountToDrop;
+            Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
+            Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
         }
 
         private Vector3 StandardizedLootDropTransformations(Collectible prefab)
