@@ -1,7 +1,6 @@
 using Assets.Scripts;
 using NeonLadder.Core;
 using NeonLadder.Events;
-using NeonLadder.Items;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
@@ -13,7 +12,6 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class Enemy : KinematicObject
     {
-
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
@@ -22,7 +20,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         [SerializeField]
         private LootTable lootTable; // Allow assignment in the editor
-        private LootTable runtimeLootTable;
+        public LootTable runtimeLootTable;
 
         public int moveDirection;
 
@@ -74,7 +72,6 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected void Awake()
         {
-
             Debug.Log($"{nameof(Enemy)} - {this.gameObject.name} -> {nameof(Awake)}");
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
@@ -98,7 +95,6 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-
         protected override void ComputeVelocity()
         {
             if (health.IsAlive)
@@ -120,7 +116,7 @@ namespace NeonLadder.Mechanics.Controllers
 
             if (target == null)
             {
-               LogMessage("Target is null");
+                LogMessage("Target is null");
             }
 
             if (target?.health == null)
@@ -132,14 +128,11 @@ namespace NeonLadder.Mechanics.Controllers
                 LogMessage(target?.health?.current.ToString());
             }
 
-
-
             if (health.IsAlive)
             {
                 if (target.health.IsAlive)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-                    //LogMessage($"Distance to target: {distanceToTarget}");
 
                     switch (currentState)
                     {
@@ -196,78 +189,6 @@ namespace NeonLadder.Mechanics.Controllers
             yield return new WaitForSeconds(3);
             animator.SetInteger("animation", idleAnimation);
         }
-
-        public void DropLoot()
-        {
-            if (lootTable == null)
-                return;
-
-            foreach (var dropGroup in lootTable.dropGroups)
-            {
-                int itemsToDrop = Random.Range(dropGroup.minDrops, dropGroup.maxDrops + 1);
-
-                foreach (var lootItem in dropGroup.lootItems)
-                {
-                    if (itemsToDrop <= 0)
-                        break;
-
-                    if (ShouldDropItem(lootItem))
-                    {
-                        DropItem(lootItem);
-                        itemsToDrop--;
-                    }
-                }
-            }
-        }
-
-        private bool ShouldDropItem(LootItem lootItem)
-        {
-            if (lootItem.AlwaysDrop)
-                return true;
-
-            bool passesDropChance = Random.Range(0f, 100f) <= lootItem.dropProbability;
-            bool belowHealthThreshold = target.health.current / target.health.max <= lootItem.healthThreshold;
-
-            return passesDropChance && belowHealthThreshold;
-        }
-
-        private void DropItem(LootItem lootItem)
-        {
-            Vector3 spawnPosition = transform.position;
-            if (lootItem.collectiblePrefab != null)
-            {
-                spawnPosition += StandardizedLootDropTransformations(lootItem.collectiblePrefab);
-            }
-
-            int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
-            lootItem.collectiblePrefab.amount = amountToDrop;
-            Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
-            Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
-        }
-
-        private Vector3 StandardizedLootDropTransformations(Collectible prefab)
-        {
-            Vector3 deltaPosition = Vector3.zero;
-
-            switch (prefab)
-            {
-                case HealthReplenishment:
-                    deltaPosition = new Vector3(0f, .8f, 0f);
-                    prefab.transform.localScale = new Vector3(.35f, .35f, .35f);
-                    break;
-                case MetaCurrencyReplenishment:
-                    deltaPosition = new Vector3(0f, 0f, 0f);
-                    prefab.transform.localScale = new Vector3(1f, 1f, 1f);
-                    break;
-                case PermaCurrencyReplenishment:
-                    deltaPosition = new Vector3(0f, 1f, 0f);
-                    prefab.transform.localScale = new Vector3(.75f, .75f, .75f);
-                    break;
-            }
-
-            return deltaPosition;
-        }
-
 
         private void AttackPlayer()
         {

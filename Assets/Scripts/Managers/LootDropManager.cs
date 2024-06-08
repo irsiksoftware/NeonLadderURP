@@ -1,0 +1,80 @@
+﻿using NeonLadder.Items;
+using NeonLadder.Items.Loot;
+using UnityEngine;
+
+namespace NeonLadder.Mechanics.Controllers
+{
+    public class LootDropManager
+    {
+        public static void DropLoot(LootTable lootTable, Transform enemyTransform, Player target)
+        {
+            if (lootTable == null)
+                return;
+
+            foreach (var dropGroup in lootTable.dropGroups)
+            {
+                int itemsToDrop = Random.Range(dropGroup.minDrops, dropGroup.maxDrops + 1);
+
+                foreach (var lootItem in dropGroup.lootItems)
+                {
+                    if (itemsToDrop <= 0)
+                        break;
+
+                    if (ShouldDropItem(lootItem, target))
+                    {
+                        DropItem(lootItem, enemyTransform);
+                        itemsToDrop--;
+                    }
+                }
+            }
+        }
+
+        private static bool ShouldDropItem(LootItem lootItem, Player target)
+        {
+            if (lootItem.AlwaysDrop)
+                return true;
+
+            bool passesDropChance = Random.Range(0f, 100f) <= lootItem.dropProbability;
+            bool belowHealthThreshold = target.health.current / target.health.max <= lootItem.healthThreshold;
+
+            return passesDropChance && belowHealthThreshold;
+        }
+
+        private static void DropItem(LootItem lootItem, Transform enemyTransform)
+        {
+            Vector3 spawnPosition = enemyTransform.position;
+            if (lootItem.collectiblePrefab != null)
+            {
+                spawnPosition += StandardizedLootDropTransformations(lootItem.collectiblePrefab);
+            }
+
+            int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
+            lootItem.collectiblePrefab.amount = amountToDrop;
+            Object.Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
+            Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
+        }
+
+        private static Vector3 StandardizedLootDropTransformations(Collectible prefab)
+        {
+            Vector3 deltaPosition = Vector3.zero;
+
+            switch (prefab)
+            {
+                case HealthReplenishment:
+                    deltaPosition = new Vector3(0f, .8f, 0f);
+                    prefab.transform.localScale = new Vector3(.35f, .35f, .35f);
+                    break;
+                case MetaCurrencyReplenishment:
+                    deltaPosition = new Vector3(0f, 0f, 0f);
+                    prefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                    break;
+                case PermaCurrencyReplenishment:
+                    deltaPosition = new Vector3(0f, 1f, 0f);
+                    prefab.transform.localScale = new Vector3(.75f, .75f, .75f);
+                    break;
+            }
+
+            return deltaPosition;
+        }
+    }
+}
