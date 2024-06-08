@@ -1,10 +1,7 @@
-﻿using NeonLadder.Mechanics.Controllers;
-
-namespace NeonLadder.Items
+﻿namespace NeonLadder.Items
 {
-    public class MetaCurrency : Collectible
+    public class MetaCurrencyReplenishment : Collectible
     {
-        public int amount;
         public override void OnCollect()
         {
             model.Player.AddMetaCurrency(amount);

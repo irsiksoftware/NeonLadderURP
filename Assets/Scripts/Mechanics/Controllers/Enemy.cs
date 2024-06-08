@@ -1,25 +1,29 @@
 using Assets.Scripts;
+using NeonLadder.Core;
 using NeonLadder.Events;
 using NeonLadder.Items;
-using NeonLadder.Core;
+using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using NeonLadder.Models;
-using UnityEngine;
-using Platformer.Mechanics;
 using System.Collections;
+using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
 {
     public class Enemy : KinematicObject
     {
+
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
         private Player target;
 
-        public DropConfig dropConfig = null;
+        [SerializeField]
+        private LootTable lootTable; // Allow assignment in the editor
+        private LootTable runtimeLootTable;
+
         public int moveDirection;
 
         public Health health { get; private set; }
@@ -74,12 +78,26 @@ namespace NeonLadder.Mechanics.Controllers
             Debug.Log($"{nameof(Enemy)} - {this.gameObject.name} -> {nameof(Awake)}");
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
-            Simulation.Tick();
-            var model = Simulation.GetModel<PlatformerModel>();
-            var model2 = Game.Instance?.model;
-            target = model.Player;
-            
+            target = Simulation.GetModel<PlatformerModel>().Player;
+            LoadLootTable();
         }
+
+        private void LoadLootTable()
+        {
+            if (lootTable != null)
+            {
+                runtimeLootTable = lootTable;
+            }
+            else
+            {
+                runtimeLootTable = Resources.Load<LootTable>(Constants.MajorEnemyLootTablePath);
+                if (runtimeLootTable == null)
+                {
+                    Debug.LogError($"LootTable not found at path: {Constants.MajorEnemyLootTablePath}");
+                }
+            }
+        }
+
 
         protected override void ComputeVelocity()
         {
@@ -179,20 +197,68 @@ namespace NeonLadder.Mechanics.Controllers
             animator.SetInteger("animation", idleAnimation);
         }
 
-        public void DropItems()
+        public void DropLoot()
         {
-            if (dropConfig != null)
+            if (lootTable != null)
             {
-                foreach (var dropItem in dropConfig?.dropItems)
+                foreach (var dropGroup in lootTable.dropGroups)
                 {
-                    if (Random.Range(0f, 100f) <= dropItem.dropProbability)
+                    int itemsToDrop = Random.Range(dropGroup.minDrops, dropGroup.maxDrops + 1);
+
+                    foreach (var lootItem in dropGroup.lootItems)
                     {
-                        Instantiate(dropItem.collectiblePrefab, transform.position, Quaternion.identity);
-                        if (enableLogging) Debug.Log($"Dropped item: {dropItem.collectiblePrefab.name}");
+                        if (itemsToDrop <= 0)
+                            break;
+
+                        bool shouldDrop = lootItem.AlwaysDrop || Random.Range(0f, 100f) <= lootItem.dropProbability;
+
+                        if (!lootItem.AlwaysDrop && target.health.current / target.health.max > lootItem.healthThreshold)
+                        {
+                            shouldDrop = false;
+                        }
+
+                        if (shouldDrop)
+                        {
+                            Vector3 spawnPosition = transform.position;
+                            if (lootItem.collectiblePrefab != null)
+                            {
+                                spawnPosition += StandardizedLootDropTransformations(lootItem.collectiblePrefab);
+                            }
+
+                            int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
+                            lootItem.collectiblePrefab.amount = amountToDrop;
+                            Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
+                            itemsToDrop--;
+                            Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
+                        }
                     }
                 }
             }
         }
+
+        private Vector3 StandardizedLootDropTransformations(Collectible prefab)
+        {
+            Vector3 deltaPosition = Vector3.zero;
+
+            switch (prefab)
+            {
+                case HealthReplenishment:
+                    deltaPosition = new Vector3(0f, .8f, 0f);
+                    prefab.transform.localScale = new Vector3(.35f, .35f, .35f);
+                    break;
+                case MetaCurrencyReplenishment:
+                    deltaPosition = new Vector3(0f, 0f, 0f);
+                    prefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                    break;
+                case PermaCurrencyReplenishment:
+                    deltaPosition = new Vector3(0f, 1f, 0f);
+                    prefab.transform.localScale = new Vector3(.75f, .75f, .75f);
+                    break;
+            }
+
+            return deltaPosition;
+        }
+
 
         private void AttackPlayer()
         {

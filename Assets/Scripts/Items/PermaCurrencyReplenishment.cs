@@ -1,10 +1,7 @@
-﻿using NeonLadder.Mechanics.Controllers;
-
-namespace NeonLadder.Items
+﻿namespace NeonLadder.Items
 {
-    public class PermaCurrency : Collectible
+    public class PermaCurrencyReplenishment : Collectible
     {
-        public int amount;
         public override void OnCollect()
         {
             model.Player.AddPermanentCurrency(amount);

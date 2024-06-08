@@ -594,7 +594,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -698,10 +698,60 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 699849367860991765, guid: dc08c1230b5ad794196a9aba8b090723,
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
-      propertyPath: m_WarningMessage
-      value: 
+      propertyPath: playerActionMap.m_Actions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: playerActionMap.m_Bindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: playerActionMap.m_Actions.Array.data[0].m_Id
+      value: 538a360a-47d6-42e0-b65d-3d8cd68059ef
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: playerActionMap.m_Bindings.Array.data[0].m_Id
+      value: 0994a00f-28cb-4319-9cfa-5628864f1f0a
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: playerActionMap.m_Actions.Array.data[0].m_Name
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: playerActionMap.m_Actions.Array.data[0].m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: playerActionMap.m_Bindings.Array.data[0].m_Action
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: playerActionMap.m_Actions.Array.data[0].m_ExpectedControlType
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095271709995646931, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095271709995646931, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095271709995646931, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3305220943313858559, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -753,25 +803,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4613333172620822446, guid: dc08c1230b5ad794196a9aba8b090723,
+    - target: {fileID: 6097981501050384232, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.01
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5669524973949155612, guid: dc08c1230b5ad794196a9aba8b090723,
+    - target: {fileID: 6913947404772791968, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
-      propertyPath: playerActionMap.m_Id
-      value: 25d47460-2ffe-4047-8762-f2d2e326194f
+      propertyPath: controlEnabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5669524973949155612, guid: dc08c1230b5ad794196a9aba8b090723,
+    - target: {fileID: 6913947404772791968, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
-      propertyPath: playerActionMap.m_Name
-      value: Player
+      propertyPath: layerMask.m_Bits
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.01
+      propertyPath: m_LocalPosition.x
+      value: 491
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 503.04
       objectReference: {fileID: 0}
     - target: {fileID: 7439663405200563838, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -780,8 +835,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.01
+      propertyPath: m_LocalPosition.x
+      value: 491
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 503.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171499512219005639, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -919,6 +984,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4227584520469944662, guid: 5115736b8017276408dec7c87c25ffb9,
+        type: 3}
+      propertyPath: lootTable
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c6c42bbddeadd4a9f7e354bd72b1c1,
+        type: 2}
+    - target: {fileID: 4227584520469944662, guid: 5115736b8017276408dec7c87c25ffb9,
+        type: 3}
+      propertyPath: dropConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 068dea586a14ef14ba62f3889f068df5,
+        type: 2}
     - target: {fileID: 6189079400462985659, guid: 5115736b8017276408dec7c87c25ffb9,
         type: 3}
       propertyPath: m_Name

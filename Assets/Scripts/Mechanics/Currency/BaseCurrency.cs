@@ -1,33 +1,31 @@
-﻿//using DamageNumbersPro;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace NeonLadder.Mechanics.Stats
+namespace NeonLadder.Mechanics.Currency
 {
-    public abstract class BaseStat : MonoBehaviour
+    public class BaseCurrency : MonoBehaviour
     {
+
         [SerializeField]
-        public float current;
-        public float max = 100;
+        public int current;
+        public int max = int.MaxValue;
         public bool IsDepleted => current == 0;
         //public DamageNumber damageNumber;
 
-        public void Increment(float amount = 1)
+        public void Increment(int amount = 1)
         {
-            current = Mathf.Clamp(current + amount, 0, max);
+            current += amount;
         }
 
-        public void Decrement(float amount = 1)
+        public void Decrement(int amount = 1)
         {
-            current = Mathf.Clamp(current - amount, 0, max);
-
-            //use parent objects type to determine if damage or stamina
+            current -= amount;
 
             switch (this)
             {
-                case Health:
+                case Meta:
                     //damageNumber.Spawn(transform.position, amount.ToString());
                     break;
-                case Stamina:
+                case Perma:
                     //damageNumber.Spawn(transform.position, amount.ToString());
                     break;
             }
@@ -45,12 +43,12 @@ namespace NeonLadder.Mechanics.Stats
 
         protected virtual void OnDepleted()
         {
-            
+
         }
 
         protected virtual void Awake()
         {
-            RestoreToMax();
+
         }
 
         protected virtual void RestoreToMax()

@@ -20,7 +20,7 @@ namespace NeonLadder.Events
         {
             yield return new WaitForSeconds(enemy.deathAnimationDuration);
             enemyAnimator.enabled = false;
-            enemy.DropItems(); // Drop items upon death
+            enemy.DropLoot(); // Drop items upon death
             enemy.transform.parent.gameObject.SetActive(false);
         }
     }

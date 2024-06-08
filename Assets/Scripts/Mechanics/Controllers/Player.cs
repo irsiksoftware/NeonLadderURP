@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System;
@@ -22,6 +23,10 @@ namespace NeonLadder.Mechanics.Controllers
         public PlayerAction playerActions { get; private set; }
         public Health health { get; private set; }
         public Stamina stamina { get; private set; }
+
+        public Meta metaCurrency { get; private set; }
+        public Perma permaCurrency { get; private set; }
+
         [SerializeField]
         public bool controlEnabled;
         [SerializeField]
@@ -68,6 +73,8 @@ namespace NeonLadder.Mechanics.Controllers
             rigidbody = GetComponent<Rigidbody>();
             health = GetComponent<Health>();
             stamina = GetComponent<Stamina>();
+            metaCurrency = GetComponent<Meta>();
+            permaCurrency = GetComponent<Perma>();
         }
 
         public void OnCollisionEnter2D(Collision2D collision)
@@ -247,12 +254,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         internal void AddMetaCurrency(int amount)
         {
-            throw new NotImplementedException();
+            metaCurrency.Increment(amount);
         }
 
         internal void AddPermanentCurrency(int amount)
         {
-            throw new NotImplementedException();
+            permaCurrency.Increment(amount);
         }
     }
 }
