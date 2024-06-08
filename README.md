@@ -41,8 +41,8 @@ Once loaded, open the `SampleScene`:
 3. Click the `Play` button again to stop the scene.
 
 ## Download Additional Assets
-1. In the Project window, search for `DownloadInstructions`.
-2. Locate the DownloadInstructions.txt file which exists in the SURIYUN folder
+1. In the Project tab's search bos, search for `DownloadInstructions`.
+2. Locate the DownloadInstructions.txt file which exists in the SURIYUN folder (you can see the full path of the DownloadInstructions at the bottom of the Editor, inicating the location of the path).
 3. Follow the instructions provided in the `DownloadInstructions` files to download the asset.
 4. After downloading, double-click the downloaded files (.unitypackage).
 5. If prompted, choose to open with Unity Editor version 2022.3.23f1.
