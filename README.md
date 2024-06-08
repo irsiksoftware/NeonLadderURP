@@ -25,10 +25,10 @@ or by clicking the "Code -> Download" button and extracting the repository. (Not
 > During the installation, UAC may prompt fo the installation, choose yes.
 
 ## How to Open the Project
-Select Projects from Unity Hub
-Select NeonLadderURP-main
-Wait for the project to load. 
-If prompted "This project is using the new input system package but the native platform backends for the new input system are not enabled in the player settings. This meants that no input fro native devices will come through, Do you want to enable the backends? Doing so will "RESTART" the editor. Click - YES
+1. Select Projects from Unity Hub
+2. Select The cloned folder (NeonLadderURP if you cloned via a shell, or NeonLadderURP-main if you downloaded and extracted)
+3. Wait for the project to load. 
+4. If prompted "This project is using the new input system package but the native platform backends for the new input system are not enabled in the player settings. This meants that no input fro native devices will come through, Do you want to enable the backends? Doing so will "RESTART" the editor. Click - YES
 
 Once loaded, open the `SampleScene`:
 1. Locate the `Project` window at the bottom of the Unity Editor.
