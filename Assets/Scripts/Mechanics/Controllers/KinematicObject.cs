@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    /// <summary>
-    /// Implements game physics for some in-game entity.
-    /// </summary>
     public class KinematicObject : MonoBehaviour
     {
         protected Player player;
@@ -14,26 +11,18 @@ namespace NeonLadder.Mechanics.Controllers
         public float gravityModifier = 1f;
         public Vector3 velocity;
         public LayerMask layerMask;
-
         public bool IsGrounded { get; private set; }
-
         protected Vector3 targetVelocity;
         protected Vector3 groundNormal;
         //https://github.com/Unity-Technologies/UnityCsReference/blob/master/Runtime/Export/Scripting/Component.deprecated.cs
         protected new Rigidbody rigidbody;
         protected RaycastHit[] hitBuffer = new RaycastHit[16];
-
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
 
         public void Bounce(float value)
         {
             velocity.y = value;
-        }
-
-        public void Bounce(Vector3 dir)
-        {
-            velocity = dir;
         }
 
         public void Teleport(Vector3 position)
@@ -69,13 +58,11 @@ namespace NeonLadder.Mechanics.Controllers
             targetVelocity = Vector3.zero;
         }
 
-
         protected virtual void FixedUpdate()
         {
             velocity += gravityModifier * Physics.gravity * Time.deltaTime;
             velocity.x = targetVelocity.x;
             velocity.z = 0;
-
             IsGrounded = false;
 
             Vector3 deltaPosition = velocity * Time.deltaTime;
@@ -83,7 +70,6 @@ namespace NeonLadder.Mechanics.Controllers
             Vector3 move = moveAlongGround * deltaPosition.x;
 
             PerformMovement(move, false);
-
             move = Vector3.up * deltaPosition.y;
             PerformMovement(move, true);
         }

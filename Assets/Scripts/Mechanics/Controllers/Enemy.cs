@@ -14,6 +14,8 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip ouchAudio;
         public AudioClip jumpAudio;
         public AudioClip landAudio;
+        internal Animator animator;
+        private int moveDirection;
 
         [SerializeField]
         private LootTable lootTable; // Allow assignment in the editor
@@ -24,14 +26,10 @@ namespace NeonLadder.Mechanics.Controllers
             private set { runtimeLootTable = value; }
         }
 
-        private int moveDirection;
-
         public Health health { get; private set; }
         public Stamina stamina { get; private set; }
         [SerializeField]
         public float staminaRegenTimer = 0f;
-
-        internal Animator animator;
 
         [SerializeField]
         protected virtual int attackDamage { get; set; } = 10; // Damage per attack
@@ -40,18 +38,13 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         protected virtual float attackCooldown { get; set; } = 1.0f; // Cooldown time between attacks in seconds
         protected virtual float lastAttackTime { get; set; } = 0; // Timestamp of the last attack
-
-        public int IdleAnimation => idleAnimation;
         protected virtual int idleAnimation { get; set; } = 0;
         protected virtual int walkForwardAnimation { get; set; } = 1;
         protected virtual int attackAnimation { get; set; } = 2;
         protected virtual int hurtAnimation { get; set; } = 3;
         protected virtual int victoryAnimation { get; set; } = 5;
-
         public int DeathAnimation => deathAnimation;
         protected virtual int deathAnimation { get; set; } = 4;
-        public int DeadAnimation => deadAnimation;
-        protected virtual int deadAnimation { get; set; } = 6;
         public float DeathAnimationDuration => deathAnimationDuration;
         protected virtual float deathAnimationDuration { get; set; } = 3.5f;
 
