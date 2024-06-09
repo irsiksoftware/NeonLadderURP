@@ -16,15 +16,13 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip jumpAudio;
         public AudioClip landOnGroundAudio;
         public AudioClip landOnEnemyAudio;
-
+        Vector3 move;
         public int moveDirection { get; set; } = 0;
         public PlayerAction playerActions { get; private set; }
         public Health health { get; private set; }
         public Stamina stamina { get; private set; }
-
         public Meta metaCurrency { get; private set; }
         public Perma permaCurrency { get; private set; }
-
         [SerializeField]
         public bool controlEnabled;
         [SerializeField]
@@ -39,24 +37,10 @@ namespace NeonLadder.Mechanics.Controllers
             set { controls = value; }
         }
 
-        Vector3 move;
-
-        public Directions? CameFrom { get; set; }
-
-        public void EnablePlayerControl()
-        {
-            controlEnabled = true;
-        }
-
-        public void DisablePlayerControl()
-        {
-            controlEnabled = false;
-        }
         protected override void OnEnable()
         {
             base.OnEnable();
         }
-
 
         public void Spawn(Transform location)
         {
@@ -74,8 +58,6 @@ namespace NeonLadder.Mechanics.Controllers
             metaCurrency = GetComponent<Meta>();
             permaCurrency = GetComponent<Perma>();
         }
-
-
 
         protected override void Update()
         {
@@ -98,12 +80,8 @@ namespace NeonLadder.Mechanics.Controllers
             moveDirection = direction;
         }
 
-
-
-
         protected override void ComputeVelocity()
         {
-
             if (controlEnabled)
             {
                 base.ComputeVelocity();
@@ -126,7 +104,6 @@ namespace NeonLadder.Mechanics.Controllers
                     animator.SetInteger("animation", 6);
                 }
 
- 
                 if (playerActions.attackState == ActionStates.Acting)
                 {
                     animator.SetInteger("animation", 23);
@@ -144,7 +121,6 @@ namespace NeonLadder.Mechanics.Controllers
                         velocity.y *= Constants.JumpDeceleration;
                     }
                 }
-
 
                 if (moveDirection != 0)
                 {
@@ -165,38 +141,6 @@ namespace NeonLadder.Mechanics.Controllers
                     targetVelocity.x = move.x * Constants.DefaultMaxSpeed;
                 }
             }
-
-        }
-
-
-
-
-
-        public void StartWalking(bool right)
-        {
-            if (right)
-            {
-                rigidbody.velocity = new Vector2(Constants.CutsceneProtagonistWalkSpeed, rigidbody.velocity.y);
-            }
-            else
-            {
-                rigidbody.velocity = new Vector2(-Constants.CutsceneProtagonistWalkSpeed, rigidbody.velocity.y);
-
-            }
-        }
-        public void DisableAnimator()
-        {
-            animator.enabled = false;
-        }
-
-        public void EnableAnimator()
-        {
-            animator.enabled = true;
-        }
-        public void StopWalking()
-        {
-
-            rigidbody.velocity = new Vector2(0f, rigidbody.velocity.y);
         }
 
         internal void AddMetaCurrency(int amount)
