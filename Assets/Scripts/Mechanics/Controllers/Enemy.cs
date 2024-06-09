@@ -1,6 +1,5 @@
 using Assets.Scripts;
 using NeonLadder.Core;
-using NeonLadder.Events;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
@@ -63,8 +62,13 @@ namespace NeonLadder.Mechanics.Controllers
         public int DeathAnimation => deathAnimation;
         protected virtual int deathAnimation { get; set; } = 4;
 
+
         public int VictoryAnimation => victoryAnimation;
         protected virtual int victoryAnimation { get; set; } = 5;
+
+        public int DeadAnimation => deadAnimation;
+        protected virtual int deadAnimation { get; set; } = 6;
+
 
         public float DeathAnimationDuration => deathAnimationDuration;
         protected virtual float deathAnimationDuration { get; set; } = 3.5f;
@@ -80,13 +84,13 @@ namespace NeonLadder.Mechanics.Controllers
 
         void OnCollisionEnter(Collision collision)
         {
-            var player = collision.gameObject.GetComponent<Player>();
-            if (player != null)
-            {
-                var ev = Simulation.Schedule<PlayerEnemyCollision>();
-                ev.enemy = this;
-                if (enableLogging) Debug.Log("Collision with player detected.");
-            }
+            //var player = collision.gameObject.GetComponent<Player>();
+            //if (player != null)
+            //{
+            //    var ev = Simulation.Schedule<PlayerEnemyCollision>();
+            //    ev.enemy = this;
+            //    if (enableLogging) Debug.Log("Collision with player detected.");
+            //}
         }
 
         protected virtual void Awake()
@@ -156,22 +160,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            base.Update();  // Ensures that base class Update is called
-
-            if (target == null)
-            {
-                LogMessage("Target is null");
-            }
-
-            if (target?.health == null)
-            {
-                LogMessage("Target health is null");
-            }
-            else
-            {
-                LogMessage(target?.health?.current.ToString());
-            }
-
+            base.Update(); 
             if (health.IsAlive)
             {
                 if (target.health.IsAlive)
@@ -226,12 +215,23 @@ namespace NeonLadder.Mechanics.Controllers
                     StartCoroutine(PlayVictoryAnimation());
                 }
             }
+            else
+            {
+                animator.SetInteger("animation", DeathAnimation);
+                StartCoroutine(PlayDeathAnimation());
+            }
         }
 
         private IEnumerator PlayVictoryAnimation()
         {
             yield return new WaitForSeconds(3);
             animator.SetInteger("animation", idleAnimation);
+        }
+
+        private IEnumerator PlayDeathAnimation()
+        {
+            yield return new WaitForSeconds(DeathAnimationDuration);
+            transform.parent.gameObject.SetActive(false);
         }
 
         private void AttackPlayer()

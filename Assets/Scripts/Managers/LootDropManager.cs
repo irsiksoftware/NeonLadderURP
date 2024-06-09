@@ -1,17 +1,33 @@
 ﻿using NeonLadder.Items;
 using NeonLadder.Items.Loot;
+using System.Collections;
 using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class LootDropManager
+    public class LootDropManager : MonoBehaviour
     {
-        public static void DropLoot(LootTable lootTable, Transform enemyTransform, Player target)
+        public static LootDropManager Instance { get; private set; }
+
+        private void Awake()
         {
-            if (lootTable == null)
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public static void DropLoot(Player target, Enemy enemy)
+        {
+            if (enemy.RuntimeLootTable == null)
                 return;
 
-            foreach (var dropGroup in lootTable.dropGroups)
+            foreach (var dropGroup in enemy.RuntimeLootTable.dropGroups)
             {
                 int itemsToDrop = Random.Range(dropGroup.minDrops, dropGroup.maxDrops + 1);
 
@@ -22,11 +38,17 @@ namespace NeonLadder.Mechanics.Controllers
 
                     if (ShouldDropItem(lootItem, target))
                     {
-                        DropItem(lootItem, enemyTransform);
+                        Instance.StartCoroutine(Instance.DelayedDropItem(lootItem, enemy.transform, enemy.DeathAnimationDuration));
                         itemsToDrop--;
                     }
                 }
             }
+        }
+
+        private IEnumerator DelayedDropItem(LootItem lootItem, Transform enemyTransform, float secondsDelay)
+        {
+            yield return new WaitForSeconds(secondsDelay);
+            DropItem(lootItem, enemyTransform);
         }
 
         private static bool ShouldDropItem(LootItem lootItem, Player target)

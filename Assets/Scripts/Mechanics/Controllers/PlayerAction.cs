@@ -179,7 +179,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnMeleeAttackPerformed(InputAction.CallbackContext context)
         {
-            Debug.Log("Attack Performed: Current State - " + attackState);
+            //Debug.Log("Attack Performed: Current State - " + attackState);
             if (!player.stamina.IsExhausted)
             {
                 if (attackState == ActionStates.Ready)
@@ -196,7 +196,7 @@ namespace NeonLadder.Mechanics.Controllers
             if (attackState == ActionStates.Acting)
             {
                 stopAttack = true;
-                Debug.Log("Melee attack cancel requested");
+                //Debug.Log("Melee attack cancel requested");
             }
         }
 
@@ -245,7 +245,7 @@ namespace NeonLadder.Mechanics.Controllers
                 case ActionStates.Preparing:
                     attackDuration = initialAttackDuration; // Reset the attack duration
                     attackState = ActionStates.Acting;
-                    Debug.Log("Transitioned to Acting");
+                    //Debug.Log("Transitioned to Acting");
                     break;
 
                 case ActionStates.Acting:
@@ -263,7 +263,7 @@ namespace NeonLadder.Mechanics.Controllers
                     else
                     {
                         attackState = ActionStates.Ready; // Automatically reset to Ready after completing the cycle
-                        Debug.Log("Attack state reset to Ready");
+                        //Debug.Log("Attack state reset to Ready");
                     }
                     break;
 

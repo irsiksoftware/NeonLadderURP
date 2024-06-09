@@ -16,7 +16,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            Debug.Log($"{nameof(HealthIsZero)} event executed for ${health.gameObject.tag}");
+            //Debug.Log($"{nameof(HealthIsZero)} event executed for ${health.gameObject.tag}");
             switch (health.gameObject.tag)
             {
                 case "Player":
