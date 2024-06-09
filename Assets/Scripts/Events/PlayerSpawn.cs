@@ -24,7 +24,7 @@ namespace NeonLadder.Events
             player.health.Increment(Constants.MaxHealth);
             player.stamina.Increment(Constants.MaxStamina);
             player.Teleport(spawnPoint.transform.position);
-            player.playerActions.jumpState = ActionStates.Ready;
+            //player.playerActions.jumpState = ActionStates.Ready;
             player.animator.SetBool("dead", false);
             model.VirtualCamera.m_Follow = player.transform;
             model.VirtualCamera.m_LookAt = player.transform;

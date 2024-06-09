@@ -16,8 +16,6 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip jumpAudio;
         public AudioClip landOnGroundAudio;
         public AudioClip landOnEnemyAudio;
-        Vector3 move;
-        public int moveDirection { get; set; } = 0;
         public PlayerAction playerActions { get; private set; }
         public Health health { get; private set; }
         public Stamina stamina { get; private set; }
@@ -75,71 +73,39 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        public void UpdateMoveDirection(int direction)
-        {
-            moveDirection = direction;
-        }
 
         protected override void ComputeVelocity()
         {
-            if (controlEnabled)
+            if (!controlEnabled)
+                return;
+
+            HandleAnimations();
+            targetVelocity.x = playerActions.playerInput.x * (Constants.DefaultMaxSpeed) * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
+        }
+
+        private void HandleAnimations()
+        {
+            if (animator.GetInteger("animation") > 9000) //dances, non locomotion animations
             {
-                base.ComputeVelocity();
+                return;
+            }
 
-                if (animator.GetInteger("animation") > 9000) //dances, non locomotion animations
-                {
-                    return;
-                }
+            if (Math.Abs(velocity.x) < 0.1)
+            {
+                animator.SetInteger("animation", 1);
+            }
+            else if (Math.Abs(velocity.x) > 4)
+            {
+                animator.SetInteger("animation", 10);
+            }
+            else if (Math.Abs(velocity.x) > 0.1)
+            {
+                animator.SetInteger("animation", 6);
+            }
 
-                if (Math.Abs(velocity.x) < 0.1)
-                {
-                    animator.SetInteger("animation", 1);
-                }
-                else if (Math.Abs(velocity.x) > 4)
-                {
-                    animator.SetInteger("animation", 10);
-                }
-                else if (Math.Abs(velocity.x) > 0.1)
-                {
-                    animator.SetInteger("animation", 6);
-                }
-
-                if (playerActions.attackState == ActionStates.Acting)
-                {
-                    animator.SetInteger("animation", 23);
-                }
-
-                if (playerActions?.jump ?? false && IsGrounded)
-                {
-                    velocity.y = Constants.JumpTakeOffSpeed; // Initial jump velocity
-                }
-
-                else if (playerActions?.stopJump ?? false)
-                {
-                    if (velocity.y > 0)
-                    {
-                        velocity.y *= Constants.JumpDeceleration;
-                    }
-                }
-
-                if (moveDirection != 0)
-                {
-                    move.x = moveDirection;
-                }
-                else
-                {
-                    move.x = 0; // Stop movement when moveDirection is zero
-                }
-
-
-                if (playerActions?.IsSprinting ?? false)
-                {
-                    targetVelocity.x = moveDirection * (Constants.DefaultMaxSpeed * Constants.SprintSpeedMultiplier);
-                }
-                else
-                {
-                    targetVelocity.x = move.x * Constants.DefaultMaxSpeed;
-                }
+            if (playerActions.attackState == ActionStates.Acting)
+            {
+                animator.SetInteger("animation", 23);
             }
         }
 

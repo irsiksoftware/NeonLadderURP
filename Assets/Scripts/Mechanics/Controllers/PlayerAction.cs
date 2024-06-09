@@ -11,21 +11,11 @@ namespace NeonLadder.Mechanics.Controllers
     public class PlayerAction : BaseAction
     {
         private Player player;
-        private Vector2 playerInput = new Vector2(0, 0);
+        public Vector2 playerInput = new Vector2(0, 0);
         private float sprintTimeAccumulator = 0f;
         public bool isClimbing { get; set; }
         private bool isUsingMelee = true;
         public InputActionMap playerActionMap;
-
-        #region Jumping
-        [SerializeField]
-        public ActionStates jumpState = ActionStates.Ready;
-        [SerializeField]
-        public bool jump;
-        public bool IsJumping => jumpState == ActionStates.Preparing || jumpState == ActionStates.Acting || jumpState == ActionStates.InAction || !stopJump;
-        [SerializeField]
-        public bool stopJump;
-        #endregion
 
         #region Sprinting
         [SerializeField]
@@ -63,14 +53,11 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (player.controlEnabled)
             {
-                UpdateJumpState(player.IsGrounded);
-                UpdateSprintState(playerInput, ref player.velocity);
+                UpdateSprintState(ref player.velocity);
                 if (IsAttacking ?? false)
                 {
-                    UpdateAttackState(playerInput, ref player.velocity);
-                    //TryAttackEnemy(); // this needs to check for attack state and only be performed once.
+                    UpdateAttackState();
                 }
-                UpdateJumpAnimationParameters(player);
             }
 
             if (AnimationDebuggingText != null)
@@ -99,39 +86,23 @@ namespace NeonLadder.Mechanics.Controllers
             playerActionMap = player.controls.FindActionMap("Player");
             playerActionMap.Enable();
 
-            var jumpAction = playerActionMap.FindAction("Jump");
-            jumpAction.performed += OnJumpPerformed;
-            jumpAction.canceled += OnJumpCanceled;
-
             var sprintAction = playerActionMap.FindAction("Sprint");
             sprintAction.performed += OnSprintPerformed;
             sprintAction.canceled += OnSprintCanceled;
 
-            var moveLeftAction = playerActionMap.FindAction("MoveLeft");
-            moveLeftAction.performed += OnMoveLeftPerformed;
-            moveLeftAction.canceled += OnMoveCanceled;
-
-            var moveRightAction = playerActionMap.FindAction("MoveRight");
-            moveRightAction.performed += OnMoveRightPerformed;
-            moveRightAction.canceled += OnMoveCanceled;
-
-            var upAction = playerActionMap.FindAction("Up");
-            upAction.performed += OnUpPerformed;
+            var moveAction = playerActionMap.FindAction("Move");
+            moveAction.performed += OnMovePerformed;
+            moveAction.canceled += OnMoveCanceled;
 
             var meleeAction = playerActionMap.FindAction("MeleeAttack");
             meleeAction.performed += OnMeleeAttackPerformed;
             meleeAction.canceled += OnMeleeAttackCanceled;
-            base.ConfigureControls(player);
-
-            var dashAction = playerActionMap.FindAction("Dash");
-            dashAction.performed += OnDashPerformed;
-            dashAction.canceled += OnDashCanceled;
-
 
             var weaponSwapAction = playerActionMap.FindAction("WeaponSwap");
             weaponSwapAction.performed += OnWeaponSwap;
-        }
 
+            ControllerDebugging.PrintDebugControlConfiguration(player);
+        }
 
         private void OnWeaponSwap(InputAction.CallbackContext context)
         {
@@ -145,7 +116,6 @@ namespace NeonLadder.Mechanics.Controllers
             else
             {
                 SwapWeapons(rangedWeaponGroups, meleeWeaponGroups);
-
             }
 
             isUsingMelee = !isUsingMelee;
@@ -164,16 +134,6 @@ namespace NeonLadder.Mechanics.Controllers
                 var weapon = weaponGroup.transform.GetChild(0).gameObject;
                 weapon.SetActive(true);
             }
-        }
-
-        private void OnDashCanceled(InputAction.CallbackContext context)
-        {
-            //GetComponentInParent<DashAfterImage>().StopDash();
-        }
-
-        private void OnDashPerformed(InputAction.CallbackContext context)
-        {
-            //GetComponentInParent<DashAfterImage>().StartDash();
         }
 
         private void OnMeleeAttackPerformed(InputAction.CallbackContext context)
@@ -196,7 +156,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        public void UpdateSprintState(Vector2 move, ref Vector3 velocity)
+        public void UpdateSprintState(ref Vector3 velocity)
         {
             float staminaCostPerTenthSecond = Constants.SprintStaminaCost * 0.1f;
             switch (sprintState)
@@ -222,7 +182,7 @@ namespace NeonLadder.Mechanics.Controllers
                             sprintTimeAccumulator -= 0.1f; // Subtract 0.1 seconds from the accumulator
                         }
 
-                        velocity.x = player.moveDirection * (Constants.SprintSpeedMultiplier * Constants.DefaultMaxSpeed);
+                        //velocity.x = player.move.x * (Constants.SprintSpeedMultiplier * Constants.DefaultMaxSpeed);
                         sprintDuration -= Time.deltaTime;
                     }
                     break;
@@ -234,67 +194,34 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        public void UpdateAttackState(Vector2 move, ref Vector3 velocity)
+        public void UpdateAttackState()
         {
             switch (attackState)
             {
                 case ActionStates.Preparing:
-                    attackDuration = initialAttackDuration; // Reset the attack duration
+                    attackDuration = initialAttackDuration;
                     attackState = ActionStates.Acting;
-                    //Debug.Log("Transitioned to Acting");
                     break;
 
                 case ActionStates.Acting:
                     if (attackDuration > 0)
                     {
                         attackDuration -= Time.deltaTime;
-                        //Debug.Log($"Attacking... {attackDuration} seconds remaining.");
 
-                        // Trigger the attack halfway through the attack duration
                         if (attackDuration <= initialAttackDuration / 2 && attackDuration > initialAttackDuration / 2 - Time.deltaTime)
                         {
-                            TryAttackEnemy(); // Perform attack
+                            TryAttackEnemy();
                         }
                     }
                     else
                     {
-                        attackState = ActionStates.Ready; // Automatically reset to Ready after completing the cycle
-                        //Debug.Log("Attack state reset to Ready");
+                        attackState = ActionStates.Ready;
+
                     }
                     break;
 
                 case ActionStates.Acted:
-                    // Optionally, handle post-attack logic here, like returning to a neutral stance
-                    break;
-            }
-        }
 
-        public void UpdateJumpState(bool IsGrounded)
-        {
-            jump = false;
-            switch (jumpState)
-            {
-                case ActionStates.Preparing:
-                    jumpState = ActionStates.Acting;
-                    jump = true;
-                    stopJump = false;
-                    break;
-                case ActionStates.Acting:
-                    if (!IsGrounded)
-                    {
-                        Schedule<PlayerJumped>();
-                        jumpState = ActionStates.InAction;
-                    }
-                    break;
-                case ActionStates.InAction:
-                    if (IsGrounded)
-                    {
-                        Schedule<PlayerLanded>();
-                        jumpState = ActionStates.Acted;
-                    }
-                    break;
-                case ActionStates.Acted:
-                    jumpState = ActionStates.Ready;
                     break;
             }
         }
@@ -319,62 +246,15 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        private void OnMoveLeftPerformed(InputAction.CallbackContext context)
+        private void OnMovePerformed(InputAction.CallbackContext context)
         {
-            Keypresses.Add(context.action.name);
-            player.moveDirection = -1;
-            playerInput = new Vector2(-1, 0);
-            UpdateRotation(-1);
-        }
-
-        private void OnMoveRightPerformed(InputAction.CallbackContext context)
-        {
-            Keypresses.Add(context.action.name);
-            player.moveDirection = 1;
-            playerInput = new Vector2(1, 0); // Assuming right movement is along the positive x-axis
-            UpdateRotation(1);
-        }
-
-        private void OnUpPerformed(InputAction.CallbackContext context)
-        {
-            InitAction(player.animator, "isClimbing", Constants.ClimbDuration);
+            playerInput = context.ReadValue<Vector2>();
+            UpdateRotation(playerInput.x);
         }
 
         private void OnMoveCanceled(InputAction.CallbackContext context)
         {
-            Keypresses.Remove(context.action.name);
-            player.UpdateMoveDirection(0);
             playerInput = Vector2.zero; // No movement input
-            UpdateRotation(0);
-        }
-
-        //used by signals
-        public void Jump()
-        {
-            OnJumpPerformed(new InputAction.CallbackContext());
-        }
-
-        public void OnJumpPerformed(InputAction.CallbackContext context)
-        {
-            if (player.stamina.IsExhausted) return;
-            player.stamina.Decrement(Constants.JumpStaminaCost);
-            if (jumpState == ActionStates.Ready)
-            {
-                jumpState = ActionStates.Preparing;
-                player.velocity.y = Constants.JumpTakeOffSpeed * Constants.JumpModifier;
-            }
-
-            stopJump = true;
-            Schedule<PlayerStopJump>();
-        }
-
-        private void OnJumpCanceled(InputAction.CallbackContext context)
-        {
-            if (IsJumping)
-            {
-                player.velocity.y *= Constants.JumpCutOffFactor;
-                stopJump = true;
-            }
         }
 
         private void TryAttackEnemy()
@@ -386,9 +266,8 @@ namespace NeonLadder.Mechanics.Controllers
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, rayDirection, out hit, attackRange))
             {
-     
                 Debug.DrawRay(rayOrigin, rayDirection * attackRange, Color.red);
-                if ( hit.collider.CompareTag("Boss") || hit.collider.CompareTag("Major") || hit.collider.CompareTag("Minor"))
+                if (hit.collider.CompareTag("Boss") || hit.collider.CompareTag("Major") || hit.collider.CompareTag("Minor"))
                 {
                     Health enemyHealth = hit.collider.GetComponent<Health>();
                     if (enemyHealth != null)
