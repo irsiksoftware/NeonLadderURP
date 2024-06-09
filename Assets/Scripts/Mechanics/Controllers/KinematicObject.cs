@@ -64,7 +64,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void ComputeVelocity()
         {
-            // Implement character-specific velocity computation here
+            // Implement the most basic velocity calculation here
         }
 
         protected virtual void FixedUpdate()

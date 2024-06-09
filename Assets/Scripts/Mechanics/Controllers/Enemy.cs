@@ -10,11 +10,13 @@ using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class Enemy : KinematicObject
+    public abstract class Enemy : KinematicObject
     {
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
+        public AudioClip jumpAudio;
+        public AudioClip landAudio;
 
         private Player target;
 
@@ -38,24 +40,36 @@ namespace NeonLadder.Mechanics.Controllers
         internal Animator animator;
 
         [SerializeField]
-        private int attackDamage = 10; // Damage per attack
+        public virtual int attackDamage { get; set; } = 10; // Damage per attack
         [SerializeField]
-        private float attackRange = 3.0f; // Range within which the monster can attack
+        public virtual float attackRange { get; set; } = 3.0f; // Range within which the monster can attack
         [SerializeField]
-        private float attackCooldown = 1.0f; // Cooldown time between attacks in seconds
-        private float lastAttackTime = 0; // Timestamp of the last attack
+        protected virtual float attackCooldown { get; set; } = 1.0f; // Cooldown time between attacks in seconds
+        protected virtual float lastAttackTime { get; set; } = 0; // Timestamp of the last attack
 
         // Animation states
-        public int idleAnimation = 0;
-        public int walkForwardAnimation = 1;
-        public int attackAnimation = 2;
-        public int hurtAnimation = 3;
-        public int deathAnimation = 4;
-        public int victoryAnimation = 5;
+        public int IdleAnimation => idleAnimation;
+        protected virtual int idleAnimation { get; set; } = 0;
 
-        public float deathAnimationDuration = 3.5f;
+        public int WalkForwardAnimation => walkForwardAnimation;
+        protected virtual int walkForwardAnimation { get; set; } = 1;
 
-        public bool IsFacingLeft { get; private set; }
+        public int AttackAnimation => attackAnimation;
+        protected virtual int attackAnimation { get; set; } = 2;
+
+        public int HurtAnimation => hurtAnimation;
+        protected virtual int hurtAnimation { get; set; } = 3;
+
+        public int DeathAnimation => deathAnimation;
+        protected virtual int deathAnimation { get; set; } = 4;
+
+        public int VictoryAnimation => victoryAnimation;
+        protected virtual int victoryAnimation { get; set; } = 5;
+
+        public float DeathAnimationDuration => deathAnimationDuration;
+        protected virtual float deathAnimationDuration { get; set; } = 3.5f;
+
+        public bool IsFacingLeft => target.transform.position.x < transform.parent.position.x;
 
         [SerializeField]
         private MonsterStates currentState = MonsterStates.Idle;
@@ -75,9 +89,9 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
-            Debug.Log($"{nameof(Enemy)} - {this.gameObject.name} -> {nameof(Awake)}");
+            Debug.Log($"{gameObject.name} {nameof(Enemy)} is {nameof(Awake)}");
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
             target = Simulation.GetModel<PlatformerModel>().Player;
@@ -86,22 +100,47 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void LoadLootTable()
         {
+            // Check if lootTable is assigned in the editor
             if (lootTable != null)
             {
-                runtimeLootTable = lootTable;
+                RuntimeLootTable = lootTable;
             }
             else
             {
-                runtimeLootTable = Resources.Load<LootTable>(Constants.MajorEnemyLootTablePath);
-                if (runtimeLootTable == null)
+                // Determine the appropriate loot table path based on the type of enemy
+                string lootTablePath = string.Empty;
+
+                switch (this)
                 {
-                    Debug.LogError($"LootTable not found at path: {Constants.MajorEnemyLootTablePath}");
+                    case Minor:
+                        lootTablePath = Constants.MinorEnemyLootTablePath;
+                        break;
+                    case Major:
+                        lootTablePath = Constants.MajorEnemyLootTablePath;
+                        break;
+                    case Boss:
+                        lootTablePath = Constants.BossEnemyLootTablePath;
+                        break;
+                    default:
+                        Debug.LogError($"LootTable not found for enemy: {this}");
+                        break;
+                }
+
+                if (lootTablePath != string.Empty)
+                {
+                    RuntimeLootTable = Resources.Load<LootTable>(lootTablePath);
+                    if (RuntimeLootTable == null)
+                    {
+                        Debug.LogError($"LootTable not found at path: {lootTablePath}");
+                    }
                 }
             }
         }
 
+
         protected override void ComputeVelocity()
         {
+            base.ComputeVelocity();
             if (health.IsAlive)
             {
                 base.ComputeVelocity();  // Ensures that base class logic like physics calculations are still executed
@@ -207,7 +246,6 @@ namespace NeonLadder.Mechanics.Controllers
         private void ChasePlayer()
         {
             LogMessage("ChasePlayer called.");
-            IsFacingLeft = (target.transform.position.x - transform.parent.position.x) < 0 ? true : false;
             transform.parent.rotation = Quaternion.Euler(0, IsFacingLeft ? -90 : 90, 0);
             moveDirection = IsFacingLeft ? -1 : 1;
             animator.SetInteger("animation", walkForwardAnimation);

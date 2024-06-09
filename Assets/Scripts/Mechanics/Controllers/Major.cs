@@ -1,7 +1,6 @@
 ﻿namespace NeonLadder.Mechanics.Controllers
 {
-    public class Boss : Enemy
+    public class Major : Enemy
     {
-
     }
 }

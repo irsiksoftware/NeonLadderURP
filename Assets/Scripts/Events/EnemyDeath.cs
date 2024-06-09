@@ -12,13 +12,13 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             enemyAnimator = enemy.GetComponentInParent<Animator>();
-            enemyAnimator.SetInteger("animation", enemy.deathAnimation);
+            enemyAnimator.SetInteger("animation", enemy.DeathAnimation);
             enemy.StartCoroutine(HandleDeathAnimation());
         }
 
         private IEnumerator HandleDeathAnimation()
         {
-            yield return new WaitForSeconds(enemy.deathAnimationDuration);
+            yield return new WaitForSeconds(enemy.DeathAnimationDuration);
             enemyAnimator.enabled = false;
             LootDropManager.DropLoot(enemy.RuntimeLootTable, enemy.transform, model.Player); // Drop items upon death
             enemy.transform.parent.gameObject.SetActive(false);
