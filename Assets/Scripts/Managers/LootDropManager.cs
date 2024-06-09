@@ -72,8 +72,8 @@ namespace NeonLadder.Mechanics.Controllers
 
             int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
             lootItem.collectiblePrefab.amount = amountToDrop;
-            Object.Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
-            Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
+            Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
+            //Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
         }
 
         private static Vector3 StandardizedLootDropTransformations(Collectible prefab)

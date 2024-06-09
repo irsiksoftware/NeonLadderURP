@@ -1,9 +1,7 @@
 using Assets.Scripts;
-using NeonLadder.Core;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
-using NeonLadder.Models;
 using System.Collections;
 using UnityEngine;
 
@@ -16,8 +14,6 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip ouchAudio;
         public AudioClip jumpAudio;
         public AudioClip landAudio;
-
-        private Player target;
 
         [SerializeField]
         private LootTable lootTable; // Allow assignment in the editor
@@ -35,7 +31,6 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         public float staminaRegenTimer = 0f;
 
-        public SpriteRenderer spriteRenderer { get; private set; }
         internal Animator animator;
 
         [SerializeField]
@@ -46,111 +41,65 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual float attackCooldown { get; set; } = 1.0f; // Cooldown time between attacks in seconds
         protected virtual float lastAttackTime { get; set; } = 0; // Timestamp of the last attack
 
-        // Animation states
         public int IdleAnimation => idleAnimation;
         protected virtual int idleAnimation { get; set; } = 0;
-
-        public int WalkForwardAnimation => walkForwardAnimation;
         protected virtual int walkForwardAnimation { get; set; } = 1;
-
-        public int AttackAnimation => attackAnimation;
         protected virtual int attackAnimation { get; set; } = 2;
-
-        public int HurtAnimation => hurtAnimation;
         protected virtual int hurtAnimation { get; set; } = 3;
+        protected virtual int victoryAnimation { get; set; } = 5;
 
         public int DeathAnimation => deathAnimation;
         protected virtual int deathAnimation { get; set; } = 4;
-
-
-        public int VictoryAnimation => victoryAnimation;
-        protected virtual int victoryAnimation { get; set; } = 5;
-
         public int DeadAnimation => deadAnimation;
         protected virtual int deadAnimation { get; set; } = 6;
-
-
         public float DeathAnimationDuration => deathAnimationDuration;
         protected virtual float deathAnimationDuration { get; set; } = 3.5f;
 
-        public bool IsFacingLeft => target.transform.position.x < transform.parent.position.x;
+        public bool IsFacingLeft => player.transform.position.x < transform.parent.position.x;
 
         [SerializeField]
         private MonsterStates currentState = MonsterStates.Idle;
 
-        private bool enableLogging = true; // Toggle this to enable/disable logging
-        private float logInterval = 1.0f; // Log every 1 second
-        private float lastLogTime = 0.0f; // Track time since last log
-
-        void OnCollisionEnter(Collision collision)
-        {
-            //var player = collision.gameObject.GetComponent<Player>();
-            //if (player != null)
-            //{
-            //    var ev = Simulation.Schedule<PlayerEnemyCollision>();
-            //    ev.enemy = this;
-            //    if (enableLogging) Debug.Log("Collision with player detected.");
-            //}
-        }
-
         protected virtual void Awake()
         {
-            Debug.Log($"{gameObject.name} {nameof(Enemy)} is {nameof(Awake)}");
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
-            target = Simulation.GetModel<PlatformerModel>().Player;
             LoadLootTable();
         }
 
         private void LoadLootTable()
         {
-            // Check if lootTable is assigned in the editor
             if (lootTable != null)
             {
                 RuntimeLootTable = lootTable;
             }
             else
             {
-                // Determine the appropriate loot table path based on the type of enemy
-                string lootTablePath = string.Empty;
-
                 switch (this)
                 {
                     case Minor:
-                        lootTablePath = Constants.MinorEnemyLootTablePath;
+                        RuntimeLootTable = Resources.Load<LootTable>(Constants.MinorEnemyLootTablePath);
                         break;
                     case Major:
-                        lootTablePath = Constants.MajorEnemyLootTablePath;
+                        RuntimeLootTable = Resources.Load<LootTable>(Constants.MajorEnemyLootTablePath);
                         break;
                     case Boss:
-                        lootTablePath = Constants.BossEnemyLootTablePath;
+                        RuntimeLootTable = Resources.Load<LootTable>(Constants.BossEnemyLootTablePath);
                         break;
                     default:
                         Debug.LogError($"LootTable not found for enemy: {this}");
                         break;
                 }
-
-                if (lootTablePath != string.Empty)
-                {
-                    RuntimeLootTable = Resources.Load<LootTable>(lootTablePath);
-                    if (RuntimeLootTable == null)
-                    {
-                        Debug.LogError($"LootTable not found at path: {lootTablePath}");
-                    }
-                }
             }
         }
-
 
         protected override void ComputeVelocity()
         {
             base.ComputeVelocity();
             if (health.IsAlive)
             {
-                base.ComputeVelocity();  // Ensures that base class logic like physics calculations are still executed
                 if (moveDirection != 0)
                 {
-                    animator.SetInteger("animation", walkForwardAnimation);
                     targetVelocity.x = moveDirection * Constants.DefaultMaxSpeed;
                 }
 
@@ -160,12 +109,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            base.Update(); 
+            base.Update();
             if (health.IsAlive)
             {
-                if (target.health.IsAlive)
+                if (player.health.IsAlive)
                 {
-                    float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+                    float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
 
                     switch (currentState)
                     {
@@ -174,22 +123,18 @@ namespace NeonLadder.Mechanics.Controllers
                             if (distanceToTarget > attackRange)
                             {
                                 currentState = MonsterStates.Approaching;
-                                LogMessage("Switching to Approaching state.");
                             }
                             else
                             {
                                 currentState = MonsterStates.Attacking;
-                                LogMessage("Switching to Attacking state.");
                             }
                             break;
                         case MonsterStates.Approaching:
                             if (distanceToTarget <= attackRange)
                             {
-                                // Stop and reassess before attacking
                                 moveDirection = 0;
                                 animator.SetInteger("animation", idleAnimation);
                                 currentState = MonsterStates.Reassessing;
-                                LogMessage("Reassessing before attack.");
                             }
                             else
                             {
@@ -200,9 +145,7 @@ namespace NeonLadder.Mechanics.Controllers
                             if (Time.time > lastAttackTime + attackCooldown)
                             {
                                 AttackPlayer();
-                                // After attacking, reassess the situation
                                 currentState = MonsterStates.Reassessing;
-                                LogMessage("Attacked player. Reassessing.");
                             }
 
                             break;
@@ -236,28 +179,17 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void AttackPlayer()
         {
-            LogMessage("AttackPlayer called.");
             lastAttackTime = Time.time;
-            target.health.Decrement(attackDamage);
+            player.health.Decrement(attackDamage);
             animator.SetInteger("animation", attackAnimation);
             currentState = MonsterStates.Reassessing;
         }
 
         private void ChasePlayer()
         {
-            LogMessage("ChasePlayer called.");
             transform.parent.rotation = Quaternion.Euler(0, IsFacingLeft ? -90 : 90, 0);
             moveDirection = IsFacingLeft ? -1 : 1;
             animator.SetInteger("animation", walkForwardAnimation);
-        }
-
-        private void LogMessage(string message)
-        {
-            if (enableLogging && Time.time > lastLogTime + logInterval)
-            {
-                Debug.Log(message);
-                lastLogTime = Time.time;
-            }
         }
     }
 }

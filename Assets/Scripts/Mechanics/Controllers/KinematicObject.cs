@@ -1,4 +1,5 @@
 using NeonLadder.Core;
+using NeonLadder.Models;
 using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
@@ -8,6 +9,7 @@ namespace NeonLadder.Mechanics.Controllers
     /// </summary>
     public class KinematicObject : MonoBehaviour
     {
+        protected Player player;
         public float minGroundNormalY = .65f;
         public float gravityModifier = 1f;
         public Vector3 velocity;
@@ -54,7 +56,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void Start()
         {
-            // Adjusted for 3D physics layer mask, removing the use of ContactFilter2D
+            player = Simulation.GetModel<PlatformerModel>().Player;
         }
 
         protected virtual void Update()
@@ -62,18 +64,16 @@ namespace NeonLadder.Mechanics.Controllers
             targetVelocity = Vector3.zero;
             ComputeVelocity();
         }
-
         protected virtual void ComputeVelocity()
         {
-            // Implement the most basic velocity calculation here
+            targetVelocity = Vector3.zero;
         }
+
 
         protected virtual void FixedUpdate()
         {
             velocity += gravityModifier * Physics.gravity * Time.deltaTime;
             velocity.x = targetVelocity.x;
-
-            // Limit Z movement or adjust it according to your requirements
             velocity.z = 0;
 
             IsGrounded = false;

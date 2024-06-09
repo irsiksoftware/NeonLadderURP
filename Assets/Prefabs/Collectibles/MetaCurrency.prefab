@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1712810085220654690}
   - component: {fileID: -61710834424923109}
   - component: {fileID: 4713723657696764748}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: MetaCurrency
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4851,7 +4851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f98c7053b3a734487cecb8c3e631d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 1
+  amount: 22
 --- !u!65 &4713723657696764748
 BoxCollider:
   m_ObjectHideFlags: 0

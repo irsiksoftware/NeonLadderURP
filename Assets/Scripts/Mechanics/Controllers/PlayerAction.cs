@@ -130,7 +130,6 @@ namespace NeonLadder.Mechanics.Controllers
 
             var weaponSwapAction = playerActionMap.FindAction("WeaponSwap");
             weaponSwapAction.performed += OnWeaponSwap;
-
         }
 
 
@@ -179,12 +178,10 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnMeleeAttackPerformed(InputAction.CallbackContext context)
         {
-            //Debug.Log("Attack Performed: Current State - " + attackState);
             if (!player.stamina.IsExhausted)
             {
                 if (attackState == ActionStates.Ready)
                 {
-                    Debug.Log("Starting Attack");
                     attackState = ActionStates.Preparing;
                     stopAttack = false;
                 }
@@ -196,7 +193,6 @@ namespace NeonLadder.Mechanics.Controllers
             if (attackState == ActionStates.Acting)
             {
                 stopAttack = true;
-                //Debug.Log("Melee attack cancel requested");
             }
         }
 
@@ -383,7 +379,6 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void TryAttackEnemy()
         {
-            // Adjust the ray origin to be higher up on the character's body
             Vector3 rayOrigin = transform.parent.position + new Vector3(0, 1.0f, 0);  // Adjust 1.0f to suit the character size
             Vector3 rayDirection = transform.parent.forward;
             float attackRange = Constants.AttackRange;
@@ -399,7 +394,6 @@ namespace NeonLadder.Mechanics.Controllers
                     if (enemyHealth != null)
                     {
                         enemyHealth.Decrement(Constants.AttackDamage);
-                        Debug.Log("Attacked " + hit.collider.name + " for " + attackDuration + " damage.");
                     }
                 }
             }

@@ -21,7 +21,6 @@ namespace NeonLadder.Effects.Text
             speechBubbleRect = GetComponent<RectTransform>();
             speechBubbleImage = GetComponent<Image>();
 
-            isFacingLeft = IsFacingLeft();
             speechBubbleImage.enabled = false;
         }
 
@@ -29,7 +28,6 @@ namespace NeonLadder.Effects.Text
         {
             if (target != null)
             {
-                isFacingLeft = IsFacingLeft();
                 Vector3 worldOffset = isFacingLeft ? offsetLeft : offsetRight;
                 Sprite currentSprite = isFacingLeft ? leftBubbleSprite : rightBubbleSprite;
                 speechBubbleImage.sprite = currentSprite;
@@ -37,29 +35,6 @@ namespace NeonLadder.Effects.Text
                 speechBubbleRect.position = screenPos;
                 speechBubbleImage.enabled = true;
             }
-        }
-
-        private bool IsFacingLeft()
-        {
-            bool result;
-            var spriteRenderer = target.GetComponent<SpriteRenderer>();
-            var bossController = target.GetComponent<Boss>();
-
-            if (spriteRenderer != null)
-            {
-                result = spriteRenderer.flipX;
-            }
-            else if (bossController != null)
-            {
-                result = bossController.IsFacingLeft;
-            }
-            else
-            {
-                Debug.Log("No SpriteRenderer or BossController found on the target object. Defaulting to false.");
-                result = true;
-            }
-
-            return result;
         }
     }
 }

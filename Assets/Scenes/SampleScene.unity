@@ -780,6 +780,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
+      propertyPath: attackDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
       propertyPath: playerActionMap.m_Actions.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -1023,6 +1028,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Salamander1
       objectReference: {fileID: 0}
+    - target: {fileID: 1354695457756108415, guid: f4401a7393fb08f419a87ccbbf85b2c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8835343704864035979, guid: f4401a7393fb08f419a87ccbbf85b2c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1078,6 +1088,114 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4401a7393fb08f419a87ccbbf85b2c9, type: 3}
+--- !u!1001 &2208596307155653185
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1670589244372158216, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 37ccd4a934f948743a8dd7bcd6a3d09e, type: 2}
+    - target: {fileID: 1670589244372158216, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3482160500381520835, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607559049471270949, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: gravityModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607559049471270949, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607559049471270949, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: minGroundNormalY
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889955898790259993, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_Name
+      value: BattleBee1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889955898790259993, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889955898790259993, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_TagString
+      value: Minor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 510.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 508.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ddaf7a65cd4ba546a8d87d394dedb26, type: 3}
 --- !u!1001 &7940157840623343365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1141,6 +1259,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrabSpider1
       objectReference: {fileID: 0}
+    - target: {fileID: 6189079400462985659, guid: 5115736b8017276408dec7c87c25ffb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1162,3 +1285,4 @@ SceneRoots:
   - {fileID: 219894363}
   - {fileID: 1476602351}
   - {fileID: 257671323589426636}
+  - {fileID: 2208596307155653185}
