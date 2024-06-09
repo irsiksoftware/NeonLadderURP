@@ -1,4 +1,5 @@
-﻿using NeonLadder.WebRequests;
+﻿//when I get my REST API setup.
+//using NeonLadder.WebRequests;
 
 namespace NeonLadder.Core
 {
