@@ -1,4 +1,6 @@
-﻿namespace NeonLadder.Core
+﻿using NeonLadder.WebRequests;
+
+namespace NeonLadder.Core
 {
     public static partial class Simulation
     {
@@ -26,6 +28,9 @@
             {
                 if (Precondition())
                     Execute();
+
+                //when I get my REST API setup.
+                //WebRequestHandler.SendEventDataAsync(this.GetType().Name, tick);
             }
 
             /// <summary>
