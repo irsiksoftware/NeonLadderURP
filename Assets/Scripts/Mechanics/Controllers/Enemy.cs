@@ -29,7 +29,7 @@ namespace NeonLadder.Mechanics.Controllers
             private set { runtimeLootTable = value; }
         }
 
-        public int moveDirection;
+        private int moveDirection;
 
         public Health health { get; private set; }
         public Stamina stamina { get; private set; }
@@ -40,9 +40,9 @@ namespace NeonLadder.Mechanics.Controllers
         internal Animator animator;
 
         [SerializeField]
-        public virtual int attackDamage { get; set; } = 10; // Damage per attack
+        protected virtual int attackDamage { get; set; } = 10; // Damage per attack
         [SerializeField]
-        public virtual float attackRange { get; set; } = 3.0f; // Range within which the monster can attack
+        protected virtual float attackRange { get; set; } = 3.0f; // Range within which the monster can attack
         [SerializeField]
         protected virtual float attackCooldown { get; set; } = 1.0f; // Cooldown time between attacks in seconds
         protected virtual float lastAttackTime { get; set; } = 0; // Timestamp of the last attack
