@@ -20,7 +20,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         [SerializeField]
         private LootTable lootTable; // Allow assignment in the editor
-        public LootTable runtimeLootTable;
+        private LootTable runtimeLootTable;
+        public LootTable RuntimeLootTable
+        {
+            get { return runtimeLootTable; }
+            private set { runtimeLootTable = value; }
+        }
 
         public int moveDirection;
 
