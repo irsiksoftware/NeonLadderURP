@@ -2,6 +2,7 @@ using Assets.Scripts;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static NeonLadder.Core.Simulation;
@@ -263,10 +264,13 @@ namespace NeonLadder.Mechanics.Controllers
             Vector3 rayDirection = transform.parent.forward;
             float attackRange = Constants.AttackRange;
 
-            RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, rayDirection, out hit, attackRange))
+            RaycastHit[] hits = Physics.RaycastAll(rayOrigin, rayDirection, attackRange);
+
+            Debug.DrawRay(rayOrigin, rayDirection * attackRange, Color.red);
+            List<string> enemiesCaughtInRaycast = new List<string>();
+            foreach (RaycastHit hit in hits)
             {
-                Debug.DrawRay(rayOrigin, rayDirection * attackRange, Color.red);
+                enemiesCaughtInRaycast.Add(hit.collider.gameObject.name);
                 if (hit.collider.CompareTag("Boss") || hit.collider.CompareTag("Major") || hit.collider.CompareTag("Minor"))
                 {
                     Health enemyHealth = hit.collider.GetComponent<Health>();
@@ -276,6 +280,9 @@ namespace NeonLadder.Mechanics.Controllers
                     }
                 }
             }
+
+            Debug.Log(string.Format("Enemies hit by raycast: {0}", string.Join(", ", enemiesCaughtInRaycast.ToArray())));
         }
+
     }
 }

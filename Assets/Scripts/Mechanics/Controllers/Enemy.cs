@@ -34,7 +34,31 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         protected virtual int attackDamage { get; set; } = 10; // Damage per attack
         [SerializeField]
-        protected virtual float attackRange { get; set; } = 3.0f; // Range within which the monster can attack
+        private float _attackRange; // Backing field to allow assignment in the inspector
+        protected virtual float attackRange
+        {
+            get
+            {
+                if (_attackRange > 0)
+                {
+                    return _attackRange;
+                }
+                else
+                {
+                    BoxCollider boxCollider = GetComponentInParent<BoxCollider>();
+                    return boxCollider != null ? boxCollider.size.x / 2 + 1.0f : 3.0f; // Default value if no BoxCollider found
+                }
+            }
+            set
+            {
+                _attackRange = value;
+            }
+        }
+
+        [SerializeField]
+        protected virtual bool retreatWhenTooClose { get; set; } = false;
+        [SerializeField]
+        protected virtual float retreatBuffer { get; set; } = 1.0f;
         [SerializeField]
         protected virtual float attackCooldown { get; set; } = 1.0f; // Cooldown time between attacks in seconds
         protected virtual float lastAttackTime { get; set; } = 0; // Timestamp of the last attack
@@ -70,6 +94,7 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 switch (this)
                 {
+                    case FlyingMinor:
                     case Minor:
                         RuntimeLootTable = Resources.Load<LootTable>(Constants.MinorEnemyLootTablePath);
                         break;
@@ -108,7 +133,6 @@ namespace NeonLadder.Mechanics.Controllers
                 if (player.health.IsAlive)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
-
                     switch (currentState)
                     {
                         case MonsterStates.Idle:
@@ -116,6 +140,11 @@ namespace NeonLadder.Mechanics.Controllers
                             if (distanceToTarget > attackRange)
                             {
                                 currentState = MonsterStates.Approaching;
+                            }
+                            else if (retreatWhenTooClose && distanceToTarget < attackRange - retreatBuffer)
+                            {
+                                Debug.Log("Switching to Retreating state");
+                                currentState = MonsterStates.Retreating;
                             }
                             else
                             {
@@ -134,13 +163,24 @@ namespace NeonLadder.Mechanics.Controllers
                                 ChasePlayer();
                             }
                             break;
+                        case MonsterStates.Retreating:
+                            if (distanceToTarget >= attackRange)
+                            {
+                                moveDirection = 0;
+                                animator.SetInteger("animation", idleAnimation);
+                                currentState = MonsterStates.Reassessing;
+                            }
+                            else
+                            {
+                                Retreat();
+                            }
+                            break;
                         case MonsterStates.Attacking:
                             if (Time.time > lastAttackTime + attackCooldown)
                             {
                                 AttackPlayer();
                                 currentState = MonsterStates.Reassessing;
                             }
-
                             break;
                     }
                 }
@@ -156,6 +196,12 @@ namespace NeonLadder.Mechanics.Controllers
                 animator.SetInteger("animation", DeathAnimation);
                 StartCoroutine(PlayDeathAnimation());
             }
+        }
+        private void Retreat()
+        {
+            transform.parent.rotation = Quaternion.Euler(0, IsFacingLeft ? 90 : -90, 0);
+            moveDirection = IsFacingLeft ? 1 : -1;
+            animator.SetInteger("animation", walkForwardAnimation);
         }
 
         private IEnumerator PlayVictoryAnimation()

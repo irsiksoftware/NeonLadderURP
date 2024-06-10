@@ -5,6 +5,7 @@ namespace NeonLadder.Mechanics.Enums
         Idle,
         Approaching,
         Reassessing,
+        Retreating,
         Attacking
     }
 }

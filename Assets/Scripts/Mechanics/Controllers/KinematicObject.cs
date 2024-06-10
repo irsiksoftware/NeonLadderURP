@@ -28,8 +28,8 @@ namespace NeonLadder.Mechanics.Controllers
         public void Teleport(Vector3 position)
         {
             rigidbody.position = position;
-            velocity *= 0;
-            rigidbody.velocity *= 0;
+            velocity = Vector3.zero;
+            rigidbody.velocity = Vector3.zero;
         }
 
         protected virtual void OnEnable()
@@ -53,6 +53,7 @@ namespace NeonLadder.Mechanics.Controllers
             targetVelocity = Vector3.zero;
             ComputeVelocity();
         }
+
         protected virtual void ComputeVelocity()
         {
             targetVelocity = Vector3.zero;
@@ -60,21 +61,37 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void FixedUpdate()
         {
-            velocity += gravityModifier * Physics.gravity * Time.deltaTime;
-            velocity.x = targetVelocity.x;
-            velocity.z = 0;
-            IsGrounded = false;
+            if (rigidbody.useGravity)
+            {
+                ApplyGravity();
+            }
+
+            UpdateHorizontalVelocity();
 
             Vector3 deltaPosition = velocity * Time.deltaTime;
-            Vector3 moveAlongGround = new Vector3(groundNormal.y, -groundNormal.x, 0);
-            Vector3 move = moveAlongGround * deltaPosition.x;
 
-            PerformMovement(move, false);
-            move = Vector3.up * deltaPosition.y;
-            PerformMovement(move, true);
+            // Adjust moveAlongGround calculation based on whether gravity is applied
+            Vector3 moveAlongGround = rigidbody.useGravity ? new Vector3(groundNormal.y, -groundNormal.x, 0) : Vector3.right;
+
+            Vector3 horizontalMove = moveAlongGround * deltaPosition.x;
+            PerformMovement(horizontalMove, false);
+
+            Vector3 verticalMove = Vector3.up * deltaPosition.y;
+            PerformMovement(verticalMove, true);
         }
 
-        void PerformMovement(Vector3 move, bool yMovement)
+        void ApplyGravity()
+        {
+            velocity += gravityModifier * Physics.gravity * Time.deltaTime;
+        }
+
+        void UpdateHorizontalVelocity()
+        {
+            velocity.x = targetVelocity.x;
+            velocity.z = 0;
+        }
+
+        void PerformMovement(Vector3 move, bool isVerticalMovement)
         {
             float distance = move.magnitude;
             if (distance > minMoveDistance)
@@ -82,37 +99,49 @@ namespace NeonLadder.Mechanics.Controllers
                 Vector3 rayOrigin = transform.position;
                 Vector3 rayDirection = move.normalized;
 
-                int count = Physics.RaycastNonAlloc(rayOrigin, rayDirection, hitBuffer, distance + shellRadius, layerMask);
-                for (int i = 0; i < count; i++)
+                int hitCount = Physics.RaycastNonAlloc(rayOrigin, rayDirection, hitBuffer, distance + shellRadius, layerMask);
+                for (int i = 0; i < hitCount; i++)
                 {
                     Vector3 currentNormal = hitBuffer[i].normal;
                     if (currentNormal.y > minGroundNormalY)
                     {
                         IsGrounded = true;
-                        if (yMovement)
+                        if (isVerticalMovement)
                         {
                             groundNormal = currentNormal;
                             currentNormal.x = 0;
                         }
                     }
+
                     if (IsGrounded)
                     {
-                        float projection = Vector3.Dot(velocity, currentNormal);
-                        if (projection < 0)
-                        {
-                            velocity = velocity - projection * currentNormal;
-                        }
+                        AdjustVelocityForGroundCollision(currentNormal);
                     }
-                    else
+                    else if (rigidbody.useGravity)
                     {
-                        velocity.x = 0;
-                        velocity.y = Mathf.Min(velocity.y, 0);
+                        AdjustVelocityForAirCollision();
                     }
+
                     float modifiedDistance = hitBuffer[i].distance - shellRadius;
-                    distance = modifiedDistance < distance ? modifiedDistance : distance;
+                    distance = Mathf.Min(modifiedDistance, distance);
                 }
             }
-            rigidbody.position = rigidbody.position + move.normalized * distance;
+
+            rigidbody.position += move.normalized * distance;
+        }
+
+        void AdjustVelocityForGroundCollision(Vector3 normal)
+        {
+            float projection = Vector3.Dot(velocity, normal);
+            if (projection < 0)
+            {
+                velocity -= projection * normal;
+            }
+        }
+
+        void AdjustVelocityForAirCollision()
+        {
+            velocity.y = Mathf.Min(velocity.y, 0);
         }
     }
 }
