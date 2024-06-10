@@ -308,10 +308,8 @@ MonoBehaviour:
   landAudio: {fileID: 0}
   lootTable: {fileID: 0}
   staminaRegenTimer: 0
-  _attackRange: 0
-  currentState: 0
   retreatWhenTooClose: 0
-  retreatBuffer: 1
+  currentState: 0
 --- !u!1001 &510695505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -816,7 +814,7 @@ PrefabInstance:
     - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: attackDuration
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1420901607164461409, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -927,6 +925,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097981501050384232, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tTransform
+        'Jaw_M'\n\tFrom animation clip 'DieA_wing'\n\tFrom animation clip 'Idle_A_wing'\n\tFrom
+        animation clip 'Run_wing'\n\tFrom animation clip 'Walk_wing'\n\tFrom animation
+        clip 'Atk3_wing'"
       objectReference: {fileID: 0}
     - target: {fileID: 6410122721869810596, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -1071,6 +1079,11 @@ PrefabInstance:
     - target: {fileID: 1354695457756108415, guid: f4401a7393fb08f419a87ccbbf85b2c9,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196127630795600190, guid: f4401a7393fb08f419a87ccbbf85b2c9,
+        type: 3}
+      propertyPath: retreatWhenTooClose
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4656137215044586210, guid: f4401a7393fb08f419a87ccbbf85b2c9,

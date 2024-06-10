@@ -2,7 +2,7 @@
 {
     public class FlyingMinor : Minor
     {
-        protected override float attackRange { get; set; } = 5f;
-        protected override bool retreatWhenTooClose { get; set; } = true;
+        protected override float AttackRange { get; set; } = 5f;
+        protected override bool RetreatWhenTooClose { get; set; } = true;
     }
 }

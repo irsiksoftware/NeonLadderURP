@@ -29,6 +29,9 @@ namespace NeonLadder.Mechanics.Controllers
         public float staminaRegenTimer = 0f;
         public Animator animator { get; private set; }
 
+        public int locomotionLayerIndex = 0; // Index for the locomotion layer
+        public int actionLayerIndex = 1; // Index for the action layer
+
         public InputActionAsset Controls
         {
             get { return controls; }
@@ -59,6 +62,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
+            HandleAnimations();
             RegenerateStamina();
             base.Update();
         }
@@ -79,33 +83,56 @@ namespace NeonLadder.Mechanics.Controllers
             if (!controlEnabled)
                 return;
 
-            HandleAnimations();
+
             targetVelocity.x = playerActions.playerInput.x * (Constants.DefaultMaxSpeed) * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
         }
 
         private void HandleAnimations()
         {
-            if (animator.GetInteger("animation") > 9000) //dances, non locomotion animations
+            if (animator.GetInteger("locomotion_animation") > 9000) // dances, non-locomotion animations
             {
                 return;
             }
 
+            HandleLocomotion();
+            HandleAction();
+        }
+
+        private void HandleLocomotion()
+        {
             if (Math.Abs(velocity.x) < 0.1)
             {
-                animator.SetInteger("animation", 1);
+                animator.SetInteger("locomotion_animation", 1); // idle
             }
             else if (Math.Abs(velocity.x) > 4)
             {
-                animator.SetInteger("animation", 10);
+                animator.SetInteger("locomotion_animation", 10); // run
             }
             else if (Math.Abs(velocity.x) > 0.1)
             {
-                animator.SetInteger("animation", 6);
+                animator.SetInteger("locomotion_animation", 6); // walk
             }
+        }
 
+        private void HandleAction()
+        {
             if (playerActions.attackState == ActionStates.Acting)
             {
-                animator.SetInteger("animation", 23);
+                if (playerActions.isUsingMelee)
+                {
+                    animator.SetInteger("action_animation", 23); // sword attack
+                    animator.SetLayerWeight(actionLayerIndex, 1); // Activate action layer
+                }
+                else
+                {
+                    animator.SetInteger("action_animation", 75); // shoot guns
+                    animator.SetLayerWeight(actionLayerIndex, 1); // Activate action layer
+                }
+            }
+            else
+            {
+                animator.SetInteger("action_animation", 0); // no action
+                animator.SetLayerWeight(actionLayerIndex, 0); // Deactivate action layer
             }
         }
 

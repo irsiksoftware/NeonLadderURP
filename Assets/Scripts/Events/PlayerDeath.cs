@@ -13,7 +13,7 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             model.Player.controlEnabled = false;
-            model.Player.animator.SetInteger("animation", 5);
+            model.Player.animator.SetInteger("locomotion_animation", 5);
             model.Player.StartCoroutine(HandleDeathAnimation(model.Player));
             model.Player.controlEnabled = false;
             model.Player.playerActions.playerActionMap.Disable();

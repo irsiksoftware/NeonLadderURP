@@ -1,11 +1,9 @@
 using Assets.Scripts;
-using NeonLadder.Events;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static NeonLadder.Core.Simulation;
 
 namespace NeonLadder.Mechanics.Controllers
 {
@@ -15,7 +13,7 @@ namespace NeonLadder.Mechanics.Controllers
         public Vector2 playerInput = new Vector2(0, 0);
         private float sprintTimeAccumulator = 0f;
         public bool isClimbing { get; set; }
-        private bool isUsingMelee = true;
+        public bool isUsingMelee = true;
         public InputActionMap playerActionMap;
 
         #region Sprinting
@@ -37,17 +35,28 @@ namespace NeonLadder.Mechanics.Controllers
 
         [SerializeField]
         public ActionStates attackState = ActionStates.Ready;
-        public bool? IsAttacking => attackState == ActionStates.Preparing || attackState == ActionStates.Acting || attackState == ActionStates.Acted;
 
         [SerializeField]
         public bool stopAttack;
         #endregion
+
+        public List<GameObject> meleeWeaponGroups;
+        public List<GameObject> rangedWeaponGroups;
 
         protected void Start()
         {
             player = GetComponentInParent<Player>();
             ConfigureControls(player);
             initialAttackDuration = attackDuration; // Initialize the initial attack duration
+                                                    // Cache the weapon groups here if not assigned via Inspector
+            if (meleeWeaponGroups == null || meleeWeaponGroups.Count == 0)
+            {
+                meleeWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("MeleeWeapons"));
+            }
+            if (rangedWeaponGroups == null || rangedWeaponGroups.Count == 0)
+            {
+                rangedWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("Firearms"));
+            }
         }
 
         protected override void Update()
@@ -55,10 +64,9 @@ namespace NeonLadder.Mechanics.Controllers
             if (player.controlEnabled)
             {
                 UpdateSprintState(ref player.velocity);
-                if (IsAttacking ?? false)
-                {
-                    UpdateAttackState();
-                }
+
+                UpdateAttackState();
+
             }
 
             if (AnimationDebuggingText != null)
@@ -95,9 +103,9 @@ namespace NeonLadder.Mechanics.Controllers
             moveAction.performed += OnMovePerformed;
             moveAction.canceled += OnMoveCanceled;
 
-            var meleeAction = playerActionMap.FindAction("MeleeAttack");
-            meleeAction.performed += OnMeleeAttackPerformed;
-            meleeAction.canceled += OnMeleeAttackCanceled;
+            var attack = playerActionMap.FindAction("Attack");
+            attack.performed += OnAttackPerformed;
+            attack.canceled += OnAttackCanceled;
 
             var weaponSwapAction = playerActionMap.FindAction("WeaponSwap");
             weaponSwapAction.performed += OnWeaponSwap;
@@ -107,9 +115,6 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnWeaponSwap(InputAction.CallbackContext context)
         {
-            GameObject[] meleeWeaponGroups = GameObject.FindGameObjectsWithTag("MeleeWeapons"); //there are two groups, one for each hand.
-            GameObject[] rangedWeaponGroups = GameObject.FindGameObjectsWithTag("Firearms"); //there are two groups, one for each hand.
-
             if (isUsingMelee)
             {
                 SwapWeapons(meleeWeaponGroups, rangedWeaponGroups);
@@ -122,7 +127,7 @@ namespace NeonLadder.Mechanics.Controllers
             isUsingMelee = !isUsingMelee;
         }
 
-        private void SwapWeapons(GameObject[] currentWeapons, GameObject[] newWeapons)
+        private void SwapWeapons(List<GameObject> currentWeapons, List<GameObject> newWeapons)
         {
             foreach (GameObject weaponGroup in currentWeapons)
             {
@@ -137,7 +142,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        private void OnMeleeAttackPerformed(InputAction.CallbackContext context)
+        private void OnAttackPerformed(InputAction.CallbackContext context)
         {
             if (!player.stamina.IsExhausted)
             {
@@ -149,7 +154,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        public void OnMeleeAttackCanceled(InputAction.CallbackContext context)
+        public void OnAttackCanceled(InputAction.CallbackContext context)
         {
             if (attackState == ActionStates.Acting)
             {

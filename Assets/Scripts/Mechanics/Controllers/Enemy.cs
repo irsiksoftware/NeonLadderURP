@@ -33,15 +33,15 @@ namespace NeonLadder.Mechanics.Controllers
 
         [SerializeField]
         protected virtual int attackDamage { get; set; } = 10; // Damage per attack
-        [SerializeField]
-        private float _attackRange; // Backing field to allow assignment in the inspector
-        protected virtual float attackRange
+
+        private float attackRange; // Backing field to allow assignment in the inspector
+        protected virtual float AttackRange
         {
             get
             {
-                if (_attackRange > 0)
+                if (attackRange > 0)
                 {
-                    return _attackRange;
+                    return attackRange;
                 }
                 else
                 {
@@ -51,12 +51,17 @@ namespace NeonLadder.Mechanics.Controllers
             }
             set
             {
-                _attackRange = value;
+                attackRange = value;
             }
         }
 
         [SerializeField]
-        protected virtual bool retreatWhenTooClose { get; set; } = false;
+        private bool retreatWhenTooClose;
+        protected virtual bool RetreatWhenTooClose
+        {
+            get { return retreatWhenTooClose; }
+            set { retreatWhenTooClose = value; }
+        }
         [SerializeField]
         protected virtual float retreatBuffer { get; set; } = 1.0f;
         [SerializeField]
@@ -137,11 +142,11 @@ namespace NeonLadder.Mechanics.Controllers
                     {
                         case MonsterStates.Idle:
                         case MonsterStates.Reassessing:
-                            if (distanceToTarget > attackRange)
+                            if (distanceToTarget > AttackRange)
                             {
                                 currentState = MonsterStates.Approaching;
                             }
-                            else if (retreatWhenTooClose && distanceToTarget < attackRange - retreatBuffer)
+                            else if (retreatWhenTooClose && distanceToTarget < AttackRange - retreatBuffer)
                             {
                                 Debug.Log("Switching to Retreating state");
                                 currentState = MonsterStates.Retreating;
@@ -152,7 +157,7 @@ namespace NeonLadder.Mechanics.Controllers
                             }
                             break;
                         case MonsterStates.Approaching:
-                            if (distanceToTarget <= attackRange)
+                            if (distanceToTarget <= AttackRange)
                             {
                                 moveDirection = 0;
                                 animator.SetInteger("animation", idleAnimation);
@@ -164,7 +169,7 @@ namespace NeonLadder.Mechanics.Controllers
                             }
                             break;
                         case MonsterStates.Retreating:
-                            if (distanceToTarget >= attackRange)
+                            if (distanceToTarget >= AttackRange)
                             {
                                 moveDirection = 0;
                                 animator.SetInteger("animation", idleAnimation);
