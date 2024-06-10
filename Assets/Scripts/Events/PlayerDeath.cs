@@ -1,5 +1,4 @@
-﻿using NeonLadder.Core;
-using NeonLadder.Mechanics.Controllers;
+﻿using NeonLadder.Mechanics.Controllers;
 using System.Collections;
 using UnityEngine;
 
@@ -15,9 +14,7 @@ namespace NeonLadder.Events
         {
             model.Player.controlEnabled = false;
             model.Player.animator.SetInteger("locomotion_animation", 5);
-            model.Player.animator.SetLayerWeight(model.Player.actionLayerIndex, 0); // Deactivate action layer
             model.Player.StartCoroutine(HandleDeathAnimation(model.Player));
-            model.Player.controlEnabled = false;
             model.Player.playerActions.playerActionMap.Disable();
         }
 
