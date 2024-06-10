@@ -308,6 +308,7 @@ MonoBehaviour:
   landAudio: {fileID: 0}
   lootTable: {fileID: 0}
   staminaRegenTimer: 0
+  attackRange: 0
   retreatWhenTooClose: 0
   currentState: 0
 --- !u!1001 &510695505
@@ -921,6 +922,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4998176064336725051, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_ScreenY
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998176064336725051, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_CameraDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998176064336725051, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_TrackedObjectOffset.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054133859628449912, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: field of view
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 6097981501050384232, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_Enabled
@@ -944,7 +965,7 @@ PrefabInstance:
     - target: {fileID: 6410122721869810596, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: max
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6913947404772791968, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -963,13 +984,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.588713
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: 503.04
+      value: 502.04
       objectReference: {fileID: 0}
     - target: {fileID: 7439663405200563838, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_Name
       value: GameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 7521150561949305211, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -978,8 +1009,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.588713
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: 503.04
+      value: 502.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9171499512219005639, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -1099,12 +1145,12 @@ PrefabInstance:
     - target: {fileID: 8835343704864035979, guid: f4401a7393fb08f419a87ccbbf85b2c9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 486.35
+      value: 485.7
       objectReference: {fileID: 0}
     - target: {fileID: 8835343704864035979, guid: f4401a7393fb08f419a87ccbbf85b2c9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04
+      value: 1.48
       objectReference: {fileID: 0}
     - target: {fileID: 8835343704864035979, guid: f4401a7393fb08f419a87ccbbf85b2c9,
         type: 3}

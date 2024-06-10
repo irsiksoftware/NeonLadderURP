@@ -34,7 +34,11 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         protected virtual int attackDamage { get; set; } = 10; // Damage per attack
 
-        private float attackRange; // Backing field to allow assignment in the inspector
+        [SerializeField]
+        private float attackRange = 3.0f; // Default value
+        [SerializeField]
+        private bool retreatWhenTooClose = false; // Default value
+
         protected virtual float AttackRange
         {
             get
@@ -49,19 +53,15 @@ namespace NeonLadder.Mechanics.Controllers
                     return boxCollider != null ? boxCollider.size.x / 2 + 1.0f : 3.0f; // Default value if no BoxCollider found
                 }
             }
-            set
-            {
-                attackRange = value;
-            }
+            set { attackRange = value; }
         }
 
-        [SerializeField]
-        private bool retreatWhenTooClose;
         protected virtual bool RetreatWhenTooClose
         {
             get { return retreatWhenTooClose; }
             set { retreatWhenTooClose = value; }
         }
+
         [SerializeField]
         protected virtual float retreatBuffer { get; set; } = 1.0f;
         [SerializeField]
@@ -69,6 +69,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual float lastAttackTime { get; set; } = 0; // Timestamp of the last attack
         protected virtual int idleAnimation { get; set; } = 0;
         protected virtual int walkForwardAnimation { get; set; } = 1;
+        protected virtual int walkBackwardAnimation { get; set; } = 6;
         protected virtual int attackAnimation { get; set; } = 2;
         protected virtual int hurtAnimation { get; set; } = 3;
         protected virtual int victoryAnimation { get; set; } = 5;
@@ -77,7 +78,7 @@ namespace NeonLadder.Mechanics.Controllers
         public float DeathAnimationDuration => deathAnimationDuration;
         protected virtual float deathAnimationDuration { get; set; } = 3.5f;
 
-        public bool IsFacingLeft => player.transform.position.x < transform.parent.position.x;
+        public bool IsFacingLeft { get; set; }
 
         [SerializeField]
         private MonsterStates currentState = MonsterStates.Idle;
@@ -126,15 +127,22 @@ namespace NeonLadder.Mechanics.Controllers
                     targetVelocity.x = moveDirection * Constants.DefaultMaxSpeed;
                 }
 
+                if (currentState == MonsterStates.Retreating)
+                {
+                    targetVelocity.x = targetVelocity.x / 2;
+                }
+
                 velocity.x = targetVelocity.x;  // Apply horizontal movement
             }
         }
 
         protected override void Update()
         {
+            IsFacingLeft = player.transform.position.x < transform.parent.position.x;
             base.Update();
             if (health.IsAlive)
             {
+                Orient();
                 if (player.health.IsAlive)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
@@ -146,9 +154,8 @@ namespace NeonLadder.Mechanics.Controllers
                             {
                                 currentState = MonsterStates.Approaching;
                             }
-                            else if (retreatWhenTooClose && distanceToTarget < AttackRange - retreatBuffer)
+                            else if (RetreatWhenTooClose && distanceToTarget < (AttackRange - retreatBuffer))
                             {
-                                Debug.Log("Switching to Retreating state");
                                 currentState = MonsterStates.Retreating;
                             }
                             else
@@ -169,7 +176,7 @@ namespace NeonLadder.Mechanics.Controllers
                             }
                             break;
                         case MonsterStates.Retreating:
-                            if (distanceToTarget >= AttackRange)
+                            if (distanceToTarget >= AttackRange - retreatBuffer)
                             {
                                 moveDirection = 0;
                                 animator.SetInteger("animation", idleAnimation);
@@ -179,6 +186,7 @@ namespace NeonLadder.Mechanics.Controllers
                             {
                                 Retreat();
                             }
+                            animator.SetInteger("animation", walkBackwardAnimation);
                             break;
                         case MonsterStates.Attacking:
                             if (Time.time > lastAttackTime + attackCooldown)
@@ -202,11 +210,11 @@ namespace NeonLadder.Mechanics.Controllers
                 StartCoroutine(PlayDeathAnimation());
             }
         }
+
         private void Retreat()
         {
-            transform.parent.rotation = Quaternion.Euler(0, IsFacingLeft ? 90 : -90, 0);
             moveDirection = IsFacingLeft ? 1 : -1;
-            animator.SetInteger("animation", walkForwardAnimation);
+            animator.SetInteger("animation", walkBackwardAnimation);
         }
 
         private IEnumerator PlayVictoryAnimation()
@@ -229,9 +237,13 @@ namespace NeonLadder.Mechanics.Controllers
             currentState = MonsterStates.Reassessing;
         }
 
+        private void Orient()
+        {
+            transform.parent.rotation = Quaternion.Euler(0, !IsFacingLeft ? 90 : -90, 0);
+        }
+
         private void ChasePlayer()
         {
-            transform.parent.rotation = Quaternion.Euler(0, IsFacingLeft ? -90 : 90, 0);
             moveDirection = IsFacingLeft ? -1 : 1;
             animator.SetInteger("animation", walkForwardAnimation);
         }

@@ -10,7 +10,7 @@ namespace NeonLadder.Events
     /// PlayerDeath event.
     /// </summary>
     /// <typeparam name="HealthIsZero"></typeparam>
-    public class HealthIsZero : Event<HealthIsZero>
+    public class HealthIsZero : BaseGameEvent<HealthIsZero>
     {
         public Health health;
 
@@ -21,6 +21,8 @@ namespace NeonLadder.Events
             {
                 case "Player":
                     Schedule<PlayerDeath>();
+                    Schedule<FadeOutCamera>();
+                    Schedule<RestartScene>(7); // Delay to allow fade out and death animation
                     break;
                 case "Boss":
                 case "Major":
