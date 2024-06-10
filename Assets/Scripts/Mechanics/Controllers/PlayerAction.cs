@@ -285,8 +285,6 @@ namespace NeonLadder.Mechanics.Controllers
                     }
                 }
             }
-
-            Debug.Log(string.Format("Enemies hit by raycast: {0}", string.Join(", ", enemiesCaughtInRaycast.ToArray())));
         }
 
     }
