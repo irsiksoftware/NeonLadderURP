@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Michsky.MUIP;
 using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
@@ -10,6 +11,11 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class Player : KinematicObject
     {
+
+        [SerializeField]
+        private ProgressBar healthBar;
+        [SerializeField]
+        private ProgressBar staminaBar;
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
@@ -67,6 +73,9 @@ namespace NeonLadder.Mechanics.Controllers
                 HandleAnimations();
                 RegenerateStamina();
             }
+
+            UpdateHealthBar();
+            UpdateStaminaBar();
 
             base.Update();
         }
@@ -151,6 +160,22 @@ namespace NeonLadder.Mechanics.Controllers
         internal void AddPermanentCurrency(int amount)
         {
             permaCurrency.Increment(amount);
+        }
+
+        private void UpdateHealthBar()
+        {
+            if (healthBar != null && health != null)
+            {
+                healthBar.currentPercent = (health.current / health.max) * 100f;
+            }
+        }
+
+        private void UpdateStaminaBar()
+        {
+            if (staminaBar != null && stamina != null)
+            {
+                staminaBar.currentPercent = (stamina.current / stamina.max) * 100f;
+            }
         }
     }
 }
