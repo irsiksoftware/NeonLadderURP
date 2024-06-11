@@ -6,7 +6,6 @@ namespace NeonLadder.Events
 {
     public class FadeOutCamera : BaseGameEvent<FadeOutCamera>
     {
-        float SceneRestartTimer = 5f;
         public override void Execute()
         {
             FadeOut();

@@ -255,7 +255,11 @@ namespace NeonLadder.Mechanics.Controllers
         private void OnMovePerformed(InputAction.CallbackContext context)
         {
             playerInput = context.ReadValue<Vector2>();
-            UpdateRotation(playerInput.x);
+            if (playerInput.x != 0)
+            {
+                float yRotation = playerInput.x > 0 ? 90 : -90;
+                transform.parent.localRotation = Quaternion.Euler(0, yRotation, 0);
+            }
         }
 
         private void OnMoveCanceled(InputAction.CallbackContext context)

@@ -35,15 +35,6 @@ namespace NeonLadder.Mechanics.Controllers
             ControllerDebugging.PrintDebugControlConfiguration(player);
         }
 
-        protected void UpdateRotation(float moveDirection)
-        {
-            if (moveDirection != 0)
-            {
-                float yRotation = moveDirection > 0 ? 90 : -90;
-                transform.parent.localRotation = Quaternion.Euler(0, yRotation, 0);
-            }
-        }
-
         void OnDrawGizmos()
         {
             Constants.DisplayAnimationDebugInfo = true;

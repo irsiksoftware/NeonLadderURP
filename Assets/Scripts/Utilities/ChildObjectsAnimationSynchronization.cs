@@ -18,7 +18,7 @@ public class ChildObjectsAnimationSynchronization : MonoBehaviour
         var animators = GetComponentsInChildren<Animator>();
         foreach (var animator in animators)
         {
-            animator.SetInteger("animation", dance);
+            animator.SetInteger("locomotion_animation", dance);
         }
     }
 

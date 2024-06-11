@@ -21,7 +21,7 @@ namespace NeonLadder.Events
             {
                 case "Player":
                     Schedule<PlayerDeath>();
-                    Schedule<FadeOutCamera>();
+                    //Schedule<FadeOutCamera>();
                     Schedule<RestartScene>(7); // Delay to allow fade out and death animation
                     break;
                 case "Boss":

@@ -12,7 +12,7 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             //enemyAnimator = enemy.GetComponentInParent<Animator>();
-            //enemyAnimator.SetInteger("animation", enemy.DeathAnimation);
+            //enemyAnimator.SetInteger("locomotion_animation", enemy.DeathAnimation);
             //enemy.StartCoroutine(HandleDeathAnimation());
             LootDropManager.DropLoot(model.Player, enemy); // Drop items upon death
         }

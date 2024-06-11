@@ -62,8 +62,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            HandleAnimations();
-            RegenerateStamina();
+            if (health.IsAlive)
+            {
+                HandleAnimations();
+                RegenerateStamina();
+            }
+
             base.Update();
         }
 
@@ -80,16 +84,19 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void ComputeVelocity()
         {
-            if (!controlEnabled)
-                return;
-
-
-            targetVelocity.x = playerActions.playerInput.x * (Constants.DefaultMaxSpeed) * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
+            if (!health.IsAlive)
+            {
+                targetVelocity = Vector3.zero;
+            }
+            else
+            {
+                targetVelocity.x = playerActions.playerInput.x * (Constants.DefaultMaxSpeed) * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
+            }
         }
 
         private void HandleAnimations()
         {
-            if (animator.GetInteger("locomotion_animation") > 9000) // dances, non-locomotion animations
+            if (animator.GetInteger("locomotion_animation") > 9000 || animator.GetInteger("locomotion_animation") == 5) // dances, non-locomotion animations
             {
                 return;
             }
