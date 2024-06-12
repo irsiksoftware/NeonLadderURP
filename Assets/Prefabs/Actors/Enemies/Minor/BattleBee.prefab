@@ -720,11 +720,11 @@ GameObject:
   - component: {fileID: 4159136576884021585}
   m_Layer: 0
   m_Name: BattleBee
-  m_TagString: Untagged
+  m_TagString: Minor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8115785008090929592
 Transform:
   m_ObjectHideFlags: 0
@@ -753,7 +753,7 @@ Animator:
   m_GameObject: {fileID: 4889955898790259993}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2cbed75cc8e5405bbe7a4ff50f21ef35, type: 3}
-  m_Controller: {fileID: 9100000, guid: 596f5e9a045747ef9c5b115a152c4bdf, type: 2}
+  m_Controller: {fileID: 9100000, guid: 37ccd4a934f948743a8dd7bcd6a3d09e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -807,10 +807,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &6627142820861289248
 MonoBehaviour:
@@ -1640,7 +1640,11 @@ PrefabInstance:
     - {fileID: -4834587697442005661, guid: f55e78d9ca8d6604bb415afb9a076119, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8086227584760742458, guid: f55e78d9ca8d6604bb415afb9a076119,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7338846140944857563}
   m_SourcePrefab: {fileID: 100100000, guid: f55e78d9ca8d6604bb415afb9a076119, type: 3}
 --- !u!4 &4465569073270234874 stripped
 Transform:
@@ -1648,3 +1652,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 223296044214123846}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8295986433152319356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8086227584760742458, guid: f55e78d9ca8d6604bb415afb9a076119,
+    type: 3}
+  m_PrefabInstance: {fileID: 223296044214123846}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7338846140944857563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295986433152319356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141f9c6b16bfb1c4493bc259c208e5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minGroundNormalY: 0.65
+  gravityModifier: 1
+  velocity: {x: 0, y: 0, z: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  audioSource: {fileID: 0}
+  respawnAudio: {fileID: 0}
+  ouchAudio: {fileID: 0}
+  jumpAudio: {fileID: 0}
+  landAudio: {fileID: 0}
+  lootTable: {fileID: 0}
+  staminaRegenTimer: 0
+  attackRange: 0
+  retreatWhenTooClose: 0
+  currentState: 0
