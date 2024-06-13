@@ -12,10 +12,9 @@ namespace NeonLadder.Mechanics.Controllers
         public Vector3 velocity;
         public LayerMask layerMask;
         public bool IsGrounded { get; private set; }
-        private bool lastGroundedState = true; // to keep track of state changes
-        private float timeSinceLastGroundedLog = 0; // timer for logging when grounded
         protected Vector3 targetVelocity;
         protected Vector3 groundNormal;
+        //https://github.com/Unity-Technologies/UnityCsReference/blob/master/Runtime/Export/Scripting/Component.deprecated.cs
         protected new Rigidbody rigidbody;
         protected RaycastHit[] hitBuffer = new RaycastHit[16];
         protected const float minMoveDistance = 0.001f;
@@ -62,6 +61,8 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void FixedUpdate()
         {
+            IsGrounded = false;
+
             if (rigidbody.useGravity)
             {
                 ApplyGravity();
@@ -72,29 +73,14 @@ namespace NeonLadder.Mechanics.Controllers
             Vector3 deltaPosition = velocity * Time.deltaTime;
 
             Vector3 moveAlongGround = rigidbody.useGravity ? new Vector3(groundNormal.y, -groundNormal.x, 0) : Vector3.right;
+
             Vector3 horizontalMove = moveAlongGround * deltaPosition.x;
             PerformMovement(horizontalMove, false);
 
             Vector3 verticalMove = Vector3.up * deltaPosition.y;
             PerformMovement(verticalMove, true);
-
-            // Enhanced log entries with Y velocity
-            if (!IsGrounded)
-            {
-                Debug.Log($"KinematicObject is not grounded. Y velocity: {velocity.y}");
-            }
-            else
-            {
-                if ((timeSinceLastGroundedLog >= 1.0f) || !lastGroundedState)
-                {
-                    Debug.Log($"KinematicObject is grounded. Y velocity: {velocity.y}");
-                    timeSinceLastGroundedLog = 0; // reset timer
-                }
-                timeSinceLastGroundedLog += Time.fixedDeltaTime; // update timer
-            }
-
-            lastGroundedState = IsGrounded; // update last state
         }
+
 
         void ApplyGravity()
         {
@@ -145,6 +131,7 @@ namespace NeonLadder.Mechanics.Controllers
 
             rigidbody.position += move.normalized * distance;
         }
+
 
         void AdjustVelocityForGroundCollision(Vector3 normal)
         {

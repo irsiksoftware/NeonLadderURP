@@ -33,6 +33,7 @@ namespace NeonLadder.Mechanics.Controllers
         public InputActionAsset controls;
         [SerializeField]
         public float staminaRegenTimer = 0f;
+        private float jumpForce = 5f;
         public Animator animator { get; private set; }
 
         public int locomotionLayerIndex = 0; // Index for the locomotion layer
@@ -100,6 +101,17 @@ namespace NeonLadder.Mechanics.Controllers
             else
             {
                 targetVelocity.x = playerActions.playerInput.x * (Constants.DefaultMaxSpeed) * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
+
+                // Handle jumping
+                if (playerActions.isJumping && IsGrounded)
+                {
+                    velocity.y = jumpForce;
+                    playerActions.isJumping = false;
+                    if (audioSource != null && jumpAudio != null)
+                    {
+                        audioSource.PlayOneShot(jumpAudio);
+                    }
+                }
             }
         }
 

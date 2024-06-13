@@ -14,6 +14,7 @@ namespace NeonLadder.Mechanics.Controllers
         private float sprintTimeAccumulator = 0f;
         public bool isClimbing { get; set; }
         public bool isUsingMelee = true;
+        public bool isJumping { get; set; }
         public InputActionMap playerActionMap;
 
         #region Sprinting
@@ -110,7 +111,19 @@ namespace NeonLadder.Mechanics.Controllers
             var weaponSwapAction = playerActionMap.FindAction("WeaponSwap");
             weaponSwapAction.performed += OnWeaponSwap;
 
+            var jumpAction = playerActionMap.FindAction("Jump");
+            jumpAction.performed += OnJumpPerformed;
+
             ControllerDebugging.PrintDebugControlConfiguration(player);
+        }
+
+
+        private void OnJumpPerformed(InputAction.CallbackContext context)
+        {
+            if (player.IsGrounded)
+            {
+                isJumping = true;
+            }
         }
 
         private void OnWeaponSwap(InputAction.CallbackContext context)
