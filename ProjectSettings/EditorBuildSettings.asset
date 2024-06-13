@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cyberpunk City/Recife_2050_Final.unity
     guid: 04b27574efdb7964fa788a97922fb8d8
+  - enabled: 1
+    path: Assets/Scenes/Barebones.unity
+    guid: fbef3dfe06e76884baeaa369e669ac79
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 23395aab919772a4b9b1c36df08e4851,
       type: 2}
