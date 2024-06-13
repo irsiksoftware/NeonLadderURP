@@ -1919,7 +1919,7 @@ GameObject:
   - component: {fileID: 5417435054425544830}
   m_Layer: 0
   m_Name: NagaWizard
-  m_TagString: Untagged
+  m_TagString: Minor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1934,7 +1934,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.46, y: 0, z: -1.94}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7509727943602037697}
@@ -1978,12 +1978,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.1045094, z: 1}
-  m_Center: {x: 0, y: 0.95594484, z: 0}
+  m_Size: {x: 1, y: 1.9316605, z: 1}
+  m_Center: {x: 0, y: 1.0423701, z: 0}
 --- !u!54 &2470029787776045305
 Rigidbody:
   m_ObjectHideFlags: 0
