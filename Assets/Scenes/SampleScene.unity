@@ -335,7 +335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &96841710
 Transform:
   m_ObjectHideFlags: 0
@@ -1471,6 +1471,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5397647865295078878, guid: 4e3ec260c9af88e4585afcaf63afb3a6,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8932368733356792782, guid: 4e3ec260c9af88e4585afcaf63afb3a6,
         type: 3}
       propertyPath: m_Name
@@ -2571,7 +2576,7 @@ PrefabInstance:
     - target: {fileID: 2095271709995646931, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.57
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2095271709995646931, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -2711,7 +2716,7 @@ PrefabInstance:
     - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1487129
+      value: 2.588713
       objectReference: {fileID: 0}
     - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -2756,7 +2761,7 @@ PrefabInstance:
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1487129
+      value: 2.588713
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -2772,6 +2777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171499512219005639, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_Mass
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9171499512219005639, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -3165,6 +3175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BattleBee
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338846140944857563, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8115785008090929592, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
         type: 3}

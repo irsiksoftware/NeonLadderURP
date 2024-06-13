@@ -33,7 +33,7 @@ namespace NeonLadder.Mechanics.Controllers
         public InputActionAsset controls;
         [SerializeField]
         public float staminaRegenTimer = 0f;
-        private float jumpForce = 5f;
+        private float jumpForce = 7f;
         public Animator animator { get; private set; }
 
         public int locomotionLayerIndex = 0; // Index for the locomotion layer
