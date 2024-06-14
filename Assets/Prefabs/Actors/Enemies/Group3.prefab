@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4054446600645361912}
   m_Layer: 0
   m_Name: Group3
-  m_TagString: Untagged
+  m_TagString: MonsterGroup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,6 +254,26 @@ PrefabInstance:
         type: 3}
       propertyPath: layerMask.m_Bits
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438506470579228006, guid: 4e3ec260c9af88e4585afcaf63afb3a6,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.5161438
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438506470579228006, guid: 4e3ec260c9af88e4585afcaf63afb3a6,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.4621866
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438506470579228006, guid: 4e3ec260c9af88e4585afcaf63afb3a6,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.011001587
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438506470579228006, guid: 4e3ec260c9af88e4585afcaf63afb3a6,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.5424556
       objectReference: {fileID: 0}
     - target: {fileID: 8932368733356792782, guid: 4e3ec260c9af88e4585afcaf63afb3a6,
         type: 3}
