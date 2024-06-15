@@ -189,7 +189,7 @@ Animator:
   m_GameObject: {fileID: 1447412156832593092}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ef9e3e8cca119c1439f6d55bf09d919f, type: 3}
-  m_Controller: {fileID: 9100000, guid: aa36e3cfbc6f7ad4786ff6961c71bad6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7e435ef79baeef345a79afe696ffa0ba, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -215,7 +215,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
