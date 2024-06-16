@@ -5223,7 +5223,7 @@ Animator:
   m_GameObject: {fileID: 5358769332522107222}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 17a37139b8cb45744a2fef2146cf6de1, type: 3}
-  m_Controller: {fileID: 9100000, guid: fcda150d0a9d3084da26ff2de9b6a291, type: 2}
+  m_Controller: {fileID: 9100000, guid: 60a1e7e3176af484cbae48d65b9ebaaf, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -5231,13 +5231,9 @@ Animator:
   m_StabilizeFeet: 0
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tTransform 'Eye1_R'\n\tTransform
-    'Eye1_L'\n\tTransform 'Eye1_R'\n\tTransform 'Eye1_L'\n\tTransform 'Jaw_M'\n\tTransform
-    'Eye1_R'\n\tTransform 'Eye1_L'\n\tFrom animation clip 'Cry_wing'\n\tFrom animation
-    clip 'Damage_wing'\n\tFrom animation clip 'DieA_wing'\n\tFrom animation clip
-    'Angpose_wing'\n\tFrom animation clip 'IdleB_wing'\n\tFrom animation clip 'Idle_A_wing'\n\tFrom
-    animation clip 'Run_L_wing'\n\tFrom animation clip 'Run_R_wing'\n\tFrom animation
-    clip 'Run_wing'\n\tFrom animation clip 'DieB_wing'\n\tand more ..."
+    by Humanoid clips.\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tFrom
+    animation clip 'DieA_wing'\n\tFrom animation clip 'Idle_A_wing'\n\tFrom animation
+    clip 'Run_wing'\n\tFrom animation clip 'Walk_wing'\n\tFrom animation clip 'Atk3_wing'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -5310,6 +5306,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
   audioSource: {fileID: 0}
   respawnAudio: {fileID: 0}
   ouchAudio: {fileID: 0}
@@ -5320,6 +5318,8 @@ MonoBehaviour:
   controls: {fileID: -944628639613478452, guid: e175689d4ebccc649a1eac37c7607673,
     type: 3}
   staminaRegenTimer: 0
+  locomotionLayerIndex: 0
+  actionLayerIndex: 1
 --- !u!114 &1569883268119596321
 MonoBehaviour:
   m_ObjectHideFlags: 0
