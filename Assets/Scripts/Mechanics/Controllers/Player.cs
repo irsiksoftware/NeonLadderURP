@@ -1,9 +1,11 @@
 using Assets.Scripts;
+using Cinemachine;
 using Michsky.MUIP;
 using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +13,6 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class Player : KinematicObject
     {
-
         [SerializeField]
         private ProgressBar healthBar;
         [SerializeField]
@@ -45,6 +46,9 @@ namespace NeonLadder.Mechanics.Controllers
             set { controls = value; }
         }
 
+        private bool isCameraPivoted = false;
+        private Coroutine cameraPivotCoroutine;
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -75,11 +79,60 @@ namespace NeonLadder.Mechanics.Controllers
                 RegenerateStamina();
             }
 
+            if (targetVelocity.z > 0.01)
+            {
+                if (!isCameraPivoted)
+                {
+                    isCameraPivoted = true;
+                    cameraPivotCoroutine = StartCoroutine(PivotCameraCoroutine(Constants.ZMovementCameraPivotDurationInSeconds));
+                }
+            }
+            else if (isCameraPivoted && cameraPivotCoroutine != null)
+            {
+                StopCoroutine(cameraPivotCoroutine);
+                isCameraPivoted = false;
+            }
+
             UpdateHealthBar();
             UpdateStaminaBar();
 
             base.Update();
         }
+
+        private IEnumerator PivotCameraCoroutine(float duration)
+        {
+            CinemachineVirtualCamera cvc = model.VirtualCamera;
+            CinemachineFramingTransposer transposer = cvc.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+            if (transposer != null)
+            {
+                int direction = UnityEngine.Random.Range(0, 2); // Use 0 and 2 for exclusive upper bound
+                float pivotDirection = (direction == 0) ? -1 : 1;
+
+                Vector3 initialOffset = transposer.m_TrackedObjectOffset;
+                Vector3 targetOffset = initialOffset + new Vector3(pivotDirection * 2, 0, 0); // Adjust 2 to desired pivot distance
+
+                float initialYRotation = cvc.transform.eulerAngles.y;
+
+                float elapsedTime = 0f;
+
+                while (elapsedTime < duration)
+                {
+                    elapsedTime += Time.deltaTime;
+                    float t = elapsedTime / duration;
+
+                    transposer.m_TrackedObjectOffset = Vector3.Lerp(initialOffset, targetOffset, t);
+
+                    float newYRotation = Mathf.Lerp(initialYRotation, initialYRotation + (pivotDirection * 45), t); // Adjust 45 to desired rotation angle
+                    cvc.transform.eulerAngles = new Vector3(cvc.transform.eulerAngles.x, newYRotation, cvc.transform.eulerAngles.z);
+
+                    yield return null;
+                }
+
+                transposer.m_TrackedObjectOffset = targetOffset;
+            }
+        }
+
 
         private void RegenerateStamina()
         {
@@ -91,16 +144,19 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-
         protected override void ComputeVelocity()
         {
             if (!health.IsAlive)
             {
                 targetVelocity = Vector3.zero;
             }
+            else if (!rigidbody.constraints.HasFlag(RigidbodyConstraints.FreezePositionZ))
+            {
+                targetVelocity.z = Constants.DefaultMaxSpeed / 2;
+            }
             else
             {
-                targetVelocity.x = playerActions.playerInput.x * (Constants.DefaultMaxSpeed) * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
+                targetVelocity.x = playerActions.playerInput.x * Constants.DefaultMaxSpeed * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
 
                 // Handle jumping
                 if (playerActions.isJumping && IsGrounded)
@@ -113,6 +169,26 @@ namespace NeonLadder.Mechanics.Controllers
                     }
                 }
             }
+        }
+
+        public void EnableZMovement()
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            controlEnabled = false;
+
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
+                                    RigidbodyConstraints.FreezePositionX |
+                                    RigidbodyConstraints.FreezePositionY;
+        }
+
+        public void DisableZMovement()
+        {
+            targetVelocity.z = 0;
+            controlEnabled = true;
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
+                                    RigidbodyConstraints.FreezePositionX |
+                                    RigidbodyConstraints.FreezePositionY |
+                                    RigidbodyConstraints.FreezePositionZ;
         }
 
         private void HandleAnimations()
@@ -132,16 +208,15 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 animator.SetInteger("locomotion_animation", 11); // jump
             }
-
-            else if (Math.Abs(velocity.x) < 0.1)
+            else if (Math.Abs(velocity.x) < 0.1 && Math.Abs(velocity.z) < 0.1)
             {
                 animator.SetInteger("locomotion_animation", 1); // idle
             }
-            else if (Math.Abs(velocity.x) > 4)
+            else if (Math.Abs(velocity.x) > 4 || Math.Abs(velocity.z) > 4)
             {
                 animator.SetInteger("locomotion_animation", 10); // run
             }
-            else if (Math.Abs(velocity.x) > 0.1)
+            else if (Math.Abs(velocity.x) > 0.1 || Math.Abs(velocity.z) > 0.1)
             {
                 animator.SetInteger("locomotion_animation", 6); // walk
             }

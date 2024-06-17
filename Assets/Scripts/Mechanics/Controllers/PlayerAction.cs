@@ -1,6 +1,7 @@
 using Assets.Scripts;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -114,9 +115,27 @@ namespace NeonLadder.Mechanics.Controllers
             var jumpAction = playerActionMap.FindAction("Jump");
             jumpAction.performed += OnJumpPerformed;
 
+
+            var upAction = playerActionMap.FindAction("Up");
+            upAction.performed += OnUpPerformed;
+
             ControllerDebugging.PrintDebugControlConfiguration(player);
         }
 
+        private bool isInZMovementZone = false;
+
+        private void OnUpPerformed(InputAction.CallbackContext context)
+        {
+            if (isInZMovementZone)
+            {
+                player.EnableZMovement();
+            }
+        }
+
+        public void SetZMovementZone(bool inZone)
+        {
+            isInZMovementZone = inZone;
+        }
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {

@@ -36,7 +36,7 @@ public class SceneChangeController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartLoadingScene(SceneName);
+            SceneManager.LoadScene(SceneName);
         }
     }
 

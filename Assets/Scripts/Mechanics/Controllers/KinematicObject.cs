@@ -7,6 +7,7 @@ namespace NeonLadder.Mechanics.Controllers
     public class KinematicObject : MonoBehaviour
     {
         protected Player player;
+        protected PlatformerModel model;
         public float minGroundNormalY = .65f;
         public float gravityModifier = 1f;
         public Vector3 velocity;
@@ -45,7 +46,8 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void Start()
         {
-            player = Simulation.GetModel<PlatformerModel>().Player;
+            model = Simulation.GetModel<PlatformerModel>();
+            player = model.Player;
         }
 
         protected virtual void Update()
@@ -68,29 +70,41 @@ namespace NeonLadder.Mechanics.Controllers
                 ApplyGravity();
             }
 
-            UpdateHorizontalVelocity();
-
+            UpdateVelocity();
             Vector3 deltaPosition = velocity * Time.deltaTime;
-
             Vector3 moveAlongGround = rigidbody.useGravity ? new Vector3(groundNormal.y, -groundNormal.x, 0) : Vector3.right;
 
-            Vector3 horizontalMove = moveAlongGround * deltaPosition.x;
-            PerformMovement(horizontalMove, false);
+            if (!rigidbody.constraints.HasFlag(RigidbodyConstraints.FreezePositionZ))
+            {
+                PerformMovement(new Vector3(0, 0, deltaPosition.z), false);
+            }
+            else
+            {
+                Vector3 horizontalMove = moveAlongGround * deltaPosition.x;
+                PerformMovement(horizontalMove, false);
+            }
 
             Vector3 verticalMove = Vector3.up * deltaPosition.y;
             PerformMovement(verticalMove, true);
         }
-
 
         void ApplyGravity()
         {
             velocity += gravityModifier * Physics.gravity * Time.deltaTime;
         }
 
-        void UpdateHorizontalVelocity()
+        void UpdateVelocity()
         {
             velocity.x = targetVelocity.x;
-            velocity.z = 0;
+
+            if (!rigidbody.constraints.HasFlag(RigidbodyConstraints.FreezePositionZ))
+            {
+                velocity.z = targetVelocity.z;
+            }
+            else
+            {
+                velocity.z = 0;
+            }
         }
 
         void PerformMovement(Vector3 move, bool isVerticalMovement)

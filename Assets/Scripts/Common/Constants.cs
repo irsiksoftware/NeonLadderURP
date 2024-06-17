@@ -34,8 +34,11 @@ namespace Assets.Scripts
         public const float DefaultGravity = 9.81f;
         #endregion
 
-        #region player
+        #region Camera
+        public static float ZMovementCameraPivotDurationInSeconds = 3f;
+        #endregion
 
+        #region player
         public static int AttackDamage = 100;
         public static float AttackRange = 2.5f;
         public static float AttackSpeed = 1f;
