@@ -1740,6 +1740,7 @@ GameObject:
   - component: {fileID: 3161811536028822787}
   - component: {fileID: 3748176057496296743}
   - component: {fileID: 6729661643399803846}
+  - component: {fileID: 4968084925251692117}
   m_Layer: 0
   m_Name: DragonShark
   m_TagString: Major
@@ -1862,6 +1863,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
+--- !u!114 &4968084925251692117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6027753727804926723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0225b8843f236459ebd95358c4c123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6027753727804926737
 GameObject:
   m_ObjectHideFlags: 0
