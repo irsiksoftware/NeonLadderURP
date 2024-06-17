@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 namespace NeonLadder.Utilities.Editor
 {
@@ -19,6 +20,7 @@ namespace NeonLadder.Utilities.Editor
 
             // Optionally, log how many objects were removed
             Debug.Log($"Removed {objectsToExclude.Length} objects marked for WebGL exclusion.");
+            EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
         }
     }
 }
