@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace NeonLadder.UI
+namespace Neonladder.UI
 {
-    public class MainUIController : MonoBehaviour
+    public class ShopkeeperUIController : MonoBehaviour
     {
         public GameObject[] panels;
 
@@ -19,6 +19,11 @@ namespace NeonLadder.UI
         void OnEnable()
         {
             SetActivePanel(0);
+        }
+
+        public void CloseShop()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

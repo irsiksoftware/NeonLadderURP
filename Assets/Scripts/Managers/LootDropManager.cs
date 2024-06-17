@@ -11,15 +11,15 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void Awake()
         {
-            if (Instance == null)
-            {
+            //if (Instance == null)
+            //{
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+                //DontDestroyOnLoad(gameObject);
+            //}
+            //else
+            //{
+            //    Destroy(gameObject);
+            //}
         }
 
         public static void DropLoot(Player target, Enemy enemy)

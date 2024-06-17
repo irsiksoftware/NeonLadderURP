@@ -2,7 +2,7 @@ using NeonLadder.Core;
 using NeonLadder.Models;
 using UnityEngine;
 
-namespace Platformer.Mechanics
+namespace NeonLadder.Mechanics.Controllers
 {
     /// <summary>
     /// This class exposes the the game model in the inspector, and ticks the
