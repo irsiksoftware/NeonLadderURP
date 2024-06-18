@@ -1,11 +1,14 @@
 namespace NeonLadder.Mechanics.Enums
 {
-    public enum ActionStates
+    public enum Tags
     {
-        Ready,
-        Preparing,
-        Acting,
-        InAction,
-        Acted
+        Boss,
+        Major,
+        Minor,
+        MeleeWeapons,
+        Firearms,
+        Grenades,
+        MonsterGroup,
+        ShopkeeperWindow
     }
 }
