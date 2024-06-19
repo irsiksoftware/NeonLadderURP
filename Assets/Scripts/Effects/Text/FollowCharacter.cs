@@ -16,12 +16,12 @@ namespace NeonLadder.Effects.Text
         private Image speechBubbleImage;
         private bool isFacingLeft;
 
-        void Start()
+        private void Awake()
         {
             speechBubbleRect = GetComponent<RectTransform>();
             speechBubbleImage = GetComponent<Image>();
-
             speechBubbleImage.enabled = false;
+            isFacingLeft = target.rotation.y < 0;
         }
 
         void Update()

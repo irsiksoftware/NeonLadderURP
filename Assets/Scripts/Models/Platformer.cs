@@ -1,3 +1,5 @@
+using Cinemachine;
+using NeonLadder.Gameplay;
 using NeonLadder.Mechanics.Controllers;
 using UnityEngine;
 
@@ -8,20 +10,9 @@ namespace NeonLadder.Models
     {
         [SerializeField]
         private Cinemachine.CinemachineVirtualCamera virtualCamera;
-        public Cinemachine.CinemachineVirtualCamera VirtualCamera
+        public CinemachineVirtualCamera VirtualCamera
         {
-            get
-            {
-                if (virtualCamera == null)
-                {
-                    var cameraObject = GameObject.Find("PlayerCamera");
-                    if (cameraObject != null)
-                    {
-                        virtualCamera = cameraObject.GetComponent<Cinemachine.CinemachineVirtualCamera>();
-                    }
-                }
-                return virtualCamera;
-            }
+            get => virtualCamera ?? (virtualCamera = Object.FindAnyObjectByType<CinemachineVirtualCamera>());
             set => virtualCamera = value;
         }
 
@@ -37,7 +28,7 @@ namespace NeonLadder.Models
         private Transform spawnPoint;
         public Transform SpawnPoint
         {
-            get => spawnPoint ?? (spawnPoint = GameObject.FindWithTag("SpawnPoint")?.transform);
+            get => spawnPoint ?? (spawnPoint = Object.FindObjectOfType<SpawnPoint>().transform);
             set => spawnPoint = value;
         }
 

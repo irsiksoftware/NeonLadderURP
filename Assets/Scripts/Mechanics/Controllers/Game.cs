@@ -5,7 +5,7 @@ using UnityEngine;
 namespace NeonLadder.Mechanics.Controllers
 {
     /// <summary>
-    /// This class exposes the the game model in the inspector, and ticks the
+    /// This class exposes the game model in the inspector, and ticks the
     /// simulation.
     /// </summary> 
     public class Game : MonoBehaviour
@@ -14,9 +14,25 @@ namespace NeonLadder.Mechanics.Controllers
 
         public PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
+        void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
         void OnEnable()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
         }
 
         void OnDisable()

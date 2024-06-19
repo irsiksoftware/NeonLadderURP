@@ -1,0 +1,50 @@
+using NeonLadder.Core;
+using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Models;
+using UnityEngine;
+
+namespace NeonLadder.Managers
+{
+    public class LootPurchaseManager : MonoBehaviour
+    {
+        protected PlatformerModel model;
+        protected Player player;
+
+        private const int metaItemCost = 10; // Leave this static for now.
+
+        void Start()
+        {
+            model = Simulation.GetModel<PlatformerModel>();
+            player = model.Player;
+
+        }
+
+        public void PurchaseMetaItem(string itemName)
+        {
+            if (player == null)
+            {
+                Debug.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchaseMetaItem)} -> Player reference magically disappeared.");
+            }
+
+            if (player.metaCurrency.current >= metaItemCost)
+            {
+                player.metaCurrency.Decrement(metaItemCost);
+                switch (itemName)
+                {
+                    case "Health Potion":
+                        player.health.Increment(10);
+                        break;
+                    case "Stamina Potion":
+                        player.stamina.Increment(10);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log("Not enough meta currency to purchase item.");
+            }
+        }
+    }
+}

@@ -35,8 +35,28 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void OnEnable()
         {
-            rigidbody = GetComponentInParent<Rigidbody>();
-            rigidbody.isKinematic = true;
+            switch (this)
+            {
+                case FlyingMinor:
+                case Minor:
+                case FlyingMajor:
+                case Major:
+                case Boss:
+                case Enemy:
+                    rigidbody = GetComponentInParent<Rigidbody>();
+                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+                    break;
+                case Player:
+                    rigidbody = GetComponent<Rigidbody>();
+                    break;
+                default:
+                    break;
+            }
+
+            if (rigidbody != null)
+            {
+                rigidbody.isKinematic = true;
+            }   
         }
 
         protected virtual void OnDisable()
@@ -45,6 +65,12 @@ namespace NeonLadder.Mechanics.Controllers
         }
 
         protected virtual void Start()
+        {
+            //model = Simulation.GetModel<PlatformerModel>();
+            //player = model.Player;
+        }
+
+        protected virtual void Awake()
         {
             model = Simulation.GetModel<PlatformerModel>();
             player = model.Player;

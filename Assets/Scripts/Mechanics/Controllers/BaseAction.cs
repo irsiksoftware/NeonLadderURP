@@ -29,7 +29,6 @@ namespace NeonLadder.Mechanics.Controllers
 
         private InputDevice controller;
 
-
         protected virtual void ConfigureControls(Player player)
         {
             ControllerDebugging.PrintDebugControlConfiguration(player);
@@ -41,6 +40,23 @@ namespace NeonLadder.Mechanics.Controllers
             Constants.DisplayPlayerActionDebugInfo = true;
             Constants.DisplayKeyPresses = true;
             Constants.DisplayControllerDebugInfo = true;
+        }
+
+        protected virtual void Awake()
+        {
+            // Initialize the controller field with the first connected controller device
+            if (Gamepad.current != null)
+            {
+                controller = Gamepad.current;
+            }
+            else if (Keyboard.current != null)
+            {
+                controller = Keyboard.current;
+            }
+            else
+            {
+                Debug.LogWarning("No controller or keyboard found.");
+            }
         }
 
         protected virtual void Update()
@@ -64,7 +80,14 @@ namespace NeonLadder.Mechanics.Controllers
                 ControllerNameDebuggingText.gameObject.SetActive(Constants.DisplayControllerDebugInfo);
                 if (Constants.DisplayControllerDebugInfo)
                 {
-                    ControllerNameDebuggingText.text = $"Controller: {ControllerDebugging.GetDeviceDebugText(controller)}";
+                    if (controller != null)
+                    {
+                        ControllerNameDebuggingText.text = $"Controller: {ControllerDebugging.GetDeviceDebugText(controller)}";
+                    }
+                    else
+                    {
+                        ControllerNameDebuggingText.text = "Controller: None";
+                    }
                 }
             }
         }

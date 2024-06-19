@@ -54,7 +54,7 @@ public class MonsterGroupActivationManager : MonoBehaviour
                 {
                     foreach (var monster in randomMonsterGroup.Monsters)
                     {
-                        if (monster.IsAlive)
+                        if (monster != null && monster.IsAlive)
                         {
                             monster.gameObject.SetActive(true);
                         }

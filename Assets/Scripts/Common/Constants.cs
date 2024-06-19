@@ -15,11 +15,21 @@ namespace Assets.Scripts
 
         public static string PlayerWeapon => nameof(PlayerWeapon);
 
+        #region Resources
+
         #region LootTables
         public static string MinorEnemyLootTablePath = "ScriptableObjects/MinorEnemyLootTable";
         public static string MajorEnemyLootTablePath = "ScriptableObjects/MajorEnemyLootTable";
         public static string BossEnemyLootTablePath = "ScriptableObjects/BossEnemyLootTable";
         #endregion
+
+        #region Managers
+        public static string LootPurchaseManagerPath = "Managers/LootPurchaseManager";
+        #endregion
+
+        #endregion
+
+
 
 
         #region Settings

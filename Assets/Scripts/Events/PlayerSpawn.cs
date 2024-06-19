@@ -1,7 +1,5 @@
 using Assets.Scripts;
 using NeonLadder.Core;
-using NeonLadder.Mechanics.Controllers;
-using NeonLadder.Mechanics.Enums;
 using UnityEngine;
 
 
@@ -12,7 +10,7 @@ namespace NeonLadder.Events
     /// </summary>
     public class PlayerSpawn : BaseGameEvent<PlayerSpawn>
     {
-        Transform spawnPoint;
+        //Transform spawnPoint;
 
         public override void Execute()
         {
@@ -23,12 +21,12 @@ namespace NeonLadder.Events
                 player.audioSource.PlayOneShot(player.respawnAudio);
             player.health.Increment(Constants.MaxHealth);
             player.stamina.Increment(Constants.MaxStamina);
-            player.Teleport(spawnPoint.transform.position);
+            //player.Teleport(spawnPoint.transform.position);
             //player.playerActions.jumpState = ActionStates.Ready;
             player.animator.SetBool("dead", false);
             model.VirtualCamera.m_Follow = player.transform;
             model.VirtualCamera.m_LookAt = player.transform;
-            Simulation.Schedule<EnablePlayerInput>(2f);
+            player.controlEnabled = true;
         }
     }
 }

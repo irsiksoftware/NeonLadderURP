@@ -40,6 +40,10 @@ namespace NeonLadder.Mechanics.Controllers
         public int locomotionLayerIndex = 0; // Index for the locomotion layer
         public int actionLayerIndex = 1; // Index for the action layer
 
+        // Variables to store default CVC properties
+        private Vector3 defaultTrackedObjectOffset;
+        private Vector3 defaultRotation;
+
         public InputActionAsset Controls
         {
             get { return controls; }
@@ -59,8 +63,9 @@ namespace NeonLadder.Mechanics.Controllers
             transform.parent.position = location.position;
         }
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             playerActions = GetComponentInChildren<PlayerAction>();
             audioSource = GetComponent<AudioSource>();
             animator = GetComponent<Animator>();
@@ -69,6 +74,20 @@ namespace NeonLadder.Mechanics.Controllers
             stamina = GetComponent<Stamina>();
             metaCurrency = GetComponent<Meta>();
             permaCurrency = GetComponent<Perma>();
+
+
+
+            //var x = model.VirtualCamera;
+            CinemachineVirtualCamera cvc = model.VirtualCamera;
+            if (cvc != null)
+            {
+                CinemachineFramingTransposer transposer = cvc.GetCinemachineComponent<CinemachineFramingTransposer>();
+                if (transposer != null)
+                {
+                    defaultTrackedObjectOffset = transposer.m_TrackedObjectOffset;
+                    defaultRotation = cvc.transform.eulerAngles;
+                }
+            }
         }
 
         protected override void Update()
@@ -133,6 +152,20 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
+        public void RevertCameraProperties()
+        {
+            CinemachineVirtualCamera cvc = model.VirtualCamera;
+            if (cvc != null)
+            {
+                CinemachineFramingTransposer transposer = cvc.GetCinemachineComponent<CinemachineFramingTransposer>();
+                if (transposer != null)
+                {
+                    transposer.m_TrackedObjectOffset = defaultTrackedObjectOffset;
+                    cvc.transform.eulerAngles = defaultRotation;
+                }
+            }
+        }
+
 
         private void RegenerateStamina()
         {
@@ -175,7 +208,6 @@ namespace NeonLadder.Mechanics.Controllers
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             controlEnabled = false;
-
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
                                     RigidbodyConstraints.FreezePositionX |
                                     RigidbodyConstraints.FreezePositionY;
@@ -185,10 +217,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             targetVelocity.z = 0;
             controlEnabled = true;
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
-                                    RigidbodyConstraints.FreezePositionX |
-                                    RigidbodyConstraints.FreezePositionY |
-                                    RigidbodyConstraints.FreezePositionZ;
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
         }
 
         private void HandleAnimations()

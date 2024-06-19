@@ -83,8 +83,9 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         private MonsterStates currentState = MonsterStates.Idle;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
             LoadLootTable();
@@ -115,6 +116,11 @@ namespace NeonLadder.Mechanics.Controllers
                         break;
                 }
             }
+
+            if (RuntimeLootTable == null)
+            {
+                Debug.LogError($"LootTable not found for enemy: {this}");
+            }   
         }
 
         protected override void ComputeVelocity()
