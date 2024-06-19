@@ -13,6 +13,7 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class Player : KinematicObject
     {
+        private bool ForceRightCameraPivot = true;
         [SerializeField]
         private ProgressBar healthBar;
         [SerializeField]
@@ -127,6 +128,11 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 int direction = UnityEngine.Random.Range(0, 2); // Use 0 and 2 for exclusive upper bound
                 float pivotDirection = (direction == 0) ? -1 : 1;
+
+                if (ForceRightCameraPivot)
+                {
+                    pivotDirection = -1;
+                }
 
                 Vector3 initialOffset = transposer.m_TrackedObjectOffset;
                 Vector3 targetOffset = initialOffset + new Vector3(pivotDirection * 2, 0, 0); // Adjust 2 to desired pivot distance
