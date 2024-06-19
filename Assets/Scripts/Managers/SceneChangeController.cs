@@ -33,6 +33,7 @@ public class SceneChangeController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
         Debug.Log("Scene loaded: " + scene.name);
         if (player == null)
         {
@@ -43,8 +44,10 @@ public class SceneChangeController : MonoBehaviour
 
         if (player != null)
         {
+            model.VirtualCamera.GetComponent<DynamicCameraAdjustment>().RefreshRenderers();
             player.DisableZMovement();
             player.RevertCameraProperties();
+            
             // Find the spawn point in the new scene
             GameObject spawnPoint = GameObject.FindGameObjectWithTag(Tags.SpawnPoint.ToString());
             if (spawnPoint != null)
