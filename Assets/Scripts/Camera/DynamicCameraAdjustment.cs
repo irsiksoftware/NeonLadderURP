@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 public class DynamicCameraAdjustment : MonoBehaviour
 {
-    public float MaximumPercentOfFrameTakenUpByObject = 0.1f; // e.g., 10%
-    public float DynamicCameraOffsetChangeSpeed = 2f; // e.g., speed factor for the transition
-    public float MinDistanceToPlayer = 2.1f; // Minimum distance the camera should move to the player
-    public float MinOffset = 2.1f; // Minimum allowable offset for the camera
+    public float DynamicCameraOffsetChangeSpeed = 2f; // Speed factor for the transition
+    public float MinimumCameraDistance = 2.4f; // Smallest float that the FramingTransposer's Camera Distance will reach before giving up trying
     public float MinimumTrackedObjectOffsetY = 1f; // Minimum Y offset for the tracked object
 
     public List<string> TagsToIgnore; // List of tags to ignore
@@ -21,6 +19,7 @@ public class DynamicCameraAdjustment : MonoBehaviour
     private Vector3 initialTrackedObjectOffset;
 
     private Renderer[] renderers; // Cached renderers
+    private Renderer lastBlockingObject; // Last object that was blocking the camera
 
     void Start()
     {
@@ -56,60 +55,70 @@ public class DynamicCameraAdjustment : MonoBehaviour
         Ray ray = new Ray(transform.position, directionToPlayer);
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        bool objectExceedsScreenPercentage = false;
+        bool objectCleared = true;
+        Renderer currentBlockingObject = null;
 
         foreach (Renderer renderer in renderers)
         {
-            // Check if the object's tag or its parent's tag is in the ignore list
-            if (IsTagOrLayerIgnored(renderer))
-                continue;
-
-            if (renderer.bounds.IntersectRay(ray, out float distance) && distance < distanceToPlayer)
+            // Ensure the object's tag or its parent's tag is not in the ignore list
+            if (!IsTagOrLayerIgnored(renderer))
             {
-                if (IsObjectExceedingScreenPercentage(renderer))
+                if (renderer.bounds.IntersectRay(ray, out float distance) && distance < distanceToPlayer)
                 {
-                    //Debug.Log("Object " + renderer.gameObject.name + " is taking up too much of the screen!");
-                    float newDistance = Mathf.Lerp(framingTransposer.m_CameraDistance, MinDistanceToPlayer, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
-                    newDistance = Mathf.Max(newDistance, MinDistanceToPlayer);
-
-                    if (Mathf.Abs(framingTransposer.m_CameraDistance - newDistance) > 0.0001f)
-                    {
-                        //Debug.Log($"Setting camera distance to {newDistance}, current distance is {framingTransposer.m_CameraDistance}");
-                        framingTransposer.m_CameraDistance = newDistance;
-                    }
-
-                    // Adjust Tracked Object Offset Y
-                    float newOffsetY = Mathf.Lerp(initialTrackedObjectOffset.y, MinimumTrackedObjectOffsetY, 1 - (newDistance / initialCameraDistance));
-                    if (Mathf.Abs(framingTransposer.m_TrackedObjectOffset.y - newOffsetY) > 0.0001f)
-                    {
-                        //Debug.Log($"Setting tracked object offset Y to {newOffsetY}, current offset Y is {framingTransposer.m_TrackedObjectOffset.y}");
-                        framingTransposer.m_TrackedObjectOffset.y = newOffsetY;
-                    }
-
-                    objectExceedsScreenPercentage = true;
-                    break; // Move camera once an object is found
+                    //Debug.Log($"Object in the way: {renderer.gameObject.name}");
+                    objectCleared = false;
+                    currentBlockingObject = renderer;
+                    break;
                 }
             }
         }
 
-        // Reset the camera distance if no object exceeds the screen percentage
-        if (!objectExceedsScreenPercentage)
+        if (objectCleared)
         {
+            //Debug.Log("No objects in the way");
+            // Reset the camera distance and tracked object offset Y
             float resetDistance = Mathf.Lerp(framingTransposer.m_CameraDistance, initialCameraDistance, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
-            resetDistance = Mathf.Max(resetDistance, MinOffset);
+            resetDistance = Mathf.Max(resetDistance, MinimumCameraDistance);
 
             if (Mathf.Abs(framingTransposer.m_CameraDistance - resetDistance) > 0.0001f)
             {
-                //Debug.Log($"Resetting camera distance to {resetDistance}, current distance is {framingTransposer.m_CameraDistance}");
                 framingTransposer.m_CameraDistance = resetDistance;
             }
 
-            // Reset Tracked Object Offset Y
             float resetOffsetY = Mathf.Lerp(framingTransposer.m_TrackedObjectOffset.y, initialTrackedObjectOffset.y, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
             if (Mathf.Abs(framingTransposer.m_TrackedObjectOffset.y - resetOffsetY) > 0.0001f)
             {
-                //Debug.Log($"Resetting tracked object offset Y to {resetOffsetY}, current offset Y is {framingTransposer.m_TrackedObjectOffset.y}");
                 framingTransposer.m_TrackedObjectOffset.y = resetOffsetY;
+            }
+
+            // Reset last blocking object
+            lastBlockingObject = null;
+        }
+        else
+        {
+            // Adjust camera distance and tracked object offset Y
+            if (currentBlockingObject != lastBlockingObject || framingTransposer.m_CameraDistance > MinimumCameraDistance * 1.05f)
+            {
+                float newDistance = Mathf.Lerp(framingTransposer.m_CameraDistance, MinimumCameraDistance, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
+                newDistance = Mathf.Max(newDistance, MinimumCameraDistance);
+
+                if (Mathf.Abs(framingTransposer.m_CameraDistance - newDistance) > 0.0001f)
+                {
+                    framingTransposer.m_CameraDistance = newDistance;
+                }
+
+                float newOffsetY = Mathf.Lerp(initialTrackedObjectOffset.y, MinimumTrackedObjectOffsetY, 1 - (newDistance / initialCameraDistance));
+                if (Mathf.Abs(framingTransposer.m_TrackedObjectOffset.y - newOffsetY) > 0.0001f)
+                {
+                    framingTransposer.m_TrackedObjectOffset.y = newOffsetY;
+                }
+
+                // Update last blocking object
+                lastBlockingObject = currentBlockingObject;
+            }
+            else
+            {
+                //Debug.Log($"Reached minimum camera distance with the same blocking object: {currentBlockingObject.gameObject.name}");
             }
         }
     }
@@ -128,34 +137,6 @@ public class DynamicCameraAdjustment : MonoBehaviour
             currentTransform = currentTransform.parent;
         }
         return false;
-    }
-
-    bool IsObjectExceedingScreenPercentage(Renderer renderer)
-    {
-        Bounds bounds = renderer.bounds;
-        Vector3[] screenPoints = new Vector3[8];
-        Camera mainCamera = Camera.main;
-
-        screenPoints[0] = mainCamera.WorldToScreenPoint(new Vector3(bounds.min.x, bounds.min.y, bounds.min.z));
-        screenPoints[1] = mainCamera.WorldToScreenPoint(new Vector3(bounds.max.x, bounds.min.y, bounds.min.z));
-        screenPoints[2] = mainCamera.WorldToScreenPoint(new Vector3(bounds.min.x, bounds.max.y, bounds.min.z));
-        screenPoints[3] = mainCamera.WorldToScreenPoint(new Vector3(bounds.max.x, bounds.max.y, bounds.min.z));
-        screenPoints[4] = mainCamera.WorldToScreenPoint(new Vector3(bounds.min.x, bounds.min.y, bounds.max.z));
-        screenPoints[5] = mainCamera.WorldToScreenPoint(new Vector3(bounds.max.x, bounds.min.y, bounds.max.z));
-        screenPoints[6] = mainCamera.WorldToScreenPoint(new Vector3(bounds.min.x, bounds.max.y, bounds.max.z));
-        screenPoints[7] = mainCamera.WorldToScreenPoint(new Vector3(bounds.max.x, bounds.max.y, bounds.max.z));
-
-        Rect boundingBox = new Rect(screenPoints[0], Vector2.zero);
-        foreach (Vector3 sp in screenPoints)
-        {
-            boundingBox = Rect.MinMaxRect(Mathf.Min(boundingBox.xMin, sp.x), Mathf.Min(boundingBox.yMin, sp.y),
-                                          Mathf.Max(boundingBox.xMax, sp.x), Mathf.Max(boundingBox.yMax, sp.y));
-        }
-
-        float screenArea = Screen.width * Screen.height;
-        float boundingBoxArea = boundingBox.width * boundingBox.height;
-
-        return (boundingBoxArea / screenArea) > MaximumPercentOfFrameTakenUpByObject;
     }
 
     void LogFramingTransposerSettings()
