@@ -18,7 +18,7 @@ public class DynamicCameraAdjustment : MonoBehaviour
     private CinemachineCollider cinemachineCollider;
     private Vector3 initialTrackedObjectOffset;
 
-    private Renderer[] renderers; // Cached renderers
+    private List<Renderer> renderers; // Cached renderers
     private Renderer lastBlockingObject; // Last object that was blocking the camera
 
     void Start()
@@ -41,7 +41,7 @@ public class DynamicCameraAdjustment : MonoBehaviour
 
     void CacheRenderers()
     {
-        renderers = FindObjectsOfType<Renderer>();
+        renderers = new List<Renderer>(FindObjectsOfType<Renderer>());
     }
 
     public void RefreshRenderers()
@@ -58,14 +58,16 @@ public class DynamicCameraAdjustment : MonoBehaviour
         bool objectCleared = true;
         Renderer currentBlockingObject = null;
 
+        // Clean up null references from the list
+        renderers.RemoveAll(renderer => renderer == null);
+
         foreach (Renderer renderer in renderers)
         {
-            // Ensure the object's tag or its parent's tag is not in the ignore list
-            if (!IsTagOrLayerIgnored(renderer))
+            // Ensure the renderer is not null and its tag or its parent's tag is not in the ignore list
+            if (renderer != null && !IsTagOrLayerIgnored(renderer))
             {
                 if (renderer.bounds.IntersectRay(ray, out float distance) && distance < distanceToPlayer)
                 {
-                    //Debug.Log($"Object in the way: {renderer.gameObject.name}");
                     objectCleared = false;
                     currentBlockingObject = renderer;
                     break;
@@ -75,7 +77,6 @@ public class DynamicCameraAdjustment : MonoBehaviour
 
         if (objectCleared)
         {
-            //Debug.Log("No objects in the way");
             // Reset the camera distance and tracked object offset Y
             float resetDistance = Mathf.Lerp(framingTransposer.m_CameraDistance, initialCameraDistance, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
             resetDistance = Mathf.Max(resetDistance, MinimumCameraDistance);
@@ -115,10 +116,6 @@ public class DynamicCameraAdjustment : MonoBehaviour
 
                 // Update last blocking object
                 lastBlockingObject = currentBlockingObject;
-            }
-            else
-            {
-                //Debug.Log($"Reached minimum camera distance with the same blocking object: {currentBlockingObject.gameObject.name}");
             }
         }
     }

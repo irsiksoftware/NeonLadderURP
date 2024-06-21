@@ -1,4 +1,5 @@
 using NeonLadder.Core;
+using NeonLadder.Managers;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
@@ -10,12 +11,14 @@ public class SceneChangeController : MonoBehaviour
     public string SceneName;
     private PlatformerModel model;
     private Player player;
-
+    private PlayerPositionManager playerPositionManager;
 
     private void Awake()
     {
         model = Simulation.GetModel<PlatformerModel>();
         player = model.Player;
+        playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerPositionManager>();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -23,33 +26,42 @@ public class SceneChangeController : MonoBehaviour
     {
         if (collision.CompareTag(Tags.Player.ToString()))
         {
-            
             SceneManager.LoadScene(SceneName);
-            
         }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Scene loaded: " + scene.name);
         if (player == null)
         {
-            Debug.LogWarning("Player not found in the scene.");
             return;
         }
 
-
-        if (player != null)
+         var cameraAdjustment = model.VirtualCamera.GetComponent<DynamicCameraAdjustment>();
+        if (cameraAdjustment != null)
         {
-            model.VirtualCamera.GetComponent<DynamicCameraAdjustment>().RefreshRenderers();
-            player.DisableZMovement();
-            player.RevertCameraProperties();
-            
+            cameraAdjustment.RefreshRenderers();
+        }
+        else
+        {
+            Debug.LogWarning("DynamicCameraAdjustment not found in the scene.");
+        }
+
+        player.DisableZMovement();
+        player.RevertCameraProperties();
+
+        Vector3 spawnPosition;
+        if (playerPositionManager.TryGetLastPlayerPosition(scene.name, out spawnPosition))
+        {
+            // Use the saved position to place the player in the correct spot
+            player.transform.position = spawnPosition;
+        }
+        else
+        {
             // Find the spawn point in the new scene
             GameObject spawnPoint = GameObject.FindGameObjectWithTag(Tags.SpawnPoint.ToString());
             if (spawnPoint != null)
             {
-                Debug.Log("Player spawned at: " + spawnPoint.transform.position);
                 player.transform.position = spawnPoint.transform.position;
             }
             else

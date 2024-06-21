@@ -1,15 +1,18 @@
 using Assets.Scripts;
+using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace NeonLadder.Mechanics.Controllers
 {
     public class PlayerAction : BaseAction
     {
+        private PlayerPositionManager playerPositionManager;
         private Player player;
         public Vector2 playerInput = new Vector2(0, 0);
         private float sprintTimeAccumulator = 0f;
@@ -48,6 +51,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected void Start()
         {
             player = GetComponentInParent<Player>();
+            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerPositionManager>();
             ConfigureControls(player);
             initialAttackDuration = attackDuration; // Initialize the initial attack duration
                                                     // Cache the weapon groups here if not assigned via Inspector
@@ -128,6 +132,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (isInZMovementZone)
             {
+                playerPositionManager.SavePlayerPosition(SceneManager.GetActiveScene().name, player.transform.position);
                 player.EnableZMovement();
             }
         }
