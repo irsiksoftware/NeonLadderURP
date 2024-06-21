@@ -13,6 +13,7 @@ namespace NeonLadder.Mechanics.Enums
         ShopkeeperWindow,
         Managers,
         SpawnPoint,
-        GameController
+        GameController,
+        PlayerCamera
     }
 }

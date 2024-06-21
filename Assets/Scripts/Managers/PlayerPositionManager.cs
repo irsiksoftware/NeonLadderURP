@@ -1,22 +1,46 @@
-using UnityEngine;
-using System.Collections.Generic;
-
 namespace NeonLadder.Managers
 {
-    public class PlayerPositionManager : MonoBehaviour
-    {
-        private Dictionary<string, Vector3> scenePositions = new Dictionary<string, Vector3>();
+    using System.Collections.Generic;
+    using UnityEngine;
 
-        // Method to save player position
-        public void SavePlayerPosition(string sceneName, Vector3 position)
+    public class PlayerAndCameraPositionManager : MonoBehaviour
+    {
+        private Dictionary<string, PlayerAndCameraState> sceneStates = new Dictionary<string, PlayerAndCameraState>();
+
+        public void SaveState(string sceneName, Vector3 playerPosition, Vector3 cameraPosition, Quaternion cameraRotation)
         {
-            scenePositions[sceneName] = position;
+            sceneStates[sceneName] = new PlayerAndCameraState(playerPosition, cameraPosition, cameraRotation);
         }
 
-        // Method to try and get the last player position
-        public bool TryGetLastPlayerPosition(string sceneName, out Vector3 position)
+        public bool TryGetState(string sceneName, out Vector3 playerPosition, out Vector3 cameraPosition, out Quaternion cameraRotation)
         {
-            return scenePositions.TryGetValue(sceneName, out position);
+            if (sceneStates.TryGetValue(sceneName, out PlayerAndCameraState state))
+            {
+                playerPosition = state.PlayerPosition;
+                cameraPosition = state.CameraPosition;
+                cameraRotation = state.CameraRotation;
+                return true;
+            }
+
+            playerPosition = Vector3.zero;
+            cameraPosition = Vector3.zero;
+            cameraRotation = Quaternion.identity;
+            return false;
         }
     }
+
+    public class PlayerAndCameraState
+    {
+        public Vector3 PlayerPosition { get; }
+        public Vector3 CameraPosition { get; }
+        public Quaternion CameraRotation { get; }
+
+        public PlayerAndCameraState(Vector3 playerPosition, Vector3 cameraPosition, Quaternion cameraRotation)
+        {
+            PlayerPosition = playerPosition;
+            CameraPosition = cameraPosition;
+            CameraRotation = cameraRotation;
+        }
+    }
+
 }

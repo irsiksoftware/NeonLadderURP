@@ -6,8 +6,8 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class KinematicObject : MonoBehaviour
     {
-        protected Player player;
-        protected PlatformerModel model;
+        public Player player;
+        public PlatformerModel model;
         public float minGroundNormalY = .65f;
         public float gravityModifier = 1f;
         public Vector3 velocity;

@@ -35,12 +35,14 @@ public class DynamicCameraAdjustment : MonoBehaviour
 
     void OnEnable()
     {
-        ResetToInitialSettings();
+        //ResetToInitialSettings();
         RefreshRenderers(); // Refresh renderers for the new scene
+        cinemachineVirtualCamera.enabled = true;
     }
 
     private void OnDisable()
     {
+        cinemachineVirtualCamera.enabled = false;
         //ResetToInitialSettings();
     }
 

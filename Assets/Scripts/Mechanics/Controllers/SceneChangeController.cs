@@ -11,17 +11,18 @@ public class SceneChangeController : MonoBehaviour
     public string SceneName;
     private PlatformerModel model;
     private Player player;
-    private PlayerPositionManager playerPositionManager;
+    private PlayerAndCameraPositionManager playerAndCameraPositionManager;
     private DynamicCameraAdjustment cameraAdjustment;
 
 
     private void Awake()
     {
+        
         model = Simulation.GetModel<PlatformerModel>();
         player = model.Player;
-        playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerPositionManager>();
+        playerAndCameraPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerAndCameraPositionManager>();
         cameraAdjustment = model.VirtualCamera.GetComponent<DynamicCameraAdjustment>();
-
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -48,10 +49,15 @@ public class SceneChangeController : MonoBehaviour
         //Debug.Log("DynamicCameraAdjustment enabled state: " + cameraAdjustment.enabled);
         player.DisableZMovement();
 
-        Vector3 spawnPosition;
-        if (playerPositionManager.TryGetLastPlayerPosition(scene.name, out spawnPosition))
+        Vector3 playerPosition, cameraPosition;
+        Quaternion cameraRotation;
+
+        if (playerAndCameraPositionManager.TryGetState(scene.name, out playerPosition, out cameraPosition, out cameraRotation))
         {
-            player.transform.position = spawnPosition;
+            // Set the player and camera positions and rotations
+            player.transform.position = playerPosition;
+            //model.VirtualCamera.transform.position = cameraPosition;
+            //model.VirtualCamera.transform.rotation = cameraRotation;
         }
         else
         {
@@ -66,5 +72,9 @@ public class SceneChangeController : MonoBehaviour
                 Debug.LogWarning("No SpawnPoint found in the scene.");
             }
         }
+
+        //set players transform rotation y = 90 (facing to the right)
+        player.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+        player.RevertCameraProperties();
     }
 }

@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 4500333531790148735, guid: 6ae3d92156dd8ba4db42c4cd688b308c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5123895636489595860, guid: 6ae3d92156dd8ba4db42c4cd688b308c,
         type: 3}
@@ -837,7 +837,7 @@ PrefabInstance:
     - target: {fileID: 8553754061022362872, guid: f8e1d7e51b8764b4fbe85220f91831cb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1130,6 +1130,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: GameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 7521150561949305211, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828112130496461240, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerCamera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

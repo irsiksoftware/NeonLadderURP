@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Cinemachine;
 using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
@@ -11,7 +12,7 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class PlayerAction : BaseAction
     {
-        private PlayerPositionManager playerPositionManager;
+        private PlayerAndCameraPositionManager playerPositionManager;
         private Player player;
         public Vector2 playerInput = new Vector2(0, 0);
         private float sprintTimeAccumulator = 0f;
@@ -50,7 +51,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected void Start()
         {
             player = GetComponentInParent<Player>();
-            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerPositionManager>();
+            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerAndCameraPositionManager>();
             ConfigureControls(player);
             initialAttackDuration = attackDuration; // Initialize the initial attack duration
                                                     // Cache the weapon groups here if not assigned via Inspector
@@ -131,7 +132,9 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (isInZMovementZone)
             {
-                playerPositionManager.SavePlayerPosition(SceneManager.GetActiveScene().name, player.transform.position);
+                playerPositionManager.SaveState(SceneManager.GetActiveScene().name, player.transform.position, 
+                    Game.Instance.model.VirtualCamera.gameObject.transform.position, 
+                    Game.Instance.model.VirtualCamera.gameObject.transform.rotation);
                 player.EnableZMovement();
             }
         }
