@@ -1,6 +1,6 @@
 using Cinemachine;
-using NeonLadder.Gameplay;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
 using UnityEngine;
 
 namespace NeonLadder.Models
@@ -9,10 +9,10 @@ namespace NeonLadder.Models
     public class PlatformerModel
     {
         [SerializeField]
-        private Cinemachine.CinemachineVirtualCamera virtualCamera;
+        private CinemachineVirtualCamera virtualCamera;
         public CinemachineVirtualCamera VirtualCamera
         {
-            get => virtualCamera ?? (virtualCamera = Object.FindAnyObjectByType<CinemachineVirtualCamera>());
+            get => virtualCamera ?? (virtualCamera = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<CinemachineVirtualCamera>());
             set => virtualCamera = value;
         }
 
@@ -20,7 +20,7 @@ namespace NeonLadder.Models
         private Player player;
         public Player Player
         {
-            get => player ?? (player = Object.FindObjectOfType<Player>());
+            get => player ?? (player = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<Player>());
             set => player = value;
         }
 
@@ -28,7 +28,7 @@ namespace NeonLadder.Models
         private Transform spawnPoint;
         public Transform SpawnPoint
         {
-            get => spawnPoint ?? (spawnPoint = Object.FindObjectOfType<SpawnPoint>().transform);
+            get => spawnPoint ?? (spawnPoint = GameObject.FindGameObjectWithTag(Tags.SpawnPoint.ToString()).transform);
             set => spawnPoint = value;
         }
 

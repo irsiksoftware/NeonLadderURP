@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using System.Collections.Generic;
+using NeonLadder.Mechanics.Enums;
 
 public class DynamicCameraAdjustment : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class DynamicCameraAdjustment : MonoBehaviour
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private Transform playerTransform;
     private float initialCameraDistance;
+    private Vector3 initialCameraPosition;
+    private Quaternion initialCameraRotation;
     private CinemachineFramingTransposer framingTransposer;
     private CinemachineCollider cinemachineCollider;
     private Vector3 initialTrackedObjectOffset;
@@ -21,32 +24,54 @@ public class DynamicCameraAdjustment : MonoBehaviour
     private List<Renderer> renderers; // Cached renderers
     private Renderer lastBlockingObject; // Last object that was blocking the camera
 
-    void Start()
+    void Awake()
     {
         cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
-        playerTransform = GameObject.FindWithTag("Player").transform; // Assume the player has the tag "Player"
         framingTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         cinemachineCollider = cinemachineVirtualCamera.GetComponent<CinemachineCollider>();
-        initialCameraDistance = framingTransposer.m_CameraDistance;
-        initialTrackedObjectOffset = framingTransposer.m_TrackedObjectOffset;
+        CacheInitialSettings(); // Cache initial settings on Awake
+        playerTransform = GameObject.FindWithTag(Tags.Player.ToString()).transform; // Assume the player has the tag "Player"
+    }
 
-        CacheRenderers(); // Cache renderers at the start
-        LogFramingTransposerSettings();
+    void OnEnable()
+    {
+        ResetToInitialSettings();
+        RefreshRenderers(); // Refresh renderers for the new scene
+    }
+
+    private void OnDisable()
+    {
+        //ResetToInitialSettings();
     }
 
     void Update()
     {
-        AdjustCameraIfNeeded();
+        if (enabled) //CYA
+        {
+            AdjustCameraIfNeeded();
+        }
     }
 
-    void CacheRenderers()
+    private void CacheInitialSettings()
     {
-        renderers = new List<Renderer>(FindObjectsOfType<Renderer>());
+        initialCameraDistance = framingTransposer.m_CameraDistance;
+        initialTrackedObjectOffset = framingTransposer.m_TrackedObjectOffset;
+        initialCameraPosition = transform.position;
+        initialCameraRotation = transform.rotation;
+        LogFramingTransposerSettings();
+    }
+
+    public void ResetToInitialSettings()
+    {
+        framingTransposer.m_CameraDistance = initialCameraDistance;
+        framingTransposer.m_TrackedObjectOffset = initialTrackedObjectOffset;
+        transform.position = initialCameraPosition;
+        transform.rotation = initialCameraRotation;
     }
 
     public void RefreshRenderers()
     {
-        CacheRenderers();
+        renderers = new List<Renderer>(FindObjectsOfType<Renderer>());
     }
 
     void AdjustCameraIfNeeded()
@@ -78,21 +103,8 @@ public class DynamicCameraAdjustment : MonoBehaviour
         if (objectCleared)
         {
             // Reset the camera distance and tracked object offset Y
-            float resetDistance = Mathf.Lerp(framingTransposer.m_CameraDistance, initialCameraDistance, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
-            resetDistance = Mathf.Max(resetDistance, MinimumCameraDistance);
-
-            if (Mathf.Abs(framingTransposer.m_CameraDistance - resetDistance) > 0.0001f)
-            {
-                framingTransposer.m_CameraDistance = resetDistance;
-            }
-
-            float resetOffsetY = Mathf.Lerp(framingTransposer.m_TrackedObjectOffset.y, initialTrackedObjectOffset.y, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
-            if (Mathf.Abs(framingTransposer.m_TrackedObjectOffset.y - resetOffsetY) > 0.0001f)
-            {
-                framingTransposer.m_TrackedObjectOffset.y = resetOffsetY;
-            }
-
-            // Reset last blocking object
+            framingTransposer.m_CameraDistance = initialCameraDistance;
+            framingTransposer.m_TrackedObjectOffset = initialTrackedObjectOffset;
             lastBlockingObject = null;
         }
         else
@@ -100,19 +112,8 @@ public class DynamicCameraAdjustment : MonoBehaviour
             // Adjust camera distance and tracked object offset Y
             if (currentBlockingObject != lastBlockingObject || framingTransposer.m_CameraDistance > MinimumCameraDistance * 1.05f)
             {
-                float newDistance = Mathf.Lerp(framingTransposer.m_CameraDistance, MinimumCameraDistance, Time.deltaTime * DynamicCameraOffsetChangeSpeed);
-                newDistance = Mathf.Max(newDistance, MinimumCameraDistance);
-
-                if (Mathf.Abs(framingTransposer.m_CameraDistance - newDistance) > 0.0001f)
-                {
-                    framingTransposer.m_CameraDistance = newDistance;
-                }
-
-                float newOffsetY = Mathf.Lerp(initialTrackedObjectOffset.y, MinimumTrackedObjectOffsetY, 1 - (newDistance / initialCameraDistance));
-                if (Mathf.Abs(framingTransposer.m_TrackedObjectOffset.y - newOffsetY) > 0.0001f)
-                {
-                    framingTransposer.m_TrackedObjectOffset.y = newOffsetY;
-                }
+                framingTransposer.m_CameraDistance = MinimumCameraDistance;
+                framingTransposer.m_TrackedObjectOffset.y = MinimumTrackedObjectOffsetY;
 
                 // Update last blocking object
                 lastBlockingObject = currentBlockingObject;
@@ -143,7 +144,9 @@ public class DynamicCameraAdjustment : MonoBehaviour
                             $"Soft Zone Height: {framingTransposer.m_SoftZoneHeight}, Soft Zone Width: {framingTransposer.m_SoftZoneWidth}\n" +
                             $"Bias X: {framingTransposer.m_BiasX}, Bias Y: {framingTransposer.m_BiasY}\n" +
                             $"Minimum FOV: {framingTransposer.m_MinimumFOV}, Maximum FOV: {framingTransposer.m_MaximumFOV}\n" +
-                            $"XDamping: {framingTransposer.m_XDamping}, YDamping: {framingTransposer.m_YDamping}, ZDamping: {framingTransposer.m_ZDamping}";
+                            $"XDamping: {framingTransposer.m_XDamping}, YDamping: {framingTransposer.m_YDamping}, ZDamping: {framingTransposer.m_ZDamping}\n" +
+                            $"Transform Position: {transform.position}\n" +
+                            $"Transform Rotation: {transform.rotation}\n";
 
         if (cinemachineCollider != null)
         {

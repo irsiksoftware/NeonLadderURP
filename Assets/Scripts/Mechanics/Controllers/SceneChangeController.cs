@@ -12,12 +12,15 @@ public class SceneChangeController : MonoBehaviour
     private PlatformerModel model;
     private Player player;
     private PlayerPositionManager playerPositionManager;
+    private DynamicCameraAdjustment cameraAdjustment;
+
 
     private void Awake()
     {
         model = Simulation.GetModel<PlatformerModel>();
         player = model.Player;
         playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerPositionManager>();
+        cameraAdjustment = model.VirtualCamera.GetComponent<DynamicCameraAdjustment>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -26,7 +29,10 @@ public class SceneChangeController : MonoBehaviour
     {
         if (collision.CompareTag(Tags.Player.ToString()))
         {
-            SceneManager.LoadScene(SceneName);
+            //Debug.Log("Disabling DynamicCameraAdjustment");
+            cameraAdjustment.enabled = false;
+            //Debug.Log("DynamicCameraAdjustment enabled state: " + cameraAdjustment.enabled);
+            SceneManager.LoadScene(SceneName); //breakpoint here
         }
     }
 
@@ -37,23 +43,14 @@ public class SceneChangeController : MonoBehaviour
             return;
         }
 
-         var cameraAdjustment = model.VirtualCamera.GetComponent<DynamicCameraAdjustment>();
-        if (cameraAdjustment != null)
-        {
-            cameraAdjustment.RefreshRenderers();
-        }
-        else
-        {
-            Debug.LogWarning("DynamicCameraAdjustment not found in the scene.");
-        }
-
+        //Debug.Log("Enabling DynamicCameraAdjustment");
+        cameraAdjustment.enabled = true;
+        //Debug.Log("DynamicCameraAdjustment enabled state: " + cameraAdjustment.enabled);
         player.DisableZMovement();
-        player.RevertCameraProperties();
 
         Vector3 spawnPosition;
         if (playerPositionManager.TryGetLastPlayerPosition(scene.name, out spawnPosition))
         {
-            // Use the saved position to place the player in the correct spot
             player.transform.position = spawnPosition;
         }
         else

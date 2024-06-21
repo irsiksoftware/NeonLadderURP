@@ -12,6 +12,7 @@ namespace NeonLadder.Mechanics.Enums
         MonsterGroup,
         ShopkeeperWindow,
         Managers,
-        SpawnPoint
+        SpawnPoint,
+        GameController
     }
 }

@@ -2,7 +2,6 @@ using Assets.Scripts;
 using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
