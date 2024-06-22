@@ -1,5 +1,4 @@
 using Assets.Scripts;
-using Cinemachine;
 using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
