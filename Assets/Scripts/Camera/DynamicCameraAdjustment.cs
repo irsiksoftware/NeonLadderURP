@@ -8,47 +8,40 @@ public class DynamicCameraAdjustment : MonoBehaviour
     public float DynamicCameraOffsetChangeSpeed = 2f; // Speed factor for the transition
     public float MinimumCameraDistance = 2.4f; // Smallest float that the FramingTransposer's Camera Distance will reach before giving up trying
     public float MinimumTrackedObjectOffsetY = 1f; // Minimum Y offset for the tracked object
-
-    public List<string> TagsToIgnore; // List of tags to ignore
-    public List<string> LayersToIgnore; // List of layers to ignore
-
+    public List<string> TagsToIgnore; 
+    public List<string> LayersToIgnore;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private Transform playerTransform;
     private float initialCameraDistance;
     private Vector3 initialCameraPosition;
     private Quaternion initialCameraRotation;
     private CinemachineFramingTransposer framingTransposer;
-    private CinemachineCollider cinemachineCollider;
     private Vector3 initialTrackedObjectOffset;
-
-    private List<Renderer> renderers; // Cached renderers
-    private Renderer lastBlockingObject; // Last object that was blocking the camera
+    private List<Renderer> renderers; 
+    private Renderer lastBlockingObject;
 
     void Awake()
     {
         cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
         framingTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-        cinemachineCollider = cinemachineVirtualCamera.GetComponent<CinemachineCollider>();
-        CacheInitialSettings(); // Cache initial settings on Awake
+        CacheInitialSettings();
         playerTransform = GameObject.FindWithTag(Tags.Player.ToString()).transform; // Assume the player has the tag "Player"
     }
 
     void OnEnable()
     {
-        //ResetToInitialSettings();
-        RefreshRenderers(); // Refresh renderers for the new scene
+        RefreshRenderers(); 
         cinemachineVirtualCamera.enabled = true;
     }
 
     private void OnDisable()
     {
         cinemachineVirtualCamera.enabled = false;
-        //ResetToInitialSettings();
     }
 
     void Update()
     {
-        if (enabled) //CYA
+        if (enabled)
         {
             AdjustCameraIfNeeded();
         }
@@ -60,7 +53,6 @@ public class DynamicCameraAdjustment : MonoBehaviour
         initialTrackedObjectOffset = framingTransposer.m_TrackedObjectOffset;
         initialCameraPosition = transform.position;
         initialCameraRotation = transform.rotation;
-        LogFramingTransposerSettings();
     }
 
     public void ResetToInitialSettings()
@@ -104,20 +96,16 @@ public class DynamicCameraAdjustment : MonoBehaviour
 
         if (objectCleared)
         {
-            // Reset the camera distance and tracked object offset Y
             framingTransposer.m_CameraDistance = initialCameraDistance;
             framingTransposer.m_TrackedObjectOffset = initialTrackedObjectOffset;
             lastBlockingObject = null;
         }
         else
         {
-            // Adjust camera distance and tracked object offset Y
             if (currentBlockingObject != lastBlockingObject || framingTransposer.m_CameraDistance > MinimumCameraDistance * 1.05f)
             {
                 framingTransposer.m_CameraDistance = MinimumCameraDistance;
                 framingTransposer.m_TrackedObjectOffset.y = MinimumTrackedObjectOffsetY;
-
-                // Update last blocking object
                 lastBlockingObject = currentBlockingObject;
             }
         }
@@ -137,24 +125,5 @@ public class DynamicCameraAdjustment : MonoBehaviour
             currentTransform = currentTransform.parent;
         }
         return false;
-    }
-
-    void LogFramingTransposerSettings()
-    {
-        string logMessage = $"Initial Camera Distance: {initialCameraDistance}\n" +
-                            $"Dead Zone Height: {framingTransposer.m_DeadZoneHeight}, Dead Zone Width: {framingTransposer.m_DeadZoneWidth}\n" +
-                            $"Soft Zone Height: {framingTransposer.m_SoftZoneHeight}, Soft Zone Width: {framingTransposer.m_SoftZoneWidth}\n" +
-                            $"Bias X: {framingTransposer.m_BiasX}, Bias Y: {framingTransposer.m_BiasY}\n" +
-                            $"Minimum FOV: {framingTransposer.m_MinimumFOV}, Maximum FOV: {framingTransposer.m_MaximumFOV}\n" +
-                            $"XDamping: {framingTransposer.m_XDamping}, YDamping: {framingTransposer.m_YDamping}, ZDamping: {framingTransposer.m_ZDamping}\n" +
-                            $"Transform Position: {transform.position}\n" +
-                            $"Transform Rotation: {transform.rotation}\n";
-
-        if (cinemachineCollider != null)
-        {
-            logMessage += $"\nCinemachine Collider Minimum Distance: {cinemachineCollider.m_MinimumDistanceFromTarget}";
-        }
-
-        Debug.Log(logMessage);
     }
 }

@@ -95,14 +95,16 @@ namespace NeonLadder.Mechanics.Controllers
             base.Update();
         }
 
-        protected void OnDestroy()
+        protected new void OnDestroy()
         {
             UnsubscribeFromInputActions();
+            base.OnDestroy();
         }
 
-        protected void OnDisable()
+        protected new void OnDisable()
         {
             UnsubscribeFromInputActions();
+            base.OnDisable();
         }
 
         protected void OnEnable()
