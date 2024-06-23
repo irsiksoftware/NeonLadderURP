@@ -75,10 +75,6 @@ namespace NeonLadder.Mechanics.Controllers
             stamina = GetComponent<Stamina>();
             metaCurrency = GetComponent<Meta>();
             permaCurrency = GetComponent<Perma>();
-
-
-
-            //var x = model.VirtualCamera;
             CinemachineVirtualCamera cvc = model.VirtualCamera;
             if (cvc != null)
             {

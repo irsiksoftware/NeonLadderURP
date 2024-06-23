@@ -1,5 +1,4 @@
 using Assets.Scripts;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -58,6 +57,10 @@ namespace NeonLadder.Mechanics.Controllers
                 Debug.LogWarning("No controller or keyboard found.");
             }
         }
+
+        protected void OnDestroy() { }
+
+        protected void OnDisable() { }
 
         protected virtual void Update()
         {

@@ -52,6 +52,7 @@ namespace NeonLadder.Mechanics.Controllers
             player = GetComponentInParent<Player>();
             playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerAndCameraPositionManager>();
             ConfigureControls(player);
+            ControllerDebugging.PrintDebugControlConfiguration(player);
             initialAttackDuration = attackDuration; // Initialize the initial attack duration
                                                     // Cache the weapon groups here if not assigned via Inspector
             if (meleeWeaponGroups == null || meleeWeaponGroups.Count == 0)
@@ -71,7 +72,6 @@ namespace NeonLadder.Mechanics.Controllers
                 UpdateSprintState(ref player.velocity);
 
                 UpdateAttackState();
-
             }
 
             if (AnimationDebuggingText != null)
@@ -93,6 +93,75 @@ namespace NeonLadder.Mechanics.Controllers
             }
 
             base.Update();
+        }
+
+        protected void OnDestroy()
+        {
+            UnsubscribeFromInputActions();
+        }
+
+        protected void OnDisable()
+        {
+            UnsubscribeFromInputActions();
+        }
+
+        protected void OnEnable()
+        {
+            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerAndCameraPositionManager>();
+            if (playerPositionManager == null)
+            {
+                Debug.LogError("PlayerPositionManager not found in the scene.");
+            }
+
+            if (playerActionMap == null)
+            {
+                ConfigureControls(player);
+            }
+        }
+
+        private void UnsubscribeFromInputActions()
+        {
+            if (playerActionMap != null)
+            {
+                var sprintAction = playerActionMap.FindAction("Sprint");
+                if (sprintAction != null)
+                {
+                    sprintAction.performed -= OnSprintPerformed;
+                    sprintAction.canceled -= OnSprintCanceled;
+                }
+
+                var moveAction = playerActionMap.FindAction("Move");
+                if (moveAction != null)
+                {
+                    moveAction.performed -= OnMovePerformed;
+                    moveAction.canceled -= OnMoveCanceled;
+                }
+
+                var attack = playerActionMap.FindAction("Attack");
+                if (attack != null)
+                {
+                    attack.performed -= OnAttackPerformed;
+                    attack.canceled -= OnAttackCanceled;
+                }
+
+                var weaponSwapAction = playerActionMap.FindAction("WeaponSwap");
+                if (weaponSwapAction != null)
+                {
+                    weaponSwapAction.performed -= OnWeaponSwap;
+                }
+
+                var jumpAction = playerActionMap.FindAction("Jump");
+                if (jumpAction != null)
+                {
+                    jumpAction.performed -= OnJumpPerformed;
+                }
+
+                var upAction = playerActionMap.FindAction("Up");
+                if (upAction != null)
+                {
+                    upAction.performed -= OnUpPerformed;
+                }
+            }
         }
 
         protected override void ConfigureControls(Player player)
@@ -118,7 +187,6 @@ namespace NeonLadder.Mechanics.Controllers
             var jumpAction = playerActionMap.FindAction("Jump");
             jumpAction.performed += OnJumpPerformed;
 
-
             var upAction = playerActionMap.FindAction("Up");
             upAction.performed += OnUpPerformed;
 
@@ -131,8 +199,8 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (isInZMovementZone)
             {
-                playerPositionManager.SaveState(SceneManager.GetActiveScene().name, player.transform.position, 
-                    Game.Instance.model.VirtualCamera.gameObject.transform.position, 
+                playerPositionManager.SaveState(SceneManager.GetActiveScene().name, player.transform.position,
+                    Game.Instance.model.VirtualCamera.gameObject.transform.position,
                     Game.Instance.model.VirtualCamera.gameObject.transform.rotation);
                 player.EnableZMovement();
             }
@@ -226,7 +294,6 @@ namespace NeonLadder.Mechanics.Controllers
                             sprintTimeAccumulator -= 0.1f; // Subtract 0.1 seconds from the accumulator
                         }
 
-                        //velocity.x = player.move.x * (Constants.SprintSpeedMultiplier * Constants.DefaultMaxSpeed);
                         sprintDuration -= Time.deltaTime;
                     }
                     break;
@@ -260,12 +327,10 @@ namespace NeonLadder.Mechanics.Controllers
                     else
                     {
                         attackState = ActionStates.Ready;
-
                     }
                     break;
 
                 case ActionStates.Acted:
-
                     break;
             }
         }
@@ -328,6 +393,5 @@ namespace NeonLadder.Mechanics.Controllers
                 }
             }
         }
-
     }
 }
