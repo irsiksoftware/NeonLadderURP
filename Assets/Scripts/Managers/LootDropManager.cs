@@ -7,22 +7,7 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class LootDropManager : MonoBehaviour
     {
-        public static LootDropManager Instance { get; private set; }
-
-        private void Awake()
-        {
-            //if (Instance == null)
-            //{
-                Instance = this;
-                //DontDestroyOnLoad(gameObject);
-            //}
-            //else
-            //{
-            //    Destroy(gameObject);
-            //}
-        }
-
-        public static void DropLoot(Player target, Enemy enemy)
+        public void DropLoot(Player target, Enemy enemy)
         {
             if (enemy.RuntimeLootTable == null)
                 return;
@@ -38,7 +23,7 @@ namespace NeonLadder.Mechanics.Controllers
 
                     if (ShouldDropItem(lootItem, target))
                     {
-                        Instance.StartCoroutine(Instance.DelayedDropItem(lootItem, enemy.transform, enemy.DeathAnimationDuration));
+                        StartCoroutine(DelayedDropItem(lootItem, enemy.transform, enemy.DeathAnimationDuration));
                         itemsToDrop--;
                     }
                 }
@@ -73,7 +58,6 @@ namespace NeonLadder.Mechanics.Controllers
             int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
             lootItem.collectiblePrefab.amount = amountToDrop;
             Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
-            //Debug.Log($"Dropped {amountToDrop} items: {lootItem.collectiblePrefab.name}");
         }
 
         private static Vector3 StandardizedLootDropTransformations(Collectible prefab)

@@ -11,7 +11,7 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             enemy.GetComponentInParent<Rigidbody>().useGravity = true;
-            LootDropManager.DropLoot(model.Player, enemy);
+            Game.Instance.GetComponentInChildren<LootDropManager>().DropLoot(model.Player, enemy);
         }
     }
 }

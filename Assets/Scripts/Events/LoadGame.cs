@@ -21,7 +21,6 @@ namespace NeonLadder.Events
                 model.Player.PermaCurrency.current = playerData.PermaCurrency;
                 model.Player.Unlocks.Set(playerData.Unlocks);
                 ApplyPlayerSettings(playerData.Settings);
-
                 Debug.Log("Player data loaded.");
             }
             else
