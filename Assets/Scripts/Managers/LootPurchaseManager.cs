@@ -11,12 +11,12 @@ namespace NeonLadder.Managers
         protected Player player;
 
         private const int metaItemCost = 10; // Leave this static for now.
+        private const int permaItemCost = 10; // Leave this static for now.
 
         void Start()
         {
             model = Simulation.GetModel<PlatformerModel>();
             player = model.Player;
-
         }
 
         public void PurchaseMetaItem(string itemName)
@@ -36,6 +36,32 @@ namespace NeonLadder.Managers
                         break;
                     case "Stamina Potion":
                         player.stamina.Increment(10);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log("Not enough meta currency to purchase item.");
+            }
+        }
+
+
+        public void PurchasePermaItem(string itemName)
+        {
+            if (player == null)
+            {
+                Debug.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchasePermaItem)} -> Player reference magically disappeared.");
+            }
+
+            if (player.permaCurrency.current >= permaItemCost)
+            {
+                player.permaCurrency.Decrement(permaItemCost);
+                switch (itemName)
+                {
+                    case "Extra Jump":
+                        player.playerActions.IncrementAvailableMidAirJumps();
                         break;
                     default:
                         break;

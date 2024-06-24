@@ -14,9 +14,14 @@ namespace NeonLadder.Utilities
             lootPurchaseManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<LootPurchaseManager>();
         }
 
-        public void OnButtonClick()
+        public void OnMetaItemButtonClick()
         {
             lootPurchaseManager.PurchaseMetaItem(GetComponentInChildren<TextMeshProUGUI>().text);
+        }
+
+        public void OnPermaItemButtonClick()
+        {
+            lootPurchaseManager.PurchasePermaItem(GetComponentInChildren<TextMeshProUGUI>().text);
         }
     }
 }

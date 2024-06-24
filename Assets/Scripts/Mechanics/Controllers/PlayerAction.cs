@@ -17,10 +17,19 @@ namespace NeonLadder.Mechanics.Controllers
         private float sprintTimeAccumulator = 0f;
         public bool isClimbing { get; set; }
         public bool isUsingMelee = true;
+
+        #region Jumping
         public bool isJumping { get; set; }
+        public float jumpForce = 7f;
+        private int jumpCount = 0;
+        public int JumpCount => jumpCount;
+        private int maxJumps = 1;
+        public int MaxJumps => maxJumps;
+        #endregion
+
         public InputActionMap playerActionMap;
 
-        #region Sprinting
+        #region Sprinting  
         [SerializeField]
         public float sprintSpeed = Constants.DefaultMaxSpeed * Constants.SprintSpeedMultiplier;
         [SerializeField]
@@ -215,7 +224,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
-            if (player.IsGrounded)
+            if (player.IsGrounded || jumpCount < maxJumps)
             {
                 isJumping = true;
             }
@@ -394,6 +403,21 @@ namespace NeonLadder.Mechanics.Controllers
                     }
                 }
             }
+        }
+
+        public void IncrementAvailableMidAirJumps()
+        {
+            maxJumps++;
+        }
+
+        public void IncrementJumpCount()
+        {
+            jumpCount++;
+        }
+
+        public void ResetJumpCount()
+        {
+            jumpCount = 0;
         }
     }
 }
