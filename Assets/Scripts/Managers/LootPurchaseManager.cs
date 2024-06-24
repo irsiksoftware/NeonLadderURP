@@ -48,8 +48,9 @@ namespace NeonLadder.Managers
         }
 
 
-        public void PurchasePermaItem(string itemName)
+        public bool PurchasePermaItem(string itemName)
         {
+            bool result = false;
             if (player == null)
             {
                 Debug.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchasePermaItem)} -> Player reference magically disappeared.");
@@ -57,6 +58,7 @@ namespace NeonLadder.Managers
 
             if (player.permaCurrency.current >= permaItemCost)
             {
+                result = true;
                 player.permaCurrency.Decrement(permaItemCost);
                 switch (itemName)
                 {
@@ -71,6 +73,7 @@ namespace NeonLadder.Managers
             {
                 Debug.Log("Not enough meta currency to purchase item.");
             }
+            return result;
         }
     }
 }

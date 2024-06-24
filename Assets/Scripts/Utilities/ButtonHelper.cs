@@ -21,7 +21,11 @@ namespace NeonLadder.Utilities
 
         public void OnPermaItemButtonClick()
         {
-            lootPurchaseManager.PurchasePermaItem(GetComponentInChildren<TextMeshProUGUI>().text);
+            var success = lootPurchaseManager.PurchasePermaItem(GetComponentInChildren<TextMeshProUGUI>().text);
+            if (success)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
