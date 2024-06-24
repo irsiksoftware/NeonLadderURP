@@ -26,16 +26,16 @@ namespace NeonLadder.Managers
                 Debug.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchaseMetaItem)} -> Player reference magically disappeared.");
             }
 
-            if (player.metaCurrency.current >= metaItemCost)
+            if (player.MetaCurrency.current >= metaItemCost)
             {
-                player.metaCurrency.Decrement(metaItemCost);
+                player.MetaCurrency.Decrement(metaItemCost);
                 switch (itemName)
                 {
                     case "Health Potion":
-                        player.health.Increment(10);
+                        player.Health.Increment(10);
                         break;
                     case "Stamina Potion":
-                        player.stamina.Increment(10);
+                        player.Stamina.Increment(10);
                         break;
                     default:
                         break;
@@ -56,14 +56,14 @@ namespace NeonLadder.Managers
                 Debug.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchasePermaItem)} -> Player reference magically disappeared.");
             }
 
-            if (player.permaCurrency.current >= permaItemCost)
+            if (player.PermaCurrency.current >= permaItemCost)
             {
                 result = true;
-                player.permaCurrency.Decrement(permaItemCost);
+                player.PermaCurrency.Decrement(permaItemCost);
                 switch (itemName)
                 {
                     case "Extra Jump":
-                        player.playerActions.IncrementAvailableMidAirJumps();
+                        player.Actions.IncrementAvailableMidAirJumps();
                         break;
                     default:
                         break;

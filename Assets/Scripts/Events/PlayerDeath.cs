@@ -15,7 +15,7 @@ namespace NeonLadder.Events
             model.Player.controlEnabled = false;
             model.Player.animator.SetInteger("locomotion_animation", 5);
             model.Player.StartCoroutine(HandleDeathAnimation(model.Player));
-            model.Player.playerActions.playerActionMap.Disable();
+            model.Player.Actions.playerActionMap.Disable();
         }
 
         private IEnumerator HandleDeathAnimation(Player player)

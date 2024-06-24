@@ -58,7 +58,7 @@ namespace NeonLadder.Events
 
                 if (willHurtPlayer)
                 {
-                    player.health.Decrement();
+                    player.Health.Decrement();
                     //player.playerActions.knockback = true;
                 }
             }

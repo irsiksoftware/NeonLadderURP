@@ -1,6 +1,7 @@
 using NeonLadder.Core;
 using NeonLadder.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NeonLadder.Mechanics.Controllers
 {
@@ -56,12 +57,15 @@ namespace NeonLadder.Mechanics.Controllers
             if (rigidbody != null)
             {
                 rigidbody.isKinematic = true;
-            }   
+            }
         }
 
         protected virtual void OnDisable()
         {
-            rigidbody.isKinematic = false;
+            if (rigidbody != null && SceneManager.GetActiveScene().name == "Banner")
+            {
+                rigidbody.isKinematic = false;
+            }
         }
 
         protected virtual void Start()

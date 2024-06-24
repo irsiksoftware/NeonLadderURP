@@ -24,11 +24,12 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip jumpAudio;
         public AudioClip landOnGroundAudio;
         public AudioClip landOnEnemyAudio;
-        public PlayerAction playerActions { get; private set; }
-        public Health health { get; private set; }
-        public Stamina stamina { get; private set; }
-        public Meta metaCurrency { get; private set; }
-        public Perma permaCurrency { get; private set; }
+        public PlayerAction Actions { get; private set; }
+        public PlayerUnlock Unlocks { get; private set; }
+        public Health Health { get; private set; }
+        public Stamina Stamina { get; private set; }
+        public Meta MetaCurrency { get; private set; }
+        public Perma PermaCurrency { get; private set; }
         [SerializeField]
         public bool controlEnabled;
         [SerializeField]
@@ -68,14 +69,15 @@ namespace NeonLadder.Mechanics.Controllers
         protected override void Awake()
         {
             base.Awake();
-            playerActions = GetComponentInChildren<PlayerAction>();
+            Actions = GetComponentInChildren<PlayerAction>();
+            Unlocks = GetComponentInChildren<PlayerUnlock>();
             audioSource = GetComponent<AudioSource>();
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody>();
-            health = GetComponent<Health>();
-            stamina = GetComponent<Stamina>();
-            metaCurrency = GetComponent<Meta>();
-            permaCurrency = GetComponent<Perma>();
+            Health = GetComponent<Health>();
+            Stamina = GetComponent<Stamina>();
+            MetaCurrency = GetComponent<Meta>();
+            PermaCurrency = GetComponent<Perma>();
             CinemachineVirtualCamera cvc = model.VirtualCamera;
             if (cvc != null)
             {
@@ -93,14 +95,13 @@ namespace NeonLadder.Mechanics.Controllers
             base.FixedUpdate();
             if (IsGrounded)
             {
-                playerActions.ResetJumpCount();
+                Actions.ResetJumpCount();
             }
         }
 
-
         protected override void Update()
         {
-            if (health.IsAlive)
+            if (Health.IsAlive)
             {
                 HandleAnimations();
                 RegenerateStamina();
@@ -185,14 +186,14 @@ namespace NeonLadder.Mechanics.Controllers
             staminaRegenTimer += Time.deltaTime;
             if (staminaRegenTimer >= 0.1f) // Check if 1/10th of a second has passed
             {
-                stamina.Increment(0.1f); // Increment stamina by 1/10th of a unit
+                Stamina.Increment(0.1f); // Increment stamina by 1/10th of a unit
                 staminaRegenTimer -= 0.1f; // Decrease the timer by 0.1f instead of resetting to 0
             }
         }
 
         protected override void ComputeVelocity()
         {
-            if (!health.IsAlive)
+            if (!Health.IsAlive)
             {
                 targetVelocity = Vector3.zero;
             }
@@ -202,14 +203,14 @@ namespace NeonLadder.Mechanics.Controllers
             }
             else
             {
-                targetVelocity.x = playerActions.playerInput.x * Constants.DefaultMaxSpeed * ((playerActions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
+                targetVelocity.x = Actions.playerInput.x * Constants.DefaultMaxSpeed * ((Actions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
 
                 // Handle jumping
-                if (playerActions.isJumping && playerActions.JumpCount < playerActions.MaxJumps)
+                if (Actions.isJumping && Actions.JumpCount < Actions.MaxJumps)
                 {
-                    velocity.y = playerActions.jumpForce;
-                    playerActions.IncrementJumpCount();
-                    playerActions.isJumping = false;
+                    velocity.y = Actions.jumpForce;
+                    Actions.IncrementJumpCount();
+                    Actions.isJumping = false;
                     if (audioSource != null && jumpAudio != null)
                     {
                         audioSource.PlayOneShot(jumpAudio);
@@ -267,9 +268,9 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void HandleAction()
         {
-            if (playerActions.attackState == ActionStates.Acting)
+            if (Actions.attackState == ActionStates.Acting)
             {
-                if (playerActions.isUsingMelee)
+                if (Actions.isUsingMelee)
                 {
                     animator.SetInteger("action_animation", 23); // sword attack
                     animator.SetLayerWeight(actionLayerIndex, 1); // Activate action layer
@@ -289,27 +290,27 @@ namespace NeonLadder.Mechanics.Controllers
 
         internal void AddMetaCurrency(int amount)
         {
-            metaCurrency.Increment(amount);
+            MetaCurrency.Increment(amount);
         }
 
         internal void AddPermanentCurrency(int amount)
         {
-            permaCurrency.Increment(amount);
+            PermaCurrency.Increment(amount);
         }
 
         private void UpdateHealthBar()
         {
-            if (healthBar != null && health != null)
+            if (healthBar != null && Health != null)
             {
-                healthBar.currentPercent = (health.current / health.max) * 100f;
+                healthBar.currentPercent = (Health.current / Health.max) * 100f;
             }
         }
 
         private void UpdateStaminaBar()
         {
-            if (staminaBar != null && stamina != null)
+            if (staminaBar != null && Stamina != null)
             {
-                staminaBar.currentPercent = (stamina.current / stamina.max) * 100f;
+                staminaBar.currentPercent = (Stamina.current / Stamina.max) * 100f;
             }
         }
     }

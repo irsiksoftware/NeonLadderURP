@@ -44,5 +44,17 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (Instance == this) Simulation.Tick();
         }
+
+        // Method to enable all first-level children except those with the tag "PauseMenu" which are used throughout the game.
+        public void EnableAllFirstLevelChildren()
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.tag != "PauseMenu")
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+        }
     }
 }

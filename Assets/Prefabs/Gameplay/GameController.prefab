@@ -246,6 +246,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4009130065698333721, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
+        type: 3}
+      propertyPath: m_TagString
+      value: PauseMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 4009130065698333724, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
         type: 3}
       propertyPath: menuUI
@@ -779,27 +784,27 @@ PrefabInstance:
     - target: {fileID: 2108671976740469805, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2108671976740469805, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2108671976740469805, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2108671976740469805, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 210
+      value: 233
       objectReference: {fileID: 0}
     - target: {fileID: 2108671976740469805, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -84
+      value: -108
       objectReference: {fileID: 0}
     - target: {fileID: 2213487253709793090, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
@@ -1009,12 +1014,12 @@ PrefabInstance:
     - target: {fileID: 4367483529187964536, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 184
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 4367483529187964536, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -84
+      value: -113
       objectReference: {fileID: 0}
     - target: {fileID: 4798643860162742239, guid: d08126847cf001a4d97b0aa3b2599551,
         type: 3}

@@ -1,18 +1,10 @@
-using TMPro;
-
-public class MetaCurrencyController : BaseCurrencyController
+namespace NeonLadder.Mechanics.Controllers
 {
-    TextMeshProUGUI tmp;
-    // Start is called before the first frame update
-    protected override void Awake()
+    public class MetaCurrencyController : BaseCurrencyController
     {
-        base.Awake();
-        tmp = GetComponentInChildren<TextMeshProUGUI>();
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        tmp.text = player.metaCurrency.current.ToString();
+        protected override void Update()
+        {
+            currencyTextMeshPro.text = player.MetaCurrency.current.ToString();
+        }
     }
 }

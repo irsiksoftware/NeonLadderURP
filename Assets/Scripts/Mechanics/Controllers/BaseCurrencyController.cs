@@ -1,21 +1,25 @@
 using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Models;
+using TMPro;
 using UnityEngine;
 
-public class BaseCurrencyController : MonoBehaviour
+namespace NeonLadder.Mechanics.Controllers
 {
-    protected Player player;
-    public PlatformerModel model;
-    protected virtual void Awake()
+    public class BaseCurrencyController : MonoBehaviour
     {
-        model = Simulation.GetModel<PlatformerModel>();
-        player = model.Player;
-    }
+        protected Player player;
+        protected PlatformerModel model;
+        protected TextMeshProUGUI currencyTextMeshPro;
+        protected virtual void Awake()
+        {
+            model = Simulation.GetModel<PlatformerModel>();
+            player = model.Player;
+            currencyTextMeshPro = GetComponentInChildren<TextMeshProUGUI>();
+        }
+        protected virtual void Update()
+        {
 
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        //player = model.Player;
+        }
     }
 }

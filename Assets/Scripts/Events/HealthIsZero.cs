@@ -13,6 +13,7 @@ namespace NeonLadder.Events
     public class HealthIsZero : BaseGameEvent<HealthIsZero>
     {
         public Health health;
+        public Transform spawnPoint;
 
         public override void Execute()
         {
@@ -20,9 +21,11 @@ namespace NeonLadder.Events
             switch (health.gameObject.tag)
             {
                 case "Player":
+                    Schedule<SaveGame>();
                     Schedule<PlayerDeath>();
                     //Schedule<FadeOutCamera>();
                     Schedule<RestartScene>(7); // Delay to allow fade out and death animation
+                    Schedule<PlayerSpawn>();
                     break;
                 case "Boss":
                 case "Major":

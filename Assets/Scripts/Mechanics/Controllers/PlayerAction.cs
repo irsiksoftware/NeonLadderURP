@@ -28,6 +28,7 @@ namespace NeonLadder.Mechanics.Controllers
         #endregion
 
         public InputActionMap playerActionMap;
+        public InputActionMap uiActionMap;
 
         #region Sprinting  
         [SerializeField]
@@ -261,7 +262,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnAttackPerformed(InputAction.CallbackContext context)
         {
-            if (!player.stamina.IsExhausted)
+            if (!player.Stamina.IsExhausted)
             {
                 if (attackState == ActionStates.Ready)
                 {
@@ -301,7 +302,7 @@ namespace NeonLadder.Mechanics.Controllers
                         sprintTimeAccumulator += Time.deltaTime;
                         if (sprintTimeAccumulator >= 0.1f)
                         {
-                            player.stamina.Decrement(staminaCostPerTenthSecond); // Decrement stamina
+                            player.Stamina.Decrement(staminaCostPerTenthSecond); // Decrement stamina
                             sprintTimeAccumulator -= 0.1f; // Subtract 0.1 seconds from the accumulator
                         }
 
@@ -348,7 +349,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
-            if (!player.stamina.IsExhausted)
+            if (!player.Stamina.IsExhausted)
             {
                 if (sprintState == ActionStates.Ready)
                 {

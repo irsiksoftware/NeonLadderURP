@@ -57,7 +57,7 @@ namespace NeonLadder.Mechanics.Controllers
                 return true;
 
             bool passesDropChance = Random.Range(0f, 100f) <= lootItem.dropProbability;
-            bool belowHealthThreshold = target.health.current / target.health.max <= lootItem.healthThreshold;
+            bool belowHealthThreshold = target.Health.current / target.Health.max <= lootItem.healthThreshold;
 
             return passesDropChance && belowHealthThreshold;
         }

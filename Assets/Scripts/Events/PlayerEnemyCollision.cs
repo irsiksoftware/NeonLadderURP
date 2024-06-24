@@ -11,7 +11,6 @@ namespace NeonLadder.Events
         public Enemy enemy;
         public Player player;
 
-
         public override void Execute()
         {
             //get enemys capsulecollider2d
@@ -45,7 +44,7 @@ namespace NeonLadder.Events
                 
                 if (willHurtPlayer)
                 {
-                    player.health.Decrement();
+                    player.Health.Decrement();
                     //player.playerActions.knockback = true;
                 }
             }

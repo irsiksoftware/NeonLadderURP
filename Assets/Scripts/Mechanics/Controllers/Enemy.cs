@@ -149,7 +149,7 @@ namespace NeonLadder.Mechanics.Controllers
             if (health.IsAlive)
             {
                 Orient();
-                if (player.health.IsAlive)
+                if (player.Health.IsAlive)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
                     switch (currentState)
@@ -238,7 +238,7 @@ namespace NeonLadder.Mechanics.Controllers
         private void AttackPlayer()
         {
             lastAttackTime = Time.time;
-            player.health.Decrement(attackDamage);
+            player.Health.Decrement(attackDamage);
             animator.SetInteger("animation", attackAnimation);
             currentState = MonsterStates.Reassessing;
         }
