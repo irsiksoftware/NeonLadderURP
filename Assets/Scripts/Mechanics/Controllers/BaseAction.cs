@@ -1,4 +1,4 @@
-using Assets.Scripts;
+using NeonLadder.Common;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;

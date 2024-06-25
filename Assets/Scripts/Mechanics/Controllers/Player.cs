@@ -1,4 +1,4 @@
-using Assets.Scripts;
+using NeonLadder.Common;
 using Cinemachine;
 using Michsky.MUIP;
 using NeonLadder.Mechanics.Currency;
@@ -37,11 +37,9 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         public float staminaRegenTimer = 0f;
 
+        public float DeathAnimationDuration => 3.333f;
 
         public Animator animator { get; private set; }
-
-        public int locomotionLayerIndex = 0; // Index for the locomotion layer
-        public int actionLayerIndex = 1; // Index for the action layer
 
         // Variables to store default CVC properties
         private Vector3 defaultTrackedObjectOffset;
@@ -273,18 +271,18 @@ namespace NeonLadder.Mechanics.Controllers
                 if (Actions.isUsingMelee)
                 {
                     animator.SetInteger("action_animation", 23); // sword attack
-                    animator.SetLayerWeight(actionLayerIndex, 1); // Activate action layer
+                    animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
                 }
                 else
                 {
                     animator.SetInteger("action_animation", 75); // shoot guns
-                    animator.SetLayerWeight(actionLayerIndex, 1); // Activate action layer
+                    animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
                 }
             }
             else
             {
                 animator.SetInteger("action_animation", 0); // no action
-                animator.SetLayerWeight(actionLayerIndex, 0); // Deactivate action layer
+                animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
             }
         }
 

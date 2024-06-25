@@ -1,4 +1,4 @@
-using Assets.Scripts;
+using NeonLadder.Common;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;

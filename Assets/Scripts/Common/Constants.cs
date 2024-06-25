@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Assets.Scripts
+namespace NeonLadder.Common
 {
     [Serializable]
     public static class Constants
@@ -58,12 +58,15 @@ namespace Assets.Scripts
         public const float DefaultJumpModifier = 1.5f;
         public const float DefaultDeceleration = 0.5f;
         public const float DefaultCharacterScale = 1f;
-        public const int DefaultMaxHealth = 3;
+        public const int DefaultMaxHealth = 100;
         public const int DefaultMaxStamina = 100;
         public const float DefaultKnockbackDuration = 0.25f; // Duration of the knockback effect
         public const float DefaultKnockbackSpeed = 2f;
         public const float DefaultKnockMultiplier = 1f;
-        
+
+        public const int PlayerLocomotionLayerIndex = 0; // Index for the locomotion layer
+        public const int PlayerActionLayerIndex = 1; // Index for the action layer
+
 
         public static float JumpTakeOffSpeed { get; set; } = DefaultJumpTakeOffSpeed;
         public static float JumpModifier { get; set; } = DefaultJumpModifier;

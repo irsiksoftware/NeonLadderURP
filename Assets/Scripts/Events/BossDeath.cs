@@ -1,4 +1,4 @@
-using Assets.Scripts;
+using NeonLadder.Common;
 using NeonLadder.Mechanics.Controllers;
 using UnityEngine;
 

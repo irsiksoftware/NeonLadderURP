@@ -1,4 +1,4 @@
-using Assets.Scripts;
+using NeonLadder.Common;
 using NeonLadder.Mechanics.Collectibles;
 using NeonLadder.Mechanics.Enums;
 using UnityEngine;

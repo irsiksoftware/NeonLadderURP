@@ -1,6 +1,4 @@
-using Assets.Scripts;
-using UnityEngine;
-
+using NeonLadder.Common;
 
 namespace NeonLadder.Events
 {
@@ -11,19 +9,17 @@ namespace NeonLadder.Events
     {
         public override void Execute()
         {
-            var player = model.Player;
-            player.GetComponent<Collider>().enabled = true;
-            player.controlEnabled = false;
-            if (player.audioSource && player.respawnAudio)
-                player.audioSource.PlayOneShot(player.respawnAudio);
-            player.Health.Increment(Constants.MaxHealth);
-            player.Stamina.Increment(Constants.MaxStamina);
-            //player.Teleport(player.transform.position);
-            //player.playerActions.jumpState = ActionStates.Ready;
-            player.animator.SetInteger("locomotion_animation", 0);
-            model.VirtualCamera.m_Follow = player.transform;
-            model.VirtualCamera.m_LookAt = player.transform;
-            player.controlEnabled = true;
+            if (model.Player.audioSource && model.Player.respawnAudio)
+            {
+                model.Player.audioSource.PlayOneShot(model.Player.respawnAudio);
+            }
+
+            model.Player.Health.Increment(model.Player.Health.max);
+            model.Player.Stamina.Increment(model.Player.Stamina.max);
+            model.Player.animator.enabled = true;
+            model.Player.animator.SetInteger("locomotion_animation", 777);
+            model.Player.Actions.playerActionMap.Enable();
+            model.Player.controlEnabled = true;
         }
     }
 }

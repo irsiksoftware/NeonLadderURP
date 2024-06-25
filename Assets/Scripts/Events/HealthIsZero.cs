@@ -24,8 +24,8 @@ namespace NeonLadder.Events
                     Schedule<SaveGame>();
                     Schedule<PlayerDeath>();
                     //Schedule<FadeOutCamera>();
-                    Schedule<RestartScene>(7); // Delay to allow fade out and death animation
-                    Schedule<PlayerSpawn>();
+                    //Schedule<RestartScene>(7); // Delay to allow fade out and death animation
+                    //Schedule<PlayerSpawn>();
                     break;
                 case "Boss":
                 case "Major":

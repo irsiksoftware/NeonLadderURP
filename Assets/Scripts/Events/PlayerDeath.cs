@@ -1,6 +1,7 @@
-﻿using NeonLadder.Mechanics.Controllers;
+﻿using NeonLadder.Common;
 using System.Collections;
 using UnityEngine;
+using static NeonLadder.Core.Simulation;
 
 namespace NeonLadder.Events
 {
@@ -9,19 +10,21 @@ namespace NeonLadder.Events
     /// </summary>
     public class PlayerDeath : BaseGameEvent<PlayerDeath>
     {
-        float DeathAnimationDuration = 2.5f;
         public override void Execute()
         {
             model.Player.controlEnabled = false;
+            model.Player.animator.SetInteger("action_animation", 0);
+            model.Player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
             model.Player.animator.SetInteger("locomotion_animation", 5);
-            model.Player.StartCoroutine(HandleDeathAnimation(model.Player));
+            model.Player.StartCoroutine(HandleDeathAnimation());
             model.Player.Actions.playerActionMap.Disable();
         }
 
-        private IEnumerator HandleDeathAnimation(Player player)
+        private IEnumerator HandleDeathAnimation()
         {
-            yield return new WaitForSeconds(DeathAnimationDuration);
-            player.animator.enabled = false;
+            yield return new WaitForSecondsRealtime(model.Player.DeathAnimationDuration);
+            model.Player.animator.enabled = false;
+            Schedule<PlayerSpawn>();
         }
     }
 }
