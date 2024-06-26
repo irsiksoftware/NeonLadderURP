@@ -7,8 +7,8 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class KinematicObject : MonoBehaviour
     {
-        public Player player;
-        public PlatformerModel model;
+        public Player player { get; set; }
+        public PlatformerModel model { get; private set; }
         public float minGroundNormalY = .65f;
         public float gravityModifier = 1f;
         public Vector3 velocity;
@@ -62,16 +62,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void OnDisable()
         {
-            if (rigidbody != null && SceneManager.GetActiveScene().name == "Banner")
-            {
-                rigidbody.isKinematic = false;
-            }
+
         }
 
         protected virtual void Start()
         {
-            //model = Simulation.GetModel<PlatformerModel>();
-            //player = model.Player;
+
         }
 
         protected virtual void Awake()

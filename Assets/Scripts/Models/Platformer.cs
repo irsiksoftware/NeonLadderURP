@@ -2,6 +2,7 @@ using Cinemachine;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NeonLadder.Models
 {
@@ -12,7 +13,14 @@ namespace NeonLadder.Models
         private CinemachineVirtualCamera virtualCamera;
         public CinemachineVirtualCamera VirtualCamera
         {
-            get => virtualCamera ?? (virtualCamera = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<CinemachineVirtualCamera>());
+            get
+            {
+                if (SceneManager.GetActiveScene().name != Scenes.Title.ToString())
+                {
+                    return virtualCamera ?? (virtualCamera = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<CinemachineVirtualCamera>());
+                }
+                return null;
+            }
             set => virtualCamera = value;
         }
 
@@ -20,7 +28,7 @@ namespace NeonLadder.Models
         private Player player;
         public Player Player
         {
-            get => player ?? (player = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<Player>());
+            get => player ?? (player = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).GetComponent<Player>());
             set => player = value;
         }
 

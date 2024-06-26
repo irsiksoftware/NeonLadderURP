@@ -5300,14 +5300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03018d13bad052c41aa28b57fac7653b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  model:
-    virtualCamera: {fileID: 0}
-    player: {fileID: 0}
-    spawnPoint: {fileID: 0}
-    jumpModifier: 1.5
-    jumpDeceleration: 0.5
-    timeScaleMultiplier: 1
   minGroundNormalY: 0.65
   gravityModifier: 1
   velocity: {x: 0, y: 0, z: 0}
@@ -5326,8 +5318,6 @@ MonoBehaviour:
   controls: {fileID: -944628639613478452, guid: e175689d4ebccc649a1eac37c7607673,
     type: 3}
   staminaRegenTimer: 0
-  locomotionLayerIndex: 0
-  actionLayerIndex: 1
 --- !u!114 &1569883268119596321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9287,6 +9277,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4721412442788016091, guid: dd358eca7256920488c100301afbd72e,
         type: 3}
+      propertyPath: uiActionMap.m_Id
+      value: 2e79cfdd-5680-4a1f-ac27-c4fbbce6240a
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721412442788016091, guid: dd358eca7256920488c100301afbd72e,
+        type: 3}
+      propertyPath: uiActionMap.m_Name
+      value: Ui
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721412442788016091, guid: dd358eca7256920488c100301afbd72e,
+        type: 3}
       propertyPath: playerActionMap.m_Id
       value: 090154a7-cc73-499a-959e-feede1709ac0
       objectReference: {fileID: 0}
@@ -9298,6 +9298,11 @@ PrefabInstance:
     - target: {fileID: 8383141186732845002, guid: dd358eca7256920488c100301afbd72e,
         type: 3}
       propertyPath: m_Name
+      value: PlayerScripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 8383141186732845002, guid: dd358eca7256920488c100301afbd72e,
+        type: 3}
+      propertyPath: m_TagString
       value: PlayerScripts
       objectReference: {fileID: 0}
     m_RemovedComponents: []
