@@ -9,7 +9,7 @@ namespace NeonLadder.Managers
     {
         public List<MonsterGroup> MonsterGroups { get; set; } = new List<MonsterGroup>();
         // Start is called before the first frame update
-        void Start()
+        void OnEnable()
         {
             var monsterGroups = GameObject.FindGameObjectsWithTag("MonsterGroup");
             foreach (var monsterGroup in monsterGroups)
@@ -40,7 +40,16 @@ namespace NeonLadder.Managers
                     }
                 }
             }
+        }
 
+        void Awake()
+        {
+            enabled = false;
+        }
+
+        private void OnDisable()
+        {
+            MonsterGroups.Clear();
         }
 
         // Update is called once per frame

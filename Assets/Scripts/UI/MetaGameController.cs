@@ -36,6 +36,7 @@ namespace NeonLadder.UI
             // Find the Player and UI action maps
             playerActionMap = inputActions.FindActionMap("Player");
             uiActionMap = inputActions.FindActionMap("UI");
+            gamePlayCanvasii[0] = GetComponentInChildren<StatUI>().gameObject.GetComponent<Canvas>();
         }
 
         void OnEnable()

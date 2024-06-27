@@ -1,29 +1,25 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class EnemyDefeatedManager : InteractableEntitiesManager
+public class EnemyDefeatedManager : MonoBehaviour
 {
-    public static EnemyDefeatedManager Instance { get; private set; }
-
     public TextMeshProUGUI enemyDefeatedCounterText;
     private int defeatedEnemiesCount = 0;
 
-    new void Awake()
+   
+
+    private void Start()
     {
-        // If there is an instance, and it's not me, destroy myself.
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        enabled = false;
     }
 
-    public override void InteractWithEntity(GameObject entity)
+    void Awake()
     {
-        base.InteractWithEntity(entity);
+
+    }
+
+    public void InteractWithEntity(GameObject entity)
+    {
         defeatedEnemiesCount++;
         UpdateEnemyDefeatedUI();
     }

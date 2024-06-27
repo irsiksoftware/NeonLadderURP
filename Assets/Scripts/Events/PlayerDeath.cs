@@ -25,7 +25,10 @@ namespace NeonLadder.Events
         private IEnumerator HandleDeathAnimation()
         {
             yield return new WaitForSecondsRealtime(model.Player.DeathAnimationDuration);
-            SceneManager.LoadScene(Scenes.Title.ToString());
+
+            Schedule<PlayerSpawn>();
+            SceneManager.LoadScene(Scenes.Staging.ToString());
+           
         }
     }
 }

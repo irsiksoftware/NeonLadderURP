@@ -19,6 +19,12 @@ namespace NeonLadder.Managers
             player = model.Player;
         }
 
+        private void Awake()
+        {
+            enabled = false;
+
+        }
+
         public void PurchaseMetaItem(string itemName)
         {
             if (player == null)

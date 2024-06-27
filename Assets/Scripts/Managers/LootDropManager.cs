@@ -1,12 +1,24 @@
 ﻿using NeonLadder.Items;
 using NeonLadder.Items.Loot;
+using NeonLadder.Mechanics.Controllers;
 using System.Collections;
 using UnityEngine;
 
-namespace NeonLadder.Mechanics.Controllers
+namespace NeonLadder.Managers
 {
     public class LootDropManager : MonoBehaviour
     {
+
+        void Start()
+        {
+           
+        }
+
+        void Awake()
+        {
+            enabled = false;
+        }
+
         public void DropLoot(Player target, Enemy enemy)
         {
             if (enemy.RuntimeLootTable == null)

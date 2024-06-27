@@ -11,7 +11,7 @@ public class SceneChangeController : MonoBehaviour
     public string SceneName;
     private PlatformerModel model;
     private Player player;
-    private PlayerAndCameraPositionManager playerAndCameraPositionManager;
+    private PlayerCameraPositionManager playerAndCameraPositionManager;
     private DynamicCameraAdjustment cameraAdjustment;
 
 
@@ -20,7 +20,8 @@ public class SceneChangeController : MonoBehaviour
         
         model = Simulation.GetModel<PlatformerModel>();
         player = model.Player;
-        playerAndCameraPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerAndCameraPositionManager>();
+        //remove this line
+        playerAndCameraPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
         cameraAdjustment = model.VirtualCamera.GetComponent<DynamicCameraAdjustment>();
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -31,6 +32,7 @@ public class SceneChangeController : MonoBehaviour
         if (collision.CompareTag(Tags.Player.ToString()))
         {
             //Debug.Log("Disabling DynamicCameraAdjustment");
+            //replace with manager call
             cameraAdjustment.enabled = false;
             //Debug.Log("DynamicCameraAdjustment enabled state: " + cameraAdjustment.enabled);
             SceneManager.LoadScene(SceneName); //breakpoint here
@@ -45,19 +47,21 @@ public class SceneChangeController : MonoBehaviour
         }
 
         //Debug.Log("Enabling DynamicCameraAdjustment");
+        //replace with manager call
         cameraAdjustment.enabled = true;
         //Debug.Log("DynamicCameraAdjustment enabled state: " + cameraAdjustment.enabled);
         player.DisableZMovement();
 
-        Vector3 playerPosition, cameraPosition;
+        Vector3 playerPosition;
         Quaternion cameraRotation;
 
-        if (playerAndCameraPositionManager.TryGetState(scene.name, out playerPosition, out cameraPosition, out cameraRotation))
+        if (playerAndCameraPositionManager.TryGetState(scene.name, out playerPosition, out cameraRotation))
         {
+            Debug.Log($"Restoring player position to {playerPosition} and camera rotation to {cameraRotation} in scene {scene.name}.");
             // Set the player and camera positions and rotations
             player.transform.position = playerPosition;
             //model.VirtualCamera.transform.position = cameraPosition;
-            //model.VirtualCamera.transform.rotation = cameraRotation;
+            model.VirtualCamera.transform.rotation = cameraRotation;
         }
         else
         {

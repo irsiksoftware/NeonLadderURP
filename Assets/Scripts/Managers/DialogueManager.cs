@@ -5,19 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Tables;
 
-namespace NeonLadder.Managers.Dialogue
+namespace NeonLadder.Managers
 {
-    public interface IDialogueManager
-    {
-        void Show(string key);
-        void HideDialogues();
-        void InitializeLanguage(SystemLanguage language);
-        string GetLocalizedString(string key);
-        StringTable currentStringTable { get; set; }
-    }
-
-
-    public class DialogueManager : MonoBehaviour, IDialogueManager
+    public class DialogueManager : MonoBehaviour
     {
         public Dictionary<string, (Canvas canvas, CinemachineVirtualCamera vCam, TextMeshProUGUI speechText)> characterSpeeches;
         public Canvas protagonistSpeechBubbleCanvas;
@@ -64,14 +54,11 @@ namespace NeonLadder.Managers.Dialogue
 
         public StringTable currentStringTable { get; set; }
 
-        private void Start()
+        void Start()
         {
             typewriterEffect = GetComponent<Typewriter>();
             InitializeLanguage(Application.systemLanguage);
-        }
 
-        private void Awake()
-        {
             characterSpeeches = new Dictionary<string, (Canvas, CinemachineVirtualCamera, TextMeshProUGUI)>();
             if (protagonistSpeechBubbleCanvas != null)
             {
@@ -114,6 +101,12 @@ namespace NeonLadder.Managers.Dialogue
                 characterSpeeches.Add("merchant", (merchantSpeechBubbleCanvas, merchantVCam, merchantSpeechText));
             }
             HideDialogues();
+            
+        }
+
+        void Awake()
+        {
+            enabled = false;
         }
 
         public void Show(string key)

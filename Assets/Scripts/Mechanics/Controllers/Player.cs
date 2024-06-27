@@ -15,9 +15,9 @@ namespace NeonLadder.Mechanics.Controllers
     {
         private bool ForceRightCameraPivot = true;
         [SerializeField]
-        private ProgressBar healthBar;
+        private ProgressBar HealthBar;
         [SerializeField]
-        private ProgressBar staminaBar;
+        private ProgressBar StaminaBar;
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
@@ -74,6 +74,8 @@ namespace NeonLadder.Mechanics.Controllers
             rigidbody = GetComponent<Rigidbody>();
             Health = GetComponent<Health>();
             Stamina = GetComponent<Stamina>();
+            HealthBar = GetComponentInChildren<HealthBar>().gameObject.GetComponent<ProgressBar>();
+            StaminaBar = GetComponentInChildren<StaminaBar>().gameObject.GetComponent<ProgressBar>();
             MetaCurrency = GetComponent<Meta>();
             PermaCurrency = GetComponent<Perma>();
             CinemachineVirtualCamera cvc = model.VirtualCamera;
@@ -298,17 +300,17 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void UpdateHealthBar()
         {
-            if (healthBar != null && Health != null)
+            if (HealthBar != null && Health != null)
             {
-                healthBar.currentPercent = (Health.current / Health.max) * 100f;
+                HealthBar.currentPercent = (Health.current / Health.max) * 100f;
             }
         }
 
         private void UpdateStaminaBar()
         {
-            if (staminaBar != null && Stamina != null)
+            if (StaminaBar != null && Stamina != null)
             {
-                staminaBar.currentPercent = (Stamina.current / Stamina.max) * 100f;
+                StaminaBar.currentPercent = (Stamina.current / Stamina.max) * 100f;
             }
         }
     }

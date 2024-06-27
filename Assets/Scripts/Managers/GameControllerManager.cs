@@ -1,7 +1,10 @@
+using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static NeonLadder.Core.Simulation;
 
 public class GameControllerManager : MonoBehaviour
 {
@@ -10,74 +13,126 @@ public class GameControllerManager : MonoBehaviour
     private Player player;
     private PlayerAction playerActions;
     private GameObject statUI;
+    private Scenes scene;
 
     // Start is called before the first frame update
     void Start()
     {
+        scene = SceneEnumResolver.Resolve(SceneManager.GetActiveScene().name);
         InitializeControllers();
-        AdjustControllersBasedOnScene(SceneManager.GetActiveScene().name);
+        AdjustControllersBasedOnScene();
+
+    }
+
+    private void Awake()
+    {
+        enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        AdjustControllersBasedOnScene(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name != scene.ToString())
+        {
+            scene = SceneEnumResolver.Resolve(SceneManager.GetActiveScene().name);
+            InitializeControllers();
+            AdjustControllersBasedOnScene();
+        }
     }
 
     private void InitializeControllers()
     {
-        gameController = Game.Instance;
-        if (gameController == null)
+        if (scene == Scenes.Title)
         {
-            Debug.LogError("GameController not found in scene.");
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).GetComponent<Player>();
+                if (player == null)
+                {
+                    Debug.LogError("Player not found in scene.");
+                }
+            }
+
+            if (playerActions == null)
+            {
+                playerActions = player.GetComponentInChildren<PlayerAction>();
+                if (playerActions == null)
+                {
+                    Debug.LogError("PlayerAction not found in scene.");
+                }
+            }
+
+            if (statUI == null)
+            {
+                statUI = player.GetComponentInChildren<StatUI>().gameObject;
+                if (statUI == null)
+                {
+                    Debug.LogError("StatUI not found in scene.");
+                }
+            }
         }
 
-        dynamicCameraAdjustment = gameController.GetComponentInChildren<DynamicCameraAdjustment>();
-        if (dynamicCameraAdjustment == null)
+        else
         {
-            Debug.LogError("DynamicCameraAdjustment not found in scene.");
-        }
+            if (gameController == null)
+            {
+                gameController = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponent<Game>();
+                if (gameController == null)
+                {
+                    Debug.LogError("GameController not found in scene.");
+                }
+            }
 
-        player = gameController.GetComponentInChildren<Player>();
-        if (player == null)
-        {
-            Debug.LogError("Player not found in scene.");
-        }
+            if (dynamicCameraAdjustment == null)
+            {
+                dynamicCameraAdjustment = gameController.GetComponentInChildren<DynamicCameraAdjustment>();
+                if (dynamicCameraAdjustment == null)
+                {
+                    Debug.LogError("DynamicCameraAdjustment not found in scene.");
+                }
+            }
 
-        playerActions = player.GetComponentInChildren<PlayerAction>();
-        if (playerActions == null)
-        {
-            Debug.LogError("PlayerAction not found in scene.");
-        }
+            if (player == null)
+            {
+                player = gameController.GetComponentInChildren<Player>();
+                if (player == null)
+                {
+                    Debug.LogError("Player not found in scene.");
+                }
+            }
 
-        statUI = gameController.GetComponentInChildren<StatUI>().gameObject;
-        if (statUI == null)
-        {
-            Debug.LogError("StatUI not found in scene.");
+            if (playerActions == null)
+            {
+                playerActions = player.GetComponentInChildren<PlayerAction>();
+                if (playerActions == null)
+                {
+                    Debug.LogError("PlayerAction not found in scene.");
+                }
+            }
         }
     }
 
-    private void AdjustControllersBasedOnScene(string sceneName)
+    public void AdjustControllersBasedOnScene()
     {
-        switch (sceneName)
+        switch (scene)
         {
-            case nameof(Scenes.Title):
+            case Scenes.Title:
+                player.GetComponentInChildren<StatUI>().gameObject.SetActive(false);
                 playerActions.enabled = false;
-                gameController.gameObject.SetActive(false);
                 break;
-            case nameof(Scenes.Staging):
+            case Scenes.Staging:
                 dynamicCameraAdjustment.enabled = false;
                 break;
-            case nameof(Scenes.Start):
+            case Scenes.Start:
+                dynamicCameraAdjustment.enabled = true;
                 break;
-            case nameof(Scenes.MetaShop):
+            case Scenes.MetaShop:
                 // Adjust components for MetaShop scene
                 break;
-            case nameof(Scenes.PermaShop):
+            case Scenes.PermaShop:
                 // Adjust components for PermaShop scene
                 break;
             default:
-                dynamicCameraAdjustment.enabled = true;
                 playerActions.enabled = true;
                 gameController.gameObject.SetActive(true);
                 break;

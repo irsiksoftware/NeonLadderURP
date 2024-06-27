@@ -16,10 +16,12 @@ namespace NeonLadder.Events
 
             model.Player.Health.Increment(model.Player.Health.max);
             model.Player.Stamina.Increment(model.Player.Stamina.max);
+            model.Player.MetaCurrency.Deplete();
             model.Player.animator.enabled = true;
             model.Player.animator.SetInteger("locomotion_animation", 777);
             model.Player.Actions.playerActionMap.Enable();
             model.Player.controlEnabled = true;
+            
         }
     }
 }

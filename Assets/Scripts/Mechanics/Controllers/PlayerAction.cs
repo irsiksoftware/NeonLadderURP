@@ -11,7 +11,7 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class PlayerAction : BaseAction
     {
-        private PlayerAndCameraPositionManager playerPositionManager;
+        private PlayerCameraPositionManager playerPositionManager;
         private Player player;
         public Vector2 playerInput = new Vector2(0, 0);
         private float sprintTimeAccumulator = 0f;
@@ -60,7 +60,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected void Start()
         {
             player = GetComponentInParent<Player>();
-            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerAndCameraPositionManager>();
+            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
             ConfigureControls(player);
             ControllerDebugging.PrintDebugControlConfiguration(player);
             initialAttackDuration = attackDuration; // Initialize the initial attack duration
@@ -119,7 +119,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected void OnEnable()
         {
-            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerAndCameraPositionManager>();
+            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
             if (playerPositionManager == null)
             {
                 Debug.LogError("PlayerPositionManager not found in the scene.");
@@ -211,9 +211,10 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (isInZMovementZone)
             {
-                playerPositionManager.SaveState(SceneManager.GetActiveScene().name, player.transform.position,
-                    Game.Instance.model.VirtualCamera.gameObject.transform.position,
-                    Game.Instance.model.VirtualCamera.gameObject.transform.rotation);
+                playerPositionManager.SaveState(SceneManager.GetActiveScene().name, 
+                                                player.transform.position,                    
+                                                Game.Instance.model.VirtualCamera.gameObject.transform.rotation);
+                Debug.Log($"Saved player position: {player.transform.position} and camera rotation: {Game.Instance.model.VirtualCamera.gameObject.transform.rotation} in scene {SceneManager.GetActiveScene().name}");
                 player.EnableZMovement();
             }
         }

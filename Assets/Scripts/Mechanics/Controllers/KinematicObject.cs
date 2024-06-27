@@ -1,6 +1,7 @@
 using NeonLadder.Core;
 using NeonLadder.Models;
 using UnityEngine;
+using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
 using UnityEngine.SceneManagement;
 
 namespace NeonLadder.Mechanics.Controllers
@@ -36,6 +37,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void OnEnable()
         {
+
             switch (this)
             {
                 case FlyingMinor:
@@ -58,22 +60,34 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 rigidbody.isKinematic = true;
             }
+
+            GuaranteeModelAndPlayer();
         }
 
         protected virtual void OnDisable()
         {
-
         }
 
         protected virtual void Start()
         {
-
+            GuaranteeModelAndPlayer();
         }
 
         protected virtual void Awake()
         {
-            model = Simulation.GetModel<PlatformerModel>();
-            player = model.Player;
+            GuaranteeModelAndPlayer();
+        }
+
+        private void GuaranteeModelAndPlayer()
+        {
+            if (model == null)
+            {
+                model = Simulation.GetModel<PlatformerModel>();
+            }
+            if (player == null && model != null)
+            {
+                player = model.Player;
+            }
         }
 
         protected virtual void Update()

@@ -20,31 +20,37 @@ public class DynamicCameraAdjustment : MonoBehaviour
     private List<Renderer> renderers; 
     private Renderer lastBlockingObject;
 
+    private void Start()
+    {
+        CacheInitialSettings();
+    }
+
     void Awake()
     {
-        cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
-        framingTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-        CacheInitialSettings();
-        playerTransform = GameObject.FindWithTag(Tags.Player.ToString()).transform; // Assume the player has the tag "Player"
+        //CacheInitialSettings();
+        //enabled = false;
     }
 
     void OnEnable()
     {
-        RefreshRenderers(); 
-        //cinemachineVirtualCamera.enabled = true;
+        cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+        framingTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        playerTransform = GameObject.FindWithTag(Tags.Player.ToString()).transform; // Assume the player has the tag "Player"
+        RefreshRenderers();
+        //CacheInitialSettings();
+        cinemachineVirtualCamera.enabled = true;
     }
 
     private void OnDisable()
     {
-        //cinemachineVirtualCamera.enabled = false;
+        //ResetToInitialSettings();
+        cinemachineVirtualCamera.enabled = false;
+        cinemachineVirtualCamera.enabled = true;
     }
 
     void Update()
     {
-        if (enabled)
-        {
-            AdjustCameraIfNeeded();
-        }
+       AdjustCameraIfNeeded();
     }
 
     private void CacheInitialSettings()

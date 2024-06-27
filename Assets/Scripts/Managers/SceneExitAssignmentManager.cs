@@ -9,6 +9,7 @@ public class SceneExitAssignmentManager : MonoBehaviour
 {
     void Start()
     {
+        enabled = false;
         GameObject[] sceneChangeObjects = GameObject.FindGameObjectsWithTag("SceneChange");
 
         // Shuffle the array
