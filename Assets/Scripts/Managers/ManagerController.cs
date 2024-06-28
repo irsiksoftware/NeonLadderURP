@@ -79,6 +79,8 @@ namespace NeonLadder.Managers
                     Simulation.Schedule<LoadGame>();
                     lootDropManager.enabled = false;
                     playerCameraPositionManager.enabled = true;
+                    playerCameraPositionManager.EmptySceneStates();
+                    monsterGroupActivationManager.enabled = false;
                     break;
                 case Scenes.Start:
                     monsterGroupActivationManager.enabled = true;

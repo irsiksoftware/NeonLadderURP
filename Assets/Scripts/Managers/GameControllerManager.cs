@@ -1,3 +1,4 @@
+using Cinemachine;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Utilities;
@@ -120,19 +121,25 @@ public class GameControllerManager : MonoBehaviour
                 break;
             case Scenes.Staging:
                 //dynamicCameraAdjustment.enabled = false;
+                //set framingTransposer follow distance to 6
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
                 break;
             case Scenes.Start:
                 //dynamicCameraAdjustment.enabled = true;
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
                 break;
             case Scenes.MetaShop:
                 // Adjust components for MetaShop scene
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 2.2f;
                 break;
             case Scenes.PermaShop:
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 2.2f;
                 // Adjust components for PermaShop scene
                 break;
             default:
                 playerActions.enabled = true;
                 gameController.gameObject.SetActive(true);
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
                 break;
         }
     }

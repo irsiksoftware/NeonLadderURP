@@ -18,6 +18,12 @@ namespace NeonLadder.Managers
 
         private Dictionary<string, PlayerAndCameraState> sceneStates = new Dictionary<string, PlayerAndCameraState>();
 
+
+        public void EmptySceneStates()
+        {
+            sceneStates.Clear();
+        }
+
         public void SaveState(string sceneName, Vector3 playerPosition, Vector3 cameraPosition, Quaternion cameraRotation)
         {
             sceneStates[sceneName] = new PlayerAndCameraState(playerPosition, cameraPosition, cameraRotation);

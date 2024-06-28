@@ -1,5 +1,6 @@
 ﻿using NeonLadder.Common;
 using NeonLadder.Mechanics.Enums;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,14 +20,19 @@ namespace NeonLadder.Events
             model.Player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
             model.Player.animator.SetInteger("locomotion_animation", 5);
             model.Player.StartCoroutine(HandleDeathAnimation());
-            //model.Player.Actions.playerActionMap.Disable();
+            model.Player.Actions.playerActionMap.Disable();
+            SceneManager.activeSceneChanged -= OnSceneChange;
+            SceneManager.activeSceneChanged += OnSceneChange;
+        }
+
+        private void OnSceneChange(Scene arg0, Scene arg1)
+        {
+            Schedule<PlayerSpawn>(2);
         }
 
         private IEnumerator HandleDeathAnimation()
         {
             yield return new WaitForSecondsRealtime(model.Player.DeathAnimationDuration);
-
-            Schedule<PlayerSpawn>();
             SceneManager.LoadScene(Scenes.Staging.ToString());
            
         }
