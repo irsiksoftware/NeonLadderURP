@@ -14,6 +14,7 @@ namespace NeonLadder.Mechanics.Enums
         Managers,
         SpawnPoint,
         GameController,
-        PlayerCamera
+        PlayerCamera,
+        MainCamera
     }
 }

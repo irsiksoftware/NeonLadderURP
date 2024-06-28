@@ -12,29 +12,26 @@ public class SceneChangeController : MonoBehaviour
     private PlatformerModel model;
     private Player player;
     private PlayerCameraPositionManager playerAndCameraPositionManager;
-    private DynamicCameraAdjustment cameraAdjustment;
-
 
     private void Awake()
     {
         
         model = Simulation.GetModel<PlatformerModel>();
         player = model.Player;
-        //remove this line
         playerAndCameraPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
-        cameraAdjustment = model.VirtualCamera.GetComponent<DynamicCameraAdjustment>();
-        SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag(Tags.Player.ToString()))
         {
-            //Debug.Log("Disabling DynamicCameraAdjustment");
-            //replace with manager call
-            cameraAdjustment.enabled = false;
-            //Debug.Log("DynamicCameraAdjustment enabled state: " + cameraAdjustment.enabled);
+            model.VirtualCamera.enabled = false;
             SceneManager.LoadScene(SceneName); //breakpoint here
         }
     }
@@ -46,26 +43,24 @@ public class SceneChangeController : MonoBehaviour
             return;
         }
 
-        //Debug.Log("Enabling DynamicCameraAdjustment");
-        //replace with manager call
-        cameraAdjustment.enabled = true;
-        //Debug.Log("DynamicCameraAdjustment enabled state: " + cameraAdjustment.enabled);
         player.DisableZMovement();
 
         Vector3 playerPosition;
+        Vector3 cameraPosition;
         Quaternion cameraRotation;
 
-        if (playerAndCameraPositionManager.TryGetState(scene.name, out playerPosition, out cameraRotation))
+        if (playerAndCameraPositionManager.TryGetState(scene.name, out playerPosition, out cameraPosition, out cameraRotation))
         {
-            Debug.Log($"Restoring player position to {playerPosition} and camera rotation to {cameraRotation} in scene {scene.name}.");
-            // Set the player and camera positions and rotations
-            player.transform.position = playerPosition;
-            //model.VirtualCamera.transform.position = cameraPosition;
-            model.VirtualCamera.transform.rotation = cameraRotation;
+            //Debug.Log($"Restoring player position to {playerPosition} \n " + 
+            //            $"camera rotation to {cameraRotation} \n " +
+            //            $"camer position to {cameraPosition} \n " +
+            //            $"in scene {scene.name}.");
+
+            player.Teleport(playerPosition);
+            GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString()).transform.position = cameraPosition;
         }
         else
         {
-            // Find the spawn point in the new scene
             GameObject spawnPoint = GameObject.FindGameObjectWithTag(Tags.SpawnPoint.ToString());
             if (spawnPoint != null)
             {
@@ -76,9 +71,8 @@ public class SceneChangeController : MonoBehaviour
                 Debug.LogWarning("No SpawnPoint found in the scene.");
             }
         }
-
+        model.VirtualCamera.enabled = true;
         //set players transform rotation y = 90 (facing to the right)
         player.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
-        player.RevertCameraProperties();
     }
 }

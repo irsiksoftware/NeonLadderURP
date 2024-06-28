@@ -1,15 +1,13 @@
-using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static NeonLadder.Core.Simulation;
 
 public class GameControllerManager : MonoBehaviour
 {
     private Game gameController;
-    private DynamicCameraAdjustment dynamicCameraAdjustment;
+    //private DynamicCameraAdjustment dynamicCameraAdjustment;
     private Player player;
     private PlayerAction playerActions;
     private GameObject statUI;
@@ -83,14 +81,14 @@ public class GameControllerManager : MonoBehaviour
                 }
             }
 
-            if (dynamicCameraAdjustment == null)
-            {
-                dynamicCameraAdjustment = gameController.GetComponentInChildren<DynamicCameraAdjustment>();
-                if (dynamicCameraAdjustment == null)
-                {
-                    Debug.LogError("DynamicCameraAdjustment not found in scene.");
-                }
-            }
+            //if (dynamicCameraAdjustment == null)
+            //{
+            //    dynamicCameraAdjustment = gameController.GetComponentInChildren<DynamicCameraAdjustment>();
+            //    if (dynamicCameraAdjustment == null)
+            //    {
+            //        Debug.LogError("DynamicCameraAdjustment not found in scene.");
+            //    }
+            //}
 
             if (player == null)
             {
@@ -121,10 +119,10 @@ public class GameControllerManager : MonoBehaviour
                 playerActions.enabled = false;
                 break;
             case Scenes.Staging:
-                dynamicCameraAdjustment.enabled = false;
+                //dynamicCameraAdjustment.enabled = false;
                 break;
             case Scenes.Start:
-                dynamicCameraAdjustment.enabled = true;
+                //dynamicCameraAdjustment.enabled = true;
                 break;
             case Scenes.MetaShop:
                 // Adjust components for MetaShop scene

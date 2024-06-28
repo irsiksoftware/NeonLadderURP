@@ -211,10 +211,20 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (isInZMovementZone)
             {
-                playerPositionManager.SaveState(SceneManager.GetActiveScene().name, 
-                                                player.transform.position,                    
-                                                Game.Instance.model.VirtualCamera.gameObject.transform.rotation);
-                Debug.Log($"Saved player position: {player.transform.position} and camera rotation: {Game.Instance.model.VirtualCamera.gameObject.transform.rotation} in scene {SceneManager.GetActiveScene().name}");
+                var sceneName = SceneManager.GetActiveScene().name;
+                var cameraPosition = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString()).transform.position;
+                var cvcRotation = Game.Instance.model.VirtualCamera.gameObject.transform.rotation;
+
+                playerPositionManager.SaveState(sceneName, 
+                                                player.transform.position,
+                                                cameraPosition,
+                                                cvcRotation);
+
+                //Debug.Log($"Saved player position: {player.transform.position} \n" +
+                //        $"CvcRotation: {cvcRotation} \n" + 
+                //        $"CameraPosition: {cameraPosition} \n" +
+                //        $"in scene {SceneManager.GetActiveScene().name}");
+
                 player.EnableZMovement();
             }
         }

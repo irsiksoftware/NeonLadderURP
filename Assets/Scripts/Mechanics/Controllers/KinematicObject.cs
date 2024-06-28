@@ -1,8 +1,6 @@
 using NeonLadder.Core;
 using NeonLadder.Models;
 using UnityEngine;
-using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
-using UnityEngine.SceneManagement;
 
 namespace NeonLadder.Mechanics.Controllers
 {
@@ -30,9 +28,9 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void Teleport(Vector3 position)
         {
-            rigidbody.position = position;
+            transform.position = position;
             velocity = Vector3.zero;
-            rigidbody.velocity = Vector3.zero;
+            //rigidbody.velocity = Vector3.zero;
         }
 
         protected virtual void OnEnable()

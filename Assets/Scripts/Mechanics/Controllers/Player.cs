@@ -1,11 +1,10 @@
-using NeonLadder.Common;
 using Cinemachine;
 using Michsky.MUIP;
+using NeonLadder.Common;
 using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +12,6 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public class Player : KinematicObject
     {
-        private bool ForceRightCameraPivot = true;
         [SerializeField]
         private ProgressBar HealthBar;
         [SerializeField]
@@ -41,18 +39,11 @@ namespace NeonLadder.Mechanics.Controllers
 
         public Animator animator { get; private set; }
 
-        // Variables to store default CVC properties
-        private Vector3 defaultTrackedObjectOffset;
-        private Vector3 defaultRotation;
-
         public InputActionAsset Controls
         {
             get { return controls; }
             set { controls = value; }
         }
-
-        private bool isCameraPivoted = false;
-        private Coroutine cameraPivotCoroutine;
 
         protected override void OnEnable()
         {
@@ -78,16 +69,6 @@ namespace NeonLadder.Mechanics.Controllers
             StaminaBar = GetComponentInChildren<StaminaBar>().gameObject.GetComponent<ProgressBar>();
             MetaCurrency = GetComponent<Meta>();
             PermaCurrency = GetComponent<Perma>();
-            CinemachineVirtualCamera cvc = model.VirtualCamera;
-            if (cvc != null)
-            {
-                CinemachineFramingTransposer transposer = cvc.GetCinemachineComponent<CinemachineFramingTransposer>();
-                if (transposer != null)
-                {
-                    defaultTrackedObjectOffset = transposer.m_TrackedObjectOffset;
-                    defaultRotation = cvc.transform.eulerAngles;
-                }
-            }
         }
 
         protected override void FixedUpdate()
@@ -107,79 +88,11 @@ namespace NeonLadder.Mechanics.Controllers
                 RegenerateStamina();
             }
 
-            if (targetVelocity.z > 0.01)
-            {
-                if (!isCameraPivoted)
-                {
-                    isCameraPivoted = true;
-                    cameraPivotCoroutine = StartCoroutine(PivotCameraCoroutine(Constants.ZMovementCameraPivotDurationInSeconds));
-                }
-            }
-            else if (isCameraPivoted && cameraPivotCoroutine != null)
-            {
-                StopCoroutine(cameraPivotCoroutine);
-                isCameraPivoted = false;
-            }
-
             UpdateHealthBar();
             UpdateStaminaBar();
 
             base.Update();
         }
-
-        private IEnumerator PivotCameraCoroutine(float duration)
-        {
-            CinemachineVirtualCamera cvc = model.VirtualCamera;
-            CinemachineFramingTransposer transposer = cvc.GetCinemachineComponent<CinemachineFramingTransposer>();
-
-            if (transposer != null)
-            {
-                int direction = UnityEngine.Random.Range(0, 2); // Use 0 and 2 for exclusive upper bound
-                float pivotDirection = (direction == 0) ? -1 : 1;
-
-                if (ForceRightCameraPivot)
-                {
-                    pivotDirection = -1;
-                }
-
-                Vector3 initialOffset = transposer.m_TrackedObjectOffset;
-                Vector3 targetOffset = initialOffset + new Vector3(pivotDirection * 2, 0, 0); // Adjust 2 to desired pivot distance
-
-                float initialYRotation = cvc.transform.eulerAngles.y;
-
-                float elapsedTime = 0f;
-
-                while (elapsedTime < duration)
-                {
-                    elapsedTime += Time.deltaTime;
-                    float t = elapsedTime / duration;
-
-                    transposer.m_TrackedObjectOffset = Vector3.Lerp(initialOffset, targetOffset, t);
-
-                    float newYRotation = Mathf.Lerp(initialYRotation, initialYRotation + (pivotDirection * 45), t); // Adjust 45 to desired rotation angle
-                    cvc.transform.eulerAngles = new Vector3(cvc.transform.eulerAngles.x, newYRotation, cvc.transform.eulerAngles.z);
-
-                    yield return null;
-                }
-
-                transposer.m_TrackedObjectOffset = targetOffset;
-            }
-        }
-
-        public void RevertCameraProperties()
-        {
-            CinemachineVirtualCamera cvc = model.VirtualCamera;
-            if (cvc != null)
-            {
-                CinemachineFramingTransposer transposer = cvc.GetCinemachineComponent<CinemachineFramingTransposer>();
-                if (transposer != null)
-                {
-                    transposer.m_TrackedObjectOffset = defaultTrackedObjectOffset;
-                    cvc.transform.eulerAngles = defaultRotation;
-                }
-            }
-        }
-
 
         private void RegenerateStamina()
         {
