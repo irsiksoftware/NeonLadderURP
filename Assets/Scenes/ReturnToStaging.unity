@@ -868,46 +868,51 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Visuals:
 
+    
 
-    We see our protagonist being pulled from the right to the
-    left in a temporal dimension. On the left side of the scene, a vortex creates
-    the "pulling" motion, with the silhouette of the ship engaging the emergency
+    We see our protagonist being pulled from the right
+    to the left in a temporal dimension. On the left side of the scene, a vortex
+    creates the "pulling" motion, with the silhouette of the ship engaging the emergency
     RRTS rescue protocol.
 
+    
 
     Sounds:
 
+    
 
-    Whirring noises as the ship activates
-    the emergency protocol.
+    Whirring noises as the
+    ship activates the emergency protocol.
 
+    
 
     Ship Dialogue:
 
+    
 
-    "Rapid Response Tactical Squad
-    resuscitation protocol activated....."
+    "Rapid
+    Response Tactical Squad resuscitation protocol activated....."
 
+    
 
-    "Despite a fierce battle, you have
-    fallen in combat. But this is not the end, Commander. I''ll always have your
-    back. Your journey is far from over, and together, we will face these challenges
-    anew."
+    "Despite
+    a fierce battle, you have fallen in combat. But this is not the end, Commander.
+    I''ll always have your back. Your journey is far from over, and together, we
+    will face these challenges anew."
 
+    
 
     Audible: More whirring noises...
 
+    
 
-    "Recalibrating your vitals...
-    and restoring your strength."
-
-
-    "Prepare yourself, for we have much left
-    to accomplish - and remember, Commander; in battle, fear is your greatest enemy.
-    When you dodge, refuse to be cut. When you protect someone, be like a mighty
-    oak in front of them. And when you attack, let your resolve be unwavering. You
-    are a warrior, and warriors do not yield to fear. Rise again, Commander - let
-    our battle rage on. Together, we can accomplish anything."'
+    "Vital
+    signs recalibration complete. Timeline reset. Prepare yourself Commander, for
+    the sins yet live - and remember, Commander; in battle, fear is your greatest
+    enemy. When you dodge, refuse to be cut. When you protect someone, be like a
+    mighty oak in front of them. And when you attack, let your resolve be unwavering.
+    You are a warrior, and warriors do not yield to fear. Rise again, and let our
+    battle rage on. Together, we can accomplish anything."'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -934,8 +939,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1232,8 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10281d197b70ca84eb637ff450104549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 100
-  bufferPercentage: 0.2
+  scrollSpeed: 80
 --- !u!1 &1754353573
 GameObject:
   m_ObjectHideFlags: 0
