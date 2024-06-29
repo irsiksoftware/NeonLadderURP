@@ -59,19 +59,19 @@ public class AutoScrollText : MonoBehaviour
         scrollRect.verticalNormalizedPosition = 1;
 
         // Log initial positions
-        Debug.Log($"Initial VerticalNormalizedPosition: {scrollRect.verticalNormalizedPosition}\n" +
-                  $"Content Height: {contentRectTransform.rect.height}\n" +
-                  $"Scroll Rect Height: {scrollRectTransform.rect.height}\n" +
-                  $"Scroll Speed: {scrollSpeed}");
+        // Debug.Log($"Initial VerticalNormalizedPosition: {scrollRect.verticalNormalizedPosition}\n" +
+        //           $"Content Height: {contentRectTransform.rect.height}\n" +
+        //           $"Scroll Rect Height: {scrollRectTransform.rect.height}\n" +
+        //           $"Scroll Speed: {scrollSpeed}");
     }
 
     void Update()
     {
         if (isScrolling)
         {
-            Debug.Log($"VerticalNormalizedPosition: {scrollRect.verticalNormalizedPosition} @ Time {Time.time}\n" +
-                      $"Content Height: {contentRectTransform.rect.height}\n" +
-                      $"Scroll Rect Height: {scrollRectTransform.rect.height}");
+            // Debug.Log($"VerticalNormalizedPosition: {scrollRect.verticalNormalizedPosition} @ Time {Time.time}\n" +
+            //           $"Content Height: {contentRectTransform.rect.height}\n" +
+            //           $"Scroll Rect Height: {scrollRectTransform.rect.height}");
 
             if (scrollRect.verticalNormalizedPosition > 0)
             {
@@ -104,13 +104,13 @@ public class AutoScrollText : MonoBehaviour
             float width = canvasRectTransform.rect.width * textHeightMultiplier;
             textRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
 
-            Debug.Log($"Canvas Width: {canvasRectTransform.rect.width}\n" +
-                      $"Text Width: {textRectTransform.rect.width}\n" +
-                      $"Text: {textMeshPro.text}");
+            // Debug.Log($"Canvas Width: {canvasRectTransform.rect.width}\n" +
+            //           $"Text Width: {textRectTransform.rect.width}\n" +
+            //           $"Text: {textMeshPro.text}");
         }
         else
         {
-            Debug.LogWarning("TextMeshProUGUI component not found in children.");
+            // Debug.LogWarning("TextMeshProUGUI component not found in children.");
         }
     }
 
@@ -135,11 +135,11 @@ public class AutoScrollText : MonoBehaviour
             // Set the height of the content RectTransform
             contentRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalHeight);
 
-            Debug.Log($"Adjusted Content Height: {contentRectTransform.rect.height}");
+            // Debug.Log($"Adjusted Content Height: {contentRectTransform.rect.height}");
         }
         else
         {
-            Debug.LogWarning("TextMeshProUGUI component not found in children.");
+            // Debug.LogWarning("TextMeshProUGUI component not found in children.");
         }
     }
 
@@ -154,7 +154,7 @@ public class AutoScrollText : MonoBehaviour
         float bufferHeight = lineBreakCount * lineBreakHeightMultiplier; // Adjust the multiplier as needed
         bufferHeight += text.Length * bufferHeightMultiplier; // Adjust the multiplier as needed
 
-        Debug.Log($"Calculated Buffer Height: {bufferHeight}");
+        // Debug.Log($"Calculated Buffer Height: {bufferHeight}");
         return bufferHeight;
     }
 
