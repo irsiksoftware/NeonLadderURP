@@ -46,8 +46,8 @@ public class AutoScrollText : MonoBehaviour
         contentRectTransform.anchorMax = new Vector2(1, 1);
 
         // Reset the offsets
-        contentRectTransform.offsetMin = Vector2.zero;
-        contentRectTransform.offsetMax = Vector2.zero;
+        //contentRectTransform.offsetMin = Vector2.zero;
+        //contentRectTransform.offsetMax = Vector2.zero;
 
         // Set TextMeshPro width to 75% of the viewport
         SetTextMeshProWidth();
