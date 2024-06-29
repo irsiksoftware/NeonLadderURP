@@ -123,6 +123,7 @@ public class GameControllerManager : MonoBehaviour
                 //dynamicCameraAdjustment.enabled = false;
                 //set framingTransposer follow distance to 6
                 player.GetComponentInChildren<StatUI>().gameObject.SetActive(true);
+                player.animator.SetInteger("locomotion_animation", 777); //escape death animation for webgl attempt.
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
                 break;
             case Scenes.ReturnToStaging:

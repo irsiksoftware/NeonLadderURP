@@ -27,8 +27,13 @@ public class AutoScrollText : MonoBehaviour
     private float initialTextOffset = 1.35f;
     private float bufferHeight;
 
+
     void Awake()
     {
+        #if UNITY_EDITOR
+        scrollSpeed = 500f;
+        #endif
+
         scrollRect = GetComponent<ScrollRect>();
         scrollRectTransform = GetComponent<RectTransform>();
         contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
@@ -45,13 +50,17 @@ public class AutoScrollText : MonoBehaviour
         text = textMeshPro.text;
         bufferHeight = (text.Split('\n').Length - 1) * lineBreakHeightMultiplier + text.Length * bufferHeightMultiplier;
 
-        SceneManager.activeSceneChanged -= OnSceneChange;
         SceneManager.activeSceneChanged += OnSceneChange;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= OnSceneChange;
     }
 
     private void OnSceneChange(Scene arg0, Scene arg1)
     {
-        Schedule<PlayerSpawn>();
+        Schedule<PlayerSpawn>(20);
     }
 
     void Start()
