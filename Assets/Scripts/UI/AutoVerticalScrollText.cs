@@ -8,30 +8,41 @@ public class AutoScrollText : MonoBehaviour
     private RectTransform scrollRectTransform;
     private RectTransform contentRectTransform;
     private TextMeshProUGUI textMeshPro;
+    private RectTransform textRectTransform;
+    private RectTransform canvasRectTransform;
+    private Image scrollbarImage;
+    private Image targetGraphicImage;
+    private Image handleImage;
     private string text;
     public float scrollSpeed = 20f;
     private bool isScrolling = true;
-    private float bufferHeightMultiplier = 0.20f;
+    private float bufferHeightMultiplier = 0.15f;
     private float lineBreakHeightMultiplier = 10f;
     private float textHeightMultiplier = 0.75f;
-    private float initialTextOffset = 1.25f;
+    private float initialTextOffset = 1.35f;
     private float bufferHeight;
+
+    void Awake()
+    {
+        scrollRect = GetComponent<ScrollRect>();
+        scrollRectTransform = GetComponent<RectTransform>();
+        contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
+        textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
+        textRectTransform = textMeshPro.GetComponent<RectTransform>();
+        canvasRectTransform = GetComponent<RectTransform>();
+        scrollbarImage = scrollRect.verticalScrollbar.GetComponent<Image>();
+        targetGraphicImage = scrollRect.verticalScrollbar.targetGraphic as Image;
+        handleImage = scrollRect.verticalScrollbar.handleRect.GetComponent<Image>();
+
+        SetRectTransformAnchors(scrollRectTransform);
+        SetRectTransformAnchors(contentRectTransform);
+        MakeScrollbarTransparent();
+        text = textMeshPro.text;
+        bufferHeight = (text.Split('\n').Length - 1) * lineBreakHeightMultiplier + text.Length * bufferHeightMultiplier;
+    }
 
     void Start()
     {
-        scrollRect = GetComponent<ScrollRect>();
-        MakeScrollbarTransparent(scrollRect.verticalScrollbar);
-        scrollRectTransform = GetComponent<RectTransform>();
-        scrollRectTransform.anchorMin = new Vector2(0, 0);
-        scrollRectTransform.anchorMax = new Vector2(1, 1);
-        scrollRectTransform.offsetMin = Vector2.zero;
-        scrollRectTransform.offsetMax = Vector2.zero;
-        contentRectTransform = scrollRect.content.GetComponent<RectTransform>();
-        contentRectTransform.anchorMin = new Vector2(0, 0);
-        contentRectTransform.anchorMax = new Vector2(1, 1);
-        textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
-        text = textMeshPro.text;
-        bufferHeight = (text.Split('\n').Length - 1) * lineBreakHeightMultiplier + text.Length * bufferHeightMultiplier;
         SetTextMeshProWidth();
         AdjustContentHeight();
         scrollRect.verticalNormalizedPosition = initialTextOffset;
@@ -61,26 +72,31 @@ public class AutoScrollText : MonoBehaviour
 
     private void SetTextMeshProWidth()
     {
-        RectTransform textRectTransform = textMeshPro.GetComponent<RectTransform>();
-        RectTransform canvasRectTransform = GetComponent<RectTransform>();
         float width = canvasRectTransform.rect.width * textHeightMultiplier;
         textRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
 
     private void AdjustContentHeight()
     {
-        RectTransform textRectTransform = textMeshPro.GetComponent<RectTransform>();
         float preferredHeight = textMeshPro.preferredHeight;
         float totalHeight = preferredHeight + bufferHeight;
         textRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalHeight);
         contentRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalHeight);
     }
 
-    private void MakeScrollbarTransparent(Scrollbar scrollbar)
+    private void MakeScrollbarTransparent()
     {
         Color transparent = new Color(0, 0, 0, 0);
-        scrollbar.GetComponent<Image>().color = transparent;
-        scrollbar.targetGraphic.color = transparent;
-        scrollbar.handleRect.GetComponent<Image>().color = transparent;
+        scrollbarImage.color = transparent;
+        targetGraphicImage.color = transparent;
+        handleImage.color = transparent;
+    }
+
+    private void SetRectTransformAnchors(RectTransform rectTransform)
+    {
+        rectTransform.anchorMin = new Vector2(0, 0);
+        rectTransform.anchorMax = new Vector2(1, 1);
+        rectTransform.offsetMin = Vector2.zero;
+        rectTransform.offsetMax = Vector2.zero;
     }
 }
