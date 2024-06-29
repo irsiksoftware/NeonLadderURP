@@ -12,10 +12,9 @@ public class AutoScrollText : MonoBehaviour
     private RectTransform contentRectTransform;
     public float scrollSpeed = 20f;
     private bool isScrolling = true; // To keep track of whether the text is still scrolling
-    private float bufferHeightMultiplier = 0.25f; // Adjust the multiplier as needed
+    private float bufferHeightMultiplier = 0.10f; // Adjust the multiplier as needed
     private float lineBreakHeightMultiplier = 10f; // Adjust the multiplier as needed
     private float textHeightMultiplier = 0.75f; // Adjust the multiplier as needed
-
 
     void Start()
     {
@@ -55,10 +54,6 @@ public class AutoScrollText : MonoBehaviour
 
         // Adjust the height of the content to ensure scrolling
         AdjustContentHeight();
-
-        // Force update of the layout to ensure the content size is correct
-        Canvas.ForceUpdateCanvases();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(contentRectTransform);
 
         // Set initial vertical position to the top
         scrollRect.verticalNormalizedPosition = 1;
@@ -112,9 +107,6 @@ public class AutoScrollText : MonoBehaviour
             Debug.Log($"Canvas Width: {canvasRectTransform.rect.width}\n" +
                       $"Text Width: {textRectTransform.rect.width}\n" +
                       $"Text: {textMeshPro.text}");
-
-            // Force update of the layout to ensure the content size is correct
-            LayoutRebuilder.ForceRebuildLayoutImmediate(textRectTransform);
         }
         else
         {
