@@ -1,6 +1,11 @@
-using UnityEngine;
-using UnityEngine.UI;
+using NeonLadder.Events;
+using NeonLadder.Mechanics.Enums;
+using System;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static NeonLadder.Core.Simulation;
 
 public class AutoScrollText : MonoBehaviour
 {
@@ -39,10 +44,19 @@ public class AutoScrollText : MonoBehaviour
         MakeScrollbarTransparent();
         text = textMeshPro.text;
         bufferHeight = (text.Split('\n').Length - 1) * lineBreakHeightMultiplier + text.Length * bufferHeightMultiplier;
+
+        SceneManager.activeSceneChanged -= OnSceneChange;
+        SceneManager.activeSceneChanged += OnSceneChange;
+    }
+
+    private void OnSceneChange(Scene arg0, Scene arg1)
+    {
+        Schedule<PlayerSpawn>();
     }
 
     void Start()
     {
+        Debug.Log($"Scroll Speed: {scrollSpeed}");
         SetTextMeshProWidth();
         AdjustContentHeight();
         scrollRect.verticalNormalizedPosition = initialTextOffset;
@@ -67,7 +81,7 @@ public class AutoScrollText : MonoBehaviour
 
     private void OnScrollFinished()
     {
-        Debug.Log("Text is finished scrolling");
+        SceneManager.LoadScene(Scenes.Staging.ToString());
     }
 
     private void SetTextMeshProWidth()

@@ -21,19 +21,13 @@ namespace NeonLadder.Events
             model.Player.animator.SetInteger("locomotion_animation", 5);
             model.Player.StartCoroutine(HandleDeathAnimation());
             model.Player.Actions.playerActionMap.Disable();
-            SceneManager.activeSceneChanged -= OnSceneChange;
-            SceneManager.activeSceneChanged += OnSceneChange;
-        }
 
-        private void OnSceneChange(Scene arg0, Scene arg1)
-        {
-            Schedule<PlayerSpawn>(2);
         }
 
         private IEnumerator HandleDeathAnimation()
         {
             yield return new WaitForSecondsRealtime(model.Player.DeathAnimationDuration);
-            SceneManager.LoadScene(Scenes.Staging.ToString());
+            SceneManager.LoadScene(Scenes.ReturnToStaging.ToString());
            
         }
     }
