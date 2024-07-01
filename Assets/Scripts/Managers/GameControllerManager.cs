@@ -21,7 +21,6 @@ public class GameControllerManager : MonoBehaviour
         scene = SceneEnumResolver.Resolve(SceneManager.GetActiveScene().name);
         InitializeControllers();
         AdjustControllersBasedOnScene();
-
     }
 
     private void Awake()
@@ -29,7 +28,6 @@ public class GameControllerManager : MonoBehaviour
         enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (SceneManager.GetActiveScene().name != scene.ToString())
@@ -105,15 +103,8 @@ public class GameControllerManager : MonoBehaviour
             case Scenes.Title:
                 player.GetComponentInChildren<Canvas>().enabled = false;
                 playerActions.enabled = false;
-                //gameController.gameObject.GetComponentInChildren<Camera>().enabled = false;
-                if (gameController != null)
-                {
-                    gameController.gameObject.SetActive(false);
-                }
                 break;
             case Scenes.Staging:
-                //dynamicCameraAdjustment.enabled = false;
-                //set framingTransposer follow distance to 6
                 player.GetComponentInChildren<Canvas>().enabled = true;
                 Schedule<LoadGame>();
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
@@ -124,19 +115,15 @@ public class GameControllerManager : MonoBehaviour
                 player.GetComponentInChildren<Canvas>().enabled = false;
                 break;
             case Scenes.Start:
-                //dynamicCameraAdjustment.enabled = true;
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
                 break;
             case Scenes.MetaShop:
-                // Adjust components for MetaShop scene
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 2.2f;
                 break;
             case Scenes.PermaShop:
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 2.2f;
-                // Adjust components for PermaShop scene
                 break;
             case Scenes.Credits:
-                // Adjust components for Credits scene
                 break;
             default:
                 playerActions.enabled = true;

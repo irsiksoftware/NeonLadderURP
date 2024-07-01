@@ -8,11 +8,7 @@ namespace NeonLadder.Managers
 {
     public class LootDropManager : MonoBehaviour
     {
-
-        void Start()
-        {
-           
-        }
+        void Start() { }
 
         void Awake()
         {

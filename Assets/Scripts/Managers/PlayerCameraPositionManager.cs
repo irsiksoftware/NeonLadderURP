@@ -5,19 +5,14 @@ namespace NeonLadder.Managers
 {
     public class PlayerCameraPositionManager : MonoBehaviour
     {
-
         void Start()
         {
             enabled = false;
         }
 
-        void Awake()
-        {
-
-        }
+        void Awake() { }
 
         private Dictionary<string, PlayerAndCameraState> sceneStates = new Dictionary<string, PlayerAndCameraState>();
-
 
         public void EmptySceneStates()
         {

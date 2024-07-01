@@ -1,5 +1,3 @@
-using NeonLadder.Core;
-using NeonLadder.Events;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Utilities;
 using UnityEngine;
@@ -11,7 +9,6 @@ namespace NeonLadder.Managers
     {
         private static ManagerController Instance;
         [SerializeField] private bool dontDestroyOnLoad = true;
-
 
         private Scenes scene;
         private EnemyDefeatedManager enemyDefeatedManager;
@@ -51,7 +48,6 @@ namespace NeonLadder.Managers
             }
         }
 
-        // Start is called before the first frame update
         void Start()
         {
             scene = SceneEnumResolver.Resolve(SceneManager.GetActiveScene().name);
@@ -66,7 +62,6 @@ namespace NeonLadder.Managers
                 ToggleManagers();
             }
         }
-
 
         public void ToggleManagers()
         {

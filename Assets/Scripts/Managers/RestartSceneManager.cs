@@ -18,11 +18,8 @@ public class RestartSceneManager : MonoBehaviour
         }
     }
 
-
-
     public void RestartScene()
     {
-        //Debug.Log("RestartScene called");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

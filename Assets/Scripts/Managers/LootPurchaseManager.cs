@@ -22,7 +22,6 @@ namespace NeonLadder.Managers
         private void Awake()
         {
             enabled = false;
-
         }
 
         public void PurchaseMetaItem(string itemName)

@@ -1,3 +1,4 @@
+using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,9 @@ namespace NeonLadder.Managers
     public class MonsterGroupActivationManager : MonoBehaviour
     {
         public List<MonsterGroup> MonsterGroups { get; set; } = new List<MonsterGroup>();
-        // Start is called before the first frame update
         void OnEnable()
         {
-            var monsterGroups = GameObject.FindGameObjectsWithTag("MonsterGroup");
+            var monsterGroups = GameObject.FindGameObjectsWithTag(Tags.MonsterGroup.ToString());
             foreach (var monsterGroup in monsterGroups)
             {
                 var monsters = monsterGroup.GetComponentsInChildren<Health>().ToList();
@@ -52,7 +52,6 @@ namespace NeonLadder.Managers
             MonsterGroups.Clear();
         }
 
-        // Update is called once per frame
         void Update()
         {
             //if all monsters in a group are dead, deactivate the group, and randomly activate another group until all groups are dead

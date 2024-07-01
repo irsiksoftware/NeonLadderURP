@@ -44,7 +44,7 @@ namespace NeonLadder.Utilities
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "Title")
+            if (SceneEnumResolver.Resolve(scene.name) == Scenes.Title)
             {
                 Time.timeScale = 1f;
             }

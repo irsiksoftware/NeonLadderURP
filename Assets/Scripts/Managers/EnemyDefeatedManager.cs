@@ -6,17 +6,12 @@ public class EnemyDefeatedManager : MonoBehaviour
     public TextMeshProUGUI enemyDefeatedCounterText;
     private int defeatedEnemiesCount = 0;
 
-   
-
     private void Start()
     {
         enabled = false;
     }
 
-    void Awake()
-    {
-
-    }
+    void Awake() { }
 
     public void InteractWithEntity(GameObject entity)
     {
