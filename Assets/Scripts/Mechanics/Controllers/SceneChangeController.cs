@@ -15,7 +15,6 @@ public class SceneChangeController : MonoBehaviour
 
     private void Awake()
     {
-        
         model = Simulation.GetModel<PlatformerModel>();
         player = model.Player;
         playerAndCameraPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
@@ -51,11 +50,6 @@ public class SceneChangeController : MonoBehaviour
 
         if (playerAndCameraPositionManager.TryGetState(scene.name, out playerPosition, out cameraPosition, out cameraRotation))
         {
-            //Debug.Log($"Restoring player position to {playerPosition} \n " + 
-            //            $"camera rotation to {cameraRotation} \n " +
-            //            $"camer position to {cameraPosition} \n " +
-            //            $"in scene {scene.name}.");
-
             player.Teleport(playerPosition);
             GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString()).transform.position = cameraPosition;
         }
@@ -72,7 +66,10 @@ public class SceneChangeController : MonoBehaviour
             }
         }
         model.VirtualCamera.enabled = true;
-        //set players transform rotation y = 90 (facing to the right)
         player.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+        if (player.transform.position.y < 0)
+        {
+            player.transform.position = new Vector3(player.transform.position.x, 0.01f, player.transform.position.z);
+        }
     }
 }

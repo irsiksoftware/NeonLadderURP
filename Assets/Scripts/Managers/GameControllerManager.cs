@@ -1,17 +1,18 @@
 using Cinemachine;
+using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.UI;
 using NeonLadder.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static NeonLadder.Core.Simulation;
 
 public class GameControllerManager : MonoBehaviour
 {
     private Game gameController;
-    //private DynamicCameraAdjustment dynamicCameraAdjustment;
     private Player player;
     private PlayerAction playerActions;
-    private GameObject statUI;
     private Scenes scene;
 
     // Start is called before the first frame update
@@ -60,36 +61,22 @@ public class GameControllerManager : MonoBehaviour
                     Debug.LogError("PlayerAction not found in scene.");
                 }
             }
-
-            if (statUI == null)
-            {
-                statUI = player.GetComponentInChildren<StatUI>().gameObject;
-                if (statUI == null)
-                {
-                    Debug.LogError("StatUI not found in scene.");
-                }
-            }
         }
 
-        else
+        else if (scene != Scenes.Credits)
         {
             if (gameController == null)
             {
-                gameController = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponent<Game>();
+                var gameControllerObj = GameObject.FindGameObjectWithTag(Tags.GameController.ToString());
+                if (gameControllerObj != null)
+                {
+                    gameController = gameControllerObj.GetComponent<Game>();
+                }
                 if (gameController == null)
                 {
                     Debug.LogError("GameController not found in scene.");
                 }
             }
-
-            //if (dynamicCameraAdjustment == null)
-            //{
-            //    dynamicCameraAdjustment = gameController.GetComponentInChildren<DynamicCameraAdjustment>();
-            //    if (dynamicCameraAdjustment == null)
-            //    {
-            //        Debug.LogError("DynamicCameraAdjustment not found in scene.");
-            //    }
-            //}
 
             if (player == null)
             {
@@ -116,18 +103,25 @@ public class GameControllerManager : MonoBehaviour
         switch (scene)
         {
             case Scenes.Title:
-                player.GetComponentInChildren<StatUI>().gameObject.SetActive(false);
+                player.GetComponentInChildren<Canvas>().enabled = false;
                 playerActions.enabled = false;
+                //gameController.gameObject.GetComponentInChildren<Camera>().enabled = false;
+                if (gameController != null)
+                {
+                    gameController.gameObject.SetActive(false);
+                }
                 break;
             case Scenes.Staging:
                 //dynamicCameraAdjustment.enabled = false;
                 //set framingTransposer follow distance to 6
-                player.GetComponentInChildren<StatUI>().gameObject.SetActive(true);
-                player.animator.SetInteger("locomotion_animation", 777); //escape death animation for webgl attempt.
+                player.GetComponentInChildren<Canvas>().enabled = true;
+                Schedule<LoadGame>();
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
+                gameController.gameObject.GetComponent<MetaGameController>().enabled = false;
+                gameController.gameObject.GetComponent<MetaGameController>().enabled = true;
                 break;
             case Scenes.ReturnToStaging:
-                player.GetComponentInChildren<StatUI>().gameObject.SetActive(false);
+                player.GetComponentInChildren<Canvas>().enabled = false;
                 break;
             case Scenes.Start:
                 //dynamicCameraAdjustment.enabled = true;
@@ -140,6 +134,9 @@ public class GameControllerManager : MonoBehaviour
             case Scenes.PermaShop:
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 2.2f;
                 // Adjust components for PermaShop scene
+                break;
+            case Scenes.Credits:
+                // Adjust components for Credits scene
                 break;
             default:
                 playerActions.enabled = true;

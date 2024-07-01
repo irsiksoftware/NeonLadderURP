@@ -5301,7 +5301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03018d13bad052c41aa28b57fac7653b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minGroundNormalY: 0.65
+  minGroundNormalY: 0.75
   gravityModifier: 1
   velocity: {x: 0, y: 0, z: 0}
   layerMask:
@@ -5315,7 +5315,6 @@ MonoBehaviour:
   jumpAudio: {fileID: 0}
   landOnGroundAudio: {fileID: 0}
   landOnEnemyAudio: {fileID: 0}
-  controlEnabled: 1
   controls: {fileID: -944628639613478452, guid: e175689d4ebccc649a1eac37c7607673,
     type: 3}
   staminaRegenTimer: 0

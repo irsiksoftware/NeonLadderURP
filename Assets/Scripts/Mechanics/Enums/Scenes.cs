@@ -8,6 +8,7 @@ namespace NeonLadder.Mechanics.Enums
         Start,
         MetaShop,
         PermaShop,
-        ReturnToStaging
+        ReturnToStaging,
+        Credits
     }
 }

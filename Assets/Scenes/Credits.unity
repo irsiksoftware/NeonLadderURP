@@ -140,6 +140,36 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1085564951840683007, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085564951840683007, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361106623524282680, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361106623524282680, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361106623524282680, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361106623524282680, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4630614794899760440, guid: 45a5343220e19c34ab9dec7d2f5566de,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -158,17 +188,111 @@ PrefabInstance:
     - target: {fileID: 5894634967134419086, guid: 45a5343220e19c34ab9dec7d2f5566de,
         type: 3}
       propertyPath: scrollSpeed
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5894634967134419086, guid: 45a5343220e19c34ab9dec7d2f5566de,
         type: 3}
       propertyPath: targetScene
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894634967134419086, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: initialTextOffset
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894634967134419086, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: bufferHeightMultiplier
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147813938580385259, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147813938580385259, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6175379630808384940, guid: 45a5343220e19c34ab9dec7d2f5566de,
         type: 3}
       propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622722360991453877, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_text
+      value: 'Neon Ladder
+
+
+        -- Irsik Software, ShorelineGames LLC --
+
+
+
+
+
+
+        Principle
+        Software Developer
+
+
+        -- Dakota D. Irsik --
+
+
+
+
+
+
+
+        Assistant
+        Level Designer
+
+
+        -- Ahsin A. Memon --
+
+
+
+
+
+
+        Special Thanks
+
+
+        --
+        Cameron Blair --
+
+
+        -- Cory D. Chatham --
+
+
+        -- Andrew J. Delikat
+        --
+
+
+        -- Aria Irsik --
+
+
+        -- Elleira "Ellie" Irsik --
+
+
+        --
+        Kairi "Niannian"  Chu''nian Irsik --
+
+
+        -- Larry J. R. Irsik  --
+
+
+        --
+        Minjia Shen --
+
+
+        -- Justin Williams --'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622722360991453877, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8535418843696218278, guid: 45a5343220e19c34ab9dec7d2f5566de,
         type: 3}

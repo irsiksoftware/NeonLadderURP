@@ -61,15 +61,18 @@ namespace NeonLadder.Managers
 
         private static void DropItem(LootItem lootItem, Transform enemyTransform)
         {
-            Vector3 spawnPosition = enemyTransform.position;
-            if (lootItem.collectiblePrefab != null)
+            if (enemyTransform != null)
             {
-                spawnPosition += StandardizedLootDropTransformations(lootItem.collectiblePrefab);
-            }
+                Vector3 spawnPosition = enemyTransform.position;
+                if (lootItem.collectiblePrefab != null)
+                {
+                    spawnPosition += StandardizedLootDropTransformations(lootItem.collectiblePrefab);
+                }
 
-            int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
-            lootItem.collectiblePrefab.amount = amountToDrop;
-            Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
+                int amountToDrop = Random.Range(lootItem.minAmount, lootItem.maxAmount + 1);
+                lootItem.collectiblePrefab.amount = amountToDrop;
+                Instantiate(lootItem.collectiblePrefab, spawnPosition, Quaternion.identity);
+            }
         }
 
         private static Vector3 StandardizedLootDropTransformations(Collectible prefab)

@@ -17,15 +17,11 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            //Debug.Log($"{nameof(HealthIsZero)} event executed for ${health.gameObject.tag}");
             switch (health.gameObject.tag)
             {
                 case "Player":
-                    Schedule<SaveGame>();
+                    SaveGameManager.Save(model.Player);
                     Schedule<PlayerDeath>();
-                    //Schedule<FadeOutCamera>();
-                    //Schedule<RestartScene>(7); // Delay to allow fade out and death animation
-                    //Schedule<PlayerSpawn>();
                     break;
                 case "Boss":
                 case "Major":

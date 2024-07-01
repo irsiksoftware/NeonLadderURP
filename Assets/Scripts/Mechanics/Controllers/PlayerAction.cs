@@ -77,7 +77,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            if (player.controlEnabled)
+            if (playerActionMap.enabled)
             {
                 UpdateSprintState(ref player.velocity);
 
@@ -219,11 +219,6 @@ namespace NeonLadder.Mechanics.Controllers
                                                 player.transform.position,
                                                 cameraPosition,
                                                 cvcRotation);
-
-                //Debug.Log($"Saved player position: {player.transform.position} \n" +
-                //        $"CvcRotation: {cvcRotation} \n" + 
-                //        $"CameraPosition: {cameraPosition} \n" +
-                //        $"in scene {SceneManager.GetActiveScene().name}");
 
                 player.EnableZMovement();
             }
@@ -380,11 +375,14 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnMovePerformed(InputAction.CallbackContext context)
         {
-            playerInput = context.ReadValue<Vector2>();
-            if (playerInput.x != 0)
+            if (player.Health.IsAlive)
             {
-                float yRotation = playerInput.x > 0 ? 90 : -90;
-                transform.parent.localRotation = Quaternion.Euler(0, yRotation, 0);
+                playerInput = context.ReadValue<Vector2>();
+                if (playerInput.x != 0)
+                {
+                    float yRotation = playerInput.x > 0 ? 90 : -90;
+                    transform.parent.localRotation = Quaternion.Euler(0, yRotation, 0);
+                }
             }
         }
 

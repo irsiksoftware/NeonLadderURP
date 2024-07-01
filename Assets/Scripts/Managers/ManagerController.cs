@@ -76,7 +76,6 @@ namespace NeonLadder.Managers
                     gameControllerManager.enabled = true;
                     break;
                 case Scenes.Staging:
-                    Simulation.Schedule<LoadGame>();
                     lootDropManager.enabled = false;
                     playerCameraPositionManager.enabled = true;
                     playerCameraPositionManager.EmptySceneStates();

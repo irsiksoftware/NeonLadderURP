@@ -16,6 +16,11 @@ namespace NeonLadderURP.DataManagement
             File.WriteAllText(Path.Combine(Application.persistentDataPath, SaveFileName), json);
         }
 
+        public static bool SaveExists()
+        {
+            return File.Exists(Path.Combine(Application.persistentDataPath, SaveFileName));
+        }   
+
         public static PlayerData Load()
         {
             string path = Path.Combine(Application.persistentDataPath, SaveFileName);

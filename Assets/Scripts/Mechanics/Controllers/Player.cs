@@ -1,4 +1,3 @@
-using Cinemachine;
 using Michsky.MUIP;
 using NeonLadder.Common;
 using NeonLadder.Mechanics.Currency;
@@ -29,15 +28,13 @@ namespace NeonLadder.Mechanics.Controllers
         public Meta MetaCurrency { get; private set; }
         public Perma PermaCurrency { get; private set; }
         [SerializeField]
-        public bool controlEnabled;
-        [SerializeField]
         public InputActionAsset controls;
         [SerializeField]
         public float staminaRegenTimer = 0f;
 
         public float DeathAnimationDuration => 3.333f;
 
-        public Animator animator { get; private set; }
+        public Animator animator { get; set; }
 
         public InputActionAsset Controls
         {
@@ -119,7 +116,7 @@ namespace NeonLadder.Mechanics.Controllers
                 targetVelocity.x = Actions.playerInput.x * Constants.DefaultMaxSpeed * ((Actions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
 
                 // Handle jumping
-                if (Actions.isJumping && Actions.JumpCount < Actions.MaxJumps)
+                if (Actions.isJumping && Actions.JumpCount < Actions.MaxJumps) 
                 {
                     velocity.y = Actions.jumpForce;
                     Actions.IncrementJumpCount();
@@ -135,7 +132,7 @@ namespace NeonLadder.Mechanics.Controllers
         public void EnableZMovement()
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            controlEnabled = false;
+            Actions.playerActionMap.Disable();
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
                                     RigidbodyConstraints.FreezePositionX |
                                     RigidbodyConstraints.FreezePositionY;
@@ -144,7 +141,7 @@ namespace NeonLadder.Mechanics.Controllers
         public void DisableZMovement()
         {
             targetVelocity.z = 0;
-            controlEnabled = true;
+            Actions.playerActionMap.Enable();
             rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
         }
 

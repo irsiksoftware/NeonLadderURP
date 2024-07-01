@@ -8,7 +8,7 @@ namespace NeonLadder.Mechanics.Controllers
     {
         public Player player { get; set; }
         public PlatformerModel model { get; private set; }
-        public float minGroundNormalY = .65f;
+        public float minGroundNormalY = .75f;
         public float gravityModifier = 1f;
         public Vector3 velocity;
         public LayerMask layerMask;
@@ -30,7 +30,6 @@ namespace NeonLadder.Mechanics.Controllers
         {
             transform.position = position;
             velocity = Vector3.zero;
-            //rigidbody.velocity = Vector3.zero;
         }
 
         protected virtual void OnEnable()

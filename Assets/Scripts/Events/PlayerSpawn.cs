@@ -1,4 +1,5 @@
-using NeonLadder.Common;
+using NeonLadder.Mechanics.Controllers;
+using System.Collections;
 
 namespace NeonLadder.Events
 {
@@ -16,12 +17,18 @@ namespace NeonLadder.Events
 
             model.Player.Health.Increment(model.Player.Health.max);
             model.Player.Stamina.Increment(model.Player.Stamina.max);
-            model.Player.MetaCurrency.Deplete();
-            model.Player.animator.enabled = true;
-            model.Player.animator.SetInteger("locomotion_animation", 777);
-            model.Player.Actions.playerActionMap.Enable();
-            model.Player.controlEnabled = true;
-            
+
+            // Start the coroutine to reset the Animator - THIS MUST be done inside of a coroutine for WebGL to function properly.
+            model.Player.StartCoroutine(ResetAnimatorDelayed(model.Player));
+        }
+
+        private IEnumerator ResetAnimatorDelayed(Player player)
+        {
+            yield return null; // Wait for one frame
+
+            player.animator.enabled = true;
+            player.animator.SetInteger("locomotion_animation", 777);
+            player.Actions.playerActionMap.Enable();
         }
     }
 }

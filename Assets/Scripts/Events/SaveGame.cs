@@ -1,4 +1,4 @@
-using NeonLadder.Core;
+using NeonLadder.Mechanics.Controllers;
 using NeonLadderURP.DataManagement;
 using UnityEngine;
 
@@ -7,19 +7,16 @@ namespace NeonLadder.Events
     /// <summary>
     /// Fired to save the game data.
     /// </summary>
-    public class SaveGame : BaseGameEvent<SaveGame>
+    public static class SaveGameManager //: BaseGameEvent<SaveGame>
     {
-        public override void Execute()
-        {
-            SavePlayerData();
-        }
 
-        private void SavePlayerData()
+
+        public static void Save(Player player)
         {
             PlayerData playerData = new PlayerData
             {
-                PermaCurrency = model.Player.PermaCurrency.current,
-                Unlocks = model.Player.Unlocks.Get(), // Assume you have a method to get current unlocks
+                PermaCurrency = player.PermaCurrency.current,
+                Unlocks = player.Unlocks.Get(), // Assume you have a method to get current unlocks
                 Settings = new PlayerSettings()
                 {
                     MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f),

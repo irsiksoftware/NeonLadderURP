@@ -1,7 +1,10 @@
+using NeonLadder.Events;
 using NeonLadder.Managers;
+using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NeonLadder.Utilities
 {
@@ -26,6 +29,26 @@ namespace NeonLadder.Utilities
             {
                 Destroy(gameObject);
             }
+        }
+
+        public void LoadScene(string sceneName)
+        {
+            if (SceneEnumResolver.Resolve(sceneName) == Scenes.Title)
+            {
+                SaveGameManager.Save(Game.Instance.model.Player);
+                Game.Instance.DestroyGameInstance();
+            }
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene(sceneName);
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "Title")
+            {
+                Time.timeScale = 1f;
+            }
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

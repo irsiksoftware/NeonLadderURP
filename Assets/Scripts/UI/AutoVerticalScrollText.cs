@@ -21,11 +21,12 @@ public class AutoScrollText : MonoBehaviour
     private string text;
     public float scrollSpeed = 20f;
     private bool isScrolling = true;
-    private float bufferHeightMultiplier = 0.15f;
-    private float lineBreakHeightMultiplier = 10f;
-    private float textHeightMultiplier = 0.75f;
-    private float initialTextOffset = 1.35f;
+    public float bufferHeightMultiplier = 0.15f;
+    public float lineBreakHeightMultiplier = 10f;
+    public float textHeightMultiplier = 0.75f;
+    public float initialTextOffset = 1.35f;
     private float bufferHeight;
+    public Scenes targetScene;
 
 
     void Awake()
@@ -60,12 +61,11 @@ public class AutoScrollText : MonoBehaviour
 
     private void OnSceneChange(Scene arg0, Scene arg1)
     {
-        Schedule<PlayerSpawn>(20);
+        Schedule<PlayerSpawn>(10);
     }
 
     void Start()
     {
-        Debug.Log($"Scroll Speed: {scrollSpeed}");
         SetTextMeshProWidth();
         AdjustContentHeight();
         scrollRect.verticalNormalizedPosition = initialTextOffset;
@@ -90,7 +90,7 @@ public class AutoScrollText : MonoBehaviour
 
     private void OnScrollFinished()
     {
-        SceneManager.LoadScene(Scenes.Staging.ToString());
+        SceneManager.LoadScene(targetScene.ToString());
     }
 
     private void SetTextMeshProWidth()
