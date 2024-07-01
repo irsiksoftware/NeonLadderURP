@@ -158,9 +158,21 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void HandleLocomotion()
         {
-            if (velocity.y > 0.01)
+            // roll animation = 13
+            if (velocity.y > 2)
             {
-                animator.SetInteger("locomotion_animation", 11); // jump
+                if (Actions.JumpCount == 2) // This is the second jump
+                {
+                    animator.SetInteger("locomotion_animation", 13); // roll
+                }
+                else
+                {
+                    animator.SetInteger("locomotion_animation", 11); // jump
+                }
+            }
+            else if (velocity.y < -2)
+            {
+                animator.SetInteger("locomotion_animation", 12); // fall
             }
             else if (Math.Abs(velocity.x) < 0.1 && Math.Abs(velocity.z) < 0.1)
             {
