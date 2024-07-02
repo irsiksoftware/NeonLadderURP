@@ -393,23 +393,26 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void TryAttackEnemy()
         {
-            Vector3 rayOrigin = transform.parent.position + new Vector3(0, 1.0f, 0);  // Adjust 1.0f to suit the character size
-            Vector3 rayDirection = transform.parent.forward;
-            float attackRange = Constants.AttackRange;
-
-            RaycastHit[] hits = Physics.RaycastAll(rayOrigin, rayDirection, attackRange);
-
-            Debug.DrawRay(rayOrigin, rayDirection * attackRange, Color.red);
-            List<string> enemiesCaughtInRaycast = new List<string>();
-            foreach (RaycastHit hit in hits)
+            if (isUsingMelee)
             {
-                enemiesCaughtInRaycast.Add(hit.collider.gameObject.name);
-                if (hit.collider.CompareTag("Boss") || hit.collider.CompareTag("Major") || hit.collider.CompareTag("Minor"))
+                Vector3 rayOrigin = transform.parent.position + new Vector3(0, 1.0f, 0);  // Adjust 1.0f to suit the character size
+                Vector3 rayDirection = transform.parent.forward;
+                float attackRange = Constants.AttackRange;
+
+                RaycastHit[] hits = Physics.RaycastAll(rayOrigin, rayDirection, attackRange);
+
+                Debug.DrawRay(rayOrigin, rayDirection * attackRange, Color.red);
+                List<string> enemiesCaughtInRaycast = new List<string>();
+                foreach (RaycastHit hit in hits)
                 {
-                    Health enemyHealth = hit.collider.GetComponent<Health>();
-                    if (enemyHealth != null)
+                    enemiesCaughtInRaycast.Add(hit.collider.gameObject.name);
+                    if (hit.collider.CompareTag("Boss") || hit.collider.CompareTag("Major") || hit.collider.CompareTag("Minor"))
                     {
-                        enemyHealth.Decrement(Constants.AttackDamage);
+                        Health enemyHealth = hit.collider.GetComponent<Health>();
+                        if (enemyHealth != null)
+                        {
+                            enemyHealth.Decrement(Constants.AttackDamage);
+                        }
                     }
                 }
             }
