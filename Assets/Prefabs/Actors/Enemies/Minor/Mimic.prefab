@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 6001666444622087326}
   - component: {fileID: 8879383648936848397}
   - component: {fileID: 4941114856100309104}
+  - component: {fileID: 4175925617321977122}
   m_Layer: 0
   m_Name: Mimic
   m_TagString: Minor
@@ -200,6 +201,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
+--- !u!114 &4175925617321977122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524494402907306086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1714855538398118418
 GameObject:
   m_ObjectHideFlags: 0

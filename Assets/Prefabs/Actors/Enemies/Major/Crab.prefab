@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 543618142301629375}
   - component: {fileID: 8791361210454899027}
   - component: {fileID: 7212271202758195228}
-  - component: {fileID: 5135095189200010290}
+  - component: {fileID: 3694338508863610967}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Major
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &5135095189200010290
+--- !u!114 &3694338508863610967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 850272462617381134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0225b8843f236459ebd95358c4c123, type: 3}
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &850272462617381136

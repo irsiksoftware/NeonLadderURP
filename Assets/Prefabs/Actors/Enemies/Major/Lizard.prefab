@@ -1848,7 +1848,7 @@ GameObject:
   - component: {fileID: 7685456082607370167}
   - component: {fileID: 1451577930058754443}
   - component: {fileID: 8051622542252312221}
-  - component: {fileID: 5710103436338777614}
+  - component: {fileID: 3386926219355226664}
   m_Layer: 0
   m_Name: Lizard
   m_TagString: Major
@@ -1971,7 +1971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &5710103436338777614
+--- !u!114 &3386926219355226664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1980,7 +1980,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6204530840110606686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0225b8843f236459ebd95358c4c123, type: 3}
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1135542458407683549

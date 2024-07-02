@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 7964893609161761557}
   - component: {fileID: 8279011589582697839}
   - component: {fileID: 1058876840668690388}
+  - component: {fileID: 4014694705811609475}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Minor
@@ -643,6 +644,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
+--- !u!114 &4014694705811609475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3227756427205745131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3298885543490159552
 GameObject:
   m_ObjectHideFlags: 0

@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 7547992709649217092}
   - component: {fileID: 5937482297244689820}
   - component: {fileID: 7278384659593518523}
-  - component: {fileID: 209421528658847297}
+  - component: {fileID: 138497536059389788}
   m_Layer: 0
   m_Name: Gorilla
   m_TagString: Major
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &209421528658847297
+--- !u!114 &138497536059389788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1447412156832593092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0225b8843f236459ebd95358c4c123, type: 3}
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1447412156832593094

@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 3587397610899027364}
   - component: {fileID: 7772861403135878887}
   - component: {fileID: 8071586598277191439}
-  - component: {fileID: 4916608392615572975}
+  - component: {fileID: 2625896889826218188}
   m_Layer: 0
   m_Name: FlyingFrog
   m_TagString: Major
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &4916608392615572975
+--- !u!114 &2625896889826218188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5680596531327945821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0225b8843f236459ebd95358c4c123, type: 3}
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5680596531327945823

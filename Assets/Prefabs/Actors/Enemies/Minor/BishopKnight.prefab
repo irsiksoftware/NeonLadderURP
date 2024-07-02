@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 790412529162808695}
   - component: {fileID: 1298537169856075153}
   - component: {fileID: 6537990367971502700}
+  - component: {fileID: 9157629944569660258}
   m_Layer: 0
   m_Name: BishopKnight
   m_TagString: Minor
@@ -49,7 +50,7 @@ Animator:
   m_GameObject: {fileID: 1184444242315725227}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: db39d76c3a2c436fa76587eab2502f8f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 37e6b3e039904a6d99b204b48649d9b5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d5ee0b538a6ca84ba180eb0c3e01305, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
+--- !u!114 &9157629944569660258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184444242315725227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1368945284543947952
 GameObject:
   m_ObjectHideFlags: 0

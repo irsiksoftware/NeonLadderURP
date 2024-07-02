@@ -6,6 +6,7 @@ namespace NeonLadder.Mechanics.Controllers
     {
         public GameObject muzzle;
         public GameObject impact;
+        public int Damage;
         [SerializeField]
         private float speed;
         [SerializeField]

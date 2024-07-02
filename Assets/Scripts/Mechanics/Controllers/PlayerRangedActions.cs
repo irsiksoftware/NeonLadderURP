@@ -3,13 +3,14 @@ using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class PlayeRangedActions : MonoBehaviour
+    public class PlayerRangedActions : MonoBehaviour
     {
         public float raycastDistance = 100f;
         public Transform spawnPoint;
         private int currentFX = 0;
         public List<GameObject> prefabs = new List<GameObject>();
         public Player player;
+        public int Damage = 10;
 
         public void Shoot(Vector3 targetPoint)
         {
@@ -18,6 +19,7 @@ namespace NeonLadder.Mechanics.Controllers
 
             if (projectileController != null)
             {
+                projectileController.Damage = Damage;
                 Vector3 direction = (targetPoint - spawnPoint.position).normalized;
                 direction.z = 0;
                 projectileController.SetDirection(direction);

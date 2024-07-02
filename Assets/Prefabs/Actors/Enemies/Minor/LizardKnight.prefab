@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 1245208309082504254}
   - component: {fileID: 7807501683635573269}
   - component: {fileID: 8882879657844300646}
+  - component: {fileID: 693928243990674551}
   m_Layer: 0
   m_Name: LizardKnight
   m_TagString: Minor
@@ -424,6 +425,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
+--- !u!114 &693928243990674551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125715020853024642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1370620042761008949
 GameObject:
   m_ObjectHideFlags: 0
