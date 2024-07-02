@@ -9295,6 +9295,11 @@ PrefabInstance:
       propertyPath: playerActionMap.m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4825187414984910413, guid: dd358eca7256920488c100301afbd72e,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 5340501665283719611}
     - target: {fileID: 8383141186732845002, guid: dd358eca7256920488c100301afbd72e,
         type: 3}
       propertyPath: m_Name
@@ -10168,6 +10173,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e92ca9c000f09494fb23d45891d8e3d8, type: 3}
+--- !u!4 &5340501665283719611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8149270576353029091, guid: e92ca9c000f09494fb23d45891d8e3d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4252879716183108184}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5711359390174913976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8378824559502643168, guid: e92ca9c000f09494fb23d45891d8e3d8,

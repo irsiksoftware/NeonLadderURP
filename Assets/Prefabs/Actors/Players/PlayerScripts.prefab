@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4185943908559832658}
   - component: {fileID: 4721412442788016091}
+  - component: {fileID: 4825187414984910413}
   m_Layer: 0
   m_Name: PlayerScripts
   m_TagString: Untagged
@@ -49,9 +50,21 @@ MonoBehaviour:
   InputDebuggingText: {fileID: 0}
   ControllerNameDebuggingText: {fileID: 0}
   TouchScreenSupportDebuggingText: {fileID: 0}
-  jumpState: 0
-  jump: 0
-  stopJump: 0
+  playerInput: {x: 0, y: 0}
+  isUsingMelee: 1
+  jumpForce: 7
+  playerActionMap:
+    m_Name: 
+    m_Id: 
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  uiActionMap:
+    m_Name: 
+    m_Id: 
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
   sprintSpeed: 7
   sprintDuration: 10
   sprintState: 0
@@ -59,3 +72,22 @@ MonoBehaviour:
   attackDuration: 0
   attackState: 0
   stopAttack: 0
+  meleeWeaponGroups: []
+  rangedWeaponGroups: []
+--- !u!114 &4825187414984910413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383141186732845002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466187e22d72de74babad4c4b7ac998d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 200
+  spawnPoint: {fileID: 0}
+  prefabs:
+  - {fileID: 5173163397233013865, guid: 3135caadf0341fe47b52e354628a11b9, type: 3}
+  player: {fileID: 0}
