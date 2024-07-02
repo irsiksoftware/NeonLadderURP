@@ -5186,6 +5186,7 @@ GameObject:
   - component: {fileID: 394206682869492968}
   - component: {fileID: 6136489052418638049}
   - component: {fileID: 4806542478482414112}
+  - component: {fileID: 2736710589979961786}
   m_Layer: 0
   m_Name: Kaoru
   m_TagString: Player
@@ -5374,6 +5375,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 2147483647
+--- !u!114 &2736710589979961786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5358769332522107222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c943337c6044511b249ee9d87f87e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
+    type: 3}
 --- !u!1 &5370462153359681267
 GameObject:
   m_ObjectHideFlags: 0

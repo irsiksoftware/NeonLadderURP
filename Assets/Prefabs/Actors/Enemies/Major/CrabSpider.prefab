@@ -1370,6 +1370,7 @@ GameObject:
   - component: {fileID: 504412177688570069}
   - component: {fileID: 8911097923852046603}
   - component: {fileID: 95591128478954742}
+  - component: {fileID: 2625831835777085618}
   m_Layer: 0
   m_Name: CrabSpider
   m_TagString: Major
@@ -1504,6 +1505,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2625831835777085618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189079400462985659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c943337c6044511b249ee9d87f87e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
+    type: 3}
 --- !u!1 &6356005457803764171
 GameObject:
   m_ObjectHideFlags: 0

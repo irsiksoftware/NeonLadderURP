@@ -1,4 +1,6 @@
 ﻿//using DamageNumbersPro;
+using DamageNumbersPro;
+using NeonLadeer.Mechanics.Controllers;
 using UnityEngine;
 
 namespace NeonLadder.Mechanics.Stats
@@ -9,7 +11,7 @@ namespace NeonLadder.Mechanics.Stats
         public float current;
         public float max = 100;
         public bool IsDepleted => current == 0;
-        //public DamageNumber damageNumber;
+        protected DamageNumberController damageNumberController;
 
         public void Increment(float amount = 1)
         {
@@ -25,7 +27,10 @@ namespace NeonLadder.Mechanics.Stats
             switch (this)
             {
                 case Health:
-                    //damageNumber.Spawn(transform.position, amount.ToString());
+                    if (damageNumberController != null)
+                    {
+                        damageNumberController.SpawnPopup(amount);
+                    }
                     break;
                 case Stamina:
                     //damageNumber.Spawn(transform.position, amount.ToString());
@@ -51,6 +56,7 @@ namespace NeonLadder.Mechanics.Stats
         protected virtual void Awake()
         {
             RestoreToMax();
+            damageNumberController = GetComponent<DamageNumberController>();
         }
 
         protected virtual void RestoreToMax()

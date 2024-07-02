@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 1421748671414856878}
   - component: {fileID: 7177872537975009279}
   - component: {fileID: 2605193642542145101}
+  - component: {fileID: 4463037896016872492}
   m_Layer: 0
   m_Name: DemonKnight
   m_TagString: Minor
@@ -434,6 +435,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4463037896016872492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915177123758144454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c943337c6044511b249ee9d87f87e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
+    type: 3}
 --- !u!1 &1935825255105753730
 GameObject:
   m_ObjectHideFlags: 0

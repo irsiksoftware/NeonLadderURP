@@ -16,7 +16,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (other.gameObject.layer == LayerMask.NameToLayer(Layers.Battle.ToString()))
             {
-                Debug.Log("Bullet hit the enemy!");
+                //Debug.Log("Bullet hit the enemy!");
                 Destroy(other.gameObject);
                 health.Decrement(other.GetComponent<ProjectileController>().Damage);
             }

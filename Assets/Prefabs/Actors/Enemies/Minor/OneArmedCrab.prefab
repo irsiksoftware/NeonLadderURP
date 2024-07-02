@@ -1397,6 +1397,7 @@ GameObject:
   - component: {fileID: 4631486837913274653}
   - component: {fileID: 501225310379962543}
   - component: {fileID: 2201088253023934071}
+  - component: {fileID: 9134528165449785070}
   m_Layer: 0
   m_Name: OneArmedCrab
   m_TagString: Minor
@@ -1531,6 +1532,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9134528165449785070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6747288530658983939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c943337c6044511b249ee9d87f87e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
+    type: 3}
 --- !u!1 &6874557398283652042
 GameObject:
   m_ObjectHideFlags: 0
