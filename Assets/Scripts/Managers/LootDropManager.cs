@@ -31,7 +31,7 @@ namespace NeonLadder.Managers
 
                     if (ShouldDropItem(lootItem, target))
                     {
-                        StartCoroutine(DelayedDropItem(lootItem, enemy.transform, enemy.DeathAnimationDuration));
+                        StartCoroutine(DelayedDropItem(lootItem, enemy.transform, enemy.DeathAnimationDuration + enemy.deathBuffer));
                         itemsToDrop--;
                     }
                 }

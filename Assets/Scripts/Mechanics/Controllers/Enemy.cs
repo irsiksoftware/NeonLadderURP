@@ -38,6 +38,8 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         protected virtual int attackDamage { get; set; } = 10; // Damage per attack
 
+        public float deathBuffer = 1f;
+
         [SerializeField]
         private float attackRange = 0f; // Default value
         [SerializeField]
@@ -100,7 +102,7 @@ namespace NeonLadder.Mechanics.Controllers
             health = GetComponentInParent<Health>();
             LoadLootTable();
             CacheAnimationClipLengths();
-            attackAnimationDuration = GetAnimationClipLength(Animations.Attack01);
+            attackAnimationDuration = GetAnimationClipLength(Animations.Attack1);
             deathAnimationDuration = GetAnimationClipLength(Animations.Die);
 
         }
@@ -270,7 +272,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private IEnumerator PlayDeathAnimation()
         {
-            yield return new WaitForSeconds(deathAnimationDuration);
+            yield return new WaitForSeconds(deathAnimationDuration + deathBuffer);
             transform.parent.gameObject.SetActive(false);
         }
 
@@ -311,16 +313,7 @@ namespace NeonLadder.Mechanics.Controllers
             lastAttackTime = Time.time;
             player.Health.Decrement(attackDamage);
             animator.SetInteger("animation", attackAnimation);
-
-            if (attackAnimationDuration == 0)
-            {
-                yield return new WaitForSeconds(1f);
-            }
-            else
-            {
-                yield return new WaitForSeconds(attackAnimationDuration);
-            }
-
+            yield return new WaitForSeconds(attackAnimationDuration);
             currentState = MonsterStates.Reassessing;
         }
 
