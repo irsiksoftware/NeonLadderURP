@@ -2,6 +2,10 @@ namespace NeonLadder.Mechanics.Enums
 {
     public enum Layers
     {
-        Battle
+        Battle,
+        TransparentFX,
+        IgnoreRaycast,
+        Water,
+        UI
     }
 }
