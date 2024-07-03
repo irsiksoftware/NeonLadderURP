@@ -1,8 +1,9 @@
 using NeonLadder.Common;
 using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
-using NeonLadder.Mechanics.Stats;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -44,8 +45,11 @@ namespace NeonLadder.Mechanics.Controllers
 
         #region Attacking
         [SerializeField]
-        public float attackDuration; // seconds
-        private float initialAttackDuration; // Store the initial attack duration
+        private float attackAnimationDuration;
+        public float AttackAnimationDuration;
+
+        private int meleeAttackAnimation = 23;
+        private int rangedAttackAnimation = 75;
 
         [SerializeField]
         public ActionStates attackState = ActionStates.Ready;
@@ -57,14 +61,14 @@ namespace NeonLadder.Mechanics.Controllers
         public List<GameObject> meleeWeaponGroups;
         public List<GameObject> rangedWeaponGroups;
 
+
+
         protected void Start()
         {
             player = GetComponentInParent<Player>();
             playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
             ConfigureControls(player);
             ControllerDebugging.PrintDebugControlConfiguration(player);
-            initialAttackDuration = attackDuration; // Initialize the initial attack duration
-                                                    // Cache the weapon groups here if not assigned via Inspector
             if (meleeWeaponGroups == null || meleeWeaponGroups.Count == 0)
             {
                 meleeWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("MeleeWeapons"));
@@ -215,7 +219,7 @@ namespace NeonLadder.Mechanics.Controllers
                 var cameraPosition = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString()).transform.position;
                 var cvcRotation = Game.Instance.model.VirtualCamera.gameObject.transform.rotation;
 
-                playerPositionManager.SaveState(sceneName, 
+                playerPositionManager.SaveState(sceneName,
                                                 player.transform.position,
                                                 cameraPosition,
                                                 cvcRotation);
@@ -328,26 +332,12 @@ namespace NeonLadder.Mechanics.Controllers
             switch (attackState)
             {
                 case ActionStates.Preparing:
-                    attackDuration = initialAttackDuration;
                     attackState = ActionStates.Acting;
                     break;
-
                 case ActionStates.Acting:
-                    if (attackDuration > 0)
-                    {
-                        attackDuration -= Time.deltaTime;
-
-                        if (attackDuration <= initialAttackDuration / 2 && attackDuration > initialAttackDuration / 2 - Time.deltaTime)
-                        {
-                            TryAttackEnemy();
-                        }
-                    }
-                    else
-                    {
-                        attackState = ActionStates.Ready;
-                    }
+                    StartCoroutine(TryAttackEnemy());
+                    attackState = ActionStates.Ready;
                     break;
-
                 case ActionStates.Acted:
                     break;
             }
@@ -391,29 +381,25 @@ namespace NeonLadder.Mechanics.Controllers
             playerInput = Vector2.zero; // No movement input
         }
 
-        private void TryAttackEnemy()
+        private IEnumerator TryAttackEnemy()
         {
-            if (isUsingMelee)
+            var attackComponents = transform.parent.gameObject.GetComponentsInChildren<Collider>()
+                                                              .Where(c => c.gameObject != transform.parent.gameObject).ToList();
+            if (attackComponents != null && attackComponents.Count() > 0)
             {
-                Vector3 rayOrigin = transform.parent.position + new Vector3(0, 1.0f, 0);  // Adjust 1.0f to suit the character size
-                Vector3 rayDirection = transform.parent.forward;
-                float attackRange = Constants.AttackRange;
-
-                RaycastHit[] hits = Physics.RaycastAll(rayOrigin, rayDirection, attackRange);
-
-                Debug.DrawRay(rayOrigin, rayDirection * attackRange, Color.red);
-                List<string> enemiesCaughtInRaycast = new List<string>();
-                foreach (RaycastHit hit in hits)
+                player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
+                //lastAttackTime = Time.time;
+                foreach (var attackComponent in attackComponents)
                 {
-                    enemiesCaughtInRaycast.Add(hit.collider.gameObject.name);
-                    if (hit.collider.CompareTag("Boss") || hit.collider.CompareTag("Major") || hit.collider.CompareTag("Minor"))
-                    {
-                        Health enemyHealth = hit.collider.GetComponent<Health>();
-                        if (enemyHealth != null)
-                        {
-                            enemyHealth.Decrement(Constants.AttackDamage);
-                        }
-                    }
+                    attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Battle));
+                }
+                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), (isUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
+                yield return new WaitForSeconds(player.attackAnimationDuration);
+                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
+                player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Activate action layer
+                foreach (var attackComponent in attackComponents)
+                {
+                    attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Default));
                 }
             }
         }

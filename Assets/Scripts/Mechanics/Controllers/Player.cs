@@ -32,9 +32,15 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         public float staminaRegenTimer = 0f;
 
-        public float DeathAnimationDuration => 3.333f;
 
-        public Animator animator { get; set; }
+        private int walkAnimation = 6;
+        private int runAnimation = 10;
+        private int idleAnimation = 1;
+        private int jumpAnimation = 11;
+        private int fallAnimation = 12;
+        private int rollAnimation = 13;
+
+
 
         public InputActionAsset Controls
         {
@@ -58,7 +64,6 @@ namespace NeonLadder.Mechanics.Controllers
             Actions = GetComponentInChildren<PlayerAction>();
             Unlocks = GetComponentInChildren<PlayerUnlock>();
             audioSource = GetComponent<AudioSource>();
-            animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody>();
             Health = GetComponent<Health>();
             Stamina = GetComponent<Stamina>();
@@ -147,13 +152,13 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void HandleAnimations()
         {
-            if (animator.GetInteger("locomotion_animation") > 9000 || animator.GetInteger("locomotion_animation") == 5) // dances, non-locomotion animations
+            if (animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) > 9000 || animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 5) // dances, non-locomotion animations
             {
                 return;
             }
 
             HandleLocomotion();
-            HandleAction();
+            //HandleAction();
         }
 
         private void HandleLocomotion()
@@ -163,52 +168,54 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 if (Actions.JumpCount == 2) // This is the second jump
                 {
-                    animator.SetInteger("locomotion_animation", 13); // roll
+                    animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), rollAnimation); // roll
                 }
                 else
                 {
-                    animator.SetInteger("locomotion_animation", 11); // jump
+                    animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), jumpAnimation); // jump
                 }
             }
             else if (velocity.y < -2)
             {
-                animator.SetInteger("locomotion_animation", 12); // fall
+                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), fallAnimation); // fall
             }
             else if (Math.Abs(velocity.x) < 0.1 && Math.Abs(velocity.z) < 0.1)
             {
-                animator.SetInteger("locomotion_animation", 1); // idle
+                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), idleAnimation); // idle
             }
             else if (Math.Abs(velocity.x) > 4 || Math.Abs(velocity.z) > 4)
             {
-                animator.SetInteger("locomotion_animation", 10); // run
+                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), runAnimation); // run
             }
             else if (Math.Abs(velocity.x) > 0.1 || Math.Abs(velocity.z) > 0.1)
             {
-                animator.SetInteger("locomotion_animation", 6); // walk
+                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), walkAnimation); // walk
             }
         }
 
-        private void HandleAction()
-        {
-            if (Actions.attackState == ActionStates.Acting)
-            {
-                if (Actions.isUsingMelee)
-                {
-                    animator.SetInteger("action_animation", 23); // sword attack
-                    animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
-                }
-                else
-                {
-                    animator.SetInteger("action_animation", 75); // shoot guns
-                    animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
-                }
-            }
-            else
-            {
-                animator.SetInteger("action_animation", 0); // no action
-                animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
-            }
-        }
+
+
+        //private void HandleAction()
+        //{
+        //    if (Actions.attackState == ActionStates.Acting)
+        //    {
+        //        if (Actions.isUsingMelee)
+        //        {
+        //            animator.SetInteger("action_animation", meleeAttackAnimation); // sword attack
+        //            animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
+        //        }
+        //        else
+        //        {
+        //            animator.SetInteger("action_animation", rangedAttackAnimation); // shoot guns
+        //            animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
+        //        }
+        //    }
+        //    else
+        //    {
+        //        animator.SetInteger("action_animation", 0); // no action
+        //        animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
+        //    }
+        //}
 
         internal void AddMetaCurrency(int amount)
         {

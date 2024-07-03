@@ -1,5 +1,7 @@
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
@@ -7,6 +9,17 @@ namespace NeonLadder.Mechanics.Controllers
     public class DamageController : MonoBehaviour
     {
         public Health health { get; private set; }
+
+        [SerializeField]
+        private float duplicateCollisionAvoidanceTimer = 0f;
+
+        public float DuplicateCollisionAvoidanceTimer
+        {
+            get => duplicateCollisionAvoidanceTimer;
+            set => duplicateCollisionAvoidanceTimer = value;
+        }
+
+        private HashSet<GameObject> recentCollisions = new HashSet<GameObject>();
 
         private void Start()
         {
@@ -17,21 +30,29 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (other.gameObject.layer == LayerMask.NameToLayer(Layers.Battle.ToString()))
             {
-                if (TryGetComponentInHierarchy(other.transform, out ProjectileController projectile))
+                Rigidbody parentRigidbody = other.GetComponentInParent<Rigidbody>();
+
+                if (parentRigidbody != null)
                 {
-                    Destroy(other.gameObject);
-                    ApplyDamage(projectile.Damage);
-                }
-                else if (TryGetComponentInHierarchy(other.transform, out MeleeController melee))
-                {
-                    ApplyDamage(melee.Damage);
+                    GameObject collisionGameObject = parentRigidbody.gameObject;
+
+                    if (!recentCollisions.Contains(collisionGameObject))
+                    {
+                        recentCollisions.Add(collisionGameObject);
+                        StartCoroutine(RemoveFromRecentCollisions(collisionGameObject));
+
+                        if (TryGetComponentInHierarchy(other.transform, out ProjectileController projectile))
+                        {
+                            Destroy(other.gameObject);
+                            health.Decrement(projectile.Damage);
+                        }
+                        else if (TryGetComponentInHierarchy(other.transform, out MeleeController melee))
+                        {
+                            health.Decrement(melee.Damage);
+                        }
+                    }
                 }
             }
-        }
-
-        private void ApplyDamage(float damage)
-        {
-            health.Decrement(damage);
         }
 
         private bool TryGetComponentInHierarchy<T>(Transform transform, out T component) where T : Component
@@ -43,6 +64,15 @@ namespace NeonLadder.Mechanics.Controllers
                 component = transform.GetComponent<T>();
             }
             return component != null;
+        }
+
+        private IEnumerator RemoveFromRecentCollisions(GameObject obj)
+        {
+            if (duplicateCollisionAvoidanceTimer > 0)
+            {
+                yield return new WaitForSeconds(duplicateCollisionAvoidanceTimer);
+            }
+            recentCollisions.Remove(obj);
         }
     }
 }

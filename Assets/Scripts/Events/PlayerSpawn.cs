@@ -1,4 +1,5 @@
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
 using System.Collections;
 
 namespace NeonLadder.Events
@@ -27,7 +28,7 @@ namespace NeonLadder.Events
             yield return null; // Wait for one frame
 
             player.animator.enabled = true;
-            player.animator.SetInteger("locomotion_animation", 777);
+            player.animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), 777);
             player.Actions.playerActionMap.Enable();
         }
     }

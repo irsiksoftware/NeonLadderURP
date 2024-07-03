@@ -3,7 +3,6 @@ using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -16,7 +15,6 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip ouchAudio;
         public AudioClip jumpAudio;
         public AudioClip landAudio;
-        internal Animator animator;
         private int moveDirection;
 
         public bool IsFacingLeft { get; set; }
@@ -88,47 +86,13 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual int victoryAnimation { get; set; } = 5;
         protected virtual int deathAnimation { get; set; } = 4;
 
-        protected virtual float deathAnimationDuration { get; set; }
-        protected virtual float attackAnimationDuration { get; set; }
 
-        public float DeathAnimationDuration => deathAnimationDuration;
-
-        private Dictionary<Animations, float> animationClipLengths;
 
         protected override void Awake()
         {
             base.Awake();
-            animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
             LoadLootTable();
-            CacheAnimationClipLengths();
-            attackAnimationDuration = GetAnimationClipLength(Animations.Attack1);
-            deathAnimationDuration = GetAnimationClipLength(Animations.Die);
-
-        }
-
-        private void CacheAnimationClipLengths()
-        {
-            animationClipLengths = new Dictionary<Animations, float>();
-            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-
-            foreach (var clip in clips)
-            {
-                if (System.Enum.TryParse(clip.name, out Animations animation))
-                {
-                    animationClipLengths[animation] = clip.length;
-                }
-            }
-        }
-
-        private float GetAnimationClipLength(Animations animation)
-        {
-            if (animationClipLengths.TryGetValue(animation, out float length))
-            {
-                return length;
-            }
-            Debug.LogWarning($"Animation {animation} not found on {animator.name}");
-            return 0f;
         }
 
         private void LoadLootTable()

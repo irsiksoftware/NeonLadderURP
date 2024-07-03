@@ -541,6 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
 --- !u!1 &1727385550637327478
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +979,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 573538279842177704}
+  - component: {fileID: 401416424336664766}
   m_Layer: 0
   m_Name: salamender_upperMouth02
   m_TagString: Untagged
@@ -1003,6 +1005,27 @@ Transform:
   - {fileID: 7986857858487417521}
   m_Father: {fileID: 4029921907332144796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &401416424336664766
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233865311685317246}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4264326147804599431
 GameObject:
   m_ObjectHideFlags: 0

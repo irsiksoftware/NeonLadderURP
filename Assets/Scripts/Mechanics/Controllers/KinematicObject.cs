@@ -1,5 +1,7 @@
 using NeonLadder.Core;
+using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
@@ -20,6 +22,13 @@ namespace NeonLadder.Mechanics.Controllers
         protected RaycastHit[] hitBuffer = new RaycastHit[16];
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
+        public Animator animator { get; private set; }
+        public virtual float deathAnimationDuration { get; set; }
+        public virtual float attackAnimationDuration { get; set; }
+
+        public float DeathAnimationDuration => deathAnimationDuration;
+
+        private Dictionary<Animations, float> animationClipLengths;
 
         public void Bounce(float value)
         {
@@ -32,32 +41,32 @@ namespace NeonLadder.Mechanics.Controllers
             velocity = Vector3.zero;
         }
 
+        private void CacheAnimationClipLengths()
+        {
+            animationClipLengths = new Dictionary<Animations, float>();
+            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+
+            foreach (var clip in clips)
+            {
+                if (System.Enum.TryParse(clip.name, out Animations animation))
+                {
+                    animationClipLengths[animation] = clip.length;
+                }
+            }
+        }
+
+        private float GetAnimationClipLength(Animations animation)
+        {
+            if (animationClipLengths.TryGetValue(animation, out float length))
+            {
+                return length;
+            }
+            Debug.LogWarning($"Animation {animation} not found on {animator.name}");
+            return 0f;
+        }
+
         protected virtual void OnEnable()
         {
-
-            switch (this)
-            {
-                case FlyingMinor:
-                case Minor:
-                case FlyingMajor:
-                case Major:
-                case Boss:
-                case Enemy:
-                    rigidbody = GetComponentInParent<Rigidbody>();
-                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-                    break;
-                case Player:
-                    rigidbody = GetComponent<Rigidbody>();
-                    break;
-                default:
-                    break;
-            }
-
-            if (rigidbody != null)
-            {
-                rigidbody.isKinematic = true;
-            }
-
             GuaranteeModelAndPlayer();
         }
 
@@ -72,7 +81,35 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void Awake()
         {
+            switch (this)
+            {
+                case FlyingMinor:
+                case Minor:
+                case FlyingMajor:
+                case Major:
+                case Boss:
+                case Enemy:
+                    rigidbody = GetComponentInParent<Rigidbody>();
+                    animator = GetComponentInParent<Animator>();
+                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+                    break;
+                case Player:
+                    rigidbody = GetComponent<Rigidbody>();
+                    animator = GetComponent<Animator>();
+                    break;
+                default:
+                    break;
+            }
+
+            if (rigidbody != null)
+            {
+                rigidbody.isKinematic = true;
+            }
+
             GuaranteeModelAndPlayer();
+            CacheAnimationClipLengths();
+            attackAnimationDuration = GetAnimationClipLength(Animations.Attack1);
+            deathAnimationDuration = GetAnimationClipLength(Animations.Die);
         }
 
         private void GuaranteeModelAndPlayer()

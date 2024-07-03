@@ -1,3 +1,4 @@
+using NeonLadder.Mechanics.Enums;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class ChildObjectsAnimationSynchronization : MonoBehaviour
         var animators = GetComponentsInChildren<Animator>();
         foreach (var animator in animators)
         {
-            animator.SetInteger("locomotion_animation", dance);
+            animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), dance);
         }
     }
 
