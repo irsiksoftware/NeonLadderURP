@@ -57,4 +57,7 @@ MonoBehaviour:
   landAudio: {fileID: 0}
   lootTable: {fileID: 0}
   staminaRegenTimer: 0
+  attackRange: 0
+  retreatWhenTooClose: 0
   currentState: 0
+  _attackCooldown: 3

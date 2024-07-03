@@ -47,6 +47,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scorpion
       objectReference: {fileID: 0}
+    - target: {fileID: 2245800193157607375, guid: 9cb570a0b7daa0443b94d266dcc76749,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2245800193157903337, guid: 9cb570a0b7daa0443b94d266dcc76749,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -170,6 +175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NagaWizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6667404006967607094, guid: 4caac6cad88f34041bb75e9bde1a0383,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

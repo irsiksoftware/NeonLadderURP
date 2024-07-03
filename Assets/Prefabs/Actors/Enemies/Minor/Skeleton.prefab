@@ -930,6 +930,7 @@ GameObject:
   - component: {fileID: 4272454811055249202}
   - component: {fileID: 5731325615040376521}
   - component: {fileID: 2352853548544298975}
+  - component: {fileID: 4684295842711228267}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Minor
@@ -1078,6 +1079,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1.5
+--- !u!114 &4684295842711228267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709253892719380096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04003f6eafb6570459eb3572e1aa4837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 5
 --- !u!1 &4873547074345406329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,9 +1554,10 @@ GameObject:
   - component: {fileID: 3253763814929933189}
   - component: {fileID: 8822486498159273549}
   - component: {fileID: 7946092848258727966}
+  - component: {fileID: 5460247463150990301}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: MeleeWeapons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1611,6 +1627,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5460247463150990301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451707518484195545}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.112253726, y: 0.3984142, z: 1.2457223}
+  m_Center: {x: 0.008463251, y: 0.067692906, z: 0.95013785}
 --- !u!1 &7460482445430312744
 GameObject:
   m_ObjectHideFlags: 0

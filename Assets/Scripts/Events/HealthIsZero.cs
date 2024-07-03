@@ -26,7 +26,6 @@ namespace NeonLadder.Events
                 case "Boss":
                 case "Major":
                 case "Minor":
-                    health.gameObject.layer = LayerMask.NameToLayer("TransparentFX");
                     var ev = Schedule<EnemyDeath>();
                     ev.enemy = health.gameObject.GetComponentInChildren<Enemy>();
                     break;

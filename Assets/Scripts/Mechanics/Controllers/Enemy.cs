@@ -3,6 +3,8 @@ using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
@@ -16,6 +18,8 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip landAudio;
         internal Animator animator;
         private int moveDirection;
+
+        public bool IsFacingLeft { get; set; }
 
         [SerializeField]
         private LootTable lootTable; // Allow assignment in the editor
@@ -35,7 +39,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual int attackDamage { get; set; } = 10; // Damage per attack
 
         [SerializeField]
-        private float attackRange = 3.0f; // Default value
+        private float attackRange = 0f; // Default value
         [SerializeField]
         private bool retreatWhenTooClose = false; // Default value
 
@@ -61,27 +65,33 @@ namespace NeonLadder.Mechanics.Controllers
             get { return retreatWhenTooClose; }
             set { retreatWhenTooClose = value; }
         }
-
+        [SerializeField]
+        private MonsterStates currentState = MonsterStates.Idle;
         [SerializeField]
         protected virtual float retreatBuffer { get; set; } = 1.0f;
         [SerializeField]
-        protected virtual float attackCooldown { get; set; } = 1.0f; // Cooldown time between attacks in seconds
-        protected virtual float lastAttackTime { get; set; } = 0; // Timestamp of the last attack
+        private float _attackCooldown = 3.0f; // Default value if not set in the editor or overridden
+
+        public virtual float attackCooldown
+        {
+            get => _attackCooldown;
+            set => _attackCooldown = value;
+        }
+        protected virtual float lastAttackTime { get; set; } = -10f;
         protected virtual int idleAnimation { get; set; } = 0;
         protected virtual int walkForwardAnimation { get; set; } = 1;
         protected virtual int walkBackwardAnimation { get; set; } = 6;
         protected virtual int attackAnimation { get; set; } = 2;
         protected virtual int hurtAnimation { get; set; } = 3;
         protected virtual int victoryAnimation { get; set; } = 5;
-        public int DeathAnimation => deathAnimation;
         protected virtual int deathAnimation { get; set; } = 4;
+
+        protected virtual float deathAnimationDuration { get; set; }
+        protected virtual float attackAnimationDuration { get; set; }
+
         public float DeathAnimationDuration => deathAnimationDuration;
-        protected virtual float deathAnimationDuration { get; set; } = 3.5f;
 
-        public bool IsFacingLeft { get; set; }
-
-        [SerializeField]
-        private MonsterStates currentState = MonsterStates.Idle;
+        private Dictionary<Animations, float> animationClipLengths;
 
         protected override void Awake()
         {
@@ -89,6 +99,34 @@ namespace NeonLadder.Mechanics.Controllers
             animator = GetComponentInParent<Animator>();
             health = GetComponentInParent<Health>();
             LoadLootTable();
+            CacheAnimationClipLengths();
+            attackAnimationDuration = GetAnimationClipLength(Animations.Attack01);
+            deathAnimationDuration = GetAnimationClipLength(Animations.Die);
+
+        }
+
+        private void CacheAnimationClipLengths()
+        {
+            animationClipLengths = new Dictionary<Animations, float>();
+            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+
+            foreach (var clip in clips)
+            {
+                if (System.Enum.TryParse(clip.name, out Animations animation))
+                {
+                    animationClipLengths[animation] = clip.length;
+                }
+            }
+        }
+
+        private float GetAnimationClipLength(Animations animation)
+        {
+            if (animationClipLengths.TryGetValue(animation, out float length))
+            {
+                return length;
+            }
+            Debug.LogWarning($"Animation {animation} not found on {animator.name}");
+            return 0f;
         }
 
         private void LoadLootTable()
@@ -120,7 +158,7 @@ namespace NeonLadder.Mechanics.Controllers
             if (RuntimeLootTable == null)
             {
                 Debug.LogError($"LootTable not found for enemy: {this}");
-            }   
+            }
         }
 
         protected override void ComputeVelocity()
@@ -164,9 +202,14 @@ namespace NeonLadder.Mechanics.Controllers
                             {
                                 currentState = MonsterStates.Retreating;
                             }
-                            else
+                            else if (Time.time > lastAttackTime + attackCooldown)
                             {
                                 currentState = MonsterStates.Attacking;
+                            }
+                            else
+                            {
+                                moveDirection = 0;
+                                animator.SetInteger("animation", idleAnimation);
                             }
                             break;
                         case MonsterStates.Approaching:
@@ -195,11 +238,7 @@ namespace NeonLadder.Mechanics.Controllers
                             animator.SetInteger("animation", walkBackwardAnimation);
                             break;
                         case MonsterStates.Attacking:
-                            if (Time.time > lastAttackTime + attackCooldown)
-                            {
-                                AttackPlayer();
-                                currentState = MonsterStates.Reassessing;
-                            }
+                            StartCoroutine(AttackPlayer());
                             break;
                     }
                 }
@@ -212,7 +251,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
             else
             {
-                animator.SetInteger("animation", DeathAnimation);
+                animator.SetInteger("animation", deathAnimation);
                 StartCoroutine(PlayDeathAnimation());
             }
         }
@@ -231,15 +270,57 @@ namespace NeonLadder.Mechanics.Controllers
 
         private IEnumerator PlayDeathAnimation()
         {
-            yield return new WaitForSeconds(DeathAnimationDuration);
+            yield return new WaitForSeconds(deathAnimationDuration);
             transform.parent.gameObject.SetActive(false);
         }
 
-        private void AttackPlayer()
+        private IEnumerator AttackPlayer()
+        {
+            var attackComponents = transform.parent.gameObject.GetComponentsInChildren<Collider>()
+                                                              .Where(c => c.gameObject != transform.parent.gameObject).ToList();
+            if (attackComponents != null && attackComponents.Count() > 0)
+            {
+                lastAttackTime = Time.time;
+                foreach (var attackComponent in attackComponents)
+                {
+                    attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Battle));
+                }
+
+                animator.SetInteger("animation", attackAnimation);
+                yield return new WaitForSeconds(attackAnimationDuration);
+
+                foreach (var attackComponent in attackComponents)
+                {
+                    attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Default));
+                }
+
+                currentState = MonsterStates.Reassessing;
+            }
+            else
+            {
+                Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Restorting to {nameof(FallbackAttack)}");
+                if (Time.time > lastAttackTime + attackCooldown)
+                {
+                    yield return StartCoroutine(FallbackAttack());
+                }
+            }
+        }
+
+        private IEnumerator FallbackAttack()
         {
             lastAttackTime = Time.time;
             player.Health.Decrement(attackDamage);
             animator.SetInteger("animation", attackAnimation);
+
+            if (attackAnimationDuration == 0)
+            {
+                yield return new WaitForSeconds(1f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(attackAnimationDuration);
+            }
+
             currentState = MonsterStates.Reassessing;
         }
 

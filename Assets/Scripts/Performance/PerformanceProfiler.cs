@@ -29,16 +29,16 @@ public class PerformanceProfiler : MonoBehaviour
 
     void Start()
     {
-        try
-        {
+        //try
+        //{
             InitializeLogging();
             LogHardwareInfo();
             StartCoroutine(LogPerformanceData());
-        }
-        catch (System.Exception e)
-        {
-            //UnityEngine.Debug.LogError("Error initializing PerformanceProfiler: " + e.Message);
-        }
+        //}
+        //catch (System.Exception e)
+        //{
+        //    //UnityEngine.Debug.LogError("Error initializing PerformanceProfiler: " + e.Message);
+        //}
     }
 
     void Update()
@@ -97,8 +97,8 @@ public class PerformanceProfiler : MonoBehaviour
 
     private void WriteDataToFile()
     {
-        try
-        {
+        //try
+        //{
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
                 foreach (string logEntry in logData)
@@ -107,11 +107,11 @@ public class PerformanceProfiler : MonoBehaviour
                 }
             }
             ////UnityEngine.Debug.Log("Performance data saved to: " + filePath);
-        }
-        catch (System.Exception e)
-        {
-            ////UnityEngine.Debug.LogError("Error writing performance data to file: " + e.Message);
-        }
+        //}
+        //catch (System.Exception e)
+        //{
+        //    ////UnityEngine.Debug.LogError("Error writing performance data to file: " + e.Message);
+        //}
     }
 
     private void LogHardwareInfo()
@@ -128,8 +128,8 @@ public class PerformanceProfiler : MonoBehaviour
 
     private float GetCPUUsage()
     {
-        try
-        {
+        //try
+        //{
 #if UNITY_STANDALONE_WIN
             return cpuCounter.NextValue();
 #elif UNITY_STANDALONE_OSX
@@ -139,18 +139,18 @@ public class PerformanceProfiler : MonoBehaviour
 #else
             return 0;
 #endif
-        }
-        catch (System.Exception e)
-        {
-            //UnityEngine.Debug.LogError("Error getting CPU usage: " + e.Message);
-            return 0;
-        }
+        //}
+        //catch (System.Exception e)
+        //{
+        //    //UnityEngine.Debug.LogError("Error getting CPU usage: " + e.Message);
+        //    return 0;
+        //}
     }
 
     private float GetGPUUsage()
     {
-        try
-        {
+        //try
+        //{
 #if UNITY_STANDALONE_WIN
             return GetGPUUsageWindows();
 #elif UNITY_STANDALONE_OSX
@@ -160,12 +160,12 @@ public class PerformanceProfiler : MonoBehaviour
 #else
             return 0;
 #endif
-        }
-        catch (System.Exception e)
-        {
-            //UnityEngine.Debug.LogError("Error getting GPU usage: " + e.Message);
-            return 0;
-        }
+        //}
+        //catch (System.Exception e)
+        //{
+        //    //UnityEngine.Debug.LogError("Error getting GPU usage: " + e.Message);
+        //    return 0;
+        //}
     }
 
 #if UNITY_STANDALONE_WIN

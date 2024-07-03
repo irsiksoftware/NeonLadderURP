@@ -7,6 +7,7 @@ namespace NeonLadder.Mechanics.Controllers
     public class DamageController : MonoBehaviour
     {
         public Health health { get; private set; }
+
         private void Start()
         {
             health = GetComponent<Health>();
@@ -16,10 +17,32 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (other.gameObject.layer == LayerMask.NameToLayer(Layers.Battle.ToString()))
             {
-                //Debug.Log("Bullet hit the enemy!");
-                Destroy(other.gameObject);
-                health.Decrement(other.GetComponent<ProjectileController>().Damage);
+                if (TryGetComponentInHierarchy(other.transform, out ProjectileController projectile))
+                {
+                    Destroy(other.gameObject);
+                    ApplyDamage(projectile.Damage);
+                }
+                else if (TryGetComponentInHierarchy(other.transform, out MeleeController melee))
+                {
+                    ApplyDamage(melee.Damage);
+                }
             }
+        }
+
+        private void ApplyDamage(float damage)
+        {
+            health.Decrement(damage);
+        }
+
+        private bool TryGetComponentInHierarchy<T>(Transform transform, out T component) where T : Component
+        {
+            component = transform.GetComponent<T>();
+            while (component == null && transform.parent != null)
+            {
+                transform = transform.parent;
+                component = transform.GetComponent<T>();
+            }
+            return component != null;
         }
     }
 }

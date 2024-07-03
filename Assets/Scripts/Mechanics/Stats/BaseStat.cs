@@ -1,6 +1,5 @@
 ﻿//using DamageNumbersPro;
-using DamageNumbersPro;
-using NeonLadeer.Mechanics.Controllers;
+using NeonLadder.Mechanics.Controllers;
 using UnityEngine;
 
 namespace NeonLadder.Mechanics.Stats

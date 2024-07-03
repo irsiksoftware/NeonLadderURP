@@ -74,21 +74,33 @@ namespace NeonLadder.Managers
                     lootDropManager.enabled = false;
                     playerCameraPositionManager.enabled = true;
                     playerCameraPositionManager.EmptySceneStates();
-                    monsterGroupActivationManager.enabled = false;
+                    if (monsterGroupActivationManager != null)
+                    {
+                        monsterGroupActivationManager.enabled = false;
+                    }
                     break;
                 case Scenes.Start:
-                    monsterGroupActivationManager.enabled = true;
+                    if (monsterGroupActivationManager != null)
+                    {
+                        monsterGroupActivationManager.enabled = true;
+                    }
                     lootDropManager.enabled = true;
                     break;
                 case Scenes.MetaShop:
                     lootDropManager.enabled = false;
                     lootPurchaseManager.enabled = true;
-                    monsterGroupActivationManager.enabled = false;
+                    if (monsterGroupActivationManager != null)
+                    {
+                        monsterGroupActivationManager.enabled = false;
+                    }
                     break;
                 case Scenes.PermaShop:
                     lootDropManager.enabled = false;
                     lootPurchaseManager.enabled = true;
-                    monsterGroupActivationManager.enabled = false;
+                    if (monsterGroupActivationManager != null)
+                    {
+                        monsterGroupActivationManager.enabled = false;
+                    }
                     break;
                 default:
                     break;
