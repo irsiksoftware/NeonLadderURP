@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class DamageController : MonoBehaviour
+    public class CollisionController : MonoBehaviour
     {
         public Health health { get; private set; }
 

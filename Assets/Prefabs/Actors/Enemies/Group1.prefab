@@ -47,6 +47,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Salamander
       objectReference: {fileID: 0}
+    - target: {fileID: 1354695457756108415, guid: f4401a7393fb08f419a87ccbbf85b2c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8835343704864035979, guid: f4401a7393fb08f419a87ccbbf85b2c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -194,6 +199,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BattleBee
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889955898790259993, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7338846140944857563, guid: 8ddaf7a65cd4ba546a8d87d394dedb26,
         type: 3}

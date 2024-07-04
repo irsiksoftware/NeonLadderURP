@@ -5143,7 +5143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04003f6eafb6570459eb3572e1aa4837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  damage: 0
 --- !u!1001 &336756089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5621,6 +5621,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7568910142647009618, guid: e06c739258aebcd4fbab5e06d13eb224,
+        type: 3}
+      propertyPath: duplicateCollisionAvoidanceTimer
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8961210717602290724, guid: e06c739258aebcd4fbab5e06d13eb224,
         type: 3}
       propertyPath: m_Name
@@ -6013,7 +6018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04003f6eafb6570459eb3572e1aa4837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  damage: 0
 --- !u!1001 &1961792858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6149,6 +6154,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097861769947322455, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: duplicateCollisionAvoidanceTimer
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6097981501050384232, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
