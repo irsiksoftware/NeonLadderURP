@@ -5236,8 +5236,8 @@ Animator:
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed
     by Humanoid clips.\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tFrom
-    animation clip 'DieA_wing'\n\tFrom animation clip 'Idle_A_wing'\n\tFrom animation
-    clip 'Run_wing'\n\tFrom animation clip 'Walk_wing'\n\tFrom animation clip 'Atk3_wing'"
+    animation clip 'Die'\n\tFrom animation clip 'Idle_A_wing'\n\tFrom animation clip
+    'Run_wing'\n\tFrom animation clip 'Walk_wing'\n\tFrom animation clip 'Attack1'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -5417,7 +5417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04003f6eafb6570459eb3572e1aa4837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  damage: 0
 --- !u!1 &5370462153359681267
 GameObject:
   m_ObjectHideFlags: 0
@@ -9608,7 +9608,11 @@ PrefabInstance:
     - {fileID: 280682406197334161, guid: e92ca9c000f09494fb23d45891d8e3d8, type: 3}
     - {fileID: 3879000286821305154, guid: e92ca9c000f09494fb23d45891d8e3d8, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5215968424101920906, guid: e92ca9c000f09494fb23d45891d8e3d8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 48343533774582286}
   m_SourcePrefab: {fileID: 100100000, guid: e92ca9c000f09494fb23d45891d8e3d8, type: 3}
 --- !u!4 &6288127034008930043 stripped
 Transform:
@@ -9616,6 +9620,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2523276604560066843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7739063321879677329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5215968424101920906, guid: e92ca9c000f09494fb23d45891d8e3d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2523276604560066843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &48343533774582286
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7739063321879677329}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.022929097, y: 0.0029317604, z: 0.012265085}
+  m_Center: {x: -0.008658917, y: 0.000036799756, z: -0.0024767772}
 --- !u!1001 &3653440200611578758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10215,7 +10246,11 @@ PrefabInstance:
     - {fileID: 3980502466198298546, guid: e92ca9c000f09494fb23d45891d8e3d8, type: 3}
     - {fileID: 4826109851987626200, guid: e92ca9c000f09494fb23d45891d8e3d8, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5215968424101920906, guid: e92ca9c000f09494fb23d45891d8e3d8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7830928021971526165}
   m_SourcePrefab: {fileID: 100100000, guid: e92ca9c000f09494fb23d45891d8e3d8, type: 3}
 --- !u!4 &5340501665283719611 stripped
 Transform:
@@ -10229,6 +10264,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4252879716183108184}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8315778191338842834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5215968424101920906, guid: e92ca9c000f09494fb23d45891d8e3d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4252879716183108184}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7830928021971526165
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8315778191338842834}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.022929115, y: 0.0029317625, z: 0.012265072}
+  m_Center: {x: -0.008658807, y: 0.000035634897, z: -0.0024768172}
 --- !u!1001 &7213956735961527711
 PrefabInstance:
   m_ObjectHideFlags: 0
