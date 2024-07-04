@@ -28,19 +28,20 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer(Layers.Battle.ToString()))
+            Rigidbody parentRigidbody = other.GetComponentInParent<Rigidbody>();
+            if (parentRigidbody != null)
             {
-                Rigidbody parentRigidbody = other.GetComponentInParent<Rigidbody>();
+                GameObject collisionGameObject = parentRigidbody.gameObject;
 
-                if (parentRigidbody != null)
+                if (!recentCollisions.Contains(collisionGameObject))
                 {
-                    GameObject collisionGameObject = parentRigidbody.gameObject;
+                    recentCollisions.Add(collisionGameObject);
+                    StartCoroutine(RemoveFromRecentCollisions(collisionGameObject));
 
-                    if (!recentCollisions.Contains(collisionGameObject))
+                    Debug.Log($"Collision detected on {gameObject.name} ({LayerMask.LayerToName(gameObject.layer)} Layer) from {other.gameObject.name} on ({LayerMask.LayerToName(other.gameObject.layer)} Layer)");
+
+                    if (other.gameObject.layer == LayerMask.NameToLayer(Layers.Battle.ToString()))
                     {
-                        recentCollisions.Add(collisionGameObject);
-                        StartCoroutine(RemoveFromRecentCollisions(collisionGameObject));
-
                         if (TryGetComponentInHierarchy(other.transform, out ProjectileController projectile))
                         {
                             Destroy(other.gameObject);
