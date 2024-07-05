@@ -65,7 +65,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected void Start()
         {
-            player = GetComponentInParent<Player>();
+            player = GetComponent<Player>();
             playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
             ConfigureControls(player);
             ControllerDebugging.PrintDebugControlConfiguration(player);
@@ -182,7 +182,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void ConfigureControls(Player player)
         {
-            playerActionMap = player.controls.FindActionMap("Player");
+            playerActionMap = player.Controls.FindActionMap("Player");
             playerActionMap.Enable();
 
             var sprintAction = playerActionMap.FindAction("Sprint");
@@ -220,7 +220,7 @@ namespace NeonLadder.Mechanics.Controllers
                 var cvcRotation = Game.Instance.model.VirtualCamera.gameObject.transform.rotation;
 
                 playerPositionManager.SaveState(sceneName,
-                                                player.transform.position,
+                                                player.transform.parent.position,
                                                 cameraPosition,
                                                 cvcRotation);
 

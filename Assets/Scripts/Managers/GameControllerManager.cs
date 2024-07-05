@@ -44,7 +44,7 @@ public class GameControllerManager : MonoBehaviour
         {
             if (player == null)
             {
-                player = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).GetComponent<Player>();
+                player = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).GetComponentInChildren<Player>();
                 if (player == null)
                 {
                     Debug.LogError("Player not found in scene.");
@@ -53,7 +53,7 @@ public class GameControllerManager : MonoBehaviour
 
             if (playerActions == null)
             {
-                playerActions = player.GetComponentInChildren<PlayerAction>();
+                playerActions = player.GetComponent<PlayerAction>();
                 if (playerActions == null)
                 {
                     Debug.LogError("PlayerAction not found in scene.");
@@ -87,7 +87,7 @@ public class GameControllerManager : MonoBehaviour
 
             if (playerActions == null)
             {
-                playerActions = player.GetComponentInChildren<PlayerAction>();
+                playerActions = player.GetComponent<PlayerAction>();
                 if (playerActions == null)
                 {
                     Debug.LogError("PlayerAction not found in scene.");
@@ -101,18 +101,18 @@ public class GameControllerManager : MonoBehaviour
         switch (scene)
         {
             case Scenes.Title:
-                player.GetComponentInChildren<Canvas>().enabled = false;
+                player.transform.parent.GetComponentInChildren<Canvas>().enabled = false;
                 playerActions.enabled = false;
                 break;
             case Scenes.Staging:
-                player.GetComponentInChildren<Canvas>().enabled = true;
+                player.transform.parent.GetComponentInChildren<Canvas>().enabled = true;
                 Schedule<LoadGame>();
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = false;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = true;
                 break;
             case Scenes.ReturnToStaging:
-                player.GetComponentInChildren<Canvas>().enabled = false;
+                player.transform.parent.GetComponentInChildren<Canvas>().enabled = false;
                 break;
             case Scenes.Start:
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;

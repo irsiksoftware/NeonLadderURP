@@ -4,10 +4,12 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-#if UNITY_STANDALONE_WIN
-using System.Management;
-using System.Diagnostics.PerformanceCounter;
-#elif UNITY_STANDALONE_OSX
+using System;
+
+//#if UNITY_STANDALONE_WIN
+//using System.Management;
+
+#if UNITY_STANDALONE_OSX
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 #elif UNITY_STANDALONE_LINUX
@@ -23,9 +25,9 @@ public class PerformanceProfiler : MonoBehaviour
     private List<string> logData = new List<string>();
     private string filePath;
     private string sessionID;
-#if UNITY_STANDALONE_WIN
-    private PerformanceCounter cpuCounter;
-#endif
+//#if UNITY_STANDALONE_WIN
+//    private PerformanceCounter cpuCounter;
+//#endif
 
     void Start()
     {
@@ -55,9 +57,9 @@ public class PerformanceProfiler : MonoBehaviour
         sessionID = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         logData.Add($"Session: {sessionID}");
         logData.Add("Platform,Time,FrameCount,AverageFrameRate,TotalAllocatedMemory(MB),TotalReservedMemory(MB),TotalUnusedReservedMemory(MB),CPUUsage(%),GPUUsage(%),FrameTime(ms),GCAlloc(MB),DrawCalls,VerticesCount,PhysicsTime(ms),RenderTime(ms),Below30FPS,CPU,GPU,RAM");
-#if UNITY_STANDALONE_WIN
-        cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-#endif
+//#if UNITY_STANDALONE_WIN
+//        cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+//#endif
     }
 
     private IEnumerator LogPerformanceData()
@@ -130,9 +132,9 @@ public class PerformanceProfiler : MonoBehaviour
     {
         //try
         //{
-#if UNITY_STANDALONE_WIN
-            return cpuCounter.NextValue();
-#elif UNITY_STANDALONE_OSX
+//#if UNITY_STANDALONE_WIN
+//            return cpuCounter.NextValue();
+#if UNITY_STANDALONE_OSX
             return GetCPUUsageMacOS();
 #elif UNITY_STANDALONE_LINUX
             return GetCPUUsageLinux();
@@ -151,9 +153,9 @@ public class PerformanceProfiler : MonoBehaviour
     {
         //try
         //{
-#if UNITY_STANDALONE_WIN
-            return GetGPUUsageWindows();
-#elif UNITY_STANDALONE_OSX
+//#if UNITY_STANDALONE_WIN
+//            return GetGPUUsageWindows();
+#if UNITY_STANDALONE_OSX
             return GetGPUUsageMacOS();
 #elif UNITY_STANDALONE_LINUX
             return GetGPUUsageLinux();
@@ -168,25 +170,25 @@ public class PerformanceProfiler : MonoBehaviour
         //}
     }
 
-#if UNITY_STANDALONE_WIN
-    private float GetGPUUsageWindows()
-    {
-        float gpuUsage = 0.0f;
-        try
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                gpuUsage += float.Parse(obj["UtilizationPercentage"].ToString());
-            }
-        }
-        catch (System.Exception e)
-        {
-           ////UnityEngine.Debug.LogError("Error querying GPU usage on Windows: " + e.Message);
-        }
-        return gpuUsage;
-    }
-#endif
+//#if UNITY_STANDALONE_WIN
+//    private float GetGPUUsageWindows()
+//    {
+//        float gpuUsage = 0.0f;
+//        try
+//        {
+//            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine");
+//            foreach (ManagementObject obj in searcher.Get())
+//            {
+//                gpuUsage += float.Parse(obj["UtilizationPercentage"].ToString());
+//            }
+//        }
+//        catch (System.Exception e)
+//        {
+//           ////UnityEngine.Debug.LogError("Error querying GPU usage on Windows: " + e.Message);
+//        }
+//        return gpuUsage;
+//    }
+//#endif
 
 #if UNITY_STANDALONE_OSX
     [DllImport("libc")]

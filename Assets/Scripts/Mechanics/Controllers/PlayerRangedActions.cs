@@ -30,7 +30,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void Awake()
         {
-            player = GetComponentInParent<Player>();
+            player = GetComponent<Player>();
         }
 
         void Update()

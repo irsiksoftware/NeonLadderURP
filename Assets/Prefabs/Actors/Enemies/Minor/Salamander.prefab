@@ -394,7 +394,6 @@ GameObject:
   - component: {fileID: 7075964392939156993}
   - component: {fileID: 257626474382176216}
   - component: {fileID: 2906852574098081392}
-  - component: {fileID: 6804468782419784117}
   m_Layer: 0
   m_Name: Salamander
   m_TagString: Minor
@@ -546,19 +545,6 @@ MonoBehaviour:
     type: 3}
   yOffset: 1
 --- !u!114 &2906852574098081392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354695457756108415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04003f6eafb6570459eb3572e1aa4837, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
---- !u!114 &6804468782419784117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

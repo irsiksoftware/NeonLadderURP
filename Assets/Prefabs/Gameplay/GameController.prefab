@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4798386135255670270}
   - component: {fileID: 4560332067811604594}
   - component: {fileID: 7422495321318935576}
+  - component: {fileID: 8887446309870951319}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -188,6 +189,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8887446309870951319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7439663405200563838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff4448050991e049a9614012f5a4087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &203148365431532564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -199,30 +212,6 @@ PrefabInstance:
     - target: {fileID: 876742143, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1558646232515457090, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
-        type: 3}
-      propertyPath: m_text
-      value: 'Special Thanks
-
-
-        Cameron Blair
-
-        Cory Chatham
-
-        Andrew
-        Delikat
-
-        Ahsin Habibi
-
-        Kairi Chu''nian Irsik
-
-        Larry
-        Joseph Raymond Irsik (Joey)
-
-        Minjia Shen
-
-        Justin Williams'
       objectReference: {fileID: 0}
     - target: {fileID: 2550566963638454825, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
         type: 3}
@@ -697,7 +686,7 @@ PrefabInstance:
     - target: {fileID: 4481389163567515994, guid: 026aa308a8ac4dd498ee51ae1f4753a5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.76
+      value: 1.7600002
       objectReference: {fileID: 0}
     - target: {fileID: 4481389163567515994, guid: 026aa308a8ac4dd498ee51ae1f4753a5,
         type: 3}
@@ -855,7 +844,7 @@ PrefabInstance:
     - target: {fileID: 1083376249593924383, guid: 100d8e793816a944cb8f053840e5f1be,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.76
+      value: 1.7600002
       objectReference: {fileID: 0}
     - target: {fileID: 1083376249593924383, guid: 100d8e793816a944cb8f053840e5f1be,
         type: 3}

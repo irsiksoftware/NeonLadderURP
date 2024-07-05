@@ -5181,7 +5181,6 @@ GameObject:
   - component: {fileID: 1845470864027298285}
   - component: {fileID: 3637705711843521602}
   - component: {fileID: 3881799296971136499}
-  - component: {fileID: 1355384117832421413}
   - component: {fileID: 1569883268119596321}
   - component: {fileID: 394206682869492968}
   - component: {fileID: 6136489052418638049}
@@ -5292,35 +5291,6 @@ CapsuleCollider:
   m_Height: 1.6950566
   m_Direction: 1
   m_Center: {x: 0, y: 0.7308294, z: 0}
---- !u!114 &1355384117832421413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5358769332522107222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03018d13bad052c41aa28b57fac7653b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minGroundNormalY: 0.75
-  gravityModifier: 1
-  velocity: {x: 0, y: 0, z: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  HealthBar: {fileID: 0}
-  StaminaBar: {fileID: 0}
-  audioSource: {fileID: 0}
-  respawnAudio: {fileID: 0}
-  ouchAudio: {fileID: 0}
-  jumpAudio: {fileID: 0}
-  landOnGroundAudio: {fileID: 0}
-  landOnEnemyAudio: {fileID: 0}
-  controls: {fileID: -944628639613478452, guid: e175689d4ebccc649a1eac37c7607673,
-    type: 3}
-  staminaRegenTimer: 0
 --- !u!114 &1569883268119596321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5334,7 +5304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: 0
-  max: 1000
+  max: 500
 --- !u!114 &394206682869492968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5404,7 +5374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duplicateCollisionAvoidanceTimer: 0
+  duplicateCollisionAvoidanceTimer: 0.1
 --- !u!114 &6602913655299422135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9360,6 +9330,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8383141186732845002, guid: dd358eca7256920488c100301afbd72e,
         type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 213246694156468486}
+    - targetCorrespondingSourceObject: {fileID: 8383141186732845002, guid: dd358eca7256920488c100301afbd72e,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 3419768305177090191}
   m_SourcePrefab: {fileID: 100100000, guid: dd358eca7256920488c100301afbd72e, type: 3}
@@ -9375,6 +9349,34 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2234297535214659647}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &213246694156468486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7734712163010891765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03018d13bad052c41aa28b57fac7653b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minGroundNormalY: 0.75
+  gravityModifier: 1
+  velocity: {x: 0, y: 0, z: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  HealthBar: {fileID: 0}
+  StaminaBar: {fileID: 0}
+  audioSource: {fileID: 0}
+  respawnAudio: {fileID: 0}
+  ouchAudio: {fileID: 0}
+  jumpAudio: {fileID: 0}
+  landOnGroundAudio: {fileID: 0}
+  landOnEnemyAudio: {fileID: 0}
+  controls: {fileID: 0}
+  staminaRegenTimer: 0
 --- !u!114 &3419768305177090191
 MonoBehaviour:
   m_ObjectHideFlags: 0

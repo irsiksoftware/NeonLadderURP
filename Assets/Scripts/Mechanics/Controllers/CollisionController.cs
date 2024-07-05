@@ -38,7 +38,7 @@ namespace NeonLadder.Mechanics.Controllers
                     recentCollisions.Add(collisionGameObject);
                     StartCoroutine(RemoveFromRecentCollisions(collisionGameObject));
 
-                    Debug.Log($"Collision detected on {gameObject.name} ({LayerMask.LayerToName(gameObject.layer)} Layer) from {other.gameObject.name} on ({LayerMask.LayerToName(other.gameObject.layer)} Layer)");
+                    //Debug.Log($"Collision detected on {gameObject.name} ({LayerMask.LayerToName(gameObject.layer)} Layer) from {other.gameObject.name} on ({LayerMask.LayerToName(other.gameObject.layer)} Layer)");
 
                     if (other.gameObject.layer == LayerMask.NameToLayer(Layers.Battle.ToString()))
                     {

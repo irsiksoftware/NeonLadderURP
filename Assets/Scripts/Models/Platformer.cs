@@ -28,7 +28,7 @@ namespace NeonLadder.Models
         private Player player;
         public Player Player
         {
-            get => player ?? (player = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).GetComponent<Player>());
+            get => player ?? (player = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).GetComponentInChildren<Player>());
             set => player = value;
         }
 

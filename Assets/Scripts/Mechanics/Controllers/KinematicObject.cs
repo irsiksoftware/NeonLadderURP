@@ -37,7 +37,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void Teleport(Vector3 position)
         {
-            transform.position = position;
+            transform.parent.position = position;
             velocity = Vector3.zero;
         }
 
@@ -81,6 +81,8 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void Awake()
         {
+            rigidbody = GetComponentInParent<Rigidbody>();
+            animator = GetComponentInParent<Animator>();
             switch (this)
             {
                 case FlyingMinor:
@@ -89,17 +91,20 @@ namespace NeonLadder.Mechanics.Controllers
                 case Major:
                 case Boss:
                 case Enemy:
-                    rigidbody = GetComponentInParent<Rigidbody>();
-                    animator = GetComponentInParent<Animator>();
                     rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
                     break;
                 case Player:
-                    rigidbody = GetComponent<Rigidbody>();
-                    animator = GetComponent<Animator>();
+                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
                     break;
                 default:
                     break;
             }
+
+            //if (this.GetType() == typeof(Enemy))
+            //{
+            //    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+            //}
+
 
             if (rigidbody != null)
             {

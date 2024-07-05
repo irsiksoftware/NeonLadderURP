@@ -2,6 +2,7 @@ using NeonLadder.Common;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
+using NeonLadder.Utilities;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -148,14 +149,15 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            IsFacingLeft = player.transform.position.x < transform.parent.position.x;
+            IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
             base.Update();
             if (health.IsAlive)
             {
                 Orient();
                 if (player.Health.IsAlive)
                 {
-                    float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
+                    float distanceToTarget = Vector3.Distance(transform.parent.position, player.transform.parent.position);
+                    TimedLogger.Log($"Distance to target: {distanceToTarget}", 1f);
                     switch (currentState)
                     {
                         case MonsterStates.Idle:
@@ -264,7 +266,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
             else
             {
-                Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Restorting to {nameof(FallbackAttack)}");
+                //Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Restorting to {nameof(FallbackAttack)}");
                 if (Time.time > lastAttackTime + attackCooldown)
                 {
                     yield return StartCoroutine(FallbackAttack());

@@ -58,7 +58,14 @@ public class SceneChangeController : MonoBehaviour
             GameObject spawnPoint = GameObject.FindGameObjectWithTag(Tags.SpawnPoint.ToString());
             if (spawnPoint != null)
             {
-                player.transform.position = spawnPoint.transform.position;
+                Debug.Log($"Current Player position: {player.transform.position} -> SpawnPoint found in the scene: {spawnPoint.transform.position}");
+                if (player.transform.parent.position != spawnPoint.transform.position)
+                {
+                    Debug.Log("Teleporting player to SpawnPoint position.");
+                    player.Teleport(spawnPoint.transform.position);
+                    //player.Actions.transform.position = spawnPoint.transform.position;
+                }
+                //player.transform.position = spawnPoint.transform.position;
             }
             else
             {
@@ -66,10 +73,12 @@ public class SceneChangeController : MonoBehaviour
             }
         }
         model.VirtualCamera.enabled = true;
-        player.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
-        if (player.transform.position.y < 0)
+        player.transform.parent.rotation = Quaternion.Euler(0, 90, 0);
+        if (player.transform.parent.position.y < 0)
         {
-            player.transform.position = new Vector3(player.transform.position.x, 0.01f, player.transform.position.z);
+            player.transform.parent.position = new Vector3(player.transform.parent.position.x, 0.01f, player.transform.parent.position.z);
         }
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

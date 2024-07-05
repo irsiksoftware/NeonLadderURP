@@ -3,6 +3,7 @@ using NeonLadder.Common;
 using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
+using NeonLadder.Utilities;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,7 +29,12 @@ namespace NeonLadder.Mechanics.Controllers
         public Meta MetaCurrency { get; private set; }
         public Perma PermaCurrency { get; private set; }
         [SerializeField]
-        public InputActionAsset controls;
+        private InputActionAsset controls;
+        public InputActionAsset Controls
+        {
+            get { return controls; }
+            set { controls = value; }
+        }
         [SerializeField]
         public float staminaRegenTimer = 0f;
 
@@ -39,14 +45,6 @@ namespace NeonLadder.Mechanics.Controllers
         private int jumpAnimation = 11;
         private int fallAnimation = 12;
         private int rollAnimation = 13;
-
-
-
-        public InputActionAsset Controls
-        {
-            get { return controls; }
-            set { controls = value; }
-        }
 
         protected override void OnEnable()
         {
@@ -61,16 +59,21 @@ namespace NeonLadder.Mechanics.Controllers
         protected override void Awake()
         {
             base.Awake();
-            Actions = GetComponentInChildren<PlayerAction>();
-            Unlocks = GetComponentInChildren<PlayerUnlock>();
-            audioSource = GetComponent<AudioSource>();
-            rigidbody = GetComponent<Rigidbody>();
-            Health = GetComponent<Health>();
-            Stamina = GetComponent<Stamina>();
-            HealthBar = GetComponentInChildren<HealthBar>().gameObject.GetComponent<ProgressBar>();
-            StaminaBar = GetComponentInChildren<StaminaBar>().gameObject.GetComponent<ProgressBar>();
-            MetaCurrency = GetComponent<Meta>();
-            PermaCurrency = GetComponent<Perma>();
+            Actions = GetComponent<PlayerAction>();
+            Unlocks = GetComponent<PlayerUnlock>();
+            audioSource = GetComponentInParent<AudioSource>();
+            rigidbody = GetComponentInParent<Rigidbody>();
+            Health = GetComponentInParent<Health>();
+            Stamina = GetComponentInParent<Stamina>();
+            HealthBar = transform.parent.GetComponentInChildren<HealthBar>().gameObject.GetComponent<ProgressBar>();
+            StaminaBar = transform.parent.GetComponentInChildren<StaminaBar>().gameObject.GetComponent<ProgressBar>();
+            MetaCurrency = GetComponentInParent<Meta>();
+            PermaCurrency = GetComponentInParent<Perma>();
+            
+            if (controls == null)
+            {
+                controls = Resources.Load<InputActionAsset>("Controls/PlayerControls");
+            }
         }
 
         protected override void FixedUpdate()
@@ -84,6 +87,8 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
+            TimedLogger.Log($"Player transform position: {transform.position}", 1f);
+            base.Update();
             if (Health.IsAlive)
             {
                 HandleAnimations();
@@ -93,7 +98,7 @@ namespace NeonLadder.Mechanics.Controllers
             UpdateHealthBar();
             UpdateStaminaBar();
 
-            base.Update();
+            
         }
 
         private void RegenerateStamina()
@@ -136,7 +141,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void EnableZMovement()
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.parent.rotation = Quaternion.Euler(0, 0, 0);
             Actions.playerActionMap.Disable();
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
                                     RigidbodyConstraints.FreezePositionX |
@@ -158,15 +163,13 @@ namespace NeonLadder.Mechanics.Controllers
             }
 
             HandleLocomotion();
-            //HandleAction();
         }
 
         private void HandleLocomotion()
         {
-            // roll animation = 13
             if (velocity.y > 2)
             {
-                if (Actions.JumpCount == 2) // This is the second jump
+                if (Actions.JumpCount == 2)
                 {
                     animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), rollAnimation); // roll
                 }
@@ -194,29 +197,6 @@ namespace NeonLadder.Mechanics.Controllers
         }
 
 
-
-        //private void HandleAction()
-        //{
-        //    if (Actions.attackState == ActionStates.Acting)
-        //    {
-        //        if (Actions.isUsingMelee)
-        //        {
-        //            animator.SetInteger("action_animation", meleeAttackAnimation); // sword attack
-        //            animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
-        //        }
-        //        else
-        //        {
-        //            animator.SetInteger("action_animation", rangedAttackAnimation); // shoot guns
-        //            animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
-        //        }
-        //    }
-        //    else
-        //    {
-        //        animator.SetInteger("action_animation", 0); // no action
-        //        animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
-        //    }
-        //}
-
         internal void AddMetaCurrency(int amount)
         {
             MetaCurrency.Increment(amount);
@@ -234,7 +214,6 @@ namespace NeonLadder.Mechanics.Controllers
                 HealthBar.currentPercent = (Health.current / Health.max) * 100f;
             }
         }
-
         private void UpdateStaminaBar()
         {
             if (StaminaBar != null && Stamina != null)
