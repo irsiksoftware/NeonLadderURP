@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5753622417671224792}
+  - component: {fileID: 187407061393818264}
   m_Layer: 0
   m_Name: Belly02
   m_TagString: Untagged
@@ -31,6 +32,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6913936374487695028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &187407061393818264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67501124917353799}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.9334526, z: 0.7347824}
+  m_Center: {x: 0.00000005145724, y: 0.3173736, z: -0.13260749}
 --- !u!1 &623077681947364311
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,8 +931,8 @@ GameObject:
   - component: {fileID: 2501150319126927074}
   - component: {fileID: 1396793939061880918}
   - component: {fileID: 7997698633424117491}
-  - component: {fileID: 3958147124678490436}
   - component: {fileID: 5310351430818852658}
+  - component: {fileID: 5666737374083019335}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Minor
@@ -976,8 +998,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0976582, y: 0.97614753, z: 1.4752238}
-  m_Center: {x: -0.014168272, y: 0.4986501, z: -0.08415997}
+  m_Size: {x: 1.0976582, y: 0.97614753, z: 1.6212316}
+  m_Center: {x: -0.014168273, y: 0.4986501, z: -0.011154412}
 --- !u!54 &2501150319126927074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1033,18 +1055,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &3958147124678490436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600701031117784447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5310351430818852658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,6 +1069,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &5666737374083019335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600701031117784447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6668774700066751743
 GameObject:
   m_ObjectHideFlags: 0

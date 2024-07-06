@@ -22,6 +22,10 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip jumpAudio;
         public AudioClip landOnGroundAudio;
         public AudioClip landOnEnemyAudio;
+
+        public bool IsFacingLeft { get; set; }
+        public bool IsFacingRight => !IsFacingLeft;
+
         public PlayerAction Actions { get; private set; }
         public PlayerUnlock Unlocks { get; private set; }
         public Health Health { get; private set; }
@@ -38,6 +42,7 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         public float staminaRegenTimer = 0f;
 
+        public override bool IsUsingMelee { get; set; } = true;
 
         private int walkAnimation = 6;
         private int runAnimation = 10;
@@ -87,7 +92,10 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            TimedLogger.Log($"Player transform position: {transform.position}", 1f);
+            //do we need this?
+            IsFacingLeft = transform.parent.rotation.eulerAngles.y == 270;
+            
+            //TimedLogger.Log($"Player transform position: {transform.position}", 1f);
             base.Update();
             if (Health.IsAlive)
             {

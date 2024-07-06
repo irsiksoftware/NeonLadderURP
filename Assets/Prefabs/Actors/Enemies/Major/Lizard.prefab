@@ -1612,6 +1612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6204530840110118068}
+  - component: {fileID: 7267377833063049413}
   m_Layer: 0
   m_Name: Bufomorph_Tongue9
   m_TagString: Untagged
@@ -1634,6 +1635,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6204530840110118070}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7267377833063049413
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6204530840110606676}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.47838792, y: 0.22195104, z: 0.271784}
+  m_Center: {x: 0.015890673, y: -0.022004405, z: -0.04172273}
 --- !u!1 &6204530840110606678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,8 +1870,8 @@ GameObject:
   - component: {fileID: 7685456082607370167}
   - component: {fileID: 1451577930058754443}
   - component: {fileID: 8051622542252312221}
-  - component: {fileID: 3386926219355226664}
   - component: {fileID: 7527294262448712518}
+  - component: {fileID: 6232563957448476423}
   m_Layer: 0
   m_Name: Lizard
   m_TagString: Major
@@ -1915,8 +1937,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.9973735, z: 1}
-  m_Center: {x: 0, y: 0.5601672, z: 0}
+  m_Size: {x: 1, y: 0.9973736, z: 1.0658884}
+  m_Center: {x: 0, y: 0.5601672, z: 0.032944217}
 --- !u!54 &7685456082607370167
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1972,18 +1994,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &3386926219355226664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6204530840110606686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7527294262448712518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,6 +2008,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &6232563957448476423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6204530840110606686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1135542458407683549
 PrefabInstance:
   m_ObjectHideFlags: 0

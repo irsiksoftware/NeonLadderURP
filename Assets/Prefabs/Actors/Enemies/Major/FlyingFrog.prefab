@@ -266,12 +266,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5680596531327652285}
   - component: {fileID: 5680596531335347757}
-  - component: {fileID: 4396613814450627285}
   - component: {fileID: 3587397610899027364}
+  - component: {fileID: 4396613814450627285}
   - component: {fileID: 7772861403135878887}
   - component: {fileID: 8071586598277191439}
-  - component: {fileID: 2625896889826218188}
   - component: {fileID: 3922645085267211306}
+  - component: {fileID: 5734256176090370132}
   m_Layer: 0
   m_Name: FlyingFrog
   m_TagString: Major
@@ -318,6 +318,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &3587397610899027364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680596531327945821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.89767456, y: 0.70374846, z: 1}
+  m_Center: {x: 0.028152466, y: 0.52703583, z: 0}
 --- !u!54 &4396613814450627285
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -345,27 +366,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &3587397610899027364
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5680596531327945821}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.89767456, y: 0.70374846, z: 1}
-  m_Center: {x: 0.028152466, y: 0.52703583, z: 0}
 --- !u!114 &7772861403135878887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,18 +394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &2625896889826218188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5680596531327945821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3922645085267211306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +408,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &5734256176090370132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680596531327945821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5680596531327945823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2194,6 +2195,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1
+  isUsingMelee: 1
   audioSource: {fileID: 0}
   respawnAudio: {fileID: 0}
   ouchAudio: {fileID: 0}
@@ -2201,9 +2203,11 @@ MonoBehaviour:
   landAudio: {fileID: 0}
   lootTable: {fileID: 0}
   staminaRegenTimer: 0
+  deathBuffer: 1
   attackRange: 3
   retreatWhenTooClose: 0
   currentState: 0
+  _attackCooldown: 3
 --- !u!4 &7467246206968112239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4531093981565543356, guid: b58906080b4e6f4438b4c78132377dd3,

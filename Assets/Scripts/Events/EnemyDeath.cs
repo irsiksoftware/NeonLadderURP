@@ -10,14 +10,21 @@ namespace NeonLadder.Events
     {
         public Enemy enemy;
         public Animator enemyAnimator;
+        private GameObject thisActorParent;
 
         public override void Execute()
         {
-            enemy.GetComponentInParent<Rigidbody>().useGravity = true;
-            //change enemy layer to FX on death do bullets pass through.
-            enemy.gameObject.layer = LayerMask.NameToLayer(Layers.Dead.ToString());
+            thisActorParent = enemy.transform.parent.gameObject;
+            thisActorParent.GetComponent<Rigidbody>().useGravity = true;
+            thisActorParent.GetComponentInChildren<CollisionController>().enabled = false;
+
+            //change enemy layer to FX on death so bullets pass through.
+            enemy.transform.parent.gameObject.layer = LayerMask.NameToLayer(Layers.Dead.ToString());
+
+            //have to change the layer to avoid stopping player from walking over the enemy after they've died.
             var attackComponents = enemy.transform.parent.gameObject.GetComponentsInChildren<Collider>()
                                                     .Where(c => c.gameObject != enemy.transform.parent.gameObject);
+
             foreach (var attackComponent in attackComponents)
             {
                 attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Dead));

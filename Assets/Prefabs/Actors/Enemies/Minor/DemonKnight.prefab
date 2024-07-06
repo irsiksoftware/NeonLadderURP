@@ -299,8 +299,8 @@ GameObject:
   - component: {fileID: 2028609909393941563}
   - component: {fileID: 1421748671414856878}
   - component: {fileID: 7177872537975009279}
-  - component: {fileID: 2605193642542145101}
   - component: {fileID: 4463037896016872492}
+  - component: {fileID: 6676131612683361094}
   m_Layer: 0
   m_Name: DemonKnight
   m_TagString: Minor
@@ -366,8 +366,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8377223, y: 2.3820324, z: 1.160879}
-  m_Center: {x: -0.03317523, y: 1.2043188, z: -0.08043933}
+  m_Size: {x: 1.8377223, y: 2.3820324, z: 1.8281444}
+  m_Center: {x: -0.03317523, y: 1.2043188, z: 0.25319275}
 --- !u!54 &2028609909393941563
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -423,18 +423,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &2605193642542145101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915177123758144454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4463037896016872492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +437,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &6676131612683361094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915177123758144454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1935825255105753730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,6 +1433,7 @@ GameObject:
   - component: {fileID: 1022347491742515354}
   - component: {fileID: 1356446649757209423}
   - component: {fileID: 427829342088360818}
+  - component: {fileID: 7261451058929365222}
   m_Layer: 0
   m_Name: DemonKingBlade
   m_TagString: Untagged
@@ -1504,6 +1506,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7261451058929365222
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5537888511970254409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3209342, y: 1.2846613, z: 4.358692}
+  m_Center: {x: 0.00000016677436, y: 0.05643592, z: 1.5048239}
 --- !u!1 &5678188041160043400
 GameObject:
   m_ObjectHideFlags: 0

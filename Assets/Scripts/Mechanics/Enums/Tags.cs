@@ -2,6 +2,7 @@ namespace NeonLadder.Mechanics.Enums
 {
     public enum Tags
     {
+        Untagged,
         Player,
         Boss,
         Major,
@@ -17,6 +18,8 @@ namespace NeonLadder.Mechanics.Enums
         PlayerCamera,
         MainCamera,
         MainMenu,
-        PlayButton
+        PlayButton,
+        PlayerProjectile,
+        EnemyProjectile
     }
 }

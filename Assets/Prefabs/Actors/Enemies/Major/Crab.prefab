@@ -327,8 +327,8 @@ GameObject:
   - component: {fileID: 543618142301629375}
   - component: {fileID: 8791361210454899027}
   - component: {fileID: 7212271202758195228}
-  - component: {fileID: 3694338508863610967}
   - component: {fileID: 136914442965239303}
+  - component: {fileID: 181944550603132507}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Major
@@ -394,8 +394,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.9864783, y: 1.3222402, z: 1.7873383}
-  m_Center: {x: -0.068692446, y: 0.7219456, z: -0.19935441}
+  m_Size: {x: 2.9864783, y: 1.3222402, z: 2.4626493}
+  m_Center: {x: -0.068692446, y: 0.7219456, z: 0.13830113}
 --- !u!54 &543618142301629375
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -451,18 +451,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &3694338508863610967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850272462617381134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &136914442965239303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +465,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &181944550603132507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850272462617381134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &850272462617381136
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 850272462617482548}
+  - component: {fileID: 4471411245358922838}
   m_Layer: 0
   m_Name: Tetrachnide_LegFrontLeft_5
   m_TagString: Untagged
@@ -572,6 +574,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 850272462617482554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4471411245358922838
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850272462617381140}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &850272462617381142
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +1020,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 850272462617482510}
+  - component: {fileID: 2452241134451209482}
   m_Layer: 0
   m_Name: Tetrachnide_LegFrontRight_5
   m_TagString: Untagged
@@ -1019,6 +1043,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 850272462617482508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2452241134451209482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850272462617381230}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &850272462617381232
 GameObject:
   m_ObjectHideFlags: 0

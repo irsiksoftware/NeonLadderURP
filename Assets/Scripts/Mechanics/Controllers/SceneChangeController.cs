@@ -58,10 +58,10 @@ public class SceneChangeController : MonoBehaviour
             GameObject spawnPoint = GameObject.FindGameObjectWithTag(Tags.SpawnPoint.ToString());
             if (spawnPoint != null)
             {
-                Debug.Log($"Current Player position: {player.transform.position} -> SpawnPoint found in the scene: {spawnPoint.transform.position}");
+                //Debug.Log($"Current Player position: {player.transform.position} -> SpawnPoint found in the scene: {spawnPoint.transform.position}");
                 if (player.transform.parent.position != spawnPoint.transform.position)
                 {
-                    Debug.Log("Teleporting player to SpawnPoint position.");
+                    //Debug.Log("Teleporting player to SpawnPoint position.");
                     player.Teleport(spawnPoint.transform.position);
                     //player.Actions.transform.position = spawnPoint.transform.position;
                 }

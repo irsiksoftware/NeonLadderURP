@@ -1391,8 +1391,8 @@ GameObject:
   - component: {fileID: 2014401490408101159}
   - component: {fileID: 1741632677722322048}
   - component: {fileID: 7145522861724822912}
-  - component: {fileID: 7946370934267707670}
   - component: {fileID: 4737322648270481059}
+  - component: {fileID: 4578716411348329517}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Minor
@@ -1458,8 +1458,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.2575247, z: 1}
-  m_Center: {x: 0, y: 0.71757245, z: 0}
+  m_Size: {x: 1, y: 1.2575247, z: 1.0281351}
+  m_Center: {x: 0, y: 0.71757245, z: 0.20703018}
 --- !u!54 &2014401490408101159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1515,18 +1515,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &7946370934267707670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4560026871901901461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4737322648270481059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,6 +1529,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &4578716411348329517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560026871901901461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5000973397907022459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1616,7 @@ GameObject:
   - component: {fileID: 4398697096494744356}
   - component: {fileID: 7408223220426443102}
   - component: {fileID: 6431148853702343264}
+  - component: {fileID: 7086203957550153107}
   m_Layer: 0
   m_Name: DaggerMesh
   m_TagString: Untagged
@@ -1687,6 +1689,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7086203957550153107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5773672239933214923}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1295203, y: 0.64770895, z: 1.5029821}
+  m_Center: {x: 0.0002494418, y: -0.011438851, z: 0.52498895}
 --- !u!1 &5953305376793561730
 GameObject:
   m_ObjectHideFlags: 0

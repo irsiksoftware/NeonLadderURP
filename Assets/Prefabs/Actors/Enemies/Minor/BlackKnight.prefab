@@ -46,8 +46,8 @@ GameObject:
   - component: {fileID: 7624229905337148446}
   - component: {fileID: 8217223967533065227}
   - component: {fileID: 8418660089953823535}
-  - component: {fileID: 2576467077803815320}
   - component: {fileID: 5558572058293650868}
+  - component: {fileID: 8854454876825590212}
   m_Layer: 0
   m_Name: BlackKnight
   m_TagString: Minor
@@ -113,8 +113,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8446045, y: 2.351417, z: 1.3408813}
-  m_Center: {x: 0, y: 1.1965413, z: 0.27090454}
+  m_Size: {x: 1.8446045, y: 2.351417, z: 1.6}
+  m_Center: {x: 0, y: 1.1965413, z: 0.25}
 --- !u!54 &7624229905337148446
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,18 +170,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &2576467077803815320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316799835402957708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5558572058293650868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +184,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &8854454876825590212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316799835402957708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &450321351519303527
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +888,7 @@ GameObject:
   - component: {fileID: 8116085899545778500}
   - component: {fileID: 6736532404538763905}
   - component: {fileID: 6862235178222620051}
+  - component: {fileID: 600186854192049584}
   m_Layer: 0
   m_Name: AxeMesh
   m_TagString: Untagged
@@ -959,6 +961,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &600186854192049584
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126032873484000975}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.27709275, y: 1.1814673, z: 2.6724007}
+  m_Center: {x: 0.0000000119919505, y: -0.23827961, z: 0.5915247}
 --- !u!1 &4652529091644479163
 GameObject:
   m_ObjectHideFlags: 0

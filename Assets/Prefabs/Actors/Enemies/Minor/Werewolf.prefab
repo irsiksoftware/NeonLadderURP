@@ -300,6 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963133952301470854}
+  - component: {fileID: 7515878331904926600}
   m_Layer: 0
   m_Name: Blade01_L
   m_TagString: Untagged
@@ -323,6 +324,27 @@ Transform:
   - {fileID: 5782363288192782947}
   m_Father: {fileID: 6671528217530185449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7515878331904926600
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067677415559103495}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.2, z: 0.2}
+  m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!1 &1402772947683675141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7359597891713053209}
+  - component: {fileID: 7225740233815822946}
   m_Layer: 0
   m_Name: Blade01_R
   m_TagString: Untagged
@@ -2078,6 +2101,27 @@ Transform:
   - {fileID: 5693682936265650293}
   m_Father: {fileID: 6621478466460110090}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7225740233815822946
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7470805014374535104}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.2, z: 0.2}
+  m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!1 &7570971476786922348
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,8 +2326,8 @@ GameObject:
   - component: {fileID: 197393272046329830}
   - component: {fileID: 3317781575730608715}
   - component: {fileID: 2229736288128806447}
-  - component: {fileID: 4075255848989867312}
   - component: {fileID: 2353857099610745787}
+  - component: {fileID: 4093734391565021117}
   m_Layer: 0
   m_Name: Werewolf
   m_TagString: Minor
@@ -2350,7 +2394,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.2835083, y: 1.7385862, z: 1}
-  m_Center: {x: 0.02633667, y: 0.87212026, z: 0}
+  m_Center: {x: 0.02633667, y: 0.87212026, z: 0.5}
 --- !u!54 &197393272046329830
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2406,18 +2450,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &4075255848989867312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8373721735408729591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2353857099610745787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2432,6 +2464,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &4093734391565021117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8373721735408729591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8612943476707190567
 GameObject:
   m_ObjectHideFlags: 0

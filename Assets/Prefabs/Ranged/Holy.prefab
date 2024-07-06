@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 937327323143511857}
   m_Layer: 6
   m_Name: Holy
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 6098853260506721820, guid: 7f71bd1a9563f9d45b67382d029914a1, type: 3}
   impact: {fileID: 4455435856697591018, guid: 05bbfc717fcaa5a49b786768b49ea0c6, type: 3}
+  Damage: 0
   speed: 40
   projectileCore: {fileID: 8578825363345728674}
 --- !u!1 &8578825363345728674

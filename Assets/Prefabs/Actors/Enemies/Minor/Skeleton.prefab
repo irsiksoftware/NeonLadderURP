@@ -928,9 +928,8 @@ GameObject:
   - component: {fileID: 4541155138281928286}
   - component: {fileID: 6401251827496488793}
   - component: {fileID: 4272454811055249202}
-  - component: {fileID: 5731325615040376521}
   - component: {fileID: 2352853548544298975}
-  - component: {fileID: 4684295842711228267}
+  - component: {fileID: 6677852827727992823}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Minor
@@ -997,7 +996,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1.6179737, z: 1}
-  m_Center: {x: 0, y: 0.8122857, z: 0}
+  m_Center: {x: 0, y: 0.8122857, z: 0.1}
 --- !u!54 &4541155138281928286
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1053,18 +1052,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &5731325615040376521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4709253892719380096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2352853548544298975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,7 +1067,7 @@ MonoBehaviour:
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
   yOffset: 1.5
---- !u!114 &4684295842711228267
+--- !u!114 &6677852827727992823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1089,10 +1076,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4709253892719380096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04003f6eafb6570459eb3572e1aa4837, type: 3}
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 5
 --- !u!1 &4873547074345406329
 GameObject:
   m_ObjectHideFlags: 0

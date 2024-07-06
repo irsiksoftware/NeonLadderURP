@@ -1486,8 +1486,8 @@ GameObject:
   - component: {fileID: 3147001137840733893}
   - component: {fileID: 2975193591950816381}
   - component: {fileID: 5367510526484905214}
-  - component: {fileID: 1361866487103866025}
   - component: {fileID: 4152402355305793005}
+  - component: {fileID: 1407112935858738026}
   m_Layer: 0
   m_Name: Stingray
   m_TagString: Minor
@@ -1610,18 +1610,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &1361866487103866025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932368733356792782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4152402355305793005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,6 +1624,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &1407112935858738026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932368733356792782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9183712132721591325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1765,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  isUsingMelee: 1
   audioSource: {fileID: 0}
   respawnAudio: {fileID: 0}
   ouchAudio: {fileID: 0}
@@ -1771,9 +1773,11 @@ MonoBehaviour:
   landAudio: {fileID: 0}
   lootTable: {fileID: 0}
   staminaRegenTimer: 0
+  deathBuffer: 1
   attackRange: 3
   retreatWhenTooClose: 0
   currentState: 0
+  _attackCooldown: 3
 --- !u!4 &5657106126277576858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4531093981565543356, guid: f55e78d9ca8d6604bb415afb9a076119,

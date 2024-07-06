@@ -19,6 +19,7 @@ namespace NeonLadder.Mechanics.Controllers
         private int moveDirection;
 
         public bool IsFacingLeft { get; set; }
+        public bool IsFacingRight => !IsFacingLeft;
 
         [SerializeField]
         private LootTable lootTable; // Allow assignment in the editor
@@ -41,8 +42,10 @@ namespace NeonLadder.Mechanics.Controllers
 
         [SerializeField]
         private float attackRange = 0f; // Default value
+
         [SerializeField]
         private bool retreatWhenTooClose = false; // Default value
+
 
         protected virtual float AttackRange
         {
@@ -66,6 +69,7 @@ namespace NeonLadder.Mechanics.Controllers
             get { return retreatWhenTooClose; }
             set { retreatWhenTooClose = value; }
         }
+
         [SerializeField]
         private MonsterStates currentState = MonsterStates.Idle;
         [SerializeField]
@@ -91,6 +95,10 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Awake()
         {
+            if (attackCooldown <= attackAnimationDuration)
+            {
+                Debug.LogWarning($"Attack cooldown is less than or equal to attack animation duration for enemy: {transform.parent.name}");
+            }
             base.Awake();
             health = GetComponentInParent<Health>();
             LoadLootTable();
@@ -150,6 +158,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected override void Update()
         {
             IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
+            //Debug.Log($"Enemy IsFacingLeft: {IsFacingLeft} - Enemy IsFacingRight: {IsFacingRight}");
             base.Update();
             if (health.IsAlive)
             {
@@ -157,7 +166,7 @@ namespace NeonLadder.Mechanics.Controllers
                 if (player.Health.IsAlive)
                 {
                     float distanceToTarget = Vector3.Distance(transform.parent.position, player.transform.parent.position);
-                    TimedLogger.Log($"Distance to target: {distanceToTarget}", 1f);
+                    //TimedLogger.Log($"Distance to target: {distanceToTarget}", 1f);
                     switch (currentState)
                     {
                         case MonsterStates.Idle:
@@ -266,7 +275,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
             else
             {
-                //Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Restorting to {nameof(FallbackAttack)}");
+                Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Resorting to {nameof(FallbackAttack)}");
                 if (Time.time > lastAttackTime + attackCooldown)
                 {
                     yield return StartCoroutine(FallbackAttack());

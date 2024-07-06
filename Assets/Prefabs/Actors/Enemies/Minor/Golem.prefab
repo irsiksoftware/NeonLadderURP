@@ -521,8 +521,8 @@ GameObject:
   - component: {fileID: 7964893609161761557}
   - component: {fileID: 8279011589582697839}
   - component: {fileID: 1058876840668690388}
-  - component: {fileID: 4014694705811609475}
   - component: {fileID: 4914515399703982814}
+  - component: {fileID: 6659005037772029226}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Minor
@@ -588,8 +588,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.0516639, z: 1}
-  m_Center: {x: 0, y: 1.3160756, z: 0}
+  m_Size: {x: 1, y: 2.0516639, z: 1.268937}
+  m_Center: {x: 0, y: 1.3160756, z: 0.13446736}
 --- !u!54 &7964893609161761557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -645,18 +645,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &4014694705811609475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3227756427205745131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4914515399703982814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +659,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &6659005037772029226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3227756427205745131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3298885543490159552
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6005123592999629392}
+  - component: {fileID: 4168546283824655495}
   m_Layer: 0
   m_Name: Mid01_R
   m_TagString: Untagged
@@ -925,6 +927,27 @@ Transform:
   - {fileID: 6263585806027050853}
   m_Father: {fileID: 6138115601470951671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4168546283824655495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309599562736198228}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4725257138333799618
 GameObject:
   m_ObjectHideFlags: 0

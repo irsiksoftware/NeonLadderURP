@@ -17,7 +17,6 @@ namespace NeonLadder.Mechanics.Controllers
         public Vector2 playerInput = new Vector2(0, 0);
         private float sprintTimeAccumulator = 0f;
         public bool isClimbing { get; set; }
-        public bool isUsingMelee = true;
 
         #region Jumping
         public bool isJumping { get; set; }
@@ -243,7 +242,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnWeaponSwap(InputAction.CallbackContext context)
         {
-            if (isUsingMelee)
+            if (player.IsUsingMelee)
             {
                 SwapWeapons(meleeWeaponGroups, rangedWeaponGroups);
             }
@@ -252,7 +251,7 @@ namespace NeonLadder.Mechanics.Controllers
                 SwapWeapons(rangedWeaponGroups, meleeWeaponGroups);
             }
 
-            isUsingMelee = !isUsingMelee;
+            player.IsUsingMelee = !player.IsUsingMelee;
         }
 
         private void SwapWeapons(List<GameObject> currentWeapons, List<GameObject> newWeapons)
@@ -381,28 +380,47 @@ namespace NeonLadder.Mechanics.Controllers
             playerInput = Vector2.zero; // No movement input
         }
 
+        [SerializeField]
+        private float percentageOfAnimationToIgnore = 0.35f; // Adjust this value to experiment with different timings
+
         private IEnumerator TryAttackEnemy()
         {
             var attackComponents = transform.parent.gameObject.GetComponentsInChildren<Collider>()
-                                                              .Where(c => c.gameObject != transform.parent.gameObject).ToList();
-            if (attackComponents != null && attackComponents.Count() > 0)
+                                                           .Where(c => c.gameObject != transform.parent.gameObject).ToList();
+            if (attackComponents != null && attackComponents.Count > 0)
             {
                 player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
-                //lastAttackTime = Time.time;
+
+                // Start the attack animation
+                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), (player.IsUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
+
+                // Calculate the duration to ignore based on the percentage
+                float ignoreDuration = player.attackAnimationDuration * percentageOfAnimationToIgnore;
+
+                // Wait for the ignore duration
+                yield return new WaitForSeconds(ignoreDuration);
+
+                // Change the attack components to the battle layer
                 foreach (var attackComponent in attackComponents)
                 {
                     attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Battle));
                 }
-                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), (isUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
-                yield return new WaitForSeconds(player.attackAnimationDuration);
-                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
-                player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Activate action layer
+
+                // Wait for the remaining duration of the attack animation
+                yield return new WaitForSeconds(player.attackAnimationDuration - ignoreDuration);
+
+                // Reset the attack components back to the default layer
                 foreach (var attackComponent in attackComponents)
                 {
                     attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Default));
                 }
+
+                // Reset the action layer weight and animation state
+                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
+                player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
             }
         }
+
 
         public void IncrementAvailableMidAirJumps()
         {

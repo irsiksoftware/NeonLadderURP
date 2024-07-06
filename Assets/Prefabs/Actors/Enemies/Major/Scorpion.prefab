@@ -587,6 +587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2245800193157903333}
+  - component: {fileID: 7534931442635523931}
   m_Layer: 0
   m_Name: Carcidonte_ThumbRight
   m_TagString: Untagged
@@ -609,6 +610,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2245800193157903237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7534931442635523931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245800193157607365}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 1.5, z: 1}
+  m_Center: {x: -0.3, y: -0.35, z: 0}
 --- !u!1 &2245800193157607367
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,6 +640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2245800193157903335}
+  - component: {fileID: 7731260760795868908}
   m_Layer: 0
   m_Name: Carcidonte_ThumbLeft
   m_TagString: Untagged
@@ -640,6 +663,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2245800193157903277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7731260760795868908
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245800193157607367}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 1.5, z: 1}
+  m_Center: {x: -0.3, y: -0.35, z: 0}
 --- !u!1 &2245800193157607369
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,8 +850,8 @@ GameObject:
   - component: {fileID: 4769266166519257092}
   - component: {fileID: 2397238480366946034}
   - component: {fileID: 9167421943860501660}
-  - component: {fileID: 5535807183869941672}
   - component: {fileID: 3401180765165696563}
+  - component: {fileID: 2416184544467049544}
   m_Layer: 0
   m_Name: Scorpion
   m_TagString: Major
@@ -873,8 +917,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.9885864, y: 4.1016006, z: 6.675293}
-  m_Center: {x: -0.38619995, y: 2.143609, z: 1.0725708}
+  m_Size: {x: 4.9885864, y: 4.1016006, z: 5.2898865}
+  m_Center: {x: -0.38619995, y: 2.143609, z: 0.37986755}
 --- !u!54 &4769266166519257092
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -930,18 +974,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &5535807183869941672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2245800193157607375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3401180765165696563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,6 +988,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &2416184544467049544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245800193157607375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2245800193157607393
 GameObject:
   m_ObjectHideFlags: 0

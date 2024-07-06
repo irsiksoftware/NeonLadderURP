@@ -17,6 +17,9 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void Start()
         {
+            //ugh
+            YOffset = yOffset;
+
             target = transform;
         }
 

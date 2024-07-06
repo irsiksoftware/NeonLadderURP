@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 790412529162808695}
   - component: {fileID: 1298537169856075153}
   - component: {fileID: 6537990367971502700}
-  - component: {fileID: 9157629944569660258}
   - component: {fileID: 4516437675934391787}
+  - component: {fileID: 822165689495839619}
   m_Layer: 0
   m_Name: BishopKnight
   m_TagString: Minor
@@ -81,8 +81,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5751648, y: 2.8769639, z: 1.3257446}
-  m_Center: {x: -0.015090942, y: 1.5094551, z: -0.18930054}
+  m_Size: {x: 1.5751648, y: 2.8769639, z: 1.5979308}
+  m_Center: {x: -0.015090942, y: 1.5094453, z: -0.053207282}
 --- !u!54 &790412529162808695
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,18 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &9157629944569660258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184444242315725227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4516437675934391787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +152,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &822165689495839619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184444242315725227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1368945284543947952
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +176,7 @@ GameObject:
   - component: {fileID: 3795574856247306925}
   - component: {fileID: 4058847545508317768}
   - component: {fileID: 5996569602191610752}
+  - component: {fileID: 1561255948280636723}
   m_Layer: 0
   m_Name: Bishop_Spear
   m_TagString: Untagged
@@ -247,6 +249,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1561255948280636723
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368945284543947952}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.19107297, y: 0.74900955, z: 4.360928}
+  m_Center: {x: 0.00000019747425, y: 0.048086993, z: 0.86045367}
 --- !u!1 &1630083968086384426
 GameObject:
   m_ObjectHideFlags: 0

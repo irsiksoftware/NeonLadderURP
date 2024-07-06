@@ -30,4 +30,6 @@ public class PlayerUnlock : MonoBehaviour
             unlockStatus[unlock.Name] = unlock.IsPurchased;
         }
     }
+
+    private void OnEnable() { }
 }

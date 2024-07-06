@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4531093981565543356}
   - component: {fileID: 5926647008189446982}
+  - component: {fileID: 1526881872866865554}
+  - component: {fileID: 2363739994401782901}
   m_Layer: 0
   m_Name: EnemyScripts
   m_TagString: Untagged
@@ -50,6 +52,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1
+  isUsingMelee: 1
   audioSource: {fileID: 0}
   respawnAudio: {fileID: 0}
   ouchAudio: {fileID: 0}
@@ -57,4 +60,34 @@ MonoBehaviour:
   landAudio: {fileID: 0}
   lootTable: {fileID: 0}
   staminaRegenTimer: 0
+  deathBuffer: 1
+  attackRange: 0
+  retreatWhenTooClose: 0
   currentState: 0
+  _attackCooldown: 3
+--- !u!114 &1526881872866865554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8086227584760742458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04003f6eafb6570459eb3572e1aa4837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+--- !u!114 &2363739994401782901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8086227584760742458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duplicateCollisionAvoidanceTimer: 0

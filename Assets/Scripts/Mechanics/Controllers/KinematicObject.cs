@@ -22,6 +22,14 @@ namespace NeonLadder.Mechanics.Controllers
         protected RaycastHit[] hitBuffer = new RaycastHit[16];
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
+
+        [SerializeField]
+        private bool isUsingMelee = true;
+        public virtual bool IsUsingMelee
+        {
+            get => isUsingMelee;
+            set => isUsingMelee = value;
+        }
         public Animator animator { get; private set; }
         public virtual float deathAnimationDuration { get; set; }
         public virtual float attackAnimationDuration { get; set; }

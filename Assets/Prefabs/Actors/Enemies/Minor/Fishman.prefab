@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 7386791062600313922}
   - component: {fileID: 685139333325651786}
   - component: {fileID: 559526624786422342}
+  - component: {fileID: 7099360077665926228}
   m_Layer: 0
   m_Name: Harpoon
   m_TagString: Untagged
@@ -783,6 +784,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7099360077665926228
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531842181359073903}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8473930003380522784, guid: eac36f1100f74cf99dbcb5d73ff4dfaa, type: 3}
 --- !u!1 &3689480735604211032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,8 +2318,8 @@ GameObject:
   - component: {fileID: 9060593055702070651}
   - component: {fileID: 6895167451090144799}
   - component: {fileID: 5410727449876544481}
-  - component: {fileID: 1347494452514171792}
   - component: {fileID: 3764724938334017286}
+  - component: {fileID: 2309506363569026053}
   m_Layer: 0
   m_Name: Fishman
   m_TagString: Minor
@@ -2419,18 +2442,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &1347494452514171792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8638927082778317261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3764724938334017286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2445,6 +2456,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &2309506363569026053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638927082778317261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8781670928613332599
 GameObject:
   m_ObjectHideFlags: 0

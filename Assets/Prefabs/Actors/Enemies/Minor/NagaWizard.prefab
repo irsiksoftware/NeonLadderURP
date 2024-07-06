@@ -173,6 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8967938874812028821}
+  - component: {fileID: 4254122430629909636}
   m_Layer: 0
   m_Name: nagaWizard_staff
   m_TagString: Untagged
@@ -196,6 +197,27 @@ Transform:
   - {fileID: 3163810320750271662}
   m_Father: {fileID: 4445429336956304127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4254122430629909636
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514845366181334262}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.8, z: 0.2}
+  m_Center: {x: 0.03, y: -1.22, z: 0}
 --- !u!1 &1564267674300806374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1917,8 +1939,8 @@ GameObject:
   - component: {fileID: 2470029787776045305}
   - component: {fileID: 8036326389261662813}
   - component: {fileID: 5417435054425544830}
-  - component: {fileID: 913093511951500051}
   - component: {fileID: 1481412670459414208}
+  - component: {fileID: 2147554904472742078}
   m_Layer: 0
   m_Name: NagaWizard
   m_TagString: Minor
@@ -1985,7 +2007,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1.9316605, z: 1}
-  m_Center: {x: 0, y: 1.0423701, z: 0}
+  m_Center: {x: 0, y: 1.0423701, z: 0.2}
 --- !u!54 &2470029787776045305
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2041,18 +2063,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &913093511951500051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6667404006967607094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1481412670459414208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,6 +2077,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &2147554904472742078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6667404006967607094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7780764178086978832
 GameObject:
   m_ObjectHideFlags: 0

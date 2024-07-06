@@ -1,77 +1,147 @@
+using NeonLadder.Events;
+using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static NeonLadder.Core.Simulation;
 
 namespace NeonLadder.Mechanics.Controllers
 {
     public class CollisionController : MonoBehaviour
     {
         public Health health { get; private set; }
+        private KinematicObject otherActor;
+        private GameObject otherActorParent;
+        
+        private KinematicObject thisActor;
+        private GameObject thisActorParent;
 
+        // Auto-property with default value and validation logic
         [SerializeField]
-        private float duplicateCollisionAvoidanceTimer = 0f;
-
-        public float DuplicateCollisionAvoidanceTimer
+        private float duplicateCollisionAvoidanceTimer = 0.6f;
+        public virtual float DuplicateCollisionAvoidanceTimer
         {
             get => duplicateCollisionAvoidanceTimer;
-            set => duplicateCollisionAvoidanceTimer = value;
+            set => duplicateCollisionAvoidanceTimer = Mathf.Max(0.6f, value);
         }
 
         private HashSet<GameObject> recentCollisions = new HashSet<GameObject>();
 
-        private void Start()
+        private void Awake()
         {
-            health = GetComponent<Health>();
+            //ugh
+            DuplicateCollisionAvoidanceTimer = duplicateCollisionAvoidanceTimer;
+     
+            thisActorParent = GetComponentInParent<Rigidbody>().gameObject;
+            health = thisActorParent.GetComponent<Health>();
+            thisActor = thisActorParent.GetComponentInChildren<KinematicObject>();
+        }
+
+        private void OnEnable()
+        {
+            // Subscribe to the event in OnEnable
+            ManagerController.Instance.eventManager.StartListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
+        }
+
+        private void OnDisable()
+        {
+            //Debug.Log($"Unsubscribing from event: OnTriggerEnter on {thisActorParent.name}");
+            ManagerController.Instance.eventManager.StopListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            Rigidbody parentRigidbody = other.GetComponentInParent<Rigidbody>();
-            if (parentRigidbody != null)
+            // If collider is type of terrain collider, schedule terrain collision event
+            if (other is TerrainCollider && thisActor is Player)
             {
-                GameObject collisionGameObject = parentRigidbody.gameObject;
+                Schedule<PlayerTerrainCollision>();
+                return;
+            }
+            else if (other is TerrainCollider && thisActor is Enemy)
+            {
+                Schedule<EnemyTerrainCollision>();
+                return;
+            }
+            else if (thisActorParent.layer == LayerMask.NameToLayer(Layers.Dead.ToString()) || other.gameObject.layer == LayerMask.NameToLayer(Layers.Dead.ToString()))
+            {
+                return;
+            }
+            
 
-                if (!recentCollisions.Contains(collisionGameObject))
+            // If we got this far, we know it's probably a legit attack collision.
+            try
+            {
+                otherActorParent = other.GetComponentInParent<Rigidbody>().gameObject;
+                otherActor = otherActorParent.GetComponentInChildren<KinematicObject>();
+            }
+            catch (Exception ex)
+            {
+                if (other.gameObject.layer == LayerMask.NameToLayer(Layers.TransparentFX.ToString()) || other.tag == nameof(Tags.Untagged))
                 {
-                    recentCollisions.Add(collisionGameObject);
-                    StartCoroutine(RemoveFromRecentCollisions(collisionGameObject));
+                    //see Collectible class for this (for now, unsure if should move to here, or schedule event, etc), or something collided with an untagged object, likely a building.
+                    return;
+                }
+                else
+                {
+                    Debug.LogError($"Error finding attacking actor: {ex.Message} \n {other.tag}");
+                    return;
+                }
+            }
 
-                    //Debug.Log($"Collision detected on {gameObject.name} ({LayerMask.LayerToName(gameObject.layer)} Layer) from {other.gameObject.name} on ({LayerMask.LayerToName(other.gameObject.layer)} Layer)");
+            if (otherActorParent.tag == nameof(Tags.PlayerProjectile) && thisActorParent.GetComponentInChildren<Player>() != null) //can't shoot myself.
+            {
+                return;
+            }
+            else if (thisActor is Enemy && otherActor is Enemy) //enemies can hurt each other.
+            {
+                return;
+            }
+            else
+            {
+                if (!recentCollisions.Contains(otherActorParent))
+                {
+                    recentCollisions.Add(otherActorParent);
+                    StartCoroutine(RemoveFromRecentCollisions(otherActorParent));
 
                     if (other.gameObject.layer == LayerMask.NameToLayer(Layers.Battle.ToString()))
                     {
-                        if (TryGetComponentInHierarchy(other.transform, out ProjectileController projectile))
+                        if (otherActorParent.tag == nameof(Tags.PlayerProjectile))
                         {
-                            Destroy(other.gameObject);
-                            health.Decrement(projectile.Damage);
+                            health.Decrement(otherActorParent.GetComponent<ProjectileController>().Damage);
                         }
-                        else if (TryGetComponentInHierarchy(other.transform, out MeleeController melee))
+                        else if (otherActor.IsUsingMelee)
                         {
-                            health.Decrement(melee.Damage);
+                            //if (otherActor is Player)
+                            //{
+                            //    Debug.Log($"Other actor is player");
+                            //}
+
+                            //if (otherActor is Enemy)
+                            //{
+                            //    Debug.Log($"Other actor is enemy");
+                            //}
+
+                            //Debug.Log($"{thisActor.transform.parent.gameObject.name} took {otherActor.GetComponent<MeleeController>().Damage} damage from {otherActorParent.name} @ {Time.time}");
+                            health.Decrement(otherActor.GetComponent<MeleeController>().Damage);
+                        }
+                        else
+                        {
+                            Debug.Log("Something went wrong");
                         }
                     }
                 }
             }
         }
 
-        private bool TryGetComponentInHierarchy<T>(Transform transform, out T component) where T : Component
-        {
-            component = transform.GetComponent<T>();
-            while (component == null && transform.parent != null)
-            {
-                transform = transform.parent;
-                component = transform.GetComponent<T>();
-            }
-            return component != null;
-        }
 
         private IEnumerator RemoveFromRecentCollisions(GameObject obj)
         {
-            if (duplicateCollisionAvoidanceTimer > 0)
+            if (DuplicateCollisionAvoidanceTimer > 0)
             {
-                yield return new WaitForSeconds(duplicateCollisionAvoidanceTimer);
+                yield return new WaitForSeconds(DuplicateCollisionAvoidanceTimer);
             }
             recentCollisions.Remove(obj);
         }

@@ -7,44 +7,37 @@ namespace NeonLadder.Managers
 {
     public class ManagerController : MonoBehaviour
     {
-        private static ManagerController Instance;
+        public static ManagerController Instance;
         [SerializeField] private bool dontDestroyOnLoad = true;
 
         private Scenes scene;
-        private EnemyDefeatedManager enemyDefeatedManager;
-        private DialogueManager dialogueManager;
-        private SceneExitAssignmentManager sceneExitAssignmentManager;
-        private LootDropManager lootDropManager;
-        private LootPurchaseManager lootPurchaseManager;
-        private MonsterGroupActivationManager monsterGroupActivationManager;
-        private PlayerCameraPositionManager playerCameraPositionManager;
-        private GameControllerManager gameControllerManager;
-        private SceneChangeManager sceneChangeManager;
+        public EnemyDefeatedManager enemyDefeatedManager;
+        public DialogueManager dialogueManager;
+        public SceneExitAssignmentManager sceneExitAssignmentManager;
+        public LootDropManager lootDropManager;
+        public LootPurchaseManager lootPurchaseManager;
+        public MonsterGroupActivationManager monsterGroupActivationManager;
+        public PlayerCameraPositionManager playerCameraPositionManager;
+        public GameControllerManager gameControllerManager;
+        public SceneChangeManager sceneChangeManager;
+        public EventManager eventManager;
 
         void Awake()
         {
+            InitializeChildComponents();
+
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
             }
             else
             {
-
-                enemyDefeatedManager = GetComponentInChildren<EnemyDefeatedManager>();
-                sceneExitAssignmentManager = GetComponentInChildren<SceneExitAssignmentManager>();
-                lootDropManager = GetComponentInChildren<LootDropManager>();
-                lootPurchaseManager = GetComponentInChildren<LootPurchaseManager>();
-                monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
-                playerCameraPositionManager = GetComponentInChildren<PlayerCameraPositionManager>();
-                gameControllerManager = GetComponentInChildren<GameControllerManager>();
-                sceneChangeManager = GetComponentInChildren<SceneChangeManager>();
-                dialogueManager = GetComponentInChildren<DialogueManager>();
-
                 Instance = this;
                 if (dontDestroyOnLoad)
                 {
                     DontDestroyOnLoad(gameObject);
                 }
+
             }
         }
 
@@ -63,8 +56,23 @@ namespace NeonLadder.Managers
             }
         }
 
+        private void InitializeChildComponents()
+        {
+            enemyDefeatedManager = GetComponentInChildren<EnemyDefeatedManager>();
+            sceneExitAssignmentManager = GetComponentInChildren<SceneExitAssignmentManager>();
+            lootDropManager = GetComponentInChildren<LootDropManager>();
+            lootPurchaseManager = GetComponentInChildren<LootPurchaseManager>();
+            playerCameraPositionManager = GetComponentInChildren<PlayerCameraPositionManager>();
+            gameControllerManager = GetComponentInChildren<GameControllerManager>();
+            sceneChangeManager = GetComponentInChildren<SceneChangeManager>();
+            dialogueManager = GetComponentInChildren<DialogueManager>();
+            eventManager = GetComponentInChildren<EventManager>();
+            monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
+        }
+
         public void ToggleManagers()
         {
+            eventManager.enabled = true;
             switch (scene)
             {
                 case Scenes.Title:
@@ -106,6 +114,5 @@ namespace NeonLadder.Managers
                     break;
             }
         }
-
     }
 }

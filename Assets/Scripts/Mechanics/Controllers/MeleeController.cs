@@ -8,6 +8,8 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         private int damage; // Backing field
 
+
+
         public int Damage
         {
             get
@@ -37,9 +39,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        private void Awake()
-        {
-            // No need for switch statement here, as the Damage property handles the fallback logic
-        }
+        private void OnEnable() { }
+        private void Awake() { }
     }
 }

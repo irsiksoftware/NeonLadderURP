@@ -302,8 +302,8 @@ GameObject:
   - component: {fileID: 1245208309082504254}
   - component: {fileID: 7807501683635573269}
   - component: {fileID: 8882879657844300646}
-  - component: {fileID: 693928243990674551}
   - component: {fileID: 6758793709825104500}
+  - component: {fileID: 5387181631571386425}
   m_Layer: 0
   m_Name: LizardKnight
   m_TagString: Minor
@@ -369,8 +369,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1692495, y: 1.9258809, z: 1}
-  m_Center: {x: -0.08462477, y: 1.048075, z: 0}
+  m_Size: {x: 1.1692495, y: 1.9258809, z: 1.483365}
+  m_Center: {x: -0.08462477, y: 1.048075, z: 0.2416826}
 --- !u!54 &1245208309082504254
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -426,18 +426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   max: 100
---- !u!114 &693928243990674551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125715020853024642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce78c0c4dc886714da8772976ab12196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6758793709825104500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +440,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
+  yOffset: 1
+--- !u!114 &5387181631571386425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125715020853024642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255c8b9ecc7903941964c38c551301cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1370620042761008949
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +464,7 @@ GameObject:
   - component: {fileID: 7825059744267970530}
   - component: {fileID: 6570004302226352405}
   - component: {fileID: 6042528435130273846}
+  - component: {fileID: 1390961296484025090}
   m_Layer: 0
   m_Name: BladeMesh
   m_TagString: Untagged
@@ -535,6 +537,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1390961296484025090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370620042761008949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.21639836, y: 0.72048396, z: 2.602194}
+  m_Center: {x: 0.011607047, y: -0.20723285, z: 0.91063726}
 --- !u!1 &1688181216566159778
 GameObject:
   m_ObjectHideFlags: 0

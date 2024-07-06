@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class PlayerRangedActions : MonoBehaviour
+    public class RangedAttackController : MonoBehaviour
     {
         public float raycastDistance = 100f;
         public Transform spawnPoint;
@@ -35,7 +35,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         void Update()
         {
-            if (!player.Actions.isUsingMelee)
+            if (!player.IsUsingMelee)
             {
                 Camera cam = Camera.main;
                 if (cam != null)
