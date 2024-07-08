@@ -11,10 +11,12 @@ namespace NeonLadder.Mechanics.Controllers
         public List<GameObject> prefabs = new List<GameObject>();
         public Player player;
         public int Damage = 10;
+        private float projectileLifetime = 2f;
 
         public void Shoot(Vector3 targetPoint)
         {
             GameObject instance = Instantiate(prefabs[currentFX], spawnPoint.position, Quaternion.identity);
+            Destroy(instance, projectileLifetime);
             ProjectileController projectileController = instance.GetComponent<ProjectileController>();
 
             if (projectileController != null)
@@ -25,7 +27,7 @@ namespace NeonLadder.Mechanics.Controllers
                 projectileController.SetDirection(direction);
             }
 
-            projectileController.SpawnSubFX(projectileController.muzzle, spawnPoint);
+            projectileController.SpawnSubFX(projectileController.muzzle, spawnPoint, projectileLifetime);
         }
 
         private void Awake()

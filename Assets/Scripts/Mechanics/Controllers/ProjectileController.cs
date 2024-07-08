@@ -33,7 +33,7 @@ namespace NeonLadder.Mechanics.Controllers
             dummyT.position = this.transform.position;
             dummyT.rotation = rot;
 
-            SpawnSubFX(impact, dummyT);
+            SpawnSubFX(impact, dummyT, 5f);
 
             if (projectileCore != null)
             {
@@ -85,11 +85,11 @@ namespace NeonLadder.Mechanics.Controllers
             Destroy(gameObject, 5f);
         }
 
-        public void SpawnSubFX(GameObject fx, Transform spawnPos)
+        public void SpawnSubFX(GameObject fx, Transform spawnPos, float lifetime)
         {
             GameObject instance = Instantiate(fx, spawnPos.position, spawnPos.rotation);
             instance.GetComponent<ParticleSystem>().Play(true);
-            Destroy(instance, 5f);
+            Destroy(instance, lifetime);
         }
     }
 }
