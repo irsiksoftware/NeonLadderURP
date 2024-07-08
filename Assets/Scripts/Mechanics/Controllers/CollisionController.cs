@@ -111,6 +111,7 @@ namespace NeonLadder.Mechanics.Controllers
                         if (otherActorParent.tag == nameof(Tags.PlayerProjectile))
                         {
                             health.Decrement(otherActorParent.GetComponent<ProjectileController>().Damage);
+                            Destroy(otherActorParent);
                         }
                         else if (otherActor.IsUsingMelee)
                         {

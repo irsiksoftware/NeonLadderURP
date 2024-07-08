@@ -13,7 +13,7 @@ namespace NeonLadder.Managers
         private Scenes scene;
         public EnemyDefeatedManager enemyDefeatedManager;
         public DialogueManager dialogueManager;
-        public SceneExitAssignmentManager sceneExitAssignmentManager;
+        //public SceneExitAssignmentManager sceneExitAssignmentManager;
         public LootDropManager lootDropManager;
         public LootPurchaseManager lootPurchaseManager;
         public MonsterGroupActivationManager monsterGroupActivationManager;
@@ -59,7 +59,7 @@ namespace NeonLadder.Managers
         private void InitializeChildComponents()
         {
             enemyDefeatedManager = GetComponentInChildren<EnemyDefeatedManager>();
-            sceneExitAssignmentManager = GetComponentInChildren<SceneExitAssignmentManager>();
+            //sceneExitAssignmentManager = GetComponentInChildren<SceneExitAssignmentManager>();
             lootDropManager = GetComponentInChildren<LootDropManager>();
             lootPurchaseManager = GetComponentInChildren<LootPurchaseManager>();
             playerCameraPositionManager = GetComponentInChildren<PlayerCameraPositionManager>();
