@@ -88,6 +88,7 @@ namespace NeonLadder.Managers
                     }
                     break;
                 case Scenes.Start:
+                case Scenes.Recife_2050_Final:
                     if (monsterGroupActivationManager != null)
                     {
                         monsterGroupActivationManager.enabled = true;

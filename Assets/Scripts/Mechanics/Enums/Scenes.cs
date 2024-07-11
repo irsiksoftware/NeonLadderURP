@@ -9,6 +9,7 @@ namespace NeonLadder.Mechanics.Enums
         MetaShop,
         PermaShop,
         ReturnToStaging,
-        Credits
+        Credits,
+        Recife_2050_Final
     }
 }
