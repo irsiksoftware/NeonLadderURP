@@ -13,7 +13,7 @@ namespace NeonLadder.Managers
         private Scenes scene;
         public EnemyDefeatedManager enemyDefeatedManager;
         public DialogueManager dialogueManager;
-        //public SceneExitAssignmentManager sceneExitAssignmentManager;
+        public SceneExitAssignmentManager sceneExitAssignmentManager;
         public LootDropManager lootDropManager;
         public LootPurchaseManager lootPurchaseManager;
         public MonsterGroupActivationManager monsterGroupActivationManager;
@@ -21,6 +21,7 @@ namespace NeonLadder.Managers
         public GameControllerManager gameControllerManager;
         public SceneChangeManager sceneChangeManager;
         public EventManager eventManager;
+        public SteamManager steamManager;
 
         void Awake()
         {
@@ -59,7 +60,7 @@ namespace NeonLadder.Managers
         private void InitializeChildComponents()
         {
             enemyDefeatedManager = GetComponentInChildren<EnemyDefeatedManager>();
-            //sceneExitAssignmentManager = GetComponentInChildren<SceneExitAssignmentManager>();
+            sceneExitAssignmentManager = GetComponentInChildren<SceneExitAssignmentManager>();
             lootDropManager = GetComponentInChildren<LootDropManager>();
             lootPurchaseManager = GetComponentInChildren<LootPurchaseManager>();
             playerCameraPositionManager = GetComponentInChildren<PlayerCameraPositionManager>();
@@ -68,6 +69,7 @@ namespace NeonLadder.Managers
             dialogueManager = GetComponentInChildren<DialogueManager>();
             eventManager = GetComponentInChildren<EventManager>();
             monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
+            steamManager = GetComponentInChildren<SteamManager>();
         }
 
         public void ToggleManagers()
@@ -77,6 +79,7 @@ namespace NeonLadder.Managers
             {
                 case Scenes.Title:
                     gameControllerManager.enabled = true;
+                    //steamManager.enabled = true;
                     break;
                 case Scenes.Staging:
                     lootDropManager.enabled = false;
