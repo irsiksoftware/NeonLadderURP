@@ -42,14 +42,27 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnEnable()
         {
-            // Subscribe to the event in OnEnable
-            ManagerController.Instance.eventManager.StartListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
+            if (ManagerController.Instance == null)
+            {
+                Debug.Log("Managers prefab is missing, or it's instance is missing an implementaiton.");
+            }
+            else
+            {
+                ManagerController.Instance.eventManager.StartListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
+            }
         }
 
         private void OnDisable()
         {
-            //Debug.Log($"Unsubscribing from event: OnTriggerEnter on {thisActorParent.name}");
-            ManagerController.Instance.eventManager.StopListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
+            //This stuff happens on Actor death.
+            //if (ManagerController.Instance == null)
+            //{
+            //    Debug.Log("Managers prefab is missing, or it's instance is missing an implementaiton.");
+            //}
+            //else
+            //{
+            //    ManagerController.Instance.eventManager.StopListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
+            //}
         }
 
         private void OnTriggerEnter(Collider other)
@@ -62,7 +75,9 @@ namespace NeonLadder.Mechanics.Controllers
             }
             else if (other is TerrainCollider && thisActor is Enemy)
             {
-                Schedule<EnemyTerrainCollision>();
+                var coll = Schedule<EnemyTerrainCollision>();
+                coll.enemy = thisActor as Enemy;
+
                 return;
             }
             else if (thisActorParent.layer == LayerMask.NameToLayer(Layers.Dead.ToString()) || other.gameObject.layer == LayerMask.NameToLayer(Layers.Dead.ToString()))

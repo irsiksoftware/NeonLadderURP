@@ -65,16 +65,24 @@ namespace NeonLadder.Mechanics.Controllers
         protected void Start()
         {
             player = GetComponent<Player>();
-            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
-            ConfigureControls(player);
-            ControllerDebugging.PrintDebugControlConfiguration(player);
-            if (meleeWeaponGroups == null || meleeWeaponGroups.Count == 0)
+            var managerObj = GameObject.FindGameObjectWithTag(Tags.Managers.ToString());
+            if (managerObj == null)
             {
-                meleeWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("MeleeWeapons"));
+                Debug.Log("Managers prefab not found in the scene.");
             }
-            if (rangedWeaponGroups == null || rangedWeaponGroups.Count == 0)
+            else
             {
-                rangedWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("Firearms"));
+                playerPositionManager = managerObj.GetComponentInChildren<PlayerCameraPositionManager>();
+                ConfigureControls(player);
+                ControllerDebugging.PrintDebugControlConfiguration(player);
+                if (meleeWeaponGroups == null || meleeWeaponGroups.Count == 0)
+                {
+                    meleeWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("MeleeWeapons"));
+                }
+                if (rangedWeaponGroups == null || rangedWeaponGroups.Count == 0)
+                {
+                    rangedWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("Firearms"));
+                }
             }
         }
 
@@ -122,15 +130,23 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected void OnEnable()
         {
-            playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
-            if (playerPositionManager == null)
+            var managerObj = GameObject.FindGameObjectWithTag(Tags.Managers.ToString());
+            if (managerObj == null)
             {
-                Debug.LogError("PlayerPositionManager not found in the scene.");
+                Debug.Log("Managers prefab not found in the scene.");
             }
-
-            if (playerActionMap == null)
+            else
             {
-                ConfigureControls(player);
+                playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
+                if (playerPositionManager == null)
+                {
+                    Debug.Log("PlayerPositionManager not found in the scene.");
+                }
+
+                if (playerActionMap == null)
+                {
+                    ConfigureControls(player);
+                }
             }
         }
 
