@@ -886,30 +886,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7851400550928104779, guid: f9d3fc35e6ae5cd448bf01328db431aa,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.2331378
-      objectReference: {fileID: 0}
-    - target: {fileID: 7851400550928104779, guid: f9d3fc35e6ae5cd448bf01328db431aa,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.6334311
-      objectReference: {fileID: 0}
     - target: {fileID: 7994448973845762054, guid: f9d3fc35e6ae5cd448bf01328db431aa,
         type: 3}
       propertyPath: m_Name
       value: Wrath
-      objectReference: {fileID: 0}
-    - target: {fileID: 7994448973845762054, guid: f9d3fc35e6ae5cd448bf01328db431aa,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7994448973845762054, guid: f9d3fc35e6ae5cd448bf01328db431aa,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -979,26 +959,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pride
       objectReference: {fileID: 0}
-    - target: {fileID: 7235662015669698416, guid: 86f9937f4b99a344ba78af8c300ef80d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7235662015669698416, guid: 86f9937f4b99a344ba78af8c300ef80d,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 7861332170528626354, guid: 86f9937f4b99a344ba78af8c300ef80d,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.0636057
-      objectReference: {fileID: 0}
-    - target: {fileID: 7861332170528626354, guid: 86f9937f4b99a344ba78af8c300ef80d,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.54315513
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1016,26 +976,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sloth
-      objectReference: {fileID: 0}
-    - target: {fileID: 3284355858361627543, guid: a88f85c48e6ee524fb0d70bb5f221cc2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3284355858361627543, guid: a88f85c48e6ee524fb0d70bb5f221cc2,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 6500317658593118868, guid: a88f85c48e6ee524fb0d70bb5f221cc2,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.2193031
-      objectReference: {fileID: 0}
-    - target: {fileID: 6500317658593118868, guid: a88f85c48e6ee524fb0d70bb5f221cc2,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.64034843
       objectReference: {fileID: 0}
     - target: {fileID: 7577545593035575148, guid: a88f85c48e6ee524fb0d70bb5f221cc2,
         type: 3}
@@ -1110,16 +1050,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2420327838398198001, guid: 2412864267491884eb24fc7a4bb096a6,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121578805631366903, guid: 2412864267491884eb24fc7a4bb096a6,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
     - target: {fileID: 3121578805631366903, guid: 2412864267491884eb24fc7a4bb096a6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1170,16 +1100,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3489883555117450939, guid: 2412864267491884eb24fc7a4bb096a6,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.2391026
-      objectReference: {fileID: 0}
-    - target: {fileID: 3489883555117450939, guid: 2412864267491884eb24fc7a4bb096a6,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.6304487
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1193,30 +1113,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4771007517788269797, guid: 620223d6dab5d9a4896e1c37bc3c623d,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.2137738
-      objectReference: {fileID: 0}
-    - target: {fileID: 4771007517788269797, guid: 620223d6dab5d9a4896e1c37bc3c623d,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.6431131
-      objectReference: {fileID: 0}
     - target: {fileID: 5066650781140085000, guid: 620223d6dab5d9a4896e1c37bc3c623d,
         type: 3}
       propertyPath: m_Name
       value: Gluttony
-      objectReference: {fileID: 0}
-    - target: {fileID: 5066650781140085000, guid: 620223d6dab5d9a4896e1c37bc3c623d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5066650781140085000, guid: 620223d6dab5d9a4896e1c37bc3c623d,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 8022901536668720721, guid: 620223d6dab5d9a4896e1c37bc3c623d,
         type: 3}
@@ -1281,16 +1181,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1792025163638902684, guid: 39fbcbaa127ec4249aa147bc5128a2a9,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.0411767
-      objectReference: {fileID: 0}
-    - target: {fileID: 1792025163638902684, guid: 39fbcbaa127ec4249aa147bc5128a2a9,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.55085236
-      objectReference: {fileID: 0}
     - target: {fileID: 2809824425738853462, guid: 39fbcbaa127ec4249aa147bc5128a2a9,
         type: 3}
       propertyPath: m_Name
@@ -1419,30 +1309,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1586097599944681424, guid: de2f545ccf92d344e8a384fa8b6a0513,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.2402571
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586097599944681424, guid: de2f545ccf92d344e8a384fa8b6a0513,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.6298714
-      objectReference: {fileID: 0}
     - target: {fileID: 8362422609393884794, guid: de2f545ccf92d344e8a384fa8b6a0513,
         type: 3}
       propertyPath: m_Name
       value: Greed
-      objectReference: {fileID: 0}
-    - target: {fileID: 8362422609393884794, guid: de2f545ccf92d344e8a384fa8b6a0513,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8362422609393884794, guid: de2f545ccf92d344e8a384fa8b6a0513,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

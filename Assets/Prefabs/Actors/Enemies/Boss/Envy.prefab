@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 8093918006847776058}
   - component: {fileID: 475107574624576658}
   - component: {fileID: 999166820242604313}
+  - component: {fileID: 6907919850245886990}
   m_Layer: 0
   m_Name: Wand_F05
   m_TagString: Untagged
@@ -581,6 +582,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &6907919850245886990
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554993335513125911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.23154368, y: 0.1033858, z: 0.27162626}
+  m_Center: {x: -0.000000007255153, y: 0.00000007073312, z: 0.3477275}
 --- !u!1 &563652332458742142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1959,7 @@ GameObject:
   - component: {fileID: 1289682634544992760}
   m_Layer: 0
   m_Name: Envy
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1952,7 +1974,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 504.04, y: 0.01, z: 500}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 560170981620000027}
@@ -2029,9 +2051,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.3
+  m_Height: 1.2391026
   m_Direction: 1
-  m_Center: {x: 0, y: 0.6, z: 0}
+  m_Center: {x: 0, y: 0.6304487, z: 0}
 --- !u!114 &2142608980156048817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6277,7 +6299,7 @@ Transform:
   m_GameObject: {fileID: 7247524365412906234}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0660798, y: 0.70401245, z: 0.7070837, w: -0.005717736}
-  m_LocalPosition: {x: -0.038474772, y: -0.006929409, z: -0.008677911}
+  m_LocalPosition: {x: -0.058, y: 0.186, z: -0.009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7597,6 +7619,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3121578805631366903}
     m_Modifications:
+    - target: {fileID: 602270896041684163, guid: d40f6f9393f05bb479fcaae12e76f7ff,
+        type: 3}
+      propertyPath: attackRange
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4531093981565543356, guid: d40f6f9393f05bb479fcaae12e76f7ff,
         type: 3}
       propertyPath: m_LocalPosition.x

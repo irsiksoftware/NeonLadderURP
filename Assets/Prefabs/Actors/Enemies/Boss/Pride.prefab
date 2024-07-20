@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 7423850423841704817}
   - component: {fileID: 5010134229365491538}
   - component: {fileID: 4254029633081172282}
+  - component: {fileID: 2592524777101941530}
   m_Layer: 0
   m_Name: Sword_M05
   m_TagString: Untagged
@@ -168,6 +169,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &2592524777101941530
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76129818682020850}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.14193721, y: 0.014221011, z: 0.64802223}
+  m_Center: {x: 0.0005333577, y: -0.003638098, z: 0.4685738}
 --- !u!1 &169921094692441030
 GameObject:
   m_ObjectHideFlags: 0
@@ -5701,7 +5723,7 @@ GameObject:
   - component: {fileID: 8949966807757481837}
   m_Layer: 0
   m_Name: Pride
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5793,9 +5815,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.1249579
+  m_Height: 1.0636057
   m_Direction: 1
-  m_Center: {x: 0, y: 0.512479, z: 0}
+  m_Center: {x: 0, y: 0.54315513, z: 0}
 --- !u!114 &8566525442218648742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7586,6 +7608,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6803616972485974380}
     m_Modifications:
+    - target: {fileID: 602270896041684163, guid: d40f6f9393f05bb479fcaae12e76f7ff,
+        type: 3}
+      propertyPath: attackRange
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4531093981565543356, guid: d40f6f9393f05bb479fcaae12e76f7ff,
         type: 3}
       propertyPath: m_LocalPosition.x
