@@ -144,13 +144,14 @@ public class SteamManager : MonoBehaviour
             Debug.Log("[Steamworks.NET] SteamAPI_Init() Succeeded!", this);
 
             // Reset achievements for testing
-            ResetAchievements();
-
+            #if UNITY_EDITOR
+                ResetAchievements();
+            #endif
             // Check if the Steam overlay is enabled
-            bool isOverlayEnabled = SteamUtils.IsOverlayEnabled();
+            //bool isOverlayEnabled = SteamUtils.IsOverlayEnabled();
 
             // Additional debug logging
-            CheckOverlayErrorDetails(isOverlayEnabled);
+            ///CheckOverlayErrorDetails(isOverlayEnabled);
         }
 
         s_EverInitialized = true;
@@ -164,6 +165,10 @@ public class SteamManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// To troubleshoot steam overlays for achievement dev testing.
+    /// </summary>
+    /// <param name="isOverlayEnabled"></param>
     private void CheckOverlayErrorDetails(bool isOverlayEnabled)
     {
         string interferingProcesses = CheckForInterferingProcesses();
