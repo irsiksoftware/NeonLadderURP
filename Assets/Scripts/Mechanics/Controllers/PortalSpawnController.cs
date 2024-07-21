@@ -46,7 +46,7 @@ public class PortalSpawnController : MonoBehaviour
         if (Prefabs.Count > 0)
         {
             int index = Random.Range(0, Prefabs.Count);
-            Debug.Log($"Spawning prefab at index: {index}"); // Debug statement
+            //Debug.Log($"Spawning prefab at index: {index}"); // Debug statement
             Instantiate(Prefabs[index], transform.position, transform.rotation);
         }
     }
