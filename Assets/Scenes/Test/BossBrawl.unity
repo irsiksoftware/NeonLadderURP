@@ -875,7 +875,7 @@ PrefabInstance:
     - target: {fileID: 3720613303249863739, guid: 28ae1419f7ae3294d94305b470824224,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5982477496231544797, guid: 28ae1419f7ae3294d94305b470824224,
         type: 3}
@@ -900,7 +900,7 @@ PrefabInstance:
     - target: {fileID: 7786442601299868271, guid: 28ae1419f7ae3294d94305b470824224,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 497.38
+      value: 503.293
       objectReference: {fileID: 0}
     - target: {fileID: 7786442601299868271, guid: 28ae1419f7ae3294d94305b470824224,
         type: 3}
@@ -963,7 +963,7 @@ PrefabInstance:
     - target: {fileID: 4762371589777255243, guid: f9d3fc35e6ae5cd448bf01328db431aa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 498.66
+      value: 504.573
       objectReference: {fileID: 0}
     - target: {fileID: 4762371589777255243, guid: f9d3fc35e6ae5cd448bf01328db431aa,
         type: 3}
@@ -1018,7 +1018,7 @@ PrefabInstance:
     - target: {fileID: 7994448973845762054, guid: f9d3fc35e6ae5cd448bf01328db431aa,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
