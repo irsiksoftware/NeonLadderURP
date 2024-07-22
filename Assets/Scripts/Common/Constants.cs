@@ -29,7 +29,7 @@ namespace NeonLadder.Common
 
         #endregion
 
-
+        public static float TransformationDurationInSeconds = 3.5f;
 
 
         #region Settings

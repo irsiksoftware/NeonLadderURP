@@ -1,5 +1,4 @@
 using NeonLadder.Events;
-using NeonLadder.Gameplay;
 using static NeonLadder.Core.Simulation;
 
 namespace NeonLadder.Mechanics.Stats

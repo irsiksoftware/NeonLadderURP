@@ -9,7 +9,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            Debug.Log("Player collided with terrain.");
+            //Debug.Log("Player collided with terrain.");
         }
     }
 }

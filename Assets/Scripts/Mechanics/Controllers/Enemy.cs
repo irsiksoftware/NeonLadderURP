@@ -11,6 +11,7 @@ namespace NeonLadder.Mechanics.Controllers
 {
     public abstract class Enemy : KinematicObject
     {
+        public bool ShouldEngagePlayer = true; // Publicly accessible flag, default to always engage.
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
@@ -45,7 +46,6 @@ namespace NeonLadder.Mechanics.Controllers
 
         [SerializeField]
         private bool retreatWhenTooClose = false; // Default value
-
 
         protected virtual float AttackRange
         {
@@ -91,7 +91,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual int victoryAnimation { get; set; } = 5;
         protected virtual int deathAnimation { get; set; } = 4;
 
-
+        private bool isIdlePlaying = false;
 
         protected override void Awake()
         {
@@ -157,80 +157,175 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
-            //Debug.Log($"Enemy IsFacingLeft: {IsFacingLeft} - Enemy IsFacingRight: {IsFacingRight}");
-            base.Update();
             if (health.IsAlive)
             {
                 Orient();
-                if (player.Health.IsAlive)
+            }
+
+            if (ShouldEngagePlayer && !isIdlePlaying)
+            {
+                TimedLogger.Log($"{transform.parent.name} ShouldEngagePlayer: {ShouldEngagePlayer}", 1f);
+                IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
+                base.Update();
+                if (health.IsAlive)
                 {
-                    float distanceToTarget = Vector3.Distance(transform.parent.position, player.transform.parent.position);
-                    //TimedLogger.Log($"Distance to target: {distanceToTarget}", 1f);
-                    switch (currentState)
+                    if (ShouldEngagePlayer && player.Health.IsAlive)
                     {
-                        case MonsterStates.Idle:
-                        case MonsterStates.Reassessing:
-                            if (distanceToTarget > AttackRange)
-                            {
-                                currentState = MonsterStates.Approaching;
-                            }
-                            else if (RetreatWhenTooClose && distanceToTarget < (AttackRange - retreatBuffer))
-                            {
-                                currentState = MonsterStates.Retreating;
-                            }
-                            else if (Time.time > lastAttackTime + attackCooldown)
-                            {
-                                currentState = MonsterStates.Attacking;
-                            }
-                            else
-                            {
-                                moveDirection = 0;
-                                animator.SetInteger("animation", idleAnimation);
-                            }
-                            break;
-                        case MonsterStates.Approaching:
-                            if (distanceToTarget <= AttackRange)
-                            {
-                                moveDirection = 0;
-                                animator.SetInteger("animation", idleAnimation);
-                                currentState = MonsterStates.Reassessing;
-                            }
-                            else
-                            {
-                                ChasePlayer();
-                            }
-                            break;
-                        case MonsterStates.Retreating:
-                            if (distanceToTarget >= AttackRange - retreatBuffer)
-                            {
-                                moveDirection = 0;
-                                animator.SetInteger("animation", idleAnimation);
-                                currentState = MonsterStates.Reassessing;
-                            }
-                            else
-                            {
-                                Retreat();
-                            }
-                            animator.SetInteger("animation", walkBackwardAnimation);
-                            break;
-                        case MonsterStates.Attacking:
-                            StartCoroutine(AttackPlayer());
-                            break;
+                        float distanceToTarget = Vector3.Distance(transform.parent.position, player.transform.parent.position);
+                        switch (currentState)
+                        {
+                            case MonsterStates.Idle:
+                                StartCoroutine(PlayIdleAndReassess(distanceToTarget));
+                                break;
+                            case MonsterStates.Reassessing:
+                                HandleReassessingState(distanceToTarget);
+                                break;
+                            case MonsterStates.Approaching:
+                                HandleApproachingState(distanceToTarget);
+                                break;
+                            case MonsterStates.Retreating:
+                                HandleRetreatingState(distanceToTarget);
+                                break;
+                            case MonsterStates.Attacking:
+                                StartCoroutine(AttackPlayer());
+                                isIdlePlaying = false; // Ensure idle animation stops
+                                break;
+                        }
                     }
                 }
                 else
                 {
-                    moveDirection = 0;
-                    animator.SetInteger("animation", victoryAnimation);
-                    StartCoroutine(PlayVictoryAnimation());
+                    StartCoroutine(PlayDeathAnimation());
+                    isIdlePlaying = false; // Ensure idle animation stops
                 }
             }
             else
             {
-                animator.SetInteger("animation", deathAnimation);
-                StartCoroutine(PlayDeathAnimation());
+                //play victory animation
+                StartCoroutine(PlayVictoryAnimation());
             }
+        }
+
+        private IEnumerator PlayIdleAndReassess(float distanceToTarget)
+        {
+            // Reassess state first
+            ReassessState(distanceToTarget);
+
+            // If state is still idle, play idle animation
+            if (currentState == MonsterStates.Idle)
+            {
+                isIdlePlaying = true;
+                moveDirection = 0;
+                animator.SetInteger("animation", idleAnimation);
+                Debug.Log($"{transform.parent.name} starting Idle animation. Expected duration: {idleAnimationDuration}");
+                yield return new WaitForSeconds(idleAnimationDuration);
+                Debug.Log($"{transform.parent.name} completed Idle animation.");
+                isIdlePlaying = false;
+                ReassessState(distanceToTarget);
+            }
+        }
+
+        private void ReassessState(float distanceToTarget)
+        {
+            if (distanceToTarget > AttackRange)
+            {
+                currentState = MonsterStates.Approaching;
+            }
+            else if (RetreatWhenTooClose && distanceToTarget < (AttackRange - retreatBuffer))
+            {
+                currentState = MonsterStates.Retreating;
+            }
+            else if (Time.time > lastAttackTime + attackCooldown)
+            {
+                currentState = MonsterStates.Attacking;
+            }
+            else
+            {
+                currentState = MonsterStates.Reassessing; // Stay idle if no other actions are required
+            }
+        }
+
+        private void HandleReassessingState(float distanceToTarget)
+        {
+            if (distanceToTarget > AttackRange)
+            {
+                currentState = MonsterStates.Approaching;
+                isIdlePlaying = false; // Ensure idle animation stops
+            }
+            else if (RetreatWhenTooClose && distanceToTarget < (AttackRange - retreatBuffer))
+            {
+                currentState = MonsterStates.Retreating;
+                isIdlePlaying = false; // Ensure idle animation stops
+            }
+            else if (Time.time > lastAttackTime + attackCooldown)
+            {
+                currentState = MonsterStates.Attacking;
+                isIdlePlaying = false; // Ensure idle animation stops
+            }
+            else
+            {
+                if (!isIdlePlaying)
+                {
+                    //Debug.Log($"{transform.parent.name} entering Reassessing state.");
+                    StartCoroutine(PlayIdleAnimation());
+                }
+            }
+        }
+
+        private void HandleApproachingState(float distanceToTarget)
+        {
+            if (distanceToTarget <= AttackRange)
+            {
+                currentState = MonsterStates.Reassessing;
+                if (!isIdlePlaying)
+                {
+                    StartCoroutine(PlayIdleAnimation());
+                }
+            }
+            else
+            {
+                moveDirection = IsFacingLeft ? -1 : 1; // Move towards the player
+                animator.SetInteger("animation", walkForwardAnimation);
+                isIdlePlaying = false; // Ensure idle animation stops
+            }
+        }
+
+        private void HandleRetreatingState(float distanceToTarget)
+        {
+            if (distanceToTarget >= AttackRange - retreatBuffer)
+            {
+                currentState = MonsterStates.Reassessing;
+                if (!isIdlePlaying)
+                {
+                    StartCoroutine(PlayIdleAnimation());
+                }
+            }
+            else
+            {
+                Retreat();
+                isIdlePlaying = false; // Ensure idle animation stops
+                animator.SetInteger("animation", walkBackwardAnimation);
+            }
+        }
+
+        private IEnumerator PlayIdleAnimation()
+        {
+            isIdlePlaying = true;
+            moveDirection = 0;
+            animator.SetInteger("animation", idleAnimation);
+            //Debug.Log($"{transform.parent.name} starting Idle animation. Expected duration: {idleAnimationDuration}");
+
+            if (Vector3.Distance(transform.parent.position, player.transform.parent.position) <= AttackRange && Time.time > lastAttackTime + attackCooldown)
+            {
+                Debug.Log($"{transform.parent.name} interrupting Idle animation to attack.");
+                isIdlePlaying = false;
+                currentState = MonsterStates.Attacking;
+                StartCoroutine(AttackPlayer());
+                yield break;
+            }
+
+            isIdlePlaying = false;
+            //ReassessState(Vector3.Distance(transform.parent.position, player.transform.parent.position));
         }
 
         private void Retreat()
@@ -241,13 +336,15 @@ namespace NeonLadder.Mechanics.Controllers
 
         private IEnumerator PlayVictoryAnimation()
         {
-            yield return new WaitForSeconds(3);
-            animator.SetInteger("animation", idleAnimation);
+            animator.SetInteger("animation", victoryAnimation);
+            yield return new WaitForSeconds(victoryAnimationDuration);
+            //animator.SetInteger("animation", idleAnimation);
         }
 
         private IEnumerator PlayDeathAnimation()
         {
-            yield return new WaitForSeconds(deathAnimationDuration + deathBuffer);
+            animator.SetInteger("animation", deathAnimation);
+            yield return new WaitForSeconds(deathAnimationDuration);
             transform.parent.gameObject.SetActive(false);
         }
 
