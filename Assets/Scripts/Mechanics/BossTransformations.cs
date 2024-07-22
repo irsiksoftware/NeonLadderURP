@@ -1,3 +1,4 @@
+using NeonLadder.Mechanics.Enums;
 using System.Collections.Generic;
 
 namespace NeonLadder.Mechanics.Controllers
@@ -6,7 +7,8 @@ namespace NeonLadder.Mechanics.Controllers
     {
         public static Dictionary<string, string> bossTransformations = new Dictionary<string, string>
         {
-            { "Wrath", "Anglerox" }
+            { nameof(Bosses.Wrath), nameof(Bosses.Anglerox) },
+            { nameof(Bosses.Gluttony), nameof(Bosses.Gobbler) }
         };
     }
 }

@@ -157,6 +157,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
+            IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
             if (health.IsAlive)
             {
                 Orient();
@@ -164,8 +165,7 @@ namespace NeonLadder.Mechanics.Controllers
 
             if (ShouldEngagePlayer && !isIdlePlaying)
             {
-                TimedLogger.Log($"{transform.parent.name} ShouldEngagePlayer: {ShouldEngagePlayer}", 1f);
-                IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
+                
                 base.Update();
                 if (health.IsAlive)
                 {
@@ -317,10 +317,10 @@ namespace NeonLadder.Mechanics.Controllers
 
             if (Vector3.Distance(transform.parent.position, player.transform.parent.position) <= AttackRange && Time.time > lastAttackTime + attackCooldown)
             {
-                Debug.Log($"{transform.parent.name} interrupting Idle animation to attack.");
+                //Debug.Log($"{transform.parent.name} interrupting Idle animation to attack.");
                 isIdlePlaying = false;
                 currentState = MonsterStates.Attacking;
-                StartCoroutine(AttackPlayer());
+                //StartCoroutine(AttackPlayer());
                 yield break;
             }
 
@@ -389,7 +389,7 @@ namespace NeonLadder.Mechanics.Controllers
             currentState = MonsterStates.Reassessing;
         }
 
-        private void Orient()
+        public void Orient()
         {
             transform.parent.rotation = Quaternion.Euler(0, !IsFacingLeft ? 90 : -90, 0);
         }

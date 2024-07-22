@@ -22,7 +22,6 @@ namespace NeonLadder.Events
             {
                 scheduledEvent = Schedule<EnemyDeath>();
                 ((EnemyDeath)scheduledEvent).enemy = enemy;
-                Debug.Log($"Enemy {health.name} has died.");
             }
 
             switch (health.gameObject.tag)
@@ -42,6 +41,8 @@ namespace NeonLadder.Events
                 case "Major":
                 case "Minor":
                     // Major and Minor enemies already handled by the common enemy logic
+                case "BossTransformation":
+                    // the Counter side of the boss -> boss transformation event, which still has the Enemy Script, so is able to die.
                     break;
                 default:
                     Debug.Log(health.gameObject.tag);

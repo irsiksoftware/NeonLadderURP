@@ -18,6 +18,7 @@ namespace NeonLadder.Events
                 var transformedBoss = boss.transformation.GetComponentInChildren<Boss>();
                 if (transformedBoss != null)
                 {
+                    transformedBoss.Orient();
                     transformedBoss.ShouldEngagePlayer = false;
                     CoroutineRunner.RunCoroutine(ScaleOverTime(boss.transformation, Constants.TransformationDurationInSeconds, transformedBoss));
                 }
