@@ -7,8 +7,6 @@ TagManager:
   - Boss
   - Major
   - Minor
-  - MeleeWeapons
-  - Firearms
   - Grenades
   - MonsterGroup
   - ShopkeeperWindow
@@ -23,6 +21,8 @@ TagManager:
   - PlayButton
   - PlayerProjectile
   - BossTransformation
+  - MeleeWeapons
+  - Firearms
   layers:
   - Default
   - TransparentFX

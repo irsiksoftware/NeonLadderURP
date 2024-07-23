@@ -101,38 +101,9 @@ namespace NeonLadder.Mechanics.Controllers
             }
             base.Awake();
             health = GetComponentInParent<Health>();
-            LoadLootTable();
-        }
-
-        private void LoadLootTable()
-        {
-            if (lootTable != null)
+            if (lootTable == null)
             {
-                RuntimeLootTable = lootTable;
-            }
-            else
-            {
-                switch (this)
-                {
-                    case FlyingMinor:
-                    case Minor:
-                        RuntimeLootTable = Resources.Load<LootTable>(Constants.MinorEnemyLootTablePath);
-                        break;
-                    case Major:
-                        RuntimeLootTable = Resources.Load<LootTable>(Constants.MajorEnemyLootTablePath);
-                        break;
-                    case Boss:
-                        RuntimeLootTable = Resources.Load<LootTable>(Constants.BossEnemyLootTablePath);
-                        break;
-                    default:
-                        Debug.LogError($"LootTable not found for enemy: {this}");
-                        break;
-                }
-            }
-
-            if (RuntimeLootTable == null)
-            {
-                Debug.LogError($"LootTable not found for enemy: {this}");
+                RuntimeLootTable = LootHelper.LoadLootTable(this);
             }
         }
 
@@ -157,6 +128,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
+            float distanceToTarget = Vector3.Distance(transform.parent.position, player.transform.parent.position);
             IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
             if (health.IsAlive)
             {
@@ -171,26 +143,28 @@ namespace NeonLadder.Mechanics.Controllers
                 {
                     if (ShouldEngagePlayer && player.Health.IsAlive)
                     {
-                        float distanceToTarget = Vector3.Distance(transform.parent.position, player.transform.parent.position);
-                        switch (currentState)
-                        {
-                            case MonsterStates.Idle:
-                                StartCoroutine(PlayIdleAndReassess(distanceToTarget));
-                                break;
-                            case MonsterStates.Reassessing:
-                                HandleReassessingState(distanceToTarget);
-                                break;
-                            case MonsterStates.Approaching:
-                                HandleApproachingState(distanceToTarget);
-                                break;
-                            case MonsterStates.Retreating:
-                                HandleRetreatingState(distanceToTarget);
-                                break;
-                            case MonsterStates.Attacking:
-                                StartCoroutine(AttackPlayer());
-                                isIdlePlaying = false; // Ensure idle animation stops
-                                break;
-                        }
+                        //if (currentState != MonsterStates.Attacking)
+                        //{
+                            switch (currentState)
+                            {
+                                case MonsterStates.Idle:
+                                    StartCoroutine(PlayIdleAndReassess(distanceToTarget));
+                                    break;
+                                case MonsterStates.Reassessing:
+                                    HandleReassessingState(distanceToTarget);
+                                    break;
+                                case MonsterStates.Approaching:
+                                    HandleApproachingState(distanceToTarget);
+                                    break;
+                                case MonsterStates.Retreating:
+                                    HandleRetreatingState(distanceToTarget);
+                                    break;
+                                case MonsterStates.Attacking:
+                                    StartCoroutine(AttackPlayer());
+                                    isIdlePlaying = false; // Ensure idle animation stops
+                                    break;
+                            }
+                        //}
                     }
                 }
                 else
@@ -368,26 +342,27 @@ namespace NeonLadder.Mechanics.Controllers
                     attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Default));
                 }
 
-                currentState = MonsterStates.Reassessing;
+                //currentState = MonsterStates.Reassessing;
             }
-            else
-            {
-                Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Resorting to {nameof(FallbackAttack)}");
-                if (Time.time > lastAttackTime + attackCooldown)
-                {
-                    yield return StartCoroutine(FallbackAttack());
-                }
-            }
+            //else
+            //{
+            //    Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Resorting to {nameof(FallbackAttack)}");
+            //    if (Time.time > lastAttackTime + attackCooldown)
+            //    {
+            //        yield return StartCoroutine(FallbackAttack());
+            //    }
+            //}
+            ReassessState(Vector3.Distance(transform.parent.position, player.transform.parent.position));
         }
 
-        private IEnumerator FallbackAttack()
-        {
-            lastAttackTime = Time.time;
-            player.Health.Decrement(attackDamage);
-            animator.SetInteger("animation", attackAnimation);
-            yield return new WaitForSeconds(attackAnimationDuration);
-            currentState = MonsterStates.Reassessing;
-        }
+        //private IEnumerator FallbackAttack()
+        //{
+        //    lastAttackTime = Time.time;
+        //    player.Health.Decrement(attackDamage);
+        //    animator.SetInteger("animation", attackAnimation);
+        //    yield return new WaitForSeconds(attackAnimationDuration);
+        //    currentState = MonsterStates.Reassessing;
+        //}
 
         public void Orient()
         {

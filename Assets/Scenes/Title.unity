@@ -667,6 +667,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5150756620191251286, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_TagString
+      value: Firearms
+      objectReference: {fileID: 0}
     - target: {fileID: 5358769332522107222, guid: 6e237756f2176ad4eb5a5995d2293cae,
         type: 3}
       propertyPath: m_Name
@@ -742,15 +747,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6879830044167378965, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_TagString
+      value: Firearms
+      objectReference: {fileID: 0}
     - target: {fileID: 7544812595316970997, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544812595316970997, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_TagString
+      value: MeleeWeapons
+      objectReference: {fileID: 0}
+    - target: {fileID: 8653438203187203135, guid: 6e237756f2176ad4eb5a5995d2293cae,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8653438203187203135, guid: 6e237756f2176ad4eb5a5995d2293cae,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_TagString
+      value: MeleeWeapons
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

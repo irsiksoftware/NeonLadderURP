@@ -2,9 +2,22 @@ namespace NeonLadder.Mechanics.Enums
 {
     public enum Bosses
     {
+        //sins
         Wrath,
-        Anglerox,
         Gluttony,
-        Gobbler
+        Greed,
+        Sloth,
+        Envy,
+        Lust,
+        Pride,
+
+        //sin-transformations
+        Gobbler,
+        Anglerox,
+        Rapax,
+        Ceratoferox,
+        Onyscidus,
+        Ursacetus,
+        Arack
     }
 }

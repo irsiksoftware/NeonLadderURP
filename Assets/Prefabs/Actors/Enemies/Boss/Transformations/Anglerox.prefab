@@ -1269,7 +1269,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 494.70752, y: -0.0000038146973, z: 500.22226}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7745874104730493214}
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 631308085082271152, guid: 2e67f594093c844e08535d075af988c4,
     type: 3}
-  yOffset: 2
+  yOffset: 4
 --- !u!114 &764404019925831046
 MonoBehaviour:
   m_ObjectHideFlags: 0

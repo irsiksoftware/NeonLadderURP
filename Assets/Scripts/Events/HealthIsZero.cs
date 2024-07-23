@@ -45,7 +45,7 @@ namespace NeonLadder.Events
                     // the Counter side of the boss -> boss transformation event, which still has the Enemy Script, so is able to die.
                     break;
                 default:
-                    Debug.Log(health.gameObject.tag);
+                    Debug.Log($"Enemy with name: {health.gameObject.name} has not tag, and has died.");
                     break;
             }
         }

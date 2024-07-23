@@ -165,7 +165,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void HandleAnimations()
         {
-            if (animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) > 9000 || animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 5) // dances, non-locomotion animations
+            if (animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) > 9000 || animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 5) // dances, death
             {
                 return;
             }
