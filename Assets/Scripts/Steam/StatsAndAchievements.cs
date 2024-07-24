@@ -7,10 +7,10 @@ namespace NeonLadder.Steam
     class StatsAndAchievements : MonoBehaviour
     {
         private Achievement[] achievements = new Achievement[] {
-        new Achievement(Achievements.ACH_WIN_ONE_GAME, "Winner", ""),
-        new Achievement(Achievements.ACH_WIN_100_GAMES, "Champion", ""),
-        new Achievement(Achievements.ACH_TRAVEL_FAR_ACCUM, "Interstellar", ""),
-        new Achievement(Achievements.ACH_TRAVEL_FAR_SINGLE, "Orbiter", "")
+        //new Achievement(Achievements.ACH_WIN_ONE_GAME, "Winner", ""),
+        //new Achievement(Achievements.ACH_WIN_100_GAMES, "Champion", ""),
+        //new Achievement(Achievements.ACH_TRAVEL_FAR_ACCUM, "Interstellar", ""),
+        //new Achievement(Achievements.ACH_TRAVEL_FAR_SINGLE, "Orbiter", "")
     };
 
         private CGameID gameID;
@@ -75,30 +75,30 @@ namespace NeonLadder.Steam
 
                 switch (achievement.AchievementID)
                 {
-                    case Achievements.ACH_WIN_ONE_GAME:
-                        if (totalNumWins != 0)
-                        {
-                            UnlockAchievement(achievement);
-                        }
-                        break;
-                    case Achievements.ACH_WIN_100_GAMES:
-                        if (totalNumWins >= 100)
-                        {
-                            UnlockAchievement(achievement);
-                        }
-                        break;
-                    case Achievements.ACH_TRAVEL_FAR_ACCUM:
-                        if (totalFeetTraveled >= 5280)
-                        {
-                            UnlockAchievement(achievement);
-                        }
-                        break;
-                    case Achievements.ACH_TRAVEL_FAR_SINGLE:
-                        if (gameFeetTraveled >= 500)
-                        {
-                            UnlockAchievement(achievement);
-                        }
-                        break;
+                    //case Achievements.ACH_WIN_ONE_GAME:
+                    //    if (totalNumWins != 0)
+                    //    {
+                    //        UnlockAchievement(achievement);
+                    //    }
+                    //    break;
+                    //case Achievements.ACH_WIN_100_GAMES:
+                    //    if (totalNumWins >= 100)
+                    //    {
+                    //        UnlockAchievement(achievement);
+                    //    }
+                    //    break;
+                    //case Achievements.ACH_TRAVEL_FAR_ACCUM:
+                    //    if (totalFeetTraveled >= 5280)
+                    //    {
+                    //        UnlockAchievement(achievement);
+                    //    }
+                    //    break;
+                    //case Achievements.ACH_TRAVEL_FAR_SINGLE:
+                    //    if (gameFeetTraveled >= 500)
+                    //    {
+                    //        UnlockAchievement(achievement);
+                    //    }
+                    //    break;
                 }
             }
         }

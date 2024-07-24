@@ -2,10 +2,14 @@ namespace NeonLadder.Mechanics.Enums
 {
     public enum Achievements
     {
-        ACH_WIN_ONE_GAME,
-        ACH_WIN_100_GAMES,
-        ACH_HEAVY_FIRE,
-        ACH_TRAVEL_FAR_ACCUM,
-        ACH_TRAVEL_FAR_SINGLE,
+        DEMO_LEVEL_COMPLETE,
+        WRATH_SIN_DEFEATED,
+        ENVY_SIN_DEFEATED,
+        GREED_SIN_DEFEATED,
+        LUST_SIN_DEFEATED,
+        GLUTTONY_SIN_DEFEATED,
+        SLOTH_SIN_DEFEATED,
+        PRIDE_SIN_DEFEATED,
+        DEVIL_BOSS_DEFEATED,
     }
 }
