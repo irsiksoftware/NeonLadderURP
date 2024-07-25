@@ -13,7 +13,8 @@ namespace NeonLadder.Mechanics.Controllers
             { nameof(Bosses.Sloth), nameof(Bosses.Ursacetus) },
             { nameof(Bosses.Envy), nameof(Bosses.Ceratoferox) },
             { nameof(Bosses.Lust), nameof(Bosses.Arack) },
-            { nameof(Bosses.Pride), nameof(Bosses.Onyscidus) }
+            { nameof(Bosses.Pride), nameof(Bosses.Onyscidus) },
+            { nameof(Bosses.Devil), nameof(Bosses.Devil) }
         };
     }
 }

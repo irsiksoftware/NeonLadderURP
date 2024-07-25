@@ -75,6 +75,8 @@ namespace NeonLadder.Steam
 
                 switch (achievement.AchievementID)
                 {
+                    case 0:
+                    break;
                     //case Achievements.ACH_WIN_ONE_GAME:
                     //    if (totalNumWins != 0)
                     //    {

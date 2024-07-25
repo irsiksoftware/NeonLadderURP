@@ -1,5 +1,6 @@
 using NeonLadder.Common;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
 using NeonLadder.Utilities;
 using System.Collections;
 using UnityEngine;
@@ -26,7 +27,14 @@ namespace NeonLadder.Events
             }
             else
             {
-                Debug.LogError($"No transformation GameObject found for boss '{boss.transform.parent.name}'.");
+                if (boss.transform.parent.name == nameof(Bosses.Devil))
+                {
+                    return;
+                }
+                else
+                {
+                    Debug.LogError($"No transformation GameObject found for boss '{boss.transform.parent.name}'.");
+                }
             }
         }
 

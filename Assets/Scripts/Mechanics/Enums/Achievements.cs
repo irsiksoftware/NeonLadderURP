@@ -10,6 +10,6 @@ namespace NeonLadder.Mechanics.Enums
         GLUTTONY_SIN_DEFEATED,
         SLOTH_SIN_DEFEATED,
         PRIDE_SIN_DEFEATED,
-        DEVIL_BOSS_DEFEATED,
+        DEVIL_SIN_DEFEATED,
     }
 }

@@ -18,6 +18,9 @@ namespace NeonLadder.Mechanics.Enums
         Ceratoferox,
         Onyscidus,
         Ursacetus,
-        Arack
+        Arack,
+
+
+        Devil
     }
 }

@@ -33,6 +33,12 @@ namespace NeonLadder.Events
             GameObject.FindGameObjectWithTag(Tags.Managers.ToString())
                       .GetComponentInChildren<LootDropManager>()
                       .DropLoot(model.Player, enemy);
+
+            var achievement = AchievementResolver.Resolve(enemy.transform.parent.name);
+            if (achievement.HasValue)
+            {
+                ManagerController.Instance.steamManager.UnlockAchievement(achievement.Value.ToString());
+            }
         }
     }
 }
