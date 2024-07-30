@@ -1,0 +1,20 @@
+name: Notify Discord
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  notify:
+    name: Notify Discord
+    runs-on: 'self-hosted'
+    steps:
+      - name: Notify Discord
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.YOUR_DISCORD_WEBHOOK_SECRET }}
+          content: |
+            [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) 
+
+            ${{ github.event.head_commit.message }}
