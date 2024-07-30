@@ -115,6 +115,7 @@ public class GameControllerManager : MonoBehaviour
                 player.transform.parent.GetComponentInChildren<Canvas>().enabled = false;
                 break;
             case Scenes.Start:
+            case Scenes.SidePath1:
                 Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
                 break;
             case Scenes.MetaShop:

@@ -67,7 +67,7 @@ namespace NeonLadder.Managers
                 player.PermaCurrency.Decrement(permaItemCost);
                 switch (itemName)
                 {
-                    case "Extra Jump":
+                    case "Double Jump":
                         player.Actions.IncrementAvailableMidAirJumps();
                         break;
                     default:

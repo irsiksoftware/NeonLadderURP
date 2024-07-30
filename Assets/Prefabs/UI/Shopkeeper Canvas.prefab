@@ -124,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 776220589645564703}
         m_TargetAssemblyTypeName: NeonLadder.Utilities.ButtonHelper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: OnPermaItemButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -553,7 +553,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7969575602740636077}
         m_TargetAssemblyTypeName: NeonLadder.Utilities.ButtonHelper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: OnMetaItemButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -773,7 +773,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7969575602740636077}
         m_TargetAssemblyTypeName: NeonLadder.Utilities.ButtonHelper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: OnMetaItemButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1532,7 +1532,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 776220589645564703}
         m_TargetAssemblyTypeName: NeonLadder.Utilities.ButtonHelper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: OnPermaItemButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

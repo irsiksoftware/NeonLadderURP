@@ -82,7 +82,7 @@ namespace NeonLadder.Managers
                     //steamManager.enabled = true;
                     break;
                 case Scenes.Staging:
-                    lootDropManager.enabled = false;
+                    lootPurchaseManager.enabled = true;
                     playerCameraPositionManager.enabled = true;
                     playerCameraPositionManager.EmptySceneStates();
                     if (monsterGroupActivationManager != null)
