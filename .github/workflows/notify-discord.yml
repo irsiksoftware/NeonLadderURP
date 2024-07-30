@@ -19,10 +19,10 @@ jobs:
             --- NEW COMMIT ---
             ==================
             [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) 
-            ----------------------
+            
 
             ======================
             --- COMMIT MESSAGE ---
             ======================
             ${{ github.event.head_commit.message }}
-            ---------------------------
+            
