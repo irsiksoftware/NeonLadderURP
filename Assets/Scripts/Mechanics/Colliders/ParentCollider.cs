@@ -14,4 +14,15 @@ public class ParentCollider : MonoBehaviour
             ManagerController.Instance.eventManager.TriggerEvent("OnTriggerEnter", gameObject, other);
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider is TerrainCollider)
+        {
+            ManagerController.Instance.eventManager.TriggerEvent("OnTriggerEnter", gameObject, collision.collider);
+            // We just hit the floor
+            Debug.Log("Ground collision detected!");
+            // Possibly schedule an event
+            // e.g. Schedule<PlayerTerrainCollision>();
+        }
+    }
 }

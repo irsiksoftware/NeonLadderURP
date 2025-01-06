@@ -73,7 +73,7 @@ namespace NeonLadder.Mechanics.Controllers
                 Schedule<PlayerTerrainCollision>();
                 return;
             }
-            else if (other is TerrainCollider && thisActor is Enemy)
+            else if (other is TerrainCollider && ((thisActor is Enemy) || thisActor is Boss))
             {
                 var coll = Schedule<EnemyTerrainCollision>();
                 coll.enemy = thisActor as Enemy;

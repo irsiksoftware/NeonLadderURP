@@ -14,7 +14,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            boss.GetComponent<Rigidbody>().velocity = new Vector2(boss.GetComponent<Rigidbody>().velocity.x, 0);
+            boss.GetComponent<Rigidbody>().linearVelocity = new Vector2(boss.GetComponent<Rigidbody>().linearVelocity.x, 0);
         }
     }
 }
