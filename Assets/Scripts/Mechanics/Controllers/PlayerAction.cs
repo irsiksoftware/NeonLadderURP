@@ -1,5 +1,6 @@
 using NeonLadder.Common;
 using NeonLadder.Managers;
+using NeonLadder.Mechanics.Controllers.Interfaces;
 using NeonLadder.Mechanics.Enums;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class PlayerAction : BaseAction
+    public class PlayerAction : BaseAction, IControllable
     {
         private PlayerCameraPositionManager playerPositionManager;
         private Player player;
@@ -147,6 +148,8 @@ namespace NeonLadder.Mechanics.Controllers
                 {
                     ConfigureControls(player);
                 }
+
+                playerActionMap.Enable();
             }
         }
 
@@ -451,6 +454,20 @@ namespace NeonLadder.Mechanics.Controllers
         public void ResetJumpCount()
         {
             jumpCount = 0;
+        }
+
+        public void DisableControls()
+        {
+            playerInput = Vector2.zero; // Stop movement
+            playerActionMap.Disable(); // Disable input
+            //OnDisable();
+            Debug.Log("Player controls disabled.");
+        }
+
+        public void EnableControls()
+        {
+            OnEnable();
+            Debug.Log("Player controls enabled.");
         }
     }
 }

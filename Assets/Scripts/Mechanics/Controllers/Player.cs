@@ -22,7 +22,7 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip jumpAudio;
         public AudioClip landOnGroundAudio;
         public AudioClip landOnEnemyAudio;
-
+        public bool IsMovingInZDimension { get; private set; }
         public bool IsFacingLeft { get; set; }
         public bool IsFacingRight => !IsFacingLeft;
 
@@ -94,7 +94,9 @@ namespace NeonLadder.Mechanics.Controllers
         {
             //do we need this?
             IsFacingLeft = transform.parent.rotation.eulerAngles.y == 270;
-            
+            // Check if moving in the Z-dimension
+            IsMovingInZDimension = Mathf.Abs(velocity.z) > 0.1f;
+
             //TimedLogger.Log($"Player transform position: {transform.position}", 1f);
             base.Update();
             if (Health.IsAlive)

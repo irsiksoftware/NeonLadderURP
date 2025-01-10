@@ -20,6 +20,7 @@ namespace NeonLadder.Mechanics.Enums
         MainMenu,
         PlayButton,
         PlayerProjectile,
-        EnemyProjectile
+        EnemyProjectile,
+        AltCamera
     }
 }

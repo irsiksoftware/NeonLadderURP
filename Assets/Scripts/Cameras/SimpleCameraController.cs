@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-namespace NeonLadder.Cameras
+namespace UnityTemplateProjects
 {
     public class SimpleCameraController : MonoBehaviour
     {
