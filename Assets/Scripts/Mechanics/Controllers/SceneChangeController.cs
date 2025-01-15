@@ -30,7 +30,7 @@ public class SceneChangeController : MonoBehaviour
     {
         if (collision.CompareTag(Tags.Player.ToString()))
         {
-            model.VirtualCamera.enabled = false;
+            //model.VirtualCamera.enabled = false;
             SceneManager.LoadScene(SceneName); //breakpoint here
         }
     }
@@ -74,6 +74,7 @@ public class SceneChangeController : MonoBehaviour
         }
         model.VirtualCamera.enabled = true;
         player.transform.parent.rotation = Quaternion.Euler(0, 90, 0);
+        player.velocity = new Vector3(0, 0, 0);
         if (player.transform.parent.position.y < 0)
         {
             player.transform.parent.position = new Vector3(player.transform.parent.position.x, 0.01f, player.transform.parent.position.z);
