@@ -12,7 +12,7 @@ namespace NeonLadder.Common
         public static List<string> DefeatedBosses { get; set; } = new List<string>();
         #endregion
 
-
+        public static string Minimap = string.Empty;
         public static string PlayerWeapon => nameof(PlayerWeapon);
 
         #region Resources
@@ -109,7 +109,7 @@ namespace NeonLadder.Common
         #region scenes
         public static List<string> MinorEnemyLevels = new List<string> { "Minor-Enemy-1", "Minor-Enemy-2", "Minor-Enemy-3" };
         public static List<string> MajorEnemyLevels = new List<string> { "Major-Enemy-1", "Major-Enemy-2", "Major-Enemy-3" };
-        public static List<string> Bosses = new List<string> { "Wrath", "Gluttony", "Pride", "Sloth", "Envy", "Lust", "Greed" };
+        //public static List<string> Bosses = new List<string> { "Wrath", "Gluttony", "Pride", "Sloth", "Envy", "Lust", "Greed" };
         public static List<string> ShopLevels = new List<string> { "Shop-1", "Shop-2", "Shop-3" };
         public static List<string> MinorEnemies = new List<string> { "Chili", "Kiwi", "Eggy", "Langsat" };
         public static List<string> MajorEnemies = new List<string> { "BlackKnight", "Werewolf", "FlyingDemon" };

@@ -1,5 +1,8 @@
+using NeonLadder.Common;
 using NeonLadder.Core;
 using NeonLadder.Models;
+using NeonLadder.ProceduralGeneration;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +27,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
 
             Instance = this;
+            Constants.Minimap = PathGenerator.GenerateIndentedText(PathGenerator.GeneratePaths()); //temp minimap
             DontDestroyOnLoad(gameObject);
         }
 
