@@ -1,20 +1,19 @@
-using NeonLadder.Mechanics.Controllers;
-using Newtonsoft.Json;
 using NeonLadder.Common;
+using NeonLadder.Mechanics.Controllers;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 // Represents an entire procedural path generation system
 namespace NeonLadder.ProceduralGeneration
 {
     public class PathGenerator
     {
+
         private static readonly int[] EncounterProbabilities = { 25, 50, 75 }; // Adjusted to only roundable to 25
         private static readonly string[] Bosses = BossTransformations.bossTransformations.Keys.ToArray();
-        private static Dictionary<string, string> BossLocations;
+        public Dictionary<string, string> BossLocations;
 
-        private static void EnsureBossLocationsInitialized()
+        private void EnsureBossLocationsInitialized()
         {
             if (BossLocations == null)
             {
@@ -36,7 +35,7 @@ namespace NeonLadder.ProceduralGeneration
             }
         }
 
-        public static Dictionary<string, Path> GeneratePaths()
+        public Dictionary<string, Path> GeneratePaths()
         {
             EnsureBossLocationsInitialized();
 
@@ -45,7 +44,7 @@ namespace NeonLadder.ProceduralGeneration
 
             int pathCount = remainingBosses.Count > 3 ? 3 : remainingBosses.Count;
             var activeBosses = remainingBosses.Where(rb => rb != Mechanics.Enums.Bosses.Devil.ToString())
-                                              .OrderBy(_ => Random.value)
+                                              .OrderBy(_ => UnityEngine.Random.value)
                                               .Take(pathCount);
 
 
@@ -65,7 +64,7 @@ namespace NeonLadder.ProceduralGeneration
             return paths;
         }
 
-        private static Path GeneratePath(string boss)
+        private Path GeneratePath(string boss)
         {
             EnsureBossLocationsInitialized();
 
@@ -167,67 +166,6 @@ namespace NeonLadder.ProceduralGeneration
         {
             var values = System.Enum.GetValues(typeof(EventType)).Cast<EventType>().ToList();
             return values[UnityEngine.Random.Range(0, values.Count)];
-        }
-
-        public static string GenerateJSON(Dictionary<string, Path> paths)
-        {
-            return JsonConvert.SerializeObject(new
-            {
-                legend = new
-                {
-                    arrows = "-> / <- (Optional rooms you can enter within the scene)",
-                    rooms = "() = (room, e.g., Shop or Rest)",
-                    encounters = new
-                    {
-                        ME = "Major Enemy (1-3 larger, more powerful foes)",
-                        mE = "Minor Enemy (1-5 smaller, less dangerous foes)",
-                        Event = new
-                        {
-                            TreasureChest = "Treasure chest containing loot",
-                            MysteriousAltar = "A mysterious altar offering a choice",
-                            Riddle = "Statue challenges you with a riddle"
-                        }
-                    }
-                },
-                map = new
-                {
-                    paths = paths,
-                    start = new
-                    {
-                        location = "City Entrance",
-                        staging = true,
-                        scene = "transition",
-                        gameObject = "city-transition-1"
-                    },
-                    backtracking = true
-                }
-            }, Formatting.Indented);
-        }
-
-        public static string GenerateIndentedText(Dictionary<string, Path> paths)
-        {
-            var text = new System.Text.StringBuilder();
-
-            text.AppendLine("City Entrance");
-            foreach (var path in paths)
-            {
-                text.AppendLine("====================");
-                //text.AppendLine($"- {path.Key.ToUpper()}");
-                foreach (var node in path.Value.Nodes)
-                {
-                    text.AppendLine($"  - {node.GameObjectName}");
-                    var description = $"    - {node.Encounter.Description}";
-                    if (node.Encounter.Description.Contains("final boss"))
-                    {
-                        description += $" - Location: {BossLocations[path.Key]}";
-                    }
-                    text.AppendLine(description);
-                }
-                text.AppendLine(); // Add empty line after each path
-
-            }
-
-            return text.ToString();
         }
     }
 

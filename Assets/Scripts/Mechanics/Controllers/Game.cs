@@ -1,3 +1,4 @@
+using Assets.Scripts.ProceduralGeneration;
 using NeonLadder.Common;
 using NeonLadder.Core;
 using NeonLadder.Models;
@@ -27,7 +28,9 @@ namespace NeonLadder.Mechanics.Controllers
             }
 
             Instance = this;
-            Constants.Minimap = PathGenerator.GenerateIndentedText(PathGenerator.GeneratePaths()); //temp minimap
+            var pathGen = new PathGenerator();
+            var paths = pathGen.GeneratePaths();
+            Constants.Minimap = PathSerialization.ToIndentedText(paths, pathGen.BossLocations); //temp minimap
             DontDestroyOnLoad(gameObject);
         }
 
