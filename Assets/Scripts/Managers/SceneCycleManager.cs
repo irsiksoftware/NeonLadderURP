@@ -1,7 +1,3 @@
-using NeonLadder.Events;
-using NeonLadder.Mechanics.Controllers;
-using NeonLadder.Mechanics.Enums;
-using NeonLadder.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
