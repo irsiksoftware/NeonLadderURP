@@ -22,6 +22,13 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip jumpAudio;
         public AudioClip landOnGroundAudio;
         public AudioClip landOnEnemyAudio;
+        [SerializeField]
+        private int miscPose = 0;
+        public virtual int MiscPose
+        {
+            get => miscPose;
+            set => miscPose = value;
+        }
         public bool IsMovingInZDimension { get; private set; }
         public bool IsFacingLeft { get; set; }
         public bool IsFacingRight => !IsFacingLeft;
@@ -74,7 +81,7 @@ namespace NeonLadder.Mechanics.Controllers
             StaminaBar = transform.parent.GetComponentInChildren<StaminaBar>().gameObject.GetComponent<ProgressBar>();
             MetaCurrency = GetComponentInParent<Meta>();
             PermaCurrency = GetComponentInParent<Perma>();
-            
+
             if (controls == null)
             {
                 controls = Resources.Load<InputActionAsset>("Controls/PlayerControls");
@@ -108,7 +115,7 @@ namespace NeonLadder.Mechanics.Controllers
             UpdateHealthBar();
             UpdateStaminaBar();
 
-            
+
         }
 
         private void RegenerateStamina()
@@ -136,7 +143,7 @@ namespace NeonLadder.Mechanics.Controllers
                 targetVelocity.x = Actions.playerInput.x * Constants.DefaultMaxSpeed * ((Actions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
 
                 // Handle jumping
-                if (Actions.isJumping && Actions.JumpCount < Actions.MaxJumps) 
+                if (Actions.isJumping && Actions.JumpCount < Actions.MaxJumps)
                 {
                     velocity.y = Actions.jumpForce;
                     Actions.IncrementJumpCount();
@@ -167,7 +174,18 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void HandleAnimations()
         {
-            if (animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) > 9000 || animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 5) // dances, death
+            if (MiscPose != 0)
+            {
+                animator.SetInteger(nameof(PlayerAnimationLayers.misc_animation), MiscPose);
+                animator.SetLayerWeight(Constants.MiscActionLayerIndex, 1);
+            }
+            else
+            {
+                animator.SetLayerWeight(Constants.MiscActionLayerIndex, 0);
+            }
+
+            if (animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) > 9000 /* dances */ ||
+                animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 5) /* death */
             {
                 return;
             }

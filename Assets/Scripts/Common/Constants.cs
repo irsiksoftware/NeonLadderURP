@@ -6,6 +6,13 @@ namespace NeonLadder.Common
     [Serializable]
     public static class Constants
     {
+        public static void UpdateSeed(string value)
+        {
+            Seed = value;
+        }
+
+        public static string Seed { get; set; } = string.Empty;
+        public static string LastSeed { get; set; } = string.Empty;
         public static string ProtagonistModel = "Kaoru"; //"Hara";
 
         #region Player Unlocks etc, need to move to real storage
@@ -66,6 +73,7 @@ namespace NeonLadder.Common
 
         public const int PlayerLocomotionLayerIndex = 0; // Index for the locomotion layer
         public const int PlayerActionLayerIndex = 1; // Index for the action layer
+        public const int MiscActionLayerIndex = 2; // Index for the action layer
 
 
         public static float JumpTakeOffSpeed { get; set; } = DefaultJumpTakeOffSpeed;

@@ -19,6 +19,7 @@ namespace NeonLadder.Managers
         public MonsterGroupActivationManager monsterGroupActivationManager;
         public PlayerCameraPositionManager playerCameraPositionManager;
         public GameControllerManager gameControllerManager;
+        public SceneCycleManager sceneCycleManager;
         public SceneChangeManager sceneChangeManager;
         public EventManager eventManager;
         public SteamManager steamManager;
@@ -70,6 +71,7 @@ namespace NeonLadder.Managers
             eventManager = GetComponentInChildren<EventManager>();
             monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
             steamManager = GetComponentInChildren<SteamManager>();
+            sceneCycleManager = GetComponentInChildren<SceneCycleManager>();
         }
 
         public void ToggleManagers()
