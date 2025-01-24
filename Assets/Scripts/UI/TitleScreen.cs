@@ -1,5 +1,3 @@
-using NeonLadder.Core;
-using NeonLadder.Events;
 using NeonLadder.Mechanics.Enums;
 using NeonLadderURP.DataManagement;
 using TMPro;

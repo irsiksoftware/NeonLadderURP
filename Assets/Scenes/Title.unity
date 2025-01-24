@@ -471,7 +471,7 @@ PrefabInstance:
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
       propertyPath: ScenesToIterateFromMainMenu.Array.size
-      value: 1
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
@@ -486,62 +486,62 @@ PrefabInstance:
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
       propertyPath: 'ScenesToIterateFromMainMenu.Array.data[2]'
-      value: Staging
+      value: AbandonedFactory
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
       propertyPath: 'ScenesToIterateFromMainMenu.Array.data[3]'
-      value: MetaShop
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[4]'
       value: AbandonedPoolURP
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[5]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[4]'
       value: Cyberpunk_Room
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[6]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[5]'
       value: CyberpunkURPScene
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[7]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[6]'
       value: WillsRoom_URP
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[8]'
-      value: URP_Rooftop_Market
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[9]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[7]'
       value: StandardizedOstrichBar
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[10]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[8]'
       value: SpaceBurgers
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[11]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[9]'
       value: FC_URP_Scene
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[12]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[10]'
       value: URP_AncientCathedral
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[13]'
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[11]'
       value: Showcase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[12]'
+      value: URP_RomanStreet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[13]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
