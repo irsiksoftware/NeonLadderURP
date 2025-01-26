@@ -73,7 +73,9 @@ crashlytics-build.properties
 
 /Assets/Packages/**
 !/Assets/Packages/*
+!/Assets/Packages/LeartesStudios/*
 !/Assets/Packages/**/DownloadInstructions.txt
+
 Assets/Audio/Background/**
 !Assets/Audio/Background/**/DownloadInstructions.txt
 
