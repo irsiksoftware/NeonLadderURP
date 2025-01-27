@@ -2,7 +2,6 @@ using NeonLadder.Common;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
-using NeonLadder.Utilities;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -18,9 +17,6 @@ namespace NeonLadder.Mechanics.Controllers
         public AudioClip jumpAudio;
         public AudioClip landAudio;
         private int moveDirection;
-
-        public bool IsFacingLeft { get; set; }
-        public bool IsFacingRight => !IsFacingLeft;
 
         [SerializeField]
         private LootTable lootTable; // Allow assignment in the editor
@@ -119,7 +115,7 @@ namespace NeonLadder.Mechanics.Controllers
 
                 if (currentState == MonsterStates.Retreating)
                 {
-                    targetVelocity.x = targetVelocity.x / 2;
+                    targetVelocity.x /= 2;
                 }
 
                 velocity.x = targetVelocity.x;  // Apply horizontal movement
@@ -287,19 +283,15 @@ namespace NeonLadder.Mechanics.Controllers
             isIdlePlaying = true;
             moveDirection = 0;
             animator.SetInteger("animation", idleAnimation);
-            //Debug.Log($"{transform.parent.name} starting Idle animation. Expected duration: {idleAnimationDuration}");
 
             if (Vector3.Distance(transform.parent.position, player.transform.parent.position) <= AttackRange && Time.time > lastAttackTime + attackCooldown)
             {
-                //Debug.Log($"{transform.parent.name} interrupting Idle animation to attack.");
                 isIdlePlaying = false;
                 currentState = MonsterStates.Attacking;
-                //StartCoroutine(AttackPlayer());
                 yield break;
             }
 
             isIdlePlaying = false;
-            //ReassessState(Vector3.Distance(transform.parent.position, player.transform.parent.position));
         }
 
         private void Retreat()
@@ -312,7 +304,6 @@ namespace NeonLadder.Mechanics.Controllers
         {
             animator.SetInteger("animation", victoryAnimation);
             yield return new WaitForSeconds(victoryAnimationDuration);
-            //animator.SetInteger("animation", idleAnimation);
         }
 
         private IEnumerator PlayDeathAnimation()
@@ -341,38 +332,9 @@ namespace NeonLadder.Mechanics.Controllers
                 {
                     attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Default));
                 }
-
-                //currentState = MonsterStates.Reassessing;
             }
-            //else
-            //{
-            //    Debug.LogWarning($"No attack components found for enemy: {transform.parent.name} -> Resorting to {nameof(FallbackAttack)}");
-            //    if (Time.time > lastAttackTime + attackCooldown)
-            //    {
-            //        yield return StartCoroutine(FallbackAttack());
-            //    }
-            //}
+
             ReassessState(Vector3.Distance(transform.parent.position, player.transform.parent.position));
-        }
-
-        //private IEnumerator FallbackAttack()
-        //{
-        //    lastAttackTime = Time.time;
-        //    player.Health.Decrement(attackDamage);
-        //    animator.SetInteger("animation", attackAnimation);
-        //    yield return new WaitForSeconds(attackAnimationDuration);
-        //    currentState = MonsterStates.Reassessing;
-        //}
-
-        public void Orient()
-        {
-            transform.parent.rotation = Quaternion.Euler(0, !IsFacingLeft ? 90 : -90, 0);
-        }
-
-        private void ChasePlayer()
-        {
-            moveDirection = IsFacingLeft ? -1 : 1;
-            animator.SetInteger("animation", walkForwardAnimation);
         }
     }
 }

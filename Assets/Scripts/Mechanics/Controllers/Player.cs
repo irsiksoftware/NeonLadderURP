@@ -3,7 +3,6 @@ using NeonLadder.Common;
 using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
-using NeonLadder.Utilities;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,8 +29,7 @@ namespace NeonLadder.Mechanics.Controllers
             set => miscPose = value;
         }
         public bool IsMovingInZDimension { get; private set; }
-        public bool IsFacingLeft { get; set; }
-        public bool IsFacingRight => !IsFacingLeft;
+
 
         public PlayerAction Actions { get; private set; }
         public PlayerUnlock Unlocks { get; private set; }

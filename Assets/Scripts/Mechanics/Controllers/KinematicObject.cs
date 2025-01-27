@@ -1,6 +1,7 @@
 using NeonLadder.Core;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ namespace NeonLadder.Mechanics.Controllers
         protected RaycastHit[] hitBuffer = new RaycastHit[16];
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
+        public bool IsFacingLeft { get; set; }
+        public bool IsFacingRight => !IsFacingLeft;
 
         [SerializeField]
         private bool isUsingMelee = true;
@@ -250,6 +253,40 @@ namespace NeonLadder.Mechanics.Controllers
         void AdjustVelocityForAirCollision()
         {
             velocity.y = Mathf.Min(velocity.y, 0);
+        }
+
+        public void WalkForward(float waitTimeInMs, float velocity, float duration)
+        {
+            StartCoroutine(WalkForwardCoroutine(waitTimeInMs, velocity, duration));
+        }
+
+        private IEnumerator WalkForwardCoroutine(float waitTimeInMs, float velocity, float duration)
+        {
+            // Convert waitTime from milliseconds to seconds
+            float waitTimeInSeconds = waitTimeInMs / 1000f;
+
+            // Wait for the specified time before starting the movement
+            yield return new WaitForSeconds(waitTimeInSeconds);
+
+            // Calculate the end time for the duration of the walk
+            float endTime = Time.time + duration;
+
+            while (Time.time < endTime)
+            {
+                // Apply velocity directly to the actor's velocity field
+                targetVelocity.x = velocity;
+
+                // Wait for the next frame
+                yield return null;
+            }
+
+            // Reset velocity after the duration
+            this.velocity = new Vector3(0, this.velocity.y, 0);
+        }
+
+         public void Orient()
+        {
+            transform.parent.rotation = Quaternion.Euler(0, !IsFacingLeft ? 90 : -90, 0);
         }
     }
 }

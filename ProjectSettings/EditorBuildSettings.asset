@@ -45,9 +45,6 @@ EditorBuildSettings:
     path: Assets/Packages/LeartesStudios/CyberpunkGigapack/Scenes/CyberpunkURPScene.unity
     guid: 585c458356fed3b4da3e6024ad380cd9
   - enabled: 1
-    path: Assets/Packages/LeartesStudios/SiegeOfPonthus/Scene/URP_SiegeOfPonthus.unity
-    guid: e02d79a7a46ebd54b8d499a6f5b781e9
-  - enabled: 1
     path: Assets/Packages/LeartesStudios/Wills Room/Scene/WillsRoom_URP.unity
     guid: f862d138705e6c046b192f899d5a109c
   - enabled: 1
@@ -63,14 +60,17 @@ EditorBuildSettings:
     path: Assets/Packages/LeartesStudios/FantasyCastle/Scene/FC_URP_Scene.unity
     guid: 563dc3533cce9664fb1a3df92e086baa
   - enabled: 1
-    path: Assets/Packages/LeartesStudios/Ancient Cathedral/Scene/URP_AncientCathedral.unity
-    guid: 67d90f3a1170e5347966a8e0d2a8a76f
-  - enabled: 1
     path: Assets/Packages/LeartesStudios/CyberpunkMegapack/Scenes/Showcase.unity
     guid: ef046a3ef6e6c7445995a33f866377b7
   - enabled: 1
     path: Assets/Packages/LeartesStudios/RomanStreet/Scene/URP_RomanStreet.unity
     guid: a0f47526a6259e84ebde89396a2941d7
+  - enabled: 1
+    path: Assets/Scenes/PackageScenes/URP_SiegeOfPonthus.unity
+    guid: dd3114da7d15df645bcca7a66231af39
+  - enabled: 1
+    path: Assets/Scenes/PackageScenes/URP_AncientCathedral.unity
+    guid: 70374d2f567dd9d4d8bc5787d4c44e1b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 23395aab919772a4b9b1c36df08e4851,
       type: 2}
