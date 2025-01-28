@@ -112,8 +112,6 @@ namespace NeonLadder.Mechanics.Controllers
 
             UpdateHealthBar();
             UpdateStaminaBar();
-
-
         }
 
         private void RegenerateStamina()
@@ -152,22 +150,6 @@ namespace NeonLadder.Mechanics.Controllers
                     }
                 }
             }
-        }
-
-        public void EnableZMovement()
-        {
-            transform.parent.rotation = Quaternion.Euler(0, 0, 0);
-            Actions.playerActionMap.Disable();
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
-                                    RigidbodyConstraints.FreezePositionX |
-                                    RigidbodyConstraints.FreezePositionY;
-        }
-
-        public void DisableZMovement()
-        {
-            targetVelocity.z = 0;
-            Actions.playerActionMap.Enable();
-            rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
         }
 
         private void HandleAnimations()

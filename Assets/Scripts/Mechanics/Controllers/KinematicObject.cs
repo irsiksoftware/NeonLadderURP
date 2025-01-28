@@ -255,38 +255,56 @@ namespace NeonLadder.Mechanics.Controllers
             velocity.y = Mathf.Min(velocity.y, 0);
         }
 
-        public void WalkForward(float waitTimeInMs, float velocity, float duration)
+        public void Walk(float waitTimeInMs, float velocity, float duration, float directionDegrees)
         {
-            StartCoroutine(WalkForwardCoroutine(waitTimeInMs, velocity, duration));
+            EnableFreeRoam();
+            StartCoroutine(WalkCoroutine(waitTimeInMs, velocity, duration, directionDegrees));
         }
 
-        private IEnumerator WalkForwardCoroutine(float waitTimeInMs, float velocity, float duration)
+        private IEnumerator WalkCoroutine(float waitTimeInMs, float velocity, float duration, float directionDegrees)
         {
-            // Convert waitTime from milliseconds to seconds
             float waitTimeInSeconds = waitTimeInMs / 1000f;
-
-            // Wait for the specified time before starting the movement
             yield return new WaitForSeconds(waitTimeInSeconds);
 
-            // Calculate the end time for the duration of the walk
             float endTime = Time.time + duration;
+            float radians = directionDegrees * Mathf.Deg2Rad;
+            Vector3 direction = new Vector3(Mathf.Sin(radians), 0, Mathf.Cos(radians)).normalized;
 
             while (Time.time < endTime)
             {
-                // Apply velocity directly to the actor's velocity field
-                targetVelocity.x = velocity;
-
-                // Wait for the next frame
+                targetVelocity = direction * velocity;
                 yield return null;
             }
 
-            // Reset velocity after the duration
             this.velocity = new Vector3(0, this.velocity.y, 0);
+            DisableZMovement();
         }
 
-         public void Orient()
+
+        public void Orient()
         {
             transform.parent.rotation = Quaternion.Euler(0, !IsFacingLeft ? 90 : -90, 0);
+        }
+
+        public void EnableZMovement()
+        {
+            transform.parent.rotation = Quaternion.Euler(0, 0, 0);
+            player.Actions.playerActionMap.Disable();
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
+                                    RigidbodyConstraints.FreezePositionX |
+                                    RigidbodyConstraints.FreezePositionY;
+        }
+
+        public void DisableZMovement()
+        {
+            targetVelocity.z = 0;
+            player.Actions.playerActionMap.Enable();
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+        }
+
+        public void EnableFreeRoam()
+        {
+            rigidbody.constraints = RigidbodyConstraints.None;
         }
     }
 }

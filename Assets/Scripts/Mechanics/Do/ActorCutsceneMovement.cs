@@ -15,7 +15,7 @@ namespace Assets.Scripts.Mechanics.Do
         private float duration = 3f;
 
         [SerializeField]
-        private bool isWalkingLeft = true;
+        private float degree = 90f;
 
         private KinematicObject actor;
 
@@ -25,9 +25,7 @@ namespace Assets.Scripts.Mechanics.Do
 
             if (actor != null)
             {
-                actor.IsFacingLeft = isWalkingLeft;
-                actor.Orient();
-                actor.WalkForward(waitTimeInMs, velocity * (actor.IsFacingLeft ? -1 : 1), duration);
+                actor.Walk(waitTimeInMs, velocity, duration, degree);
             }
             else
             {

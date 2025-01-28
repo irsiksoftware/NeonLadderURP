@@ -2490,6 +2490,145 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 502678693}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &517324599
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 155837945786386818, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 900956450805998773, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845470864027298285, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tTransform
+        'Jaw_M'\n\tFrom animation clip 'Die'\n\tFrom animation clip 'Idle_A_wing'\n\tFrom
+        animation clip 'Run_wing'\n\tFrom animation clip 'WalkForward'\n\tFrom animation
+        clip 'Attack1'"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1980766377032013307, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058268038225710553, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668142208158657838, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358769332522107222, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_Name
+      value: Kaoru
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358769332522107222, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529520102112619844, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5358769332522107222, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 517324601}
+  m_SourcePrefab: {fileID: 100100000, guid: 6e237756f2176ad4eb5a5995d2293cae, type: 3}
+--- !u!1 &517324600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5358769332522107222, guid: 6e237756f2176ad4eb5a5995d2293cae,
+    type: 3}
+  m_PrefabInstance: {fileID: 517324599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &517324601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517324600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ce021d78636af4790ca564a07a172e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimeInMs: 500
+  velocity: 2.2
+  duration: 9.25
+  degree: 180
 --- !u!4 &568591339 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2878510198987986026, guid: 670808455f0da0f43be413d81a0c1829,
@@ -113737,3 +113876,4 @@ SceneRoots:
   - {fileID: 823389598}
   - {fileID: 1395995313}
   - {fileID: 796432735}
+  - {fileID: 517324599}
