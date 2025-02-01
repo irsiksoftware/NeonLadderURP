@@ -37,7 +37,7 @@ namespace NeonLadder.Events
             var achievement = AchievementResolver.Resolve(enemy.transform.parent.name);
             if (achievement.HasValue)
             {
-                ManagerController.Instance.steamManager.UnlockAchievement(achievement.Value.ToString());
+                SteamManager.Instance.UnlockAchievement(achievement.Value.ToString());
             }
         }
     }

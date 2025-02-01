@@ -13,8 +13,6 @@ using UnityEngine;
 #if !DISABLESTEAMWORKS
 using System.Collections;
 using Steamworks;
-using System.Collections.Generic;
-using System.IO;
 #endif
 
 //
@@ -27,8 +25,8 @@ public class SteamManager : MonoBehaviour
 #if !DISABLESTEAMWORKS
     protected static bool s_EverInitialized = false;
 
-    protected static SteamManager s_instance;
-    protected static SteamManager Instance
+    public static SteamManager s_instance;
+    public static SteamManager Instance
     {
         get
         {
@@ -73,11 +71,11 @@ public class SteamManager : MonoBehaviour
     protected virtual void Awake()
     {
         // Only one instance of SteamManager at a time!
-        //if (s_instance != null)
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
+        if (s_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         s_instance = this;
 
         if (s_EverInitialized)
@@ -90,7 +88,7 @@ public class SteamManager : MonoBehaviour
         }
 
         // We want our SteamManager Instance to persist across scenes.
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         if (!Packsize.Test())
         {
@@ -137,25 +135,22 @@ public class SteamManager : MonoBehaviour
         if (!m_bInitialized)
         {
             Debug.LogError("[Steamworks.NET] SteamAPI_Init() failed. Refer to Valve's documentation or the comment above this line for more information.", this);
+
             return;
         }
         else
         {
             Debug.Log("[Steamworks.NET] SteamAPI_Init() Succeeded!", this);
 
-            // Reset achievements for testing
-            #if UNITY_EDITOR
-                ResetAchievements();
-            #endif
-            // Check if the Steam overlay is enabled
-            //bool isOverlayEnabled = SteamUtils.IsOverlayEnabled();
-
-            // Additional debug logging
-            ///CheckOverlayErrorDetails(isOverlayEnabled);
+#if UNITY_EDITOR
+            ResetAchievements();
+#endif
         }
+
 
         s_EverInitialized = true;
     }
+
 
     private void ResetAchievements()
     {
@@ -164,73 +159,18 @@ public class SteamManager : MonoBehaviour
         Debug.Log("All achievements have been reset for testing purposes.");
     }
 
-
-    /// <summary>
-    /// To troubleshoot steam overlays for achievement dev testing.
-    /// </summary>
-    /// <param name="isOverlayEnabled"></param>
-    private void CheckOverlayErrorDetails(bool isOverlayEnabled)
+    public void UnlockAchievement(string achievementID)
     {
-        string interferingProcesses = CheckForInterferingProcesses();
-        bool overlayLogExists = CheckForOverlayLogFile();
-
-        Debug.Log($"Steam Overlay Enabled: {isOverlayEnabled}\n" +
-                  $"Steam API Initialized: {m_bInitialized}\n" +
-                  $"Steam client logged on: {SteamUser.BLoggedOn()}\n" +
-                  $"Steam server connection: {SteamUser.GetSteamID()}\n" +
-                  $"SteamUtils.GetAppID: {SteamUtils.GetAppID()}\n" +
-                  $"SteamApps.GetCurrentGameLanguage: {SteamApps.GetCurrentGameLanguage()}\n" +
-                  $"SteamApps.GetAvailableGameLanguages: {SteamApps.GetAvailableGameLanguages()}\n" +
-                  $"Potential Interfering Applications: {interferingProcesses}\n" +
-                  $"overlay_log.txt exists: {overlayLogExists}");
-    }
-
-    private bool CheckForOverlayLogFile()
-    {
-        string logFilePath = string.Empty;
-
-#if UNITY_STANDALONE_WIN
-        logFilePath = Path.Combine("C:\\Program Files (x86)\\Steam\\logs", "overlay_log.txt");
-#elif UNITY_STANDALONE_OSX
-    logFilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Library/Application Support/Steam/logs/overlay_log.txt");
-#elif UNITY_STANDALONE_LINUX
-    logFilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), ".steam/steam/logs/overlay_log.txt");
-#endif
-
-        return File.Exists(logFilePath);
-    }
-
-
-    private string CheckForInterferingProcesses()
-    {
-        string[] potentialInterferingProcesses = { "Discord", "GeForceExperience", "MSI_Afterburner", "RivaTuner" };
-        List<string> interferingProcesses = new List<string>();
-
-        var runningProcesses = System.Diagnostics.Process.GetProcesses();
-        foreach (var process in runningProcesses)
+        if (!Initialized)
         {
-            foreach (var interferingProcess in potentialInterferingProcesses)
-            {
-                if (process.ProcessName.Contains(interferingProcess))
-                {
-                    interferingProcesses.Add(process.ProcessName);
-                }
-            }
+            Debug.LogError("SteamManager not initialized.");
+            return;
         }
 
-        if (interferingProcesses.Count > 0)
-        {
-            return string.Join(", ", interferingProcesses);
-        }
-        else
-        {
-            return "None";
-        }
+        SteamUserStats.SetAchievement(achievementID);
+        SteamUserStats.StoreStats();
+        Debug.Log($"Achievement {achievementID} unlocked.");
     }
-
-
-
-
     // This should only ever get called on first load and after an Assembly reload, You should never Disable the Steamworks Manager yourself.
     protected virtual void OnEnable()
     {
@@ -282,19 +222,6 @@ public class SteamManager : MonoBehaviour
 
         // Run Steam client callbacks
         SteamAPI.RunCallbacks();
-    }
-
-    public void UnlockAchievement(string achievementID)
-    {
-        if (!Initialized)
-        {
-            Debug.LogError("SteamManager not initialized.");
-            return;
-        }
-
-        SteamUserStats.SetAchievement(achievementID);
-        SteamUserStats.StoreStats();
-        Debug.Log($"Achievement {achievementID} unlocked.");
     }
 #else
 	public static bool Initialized {

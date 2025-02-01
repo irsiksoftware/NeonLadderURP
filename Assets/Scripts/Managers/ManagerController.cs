@@ -22,7 +22,7 @@ namespace NeonLadder.Managers
         public SceneCycleManager sceneCycleManager;
         public SceneChangeManager sceneChangeManager;
         public EventManager eventManager;
-        public SteamManager steamManager;
+        // public SteamManager steamManager;
 
         void Awake()
         {
@@ -70,18 +70,18 @@ namespace NeonLadder.Managers
             dialogueManager = GetComponentInChildren<DialogueManager>();
             eventManager = GetComponentInChildren<EventManager>();
             monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
-            steamManager = GetComponentInChildren<SteamManager>();
+            //steamManager = GetComponentInChildren<SteamManager>();
             sceneCycleManager = GetComponentInChildren<SceneCycleManager>();
         }
 
         public void ToggleManagers()
         {
-            eventManager.enabled = true;
+            eventManager.enabled = true; 
+            //steamManager.enabled = true;
             switch (scene)
             {
                 case Scenes.Title:
                     gameControllerManager.enabled = true;
-                    //steamManager.enabled = true;
                     break;
                 case Scenes.Staging:
                     lootPurchaseManager.enabled = true;
