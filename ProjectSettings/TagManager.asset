@@ -31,21 +31,29 @@ TagManager:
   - Grass
   - Freezable
   - Minimap
+  - waypoint
+  - water
+  - GGPlanet
+  - Gravity
+  - Quad
+  - Butter
+  - NoForcePDM
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Hero
   - Water
   - UI
   - Battle
   - Dead
   - CollisionPassthrough
-  - 
-  - 
-  - 
-  - 
-  - 
+  - INfiniDyForest
+  - INfiniDyForestInter
+  - INfiniDyTree
+  - INfiniDyTreeRoot
+  - Axe
   - 
   - 
   - 

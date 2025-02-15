@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hara
       objectReference: {fileID: 0}
+    - target: {fileID: 1522514451695828, guid: 4a7fd9ffdc5a94a47a7685783ed90515, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4534693049495012, guid: 4a7fd9ffdc5a94a47a7685783ed90515, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.683031

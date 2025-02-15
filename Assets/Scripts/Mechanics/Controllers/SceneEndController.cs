@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using NeonLadder.Mechanics.Enums;
-using Cinemachine;
+using Unity.Cinemachine;
 
 public class SceneEndController : MonoBehaviour
 {

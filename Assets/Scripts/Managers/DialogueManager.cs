@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using NeonLadder.Effects.Text;
 using System.Collections.Generic;
 using TMPro;
@@ -28,6 +28,7 @@ namespace NeonLadder.Managers
 
         public Canvas lustSpeechBubbleCanvas;
         public TextMeshProUGUI lustSpeechText;
+        [System.Obsolete]
         public CinemachineVirtualCamera lustVCam;
 
         public Canvas gluttonySpeechBubbleCanvas;

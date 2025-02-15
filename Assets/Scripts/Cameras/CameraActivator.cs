@@ -1,5 +1,5 @@
 using UnityEngine;
-using Cinemachine;
+using Unity.Cinemachine;
 using System.Collections.Generic;
 using NeonLadder.Mechanics.Enums;
 

@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using UnityEngine;
