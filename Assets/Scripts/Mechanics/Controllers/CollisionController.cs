@@ -151,7 +151,7 @@ namespace NeonLadder.Mechanics.Controllers
 
                             //Debug.Log($"{thisActor.transform.parent.gameObject.name} took {otherActor.GetComponent<MeleeController>().Damage} damage from {otherActorParent.name} @ {Time.time}");
                             health.Decrement(otherActor.GetComponent<MeleeController>().Damage);
-                            StartCoroutine(otherActor.PlayGetHitAnimation());
+                            StartCoroutine(thisActor.PlayGetHitAnimation());
                         }
                         else
                         {

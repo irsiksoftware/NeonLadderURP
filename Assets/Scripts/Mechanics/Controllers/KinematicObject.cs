@@ -143,8 +143,10 @@ namespace NeonLadder.Mechanics.Controllers
                 animationParamName = $"locomotion_animation";
             }
             animator.SetInteger(animationParamName, (int)Animations.GetHit);
+            rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(GetHitAnimationDuration);
-            //transform.parent.gameObject.SetActive(false);
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+            animator.SetInteger(animationParamName, (int)Animations.Idle);
         }
 
         private void GuaranteeModelAndPlayer()
