@@ -1,3 +1,4 @@
+using NeonLadder.Common;
 using NeonLadder.Events;
 using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
@@ -35,9 +36,16 @@ namespace NeonLadder.Mechanics.Controllers
             //ugh
             DuplicateCollisionAvoidanceTimer = duplicateCollisionAvoidanceTimer;
      
-            thisActorParent = GetComponentInParent<Rigidbody>().gameObject;
-            health = thisActorParent.GetComponent<Health>();
-            thisActor = thisActorParent.GetComponentInChildren<KinematicObject>();
+            thisActorParent = GetComponentInParent<Rigidbody>()?.gameObject;
+            if (thisActorParent == null)
+            {
+                Debug.Log($"{gameObject.name} does not appear to have a parent with a rigidbody.");
+            }
+            else
+            {
+                health = thisActorParent.GetComponent<Health>();
+                thisActor = thisActorParent.GetComponentInChildren<KinematicObject>();
+            }
         }
 
         private void OnEnable()
@@ -67,6 +75,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnTriggerEnter(Collider other)
         {
+
             // If collider is type of terrain collider, schedule terrain collision event
             if (other is TerrainCollider && thisActor is Player)
             {
@@ -80,7 +89,7 @@ namespace NeonLadder.Mechanics.Controllers
 
                 return;
             }
-            else if (thisActorParent.layer == LayerMask.NameToLayer(Layers.Dead.ToString()) || other.gameObject.layer == LayerMask.NameToLayer(Layers.Dead.ToString()))
+            else if (thisActorParent?.layer == LayerMask.NameToLayer(Layers.Dead.ToString()) || other.gameObject.layer == LayerMask.NameToLayer(Layers.Dead.ToString()))
             {
                 return;
             }
@@ -110,7 +119,7 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 return;
             }
-            else if (thisActor is Enemy && otherActor is Enemy) //enemies can hurt each other.
+            else if (thisActor is Enemy && otherActor is Enemy) //enemies can't hurt each other.
             {
                 return;
             }
@@ -142,6 +151,7 @@ namespace NeonLadder.Mechanics.Controllers
 
                             //Debug.Log($"{thisActor.transform.parent.gameObject.name} took {otherActor.GetComponent<MeleeController>().Damage} damage from {otherActorParent.name} @ {Time.time}");
                             health.Decrement(otherActor.GetComponent<MeleeController>().Damage);
+                            StartCoroutine(otherActor.PlayGetHitAnimation());
                         }
                         else
                         {

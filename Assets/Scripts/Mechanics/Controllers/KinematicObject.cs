@@ -34,12 +34,13 @@ namespace NeonLadder.Mechanics.Controllers
             set => isUsingMelee = value;
         }
         public Animator animator { get; private set; }
-        public virtual float deathAnimationDuration { get; set; }
-        public virtual float attackAnimationDuration { get; set; }
-        public virtual float victoryAnimationDuration { get; set; }
-        public virtual float idleAnimationDuration { get; set; }
+        public virtual float DeathAnimationDuration { get; set; }
+        public virtual float AttackAnimationDuration { get; set; }
+        public virtual float VictoryAnimationDuration { get; set; }
+        public virtual float IdleAnimationDuration { get; set; }
+        public virtual float GetHitAnimationDuration { get; set; }
 
-        public float DeathAnimationDuration => deathAnimationDuration;
+        protected virtual float lastAttackTime { get; set; } = -10f;
 
         private Dictionary<Animations, float> animationClipLengths;
 
@@ -126,10 +127,24 @@ namespace NeonLadder.Mechanics.Controllers
 
             GuaranteeModelAndPlayer();
             CacheAnimationClipLengths();
-            attackAnimationDuration = GetAnimationClipLength(Animations.Attack1);
-            deathAnimationDuration = GetAnimationClipLength(Animations.Die);
-            victoryAnimationDuration = GetAnimationClipLength(Animations.Victory);
-            idleAnimationDuration = GetAnimationClipLength(Animations.Idle);
+            AttackAnimationDuration = GetAnimationClipLength(Animations.Attack1);
+            DeathAnimationDuration = GetAnimationClipLength(Animations.Die);
+            VictoryAnimationDuration = GetAnimationClipLength(Animations.Victory);
+            IdleAnimationDuration = GetAnimationClipLength(Animations.Idle);
+            GetHitAnimationDuration = GetAnimationClipLength(Animations.GetHit);
+        }
+
+        public IEnumerator PlayGetHitAnimation(bool stopEarly = false)
+        {
+            var animationParamName = "animation";
+            Debug.Log("Getting hit...");
+            if (transform.parent.name.Contains("Kaoru")) // kinematic's are on child game objects, but protagonist is more fleshed out in animations so far, what a hack, need to standardize.
+            {
+                animationParamName = $"locomotion_animation";
+            }
+            animator.SetInteger(animationParamName, (int)Animations.GetHit);
+            yield return new WaitForSeconds(GetHitAnimationDuration);
+            //transform.parent.gameObject.SetActive(false);
         }
 
         private void GuaranteeModelAndPlayer()

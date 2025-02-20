@@ -414,7 +414,7 @@ namespace NeonLadder.Mechanics.Controllers
                 player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), (player.IsUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
 
                 // Calculate the duration to ignore based on the percentage
-                float ignoreDuration = player.attackAnimationDuration * percentageOfAnimationToIgnore;
+                float ignoreDuration = player.AttackAnimationDuration * percentageOfAnimationToIgnore;
 
                 // Wait for the ignore duration
                 yield return new WaitForSeconds(ignoreDuration);
@@ -426,7 +426,7 @@ namespace NeonLadder.Mechanics.Controllers
                 }
 
                 // Wait for the remaining duration of the attack animation
-                yield return new WaitForSeconds(player.attackAnimationDuration - ignoreDuration);
+                yield return new WaitForSeconds(player.AttackAnimationDuration - ignoreDuration);
 
                 // Reset the attack components back to the default layer
                 foreach (var attackComponent in attackComponents)

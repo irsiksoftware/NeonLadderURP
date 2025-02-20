@@ -4,12 +4,12 @@ namespace NeonLadder.Mechanics.Enums
     {
         Idle,
         WalkForward,
-        WalkBackward,
-        Run,
-        Jump,
         Attack1,
         GetHit,
         Die,
-        Victory
+        Victory,
+        WalkBackward,
+        Run,
+        Jump
     }
 }
