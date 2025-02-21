@@ -1,3 +1,4 @@
+using NeonLadder.Common;
 using NeonLadder.Core;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
@@ -143,6 +144,7 @@ namespace NeonLadder.Mechanics.Controllers
                 animationParamName = $"locomotion_animation";
             }
             animator.SetInteger(animationParamName, (int)Animations.GetHit);
+            Debug.Log($"animation value: {animator.GetInteger(animationParamName)}");
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(GetHitAnimationDuration);
             rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;

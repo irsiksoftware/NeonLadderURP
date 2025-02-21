@@ -122,11 +122,15 @@ namespace NeonLadder.Mechanics.Controllers
             if (health.IsAlive)
             {
                 Orient();
+                if (animator.GetInteger("animation") == 3)
+                {
+                    return;
+                }
             }
 
             if (ShouldEngagePlayer && !isIdlePlaying)
             {
-                
+
                 base.Update();
                 if (health.IsAlive)
                 {
@@ -134,25 +138,25 @@ namespace NeonLadder.Mechanics.Controllers
                     {
                         //if (currentState != MonsterStates.Attacking)
                         //{
-                            switch (currentState)
-                            {
-                                case MonsterStates.Idle:
-                                    StartCoroutine(PlayIdleAndReassess(distanceToTarget));
-                                    break;
-                                case MonsterStates.Reassessing:
-                                    HandleReassessingState(distanceToTarget);
-                                    break;
-                                case MonsterStates.Approaching:
-                                    HandleApproachingState(distanceToTarget);
-                                    break;
-                                case MonsterStates.Retreating:
-                                    HandleRetreatingState(distanceToTarget);
-                                    break;
-                                case MonsterStates.Attacking:
-                                    StartCoroutine(AttackPlayer());
-                                    isIdlePlaying = false; // Ensure idle animation stops
-                                    break;
-                            }
+                        switch (currentState)
+                        {
+                            case MonsterStates.Idle:
+                                StartCoroutine(PlayIdleAndReassess(distanceToTarget));
+                                break;
+                            case MonsterStates.Reassessing:
+                                HandleReassessingState(distanceToTarget);
+                                break;
+                            case MonsterStates.Approaching:
+                                HandleApproachingState(distanceToTarget);
+                                break;
+                            case MonsterStates.Retreating:
+                                HandleRetreatingState(distanceToTarget);
+                                break;
+                            case MonsterStates.Attacking:
+                                StartCoroutine(AttackPlayer());
+                                isIdlePlaying = false; // Ensure idle animation stops
+                                break;
+                        }
                         //}
                     }
                 }
