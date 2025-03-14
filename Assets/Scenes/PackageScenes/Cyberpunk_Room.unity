@@ -1361,6 +1361,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SKY MASTER A6a NO CAMERA 6000
       objectReference: {fileID: 0}
+    - target: {fileID: 6785060936527296842, guid: 22b4854481caa3c4db34227849159f24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7222553177765664017, guid: 22b4854481caa3c4db34227849159f24,
         type: 3}
       propertyPath: m_IsActive
@@ -57480,6 +57485,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Kaoru
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358769332522107222, guid: 6e237756f2176ad4eb5a5995d2293cae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5778094820435949910, guid: 6e237756f2176ad4eb5a5995d2293cae,
         type: 3}

@@ -8,6 +8,7 @@ namespace NeonLadder.Events
     /// <typeparam name="PlayerLanded"></typeparam>
     public class PlayerLanded : BaseGameEvent<PlayerLanded>
     {
+        public Player Player { get; set; }  
         public override void Execute()
         {
             if (model.Player.audioSource && model.Player.landOnGroundAudio)

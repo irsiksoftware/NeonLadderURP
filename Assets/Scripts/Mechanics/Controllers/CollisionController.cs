@@ -79,7 +79,8 @@ namespace NeonLadder.Mechanics.Controllers
             // If collider is type of terrain collider, schedule terrain collision event
             if (other is TerrainCollider && thisActor is Player)
             {
-                Schedule<PlayerTerrainCollision>();
+                var ptc = Schedule<PlayerTerrainCollision>();
+                ptc.player = thisActor as Player;
                 return;
             }
             else if (other is TerrainCollider && ((thisActor is Enemy) || thisActor is Boss))
