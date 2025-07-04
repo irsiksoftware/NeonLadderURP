@@ -1392,7 +1392,7 @@ public class GameControllerManager : MonoBehaviour
             case Scenes.Staging:
                 player.transform.parent.GetComponentInChildren<Canvas>().enabled = true;
                 Schedule<LoadGame>();
-                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachinePositionComposer>().m_CameraDistance = 6;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = false;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = true;
                 break;
@@ -1401,20 +1401,20 @@ public class GameControllerManager : MonoBehaviour
                 break;
             case Scenes.Start:
             case Scenes.SidePath1:
-                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachinePositionComposer>().m_CameraDistance = 6;
                 break;
             case Scenes.MetaShop:
-                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 2.2f;
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachinePositionComposer>().m_CameraDistance = 2.2f;
                 break;
             case Scenes.PermaShop:
-                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 2.2f;
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachinePositionComposer>().m_CameraDistance = 2.2f;
                 break;
             case Scenes.Credits:
                 break;
             default:
                 playerActions.enabled = true;
                 gameController.gameObject.SetActive(true);
-                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 6;
+                Game.Instance.model.VirtualCamera.GetCinemachineComponent<CinemachinePositionComposer>().m_CameraDistance = 6;
                 break;
         }
     }

@@ -13,7 +13,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            model.Player.animator.SetTrigger("victory");
+            model.Player.Animator.SetTrigger("victory");
             model.Player.Actions.playerActionMap.Disable();
         }
     }

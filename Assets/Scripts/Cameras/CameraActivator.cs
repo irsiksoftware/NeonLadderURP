@@ -10,7 +10,7 @@ namespace NeonLadder.Cameras
         [SerializeField]
         private string cameraName; // Name of the Cinemachine Virtual Camera in the hierarchy
 
-        private List<CinemachineVirtualCamera> altCameras = new List<CinemachineVirtualCamera>();
+        private List<CinemachineCamera> altCameras = new List<CinemachineCamera>();
 
         private void OnEnable()
         {
@@ -24,7 +24,7 @@ namespace NeonLadder.Cameras
 
             foreach (GameObject cameraObject in taggedCameras)
             {
-                CinemachineVirtualCamera virtualCamera = cameraObject.GetComponent<CinemachineVirtualCamera>();
+                CinemachineCamera virtualCamera = cameraObject.GetComponent<CinemachineCamera>();
 
                 if (virtualCamera != null)
                 {
@@ -35,7 +35,7 @@ namespace NeonLadder.Cameras
                 }
                 else
                 {
-                    Debug.LogWarning($"GameObject '{cameraObject.name}' tagged as 'AltCamera' does not have a CinemachineVirtualCamera component.");
+                    Debug.LogWarning($"GameObject '{cameraObject.name}' tagged as 'AltCamera' does not have a CinemachineCamera component.");
                 }
             }
 
@@ -68,12 +68,12 @@ namespace NeonLadder.Cameras
                 return;
             }
 
-            // Ensure the object has a CinemachineVirtualCamera component
-            CinemachineVirtualCamera virtualCamera = cameraObject.GetComponent<CinemachineVirtualCamera>();
+            // Ensure the object has a CinemachineCamera component
+            CinemachineCamera virtualCamera = cameraObject.GetComponent<CinemachineCamera>();
 
             if (virtualCamera == null)
             {
-                Debug.LogError($"GameObject '{cameraName}' does not have a CinemachineVirtualCamera component.");
+                Debug.LogError($"GameObject '{cameraName}' does not have a CinemachineCamera component.");
                 return;
             }
 

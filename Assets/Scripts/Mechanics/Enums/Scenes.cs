@@ -10,6 +10,7 @@ namespace NeonLadder.Mechanics.Enums
         PermaShop,
         ReturnToStaging,
         Credits,
+        Test,
         //testing - not-ready
         Recife_2050_Final,
         BossBrawl,

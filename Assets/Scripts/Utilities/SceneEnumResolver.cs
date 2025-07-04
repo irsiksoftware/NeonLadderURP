@@ -12,10 +12,14 @@ namespace NeonLadder.Utilities
             {
                 return parsedScene;
             }
-            else
+            else if (sceneName.ToLower().Contains(Scenes.Test.ToString().ToLower()))
             {
-                Debug.LogWarning($"Scene name '{sceneName}' not recognized. Returning default scene.");
-                return default(Scenes); // make this return Scenes.Unknown
+                return default;
+            }
+            else
+            { 
+                Debug.LogWarning($"Scene name '{sceneName}' is unaccounted for, Managers and events will act as if '{default}'");
+                return default; // make this return Scenes.Unknown
             }
         }
     }

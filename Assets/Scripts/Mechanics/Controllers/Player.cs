@@ -156,17 +156,17 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (MiscPose != 0)
             {
-                animator.SetInteger(nameof(PlayerAnimationLayers.misc_animation), MiscPose);
-                animator.SetLayerWeight(Constants.MiscActionLayerIndex, 1);
+                Animator.SetInteger(nameof(PlayerAnimationLayers.misc_animation), MiscPose);
+                Animator.SetLayerWeight(Constants.MiscActionLayerIndex, 1);
             }
             else
             {
-                animator.SetLayerWeight(Constants.MiscActionLayerIndex, 0);
+                Animator.SetLayerWeight(Constants.MiscActionLayerIndex, 0);
             }
 
-            if (animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) > 9000 /* dances */ ||
-                animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 5 || /* death */
-                animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 3)
+            if (Animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) > 9000 /* dances */ ||
+                Animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 5 || /* death */
+                Animator.GetInteger(nameof(PlayerAnimationLayers.locomotion_animation)) == 3)
             {
                 return;
             }
@@ -180,28 +180,28 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 if (Actions.JumpCount == 2)
                 {
-                    animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), rollAnimation); // roll
+                    Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), rollAnimation); // roll
                 }
                 else
                 {
-                    animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), jumpAnimation); // jump
+                    Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), jumpAnimation); // jump
                 }
             }
             else if (velocity.y < -2)
             {
-                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), fallAnimation); // fall
+                Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), fallAnimation); // fall
             }
             else if (Math.Abs(velocity.x) < 0.1 && Math.Abs(velocity.z) < 0.1)
             {
-                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), idleAnimation); // idle
+                Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), idleAnimation); // idle
             }
             else if (Math.Abs(velocity.x) > 4 || Math.Abs(velocity.z) > 4)
             {
-                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), runAnimation); // run
+                Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), runAnimation); // run
             }
             else if (Math.Abs(velocity.x) > 0.1 || Math.Abs(velocity.z) > 0.1)
             {
-                animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), walkAnimation); // walk
+                Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), walkAnimation); // walk
             }
         }
 

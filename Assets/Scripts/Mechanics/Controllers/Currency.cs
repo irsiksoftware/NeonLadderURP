@@ -21,7 +21,7 @@ namespace Platformer.Mechanics
         [ContextMenu("Find All Tokens")]
         void FindAllTokensInScene()
         {
-            tokens = UnityEngine.Object.FindObjectsOfType<CurrencyInstance>();
+            tokens = FindObjectsByType<CurrencyInstance>(FindObjectsSortMode.None);
         }
 
         void Awake()

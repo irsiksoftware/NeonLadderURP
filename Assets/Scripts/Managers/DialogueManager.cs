@@ -9,47 +9,46 @@ namespace NeonLadder.Managers
 {
     public class DialogueManager : MonoBehaviour
     {
-        public Dictionary<string, (Canvas canvas, CinemachineVirtualCamera vCam, TextMeshProUGUI speechText)> characterSpeeches;
+        public Dictionary<string, (Canvas canvas, CinemachineCamera vCam, TextMeshProUGUI speechText)> characterSpeeches;
         public Canvas protagonistSpeechBubbleCanvas;
         public TextMeshProUGUI protagonistSpeechText;
-        public CinemachineVirtualCamera protagonistVCam;
+        public CinemachineCamera protagonistVCam;
 
         public Canvas wrathSpeechBubbleCanvas;
         public TextMeshProUGUI wrathSpeechText;
-        public CinemachineVirtualCamera wrathVCam;
+        public CinemachineCamera wrathVCam;
 
         public Canvas prideSpeechBubbleCanvas;
         public TextMeshProUGUI prideSpeechText;
-        public CinemachineVirtualCamera prideVCam;
+        public CinemachineCamera prideVCam;
 
         public Canvas envySpeechBubbleCanvas;
         public TextMeshProUGUI envySpeechText;
-        public CinemachineVirtualCamera envyVCam;
+        public CinemachineCamera envyVCam;
 
         public Canvas lustSpeechBubbleCanvas;
         public TextMeshProUGUI lustSpeechText;
-        [System.Obsolete]
-        public CinemachineVirtualCamera lustVCam;
+        public CinemachineCamera lustVCam;
 
         public Canvas gluttonySpeechBubbleCanvas;
         public TextMeshProUGUI gluttonySpeechText;
-        public CinemachineVirtualCamera gluttonyVCam;
+        public CinemachineCamera gluttonyVCam;
 
         public Canvas greedSpeechBubbleCanvas;
         public TextMeshProUGUI greedSpeechText;
-        public CinemachineVirtualCamera greedVCam;
+        public CinemachineCamera greedVCam;
 
         public Canvas slothSpeechBubbleCanvas;
         public TextMeshProUGUI slothSpeechText;
-        public CinemachineVirtualCamera slothVCam;
+        public CinemachineCamera slothVCam;
 
         public Canvas finalBossSpeechBubbleCanvas;
         public TextMeshProUGUI finalBossSpeechText;
-        public CinemachineVirtualCamera finalBossVCam;
+        public CinemachineCamera finalBossVCam;
 
         public Canvas merchantSpeechBubbleCanvas;
         public TextMeshProUGUI merchantSpeechText;
-        public CinemachineVirtualCamera merchantVCam;
+        public CinemachineCamera merchantVCam;
 
         private Typewriter typewriterEffect;
 
@@ -60,7 +59,7 @@ namespace NeonLadder.Managers
             typewriterEffect = GetComponent<Typewriter>();
             InitializeLanguage(Application.systemLanguage);
 
-            characterSpeeches = new Dictionary<string, (Canvas, CinemachineVirtualCamera, TextMeshProUGUI)>();
+            characterSpeeches = new Dictionary<string, (Canvas, CinemachineCamera, TextMeshProUGUI)>();
             if (protagonistSpeechBubbleCanvas != null)
             {
                 characterSpeeches.Add("protagonist", (protagonistSpeechBubbleCanvas, protagonistVCam, protagonistSpeechText));

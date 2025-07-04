@@ -14,9 +14,9 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             //model.Player.controlEnabled = false;
-            model.Player.animator.SetInteger("action_animation", 0);
-            model.Player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
-            model.Player.animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), 5);
+            model.Player.Animator.SetInteger("action_animation", 0);
+            model.Player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
+            model.Player.Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), 5);
             model.Player.MetaCurrency.Deplete();
             model.Player.Stamina.Deplete();
             model.Player.Actions.playerActionMap.Disable();

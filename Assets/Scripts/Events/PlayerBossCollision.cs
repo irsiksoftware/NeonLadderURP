@@ -73,7 +73,7 @@ namespace NeonLadder.Events
 
         private bool IsPlayerAttacking()
         {
-            var isAttacking = player.animator.GetBool("isAttacking");
+            var isAttacking = player.Animator.GetBool("isAttacking");
             //AppLogger.Logger.Information($"Is Player Attacking: {isAttacking}"); // Log the state
             return isAttacking;
         }

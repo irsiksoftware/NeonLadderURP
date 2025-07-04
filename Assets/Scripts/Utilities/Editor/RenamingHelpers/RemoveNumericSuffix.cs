@@ -17,7 +17,7 @@ public class RemoveNumericSuffix : Editor
 
         string prefabName = selectedPrefab.name;
 
-        GameObject[] allGameObjects = FindObjectsOfType<GameObject>();
+        GameObject[] allGameObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
 
         foreach (GameObject obj in allGameObjects)
         {

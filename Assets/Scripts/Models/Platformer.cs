@@ -10,14 +10,14 @@ namespace NeonLadder.Models
     public class PlatformerModel
     {
         [SerializeField]
-        private CinemachineVirtualCamera virtualCamera;
-        public CinemachineVirtualCamera VirtualCamera
+        private CinemachineCamera virtualCamera;
+        public CinemachineCamera VirtualCamera
         {
             get
             {
                 if (SceneManager.GetActiveScene().name != Scenes.Title.ToString())
                 {
-                    return virtualCamera ?? (virtualCamera = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<CinemachineVirtualCamera>());
+                    return virtualCamera ?? (virtualCamera = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<CinemachineCamera>());
                 }
                 return null;
             }

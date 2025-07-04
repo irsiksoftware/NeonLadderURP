@@ -9,27 +9,27 @@ public class RotationController : MonoBehaviour
     public float AnimationDuration = 2f; // Duration of the animation
     public float ZoomLevel = 5f; // The lens zoom level to set before the animation
 
-    private CinemachineVirtualCamera _virtualCamera;
-    private CinemachineFramingTransposer _framingTransposer;
+    private CinemachineCamera _virtualCamera;
+    private CinemachinePositionComposer _framingTransposer;
     private Vector3 _initialRotation;
     private bool _isAnimating = false;
 
     void Awake()
     {
-        _virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        _virtualCamera = GetComponent<CinemachineCamera>();
 
         if (_virtualCamera == null)
         {
-            Debug.LogError("CinemachineVirtualCamera component not found on the GameObject.");
+            Debug.LogError("CinemachineCamera component not found on the GameObject.");
             return;
         }
 
         // Retrieve the Framing Transposer component
-        _framingTransposer = _virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        _framingTransposer = _virtualCamera.GetComponent<CinemachinePositionComposer>();
 
         if (_framingTransposer == null)
         {
-            Debug.LogError("CinemachineFramingTransposer component not found on the Virtual Camera.");
+            Debug.LogError("CinemachinePositionComposer component not found on the Virtual Camera.");
             return;
         }
 
@@ -37,7 +37,7 @@ public class RotationController : MonoBehaviour
         _initialRotation = _virtualCamera.transform.eulerAngles;
 
         // Set the initial zoom level
-        _framingTransposer.m_CameraDistance = ZoomLevel;
+        _framingTransposer.CameraDistance = ZoomLevel;
     }
 
     public void StartAnimationManually()

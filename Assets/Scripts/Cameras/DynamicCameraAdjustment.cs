@@ -12,12 +12,12 @@ namespace NeonLadder.Cameras
         public float MinimumTrackedObjectOffsetY = 1f; // Minimum Y offset for the tracked object
         public List<string> TagsToIgnore;
         public List<string> LayersToIgnore;
-        private CinemachineVirtualCamera cinemachineVirtualCamera;
+        private CinemachineCamera CinemachineCamera;
         private Transform playerTransform;
         private float initialCameraDistance;
         private Vector3 initialCameraPosition;
         private Quaternion initialCameraRotation;
-        private CinemachineFramingTransposer framingTransposer;
+        private CinemachinePositionComposer framingTransposer;
         private Vector3 initialTrackedObjectOffset;
         private List<Renderer> renderers;
         private Renderer lastBlockingObject;
@@ -35,19 +35,19 @@ namespace NeonLadder.Cameras
 
         void OnEnable()
         {
-            cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
-            framingTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            CinemachineCamera = GetComponent<CinemachineCamera>();
+            framingTransposer = CinemachineCamera.GetComponent<CinemachinePositionComposer>();
             playerTransform = GameObject.FindWithTag(Tags.Player.ToString()).transform; // Assume the player has the tag "Player"
             RefreshRenderers();
             //CacheInitialSettings();
-            cinemachineVirtualCamera.enabled = true;
+            CinemachineCamera.enabled = true;
         }
 
         private void OnDisable()
         {
             //ResetToInitialSettings();
-            cinemachineVirtualCamera.enabled = false;
-            cinemachineVirtualCamera.enabled = true;
+            CinemachineCamera.enabled = false;
+            CinemachineCamera.enabled = true;
         }
 
         void Update()
@@ -57,16 +57,16 @@ namespace NeonLadder.Cameras
 
         private void CacheInitialSettings()
         {
-            initialCameraDistance = framingTransposer.m_CameraDistance;
-            initialTrackedObjectOffset = framingTransposer.m_TrackedObjectOffset;
+            initialCameraDistance = framingTransposer.CameraDistance;
+            initialTrackedObjectOffset = framingTransposer.TargetOffset;
             initialCameraPosition = transform.position;
             initialCameraRotation = transform.rotation;
         }
 
         public void ResetToInitialSettings()
         {
-            framingTransposer.m_CameraDistance = initialCameraDistance;
-            framingTransposer.m_TrackedObjectOffset = initialTrackedObjectOffset;
+            framingTransposer.CameraDistance = initialCameraDistance;
+            framingTransposer.TargetOffset = initialTrackedObjectOffset;
             transform.position = initialCameraPosition;
             transform.rotation = initialCameraRotation;
         }
@@ -104,16 +104,16 @@ namespace NeonLadder.Cameras
 
             if (objectCleared)
             {
-                framingTransposer.m_CameraDistance = initialCameraDistance;
-                framingTransposer.m_TrackedObjectOffset = initialTrackedObjectOffset;
+                framingTransposer.CameraDistance = initialCameraDistance;
+                framingTransposer.TargetOffset = initialTrackedObjectOffset;
                 lastBlockingObject = null;
             }
             else
             {
-                if (currentBlockingObject != lastBlockingObject || framingTransposer.m_CameraDistance > MinimumCameraDistance * 1.05f)
+                if (currentBlockingObject != lastBlockingObject || framingTransposer.CameraDistance > MinimumCameraDistance * 1.05f)
                 {
-                    framingTransposer.m_CameraDistance = MinimumCameraDistance;
-                    framingTransposer.m_TrackedObjectOffset.y = MinimumTrackedObjectOffsetY;
+                    framingTransposer.CameraDistance = MinimumCameraDistance;
+                    framingTransposer.TargetOffset.y = MinimumTrackedObjectOffsetY;
                     lastBlockingObject = currentBlockingObject;
                 }
             }

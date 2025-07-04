@@ -122,7 +122,7 @@ namespace NeonLadder.Mechanics.Controllers
             if (health.IsAlive)
             {
                 Orient();
-                if (animator.GetInteger("animation") == 3)
+                if (Animator.GetInteger("animation") == 3)
                 {
                     return;
                 }
@@ -183,7 +183,7 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 isIdlePlaying = true;
                 moveDirection = 0;
-                animator.SetInteger("animation", (int)Animations.Idle);
+                Animator.SetInteger("animation", (int)Animations.Idle);
                 Debug.Log($"{transform.parent.name} starting Idle animation. Expected duration: {IdleAnimationDuration}");
                 yield return new WaitForSeconds(IdleAnimationDuration);
                 Debug.Log($"{transform.parent.name} completed Idle animation.");
@@ -252,7 +252,7 @@ namespace NeonLadder.Mechanics.Controllers
             else
             {
                 moveDirection = IsFacingLeft ? -1 : 1; // Move towards the player
-                animator.SetInteger("animation", (int)Animations.WalkForward);
+                Animator.SetInteger("animation", (int)Animations.WalkForward);
                 isIdlePlaying = false; // Ensure idle animation stops
             }
         }
@@ -271,7 +271,7 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 Retreat();
                 isIdlePlaying = false; // Ensure idle animation stops
-                animator.SetInteger("animation", (int)Animations.WalkBackward);
+                Animator.SetInteger("animation", (int)Animations.WalkBackward);
             }
         }
 
@@ -279,7 +279,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             isIdlePlaying = true;
             moveDirection = 0;
-            animator.SetInteger("animation", (int)Animations.Idle);
+            Animator.SetInteger("animation", (int)Animations.Idle);
 
             if (Vector3.Distance(transform.parent.position, player.transform.parent.position) <= AttackRange && Time.time > lastAttackTime + attackCooldown)
             {
@@ -294,18 +294,18 @@ namespace NeonLadder.Mechanics.Controllers
         private void Retreat()
         {
             moveDirection = IsFacingLeft ? 1 : -1;
-            animator.SetInteger("animation", (int)Animations.WalkBackward);
+            Animator.SetInteger("animation", (int)Animations.WalkBackward);
         }
 
         private IEnumerator PlayVictoryAnimation()
         {
-            animator.SetInteger("animation", (int)Animations.Victory);
+            Animator.SetInteger("animation", (int)Animations.Victory);
             yield return new WaitForSeconds(VictoryAnimationDuration);
         }
 
         private IEnumerator PlayDeathAnimation()
         {
-            animator.SetInteger("animation", (int)Animations.Die);
+            Animator.SetInteger("animation", (int)Animations.Die);
             yield return new WaitForSeconds(DeathAnimationDuration);
             transform.parent.gameObject.SetActive(false);
         }
@@ -322,7 +322,7 @@ namespace NeonLadder.Mechanics.Controllers
                     attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Battle));
                 }
 
-                animator.SetInteger("animation", (int)Animations.Attack1);
+                Animator.SetInteger("animation", (int)Animations.Attack1);
                 yield return new WaitForSeconds(AttackAnimationDuration);
 
                 foreach (var attackComponent in attackComponents)

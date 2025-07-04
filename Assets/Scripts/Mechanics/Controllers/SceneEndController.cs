@@ -41,10 +41,10 @@ public class SceneEndController : MonoBehaviour
 
     private IEnumerator ZoomInOnPlayer()
     {
-        CinemachineVirtualCamera playerCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
-        CinemachineFramingTransposer transposer = playerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        CinemachineCamera playerCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineCamera>();
+        CinemachinePositionComposer transposer = playerCamera.GetComponent<CinemachinePositionComposer>();
 
-        float initialDistance = transposer.m_CameraDistance;
+        float initialDistance = transposer.CameraDistance;
         float targetDistance = initialDistance - 5f; // Adjust this value for the desired zoom amount
         float elapsed = 0f;
 
@@ -52,7 +52,7 @@ public class SceneEndController : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float currentDistance = Mathf.Lerp(initialDistance, targetDistance, elapsed / celebrationDuration);
-            transposer.m_CameraDistance = currentDistance;
+            transposer.CameraDistance = currentDistance;
             yield return null;
         }
     }

@@ -34,7 +34,7 @@ namespace NeonLadder.Mechanics.Controllers
             get => isUsingMelee;
             set => isUsingMelee = value;
         }
-        public Animator animator { get; private set; }
+        public Animator Animator { get; private set; }
         public virtual float DeathAnimationDuration { get; set; }
         public virtual float AttackAnimationDuration { get; set; }
         public virtual float VictoryAnimationDuration { get; set; }
@@ -59,7 +59,7 @@ namespace NeonLadder.Mechanics.Controllers
         private void CacheAnimationClipLengths()
         {
             animationClipLengths = new Dictionary<Animations, float>();
-            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+            AnimationClip[] clips = Animator.runtimeAnimatorController.animationClips;
 
             foreach (var clip in clips)
             {
@@ -76,7 +76,7 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 return length;
             }
-            Debug.LogWarning($"Animation {animation} not found on {animator.name}");
+            Debug.LogWarning($"Animation {animation} not found on {Animator.name}");
             return 0f;
         }
 
@@ -97,7 +97,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual void Awake()
         {
             rigidbody = GetComponentInParent<Rigidbody>();
-            animator = GetComponentInParent<Animator>();
+            Animator = GetComponentInParent<Animator>();
             switch (this)
             {
                 case FlyingMinor:
@@ -143,12 +143,12 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 animationParamName = $"locomotion_animation";
             }
-            animator.SetInteger(animationParamName, (int)Animations.GetHit);
-            Debug.Log($"animation value: {animator.GetInteger(animationParamName)}");
+            Animator.SetInteger(animationParamName, (int)Animations.GetHit);
+            Debug.Log($"animation value: {Animator.GetInteger(animationParamName)}");
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(GetHitAnimationDuration);
             rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-            animator.SetInteger(animationParamName, (int)Animations.Idle);
+            Animator.SetInteger(animationParamName, (int)Animations.Idle);
         }
 
         private void GuaranteeModelAndPlayer()
@@ -165,7 +165,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected virtual void Update()
         {
-            targetVelocity = Vector3.zero;
+            //targetVelocity = Vector3.zero;
             ComputeVelocity();
         }
 

@@ -27,8 +27,8 @@ namespace NeonLadder.Events
         {
             yield return null; // Wait for one frame
 
-            player.animator.enabled = true;
-            player.animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), 777);
+            player.Animator.enabled = true;
+            player.Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), 777);
             player.Actions.playerActionMap.Enable();
         }
     }

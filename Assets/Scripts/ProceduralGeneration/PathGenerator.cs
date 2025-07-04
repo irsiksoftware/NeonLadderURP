@@ -14,7 +14,7 @@ namespace NeonLadder.ProceduralGeneration
     /// Represents an entire procedural path generation system.
     /// This version can accept or generate a seed string for reproducibility.
     /// </summary>
-    public class PathGenerator : InputField
+    public class PathGenerator //: InputField
     {
         private static readonly int[] EncounterProbabilities = { 25, 50, 75 }; // Adjusted to only roundable to 25
         private static readonly string[] Bosses = BossTransformations.bossTransformations.Keys.ToArray();

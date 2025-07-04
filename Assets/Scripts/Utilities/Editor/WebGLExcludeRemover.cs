@@ -10,7 +10,7 @@ namespace NeonLadder.Utilities.Editor
         public static void RemoveWebGLExcludedObjects()
         {
             // Find all objects in the scene with the WebGLExclude component
-            WebGLExclude[] objectsToExclude = FindObjectsOfType<WebGLExclude>();
+            WebGLExclude[] objectsToExclude = FindObjectsByType<WebGLExclude>(FindObjectsSortMode.InstanceID);
 
             // Iterate over the array and destroy each game object
             foreach (WebGLExclude obj in objectsToExclude)

@@ -101,7 +101,7 @@ namespace NeonLadder.Mechanics.Controllers
                 AnimationDebuggingText.gameObject.SetActive(Constants.DisplayAnimationDebugInfo);
                 if (Constants.DisplayAnimationDebugInfo)
                 {
-                    AnimationDebuggingText.text = AnimationDebugging.GetAnimationParameters(player.animator);
+                    AnimationDebuggingText.text = AnimationDebugging.GetAnimationParameters(player.Animator);
                 }
             }
 
@@ -408,10 +408,10 @@ namespace NeonLadder.Mechanics.Controllers
                                                            .Where(c => c.gameObject != transform.parent.gameObject).ToList();
             if (attackComponents != null && attackComponents.Count > 0)
             {
-                player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
+                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
 
                 // Start the attack animation
-                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), (player.IsUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
+                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), (player.IsUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
 
                 // Calculate the duration to ignore based on the percentage
                 float ignoreDuration = player.AttackAnimationDuration * percentageOfAnimationToIgnore;
@@ -435,8 +435,8 @@ namespace NeonLadder.Mechanics.Controllers
                 }
 
                 // Reset the action layer weight and animation state
-                player.animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
-                player.animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
+                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
+                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
             }
         }
 
