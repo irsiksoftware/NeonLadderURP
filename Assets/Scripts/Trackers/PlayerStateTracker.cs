@@ -21,13 +21,13 @@ namespace NeonLadder.Trackers
         private void OnEnable()
         {
             PlayerLanded.OnExecute += TrackPlayerState;
-            Debug.Log("Tracking Player State.");
+            //Debug.Log("Tracking Player State.");
         }
 
         private void OnDisable()
         {
             PlayerLanded.OnExecute -= TrackPlayerState;
-            Debug.Log("End Tracking Player State.");
+            //Debug.Log("End Tracking Player State.");
         }
 
         private void TrackPlayerState(PlayerLanded playerLandedEvent)
