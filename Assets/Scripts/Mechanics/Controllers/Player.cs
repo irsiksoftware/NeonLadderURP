@@ -100,7 +100,7 @@ namespace NeonLadder.Mechanics.Controllers
             //do we need this?
             IsFacingLeft = transform.parent.rotation.eulerAngles.y == 270;
             // Check if moving in the Z-dimension
-            IsMovingInZDimension = Mathf.Abs(velocity.z) > 0.1f;
+            IsMovingInZDimension = Mathf.Abs(velocity.z) > Constants.MovementThreshold;
 
             //TimedLogger.Log($"Player transform position: {transform.position}", 1f);
             base.Update();
@@ -117,10 +117,10 @@ namespace NeonLadder.Mechanics.Controllers
         private void RegenerateStamina()
         {
             staminaRegenTimer += Time.deltaTime;
-            if (staminaRegenTimer >= 0.1f) // Check if 1/10th of a second has passed
+            if (staminaRegenTimer >= Constants.StaminaRegenInterval) // Check if 1/10th of a second has passed
             {
-                Stamina.Increment(0.1f); // Increment stamina by 1/10th of a unit
-                staminaRegenTimer -= 0.1f; // Decrease the timer by 0.1f instead of resetting to 0
+                Stamina.Increment(Constants.StaminaRegenAmount); // Increment stamina by 1/10th of a unit
+                staminaRegenTimer -= Constants.StaminaRegenInterval; // Decrease the timer by 0.1f instead of resetting to 0
             }
         }
 
@@ -220,14 +220,14 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (HealthBar != null && Health != null)
             {
-                HealthBar.currentPercent = (Health.current / Health.max) * 100f;
+                HealthBar.currentPercent = (Health.current / Health.max) * Constants.PercentageMultiplier;
             }
         }
         private void UpdateStaminaBar()
         {
             if (StaminaBar != null && Stamina != null)
             {
-                StaminaBar.currentPercent = (Stamina.current / Stamina.max) * 100f;
+                StaminaBar.currentPercent = (Stamina.current / Stamina.max) * Constants.PercentageMultiplier;
             }
         }
     }

@@ -21,7 +21,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         #region Jumping
         public bool isJumping { get; set; }
-        public float jumpForce = 7f;
+        public float jumpForce = Constants.DefaultJumpTakeOffSpeed;
         private int jumpCount = 0;
         public int JumpCount => jumpCount;
         private int maxJumps = 1;
@@ -400,7 +400,7 @@ namespace NeonLadder.Mechanics.Controllers
         }
 
         [SerializeField]
-        private float percentageOfAnimationToIgnore = 0.35f; // Adjust this value to experiment with different timings
+        private float percentageOfAnimationToIgnore = Constants.AnimationIgnorePercentage; // Adjust this value to experiment with different timings
 
         private IEnumerator TryAttackEnemy()
         {
