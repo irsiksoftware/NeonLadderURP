@@ -98,3 +98,9 @@ Assets/Audio/Background/**
 /BuildReports
 /Assets/PerformanceData.txt
 /Assets/PerformanceData.txt.meta
+
+# Test artifacts and output
+/TestOutput/
+TestResults.xml
+test_results_*.xml
+cli_test_*.txt
