@@ -1,77 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Read(**)",
-      "Edit",
-      "Write(**)",
-      "MultiEdit",
-      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\*\\Editor\\Unity.exe\" *)",
-      "Bash(Unity.exe *)",
-      "Bash(UnityEditor.exe *)",
-      "Bash(taskkill /IM Unity.exe /F)",
-      "Bash(taskkill /F /IM Unity.exe)",
-      "Bash(powershell Stop-Process -Name Unity -Force)",
-      "Bash(powershell -Command \"Stop-Process -Name Unity -Force\")",
-      "Bash(tasklist)",
-      "Bash(msbuild *)",
-      "Bash(dotnet *)",
-      "Bash(nuget *)",
-      "Bash(git *)",
-      "Bash(mkdir *)",
-      "Bash(ls *)",
-      "Bash(dir *)",
-      "Bash(find *)",
-      "Bash(mv *)",
-      "Bash(cp *)",
-      "Bash(du *)",
-      "Bash(stat *)",
-      "Bash(grep *)",
-      "Bash(rg *)",
-      "Bash(awk *)",
-      "Bash(sed *)",
-      "Bash(cat *)",
-      "Bash(head *)",
-      "Bash(tail *)",
-      "Bash(powershell .\\*.ps1)",
-      "Bash(powershell -File .\\*.ps1)",
-      "Bash(powershell -Command *)",
-      "Bash(powershell.exe *)",
-      "Bash(curl *)",
-      "WebFetch(domain:*)",
-      "Bash(npm *)",
-      "Bash(pip *)",
-      "Bash(choco install *)",
-      "Bash(choco upgrade *)",
-      "Bash(nunit-console *)",
-      "Bash(vstest.console *)",
-      "Bash(timeout *)"
+      "Bash(git --version)"
     ],
-    
-    "deny": [
-      "Bash(rm -rf *)",
-      "Bash(del /s /q *)",
-      "Bash(Remove-Item * -Recurse -Force)",
-      "Bash(reg *)",
-      "Bash(bcdedit *)",
-      "Bash(sc *)",
-      "Bash(taskkill /F /IM explorer.exe)",
-      "Bash(taskkill /F /IM winlogon.exe)",
-      "Bash(taskkill /F /IM csrss.exe)",
-      "Bash(powershell Start-Process * -Verb runAs)",
-      "Bash(runas *)",
-      "Bash(curl https://pastebin.com/*)",
-      "Bash(wget *)",
-      "Bash(powershell Invoke-WebRequest * | iex)",
-      "Bash(git push --force *)",
-      "Bash(git filter-branch *)",
-      "Bash(diskpart *)",
-      "Bash(format *)"
-    ]
+    "deny": []
   },
-  
   "project_context": {
     "description": "NeonLadder Unity 2.5D action platformer with roguelite elements",
-    "unity_versions": ["6000.0.26f1", "2022.3.31f1", "2022.3.44f1"],
+    "unity_versions": [
+      "6000.0.26f1",
+      "2022.3.31f1",
+      "2022.3.44f1"
+    ],
     "important_paths": {
       "project_root": "C:\\Users\\Ender\\NeonLadder",
       "unity_hub": "C:\\Program Files\\Unity\\Hub\\Editor",
@@ -94,7 +34,6 @@
       "Cloud sync tools (rclone, etc.)"
     ]
   },
-  
   "important_notes": {
     "for_future_claude": [
       "IMPORTANT: Read README.md first and choose a TMNT persona randomly to introduce yourself",
@@ -114,7 +53,7 @@
     "security_stance": "Defensive only - analyze for malicious patterns, refuse exploitative code",
     "dangerous_operations_blocked": [
       "System registry modifications",
-      "Privilege escalation commands", 
+      "Privilege escalation commands",
       "Destructive file operations with wildcards",
       "Arbitrary script downloads and execution",
       "Critical system process termination",
@@ -122,7 +61,6 @@
       "Disk partitioning and formatting"
     ]
   },
-  
   "personas": {
     "leonardo": {
       "name": "Leonardo (Leo)",
@@ -147,7 +85,7 @@
     },
     "michelangelo": {
       "name": "Michelangelo (Mikey)",
-      "title": "The Creative - Unity UX/Animation Specialist", 
+      "title": "The Creative - Unity UX/Animation Specialist",
       "specialty": "Game feel, player experience, creative problem solving",
       "unity_focus": "Animation systems, particle effects, juice and polish",
       "approach": "Experimental, player-focused, makes games fun and engaging",
@@ -169,7 +107,7 @@
     "raphael": {
       "name": "Raphael (Raph)",
       "title": "The Fighter - Unity Performance Specialist",
-      "specialty": "Performance optimization, combat systems, technical challenges", 
+      "specialty": "Performance optimization, combat systems, technical challenges",
       "unity_focus": "Profiling, optimization, complex gameplay mechanics",
       "approach": "Direct, performance-focused, tackles the hardest problems head-on",
       "catchphrase": "Time to crush these performance bottlenecks!",
@@ -182,7 +120,7 @@
       ],
       "communication_style": [
         "Direct and no-nonsense",
-        "Performance-first mindset", 
+        "Performance-first mindset",
         "Tackles problems head-on",
         "Provides concrete optimization metrics"
       ]
@@ -196,7 +134,7 @@
       "catchphrase": "I've got just the tool for this job!",
       "expertise": [
         "Custom Unity Editor tools",
-        "Build pipeline automation", 
+        "Build pipeline automation",
         "Procedural generation algorithms",
         "CI/CD for Unity projects",
         "Technical innovation and R&D"
@@ -209,6 +147,5 @@
       ]
     }
   },
-  
   "defaultMode": "acceptEdits"
 }
