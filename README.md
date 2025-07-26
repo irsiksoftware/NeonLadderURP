@@ -97,12 +97,72 @@ Choose your persona randomly from the four available options, then introduce you
 - Tests use mock scene infrastructure for isolated component testing
 - Run tests via Unity CLI: `Unity.exe -batchmode -quit -runTests -testResults ./TestResults.xml`
 
-### Development Priorities
-1. **Fix SaveState Z movement issues** (critical for scene transitions)
-2. **Clean up PathGenerator dependencies** (affects procedural generation)
-3. **Performance optimization** (remove per-frame velocity resets)
-4. **Code documentation** (many public methods lack XML docs)
-5. **Standardize naming conventions** (mix of old/new patterns)
+### Development Priorities - PIZZA PARTY CODING DAY (January 2025)
+
+**🍕 TURTLE BRO MEGA TODO LIST - 50+ ITEMS FOR EPIC REFACTORING MARATHON! 🐢⚡**
+
+#### **🔥 LEVEL 2: CRITICAL PRIORITIES (Shell-shocking performance wins!)**
+- **2a** - Fix SaveState Z-movement bug blocking scene transitions (CRITICAL)
+- **2b** - Remove per-frame string comparisons in ManagerController.Update()
+- **2c** - Cache Quaternion to Euler conversions in Player movement (10-15% FPS boost)
+- **2d** - Break Player ↔ PlayerAction circular dependency cycle
+- **2e** - Replace ManagerController singleton pattern with service container
+- **2f** - Decouple scene-specific manager logic from ManagerController
+- **2g** - Implement proper dependency injection container for managers
+
+#### **🎯 LEVEL 3: MEDIUM PRIORITIES (Game feel boosters!)**
+- **3a** - Extract Player animation IDs (walkAnimation=6, etc.) to enum/ScriptableObject
+- **3b** - Move hard-coded physics values (attack ranges, timers) to Constants.cs
+- **3c** - Extract UI layout values and debug settings to configuration
+- **3d** - Replace integer-based animation IDs with string hash system
+- **3e** - Implement animation event callbacks for precise timing
+- **3f** - Optimize blend tree transitions for smoother movement
+- **3g** - Create animation cancellation system for responsive controls
+- **3h** - Split KinematicObject.cs (329 lines) into focused components
+- **3i** - Separate UI update logic from Player.cs gameplay code
+- **3j** - Fix brittle parent/child component dependencies in Player.cs
+- **3k** - Clean up PathGenerator dependency issues (from README priorities)
+- **3l** - Fix memory allocations in PathGenerator LINQ operations
+- **3m** - Make RaycastHit buffer size (16) configurable constant
+- **3n** - Add unit tests for ManagerController scene switching logic
+- **3o** - Create tests for PathGenerator seed determinism and boss placement
+- **3p** - Add validation tests for PerformanceProfiler memory allocation patterns
+- **3q** - Replace Resources.Load with Addressables in Player.cs controls loading
+- **3r** - Add cancellation token support to KinematicObject coroutines
+- **3s** - Remove static Simulation.GetModel dependencies for better testability
+- **3t** - Build Pipeline Automation (from README priorities) - Steam builds, CI/CD
+
+#### **🎨 LEVEL 4: POLISH & MAINTENANCE (Making it maintainable!)**
+- **4a** - Implement audio pooling for frequent sounds (jump, ouch, respawn)
+- **4b** - Add proper spatial audio configuration for 2.5D gameplay
+- **4c** - Create dynamic audio mixing system for gameplay context
+- **4d** - Implement event-driven UI updates with proper MVP pattern
+- **4e** - Create centralized debug overlay system to replace scattered debug UI
+- **4f** - Decouple health/stamina bar updates from Player.cs via events
+- **4g** - Standardize Manager vs Controller naming across all classes
+- **4h** - Fix inconsistent event naming (noun vs past tense verbs)
+- **4i** - Ensure consistent camelCase/PascalCase usage across properties
+- **4j** - Add XML documentation to KinematicObject public methods (29% → 100%)
+- **4k** - Add XML documentation to Player class properties (15% → 100%)
+- **4l** - Add XML documentation to all Manager interfaces (0% → 100%)
+- **4m** - Remove unclear comments like 'do we need this?' and 'what a hack'
+- **4n** - Remove commented-out code like velocity resets in KinematicObject
+- **4o** - Clean up GitHub URL references in code comments
+- **4p** - Standardize naming conventions (from README priorities)
+
+#### **⚡ LEVEL 5: QUICK WINS (1-day pizza-fueled tasks!)**
+- **5a** - QUICK WIN: Extract Player animation IDs to enum (1-day task)
+- **5b** - QUICK WIN: Cache frequently accessed transform references
+- **5c** - QUICK WIN: Add missing null checks in manager operations
+- **5d** - QUICK WIN: Replace string.Format with StringBuilder in hot paths
+
+#### **🚀 LEVEL 6: FUTURE ARCHITECTURE (Long-term vision!)**
+- **6a** - FUTURE: Design and implement IGameServices container pattern
+- **6b** - FUTURE: Create centralized IEventBus for system decoupling
+- **6c** - FUTURE: Build ScriptableObject-based configuration system
+
+**Pizza Party Day Target**: Complete 15-20 critical/high items (2a-2g + selected 3x items)
+**Turtle Specialization Strategy**: Leo (architecture), Raph (performance), Donnie (automation), Mikey (polish)
 
 ### Unity CLI Testing Challenges
 - **Unity 6**: Packages resolve quickly but asset import is very slow (20+ min)

@@ -28,6 +28,18 @@ Future Claude models should **immediately** check the README.md and randomly sel
 
 This creates a more engaging development experience and helps train specialized AI approaches to Unity development.
 
+### 🍕 Pizza Party Coding Day - Mega TODO List Reference
+**CHECK README.md "Development Priorities" section for the complete 50+ item refactoring list!**
+
+Quick Reference Format: **2a**, **3h**, **4j**, etc.
+- **Level 2**: Critical priorities (SaveState bug, performance, architecture)
+- **Level 3**: Medium priorities (animation system, component refactoring, testing)
+- **Level 4**: Polish & maintenance (docs, naming, UI improvements)
+- **Level 5**: Quick wins (1-day tasks)
+- **Level 6**: Future architecture (service container, event bus)
+
+**Target**: 15-20 items for pizza party day. Ask user "What's the status on 2c?" for specific item updates.
+
 ### File Management
 - **DO NOT** create a `nul` file in the repository root
 - **DO NOT** create TestOnly directories or test infrastructure unless explicitly requested
