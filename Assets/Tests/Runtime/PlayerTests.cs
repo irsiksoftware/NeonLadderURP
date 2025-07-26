@@ -399,7 +399,6 @@ namespace NeonLadder.Tests.Runtime
             
             player.MiscPose = combatPose;
             Assert.AreEqual(combatPose, player.MiscPose);
-            // Ender: Check this out for animation state machine integration - MiscPose should trigger animator parameters
             
             player.MiscPose = idlePose;
             Assert.AreEqual(idlePose, player.MiscPose);
@@ -418,7 +417,6 @@ namespace NeonLadder.Tests.Runtime
             Assert.IsFalse(player.IsUsingMelee);
             // In ranged mode, player should use different combat mechanics
             
-            // Ender: Check this out for weapon swap system integration - should affect attack patterns, ranges, and UI
         }
 
         [Test]
@@ -487,7 +485,6 @@ namespace NeonLadder.Tests.Runtime
             // When dead, velocity should not be updated by input
             Assert.IsTrue(initialVelocity.magnitude > 0, "Should have initial velocity to test against");
             
-            // Ender: Check this out for death state movement prevention - dead players shouldn't respond to input
             // ComputeVelocity should return early when Health.IsAlive is false
         }
 
@@ -503,7 +500,6 @@ namespace NeonLadder.Tests.Runtime
             // Timer should reset when stamina is used
             Assert.AreEqual(0f, initialTimer, 0.01f, "Timer should start at zero");
             
-            // Ender: Check this out for stamina regeneration delay mechanics - timer should prevent immediate regen after stamina use
         }
 
         [UnityTest]
@@ -534,7 +530,6 @@ namespace NeonLadder.Tests.Runtime
             player.audioSource.spatialBlend = 1.0f;
             Assert.AreEqual(1.0f, player.audioSource.spatialBlend, 0.01f, "Should be able to set 3D spatial audio");
             
-            // Ender: Check this out for audio system integration - player sounds should be positional for immersion
         }
 
         [Test]
@@ -549,7 +544,6 @@ namespace NeonLadder.Tests.Runtime
             var playerActionMap = player.Controls.FindActionMap("Player");
             Assert.IsNotNull(playerActionMap, "Player action map should exist in controls");
             
-            // Ender: Check this out for input system validation - ensures player can actually receive input
         }
 
         [Test]
@@ -591,7 +585,6 @@ namespace NeonLadder.Tests.Runtime
             
             Assert.AreEqual(initialAmount + 100, player.MetaCurrency.current, 0.01f, "Meta currency should increase");
             
-            // Ender: Check this out for roguelite currency reset mechanics - Meta should reset between runs
             // This is the temporary currency that gets lost on death
         }
 
@@ -606,7 +599,6 @@ namespace NeonLadder.Tests.Runtime
             
             Assert.AreEqual(initialAmount + 50, player.PermaCurrency.current, 0.01f, "Permanent currency should increase");
             
-            // Ender: Check this out for roguelite progression persistence - Perma currency should survive death/runs
             // This is what enables permanent upgrades between attempts
         }
 

@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep:*)"
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_test_35s.txt\")"
     ],
     "deny": []
   },
