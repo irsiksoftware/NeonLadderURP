@@ -87,6 +87,10 @@ crashlytics-build.properties
 # Additional large asset packages
 /Assets/GabrielAguiarProductions/UPMPVol1_*.unitypackage
 
+/HeroEditor_BACKUP
+/TestOutput
+console.log
+
 Assets/Audio/Background/**
 !Assets/Audio/Background/**/DownloadInstructions.txt
 
