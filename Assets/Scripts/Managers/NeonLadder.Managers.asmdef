@@ -1,0 +1,21 @@
+{
+    "name": "NeonLadder.Managers",
+    "rootNamespace": "NeonLadder.Managers",
+    "references": [
+        "NeonLadder.Mechanics",
+        "NeonLadder.Utilities",
+        "NeonLadder.Managers.Optimization",
+        "Unity.TextMeshPro",
+        "Unity.Cinemachine",
+        "Unity.Localization"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

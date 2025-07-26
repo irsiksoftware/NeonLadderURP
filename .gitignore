@@ -71,10 +71,25 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# Asset packages - ignore large files but keep download instructions and essential content
 /Assets/Packages/**
 !/Assets/Packages/*
 !/Assets/Packages/LeartesStudios/*
 !/Assets/Packages/**/DownloadInstructions.txt
+!/Assets/Packages/**/ReadMe.txt
+!/Assets/Packages/**/README.txt
+!/Assets/Packages/**/*.pdf
+!/Assets/Packages/**/*.asmdef
+
+# Temporary asset folders (should be properly imported or removed)
+/Assets/Packages/*_TEMP/
+
+# Additional large asset packages
+/Assets/GabrielAguiarProductions/UPMPVol1_*.unitypackage
+
+/HeroEditor_BACKUP
+/TestOutput
+console.log
 
 Assets/Audio/Background/**
 !Assets/Audio/Background/**/DownloadInstructions.txt
