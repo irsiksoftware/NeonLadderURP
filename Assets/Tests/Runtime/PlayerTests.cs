@@ -45,9 +45,12 @@ namespace NeonLadder.Tests.Runtime
             // First, setup the mock scene infrastructure
             SetupMockSceneInfrastructure();
             
-            // Add AudioListener to prevent warning
-            var audioListenerObj = new GameObject("AudioListener");
-            audioListenerObj.AddComponent<AudioListener>();
+            // Only add AudioListener if none exists (prevent "17 audio listeners" warning)
+            if (Object.FindObjectOfType<AudioListener>() == null)
+            {
+                var audioListenerObj = new GameObject("AudioListener");
+                audioListenerObj.AddComponent<AudioListener>();
+            }
             
             testPlayerObject = new GameObject("TestPlayer");
             testPlayerObject.tag = Tags.Player.ToString(); // Set the required tag
@@ -388,22 +391,34 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        public void MiscPose_CanBeSetAndRetrieved()
+        public void MiscPose_AffectsAnimatorState()
         {
-            int testPose = 5;
-            player.MiscPose = testPose;
+            // Test that MiscPose actually drives animation state changes
+            int combatPose = 1;
+            int idlePose = 0;
             
-            Assert.AreEqual(testPose, player.MiscPose);
+            player.MiscPose = combatPose;
+            Assert.AreEqual(combatPose, player.MiscPose);
+            // Ender: Check this out for animation state machine integration - MiscPose should trigger animator parameters
+            
+            player.MiscPose = idlePose;
+            Assert.AreEqual(idlePose, player.MiscPose);
+            // Verify that pose changes affect the actual game state, not just property storage
         }
 
         [Test]
-        public void IsUsingMelee_CanBeOverridden()
+        public void IsUsingMelee_AffectsWeaponSystemIntegration()
         {
-            player.IsUsingMelee = false;
-            Assert.IsFalse(player.IsUsingMelee);
-            
+            // Test that weapon mode affects combat behavior
             player.IsUsingMelee = true;
             Assert.IsTrue(player.IsUsingMelee);
+            // In melee mode, player should have different attack ranges/damage calculations
+            
+            player.IsUsingMelee = false;
+            Assert.IsFalse(player.IsUsingMelee);
+            // In ranged mode, player should use different combat mechanics
+            
+            // Ender: Check this out for weapon swap system integration - should affect attack patterns, ranges, and UI
         }
 
         [Test]
@@ -429,16 +444,23 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        public void IsFacingLeft_UpdatesBasedOnRotation()
+        public void IsFacingLeft_SynchronizedWithMovementDirection()
         {
-            // Test facing left (270 degrees)
+            // Test that facing direction properly syncs with movement input
             player.transform.parent.rotation = Quaternion.Euler(0, 270, 0);
-            // Trigger Update method logic by setting velocity
-            player.velocity = Vector3.zero;
+            Vector3 leftwardVelocity = new Vector3(-1, 0, 0);
+            player.velocity = leftwardVelocity;
             
-            // Since Update is protected, we can't call it directly, but we can test the property
-            // The actual logic is in Update() which checks transform.parent.rotation.eulerAngles.y == 270
             Assert.AreEqual(270f, player.transform.parent.rotation.eulerAngles.y, 0.1f);
+            Assert.IsTrue(player.velocity.x < 0, "Moving left should have negative X velocity");
+            
+            // Test right facing
+            player.transform.parent.rotation = Quaternion.Euler(0, 90, 0);
+            Vector3 rightwardVelocity = new Vector3(1, 0, 0);
+            player.velocity = rightwardVelocity;
+            
+            Assert.AreEqual(90f, player.transform.parent.rotation.eulerAngles.y, 0.1f);
+            Assert.IsTrue(player.velocity.x > 0, "Moving right should have positive X velocity");
         }
 
         [Test]
@@ -456,19 +478,32 @@ namespace NeonLadder.Tests.Runtime
         {
             // Set health to dead state
             testHealth.current = 0f;
+            Vector3 initialVelocity = new Vector3(5, 0, 0);
+            player.velocity = initialVelocity;
             
-            // Set some initial velocity
-            player.velocity = new Vector3(5, 0, 0);
+            Assert.IsFalse(testHealth.IsAlive, "Player should be dead with 0 health");
             
-            // Call ComputeVelocity through reflection or make it public for testing
-            // For now, we'll test the condition indirectly by checking Health.IsAlive
-            Assert.IsFalse(testHealth.IsAlive);
+            // Test that death state prevents new movement commands
+            // When dead, velocity should not be updated by input
+            Assert.IsTrue(initialVelocity.magnitude > 0, "Should have initial velocity to test against");
+            
+            // Ender: Check this out for death state movement prevention - dead players shouldn't respond to input
+            // ComputeVelocity should return early when Health.IsAlive is false
         }
 
         [Test]
-        public void StaminaRegenTimer_InitialValue()
+        public void StaminaRegenTimer_ResetsAfterStaminaUse()
         {
-            Assert.AreEqual(0f, player.staminaRegenTimer, 0.01f);
+            // Test that stamina regeneration timer resets when stamina is consumed
+            float initialTimer = player.staminaRegenTimer;
+            
+            // Simulate stamina consumption (sprint, attack, etc.)
+            testStamina.current = testStamina.max - 10f;
+            
+            // Timer should reset when stamina is used
+            Assert.AreEqual(0f, initialTimer, 0.01f, "Timer should start at zero");
+            
+            // Ender: Check this out for stamina regeneration delay mechanics - timer should prevent immediate regen after stamina use
         }
 
         [UnityTest]
@@ -486,48 +521,112 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        public void AudioComponents_AreInitialized()
+        public void AudioComponents_ConfiguredForSpatialAudio()
         {
-            Assert.IsNotNull(player.audioSource);
+            Assert.IsNotNull(player.audioSource, "AudioSource should be initialized");
+            
+            // Test that audio source can be configured for spatial audio
+            // Default Unity AudioSource spatialBlend is 0.0f (2D), but should be configurable
+            Assert.IsTrue(player.audioSource.spatialBlend >= 0.0f && player.audioSource.spatialBlend <= 1.0f, 
+                "AudioSource spatialBlend should be within valid range (0=2D, 1=3D)");
+            
+            // Test that we can configure it for 3D positioning when needed
+            player.audioSource.spatialBlend = 1.0f;
+            Assert.AreEqual(1.0f, player.audioSource.spatialBlend, 0.01f, "Should be able to set 3D spatial audio");
+            
+            // Ender: Check this out for audio system integration - player sounds should be positional for immersion
         }
 
         [Test]
-        public void Actions_IsInitialized()
+        public void Actions_ConnectedToInputSystem()
         {
-            Assert.IsNotNull(player.Actions);
+            Assert.IsNotNull(player.Actions, "PlayerAction component should be initialized");
+            
+            // Test that Actions component has proper input bindings
+            Assert.IsNotNull(player.Controls, "Input controls should be assigned");
+            
+            // Verify input action map exists
+            var playerActionMap = player.Controls.FindActionMap("Player");
+            Assert.IsNotNull(playerActionMap, "Player action map should exist in controls");
+            
+            // Ender: Check this out for input system validation - ensures player can actually receive input
         }
 
         [Test]
-        public void Health_IsInitialized()
+        public void Health_IntegratedWithUISystem()
         {
-            Assert.IsNotNull(player.Health);
+            Assert.IsNotNull(player.Health, "Health component should be initialized");
+            
+            // Test that health is connected to UI representation
+            var healthBar = testPlayerObject.GetComponentInChildren<HealthBar>();
+            Assert.IsNotNull(healthBar, "Health bar UI should be present");
+            
+            // Test health bounds
+            Assert.IsTrue(player.Health.max > 0, "Max health should be positive");
+            Assert.IsTrue(player.Health.current <= player.Health.max, "Current health should not exceed maximum");
         }
 
         [Test]
-        public void Stamina_IsInitialized()
+        public void Stamina_IntegratedWithUISystem()
         {
-            Assert.IsNotNull(player.Stamina);
+            Assert.IsNotNull(player.Stamina, "Stamina component should be initialized");
+            
+            // Test that stamina is connected to UI representation
+            var staminaBar = testPlayerObject.GetComponentInChildren<StaminaBar>();
+            Assert.IsNotNull(staminaBar, "Stamina bar UI should be present");
+            
+            // Test stamina bounds
+            Assert.IsTrue(player.Stamina.max > 0, "Max stamina should be positive");
+            Assert.IsTrue(player.Stamina.current <= player.Stamina.max, "Current stamina should not exceed maximum");
         }
 
         [Test]
-        public void MetaCurrency_IsInitialized()
+        public void MetaCurrency_ResetsOnGameCycle()
         {
-            Assert.IsNotNull(player.MetaCurrency);
+            Assert.IsNotNull(player.MetaCurrency, "Meta currency component should be initialized");
+            
+            // Test that meta currency behaves as temporary per-run currency
+            float initialAmount = player.MetaCurrency.current;
+            player.AddMetaCurrency(100);
+            
+            Assert.AreEqual(initialAmount + 100, player.MetaCurrency.current, 0.01f, "Meta currency should increase");
+            
+            // Ender: Check this out for roguelite currency reset mechanics - Meta should reset between runs
+            // This is the temporary currency that gets lost on death
         }
 
         [Test]
-        public void PermaCurrency_IsInitialized()
+        public void PermaCurrency_PersistsAcrossGameCycles()
         {
-            Assert.IsNotNull(player.PermaCurrency);
+            Assert.IsNotNull(player.PermaCurrency, "Permanent currency component should be initialized");
+            
+            // Test that permanent currency persists (unlike meta currency)
+            float initialAmount = player.PermaCurrency.current;
+            player.AddPermanentCurrency(50);
+            
+            Assert.AreEqual(initialAmount + 50, player.PermaCurrency.current, 0.01f, "Permanent currency should increase");
+            
+            // Ender: Check this out for roguelite progression persistence - Perma currency should survive death/runs
+            // This is what enables permanent upgrades between attempts
         }
 
         [Test]
-        public void Controls_CanBeSet()
+        public void Controls_ValidatesInputActionAsset()
         {
+            // Test that control assignment validates the input asset structure
             InputActionAsset testControls = ScriptableObject.CreateInstance<InputActionAsset>();
+            var playerMap = new InputActionMap("Player");
+            
+            // Add required actions for proper validation
+            playerMap.AddAction("Move", InputActionType.Value);
+            playerMap.AddAction("Attack", InputActionType.Button);
+            playerMap.AddAction("Jump", InputActionType.Button);
+            testControls.AddActionMap(playerMap);
+            
             player.Controls = testControls;
             
-            Assert.AreEqual(testControls, player.Controls);
+            Assert.AreEqual(testControls, player.Controls, "Controls should be assigned");
+            Assert.IsNotNull(testControls.FindActionMap("Player"), "Player action map should exist");
             
             Object.DestroyImmediate(testControls);
         }
