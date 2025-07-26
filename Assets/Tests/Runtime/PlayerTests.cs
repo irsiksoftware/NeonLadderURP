@@ -630,5 +630,6 @@ namespace NeonLadder.Tests.Runtime
             
             Object.DestroyImmediate(testControls);
         }
+
     }
 }

@@ -71,6 +71,7 @@ Choose your persona randomly from the four available options, then introduce you
 3. Performance optimization (remove per-frame velocity resets)
 4. Add missing XML documentation
 5. Standardize naming conventions
+6. **Build Pipeline Automation** (NEW - automated Steam builds, platform targets, CI/CD integration)
   
 **Step 4: Ask which objective to start with or if there's something else urgent**
 
