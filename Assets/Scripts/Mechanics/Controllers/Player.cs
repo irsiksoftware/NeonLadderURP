@@ -100,7 +100,7 @@ namespace NeonLadder.Mechanics.Controllers
             //do we need this?
             IsFacingLeft = transform.parent.rotation.eulerAngles.y == 270;
             // Check if moving in the Z-dimension
-            IsMovingInZDimension = Mathf.Abs(velocity.z) > Constants.MovementThreshold;
+            IsMovingInZDimension = Mathf.Abs(velocity.z) > Constants.Physics.Movement.ZAxisThreshold;
 
             //TimedLogger.Log($"Player transform position: {transform.position}", 1f);
             base.Update();
@@ -117,10 +117,10 @@ namespace NeonLadder.Mechanics.Controllers
         private void RegenerateStamina()
         {
             staminaRegenTimer += Time.deltaTime;
-            if (staminaRegenTimer >= Constants.StaminaRegenInterval) // Check if 1/10th of a second has passed
+            if (staminaRegenTimer >= Constants.Physics.Stamina.RegenInterval) // Check if 1/10th of a second has passed
             {
-                Stamina.Increment(Constants.StaminaRegenAmount); // Increment stamina by 1/10th of a unit
-                staminaRegenTimer -= Constants.StaminaRegenInterval; // Decrease the timer by 0.1f instead of resetting to 0
+                Stamina.Increment(Constants.Physics.Stamina.RegenAmount); // Increment stamina by 1/10th of a unit
+                staminaRegenTimer -= Constants.Physics.Stamina.RegenInterval; // Decrease the timer by 0.1f instead of resetting to 0
             }
         }
 
@@ -220,14 +220,14 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (HealthBar != null && Health != null)
             {
-                HealthBar.currentPercent = (Health.current / Health.max) * Constants.PercentageMultiplier;
+                HealthBar.currentPercent = (Health.current / Health.max) * Constants.UI.PercentageMultiplier;
             }
         }
         private void UpdateStaminaBar()
         {
             if (StaminaBar != null && Stamina != null)
             {
-                StaminaBar.currentPercent = (Stamina.current / Stamina.max) * Constants.PercentageMultiplier;
+                StaminaBar.currentPercent = (Stamina.current / Stamina.max) * Constants.UI.PercentageMultiplier;
             }
         }
     }

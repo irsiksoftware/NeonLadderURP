@@ -8,11 +8,11 @@ namespace NeonLadder.Mechanics.Controllers
     {
         public DamageNumber popupPrefab;
         [SerializeField]
-        private float yOffset = Constants.DamageNumberYOffset; // Private backing field with a default minimum value of 1
+        private float yOffset = Constants.UI.DamageNumbers.YOffset; // Private backing field with a default minimum value of 1
         public float YOffset
         {
             get => yOffset;
-            set => yOffset = Mathf.Max(Constants.DamageNumberYOffset, value); // Ensure the value is at least 1
+            set => yOffset = Mathf.Max(Constants.UI.DamageNumbers.YOffset, value); // Ensure the value is at least 1
         }
         private Transform target;
 
@@ -32,12 +32,12 @@ namespace NeonLadder.Mechanics.Controllers
 
             if (number > 5)
             {
-                newPopup.SetScale(Constants.CriticalHitScale);
+                newPopup.SetScale(Constants.UI.DamageNumbers.CriticalHitScale);
                 newPopup.SetColor(new Color(1, 0.2f, 0.2f));
             }
             else
             {
-                newPopup.SetScale(Constants.NormalHitScale);
+                newPopup.SetScale(Constants.UI.DamageNumbers.NormalHitScale);
                 newPopup.SetColor(new Color(1, 0.7f, 0.5f));
             }
         }

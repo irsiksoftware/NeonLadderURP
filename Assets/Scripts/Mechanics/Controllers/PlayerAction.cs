@@ -400,7 +400,7 @@ namespace NeonLadder.Mechanics.Controllers
         }
 
         [SerializeField]
-        private float percentageOfAnimationToIgnore = Constants.AnimationIgnorePercentage; // Adjust this value to experiment with different timings
+        private float percentageOfAnimationToIgnore = Constants.Animation.IgnorePercentage; // Adjust this value to experiment with different timings
 
         private IEnumerator TryAttackEnemy()
         {
