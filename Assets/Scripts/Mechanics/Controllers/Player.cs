@@ -205,13 +205,12 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-
-        internal void AddMetaCurrency(int amount)
+        public void AddMetaCurrency(int amount)
         {
             MetaCurrency.Increment(amount);
         }
 
-        internal void AddPermanentCurrency(int amount)
+        public void AddPermanentCurrency(int amount)
         {
             PermaCurrency.Increment(amount);
         }

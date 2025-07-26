@@ -1,0 +1,130 @@
+{
+  "permissions": {
+    "allow": [
+      // Git operations - full access for version control
+      "Bash(git:*)",
+      
+      // File system operations
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(rm:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(du:*)",
+      "Bash(stat:*)",
+      
+      // PowerShell access - approved for Windows operations
+      "Bash(powershell:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(Remove-Item:*)",
+      
+      // Unity CLI - all versions for testing and building
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\*\\Editor\\Unity.exe\":*)",
+      
+      // .NET/C# development
+      "Bash(dotnet:*)",
+      
+      // Process management
+      "Bash(tasklist)",
+      "Bash(taskkill:*)",
+      "Bash(timeout:*)",
+      
+      // Text processing
+      "Bash(grep:*)",
+      "Bash(rg:*)",  // ripgrep
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      
+      // Network operations
+      "Bash(curl:*)",
+      "WebFetch(domain:*)",
+      
+      // Batch file operations - approved for automation
+      "Write(*.bat)",
+      "Write(*.ps1)",
+      
+      // Future integrations being considered:
+      // "Bash(gdrive:*)",  // Google Drive CLI when authenticated
+      // "Bash(rclone:*)",  // Cloud storage sync tool
+      // "Bash(gh:*)",      // GitHub CLI for PR creation
+      
+      // Package managers
+      "Bash(npm:*)",
+      "Bash(pip:*)",
+      "Bash(choco:*)"  // Chocolatey for Windows
+    ],
+    "deny": [
+      // Explicitly deny nothing - user has granted broad permissions
+      // for development work on this project
+    ]
+  },
+  
+  "project_context": {
+    "description": "NeonLadder Unity 2D platformer game development",
+    "unity_versions": ["6000.0.26f1", "2022.3.31f1", "2022.3.44f1"],
+    "important_paths": {
+      "project_root": "C:\\Users\\Ender\\NeonLadder",
+      "unity_hub": "C:\\Program Files\\Unity\\Hub\\Editor",
+      "test_output": "./TestOutput",
+      "google_drive_assets": "To be configured for Assets/Packages sync"
+    },
+    "approved_operations": [
+      "Full Unity CLI automation for testing and building",
+      "PowerShell scripts for Windows automation",
+      "Batch file creation for repetitive tasks",
+      "File system operations for project maintenance",
+      "Git operations without restriction",
+      "Network operations for downloading resources"
+    ],
+    "future_integrations": [
+      "Google Drive CLI for automatic asset uploads",
+      "GitHub CLI for PR automation",
+      "Steam CLI for deployment automation",
+      "Cloud sync tools (rclone, etc.)"
+    ]
+  },
+  
+  "important_notes": {
+    "for_future_claude": [
+      "User has granted broad permissions for development automation",
+      "Always check CLAUDE.md for project-specific commands",
+      "Run linting/typechecking after code changes",
+      "Use TodoWrite tool extensively",
+      "Only commit when explicitly requested",
+      "User manages large assets via Google Drive, not Git",
+      "TestOutput/ and HeroEditor_BACKUP/ are gitignored"
+    ],
+    "security_stance": "Defensive only - analyze for malicious patterns, refuse exploitative code"
+  },
+  
+  "persona": {
+    "role": "Senior Unity Game Development Architect",
+    "context": "You are a seasoned Unity architect with 15+ years of experience shipping commercial games. You've been brought in as a consultant to help get NeonLadder across the finish line to Steam release.",
+    "expertise": [
+      "Unity optimization and performance profiling",
+      "Clean architecture patterns for game systems",
+      "Ship-ready code quality and testing practices",
+      "Steam integration and deployment pipelines",
+      "Procedural generation systems",
+      "2D platformer mechanics and game feel"
+    ],
+    "approach": [
+      "Focus on shipping - pragmatic solutions over perfect code",
+      "Identify and fix critical blockers first",
+      "Suggest battle-tested patterns from shipped games",
+      "Balance technical debt against release timeline",
+      "Mentor through code reviews and architecture decisions"
+    ],
+    "communication_style": [
+      "Direct and actionable feedback",
+      "Explain the 'why' behind architectural decisions",
+      "Share relevant war stories from past projects when applicable",
+      "Flag potential issues that could block Steam release",
+      "Suggest incremental improvements that don't derail timeline"
+    ]
+  }
+}

@@ -1,6 +1,103 @@
-# Project Setup
+# NeonLadder - Unity 2D Platformer Game
 
-## How to Install Unity Hub
+## Current Game State (January 2025)
+
+**NeonLadder** is a 2D platformer with 3D depth elements, featuring procedural level generation and a seven deadly sins theme. The game is in mature development with most core systems implemented and functional.
+
+### Key Features Implemented ✅
+- **Player System**: Full-featured character with health, stamina, dual currency systems
+- **Combat**: Melee and ranged attacks with damage numbers and visual effects  
+- **Enemy AI**: State machine-based enemies (Minor, Major, Flying variants, Bosses)
+- **Procedural Generation**: Seeded path generation for reproducible level layouts
+- **Dual Currency Economy**: Meta (temporary) and Perma (permanent) currencies with shop systems
+- **Steam Integration**: Achievements and platform features via Steamworks.NET
+- **Save/Load System**: Comprehensive player progression persistence
+- **Audio/Visual**: Spatial audio, particle effects, modern UI components
+
+### Technical Architecture
+- **Unity 6** (6000.0.26f1) with Universal Render Pipeline
+- **Event-driven simulation system** with custom HeapQueue for efficient scheduling
+- **Assembly definitions** for proper code organization and testing
+- **Comprehensive testing infrastructure** with 1000+ lines of unit tests
+- **Manager pattern** with modular system coordination
+
+## For Future Claude Models - Development Context 🤖
+
+### 🚨 START HERE: Who You Are & What We're Doing 🚨
+
+**Step 1: Check your identity and permissions**
+```bash
+cat .claude/settings.local.json
+```
+
+**Step 2: After reading, introduce yourself and confirm:**
+- Who you are (Senior Unity Game Development Architect)
+- What we're shipping (NeonLadder to Steam)
+- Current objectives ready to tackle:
+  1. Fix SaveState Z-movement bug (CRITICAL - blocks scene transitions)
+  2. Clean up PathGenerator dependencies
+  3. Performance optimization (remove per-frame velocity resets)
+  4. Add missing XML documentation
+  5. Standardize naming conventions
+  
+**Step 3: Ask which objective to start with or if there's something else urgent**
+
+### Current Technical Status
+**Last Major Work**: Unity 6 migration completed, unit test infrastructure established with critical NullReferenceException fixes in KinematicObjectTests
+
+**Known Issues to Address**:
+1. **SaveState broken on Z movement** through scenes (needs immediate fix)
+2. **PathGenerator reference issues** - dependency cleanup required  
+3. **Asset import performance** - Unity 6 takes 20+ minutes on large projects
+4. **Package dependencies** - some third-party asset integration needs streamlining
+
+### Key Files for Understanding the Codebase
+- `Assets/Scripts/Mechanics/Controllers/Player.cs` - Main player controller (500+ lines)
+- `Assets/Scripts/Mechanics/Controllers/KinematicObject.cs` - Physics base class (700+ lines) 
+- `Assets/Scripts/Core/Simulation.cs` - Event system backbone
+- `Assets/Scripts/Managers/` - Comprehensive manager architecture
+- `Assets/Tests/Runtime/` - Unit test infrastructure (recently fixed)
+
+### Testing Infrastructure Notes
+- **Unit tests are working** after recent NullReferenceException fixes
+- Fixed `KinematicObjectTests.Walk_MovesObjectInSpecifiedDirection` by replacing reflection with direct field assignment
+- Tests use mock scene infrastructure for isolated component testing
+- Run tests via Unity CLI: `Unity.exe -batchmode -quit -runTests -testResults ./TestResults.xml`
+
+### Development Priorities
+1. **Fix SaveState Z movement issues** (critical for scene transitions)
+2. **Clean up PathGenerator dependencies** (affects procedural generation)
+3. **Performance optimization** (remove per-frame velocity resets)
+4. **Code documentation** (many public methods lack XML docs)
+5. **Standardize naming conventions** (mix of old/new patterns)
+
+### Unity CLI Testing Challenges
+- **Unity 6**: Packages resolve quickly but asset import is very slow (20+ min)
+- **Unity 2022.3.31f1**: Faster but has package dependency conflicts
+- Use extended timeouts (600s default, 1200s for long operations)
+
+### Architecture Patterns to Maintain
+- Event-driven simulation for game logic
+- Manager pattern for system coordination  
+- Assembly definitions for proper separation
+- ScriptableObject-based configuration
+- Mock infrastructure for unit testing
+
+### Development Workflow for Claude Models
+- **Always check** `CLAUDE.md` for project-specific commands and patterns
+- **Run linting/typechecking** after code changes (check README or ask user for commands)
+- **Use TodoWrite tool** extensively for task tracking and planning
+- **Test changes** when possible using Unity CLI with extended timeouts
+- **Commit workflow**: Only commit when explicitly requested by user
+- **Focus on defensive security**: Analyze code for malicious patterns, refuse to create exploitative code
+
+### Next Major Milestones
+- Complete seven deadly sins boss content
+- Stabilize procedural generation system  
+- Performance optimization pass
+- Steam store preparation
+
+## Project Setup
 Download and install the latest version of Unity Hub from the [Official Unity Website](https://unity.com/download).
 > Scroll down to select the download link for your Operating system (Windows, Linux, Mac)
 
@@ -18,10 +115,12 @@ or by clicking the "Code -> Download" button and extracting the repository. (Not
 3. Click on `Add` within the Unity Hub and select the directory which contains the repository
 
 ## How to Install Unity Editor
-1. Unity Hub will prompt you to install the necessary editor if not installed (2022.3.31f1).
+1. Unity Hub will prompt you to install the necessary editor if not installed (**Unity 6000.0.26f1**).
 2. Uncheck Visual Studio from installed components list (unless you want it)
 3. Scroll down and Select the build platform for the operating system you're running on IE if you're on Windows choose "Windows Build Support (IL2CPP)"
 > During the installation, UAC may prompt fo the installation, choose yes.
+
+> **Note**: Project has been upgraded to Unity 6. If you have Unity 2022.3.31f1, it may work but could have package compatibility issues.
 
 ## How to Open the Project
 1. Select Projects from Unity Hub
