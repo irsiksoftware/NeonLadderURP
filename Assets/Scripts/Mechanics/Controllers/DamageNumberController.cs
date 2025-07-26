@@ -1,5 +1,6 @@
 using UnityEngine;
-using DamageNumbersPro; 
+using DamageNumbersPro;
+using NeonLadder.Common;
 
 namespace NeonLadder.Mechanics.Controllers
 {
@@ -7,11 +8,11 @@ namespace NeonLadder.Mechanics.Controllers
     {
         public DamageNumber popupPrefab;
         [SerializeField]
-        private float yOffset = 1f; // Private backing field with a default minimum value of 1
+        private float yOffset = Constants.UI.DamageNumbers.YOffset; // Private backing field with a default minimum value of 1
         public float YOffset
         {
             get => yOffset;
-            set => yOffset = Mathf.Max(1f, value); // Ensure the value is at least 1
+            set => yOffset = Mathf.Max(Constants.UI.DamageNumbers.YOffset, value); // Ensure the value is at least 1
         }
         private Transform target;
 
@@ -31,12 +32,12 @@ namespace NeonLadder.Mechanics.Controllers
 
             if (number > 5)
             {
-                newPopup.SetScale(1.5f);
+                newPopup.SetScale(Constants.UI.DamageNumbers.CriticalHitScale);
                 newPopup.SetColor(new Color(1, 0.2f, 0.2f));
             }
             else
             {
-                newPopup.SetScale(1);
+                newPopup.SetScale(Constants.UI.DamageNumbers.NormalHitScale);
                 newPopup.SetColor(new Color(1, 0.7f, 0.5f));
             }
         }

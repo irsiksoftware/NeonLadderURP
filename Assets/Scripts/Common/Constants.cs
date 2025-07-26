@@ -114,13 +114,213 @@ namespace NeonLadder.Common
 
         #endregion
 
-        #region scenes
-        public static List<string> MinorEnemyLevels = new List<string> { "Minor-Enemy-1", "Minor-Enemy-2", "Minor-Enemy-3" };
-        public static List<string> MajorEnemyLevels = new List<string> { "Major-Enemy-1", "Major-Enemy-2", "Major-Enemy-3" };
-        //public static List<string> Bosses = new List<string> { "Wrath", "Gluttony", "Pride", "Sloth", "Envy", "Lust", "Greed" };
-        public static List<string> ShopLevels = new List<string> { "Shop-1", "Shop-2", "Shop-3" };
-        public static List<string> MinorEnemies = new List<string> { "Chili", "Kiwi", "Eggy", "Langsat" };
-        public static List<string> MajorEnemies = new List<string> { "BlackKnight", "Werewolf", "FlyingDemon" };
+        #region physics
+        public static class Physics
+        {
+            public static class GroundDetection
+            {
+                public const float MinNormalY = 0.75f;
+                public const float MinMoveDistance = 0.001f;
+                public const float ShellRadius = 0.01f;
+            }
+            
+            public static class Movement
+            {
+                public const float ZAxisThreshold = 0.1f;
+                public const int RetreatSpeedDivider = 2;
+            }
+            
+            public static class Stamina
+            {
+                public const float RegenInterval = 0.1f;
+                public const float RegenAmount = 0.1f;
+            }
+            
+            public static class Combat
+            {
+                public const float DefaultAttackRange = 3.0f;
+                public const float BoxColliderOffset = 1.0f;
+                public const float AttackCooldown = 3.0f;
+                public const float RetreatBuffer = 1.0f;
+                public const int EnemyDamage = 10;
+                public const float DeathAnimationBuffer = 1f;
+                public const float InitialLastAttackTime = -10f;
+                public const float FlyingEnemyRange = 5f;
+            }
+            
+            public static class Projectiles
+            {
+                public const float RaycastDistance = 100f;
+                public const int Damage = 10;
+                public const float Lifetime = 2f;
+                public const float ImpactEffectLifetime = 5f;
+            }
+            
+            public static class Collision
+            {
+                public const float AvoidanceTimer = 0.6f;
+            }
+        }
+        
+        public static class UI
+        {
+            public const float PercentageMultiplier = 100f;
+            
+            public static class DamageNumbers
+            {
+                public const float YOffset = 1f;
+                public const float CriticalHitScale = 1.5f;
+                public const float NormalHitScale = 1f;
+            }
+        }
+        
+        public static class Animation
+        {
+            public const float IgnorePercentage = 0.35f;
+            
+            public static class FlyAway
+            {
+                public const float ZDistance = 3.61f;
+                public const float Duration = 30f;
+                public const float FinalScale = 0f;
+            }
+        }
+        
+        public static class Spawning
+        {
+            public static class Portal
+            {
+                public const float SpawnInterval = 5f;
+                public const float DefaultLifetime = 0f;
+            }
+        }
+        
+        public static class SceneTransition
+        {
+            public const float CelebrationDuration = 6.3f;
+            public const float CameraZoomAmount = 5f;
+            public const float PlayerYPosition = 0.01f;
+        }
+        
+        public static class Cutscene
+        {
+            public const float WaitTimeMs = 500f;
+            public const float Velocity = 2f;
+            public const float Duration = 3f;
+            public const float RotationDegree = 90f;
+        }
+        
+        public static class Audio
+        {
+            public const float TriggerTime = 0.5f;
+            public const float InitialTime = -1f;
+        }
+        #endregion
+
+        #region scenes_and_story
+        public enum ChapterScenes
+        {
+            MinorEnemy1,
+            MinorEnemy2, 
+            MinorEnemy3,
+            MajorEnemy1,
+            MajorEnemy2,
+            MajorEnemy3,
+            Shop1,
+            Shop2,
+            Shop3
+        }
+        
+        public enum EnemyTypes
+        {
+            // Minor enemies
+            Chili,
+            Kiwi,
+            Eggy,
+            Langsat,
+            // Major enemies
+            BlackKnight,
+            Werewolf,
+            FlyingDemon
+        }
+        
+        public enum SevenDeadlySins
+        {
+            Wrath,
+            Gluttony,
+            Pride,
+            Sloth,
+            Envy,
+            Lust,
+            Greed
+        }
+        
+        public static class SceneNames
+        {
+            public static readonly Dictionary<ChapterScenes, string> SceneMap = new Dictionary<ChapterScenes, string>
+            {
+                { ChapterScenes.MinorEnemy1, "Minor-Enemy-1" },
+                { ChapterScenes.MinorEnemy2, "Minor-Enemy-2" },
+                { ChapterScenes.MinorEnemy3, "Minor-Enemy-3" },
+                { ChapterScenes.MajorEnemy1, "Major-Enemy-1" },
+                { ChapterScenes.MajorEnemy2, "Major-Enemy-2" },
+                { ChapterScenes.MajorEnemy3, "Major-Enemy-3" },
+                { ChapterScenes.Shop1, "Shop-1" },
+                { ChapterScenes.Shop2, "Shop-2" },
+                { ChapterScenes.Shop3, "Shop-3" }
+            };
+            
+            public static readonly Dictionary<EnemyTypes, string> EnemyMap = new Dictionary<EnemyTypes, string>
+            {
+                { EnemyTypes.Chili, "Chili" },
+                { EnemyTypes.Kiwi, "Kiwi" },
+                { EnemyTypes.Eggy, "Eggy" },
+                { EnemyTypes.Langsat, "Langsat" },
+                { EnemyTypes.BlackKnight, "BlackKnight" },
+                { EnemyTypes.Werewolf, "Werewolf" },
+                { EnemyTypes.FlyingDemon, "FlyingDemon" }
+            };
+            
+            public static string GetSceneName(ChapterScenes scene) => SceneMap[scene];
+            public static string GetEnemyName(EnemyTypes enemy) => EnemyMap[enemy];
+            
+            // Helper methods for backwards compatibility
+            public static List<string> MinorEnemyLevels => new List<string> 
+            { 
+                GetSceneName(ChapterScenes.MinorEnemy1),
+                GetSceneName(ChapterScenes.MinorEnemy2),
+                GetSceneName(ChapterScenes.MinorEnemy3)
+            };
+            
+            public static List<string> MajorEnemyLevels => new List<string>
+            {
+                GetSceneName(ChapterScenes.MajorEnemy1),
+                GetSceneName(ChapterScenes.MajorEnemy2),
+                GetSceneName(ChapterScenes.MajorEnemy3)
+            };
+            
+            public static List<string> ShopLevels => new List<string>
+            {
+                GetSceneName(ChapterScenes.Shop1),
+                GetSceneName(ChapterScenes.Shop2),
+                GetSceneName(ChapterScenes.Shop3)
+            };
+            
+            public static List<string> MinorEnemies => new List<string>
+            {
+                GetEnemyName(EnemyTypes.Chili),
+                GetEnemyName(EnemyTypes.Kiwi),
+                GetEnemyName(EnemyTypes.Eggy),
+                GetEnemyName(EnemyTypes.Langsat)
+            };
+            
+            public static List<string> MajorEnemies => new List<string>
+            {
+                GetEnemyName(EnemyTypes.BlackKnight),
+                GetEnemyName(EnemyTypes.Werewolf),
+                GetEnemyName(EnemyTypes.FlyingDemon)
+            };
+        }
         #endregion
     }
 }

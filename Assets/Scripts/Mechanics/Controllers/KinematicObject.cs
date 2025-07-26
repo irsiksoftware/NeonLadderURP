@@ -12,7 +12,7 @@ namespace NeonLadder.Mechanics.Controllers
     {
         public Player player { get; set; }
         public PlatformerModel model { get; private set; }
-        public float minGroundNormalY = .75f;
+        public float minGroundNormalY = Constants.Physics.GroundDetection.MinNormalY;
         public float gravityModifier = 1f;
         public Vector3 velocity;
         public LayerMask layerMask;
@@ -22,8 +22,8 @@ namespace NeonLadder.Mechanics.Controllers
         //https://github.com/Unity-Technologies/UnityCsReference/blob/master/Runtime/Export/Scripting/Component.deprecated.cs
         protected new Rigidbody rigidbody;
         protected RaycastHit[] hitBuffer = new RaycastHit[16];
-        protected const float minMoveDistance = 0.001f;
-        protected const float shellRadius = 0.01f;
+        protected const float minMoveDistance = Constants.Physics.GroundDetection.MinMoveDistance;
+        protected const float shellRadius = Constants.Physics.GroundDetection.ShellRadius;
         public bool IsFacingLeft { get; set; }
         public bool IsFacingRight => !IsFacingLeft;
 
@@ -41,7 +41,7 @@ namespace NeonLadder.Mechanics.Controllers
         public virtual float IdleAnimationDuration { get; set; }
         public virtual float GetHitAnimationDuration { get; set; }
 
-        protected virtual float lastAttackTime { get; set; } = -10f;
+        protected virtual float lastAttackTime { get; set; } = Constants.Physics.Combat.InitialLastAttackTime;
 
         private Dictionary<Animations, float> animationClipLengths;
 

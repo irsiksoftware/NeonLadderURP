@@ -33,9 +33,9 @@ namespace NeonLadder.Mechanics.Controllers
         public float staminaRegenTimer = 0f;
 
         [SerializeField]
-        protected virtual int attackDamage { get; set; } = 10; // Damage per attack
+        protected virtual int attackDamage { get; set; } = Constants.Physics.Combat.EnemyDamage; // Damage per attack
 
-        public float deathBuffer = 1f;
+        public float deathBuffer = Constants.Physics.Combat.DeathAnimationBuffer;
 
         [SerializeField]
         private float attackRange = 0f; // Default value
@@ -54,7 +54,7 @@ namespace NeonLadder.Mechanics.Controllers
                 else
                 {
                     BoxCollider boxCollider = GetComponentInParent<BoxCollider>();
-                    return boxCollider != null ? boxCollider.size.x / 2 + 1.0f : 3.0f; // Default value if no BoxCollider found
+                    return boxCollider != null ? boxCollider.size.x / 2 + Constants.Physics.Combat.BoxColliderOffset : Constants.Physics.Combat.DefaultAttackRange; // Default value if no BoxCollider found
                 }
             }
             set { attackRange = value; }
@@ -69,9 +69,9 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         private MonsterStates currentState = MonsterStates.Idle;
         [SerializeField]
-        protected virtual float retreatBuffer { get; set; } = 1.0f;
+        protected virtual float retreatBuffer { get; set; } = Constants.Physics.Combat.RetreatBuffer;
         [SerializeField]
-        private float _attackCooldown = 3.0f; // Default value if not set in the editor or overridden
+        private float _attackCooldown = Constants.Physics.Combat.AttackCooldown; // Default value if not set in the editor or overridden
 
         public virtual float attackCooldown
         {
