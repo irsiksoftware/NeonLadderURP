@@ -76,6 +76,10 @@ crashlytics-build.properties
 !/Assets/Packages/LeartesStudios/*
 !/Assets/Packages/**/DownloadInstructions.txt
 
+/HeroEditor_BACKUP
+/TestOutput
+console.log
+
 Assets/Audio/Background/**
 !Assets/Audio/Background/**/DownloadInstructions.txt
 

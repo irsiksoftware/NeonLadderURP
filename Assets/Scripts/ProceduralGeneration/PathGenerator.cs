@@ -14,7 +14,7 @@ namespace NeonLadder.ProceduralGeneration
     /// Represents an entire procedural path generation system.
     /// This version can accept or generate a seed string for reproducibility.
     /// </summary>
-    public class PathGenerator : InputField
+    public class PathGenerator
     {
         private static readonly int[] EncounterProbabilities = { 25, 50, 75 }; // Adjusted to only roundable to 25
         private static readonly string[] Bosses = BossTransformations.bossTransformations.Keys.ToArray();
@@ -117,7 +117,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             unchecked
             {
-                // Simple Fowler–Noll–Vo (FNV) or any other hash approach
+                // Simple Fowlerï¿½Nollï¿½Vo (FNV) or any other hash approach
                 // This is just an example. 
                 // Or you could parse as Base36, Base64, etc.
                 int hash = 23;
@@ -283,7 +283,7 @@ namespace NeonLadder.ProceduralGeneration
         }
 
         // OPTIONAL: If you want to store the final dictionary in a single string, you can serialize to JSON.
-        // This approach allows you to save the *entire* resulting paths—useful if you want to 
+        // This approach allows you to save the *entire* resulting pathsï¿½useful if you want to 
         // guarantee the exact same run without re-calling random, or if code changes in the future.
         // Also helpful for debugging or sharing a "snapshot" of the run beyond just the seed.
         public string SerializePathsToJson(Dictionary<string, Path> paths)
