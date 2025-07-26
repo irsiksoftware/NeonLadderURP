@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git --version)"
+      "Bash(powershell:*)",
+      "Bash(pwd:*)",
+      "Bash(git:*)",
+      "Bash(dir:*)",
+      "Bash(ls:*)",
+      "Bash(npm:*)",
+      "Bash(cat:*)"
     ],
     "deny": []
   },
