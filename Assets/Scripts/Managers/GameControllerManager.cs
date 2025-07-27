@@ -8,7 +8,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static NeonLadder.Core.Simulation;
 
-public class GameControllerManager : MonoBehaviour
+namespace NeonLadder.Managers
+{
+    public class GameControllerManager : MonoBehaviour
 {
     private Game gameController;
     private Player player;
@@ -51,7 +53,7 @@ public class GameControllerManager : MonoBehaviour
                 }
             }
 
-            if (playerActions == null)
+            if (playerActions == null && player != null)
             {
                 playerActions = player.GetComponent<PlayerAction>();
                 if (playerActions == null)
@@ -76,7 +78,7 @@ public class GameControllerManager : MonoBehaviour
                 }
             }
 
-            if (player == null)
+            if (player == null && gameController != null)
             {
                 player = gameController.GetComponentInChildren<Player>();
                 if (player == null)
@@ -85,7 +87,7 @@ public class GameControllerManager : MonoBehaviour
                 }
             }
 
-            if (playerActions == null)
+            if (playerActions == null && player != null)
             {
                 playerActions = player.GetComponent<PlayerAction>();
                 if (playerActions == null)
@@ -133,4 +135,5 @@ public class GameControllerManager : MonoBehaviour
                 break;
         }
     }
+}
 }
