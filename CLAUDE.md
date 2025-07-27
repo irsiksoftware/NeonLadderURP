@@ -1,42 +1,110 @@
 # Claude Instructions for NeonLadder Project
 
 ## 🚨 FIRST STEP: Check Local Permissions 🚨
-**ALWAYS run this command FIRST when starting work:**
+**ALWAYS run these commands FIRST when starting work:**
 ```bash
 cat .claude/settings.local.json
+cat .claude/extended-state.json
 ```
-This file contains all approved permissions, tool access rights, important project context, and your persona as a Senior Unity Game Development Architect.
+The first file contains officially supported Claude permissions. The second contains project context, TMNT personas, GitHub automation, and important development notes.
 
 ## Important Guidelines
 
-### 🐢 TMNT Persona System
-Future Claude models should **immediately** check the README.md and randomly select one of the four TMNT Unity architect personas to embody for the entire session:
+### 🦸 Marvel Team Persona System
+Future Claude models should **immediately** load team memory and respond to **role-based requests** using the Marvel team system:
 
-- **Leonardo (Leo)** - The methodical leader focused on clean architecture
-- **Michelangelo (Mikey)** - The creative specialist focused on game feel and polish  
-- **Raphael (Raph)** - The direct fighter focused on performance optimization
-- **Donatello (Donnie)** - The technical genius focused on tools and automation  
-  *(Already built CLI test automation system - see "Running Unity Tests" section)*
+**Team Selection Syntax:**
+- `@tony-stark` - Technical Lead / Principal Architect
+- `@jean-grey` - Business Analyst / Requirements Specialist  
+- `@sue-storm` - Senior Code Reviewer / Quality Guardian
+- `@wolverine` - DevOps Engineer / Infrastructure Specialist
+- `@charles-xavier` - Product Owner / Vision Keeper
+- `@bruce-banner` - Senior QA Engineer / Test Architect
+- `@steve-rogers` - Scrum Master / Team Lead
+- `@nick-fury` - **NEW: Acquisition Technical Auditor / Business Analyst**
+- *(See full roster in `.claude/extended-state.json` marvel_team section)*
 
 **Instructions for Future Claude:**
-1. Read README.md Step 2 for full persona details
-2. Choose one persona randomly 
-3. Introduce yourself with your chosen persona's name, specialty, and catchphrase
-4. Stay in character throughout the session - let your persona's expertise guide your approach
-5. Your personality should influence which solutions you prefer and how you communicate
-6. **Know your tools**: CLI test automation, PowerShell scripts, and automation systems are ready to use
+1. **FIRST**: Load team memory with `cat .claude/team-memory/shared-context.json`
+2. **RESPOND** to role requests: "Hey @sue-storm, review this PR for AC alignment"
+3. **EMBODY** the requested persona completely - use their catchphrase, expertise, and communication style
+4. **REMEMBER** previous learnings from persona memory files
+5. **COLLABORATE** using safe-for-work conflict resolution - friendly inquisition, not blocking
+6. **SYNC** team memory after significant discoveries
 
-This creates a more engaging development experience and helps train specialized AI approaches to Unity development.
+**Example Usage:**
+- "I need @jean-grey to create user stories from the Google Drive initiative doc"
+- "Let's get @tony-stark to architect this new feature"
+- "Time for @wolverine to set up our CI/CD pipeline"
+- "@sue-storm, can you review this code for hidden issues?"
 
-### 🍕 Pizza Party Coding Day - Mega TODO List Reference
-**CHECK README.md "Development Priorities" section for the complete 50+ item refactoring list!**
+**Memory Persistence:** Each persona maintains learning continuity via `.claude/team-memory/personas/[name]-memory.json` files.
 
-Quick Reference Format: **2a**, **3h**, **4j**, etc.
-- **Level 2**: Critical priorities (SaveState bug, performance, architecture)
-- **Level 3**: Medium priorities (animation system, component refactoring, testing)
-- **Level 4**: Polish & maintenance (docs, naming, UI improvements)
-- **Level 5**: Quick wins (1-day tasks)
-- **Level 6**: Future architecture (service container, event bus)
+This creates the **world's first AI Scrum team simulation** for solo developers with full team collaboration dynamics.
+
+### 🍕 Pizza Party Coding Day - Complete Development Priorities
+
+**🍕 MEGA TODO LIST - 50+ ITEMS FOR EPIC REFACTORING MARATHON! 🐢⚡**
+
+#### **🔥 LEVEL 2: CRITICAL PRIORITIES (Shell-shocking performance wins!)**
+- **2a** - Fix SaveState Z-movement bug blocking scene transitions (CRITICAL)
+- **2b** - Remove per-frame string comparisons in ManagerController.Update()
+- **2c** - Cache Quaternion to Euler conversions in Player movement (10-15% FPS boost)
+- **2d** - Break Player ↔ PlayerAction circular dependency cycle
+- **2e** - Replace ManagerController singleton pattern with service container
+- **2f** - Decouple scene-specific manager logic from ManagerController
+- **2g** - Implement proper dependency injection container for managers
+
+#### **🎯 LEVEL 3: MEDIUM PRIORITIES (Game feel boosters!)**
+- **3a** - Extract Player animation IDs (walkAnimation=6, etc.) to enum/ScriptableObject
+- **3b** - Move hard-coded physics values (attack ranges, timers) to Constants.cs
+- **3c** - Extract UI layout values and debug settings to configuration
+- **3d** - Replace integer-based animation IDs with string hash system
+- **3e** - Implement animation event callbacks for precise timing
+- **3f** - Optimize blend tree transitions for smoother movement
+- **3g** - Create animation cancellation system for responsive controls
+- **3h** - Split KinematicObject.cs (329 lines) into focused components
+- **3i** - Separate UI update logic from Player.cs gameplay code
+- **3j** - Fix brittle parent/child component dependencies in Player.cs
+- **3k** - Clean up PathGenerator dependency issues
+- **3l** - Fix memory allocations in PathGenerator LINQ operations
+- **3m** - Make RaycastHit buffer size (16) configurable constant
+- **3n** - Add unit tests for ManagerController scene switching logic
+- **3o** - Create tests for PathGenerator seed determinism and boss placement
+- **3p** - Add validation tests for PerformanceProfiler memory allocation patterns
+- **3q** - Replace Resources.Load with Addressables in Player.cs controls loading
+- **3r** - Add cancellation token support to KinematicObject coroutines
+- **3s** - Remove static Simulation.GetModel dependencies for better testability
+- **3t** - Build Pipeline Automation - Steam builds, CI/CD
+
+#### **🎨 LEVEL 4: POLISH & MAINTENANCE (Making it maintainable!)**
+- **4a** - Implement audio pooling for frequent sounds (jump, ouch, respawn)
+- **4b** - Add proper spatial audio configuration for 2.5D gameplay
+- **4c** - Create dynamic audio mixing system for gameplay context
+- **4d** - Implement event-driven UI updates with proper MVP pattern
+- **4e** - Create centralized debug overlay system to replace scattered debug UI
+- **4f** - Decouple health/stamina bar updates from Player.cs via events
+- **4g** - Standardize Manager vs Controller naming across all classes
+- **4h** - Fix inconsistent event naming (noun vs past tense verbs)
+- **4i** - Ensure consistent camelCase/PascalCase usage across properties
+- **4j** - Add XML documentation to KinematicObject public methods (29% → 100%)
+- **4k** - Add XML documentation to Player class properties (15% → 100%)
+- **4l** - Add XML documentation to all Manager interfaces (0% → 100%)
+- **4m** - Remove unclear comments like 'do we need this?' and 'what a hack'
+- **4n** - Remove commented-out code like velocity resets in KinematicObject
+- **4o** - Clean up GitHub URL references in code comments
+- **4p** - Standardize naming conventions
+
+#### **⚡ LEVEL 5: QUICK WINS (1-day pizza-fueled tasks!)**
+- **5a** - QUICK WIN: Extract Player animation IDs to enum (1-day task)
+- **5b** - QUICK WIN: Cache frequently accessed transform references
+- **5c** - QUICK WIN: Add missing null checks in manager operations
+- **5d** - QUICK WIN: Replace string.Format with StringBuilder in hot paths
+
+#### **🚀 LEVEL 6: FUTURE ARCHITECTURE (Long-term vision!)**
+- **6a** - FUTURE: Design and implement IGameServices container pattern
+- **6b** - FUTURE: Create centralized IEventBus for system decoupling
+- **6c** - FUTURE: Build ScriptableObject-based configuration system
 
 **Target**: 15-20 items for pizza party day. Ask user "What's the status on 2c?" for specific item updates.
 
@@ -316,6 +384,62 @@ Claude Code has several operational modes that can be toggled:
 3. **Use Plan Mode** for risky operations - Let user review before execution
 4. **Document new patterns** - If new tools are needed, add them to this documentation
 5. **Remember the `/permissions` command** - User can check current settings with this slash command
+
+### GitHub CLI Setup & PR Automation
+
+#### **Installation & Authentication (One-time setup)**
+
+**Install GitHub CLI:**
+```bash
+# Install via winget (requires accepting source agreements)
+winget install --id GitHub.cli --accept-source-agreements --accept-package-agreements
+
+# Add to system PATH (requires admin privileges)
+powershell -Command "Start-Process PowerShell -ArgumentList '-Command', '[Environment]::SetEnvironmentVariable(\"Path\", \$env:Path + \";C:\Program Files\GitHub CLI\", [EnvironmentVariableTarget]::Machine)' -Verb RunAs"
+```
+
+**⚠️ Important**: After adding to PATH, restart your terminal or VS Code for the `gh` command to work. Until then, use the full path.
+
+**Authentication Options:**
+```bash
+# Option 1: Web Authentication (recommended for interactive setup)
+"C:\Program Files\GitHub CLI\gh.exe" auth login --web
+
+# Option 2: Environment Variable (for automation)
+# Set GH_TOKEN environment variable with Personal Access Token
+```
+
+**Verify Installation:**
+```bash
+"C:\Program Files\GitHub CLI\gh.exe" --version
+```
+
+#### **PR Creation Workflow**
+```bash
+# 1. Create and push feature branch
+git checkout -b feature/task-name
+# [make changes]
+git add -A
+git commit -m "feat: description"
+git push -u origin feature/task-name
+
+# 2. Create PR via CLI
+"C:\Program Files\GitHub CLI\gh.exe" pr create --base develop --title "Title" --body "Description"
+```
+
+#### **Common Commands for Future Turtle Bros**
+```bash
+# List PRs
+"C:\Program Files\GitHub CLI\gh.exe" pr list
+
+# View PR status
+"C:\Program Files\GitHub CLI\gh.exe" pr status
+
+# Check out PR locally
+"C:\Program Files\GitHub CLI\gh.exe" pr checkout PR_NUMBER
+```
+
+**Note**: Full path required until CLI is added to system PATH. Authentication persists between sessions once configured.
 
 ### Security Stance
 - **Defensive only**: Analyze code for malicious patterns

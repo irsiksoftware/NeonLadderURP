@@ -237,10 +237,10 @@ namespace NeonLadder.Mechanics.Controllers
                 var cameraPosition = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString()).transform.position;
                 var cvcRotation = Game.Instance.model.VirtualCamera.gameObject.transform.rotation;
 
-                //playerPositionManager.SaveState(sceneName,
-                //                                player.transform.parent.position,
-                //                                cameraPosition,
-                //                                cvcRotation);
+                playerPositionManager.SaveState(sceneName,
+                                                player.transform.parent.position,
+                                                cameraPosition,
+                                                cvcRotation);
 
                 player.EnableZMovement();
             }
