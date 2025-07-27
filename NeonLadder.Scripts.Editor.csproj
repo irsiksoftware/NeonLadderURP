@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>NeonLadder.Scripts.Editor</AssemblyName>
+    <RootNamespace>NeonLadder.Editor</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+    <Unity_Version>6000.0.26f1</Unity_Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Assets\Scripts\Editor\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ProjectReference Include="NeonLadder.Scripts.csproj" />
+
+</Project>
