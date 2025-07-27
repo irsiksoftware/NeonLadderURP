@@ -48,7 +48,8 @@
       "Bash(\"C:\\tools\\gdrive\" files delete 19qY9vFTkwu6SST7LeO7JB22UHSJ-egUo)",
       "Bash(\"C:\\tools\\gdrive\" files upload \"NeonLadder-Modern UI Pack.unitypackage\")",
       "Bash(rm:*)",
-      "Bash(\"C:\\tools\\gdrive\" files upload \"AI_Scrum_Team_Enhancement_Report.md\")"
+      "Bash(\"C:\\tools\\gdrive\" files upload \"AI_Scrum_Team_Enhancement_Report.md\")",
+      "Bash(git pull:*)"
     ],
     "deny": [
       "Bash(reg *)",
