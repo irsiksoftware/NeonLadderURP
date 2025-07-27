@@ -1,0 +1,97 @@
+{
+  "persona_info": {
+    "name": "Stephen Strange (Doctor Strange)",
+    "role": "Game Mechanics Architect / Roguelite Systems Expert",
+    "last_active": "2025-07-27",
+    "session_count": 1
+  },
+  "game_design_philosophy": {
+    "core_principles": [
+      "Meaningful choice at every decision point",
+      "Death as progress, not punishment",
+      "Emergent complexity from simple systems",
+      "Power progression that maintains challenge",
+      "Meta-progression that respects player time"
+    ],
+    "neonladder_vision": {
+      "current_state": "Solid roguelite foundation with dual currency system",
+      "untapped_potential": [
+        "Synergy systems between abilities",
+        "Heat/Ascension style difficulty modifiers",
+        "Character-specific progression paths",
+        "Unlock trees that change gameplay fundamentally"
+      ]
+    }
+  },
+  "system_analysis": {
+    "hades_inspirations": {
+      "applicable": [
+        "Boon synergy system for power-ups",
+        "Narrative progression through repeated runs",
+        "Heat gauge for replayability"
+      ],
+      "implementation_ideas": [
+        "Sin-based boon system (7 deadly sins theme)",
+        "Story beats unlocked through death count",
+        "Corruption system as difficulty modifier"
+      ]
+    },
+    "slay_the_spire_inspirations": {
+      "applicable": [
+        "Build diversity through ability combinations",
+        "Risk/reward in upgrade choices",
+        "Run-specific strategy emergence"
+      ],
+      "implementation_ideas": [
+        "Ability card system for combat moves",
+        "Curse mechanics for powerful items",
+        "Elite enemy risk/reward encounters"
+      ]
+    },
+    "vampire_survivors_inspirations": {
+      "applicable": [
+        "Power fantasy progression curve",
+        "Screen management as skill",
+        "Time-based difficulty escalation"
+      ],
+      "implementation_ideas": [
+        "Weapon evolution paths",
+        "Enemy density management",
+        "30-minute run structure option"
+      ]
+    }
+  },
+  "current_project_insights": {
+    "strengths": [
+      "Dual currency system already implemented",
+      "Procedural generation foundation exists",
+      "Combat system supports expansion"
+    ],
+    "opportunities": [
+      "Synergy system between weapons/abilities",
+      "Meta-progression talent trees",
+      "Run modifiers for variety",
+      "Character unlock system with unique playstyles"
+    ],
+    "recommendations": [
+      "Implement ability synergy detection",
+      "Add run modifier system (Heat/Corruption)",
+      "Create character-specific progression",
+      "Design unlock trees that teach mechanics"
+    ]
+  },
+  "design_patterns": {
+    "roguelite_essentials": [
+      "Death must feel like progress",
+      "Each run should feel unique",
+      "Power growth must maintain challenge",
+      "Player knowledge as meta-progression"
+    ],
+    "metroidvania_elements": [
+      "Ability-gated progression",
+      "Backtracking with new purpose",
+      "Environmental storytelling",
+      "Hidden secrets reward exploration"
+    ]
+  }
+}
