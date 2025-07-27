@@ -48,7 +48,11 @@
       "Bash(\"C:\\tools\\gdrive\" files delete 19qY9vFTkwu6SST7LeO7JB22UHSJ-egUo)",
       "Bash(\"C:\\tools\\gdrive\" files upload \"NeonLadder-Modern UI Pack.unitypackage\")",
       "Bash(rm:*)",
-      "Bash(\"C:\\tools\\gdrive\" files upload \"AI_Scrum_Team_Enhancement_Report.md\")"
+      "Bash(\"C:\\tools\\gdrive\" files upload \"AI_Scrum_Team_Enhancement_Report.md\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -quit -projectPath \"C:\\Code\\NeonLadderURP\" -createManualLayout)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -quit -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod UnityEditor.SyncVS.SyncSolution)",
+      "Bash(git config:*)",
+      "Bash(git merge:*)"
     ],
     "deny": [
       "Bash(reg *)",
