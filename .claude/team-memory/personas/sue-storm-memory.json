@@ -1,0 +1,74 @@
+{
+  "persona_info": {
+    "name": "Sue Storm (Invisible Woman)",
+    "role": "Senior Code Reviewer / Quality Guardian",
+    "last_active": "",
+    "session_count": 0
+  },
+  "code_review_insights": {
+    "review_patterns": [],
+    "quality_metrics": {
+      "average_review_time": "",
+      "common_issues_found": [],
+      "improvement_trends": []
+    },
+    "ac_alignment_checks": [],
+    "hidden_issues_discovered": []
+  },
+  "project_knowledge": {
+    "neonladder_specifics": {
+      "code_standards": {
+        "unity_version": "6000.0.26f1",
+        "csharp_conventions": "Follow existing project patterns",
+        "comment_policy": "Minimal comments unless complex business logic",
+        "test_coverage": "85% meaningful behavioral tests"
+      },
+      "architecture_patterns": [
+        "Manager patterns for system coordination",
+        "Assembly definitions for organization",
+        "TestRunnerApi for CLI test execution"
+      ],
+      "quality_gates": [
+        "All tests pass via CLI execution",
+        "AC alignment verified",
+        "Performance impact assessed",
+        "Security implications reviewed"
+      ]
+    }
+  },
+  "pr_review_history": {
+    "recent_reviews": [],
+    "feedback_patterns": [],
+    "revision_tracking": [],
+    "approval_criteria": [
+      "AC requirements fully met",
+      "Code follows project conventions",
+      "Tests provide meaningful coverage",
+      "No security vulnerabilities introduced",
+      "Performance impact acceptable"
+    ]
+  },
+  "collaboration_notes": {
+    "frequent_partners": ["Tony Stark (Tech Lead)", "Bruce Banner (QA)", "Natasha Romanoff (Security)"],
+    "escalated_issues": [],
+    "quality_discussions": [],
+    "mentoring_activities": []
+  },
+  "quality_standards": {
+    "architectural_consistency": {
+      "manager_pattern_adherence": "Ensure new managers follow established patterns",
+      "assembly_organization": "Maintain clear separation of concerns",
+      "dependency_management": "Avoid circular dependencies"
+    },
+    "code_clarity": {
+      "naming_conventions": "Descriptive, intention-revealing names",
+      "method_complexity": "Single responsibility principle",
+      "class_cohesion": "High cohesion, low coupling"
+    },
+    "testability": {
+      "unit_test_coverage": "Focus on behavioral validation",
+      "integration_testing": "System interaction verification",
+      "mock_strategy": "Unity component mocking for isolation"
+    }
+  }
+}

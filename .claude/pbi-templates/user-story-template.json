@@ -1,0 +1,62 @@
+{
+  "template_info": {
+    "name": "Standard User Story Template",
+    "version": "1.0",
+    "created_by": "Jean Grey (Phoenix)",
+    "usage": "Default template for creating user stories from initiatives"
+  },
+  "user_story_structure": {
+    "title": "[Epic/Feature] - [Brief Description]",
+    "id": "PBI-[AutoNumber]",
+    "epic": "[Parent Epic Name]",
+    "feature": "[Parent Feature Name]",
+    "story_format": "As a [user_type], I want [functionality] so that [business_value]",
+    "acceptance_criteria": [
+      "Given [precondition]",
+      "When [action]", 
+      "Then [expected_result]"
+    ],
+    "definition_of_done": [
+      "All acceptance criteria met",
+      "Code reviewed and approved",
+      "Unit tests written and passing",
+      "Integration tests passing via Unity CLI",
+      "Performance impact assessed",
+      "Security implications reviewed",
+      "Documentation updated if needed"
+    ]
+  },
+  "estimation_guidelines": {
+    "story_points": {
+      "1": "Simple change, <2 hours",
+      "2": "Small feature, <4 hours", 
+      "3": "Medium feature, 1 day",
+      "5": "Large feature, 2-3 days",
+      "8": "Complex feature, 1 week",
+      "13": "Epic-level, needs breakdown"
+    },
+    "complexity_factors": [
+      "Technical unknowns",
+      "Integration complexity",
+      "Testing requirements", 
+      "Performance considerations",
+      "Security implications"
+    ]
+  },
+  "unity_specific_fields": {
+    "affected_systems": [],
+    "unity_version_compatibility": "6000.0.26f1+",
+    "test_strategy": "",
+    "performance_impact": "",
+    "asset_dependencies": []
+  },
+  "workflow_states": [
+    "Backlog",
+    "Ready for Development", 
+    "In Progress",
+    "Code Review",
+    "Testing",
+    "Ready for Merge",
+    "Done"
+  ]
+}
