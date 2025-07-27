@@ -1,0 +1,161 @@
+{
+  "sprint_info": {
+    "number": "1",
+    "name": "Steam Launch Readiness",
+    "duration": "2 weeks",
+    "goal": "Address critical bugs and complete Steam integration for market launch",
+    "created_by": "Nick Fury",
+    "based_on": "ACQUISITION_AUDIT.md findings"
+  },
+  "epics": [
+    {
+      "id": "EPIC-001",
+      "title": "Critical Bug Fixes",
+      "priority": "Critical",
+      "business_value": "Blocks game progression - must fix for launch",
+      "stories": [
+        {
+          "id": "PBI-001",
+          "title": "Fix SaveState Z-position bug during scene transitions",
+          "points": 5,
+          "priority": "Critical",
+          "assigned_to": "@tony-stark",
+          "acceptance_criteria": [
+            "Player Z-position preserved when transitioning between scenes",
+            "No visual glitches during scene load",
+            "Save/load correctly maintains Z-position",
+            "Unit tests cover Z-position persistence"
+          ],
+          "technical_notes": "Reference: CLAUDE.md item 2a",
+          "blockers": []
+        }
+      ]
+    },
+    {
+      "id": "EPIC-002",
+      "title": "Performance Optimization",
+      "priority": "High",
+      "business_value": "15-20% FPS improvement for better player experience",
+      "stories": [
+        {
+          "id": "PBI-002",
+          "title": "Remove per-frame string comparisons in ManagerController",
+          "points": 3,
+          "priority": "High",
+          "assigned_to": "@johnny-storm",
+          "acceptance_criteria": [
+            "String comparisons cached or eliminated from Update()",
+            "Performance profiler shows measurable improvement",
+            "No regression in manager functionality",
+            "Code maintains readability"
+          ],
+          "technical_notes": "Reference: CLAUDE.md item 2b"
+        },
+        {
+          "id": "PBI-003",
+          "title": "Cache Quaternion to Euler conversions in Player movement",
+          "points": 3,
+          "priority": "High",
+          "assigned_to": "@johnny-storm",
+          "acceptance_criteria": [
+            "Euler conversions cached where possible",
+            "10-15% FPS boost verified in profiler",
+            "Player movement feels identical",
+            "Memory usage remains reasonable"
+          ],
+          "technical_notes": "Reference: CLAUDE.md item 2c"
+        }
+      ]
+    },
+    {
+      "id": "EPIC-003",
+      "title": "Steam Platform Integration",
+      "priority": "High",
+      "business_value": "Required for Steam launch - $300K+ revenue potential",
+      "stories": [
+        {
+          "id": "PBI-004",
+          "title": "Complete Steam achievements implementation",
+          "points": 5,
+          "priority": "High",
+          "assigned_to": "@wolverine",
+          "acceptance_criteria": [
+            "All 20+ achievements triggering correctly",
+            "Steam API callbacks working",
+            "Achievement progress persists",
+            "Offline achievement queue implemented"
+          ],
+          "technical_notes": "Currently disabled in code"
+        },
+        {
+          "id": "PBI-005",
+          "title": "Implement Steam Cloud saves",
+          "points": 3,
+          "priority": "High",
+          "assigned_to": "@gamora",
+          "acceptance_criteria": [
+            "Save files sync to Steam Cloud",
+            "Conflict resolution for multiple devices",
+            "Offline play still functional",
+            "Save versioning implemented"
+          ]
+        },
+        {
+          "id": "PBI-006",
+          "title": "Add Steam Rich Presence",
+          "points": 2,
+          "priority": "Medium",
+          "assigned_to": "@wolverine",
+          "acceptance_criteria": [
+            "Current level/boss displayed",
+            "Player stats shown",
+            "Join game functionality (if applicable)",
+            "Localization support"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "EPIC-004",
+      "title": "Roguelite Enhancement",
+      "priority": "Medium",
+      "business_value": "Increases retention and replay value",
+      "stories": [
+        {
+          "id": "PBI-007",
+          "title": "Implement Heat/Corruption difficulty system",
+          "points": 8,
+          "priority": "Medium",
+          "assigned_to": "@stephen-strange",
+          "acceptance_criteria": [
+            "Difficulty modifiers selectable before run",
+            "Each modifier has clear risk/reward",
+            "UI clearly shows active modifiers",
+            "Rewards scale with difficulty"
+          ],
+          "technical_notes": "Hades-style replayability system"
+        },
+        {
+          "id": "PBI-008",
+          "title": "Add ability synergy detection system",
+          "points": 5,
+          "priority": "Medium",
+          "assigned_to": "@stephen-strange",
+          "acceptance_criteria": [
+            "System detects when abilities combo",
+            "Visual feedback for synergies",
+            "Damage multipliers for combos",
+            "Tutorial explains synergy system"
+          ]
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "total_points": 34,
+    "critical_items": 1,
+    "high_priority": 5,
+    "medium_priority": 2,
+    "estimated_completion": "85% confidence in 2 weeks with full team"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "persona_info": {
+    "name": "Tony Stark (Iron Man)",
+    "role": "Technical Lead / Principal Architect",
+    "last_active": "",
+    "session_count": 0
+  },
+  "technical_insights": {
+    "architecture_decisions": [
+      {
+        "topic": "Unity CLI Test Runner",
+        "insight": "Unity 6's -runTests flag is fundamentally broken. TestRunnerApi workaround is the only reliable solution.",
+        "impact": "Critical for CI/CD pipeline reliability",
+        "date_learned": "2025-07-26",
+        "confidence": "high"
+      }
+    ],
+    "performance_discoveries": [],
+    "tool_innovations": [
+      {
+        "tool": "CLITestRunner.cs",
+        "purpose": "Unity 6 test execution workaround",
+        "status": "implemented",
+        "maintenance_notes": "Monitor Unity updates for official fix"
+      }
+    ],
+    "technology_evaluations": []
+  },
+  "project_knowledge": {
+    "neonladder_specifics": {
+      "unity_version": "6000.0.26f1",
+      "test_count": "37+ tests",
+      "test_quality": "85% meaningful behavioral tests",
+      "architecture_patterns": ["Manager patterns", "Assembly definitions"],
+      "performance_targets": "2-minute test execution"
+    },
+    "problem_areas": [
+      "Unity CLI test execution reliability",
+      "Physics constants organization",
+      "SaveState Z-position preservation"
+    ],
+    "innovation_opportunities": [
+      "Google Drive CLI integration for asset management",
+      "GitHub Actions automation",
+      "Custom Unity Editor tools"
+    ]
+  },
+  "collaboration_notes": {
+    "frequent_partners": [],
+    "conflict_resolutions": [],
+    "successful_handoffs": [],
+    "mentoring_activities": []
+  },
+  "learning_tracking": {
+    "new_concepts_learned": [],
+    "skills_developed": [],
+    "areas_to_explore": [
+      "Unity 6 new features",
+      "Advanced CI/CD patterns",
+      "Asset pipeline optimization"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "architecture_decisions": [
+    {
+      "id": "ADR-001",
+      "title": "Unity CLI Test Runner Workaround",
+      "status": "approved",
+      "decision": "Use TestRunnerApi with -executeMethod instead of broken -runTests flag",
+      "rationale": "Unity 6 CLI test runner is broken, custom CLITestRunner implementation works reliably",
+      "consequences": ["Reliable test execution", "Custom maintenance required"],
+      "decided_by": "Technical Architect",
+      "date": "2025-07-26"
+    }
+  ],
+  "technical_standards": {
+    "coding_conventions": {
+      "unity_version": "6000.0.26f1",
+      "csharp_version": "C# 9.0",
+      "naming_conventions": "Follow existing project patterns",
+      "comment_policy": "Code should be self-documenting, minimal comments unless complex business logic"
+    },
+    "testing_standards": {
+      "framework": "Unity Test Framework",
+      "coverage_target": "85% meaningful behavioral tests",
+      "test_types": ["Unit tests", "Integration tests", "Behavioral validation"],
+      "mock_strategy": "Unity component mocking for system integration"
+    },
+    "security_standards": {
+      "stance": "Defensive only - analyze for malicious patterns",
+      "code_review": "All PRs require security review for input handling",
+      "secret_management": "Never commit secrets, use environment variables"
+    }
+  },
+  "performance_baselines": {
+    "test_execution_time": "~2 minutes for full suite (37+ tests)",
+    "build_time_targets": "TBD",
+    "runtime_performance": "TBD"
+  },
+  "integration_decisions": {
+    "version_control": "Git with main branch strategy",
+    "ci_cd": "GitHub Actions (planned)",
+    "asset_management": "Google Drive for large assets, Git for code",
+    "documentation": "CLAUDE.md for development instructions, inline for complex logic"
+  }
+}
