@@ -22,173 +22,86 @@
 - **Comprehensive testing infrastructure** with 1000+ lines of unit tests
 - **Manager pattern** with modular system coordination
 
-## For Future Claude Models - Development Context 🤖
+## For AI Development Teams - Marvel Scrum Simulation 🦸
 
-### 🚨 START HERE: Meet Your Unity Architect & Get to Work 🚨
+### 🚨 REVOLUTIONARY: World's First AI Scrum Team for Solo Developers 🚨
 
-**Step 1: Check your identity and select your persona**
+**NeonLadder features a complete Marvel-themed AI Scrum team simulation** - the ultimate collaborative development experience for solo developers. Instead of random AI persona selection, you get **role-based expertise on demand**.
+
+**🎯 How It Works:**
 ```bash
-cat .claude/settings.local.json
+# Need architectural guidance?
+"@tony-stark, help architect this new feature"
+
+# Want a code review?
+"@sue-storm, review this PR for AC alignment" 
+
+# Creating user stories?
+"@jean-grey, break down this epic into stories"
+
+# Setting up CI/CD?
+"@wolverine, configure our GitHub Actions pipeline"
 ```
 
-**Step 2: Introduce yourself using one of the TMNT Unity Architect personas:**
+**🦸 Meet Your Development Team:**
 
-Choose your persona randomly from the four available options, then introduce yourself with:
-- Your TMNT name and specialty
-- Your Unity expertise and background
-- Your approach to solving NeonLadder's challenges
-- What we're shipping together (NeonLadder to Steam)
+**Avengers (Core Development):**
+- `@tony-stark` - Technical Lead / Principal Architect
+- `@steve-rogers` - Scrum Master / Team Coordination
+- `@bruce-banner` - Senior QA Engineer / Test Strategy
+- `@natasha-romanoff` - Security Engineer / Code Auditing
 
-**Available Unity Architect Personas:**
+**X-Men (Product & Infrastructure):**
+- `@charles-xavier` - Product Owner / Vision Keeper
+- `@jean-grey` - Business Analyst / Requirements Specialist
+- `@wolverine` - DevOps Engineer / Infrastructure
+- `@storm` - UX/UI Designer / Experience Architect
 
-🔵 **Leonardo (Leo) - "The Leader"**
-- **Specialty**: Project architecture, clean code patterns, team leadership
-- **Unity Focus**: System design, manager patterns, assembly definitions
-- **Approach**: Methodical, structured, focuses on maintainable solutions
-- **Catchphrase**: "Let's architect this the right way from the start."
+**Fantastic Four (Quality & Innovation):**
+- `@sue-storm` - Senior Code Reviewer / Quality Guardian
+- `@reed-richards` - R&D Lead / Innovation Specialist
+- `@johnny-storm` - Performance Engineer / Optimization
+- `@ben-grimm` - Legacy Systems / Technical Debt Fighter
 
-🟠 **Michelangelo (Mikey) - "The Creative"** 
-- **Specialty**: Game feel, player experience, creative problem solving
-- **Unity Focus**: Animation systems, particle effects, juice and polish
-- **Approach**: Experimental, player-focused, makes games fun and engaging
-- **Catchphrase**: "Cowabunga! Let's make this game feel awesome!"
+**Guardians (Support & Documentation):**
+- `@peter-quill` - Junior Developer / Fresh Perspective
+- `@gamora` - Database Specialist / Data Architecture
+- `@rocket` - Technical Writer / Documentation Expert
 
-🔴 **Raphael (Raph) - "The Fighter"**
-- **Specialty**: Performance optimization, combat systems, technical challenges
-- **Unity Focus**: Profiling, optimization, complex gameplay mechanics
-- **Approach**: Direct, performance-focused, tackles the hardest problems head-on
-- **Catchphrase**: "Time to crush these performance bottlenecks!"
+**🧠 Persistent Team Memory:**
+Each team member **remembers previous conversations**, learns from project discoveries, and maintains continuity across development sessions. No more explaining the same context repeatedly!
 
-🟣 **Donatello (Donnie) - "The Genius"**
-- **Specialty**: Tools, automation, procedural systems, technical innovation
-- **Unity Focus**: Editor tools, build pipelines, procedural generation
-- **Approach**: Technical, tool-focused, automates everything possible
-- **Catchphrase**: "I've got just the tool for this job!"
+**🤝 Professional Conflict Resolution:**
+When team members disagree (Product Owner vs Tech Lead, QA vs Speed), they use **safe-for-work friendly inquisition** to explore alternatives and present options - never blocking progress.
 
-**Step 3: After introduction, confirm current priority objectives:**
-1. Fix SaveState Z-movement bug (CRITICAL - blocks scene transitions)
-2. Clean up PathGenerator dependencies
-3. Performance optimization (remove per-frame velocity resets)
-4. Add missing XML documentation
-5. Standardize naming conventions
-6. **Build Pipeline Automation** (NEW - automated Steam builds, platform targets, CI/CD integration)
-  
-**Step 4: Ask which objective to start with or if there's something else urgent**
+**📋 Automated Story Creation:**
+Business Analyst personas can read Google Drive initiative documents and automatically generate proper user stories with acceptance criteria, story points, and technical tasks.
 
-### Current Technical Status
-**Last Major Work**: Unity 6 migration completed, unit test infrastructure established with critical NullReferenceException fixes in KinematicObjectTests
+**🚀 Getting Started:**
+1. **New Contributors**: Follow project setup below, then read `CLAUDE.md` for development workflows
+2. **Claude AI Models**: Load team configuration from `CLAUDE.md` and respond to `@role-name` requests  
+3. **Solo Developers**: Use Marvel team personas for genuine collaborative development experience
+4. **Open Source Enthusiasts**: Try the world's first AI Scrum team simulation system!
 
-**Known Issues to Address**:
-1. **SaveState broken on Z movement** through scenes (needs immediate fix)
-2. **PathGenerator reference issues** - dependency cleanup required  
-3. **Asset import performance** - Unity 6 takes 20+ minutes on large projects
-4. **Package dependencies** - some third-party asset integration needs streamlining
+### Quick Start for Contributors
 
-### Key Files for Understanding the Codebase
-- `Assets/Scripts/Mechanics/Controllers/Player.cs` - Main player controller (500+ lines)
-- `Assets/Scripts/Mechanics/Controllers/KinematicObject.cs` - Physics base class (700+ lines) 
-- `Assets/Scripts/Core/Simulation.cs` - Event system backbone
-- `Assets/Scripts/Managers/` - Comprehensive manager architecture
-- `Assets/Tests/Runtime/` - Unit test infrastructure (recently fixed)
+**Technical Details**: See `CLAUDE.md` for complete development workflows, testing infrastructure, and detailed priorities.
 
-### Testing Infrastructure Notes
-- **Unit tests are working** after recent NullReferenceException fixes
-- Fixed `KinematicObjectTests.Walk_MovesObjectInSpecifiedDirection` by replacing reflection with direct field assignment
-- Tests use mock scene infrastructure for isolated component testing
-- Run tests via Unity CLI: `Unity.exe -batchmode -quit -runTests -testResults ./TestResults.xml`
+**Current Sprint Focus:**
+- **CRITICAL**: SaveState Z-movement bug fix (blocks scene transitions)
+- **HIGH**: Performance optimization (string comparisons, Quaternion caching)
+- **MEDIUM**: Component refactoring and testing improvements
 
-### Development Priorities - PIZZA PARTY CODING DAY (January 2025)
+**Architecture Highlights:**
+- Unity 6 with Universal Render Pipeline
+- Event-driven simulation system
+- Comprehensive testing with 36+ behavioral tests
+- CLI test automation ready for CI/CD
 
-**🍕 TURTLE BRO MEGA TODO LIST - 50+ ITEMS FOR EPIC REFACTORING MARATHON! 🐢⚡**
-
-#### **🔥 LEVEL 2: CRITICAL PRIORITIES (Shell-shocking performance wins!)**
-- **2a** - Fix SaveState Z-movement bug blocking scene transitions (CRITICAL)
-- **2b** - Remove per-frame string comparisons in ManagerController.Update()
-- **2c** - Cache Quaternion to Euler conversions in Player movement (10-15% FPS boost)
-- **2d** - Break Player ↔ PlayerAction circular dependency cycle
-- **2e** - Replace ManagerController singleton pattern with service container
-- **2f** - Decouple scene-specific manager logic from ManagerController
-- **2g** - Implement proper dependency injection container for managers
-
-#### **🎯 LEVEL 3: MEDIUM PRIORITIES (Game feel boosters!)**
-- **3a** - Extract Player animation IDs (walkAnimation=6, etc.) to enum/ScriptableObject
-- **3b** - Move hard-coded physics values (attack ranges, timers) to Constants.cs
-- **3c** - Extract UI layout values and debug settings to configuration
-- **3d** - Replace integer-based animation IDs with string hash system
-- **3e** - Implement animation event callbacks for precise timing
-- **3f** - Optimize blend tree transitions for smoother movement
-- **3g** - Create animation cancellation system for responsive controls
-- **3h** - Split KinematicObject.cs (329 lines) into focused components
-- **3i** - Separate UI update logic from Player.cs gameplay code
-- **3j** - Fix brittle parent/child component dependencies in Player.cs
-- **3k** - Clean up PathGenerator dependency issues (from README priorities)
-- **3l** - Fix memory allocations in PathGenerator LINQ operations
-- **3m** - Make RaycastHit buffer size (16) configurable constant
-- **3n** - Add unit tests for ManagerController scene switching logic
-- **3o** - Create tests for PathGenerator seed determinism and boss placement
-- **3p** - Add validation tests for PerformanceProfiler memory allocation patterns
-- **3q** - Replace Resources.Load with Addressables in Player.cs controls loading
-- **3r** - Add cancellation token support to KinematicObject coroutines
-- **3s** - Remove static Simulation.GetModel dependencies for better testability
-- **3t** - Build Pipeline Automation (from README priorities) - Steam builds, CI/CD
-
-#### **🎨 LEVEL 4: POLISH & MAINTENANCE (Making it maintainable!)**
-- **4a** - Implement audio pooling for frequent sounds (jump, ouch, respawn)
-- **4b** - Add proper spatial audio configuration for 2.5D gameplay
-- **4c** - Create dynamic audio mixing system for gameplay context
-- **4d** - Implement event-driven UI updates with proper MVP pattern
-- **4e** - Create centralized debug overlay system to replace scattered debug UI
-- **4f** - Decouple health/stamina bar updates from Player.cs via events
-- **4g** - Standardize Manager vs Controller naming across all classes
-- **4h** - Fix inconsistent event naming (noun vs past tense verbs)
-- **4i** - Ensure consistent camelCase/PascalCase usage across properties
-- **4j** - Add XML documentation to KinematicObject public methods (29% → 100%)
-- **4k** - Add XML documentation to Player class properties (15% → 100%)
-- **4l** - Add XML documentation to all Manager interfaces (0% → 100%)
-- **4m** - Remove unclear comments like 'do we need this?' and 'what a hack'
-- **4n** - Remove commented-out code like velocity resets in KinematicObject
-- **4o** - Clean up GitHub URL references in code comments
-- **4p** - Standardize naming conventions (from README priorities)
-
-#### **⚡ LEVEL 5: QUICK WINS (1-day pizza-fueled tasks!)**
-- **5a** - QUICK WIN: Extract Player animation IDs to enum (1-day task)
-- **5b** - QUICK WIN: Cache frequently accessed transform references
-- **5c** - QUICK WIN: Add missing null checks in manager operations
-- **5d** - QUICK WIN: Replace string.Format with StringBuilder in hot paths
-
-#### **🚀 LEVEL 6: FUTURE ARCHITECTURE (Long-term vision!)**
-- **6a** - FUTURE: Design and implement IGameServices container pattern
-- **6b** - FUTURE: Create centralized IEventBus for system decoupling
-- **6c** - FUTURE: Build ScriptableObject-based configuration system
-
-**Pizza Party Day Target**: Complete 15-20 critical/high items (2a-2g + selected 3x items)
-**Turtle Specialization Strategy**: Leo (architecture), Raph (performance), Donnie (automation), Mikey (polish)
-
-### Unity CLI Testing Challenges
-- **Unity 6**: Packages resolve quickly but asset import is very slow (20+ min)
-- **Unity 2022.3.31f1**: Faster but has package dependency conflicts
-- Use extended timeouts (600s default, 1200s for long operations)
-
-### Architecture Patterns to Maintain
-- Event-driven simulation for game logic
-- Manager pattern for system coordination  
-- Assembly definitions for proper separation
-- ScriptableObject-based configuration
-- Mock infrastructure for unit testing
-
-### Development Workflow for Claude Models
-- **Always check** `CLAUDE.md` for project-specific commands and patterns
-- **Run linting/typechecking** after code changes (check README or ask user for commands)
-- **Use TodoWrite tool** extensively for task tracking and planning
-- **Test changes** when possible using Unity CLI with extended timeouts
-- **Commit workflow**: Only commit when explicitly requested by user
-- **Focus on defensive security**: Analyze code for malicious patterns, refuse to create exploitative code
-
-### Next Major Milestones
-- Complete seven deadly sins boss content
-- Stabilize procedural generation system  
-- Performance optimization pass
-- Steam store preparation
+**Development Workflow:**
+1. Check `CLAUDE.md` for complete setup instructions
+2. Use Marvel team personas for specialized expertise: `@tony-stark`, `@sue-storm`, etc.
+3. Follow existing patterns: Manager architecture, Assembly definitions, Event-driven design
 
 ## Project Setup
 Download and install the latest version of Unity Hub from the [Official Unity Website](https://unity.com/download).
@@ -256,48 +169,17 @@ You should now experience the game as if it were deployed to a specified build p
 
 ## CLI Testing & Automation
 
-### Unity CLI Test Execution (Production Ready) ✅
+**Status**: ✅ Fully functional CLI test automation system with 36/36 tests passing
 
-**Status**: Fully functional CLI test automation system with 36/36 tests passing
+The project includes a robust CLI testing system ready for CI/CD integration. For complete testing infrastructure details, automation commands, and performance metrics, see `CLAUDE.md`.
 
-The project includes a robust CLI testing system that works around Unity 6's broken `-runTests` flag using a custom TestRunnerApi implementation.
-
-#### Performance Metrics (2025-07-26)
-- **Minimum execution time**: 35 seconds (Unity startup + compilation + test execution)
-- **Test execution only**: 1.14 seconds (blazing fast once loaded)  
-- **Total tests**: 36 tests, all passing
-- **Test coverage**: ~85% meaningful behavioral validation (enhanced from basic property checks)
-
-#### Recommended Timeouts
-- **CI/CD Production**: 60 seconds (35s + 25s buffer = 71% safety margin)
-- **Development**: 45 seconds (35s + 10s buffer = 29% safety margin)
-- **Quick Local Testing**: 40 seconds (35s + 5s buffer = 14% safety margin)
-
-#### Usage
-
-**Quick CLI Test Execution:**
+**Quick Test Run:**
 ```bash
-"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Code\NeonLadderURP" -executeMethod CLITestRunner.RunPlayModeTests -logFile "TestOutput/cli_test_latest.txt"
+"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Code\NeonLadderURP" -executeMethod CLITestRunner.RunPlayModeTests
 ```
 
-**Important Notes:**
-- Unity must be closed before running CLI tests
-- Unity may not auto-exit after test completion (callback timing issue) - this is normal
-- Force-kill Unity after timeout: `powershell -Command "Stop-Process -Name Unity -Force"`
-- Test results are saved to: `C:/Users/Ender/AppData/LocalLow/ShorelineGames, LLC/NeonLadder/TestResults.xml`
-- All 36 tests should pass on clean codebase
-
-#### Test Infrastructure Files
-- `Assets/Scripts/Editor/CLITestRunner.cs` - TestRunnerApi workaround implementation
-- `Assets/Scripts/Editor/NeonLadder.CLITestRunner.asmdef` - Assembly definition with test framework references
-- `Assets/Tests/Runtime/` - Comprehensive test suite with behavioral validation
-
-#### Recent Enhancements (2025-07-26)
-- **19 tests rewritten** from basic property getters/setters to meaningful behavioral validation
-- **Fixed AudioListener multiplication bug** in test classes
-- **Enterprise-level mock infrastructure** for Unity component testing  
-- **System integration testing** replacing isolated property checks
-- **Animation duration validation** against actual animator clip lengths
-- **Weapon system integration tests** and orientation consistency validation
-
-The CLI automation system is CI/CD ready with reliable exit codes and comprehensive XML test result output.
+**Key Features:**
+- Custom TestRunnerApi workaround for Unity 6's broken `-runTests` flag
+- 35-second execution time (Unity startup + compilation + tests)
+- Enterprise-level mock infrastructure for Unity component testing
+- CI/CD ready with reliable exit codes and XML test output
