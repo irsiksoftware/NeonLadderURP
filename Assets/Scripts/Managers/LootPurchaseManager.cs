@@ -16,7 +16,10 @@ namespace NeonLadder.Managers
         void Start()
         {
             model = Simulation.GetModel<PlatformerModel>();
-            player = model.Player;
+            if (model != null)
+            {
+                player = model.Player;
+            }
         }
 
         private void Awake()
