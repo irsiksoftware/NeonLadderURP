@@ -1,4 +1,3 @@
-using NeonLadder.Managers;
 using NeonLadder.Mechanics.Controllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;

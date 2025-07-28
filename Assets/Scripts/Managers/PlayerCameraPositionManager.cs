@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NeonLadder.Managers
-{
-    public class PlayerCameraPositionManager : MonoBehaviour
+public class PlayerCameraPositionManager : MonoBehaviour
     {
         void Start()
         {
@@ -54,5 +52,3 @@ namespace NeonLadder.Managers
             CameraRotation = cameraRotation;
         }
     }
-
-}

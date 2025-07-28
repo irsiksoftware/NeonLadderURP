@@ -1,13 +1,10 @@
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Utilities;
-using NeonLadder.Managers.Optimization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
-namespace NeonLadder.Managers
-{
-    public class ManagerController : MonoBehaviour
+public class ManagerController : MonoBehaviour
     {
         public static ManagerController Instance;
         [SerializeField] private bool dontDestroyOnLoad = true;
@@ -211,4 +208,3 @@ namespace NeonLadder.Managers
         
         #endregion
     }
-}

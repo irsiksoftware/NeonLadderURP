@@ -14,7 +14,13 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             if (boss.audioSource && boss.jumpAudio)
-                boss.audioSource.PlayOneShot(boss.jumpAudio);
+            {
+                // Schedule jump audio through event system
+                var audioEvent = Simulation.Schedule<AudioEvent>(0f);
+                audioEvent.audioSource = boss.audioSource;
+                audioEvent.audioClip = boss.jumpAudio;
+                audioEvent.audioType = AudioEventType.Jump;
+            }
         }
     }
 }

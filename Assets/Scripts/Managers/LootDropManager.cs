@@ -4,9 +4,7 @@ using NeonLadder.Mechanics.Controllers;
 using System.Collections;
 using UnityEngine;
 
-namespace NeonLadder.Managers
-{
-    public class LootDropManager : MonoBehaviour
+public class LootDropManager : MonoBehaviour
     {
         void Start() { }
 
@@ -94,4 +92,3 @@ namespace NeonLadder.Managers
             return deltaPosition;
         }
     }
-}

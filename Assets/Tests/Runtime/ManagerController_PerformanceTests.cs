@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using System.Collections;
 using System.Diagnostics;

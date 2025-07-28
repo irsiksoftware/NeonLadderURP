@@ -1,5 +1,7 @@
 using Michsky.MUIP;
 using NeonLadder.Common;
+using NeonLadder.Core;
+using NeonLadder.Events;
 using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
@@ -119,7 +121,8 @@ namespace NeonLadder.Mechanics.Controllers
             staminaRegenTimer += Time.deltaTime;
             if (staminaRegenTimer >= Constants.Physics.Stamina.RegenInterval) // Check if 1/10th of a second has passed
             {
-                Stamina.Increment(Constants.Physics.Stamina.RegenAmount); // Increment stamina by 1/10th of a unit
+                // Use negative damage to heal stamina through event system
+                ScheduleStaminaDamage(-Constants.Physics.Stamina.RegenAmount, 0f);
                 staminaRegenTimer -= Constants.Physics.Stamina.RegenInterval; // Decrease the timer by 0.1f instead of resetting to 0
             }
         }
@@ -146,7 +149,7 @@ namespace NeonLadder.Mechanics.Controllers
                     Actions.isJumping = false;
                     if (audioSource != null && jumpAudio != null)
                     {
-                        audioSource.PlayOneShot(jumpAudio);
+                        ScheduleAudioEvent(AudioEventType.Jump, 0f);
                     }
                 }
             }
@@ -207,12 +210,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void AddMetaCurrency(int amount)
         {
-            MetaCurrency.Increment(amount);
+            ScheduleCurrencyChange(CurrencyType.Meta, amount, 0f);
         }
 
         public void AddPermanentCurrency(int amount)
         {
-            PermaCurrency.Increment(amount);
+            ScheduleCurrencyChange(CurrencyType.Perma, amount, 0f);
         }
 
         private void UpdateHealthBar()
@@ -228,6 +231,68 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 StaminaBar.currentPercent = (Stamina.current / Stamina.max) * Constants.UI.PercentageMultiplier;
             }
+        }
+
+        // Event-driven methods to replace direct stat modifications
+        public void ScheduleDamage(float amount, float delay = 0f)
+        {
+            var damageEvent = Simulation.Schedule<HealthDamageEvent>(delay);
+            damageEvent.health = Health;
+            damageEvent.damageAmount = amount;
+            damageEvent.triggerEffects = true;
+        }
+
+        public void ScheduleHealing(float amount, float delay = 0f)
+        {
+            var healingEvent = Simulation.Schedule<HealthRegenerationEvent>(delay);
+            healingEvent.health = Health;
+            healingEvent.amount = amount;
+        }
+
+        public void ScheduleStaminaDamage(float amount, float delay = 0f)
+        {
+            // Schedule stamina change event instead of direct modification
+            var staminaEvent = Simulation.Schedule<StaminaChangeEvent>(delay);
+            staminaEvent.stamina = Stamina;
+            staminaEvent.amount = -amount; // Negative for damage, positive for healing
+            
+            // Schedule visual effects for positive damage amounts only
+            if (amount > 0)
+            {
+                var damageNumberController = GetComponent<DamageNumberController>();
+                if (damageNumberController != null)
+                {
+                    var damageNumberEvent = Simulation.Schedule<DamageNumberEvent>(delay);
+                    damageNumberEvent.controller = damageNumberController;
+                    damageNumberEvent.amount = amount;
+                    damageNumberEvent.numberType = DamageNumberType.StaminaLoss;
+                }
+            }
+        }
+
+        public void ScheduleAudioEvent(AudioEventType audioType, float delay = 0f)
+        {
+            var audioEvent = Simulation.Schedule<AudioEvent>(delay);
+            audioEvent.audioSource = audioSource;
+            audioEvent.audioType = audioType;
+            
+            // Set specific audio clips based on type
+            audioEvent.audioClip = audioType switch
+            {
+                AudioEventType.Jump => jumpAudio,
+                AudioEventType.Land => landOnGroundAudio,
+                AudioEventType.Damage => ouchAudio,
+                AudioEventType.Respawn => respawnAudio,
+                _ => null
+            };
+        }
+
+        public void ScheduleCurrencyChange(CurrencyType currencyType, int amount, float delay = 0f)
+        {
+            var currencyEvent = Simulation.Schedule<CurrencyChangeEvent>(delay);
+            currencyEvent.player = this;
+            currencyEvent.currencyType = currencyType;
+            currencyEvent.amount = amount;
         }
     }
 }

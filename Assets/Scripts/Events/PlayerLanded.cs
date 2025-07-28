@@ -1,3 +1,4 @@
+using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 
 namespace NeonLadder.Events
@@ -12,7 +13,13 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             if (model.Player.audioSource && model.Player.landOnGroundAudio)
-                model.Player.audioSource.PlayOneShot(model.Player.landOnGroundAudio);
+            {
+                // Schedule landing audio through event system
+                var audioEvent = Simulation.Schedule<AudioEvent>(0f);
+                audioEvent.audioSource = model.Player.audioSource;
+                audioEvent.audioClip = model.Player.landOnGroundAudio;
+                audioEvent.audioType = AudioEventType.Land;
+            }
         }
     }
 }

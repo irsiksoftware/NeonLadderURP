@@ -1,5 +1,4 @@
 using NeonLadder.Common;
-using NeonLadder.Managers;
 using NeonLadder.Mechanics.Controllers.Interfaces;
 using NeonLadder.Mechanics.Enums;
 using System.Collections;
@@ -330,7 +329,7 @@ namespace NeonLadder.Mechanics.Controllers
                         sprintTimeAccumulator += Time.deltaTime;
                         if (sprintTimeAccumulator >= 0.1f)
                         {
-                            player.Stamina.Decrement(staminaCostPerTenthSecond); // Decrement stamina
+                            player.ScheduleStaminaDamage(staminaCostPerTenthSecond, 0f); // Schedule stamina consumption
                             sprintTimeAccumulator -= 0.1f; // Subtract 0.1 seconds from the accumulator
                         }
 

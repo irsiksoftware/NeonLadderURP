@@ -28,21 +28,21 @@ namespace NeonLadder.Events
                 // Determine appropriate state based on distance
                 MonsterStates newState = DetermineStateFromDistance(distance);
                 
-                if (newState != enemy.currentState)
+                if (newState != enemy.CurrentState)
                 {
                     var stateEvent = Simulation.Schedule<EnemyStateTransitionEvent>(0f);
                     stateEvent.enemy = enemy;
                     stateEvent.newState = newState;
-                    stateEvent.previousState = enemy.currentState;
+                    stateEvent.previousState = enemy.CurrentState;
                 }
             }
         }
 
         private MonsterStates DetermineStateFromDistance(float distance)
         {
-            if (distance <= enemy.AttackRange)
+            if (distance <= enemy.AttackRangeValue)
                 return MonsterStates.Attacking;
-            else if (distance <= enemy.AttackRange * 2)
+            else if (distance <= enemy.AttackRangeValue * 2)
                 return MonsterStates.Approaching;
             else
                 return MonsterStates.Reassessing;

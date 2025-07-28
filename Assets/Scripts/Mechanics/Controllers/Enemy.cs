@@ -397,12 +397,9 @@ namespace NeonLadder.Mechanics.Controllers
             currentState = newState;
         }
 
-        // Expose properties for event system
-        public new float AttackRange => base.AttackRange;
-        public new bool RetreatWhenTooClose 
-        { 
-            get => base.RetreatWhenTooClose; 
-            set => base.RetreatWhenTooClose = value; 
-        }
+        // Public accessors for event system
+        public int AttackDamage => attackDamage;
+        public float AttackCooldown => attackCooldown;
+        public float AttackRangeValue => AttackRange;
     }
 }

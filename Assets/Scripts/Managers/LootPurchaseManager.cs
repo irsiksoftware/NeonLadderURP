@@ -1,11 +1,10 @@
 using NeonLadder.Core;
+using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Models;
 using UnityEngine;
 
-namespace NeonLadder.Managers
-{
-    public class LootPurchaseManager : MonoBehaviour
+public class LootPurchaseManager : MonoBehaviour
     {
         protected PlatformerModel model;
         protected Player player;
@@ -33,14 +32,17 @@ namespace NeonLadder.Managers
 
             if (player.MetaCurrency.current >= metaItemCost)
             {
-                player.MetaCurrency.Decrement(metaItemCost);
+                // Schedule currency deduction
+                player.ScheduleCurrencyChange(CurrencyType.Meta, -metaItemCost, 0f);
+                
                 switch (itemName)
                 {
                     case "Health Potion":
-                        player.Health.Increment(10);
+                        player.ScheduleHealing(10, 0.1f); // Slight delay for visual effect
                         break;
                     case "Stamina Potion":
-                        player.Stamina.Increment(10);
+                        // Schedule stamina increase via negative damage (heals stamina)
+                        player.ScheduleStaminaDamage(-10, 0.1f);
                         break;
                     default:
                         break;
@@ -64,7 +66,8 @@ namespace NeonLadder.Managers
             if (player.PermaCurrency.current >= permaItemCost)
             {
                 result = true;
-                player.PermaCurrency.Decrement(permaItemCost);
+                // Schedule currency deduction
+                player.ScheduleCurrencyChange(CurrencyType.Perma, -permaItemCost, 0f);
                 switch (itemName)
                 {
                     case "Double Jump":
@@ -81,4 +84,3 @@ namespace NeonLadder.Managers
             return result;
         }
     }
-}

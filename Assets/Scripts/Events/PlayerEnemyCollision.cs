@@ -24,7 +24,11 @@ namespace NeonLadder.Events
                     var enemyHealth = enemy.GetComponent<Health>();
                     if (enemyHealth != null)
                     {
-                        enemyHealth.Decrement();
+                        // Schedule enemy damage through event system
+                        var enemyDamageEvent = Schedule<HealthDamageEvent>(0f);
+                        enemyDamageEvent.health = enemyHealth;
+                        enemyDamageEvent.damageAmount = 1f;
+                        enemyDamageEvent.triggerEffects = true;
                         if (!enemyHealth.IsAlive)
                         {
                             Schedule<EnemyDeath>().enemy = enemy;
@@ -44,7 +48,8 @@ namespace NeonLadder.Events
                 
                 if (willHurtPlayer)
                 {
-                    player.Health.Decrement();
+                    // Schedule player damage through event system
+                    player.ScheduleDamage(1f, 0f);
                     //player.playerActions.knockback = true;
                 }
             }

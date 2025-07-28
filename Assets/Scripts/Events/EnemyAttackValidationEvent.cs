@@ -21,15 +21,15 @@ namespace NeonLadder.Events
                    target != null && 
                    enemy.health.IsAlive && 
                    target.Health.IsAlive &&
-                   Time.time - lastAttackTime >= enemy.attackCooldown;
+                   Time.time - lastAttackTime >= enemy.AttackCooldown;
         }
 
         public override void Execute()
         {
             if (enemy != null && target != null)
             {
-                // Execute validated attack
-                target.Health.Decrement(enemy.attackDamage);
+                // Schedule damage event instead of direct health modification
+                target.ScheduleDamage(enemy.AttackDamage, 0f);
                 
                 // Schedule attack animation and effects
                 var animEvent = Simulation.Schedule<EnemyAnimationEvent>(0f);

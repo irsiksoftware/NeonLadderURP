@@ -398,8 +398,8 @@ namespace NeonLadder.Tests.Runtime
         {
             if (enemy != null && target != null)
             {
-                // Execute validated attack
-                target.Health.Decrement(enemy.attackDamage);
+                // Execute validated attack through event system
+                target.ScheduleDamage(enemy.attackDamage, 0f);
                 
                 // Schedule attack animation and effects
                 var animEvent = Simulation.Schedule<EnemyAnimationEvent>(0f);
