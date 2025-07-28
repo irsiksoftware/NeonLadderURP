@@ -90,7 +90,7 @@ namespace NeonLadder.Mechanics.Progression
             }
             
             // Deduct currency
-            var currency = currencyType == CurrencyType.Meta ? metaCurrency : permaCurrency;
+            BaseCurrency currency = currencyType == CurrencyType.Meta ? (BaseCurrency)metaCurrency : (BaseCurrency)permaCurrency;
             currency.Decrement(upgrade.Cost);
             
             // Apply upgrade
@@ -110,7 +110,7 @@ namespace NeonLadder.Mechanics.Progression
             if (!upgradeDatabase.TryGetValue(upgradeId, out var upgrade))
                 return false;
                 
-            var currency = currencyType == CurrencyType.Meta ? metaCurrency : permaCurrency;
+            BaseCurrency currency = currencyType == CurrencyType.Meta ? (BaseCurrency)metaCurrency : (BaseCurrency)permaCurrency;
             return currency != null && currency.current >= upgrade.Cost;
         }
         

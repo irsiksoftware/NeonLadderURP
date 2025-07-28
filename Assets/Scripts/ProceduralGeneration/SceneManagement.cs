@@ -96,48 +96,48 @@ namespace NeonLadder.ProceduralGeneration
         private static readonly Dictionary<GameScene, SceneConfig> SceneConfigs = new()
         {
             // Navigation
-            { GameScene.MainMenu, new("MainMenu", "Main Menu", "Game main menu", 0f) },
-            { GameScene.MapSelection, new("MapSelection", "Map Selection", "Choose your path", 1f) },
-            { GameScene.GameOver, new("GameOver", "Game Over", "Defeat screen", 1f) },
-            { GameScene.Victory, new("Victory", "Victory", "Victory celebration", 2f) },
+            { GameScene.MainMenu, new(GameScene.MainMenu, "MainMenu", "Main Menu", "Game main menu", 0f) },
+            { GameScene.MapSelection, new(GameScene.MapSelection, "MapSelection", "Map Selection", "Choose your path", 1f) },
+            { GameScene.GameOver, new(GameScene.GameOver, "GameOver", "Game Over", "Defeat screen", 1f) },
+            { GameScene.Victory, new(GameScene.Victory, "Victory", "Victory", "Victory celebration", 2f) },
             
             // Combat
-            { GameScene.MinorEnemyEncounter, new("Combat_Minor", "Minor Encounter", "Fight smaller enemies", 3f, true) },
-            { GameScene.MajorEnemyEncounter, new("Combat_Major", "Major Encounter", "Fight powerful enemies", 5f, true) },
-            { GameScene.EliteEncounter, new("Combat_Elite", "Elite Encounter", "Face elite enemies", 7f, true) },
+            { GameScene.MinorEnemyEncounter, new(GameScene.MinorEnemyEncounter, "Combat_Minor", "Minor Encounter", "Fight smaller enemies", 3f, true) },
+            { GameScene.MajorEnemyEncounter, new(GameScene.MajorEnemyEncounter, "Combat_Major", "Major Encounter", "Fight powerful enemies", 5f, true) },
+            { GameScene.EliteEncounter, new(GameScene.EliteEncounter, "Combat_Elite", "Elite Encounter", "Face elite enemies", 7f, true) },
             
             // Bosses
-            { GameScene.PrideBossArena, new("Boss_Pride", "Cathedral of Hubris", "Face the Sin of Pride", 10f, true) },
-            { GameScene.WrathBossArena, new("Boss_Wrath", "Necropolis of Vengeance", "Face the Sin of Wrath", 10f, true) },
-            { GameScene.GreedBossArena, new("Boss_Greed", "Vault of Avarice", "Face the Sin of Greed", 10f, true) },
-            { GameScene.EnvyBossArena, new("Boss_Envy", "Community Center", "Face the Sin of Envy", 10f, true) },
-            { GameScene.LustBossArena, new("Boss_Lust", "Eden of Desires", "Face the Sin of Lust", 10f, true) },
-            { GameScene.GluttonyBossArena, new("Boss_Gluttony", "Feast of Infinity", "Face the Sin of Gluttony", 10f, true) },
-            { GameScene.SlothBossArena, new("Boss_Sloth", "Lethargy Lounge", "Face the Sin of Sloth", 15f, true) },
+            { GameScene.PrideBossArena, new(GameScene.PrideBossArena, "Boss_Pride", "Cathedral of Hubris", "Face the Sin of Pride", 10f, true) },
+            { GameScene.WrathBossArena, new(GameScene.WrathBossArena, "Boss_Wrath", "Necropolis of Vengeance", "Face the Sin of Wrath", 10f, true) },
+            { GameScene.GreedBossArena, new(GameScene.GreedBossArena, "Boss_Greed", "Vault of Avarice", "Face the Sin of Greed", 10f, true) },
+            { GameScene.EnvyBossArena, new(GameScene.EnvyBossArena, "Boss_Envy", "Community Center", "Face the Sin of Envy", 10f, true) },
+            { GameScene.LustBossArena, new(GameScene.LustBossArena, "Boss_Lust", "Eden of Desires", "Face the Sin of Lust", 10f, true) },
+            { GameScene.GluttonyBossArena, new(GameScene.GluttonyBossArena, "Boss_Gluttony", "Feast of Infinity", "Face the Sin of Gluttony", 10f, true) },
+            { GameScene.SlothBossArena, new(GameScene.SlothBossArena, "Boss_Sloth", "Lethargy Lounge", "Face the Sin of Sloth", 15f, true) },
             
             // Services
-            { GameScene.RestArea, new("RestArea", "Rest Stop", "Recover health and stamina", 2f, true) },
-            { GameScene.ShopArea, new("ShopArea", "Merchant Shop", "Purchase upgrades", 3f, true) },
-            { GameScene.RestShopCombined, new("RestShop", "Rest & Shop", "Rest and shop combined", 4f, true) },
+            { GameScene.RestArea, new(GameScene.RestArea, "RestArea", "Rest Stop", "Recover health and stamina", 2f, true) },
+            { GameScene.ShopArea, new(GameScene.ShopArea, "ShopArea", "Merchant Shop", "Purchase upgrades", 3f, true) },
+            { GameScene.RestShopCombined, new(GameScene.RestShopCombined, "RestShop", "Rest & Shop", "Rest and shop combined", 4f, true) },
             
             // Events
-            { GameScene.TreasureChestEvent, new("Event_Treasure", "Treasure Chest", "Discover hidden loot", 2f, true) },
-            { GameScene.MysteriousAltarEvent, new("Event_Altar", "Mysterious Altar", "Make a fateful choice", 3f, true) },
-            { GameScene.RiddleStatueEvent, new("Event_Riddle", "Riddle Statue", "Solve an ancient riddle", 4f, true) },
-            { GameScene.MerchantEncounter, new("Event_Merchant", "Traveling Merchant", "Meet a wandering trader", 3f, true) },
-            { GameScene.ShrineBlessingEvent, new("Event_Shrine", "Blessing Shrine", "Receive a divine blessing", 2f, true) },
-            { GameScene.CursedEncounterEvent, new("Event_Curse", "Cursed Encounter", "Face a cursed challenge", 4f, true) },
-            { GameScene.DimensionalPortal, new("Event_Portal", "Dimensional Portal", "Travel through dimensions", 3f, true) },
+            { GameScene.TreasureChestEvent, new(GameScene.TreasureChestEvent, "Event_Treasure", "Treasure Chest", "Discover hidden loot", 2f, true) },
+            { GameScene.MysteriousAltarEvent, new(GameScene.MysteriousAltarEvent, "Event_Altar", "Mysterious Altar", "Make a fateful choice", 3f, true) },
+            { GameScene.RiddleStatueEvent, new(GameScene.RiddleStatueEvent, "Event_Riddle", "Riddle Statue", "Solve an ancient riddle", 4f, true) },
+            { GameScene.MerchantEncounter, new(GameScene.MerchantEncounter, "Event_Merchant", "Traveling Merchant", "Meet a wandering trader", 3f, true) },
+            { GameScene.ShrineBlessingEvent, new(GameScene.ShrineBlessingEvent, "Event_Shrine", "Blessing Shrine", "Receive a divine blessing", 2f, true) },
+            { GameScene.CursedEncounterEvent, new(GameScene.CursedEncounterEvent, "Event_Curse", "Cursed Encounter", "Face a cursed challenge", 4f, true) },
+            { GameScene.DimensionalPortal, new(GameScene.DimensionalPortal, "Event_Portal", "Dimensional Portal", "Travel through dimensions", 3f, true) },
             
             // Future Extensions
-            { GameScene.TreasureVault, new("TreasureVault", "Treasure Vault", "Vast treasure chamber", 5f, true) },
-            { GameScene.PuzzleRoom, new("PuzzleRoom", "Puzzle Chamber", "Solve complex puzzles", 6f, true) },
-            { GameScene.BossRushArena, new("BossRush", "Boss Rush Arena", "Face multiple bosses", 20f, true) },
-            { GameScene.SecretArea, new("SecretArea", "Secret Area", "Hidden mystical area", 8f, true) },
+            { GameScene.TreasureVault, new(GameScene.TreasureVault, "TreasureVault", "Treasure Vault", "Vast treasure chamber", 5f, true) },
+            { GameScene.PuzzleRoom, new(GameScene.PuzzleRoom, "PuzzleRoom", "Puzzle Chamber", "Solve complex puzzles", 6f, true) },
+            { GameScene.BossRushArena, new(GameScene.BossRushArena, "BossRush", "Boss Rush Arena", "Face multiple bosses", 20f, true) },
+            { GameScene.SecretArea, new(GameScene.SecretArea, "SecretArea", "Secret Area", "Hidden mystical area", 8f, true) },
             
             // Transitions
-            { GameScene.LoadingTransition, new("Loading", "Loading", "Transitioning between areas", 0.5f) },
-            { GameScene.StoryNarration, new("Story", "Story", "Narrative sequence", 2f) }
+            { GameScene.LoadingTransition, new(GameScene.LoadingTransition, "Loading", "Loading", "Transitioning between areas", 0.5f) },
+            { GameScene.StoryNarration, new(GameScene.StoryNarration, "Story", "Story", "Narrative sequence", 2f) }
         };
 
         /// <summary>

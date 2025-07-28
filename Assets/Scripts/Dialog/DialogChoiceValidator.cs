@@ -405,7 +405,7 @@ namespace NeonLadder.Dialog
                 skillGatedChoices = skillRequirements.Count,
                 charactersWithSpecialChoices = characterAvailableChoices.Count,
                 averageChoicesPerCharacter = characterAvailableChoices.Values.Any() ? 
-                    characterAvailableChoices.Values.Average(c => c.Count) : 0
+                    (float)characterAvailableChoices.Values.Average(c => c.Count) : 0f
             };
         }
 
@@ -432,11 +432,6 @@ namespace NeonLadder.Dialog
         public float averageChoicesPerCharacter;
     }
 
-    // Enums already defined in other files, but included for completeness
-    public enum SkillType
-    {
-        Intuition, Rhetoric, SpaceshipSynergy, TimeControl, Charisma
-    }
 
     #endregion
 }

@@ -55,7 +55,7 @@
     <UnityVersion>6000.0.26f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Events\HealthRegenerationEvent.cs" />
     <Compile Include="Assets\Scripts\Events\HealthDamageEvent.cs" />
     <Compile Include="Assets\Scripts\Trackers\PlayerStateTracker.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeSystem.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\LootItem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseCurrencyController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\Scripts\UI\BossesDefeatedUIDisplayManager.cs" />
     <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RemoveNumericSuffix.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\ActionStates.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgrade.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\RangedAttackController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.Mover.cs" />
     <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterController.cs" />
@@ -92,15 +94,19 @@
     <Compile Include="Assets\Scripts\DataManagement\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerSpawn.cs" />
     <Compile Include="Assets\Scripts\Models\Unlock.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\GenerationRules.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PermaCurrencyController.cs" />
     <Compile Include="Assets\Scripts\Common\Constants.cs" />
     <Compile Include="Assets\Scripts\Managers\RestartSceneManager.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneManagement.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyAttackValidationEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\AllowZMovementController.cs" />
     <Compile Include="Assets\Scripts\Utilities\Editor\WebGLExcludeRemover.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeData.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Currency.cs" />
     <Compile Include="Assets\Scripts\Steam\Achievement.cs" />
     <Compile Include="Assets\Scripts\UI\MainUIController.cs" />
+    <Compile Include="Assets\Scripts\Models\PurchasableItem.cs" />
     <Compile Include="Assets\Scripts\Events\StaminaContinuousRegenerationEvent.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerGroundedStateChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Events\InstantiateEvent.cs" />
@@ -128,14 +134,17 @@
     <Compile Include="Assets\Scripts\Events\PlayerExhaustedEvent.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\PathExtensions.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Player.cs" />
+    <Compile Include="Assets\Scripts\Dialog\ConversationManager.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerCurrencyCollision.cs" />
     <Compile Include="Assets\Scripts\Events\StaminaChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseAction.cs" />
     <Compile Include="Assets\Scripts\DataManagement\LoadSystem.cs" />
+    <Compile Include="Assets\Scripts\DataManagement\SaveSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Major.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Animations.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Loot\LootHelper.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />
+    <Compile Include="Assets\Scripts\Dialog\CharacterPersonalitySystem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Currency\Perma.cs" />
     <Compile Include="Assets\Scripts\Events\SaveGame.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\KinematicObject.cs" />
@@ -145,6 +154,7 @@
     <Compile Include="Assets\Scripts\Managers\ManagerController.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerStaminaUIManager.cs" />
     <Compile Include="Assets\Scripts\Utilities\TimedLogger.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgradeSystem.cs" />
     <Compile Include="Assets\Scripts\Managers\SceneCycleManager.cs" />
     <Compile Include="Assets\Scripts\Events\FadeInCamera.cs" />
     <Compile Include="Assets\Scripts\Models\UnlockScriptableObject.cs" />
@@ -152,17 +162,22 @@
     <Compile Include="Assets\Scripts\Mechanics\Colliders\ParentCollider.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyAnimationEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\ShopKeeperWindow.cs" />
+    <Compile Include="Assets\Scripts\Dialog\DialogSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneChangeController.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
     <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
+    <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
     <Compile Include="Assets\Scripts\Events\RestartScene.cs" />
     <Compile Include="Assets\Scripts\DataManagement\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Tags.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerAudioEvent.cs" />
+    <Compile Include="Assets\Scripts\Dialog\ConversationPointTracker.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerStopJump.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeCategory.cs" />
     <Compile Include="Assets\Scripts\Events\LoadGame.cs" />
     <Compile Include="Assets\Scripts\UI\StatUI.cs" />
+    <Compile Include="Assets\Scripts\Dialog\EnhancedLocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\LootTable.cs" />
     <Compile Include="Assets\Scripts\Items\MetaCurrencyReplenishment.cs" />
     <Compile Include="Assets\Scripts\Mechanics\BossTransformations.cs" />
@@ -176,6 +191,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
     <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Progression\CurrencyType.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyPeriodicReassessmentEvent.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Stamina.cs" />
@@ -197,6 +213,7 @@
     <Compile Include="Assets\Scripts\Managers\SceneChangeManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CameraTransformManager.cs" />
     <Compile Include="Assets\Scripts\Managers\RaycastManager.cs" />
+    <Compile Include="Assets\Scripts\Documentation\MarvelSquadPersona.cs" />
     <Compile Include="Assets\Scripts\Models\MonsterGroups.cs" />
     <Compile Include="Assets\Scripts\Utilities\AchevementResolver.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\GameStates.cs" />
@@ -212,6 +229,7 @@
     <Compile Include="Assets\Scripts\Events\BossJumped.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\ControlDisabler.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyDeath.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\PathGeneratorConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Game.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerJumped.cs" />
     <Compile Include="Assets\Scripts\Events\FadeOutCamera.cs" />
@@ -261,6 +279,7 @@
     <Compile Include="Assets\Scripts\Events\BossLanded.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerCameraPositionManager.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerVelocityValidationEvent.cs" />
+    <Compile Include="Assets\Scripts\Dialog\DialogSystemTypes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Directions.cs" />
     <Compile Include="Assets\Scripts\Events\StaminaRegenerationEvent.cs" />
   </ItemGroup>

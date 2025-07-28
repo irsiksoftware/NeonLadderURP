@@ -7,7 +7,7 @@ using NeonLadder.Mechanics.Enums;
 namespace NeonLadder.Dialog
 {
     /// <summary>
-    /// Enhanced Dialog Manager integrating Dialogue System for Unity with Disco Elysium-inspired features
+    /// Enhanced Dialog Manager integrating Dialogue System for Unity with advanced dialog features
     /// T'Challa's architectural vision for narrative excellence
     /// </summary>
     public class ConversationManager : MonoBehaviour
@@ -36,7 +36,7 @@ namespace NeonLadder.Dialog
             InitializeConversationSystem();
         }
 
-        private void InitializeConversationSystem()
+        public void InitializeConversationSystem()
         {
             conversationHistory = new Dictionary<string, List<DialogHistoryEntry>>();
             currentPlayerStats = new Dictionary<string, PlayerStats>();
@@ -123,7 +123,7 @@ namespace NeonLadder.Dialog
         #region Public Interface
 
         /// <summary>
-        /// Start a conversation with enhanced Disco Elysium features
+        /// Start a conversation with enhanced dialog features
         /// </summary>
         public void StartEnhancedConversation(string characterId, string conversationContext = "general")
         {
@@ -140,7 +140,7 @@ namespace NeonLadder.Dialog
             // Generate available choices based on CVC level, history, and stats
             var availableChoices = choiceValidator.GetAvailableChoices(characterId, conversationContext, playerStats);
             
-            // Show internal thoughts (Disco Elysium style)
+            // Show internal thoughts
             var internalThought = GetInternalThought(characterId, GetPlayerMentalState());
             if (!string.IsNullOrEmpty(internalThought))
             {
@@ -159,6 +159,13 @@ namespace NeonLadder.Dialog
             var character = GetCharacterConfig(characterId);
             if (character == null) return;
 
+            // Null check for dependencies
+            if (pointTracker == null)
+            {
+                Debug.LogError("ConversationManager: pointTracker is not assigned");
+                return;
+            }
+
             // Calculate conversation points based on choice and character personality
             var points = CalculateConversationPoints(characterId, choice);
             pointTracker.AwardPoints(characterId, choice, points);
@@ -167,7 +174,11 @@ namespace NeonLadder.Dialog
             RecordChoice(characterId, choice, conversationContext);
 
             // Generate character response based on personality and history
-            var response = personalitySystem.GenerateResponse(characterId, choice, conversationContext);
+            string response = "No response generated";
+            if (personalitySystem != null)
+            {
+                response = personalitySystem.GenerateResponse(characterId, choice, conversationContext);
+            }
             
             // Check for CVC level changes
             var newCVCLevel = pointTracker.GetCVCLevel(characterId);
@@ -219,7 +230,7 @@ namespace NeonLadder.Dialog
 
         #endregion
 
-        #region Internal Thought System (Disco Elysium Style)
+        #region Internal Thought System
 
         public string GetInternalThought(string characterId, PlayerMentalState mentalState)
         {
@@ -342,6 +353,12 @@ namespace NeonLadder.Dialog
 
         public void RecordChoice(string characterId, DialogChoice choice, string context)
         {
+            if (conversationHistory == null)
+            {
+                Debug.LogError("ConversationManager: conversationHistory is not initialized");
+                return;
+            }
+            
             if (!conversationHistory.ContainsKey(characterId))
             {
                 conversationHistory[characterId] = new List<DialogHistoryEntry>();
@@ -352,7 +369,7 @@ namespace NeonLadder.Dialog
                 choice = choice,
                 context = context,
                 timestamp = DateTime.Now,
-                cvcLevelAtTime = pointTracker.GetCVCLevel(characterId)
+                cvcLevelAtTime = pointTracker?.GetCVCLevel(characterId) ?? 0
             });
         }
 
@@ -451,13 +468,8 @@ namespace NeonLadder.Dialog
         Diplomatic, Empathetic, Insightful, Philosophical, PsychologicalInsight,
         Aggressive, Arrogant, Hostile, Suspicious,
         Motivational, Bargaining, Challenge, Pacifist, Humble,
-        TimeManipulation, CharmingPersuasion, UnityAgainstEvil
-    }
-
-    public enum PersonalityTrait
-    {
-        Aggressive, Arrogant, Greedy, Lazy, Lustful, Envious, Gluttonous,
-        Friendly, Mysterious, Wise, Cunning
+        TimeManipulation, CharmingPersuasion, UnityAgainstEvil,
+        Friendly, Energetic
     }
 
     public enum PlayerMentalState

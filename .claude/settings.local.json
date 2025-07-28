@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+<<<<<<< Updated upstream
       "Bash(powershell:*)",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/fury_verification_run.txt\")",
       "Bash(git checkout:*)",
@@ -8,6 +9,33 @@
       "Bash(mv:*)",
       "Bash(move:*)",
       "Bash(git add:*)"
+=======
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_test_latest.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_test_fixed.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_test_progress.txt\" -quit)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_test_final.txt\" -quit)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_test_success.txt\" -quit)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_test_final_attempt.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/cli_tests_complete.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/tests_final.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/compilation_check.txt\")",
+      "Bash(dotnet build:*)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod UnityEditor.SyncVS.SyncSolution -quit -logFile \"TestOutput\\compile_test.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -logFile \"TestOutput/current_errors.txt\" -quit)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_success_test.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_test_run.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/tests_complete.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/successful_test_run.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/test_monitoring_run.txt\")",
+      "Bash(powershell:*)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_test_run2.txt\")",
+      "Bash(dir:*)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_fixed_run.txt\")",
+      "Bash(move:*)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_report_run.txt\")",
+      "Bash(git add:*)",
+      "Bash(git stash push:*)"
+>>>>>>> Stashed changes
     ],
     "deny": []
   }

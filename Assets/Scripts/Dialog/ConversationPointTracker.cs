@@ -307,7 +307,7 @@ namespace NeonLadder.Dialog
                 charactersWithLevel5Plus = characterPoints.Keys.Count(c => GetCVCLevel(c) >= 5),
                 mostSuccessfulCharacter = characterPoints.OrderByDescending(kvp => kvp.Value).FirstOrDefault().Key,
                 totalConversations = pointHistory.Values.Sum(h => h.Count),
-                averageCVCLevel = characterPoints.Values.Any() ? characterPoints.Values.Average(p => p / pointsPerCVCLevel) : 0
+                averageCVCLevel = characterPoints.Values.Any() ? (float)characterPoints.Values.Average(p => p / pointsPerCVCLevel) : 0f
             };
         }
 

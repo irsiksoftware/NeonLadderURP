@@ -64,6 +64,13 @@ namespace NeonLadder.Mechanics.Controllers
         private void CacheAnimationClipLengths()
         {
             animationClipLengths = new Dictionary<Animations, float>();
+            
+            if (Animator == null || Animator.runtimeAnimatorController == null)
+            {
+                Debug.LogWarning($"Animator or RuntimeAnimatorController not found on {gameObject.name}");
+                return;
+            }
+            
             AnimationClip[] clips = Animator.runtimeAnimatorController.animationClips;
 
             foreach (var clip in clips)
@@ -77,11 +84,11 @@ namespace NeonLadder.Mechanics.Controllers
 
         private float GetAnimationClipLength(Animations animation)
         {
-            if (animationClipLengths.TryGetValue(animation, out float length))
+            if (animationClipLengths?.TryGetValue(animation, out float length) == true)
             {
                 return length;
             }
-            Debug.LogWarning($"Animation {animation} not found on {Animator.name}");
+            Debug.LogWarning($"Animation {animation} not found or animation clips not cached");
             return 0f;
         }
 
