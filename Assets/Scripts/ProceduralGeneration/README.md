@@ -163,21 +163,26 @@ double riskLevel = (double)eventNode.Properties["RiskLevel"];
 
 ## 🧪 Testing & Verification
 
-### Unit Tests
+### Unit Tests (Integrated with NeonLadder Test Suite)
 ```csharp
-// Run comprehensive unit tests
+// PathGeneratorTests.cs - Core functionality tests
 [Test] public void SameSeed_ProducesIdenticalMaps()
 [Test] public void DifferentSeeds_ProduceDifferentMaps() 
 [Test] public void EmptySeed_GeneratesValidRandomMap()
 [Test] public void ExtremeSeedInputs_HandleGracefully()
 [Test] public void NodeProperties_AreConsistent()
+
+// DeterministicHashingTests.cs - Cryptographic determinism verification
+[Test] public void String_ABC_ProducesIdenticalHashEveryTime()
+[Test] public void String_ABC_SHA256Hash_IsSpecificValue()
+[Test] public void String_ABC_Random_Sequence_IsIdentical()
+[Test] public void Cross_Platform_Hash_Consistency()
 ```
 
-### Manual Testing
-```csharp
-// Attach PathGeneratorTest to GameObject
-[ContextMenu("Test Seed Reproduction")]  // Verify determinism
-[ContextMenu("Generate Test Map")]        // View detailed output
+### Running Tests
+```bash
+# Unity CLI test execution
+"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
 ```
 
 ## 🔄 Integration with Existing Systems

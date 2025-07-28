@@ -153,27 +153,29 @@ The user has granted broad permissions for:
 **Problem**: Unity 6's `-runTests` CLI flag is broken - tests compile but never execute
 **Solution**: Custom TestRunnerApi implementation using `-executeMethod` approach
 
-### **🔧 CLI Test Execution - Ready to Use**
+### **🔧 CLI Test Execution - Direct Unity Command**
 
-**Quick Command (2-minute execution):**
+**Direct Unity CLI (2-minute execution):**
 ```bash
-"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Code\NeonLadderURP" -executeMethod CLITestRunner.RunPlayModeTests -logFile "TestOutput/cli_test_execution.txt"
+"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests -logFile "TestOutput/cli_test_execution.txt"
 ```
 
-**Automated Script:**
+**Quick Reference:**
 ```bash
-# Run this for complete automation with result parsing
-Scripts\run-tests-cli.bat
+# Kill Unity if running first
+powershell -Command "Stop-Process -Name Unity -Force"
+
+# Run tests directly
+"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
 ```
 
 ### **📁 Required Files (Already Created)**
 - **`Assets/Scripts/Editor/CLITestRunner.cs`** - TestRunnerApi workaround implementation
 - **`Assets/Scripts/Editor/NeonLadder.CLITestRunner.asmdef`** - Assembly definition with test framework references
-- **`Scripts/run-tests-cli.bat`** - Complete automation script with XML result parsing
 
 ### **📊 Expected Results**
 - **Execution Time**: ~2 minutes for full test suite
-- **Test Output**: 37+ tests (all should pass on clean codebase)
+- **Test Output**: 50+ tests including PathGenerator deterministic hashing tests
 - **XML Results**: `C:/Users/Ender/AppData/LocalLow/ShorelineGames, LLC/NeonLadder/TestResults.xml`
 - **Exit Codes**: 0 for success, 1 for failures (CI/CD ready)
 
@@ -236,9 +238,9 @@ powershell -Command "Stop-Process -Name Unity -Force"
 dir "C:/Users/Ender/AppData/LocalLow/ShorelineGames, LLC/NeonLadder/TestResults.xml"
 ```
 
-**One-Line Test Validation:**
+**Direct Unity Test Execution:**
 ```bash
-Scripts\run-tests-cli.bat
+"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
 ```
 
 ✅ **Guaranteed Working Solution** - This workaround has been validated with intentional test failures and passes all CI/CD requirements.
