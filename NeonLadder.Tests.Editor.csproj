@@ -7,6 +7,7 @@
     <RootNamespace>NeonLadder.Tests.Editor</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>true</Deterministic>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <Unity_Version>6000.0.26f1</Unity_Version>
     <Unity_AssemblyDefinitionFile>Assets\Tests\Editor\NeonLadder.Tests.Editor.asmdef</Unity_AssemblyDefinitionFile>
   </PropertyGroup>

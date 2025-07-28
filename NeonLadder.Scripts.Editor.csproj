@@ -7,6 +7,7 @@
     <RootNamespace>NeonLadder.Editor</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>true</Deterministic>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <Unity_Version>6000.0.26f1</Unity_Version>
   </PropertyGroup>
 

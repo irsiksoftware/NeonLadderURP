@@ -123,7 +123,24 @@ This creates the **world's first AI Scrum team simulation** for solo developers 
 ### Unity-Specific Guidelines
 - Unity version: Check ProjectSettings/ProjectVersion.txt for the current version
 - Test framework: Unity Test Framework (if tests are needed)
-- Assembly definitions are already set up in Assets/Scripts/NeonLadder.Scripts.asmdef
+### Assembly Definition Files (.asmdef)
+Assembly definition files organize code into separate compilation units for better build performance and dependency management:
+
+- **`Assets/Scripts/NeonLadder.Scripts.asmdef`** - Main game scripts assembly with references to Unity packages (TextMeshPro, InputSystem, Cinemachine, Localization, DamageNumbersPro, Michsky.MUIP, Steamworks.NET)
+- **`Assets/Scripts/Editor/NeonLadder.CLITestRunner.asmdef`** - CLI test runner for Unity 6 automation 
+- **`Assets/Tests/Runtime/NeonLadder.Tests.Runtime.asmdef`** - Runtime test assembly with Unity Test Runner and NUnit framework
+- **`Assets/Tests/Editor/NeonLadder.Tests.Editor.asmdef`** - Editor test assembly for testing editor-specific functionality
+
+### Visual Studio Solution Structure
+The project includes .csproj and .sln files for enhanced IDE integration:
+
+- **`NeonLadderURP.sln`** - Complete Visual Studio solution structure
+- **`NeonLadder.Scripts.csproj`** - Main game scripts project (.NET 6.0, excludes Editor/Tests)
+- **`NeonLadder.Scripts.Editor.csproj`** - Editor scripts project with UnityEditor references
+- **`NeonLadder.Tests.Runtime.csproj`** - Runtime tests project with NUnit framework
+- **`NeonLadder.Tests.Editor.csproj`** - Editor tests project with full test infrastructure
+
+These files enable better IntelliSense support and allow opening the Unity project in Visual Studio for advanced debugging and code navigation.
 
 ### Testing
 - Only create test infrastructure when explicitly asked
