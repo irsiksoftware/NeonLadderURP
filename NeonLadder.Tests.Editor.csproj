@@ -3,21 +3,24 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>9.0</LangVersion>
-    <AssemblyName>NeonLadder.Tests.Runtime</AssemblyName>
-    <RootNamespace>NeonLadder.Tests</RootNamespace>
+    <AssemblyName>NeonLadder.Tests.Editor</AssemblyName>
+    <RootNamespace>NeonLadder.Tests.Editor</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>true</Deterministic>
     <Unity_Version>6000.0.26f1</Unity_Version>
-    <Unity_AssemblyDefinitionFile>Assets\Tests\Runtime\NeonLadder.Tests.Runtime.asmdef</Unity_AssemblyDefinitionFile>
+    <Unity_AssemblyDefinitionFile>Assets\Tests\Editor\NeonLadder.Tests.Editor.asmdef</Unity_AssemblyDefinitionFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Assets\Tests\Runtime\**\*.cs" />
+    <Compile Include="Assets\Tests\Editor\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEngine.TestRunner.dll</HintPath>
@@ -28,5 +31,6 @@
   </ItemGroup>
 
   <ProjectReference Include="NeonLadder.Scripts.csproj" />
+  <ProjectReference Include="NeonLadder.Scripts.Editor.csproj" />
 
 </Project>
