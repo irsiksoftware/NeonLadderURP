@@ -1,4 +1,6 @@
 using NeonLadder.Common;
+using NeonLadder.Core;
+using NeonLadder.Events;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
@@ -93,6 +95,19 @@ namespace NeonLadder.Mechanics.Controllers
             if (lootTable == null)
             {
                 RuntimeLootTable = LootHelper.LoadLootTable(this);
+            }
+        }
+
+        protected virtual void Start()
+        {
+            // Initialize event-driven AI system
+            if (ShouldEngagePlayer && health.IsAlive)
+            {
+                // Start periodic reassessment instead of per-frame polling
+                SchedulePeriodicReassessment(player, 0.3f, 60f); // Every 300ms for 60 seconds
+                
+                // Initial distance evaluation
+                ScheduleDistanceEvaluation(player, 0.1f);
             }
         }
 
@@ -333,5 +348,58 @@ namespace NeonLadder.Mechanics.Controllers
 
             ReassessState(Vector3.Distance(transform.parent.position, player.transform.parent.position));
         }
+
+        // Event-driven AI methods to replace direct state management
+        public void ScheduleStateTransition(MonsterStates newState, float delay = 0f)
+        {
+            var stateEvent = Simulation.Schedule<EnemyStateTransitionEvent>(delay);
+            stateEvent.enemy = this;
+            stateEvent.newState = newState;
+            stateEvent.previousState = currentState;
+        }
+
+        public void ScheduleDistanceEvaluation(Player target, float delay = 0.2f)
+        {
+            var distanceEvent = Simulation.Schedule<EnemyDistanceEvaluationEvent>(delay);
+            distanceEvent.enemy = this;
+            distanceEvent.player = target;
+        }
+
+        public void ScheduleAttackValidation(Player target, float delay = 0f)
+        {
+            var attackEvent = Simulation.Schedule<EnemyAttackValidationEvent>(delay);
+            attackEvent.enemy = this;
+            attackEvent.target = target;
+            attackEvent.lastAttackTime = lastAttackTime;
+        }
+
+        public void SchedulePeriodicReassessment(Player target, float interval = 0.5f, float duration = 10f)
+        {
+            var reassessmentEvent = Simulation.Schedule<EnemyPeriodicReassessmentEvent>(0f);
+            reassessmentEvent.enemy = this;
+            reassessmentEvent.player = target;
+            reassessmentEvent.reassessmentInterval = interval;
+            reassessmentEvent.duration = duration;
+        }
+
+        public void ScheduleAnimationChange(EnemyAnimationType animationType, float delay = 0f)
+        {
+            var animEvent = Simulation.Schedule<EnemyAnimationEvent>(delay);
+            animEvent.enemy = this;
+            animEvent.animationType = animationType;
+        }
+
+        // Expose currentState for event system (fix field visibility)
+        public MonsterStates CurrentState => currentState;
+
+        public void SetState(MonsterStates newState)
+        {
+            currentState = newState;
+        }
+
+        // Public accessors for event system
+        public int AttackDamage => attackDamage;
+        public float AttackCooldown => attackCooldown;
+        public float AttackRangeValue => AttackRange;
     }
 }

@@ -204,12 +204,12 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void AddMetaCurrency(int amount)
         {
-            MetaCurrency.Increment(amount);
+            ScheduleCurrencyChange(CurrencyType.Meta, amount, 0f);
         }
 
         public void AddPermanentCurrency(int amount)
         {
-            PermaCurrency.Increment(amount);
+            ScheduleCurrencyChange(CurrencyType.Perma, amount, 0f);
         }
 
         private void UpdateHealthBar()
@@ -225,6 +225,68 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 StaminaBar.currentPercent = (Stamina.current / Stamina.max) * Constants.UI.PercentageMultiplier;
             }
+        }
+
+        // Event-driven methods to replace direct stat modifications
+        public void ScheduleDamage(float amount, float delay = 0f)
+        {
+            var damageEvent = Simulation.Schedule<HealthDamageEvent>(delay);
+            damageEvent.health = Health;
+            damageEvent.damageAmount = amount;
+            damageEvent.triggerEffects = true;
+        }
+
+        public void ScheduleHealing(float amount, float delay = 0f)
+        {
+            var healingEvent = Simulation.Schedule<HealthRegenerationEvent>(delay);
+            healingEvent.health = Health;
+            healingEvent.amount = amount;
+        }
+
+        public void ScheduleStaminaDamage(float amount, float delay = 0f)
+        {
+            // Schedule stamina change event instead of direct modification
+            var staminaEvent = Simulation.Schedule<StaminaChangeEvent>(delay);
+            staminaEvent.stamina = Stamina;
+            staminaEvent.amount = -amount; // Negative for damage, positive for healing
+            
+            // Schedule visual effects for positive damage amounts only
+            if (amount > 0)
+            {
+                var damageNumberController = GetComponent<DamageNumberController>();
+                if (damageNumberController != null)
+                {
+                    var damageNumberEvent = Simulation.Schedule<DamageNumberEvent>(delay);
+                    damageNumberEvent.controller = damageNumberController;
+                    damageNumberEvent.amount = amount;
+                    damageNumberEvent.numberType = DamageNumberType.StaminaLoss;
+                }
+            }
+        }
+
+        public void ScheduleAudioEvent(AudioEventType audioType, float delay = 0f)
+        {
+            var audioEvent = Simulation.Schedule<AudioEvent>(delay);
+            audioEvent.audioSource = audioSource;
+            audioEvent.audioType = audioType;
+            
+            // Set specific audio clips based on type
+            audioEvent.audioClip = audioType switch
+            {
+                AudioEventType.Jump => jumpAudio,
+                AudioEventType.Land => landOnGroundAudio,
+                AudioEventType.Damage => ouchAudio,
+                AudioEventType.Respawn => respawnAudio,
+                _ => null
+            };
+        }
+
+        public void ScheduleCurrencyChange(CurrencyType currencyType, int amount, float delay = 0f)
+        {
+            var currencyEvent = Simulation.Schedule<CurrencyChangeEvent>(delay);
+            currencyEvent.player = this;
+            currencyEvent.currencyType = currencyType;
+            currencyEvent.amount = amount;
         }
 
         // Event-driven movement methods to replace direct modifications
@@ -243,7 +305,7 @@ namespace NeonLadder.Mechanics.Controllers
             groundedEvent.previousGroundedState = !isGrounded; // Toggle for testing
         }
 
-        public void ScheduleAudioEvent(PlayerAudioType audioType, float delay = 0f)
+        public void SchedulePlayerAudioEvent(PlayerAudioType audioType, float delay = 0f)
         {
             var audioEvent = Simulation.Schedule<PlayerAudioEvent>(delay);
             audioEvent.player = this;
