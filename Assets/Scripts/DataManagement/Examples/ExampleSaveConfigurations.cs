@@ -17,38 +17,31 @@ namespace NeonLadderURP.DataManagement.Examples
         {
             var config = ScriptableObject.CreateInstance<SaveStateConfiguration>();
             
-            // Basic new player setup
-            var playerSetup = new PlayerProgressionSetup
-            {
-                playerLevel = 1,
-                experiencePoints = 0f,
-                maxHealth = 100,
-                currentHealth = 100,
-                maxStamina = 100f,
-                currentStamina = 100f,
-                attackDamage = 10f,
-                attackSpeed = 1f,
-                movementSpeed = 5f,
-                jumpCount = 1
-            };
+            // Configure player setup
+            config.PlayerSetup.playerLevel = 1;
+            config.PlayerSetup.experiencePoints = 0f;
+            config.PlayerSetup.maxHealth = 100;
+            config.PlayerSetup.currentHealth = 100;
+            config.PlayerSetup.maxStamina = 100f;
+            config.PlayerSetup.currentStamina = 100f;
+            config.PlayerSetup.attackDamage = 10f;
+            config.PlayerSetup.attackSpeed = 1f;
+            config.PlayerSetup.movementSpeed = 5f;
+            config.PlayerSetup.jumpCount = 1;
             
-            var currencySetup = new CurrencySetup
-            {
-                startingMetaCurrency = 0,
-                startingPermaCurrency = 0,
-                totalMetaEarned = 0,
-                totalPermaEarned = 0
-            };
+            // Configure currency setup
+            config.CurrencySetup.startingMetaCurrency = 0;
+            config.CurrencySetup.startingPermaCurrency = 0;
+            config.CurrencySetup.totalMetaEarned = 0;
+            config.CurrencySetup.totalPermaEarned = 0;
             
-            var worldSetup = new WorldStateSetup
-            {
-                currentSceneName = "SampleScene",
-                playerPosition = Vector3.zero,
-                currentCheckpoint = "",
-                currentDepth = 0,
-                runNumber = 1,
-                isActiveRun = true
-            };
+            // Configure world setup
+            config.WorldSetup.currentSceneName = "SampleScene";
+            config.WorldSetup.playerPosition = Vector3.zero;
+            config.WorldSetup.currentCheckpoint = "";
+            config.WorldSetup.currentDepth = 0;
+            config.WorldSetup.runNumber = 1;
+            config.WorldSetup.isActiveRun = true;
             
             return config;
         }
@@ -60,51 +53,44 @@ namespace NeonLadderURP.DataManagement.Examples
         {
             var config = CreateNewPlayerConfig();
             
-            // Mid-game progression
-            var playerSetup = new PlayerProgressionSetup
-            {
-                playerLevel = 10,
-                experiencePoints = 2500f,
-                maxHealth = 150,
-                currentHealth = 120,
-                maxStamina = 120f,
-                currentStamina = 90f,
-                attackDamage = 15f,
-                attackSpeed = 1.2f,
-                movementSpeed = 6f,
-                jumpCount = 2 // Double jump unlocked
-            };
+            // Configure mid-game progression
+            config.PlayerSetup.playerLevel = 10;
+            config.PlayerSetup.experiencePoints = 2500f;
+            config.PlayerSetup.maxHealth = 150;
+            config.PlayerSetup.currentHealth = 120;
+            config.PlayerSetup.maxStamina = 120f;
+            config.PlayerSetup.currentStamina = 90f;
+            config.PlayerSetup.attackDamage = 15f;
+            config.PlayerSetup.attackSpeed = 1.2f;
+            config.PlayerSetup.movementSpeed = 6f;
+            config.PlayerSetup.jumpCount = 2; // Double jump unlocked
             
-            var currencySetup = new CurrencySetup
-            {
-                startingMetaCurrency = 250,
-                startingPermaCurrency = 50,
-                totalMetaEarned = 1000,
-                totalPermaEarned = 200
-            };
+            // Configure currency
+            config.CurrencySetup.startingMetaCurrency = 250;
+            config.CurrencySetup.startingPermaCurrency = 50;
+            config.CurrencySetup.totalMetaEarned = 1000;
+            config.CurrencySetup.totalPermaEarned = 200;
             
-            var worldSetup = new WorldStateSetup
-            {
-                currentSceneName = "Level_5",
-                playerPosition = new Vector3(15f, 3f, 0f),
-                currentCheckpoint = "checkpoint_3",
-                currentDepth = 5,
-                runNumber = 3,
-                isActiveRun = true
-            };
+            // Configure world state
+            config.WorldSetup.currentSceneName = "Level_5";
+            config.WorldSetup.playerPosition = new Vector3(15f, 3f, 0f);
+            config.WorldSetup.currentCheckpoint = "checkpoint_3";
+            config.WorldSetup.currentDepth = 5;
+            config.WorldSetup.runNumber = 3;
+            config.WorldSetup.isActiveRun = true;
             
             // Add some completed content
-            worldSetup.completedScenes.AddRange(new[]
+            config.WorldSetup.completedScenes.AddRange(new[]
             {
                 "Tutorial", "Level_1", "Level_2", "Level_3", "Level_4"
             });
             
-            worldSetup.defeatedBosses.AddRange(new[]
+            config.WorldSetup.defeatedBosses.AddRange(new[]
             {
                 "TutorialBoss", "ForestBoss"
             });
             
-            worldSetup.discoveredAreas.AddRange(new[]
+            config.WorldSetup.discoveredAreas.AddRange(new[]
             {
                 "SecretCave", "HiddenShop", "BonusRoom"
             });
@@ -119,50 +105,43 @@ namespace NeonLadderURP.DataManagement.Examples
         {
             var config = CreateMidGameConfig();
             
-            // End-game progression
-            var playerSetup = new PlayerProgressionSetup
-            {
-                playerLevel = 50,
-                experiencePoints = 125000f,
-                maxHealth = 300,
-                currentHealth = 300,
-                maxStamina = 200f,
-                currentStamina = 200f,
-                attackDamage = 50f,
-                attackSpeed = 2f,
-                movementSpeed = 10f,
-                jumpCount = 3 // Triple jump
-            };
+            // Configure end-game progression
+            config.PlayerSetup.playerLevel = 50;
+            config.PlayerSetup.experiencePoints = 125000f;
+            config.PlayerSetup.maxHealth = 300;
+            config.PlayerSetup.currentHealth = 300;
+            config.PlayerSetup.maxStamina = 200f;
+            config.PlayerSetup.currentStamina = 200f;
+            config.PlayerSetup.attackDamage = 50f;
+            config.PlayerSetup.attackSpeed = 2f;
+            config.PlayerSetup.movementSpeed = 10f;
+            config.PlayerSetup.jumpCount = 3; // Triple jump
             
-            var currencySetup = new CurrencySetup
-            {
-                startingMetaCurrency = 5000,
-                startingPermaCurrency = 2000,
-                totalMetaEarned = 50000,
-                totalPermaEarned = 10000
-            };
+            // Configure end-game currency
+            config.CurrencySetup.startingMetaCurrency = 5000;
+            config.CurrencySetup.startingPermaCurrency = 2000;
+            config.CurrencySetup.totalMetaEarned = 50000;
+            config.CurrencySetup.totalPermaEarned = 10000;
             
-            var worldSetup = new WorldStateSetup
-            {
-                currentSceneName = "FinalBossArena",
-                playerPosition = new Vector3(0f, 10f, 0f),
-                currentCheckpoint = "final_checkpoint",
-                currentDepth = 25,
-                runNumber = 15,
-                isActiveRun = true
-            };
+            // Configure end-game world state
+            config.WorldSetup.currentSceneName = "FinalBossArena";
+            config.WorldSetup.playerPosition = new Vector3(0f, 10f, 0f);
+            config.WorldSetup.currentCheckpoint = "final_checkpoint";
+            config.WorldSetup.currentDepth = 25;
+            config.WorldSetup.runNumber = 15;
+            config.WorldSetup.isActiveRun = true;
             
             // Add extensive completed content
             for (int i = 1; i <= 25; i++)
             {
-                worldSetup.completedScenes.Add($"Level_{i}");
+                config.WorldSetup.completedScenes.Add($"Level_{i}");
                 if (i % 5 == 0) // Boss every 5 levels
                 {
-                    worldSetup.defeatedBosses.Add($"Boss_Level_{i}");
+                    config.WorldSetup.defeatedBosses.Add($"Boss_Level_{i}");
                 }
             }
             
-            worldSetup.discoveredAreas.AddRange(new[]
+            config.WorldSetup.discoveredAreas.AddRange(new[]
             {
                 "SecretCave", "HiddenShop", "BonusRoom", "TreasureVault",
                 "AncientLibrary", "CrystalCaverns", "FloatingIslands"
@@ -178,24 +157,19 @@ namespace NeonLadderURP.DataManagement.Examples
         {
             var config = CreateNewPlayerConfig();
             
-            // Testing-specific setup
-            var playerSetup = new PlayerProgressionSetup
-            {
-                playerLevel = 5,
-                maxHealth = 200, // High health for testing
-                currentHealth = 200,
-                maxStamina = 200f,
-                currentStamina = 200f,
-                attackDamage = 999f, // High damage for quick testing
-                movementSpeed = 15f, // Fast movement for testing
-                jumpCount = 5 // Multiple jumps for testing
-            };
+            // Configure testing-specific setup
+            config.PlayerSetup.playerLevel = 5;
+            config.PlayerSetup.maxHealth = 200; // High health for testing
+            config.PlayerSetup.currentHealth = 200;
+            config.PlayerSetup.maxStamina = 200f;
+            config.PlayerSetup.currentStamina = 200f;
+            config.PlayerSetup.attackDamage = 999f; // High damage for quick testing
+            config.PlayerSetup.movementSpeed = 15f; // Fast movement for testing
+            config.PlayerSetup.jumpCount = 5; // Multiple jumps for testing
             
-            var currencySetup = new CurrencySetup
-            {
-                startingMetaCurrency = 9999,
-                startingPermaCurrency = 9999
-            };
+            // Configure testing currency
+            config.CurrencySetup.startingMetaCurrency = 9999;
+            config.CurrencySetup.startingPermaCurrency = 9999;
             
             // Create test procedural scene set
             var testSceneSet = new ProceduralSceneSet
@@ -251,6 +225,9 @@ namespace NeonLadderURP.DataManagement.Examples
                 }
             });
             
+            // Apply the scene set to the configuration
+            config.CurrentSceneSet = testSceneSet;
+            
             return config;
         }
         
@@ -261,17 +238,15 @@ namespace NeonLadderURP.DataManagement.Examples
         {
             var config = CreateMidGameConfig();
             
-            var worldSetup = new WorldStateSetup
-            {
-                currentSceneName = "BugReproductionScene",
-                playerPosition = new Vector3(5.5f, 2.3f, 0f), // Specific position that might trigger bugs
-                currentDepth = 7,
-                runNumber = 4,
-                isActiveRun = true
-            };
+            // Configure regression testing world setup
+            config.WorldSetup.currentSceneName = "BugReproductionScene";
+            config.WorldSetup.playerPosition = new Vector3(5.5f, 2.3f, 0f); // Specific position that might trigger bugs
+            config.WorldSetup.currentDepth = 7;
+            config.WorldSetup.runNumber = 4;
+            config.WorldSetup.isActiveRun = true;
             
             // Add specific state that might cause issues
-            worldSetup.completedScenes.AddRange(new[]
+            config.WorldSetup.completedScenes.AddRange(new[]
             {
                 "Scene_With_Special_Characters!@#",
                 "VeryLongSceneNameThatMightCauseIssuesWithSerialization_12345",

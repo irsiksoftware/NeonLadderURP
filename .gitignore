@@ -119,3 +119,15 @@ Assets/Audio/Background/**
 TestResults.xml
 test_results_*.xml
 cli_test_*.txt
+
+# Unity Settings meta files (these change frequently)
+/Assets/Settings/*.meta
+
+# Claude AI assistant files (exclude by default, manually include for team memory updates)
+/.claude/
+!/.claude/extended-state.json
+!/.claude/integrations/
+!/.claude/team-memory/
+
+# Game data directory (save files, cache, etc.)
+/GameData/
