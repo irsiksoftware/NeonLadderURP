@@ -3,321 +3,664 @@ using NeonLadder.Mechanics.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;            // For string-building / encoding if needed
-using UnityEngine;           // For Random, etc.
+using System.Text;
+using System.Security.Cryptography;
+using UnityEngine;
 using Newtonsoft.Json;
-using UnityEngine.UI;       // Example of JSON serialization library (Newtonsoft)
 
 namespace NeonLadder.ProceduralGeneration
 {
     /// <summary>
-    /// Represents an entire procedural path generation system.
-    /// This version can accept or generate a seed string for reproducibility.
+    /// The Mystical PathGenerator - A Slay the Spire inspired procedural generation system
+    /// By Stephen Strange, Master of the Mystic Arts
+    /// 
+    /// "I've seen 14,000,605 possible game designs. This is the one that works."
     /// </summary>
     public class PathGenerator
     {
-        private static readonly int[] EncounterProbabilities = { 25, 50, 75 }; // Adjusted to only roundable to 25
-        private static readonly string[] Bosses = BossTransformations.bossTransformations.Keys.ToArray();
-
-        public Dictionary<string, string> BossLocations;
-        public void SetCurrentSeed(string seed)
+        // The Seven Deadly Sins Progression (6 layers + final boss)
+        private static readonly string[] LayerBosses = new[]
         {
-            CurrentSeed = seed;
-        }
+            "Pride",     // Layer 1
+            "Wrath",     // Layer 2  
+            "Greed",     // Layer 3
+            "Envy",      // Layer 4
+            "Lust",      // Layer 5
+            "Gluttony",  // Layer 6
+            "Sloth"      // Final Layer (if all others defeated)
+        };
 
-          // QUESTION: Do we want to store the seed for reference?
-        // If so, keep a private or public field here.
-        public string CurrentSeed { get { return Constants.Seed; } set { Constants.Seed = value; } }
+        private static readonly string[] BossLocations = new[]
+        {
+            "Grand Cathedral of Hubris",
+            "The Necropolis of Vengeance", 
+            "The Vault of Avarice",
+            "The Community Center",
+            "Infinite Forest (Eden of Desires)",
+            "The Feast of Infinity",
+            "The Lethargy Lounge"
+        };
+
+        // Random instance seeded from the mystical string
+        private System.Random _seededRandom;
+        private string _currentSeed;
 
         /// <summary>
-        /// If BossLocations is not initialized, sets up a default map from Boss name -> "Location" string.
+        /// Generates a complete mystical map from any seed string
         /// </summary>
-        private void EnsureBossLocationsInitialized()
+        public MysticalMap GenerateMap(string seedString = null)
         {
-            if (BossLocations == null)
-            {
-                var locations = new[]
-                {
-                    "Grand Cathedral of Hubris",
-                    "The Necropolis of Vengeance",
-                    "The Vault of Avarice",
-                    "The Community Center",
-                    "Infinite Forest (Eden of Desires)",
-                    "The Feast of Infinity",
-                    "The Lethargy Lounge",
-                    "The Final Level"
-                };
+            return GenerateMapWithRules(seedString, GenerationRules.CreateBalancedRules());
+        }
 
-                BossLocations = Bosses
-                    .Select((boss, index) => new { boss, location = locations.ElementAtOrDefault(index) ?? "Unknown" })
-                    .ToDictionary(x => x.boss.ToLower(), x => x.location);
+        /// <summary>
+        /// Generates a complete mystical map from any seed string with custom rules
+        /// </summary>
+        public MysticalMap GenerateMapWithRules(string seedString = null, GenerationRules rules = null)
+        {
+            // If no seed provided, generate a mystical one
+            if (string.IsNullOrWhiteSpace(seedString))
+            {
+                seedString = GenerateMysticalSeed();
+            }
+
+            // Use default rules if none provided
+            if (rules == null)
+            {
+                rules = GenerationRules.CreateBalancedRules();
+            }
+
+            _currentSeed = seedString;
+            
+            // Convert the mystical string to deterministic randomness
+            _seededRandom = new System.Random(ConvertSeedToInt(seedString));
+
+            var map = new MysticalMap
+            {
+                Seed = seedString,
+                Layers = new List<MapLayer>()
+            };
+
+            // Generate the six layers of the seven deadly sins
+            for (int layerIndex = 0; layerIndex < 6; layerIndex++)
+            {
+                var adjustedRules = rules.GetAdjustedRulesForLayer(layerIndex, _seededRandom);
+                var layer = GenerateLayerWithRules(layerIndex, LayerBosses[layerIndex], adjustedRules);
+                map.Layers.Add(layer);
+            }
+
+            // Add the final boss layer if all sins are vanquished
+            if (ShouldIncludeFinalBoss())
+            {
+                var finalLayer = GenerateFinalBossLayer();
+                map.Layers.Add(finalLayer);
+            }
+
+            return map;
+        }
+
+        /// <summary>
+        /// Mystical seed generation using the ancient arts of cryptography
+        /// </summary>
+        private string GenerateMysticalSeed(int length = 16)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var random = new System.Random();
+            var result = new StringBuilder(length);
+            
+            for (int i = 0; i < length; i++)
+            {
+                result.Append(chars[random.Next(chars.Length)]);
+            }
+            
+            return result.ToString();
+        }
+
+        /// <summary>
+        /// Converts any mystical string into deterministic chaos using SHA256
+        /// </summary>
+        private int ConvertSeedToInt(string seedString)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(seedString));
+                // Take first 4 bytes and convert to int for deterministic seeding
+                return BitConverter.ToInt32(hashBytes, 0);
             }
         }
 
         /// <summary>
-        /// The main entry point that uses a provided seed to generate paths deterministically.
+        /// Generates a single layer of the mystical map
         /// </summary>
-        /// <param name="seedString">An optional alphanumeric or other string that can be hashed to generate the RNG seed. or a NULL generates a new one</param>
-        /// <returns></returns>
-        public Dictionary<string, Path> GeneratePaths()
+        private MapLayer GenerateLayer(int layerIndex, string boss)
         {
-            // Use the provided seed or generate a new one
-            this.CurrentSeed = (string.IsNullOrWhiteSpace(Constants.Seed) || 
-                                Constants.Seed.ToLower() == "seed" || 
-                                Constants.LastSeed == Constants.Seed) 
-                                ? GenerateRandomSeed(12) 
-                                : Constants.Seed;// Store the seed
+            return GenerateLayerWithRules(layerIndex, boss, GenerationRules.CreateBalancedRules());
+        }
 
-            Constants.LastSeed = Constants.Seed;
-
-            // Convert the seed string to an integer for Random.InitState
-            int seedValue = ConvertSeedToInt(CurrentSeed);
-
-            // Initialize Unity's RNG with the computed seed
-            UnityEngine.Random.InitState(seedValue);
-
-            // Proceed with your normal generation logic
-            EnsureBossLocationsInitialized();
-
-            var finalBoss = Mechanics.Enums.Bosses.Devil.ToString();
-            var paths = new Dictionary<string, Path>();
-
-            var remainingBosses = Bosses.Except(Constants.DefeatedBosses).ToList();
-            int pathCount = (remainingBosses.Count > 3) ? 3 : remainingBosses.Count;
-
-            var activeBosses = remainingBosses
-                .Where(rb => rb != finalBoss)
-                .OrderBy(_ => UnityEngine.Random.value)
-                .Take(pathCount);
-
-            // Add the final path only if all other bosses are defeated
-            if (Constants.DefeatedBosses.Count == 7 && !Constants.DefeatedBosses.Contains(finalBoss))
+        /// <summary>
+        /// Generates a single layer of the mystical map with custom rules
+        /// </summary>
+        private MapLayer GenerateLayerWithRules(int layerIndex, string boss, GenerationRules rules)
+        {
+            var layer = new MapLayer
             {
-                paths[finalBoss.ToLower()] = GeneratePath(finalBoss);
+                LayerIndex = layerIndex,
+                Boss = boss,
+                Location = BossLocations[layerIndex],
+                Nodes = new List<MapNode>()
+            };
+
+            // Generate paths according to rules
+            int pathCount = _seededRandom.Next(rules.minPathsPerLayer, rules.maxPathsPerLayer + 1);
+            
+            // Track required encounters to ensure rules are met
+            var requiredNodeTypes = new List<NodeType>();
+            
+            // Add guaranteed encounters
+            for (int i = 0; i < rules.guaranteedCombatPerLayer; i++)
+            {
+                requiredNodeTypes.Add(NodeType.Encounter);
+            }
+            
+            if (rules.guaranteedRestShopPerLayer)
+            {
+                requiredNodeTypes.Add(NodeType.RestShop);
+            }
+            
+            // Generate paths with rule enforcement
+            for (int pathIndex = 0; pathIndex < pathCount; pathIndex++)
+            {
+                int nodesPerPath = _seededRandom.Next(rules.minNodesPerPath, rules.maxNodesPerPath + 1);
+                var pathNodes = GeneratePathNodesWithRules(layerIndex, pathIndex, nodesPerPath, boss, rules, requiredNodeTypes);
+                layer.Nodes.AddRange(pathNodes);
+            }
+            
+            // Ensure we met minimum requirements by adding nodes if necessary
+            EnsureRuleCompliance(layer, rules);
+
+            return layer;
+        }
+
+        /// <summary>
+        /// Calculates nodes per path based on layer depth (gets longer as you progress)
+        /// </summary>
+        private int CalculateNodesPerPath(int layerIndex)
+        {
+            // Early layers: 3-4 nodes, Later layers: 4-6 nodes
+            int baseNodes = 3 + (layerIndex / 2);
+            return baseNodes + _seededRandom.Next(0, 2);
+        }
+
+        /// <summary>
+        /// Generates the mystical nodes along a single path
+        /// </summary>
+        private List<MapNode> GeneratePathNodes(int layerIndex, int pathIndex, int nodeCount, string boss)
+        {
+            var nodes = new List<MapNode>();
+
+            for (int nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++)
+            {
+                MapNode node;
+
+                // Last node is always the boss
+                if (nodeIndex == nodeCount - 1)
+                {
+                    node = CreateBossNode(layerIndex, pathIndex, nodeIndex, boss);
+                }
+                // Second to last is usually rest/shop
+                else if (nodeIndex == nodeCount - 2)
+                {
+                    node = CreateRestShopNode(layerIndex, pathIndex, nodeIndex);
+                }
+                // Other nodes are encounters or events
+                else
+                {
+                    node = CreateRandomNode(layerIndex, pathIndex, nodeIndex);
+                }
+
+                nodes.Add(node);
+            }
+
+            return nodes;
+        }
+
+        /// <summary>
+        /// Generates path nodes with rule enforcement
+        /// </summary>
+        private List<MapNode> GeneratePathNodesWithRules(int layerIndex, int pathIndex, int nodeCount, string boss, GenerationRules rules, List<NodeType> requiredNodeTypes)
+        {
+            var nodes = new List<MapNode>();
+
+            for (int nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++)
+            {
+                MapNode node;
+
+                // Last node is always the boss
+                if (nodeIndex == nodeCount - 1)
+                {
+                    node = CreateBossNode(layerIndex, pathIndex, nodeIndex, boss);
+                }
+                // Second to last follows rest/shop rule
+                else if (nodeIndex == nodeCount - 2 && rules.restShopBeforeBoss)
+                {
+                    node = CreateRestShopNode(layerIndex, pathIndex, nodeIndex);
+                    requiredNodeTypes.Remove(NodeType.RestShop); // Mark as satisfied
+                }
+                // Other nodes follow rule requirements
+                else
+                {
+                    // Try to satisfy required node types first
+                    if (requiredNodeTypes.Count > 0 && nodeIndex < nodeCount - 2)
+                    {
+                        var requiredType = requiredNodeTypes[0];
+                        requiredNodeTypes.RemoveAt(0);
+                        
+                        node = requiredType switch
+                        {
+                            NodeType.Encounter => CreateEncounterNodeWithRules(layerIndex, pathIndex, nodeIndex, rules),
+                            NodeType.RestShop => CreateRestShopNode(layerIndex, pathIndex, nodeIndex),
+                            NodeType.Event => CreateEventNode(layerIndex, pathIndex, nodeIndex),
+                            _ => CreateRandomNodeWithRules(layerIndex, pathIndex, nodeIndex, rules)
+                        };
+                    }
+                    else
+                    {
+                        node = CreateRandomNodeWithRules(layerIndex, pathIndex, nodeIndex, rules);
+                    }
+                }
+
+                // Prevent adjacent same types if rule enabled
+                if (rules.preventAdjacentSameType && nodes.Count > 0)
+                {
+                    var lastNode = nodes[nodes.Count - 1];
+                    if (lastNode.Type == node.Type && node.Type != NodeType.Boss)
+                    {
+                        // Generate a different type
+                        node = CreateAlternativeNode(layerIndex, pathIndex, nodeIndex, lastNode.Type, rules);
+                    }
+                }
+
+                nodes.Add(node);
+            }
+
+            return nodes;
+        }
+
+        /// <summary>
+        /// Ensures layer meets all rule requirements
+        /// </summary>
+        private void EnsureRuleCompliance(MapLayer layer, GenerationRules rules)
+        {
+            // Count current node types
+            var nodeTypeCounts = layer.Nodes.GroupBy(n => n.Type).ToDictionary(g => g.Key, g => g.Count());
+            
+            var combatCount = nodeTypeCounts.GetValueOrDefault(NodeType.Encounter, 0);
+            var restShopCount = nodeTypeCounts.GetValueOrDefault(NodeType.RestShop, 0);
+            
+            // Check combat encounters
+            var combatNodes = layer.Nodes.Where(n => n.Type == NodeType.Encounter).ToList();
+            var minorEnemyCount = combatNodes.Count(n => 
+                n.Properties.ContainsKey("EncounterType") && 
+                (EncounterType)n.Properties["EncounterType"] == EncounterType.MinorEnemy);
+            
+            // Add missing minor enemies
+            if (minorEnemyCount < rules.guaranteedMinorEnemiesPerLayer)
+            {
+                var deficit = rules.guaranteedMinorEnemiesPerLayer - minorEnemyCount;
+                for (int i = 0; i < deficit; i++)
+                {
+                    var nodeIndex = layer.Nodes.Count;
+                    var minorEnemyNode = new MapNode
+                    {
+                        Id = $"L{layer.LayerIndex}_COMPLIANCE_{nodeIndex}",
+                        Type = NodeType.Encounter,
+                        LayerIndex = layer.LayerIndex,
+                        PathIndex = 0, // Add to first path
+                        NodeIndex = nodeIndex,
+                        Properties = new Dictionary<string, object>
+                        {
+                            ["EncounterType"] = EncounterType.MinorEnemy,
+                            ["EnemyCount"] = _seededRandom.Next(2, 5),
+                            ["Difficulty"] = layer.LayerIndex + 1,
+                            ["RewardMultiplier"] = _seededRandom.NextDouble() * 0.5 + 0.75
+                        }
+                    };
+                    layer.Nodes.Add(minorEnemyNode);
+                }
+            }
+            
+            // Add missing rest/shop if required
+            if (rules.guaranteedRestShopPerLayer && restShopCount == 0)
+            {
+                var nodeIndex = layer.Nodes.Count;
+                var restShopNode = CreateRestShopNode(layer.LayerIndex, 0, nodeIndex);
+                restShopNode.Id = $"L{layer.LayerIndex}_COMPLIANCE_REST_{nodeIndex}";
+                layer.Nodes.Add(restShopNode);
+            }
+        }
+
+        /// <summary>
+        /// Creates an encounter node with rule considerations
+        /// </summary>
+        private MapNode CreateEncounterNodeWithRules(int layerIndex, int pathIndex, int nodeIndex, GenerationRules rules)
+        {
+            // Determine encounter type based on rules
+            var encounterType = EncounterType.MinorEnemy; // Default to minor
+            
+            // Check if we can add major enemies
+            var existingMajorCount = 0; // Would need to count existing in layer, simplified for now
+            if (existingMajorCount < rules.maxMajorEnemiesPerLayer && _seededRandom.NextDouble() < 0.3)
+            {
+                encounterType = EncounterType.MajorEnemy;
+            }
+            
+            return new MapNode
+            {
+                Id = $"L{layerIndex}_P{pathIndex}_N{nodeIndex}",
+                Type = NodeType.Encounter,
+                LayerIndex = layerIndex,
+                PathIndex = pathIndex,
+                NodeIndex = nodeIndex,
+                Properties = new Dictionary<string, object>
+                {
+                    ["EncounterType"] = encounterType,
+                    ["EnemyCount"] = encounterType == EncounterType.MinorEnemy ? _seededRandom.Next(2, 6) : _seededRandom.Next(1, 3),
+                    ["Difficulty"] = layerIndex + 1,
+                    ["RewardMultiplier"] = _seededRandom.NextDouble() * 0.5 + 0.75
+                }
+            };
+        }
+
+        /// <summary>
+        /// Creates a random node with rule considerations
+        /// </summary>
+        private MapNode CreateRandomNodeWithRules(int layerIndex, int pathIndex, int nodeIndex, GenerationRules rules)
+        {
+            // Calculate event chance based on rules
+            double eventChance = rules.baseEventChance;
+            if (rules.eventChanceScalesWithDepth)
+            {
+                eventChance += layerIndex * 0.1f;
+            }
+            
+            bool isEvent = _seededRandom.NextDouble() < eventChance;
+            
+            if (isEvent)
+            {
+                return CreateEventNode(layerIndex, pathIndex, nodeIndex);
             }
             else
             {
-                foreach (var boss in activeBosses)
-                {
-                    paths[boss.ToLower()] = GeneratePath(boss);
-                }
-            }
-
-            return paths;
-        }
-
-
-        /// <summary>
-        /// Demonstrates how you might convert an alphanumeric seed string to an integer for Random.InitState.
-        /// This example does a simple hash, but you can do more sophisticated conversions if desired.
-        /// </summary>
-        /// <param name="seedString">String seed input</param>
-        /// <returns>An integer to use in Random.InitState</returns>
-        private int ConvertSeedToInt(string seedString)
-        {
-            unchecked
-            {
-                // Simple Fowler�Noll�Vo (FNV) or any other hash approach
-                // This is just an example. 
-                // Or you could parse as Base36, Base64, etc.
-                int hash = 23;
-                foreach (char c in seedString)
-                {
-                    hash = (hash * 31) + c;
-                }
-                return hash;
+                return CreateEncounterNodeWithRules(layerIndex, pathIndex, nodeIndex, rules);
             }
         }
 
         /// <summary>
-        /// Example of generating a random alphanumeric seed of specified length.
-        /// This can be used whenever we need a brand-new seed that is "non-human-readable".
+        /// Creates an alternative node type to prevent adjacency
         /// </summary>
-        /// <param name="length">Length of the random seed string.</param>
-        /// <returns>An alphanumeric string seed.</returns>
-        public string GenerateRandomSeed(int length = 16)
+        private MapNode CreateAlternativeNode(int layerIndex, int pathIndex, int nodeIndex, NodeType avoidType, GenerationRules rules)
         {
-            // QUESTION: Should this be truly random each time (e.g., using System.Security.Cryptography)?
-            // Or can we rely on UnityEngine.Random for convenience?
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-            // If you want cryptographically-strong random, consider using System.Security.Cryptography RNGCryptoServiceProvider.
-            // For most in-game seeds, Unity's pseudo-random is often sufficient.
-
-            // We'll do a quick approach using UnityEngine.Random
-            StringBuilder sb = new StringBuilder(length);
-            for (int i = 0; i < length; i++)
+            var alternatives = new[] { NodeType.Encounter, NodeType.Event, NodeType.RestShop }
+                .Where(t => t != avoidType).ToList();
+            
+            var chosenType = alternatives[_seededRandom.Next(alternatives.Count)];
+            
+            return chosenType switch
             {
-                int index = UnityEngine.Random.Range(0, chars.Length);
-                sb.Append(chars[index]);
-            }
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Core generation logic for a single path leading to a specific boss.
-        /// Called internally after the seed is set.
-        /// </summary>
-        private Path GeneratePath(string boss)
-        {
-            EnsureBossLocationsInitialized();
-
-            var path = new Path
-            {
-                Location = boss,
-                Nodes = new List<PathNode>()
+                NodeType.Encounter => CreateEncounterNodeWithRules(layerIndex, pathIndex, nodeIndex, rules),
+                NodeType.Event => CreateEventNode(layerIndex, pathIndex, nodeIndex),
+                NodeType.RestShop => CreateRestShopNode(layerIndex, pathIndex, nodeIndex),
+                _ => CreateEncounterNodeWithRules(layerIndex, pathIndex, nodeIndex, rules)
             };
-
-            var nodes = new List<PathNode> {
-                GenerateMixedEncounterNode("transition-1", GenerateFixedEncounterProbabilities()),
-                GenerateMixedEncounterNode("transition-2", GenerateFixedEncounterProbabilities()),
-                GenerateEventNode("transition-3", GetRandomEventType()),
-                GenerateRestAndShopNode("transition-4"),
-                GenerateBossNode(boss)
-            };
-
-            path.Nodes.AddRange(nodes);
-
-            return path;
         }
 
         /// <summary>
-        /// Spawns an encounter node containing a mix of MinorEnemy/MajorEnemy with certain probabilities.
+        /// Creates a boss encounter node
         /// </summary>
-        private static PathNode GenerateMixedEncounterNode(string gameObjectName, Dictionary<EncounterType, int> encounterProbabilities)
+        private MapNode CreateBossNode(int layerIndex, int pathIndex, int nodeIndex, string boss)
         {
-            var description = string.Join(", ", encounterProbabilities.Select(e => $"{e.Key}-{e.Value}%"));
-            return new PathNode
+            return new MapNode
             {
-                GameObjectName = gameObjectName,
-                Encounter = new Encounter
+                Id = $"L{layerIndex}_P{pathIndex}_N{nodeIndex}",
+                Type = NodeType.Boss,
+                LayerIndex = layerIndex,
+                PathIndex = pathIndex,
+                NodeIndex = nodeIndex,
+                Properties = new Dictionary<string, object>
                 {
-                    Type = null, // Mixed type
-                    Probability = 100,
-                    Description = description
+                    ["BossName"] = boss,
+                    ["Location"] = BossLocations[layerIndex],
+                    ["Difficulty"] = layerIndex + 1
                 }
             };
         }
 
         /// <summary>
-        /// Generates a dictionary of EncounterType->percent for MinorEnemy vs MajorEnemy.
-        /// Probabilities sum to 100.
+        /// Creates a rest and shop node
         /// </summary>
-        private static Dictionary<EncounterType, int> GenerateFixedEncounterProbabilities()
+        private MapNode CreateRestShopNode(int layerIndex, int pathIndex, int nodeIndex)
         {
-            var probabilities = new Dictionary<EncounterType, int>();
-            var availableProbabilities = EncounterProbabilities
-                .OrderBy(_ => UnityEngine.Random.value)
-                .ToArray();
-
-            probabilities[EncounterType.MinorEnemy] = availableProbabilities[0];
-            probabilities[EncounterType.MajorEnemy] = 100 - probabilities[EncounterType.MinorEnemy];
-
-            return probabilities;
+            return new MapNode
+            {
+                Id = $"L{layerIndex}_P{pathIndex}_N{nodeIndex}",
+                Type = NodeType.RestShop,
+                LayerIndex = layerIndex,
+                PathIndex = pathIndex,
+                NodeIndex = nodeIndex,
+                Properties = new Dictionary<string, object>
+                {
+                    ["RestEfficiency"] = _seededRandom.NextDouble() * 0.5 + 0.5, // 50-100% efficiency
+                    ["ShopQuality"] = _seededRandom.Next(1, 4) // Shop tier 1-3
+                }
+            };
         }
 
         /// <summary>
-        /// Spawns an event node (e.g., TreasureChest, MysteriousAltar, Riddle).
+        /// Creates a random encounter or event node
         /// </summary>
-        private static PathNode GenerateEventNode(string gameObjectName, EventType eventType)
+        private MapNode CreateRandomNode(int layerIndex, int pathIndex, int nodeIndex)
         {
-            return new PathNode
+            // Higher chance of encounters early, more events later
+            double encounterChance = 0.8 - (layerIndex * 0.1);
+            bool isEncounter = _seededRandom.NextDouble() < encounterChance;
+
+            if (isEncounter)
             {
-                GameObjectName = gameObjectName,
-                Encounter = new Encounter
+                return CreateEncounterNode(layerIndex, pathIndex, nodeIndex);
+            }
+            else
+            {
+                return CreateEventNode(layerIndex, pathIndex, nodeIndex);
+            }
+        }
+
+        /// <summary>
+        /// Creates an enemy encounter node
+        /// </summary>
+        private MapNode CreateEncounterNode(int layerIndex, int pathIndex, int nodeIndex)
+        {
+            // Determine encounter difficulty
+            var encounterTypes = new[] { EncounterType.MinorEnemy, EncounterType.MajorEnemy };
+            var encounterType = encounterTypes[_seededRandom.Next(encounterTypes.Length)];
+
+            return new MapNode
+            {
+                Id = $"L{layerIndex}_P{pathIndex}_N{nodeIndex}",
+                Type = NodeType.Encounter,
+                LayerIndex = layerIndex,
+                PathIndex = pathIndex,
+                NodeIndex = nodeIndex,
+                Properties = new Dictionary<string, object>
                 {
-                    EventType = eventType,
-                    Probability = 100,
-                    Description = eventType switch
+                    ["EncounterType"] = encounterType,
+                    ["EnemyCount"] = encounterType == EncounterType.MinorEnemy ? _seededRandom.Next(2, 6) : _seededRandom.Next(1, 3),
+                    ["Difficulty"] = layerIndex + 1,
+                    ["RewardMultiplier"] = _seededRandom.NextDouble() * 0.5 + 0.75 // 75-125% rewards
+                }
+            };
+        }
+
+        /// <summary>
+        /// Creates a mystical event node
+        /// </summary>
+        private MapNode CreateEventNode(int layerIndex, int pathIndex, int nodeIndex)
+        {
+            var eventTypes = Enum.GetValues(typeof(EventType)).Cast<EventType>().ToArray();
+            var eventType = eventTypes[_seededRandom.Next(eventTypes.Length)];
+
+            return new MapNode
+            {
+                Id = $"L{layerIndex}_P{pathIndex}_N{nodeIndex}",
+                Type = NodeType.Event,
+                LayerIndex = layerIndex,
+                PathIndex = pathIndex,
+                NodeIndex = nodeIndex,
+                Properties = new Dictionary<string, object>
+                {
+                    ["EventType"] = eventType,
+                    ["EventPower"] = _seededRandom.Next(1, layerIndex + 2), // Scales with layer
+                    ["RiskLevel"] = _seededRandom.NextDouble() // 0-100% risk
+                }
+            };
+        }
+
+        /// <summary>
+        /// Generates the final boss layer for ultimate challenge
+        /// </summary>
+        private MapLayer GenerateFinalBossLayer()
+        {
+            return new MapLayer
+            {
+                LayerIndex = 6,
+                Boss = "Sloth", // The final sin
+                Location = "The Lethargy Lounge",
+                Nodes = new List<MapNode>
+                {
+                    new MapNode
                     {
-                        EventType.TreasureChest => "A treasure chest containing loot.",
-                        EventType.MysteriousAltar => "A mysterious altar offering a choice.",
-                        EventType.Riddle => "A statue challenges you with a riddle.",
-                        _ => "An unknown event occurs."
+                        Id = "FINAL_BOSS",
+                        Type = NodeType.Boss,
+                        LayerIndex = 6,
+                        PathIndex = 0,
+                        NodeIndex = 0,
+                        Properties = new Dictionary<string, object>
+                        {
+                            ["BossName"] = "Sloth",
+                            ["Location"] = "The Lethargy Lounge",
+                            ["Difficulty"] = 10,
+                            ["IsFinalBoss"] = true
+                        }
                     }
                 }
             };
         }
 
         /// <summary>
-        /// Spawns a node that includes a rest stop and a shop.
+        /// Determines if the final boss should be included
         /// </summary>
-        private static PathNode GenerateRestAndShopNode(string gameObjectName)
+        private bool ShouldIncludeFinalBoss()
         {
-            return new PathNode
-            {
-                GameObjectName = gameObjectName,
-                Encounter = new Encounter
-                {
-                    Type = EncounterType.RestShop,
-                    Probability = 100,
-                    Description = "A rest stop and shop are available before the boss."
-                }
-            };
+            // Include final boss if all other bosses are defeated
+            return Constants.DefeatedBosses?.Count >= 6;
         }
 
         /// <summary>
-        /// Spawns a node containing the final boss encounter for a path.
+        /// Serializes the mystical map for persistence
         /// </summary>
-        private static PathNode GenerateBossNode(string boss)
+        public string SerializeMap(MysticalMap map)
         {
-            return new PathNode
-            {
-                GameObjectName = $"boss-{boss.ToUpper()}",
-                Encounter = new Encounter
-                {
-                    Type = EncounterType.MajorEnemy,
-                    Probability = 100,
-                    Description = $"The final boss of this path: {boss.ToUpper()}.",
-                }
-            };
+            return JsonConvert.SerializeObject(map, Formatting.Indented);
         }
 
         /// <summary>
-        /// Returns a random EventType from the enumeration.
+        /// Deserializes a mystical map from the astral plane
         /// </summary>
-        private static EventType GetRandomEventType()
+        public MysticalMap DeserializeMap(string json)
         {
-            var values = Enum.GetValues(typeof(EventType)).Cast<EventType>().ToList();
-            return values[UnityEngine.Random.Range(0, values.Count)];
-        }
-
-        // OPTIONAL: If you want to store the final dictionary in a single string, you can serialize to JSON.
-        // This approach allows you to save the *entire* resulting paths�useful if you want to 
-        // guarantee the exact same run without re-calling random, or if code changes in the future.
-        // Also helpful for debugging or sharing a "snapshot" of the run beyond just the seed.
-        public string SerializePathsToJson(Dictionary<string, Path> paths)
-        {
-            return JsonConvert.SerializeObject(paths);
-        }
-
-        /// <summary>
-        /// OPTIONAL: For re-loading a run from a JSON snapshot (instead of re-generating from seed).
-        /// This ensures the exact same data is used, even if your generation logic changes.
-        /// </summary>
-        public Dictionary<string, Path> DeserializePathsFromJson(string json)
-        {
-            return JsonConvert.DeserializeObject<Dictionary<string, Path>>(json);
+            return JsonConvert.DeserializeObject<MysticalMap>(json);
         }
     }
 
-    // Enum for encounter types
+    /// <summary>
+    /// The complete mystical map structure
+    /// </summary>
+    [Serializable]
+    public class MysticalMap
+    {
+        public string Seed { get; set; }
+        public List<MapLayer> Layers { get; set; } = new List<MapLayer>();
+    }
+
+    /// <summary>
+    /// A single layer in the mystical progression
+    /// </summary>
+    [Serializable]
+    public class MapLayer
+    {
+        public int LayerIndex { get; set; }
+        public string Boss { get; set; }
+        public string Location { get; set; }
+        public List<MapNode> Nodes { get; set; } = new List<MapNode>();
+    }
+
+    /// <summary>
+    /// A single node in the mystical map - fully extensible for future magic
+    /// </summary>
+    [Serializable]
+    public class MapNode
+    {
+        public string Id { get; set; }
+        public NodeType Type { get; set; }
+        public int LayerIndex { get; set; }
+        public int PathIndex { get; set; }
+        public int NodeIndex { get; set; }
+        
+        // Extensible properties for future mystical enhancements
+        public Dictionary<string, object> Properties { get; set; } = new Dictionary<string, object>();
+        
+        // Navigation connections (for future branching complexity)
+        public List<string> ConnectedNodeIds { get; set; } = new List<string>();
+    }
+
+    /// <summary>
+    /// The mystical node types that define reality
+    /// </summary>
+    public enum NodeType
+    {
+        Encounter,   // Combat encounters
+        Event,       // Mystical events
+        RestShop,    // Rest and shopping
+        Boss,        // Boss encounters
+        Treasure,    // Future: Treasure rooms
+        Elite,       // Future: Elite encounters
+        Mystery      // Future: Mystery nodes
+    }
+
+    /// <summary>
+    /// Combat encounter classifications
+    /// </summary>
     public enum EncounterType
     {
-        MajorEnemy,  // "ME": 1-3 larger, more powerful foes
-        MinorEnemy,  // "mE": 1-5 smaller, less dangerous foes
-        RestShop     // Combined Rest and Shop encounter
+        MinorEnemy,  // 2-5 smaller foes
+        MajorEnemy,  // 1-2 powerful foes
+        Elite        // Single elite enemy
     }
 
-    // Enum for event types
+    /// <summary>
+    /// Mystical events that bend reality
+    /// </summary>
     public enum EventType
     {
-        TreasureChest,    // Treasure chest containing loot
-        MysteriousAltar,  // A mysterious altar offering a choice
-        Riddle            // Statue challenges you with a riddle
+        TreasureChest,    // Loot chest
+        MysteriousAltar,  // Choice-based altar
+        Riddle,           // Puzzle challenge
+        Merchant,         // Traveling merchant
+        Shrine,           // Blessing shrine
+        Curse,            // Cursed encounter
+        Portal            // Dimensional portal
     }
 
-    // Classes for representing the structure
+    // Legacy classes for backward compatibility
     public class Path
     {
         public string Location { get; set; }
@@ -326,19 +669,16 @@ namespace NeonLadder.ProceduralGeneration
 
     public class PathNode
     {
-        // QUESTION: Currently all nodes default to "transition" except for boss nodes, 
-        // but you might want to store the actual scene name here.
         public string Scene { get; set; } = "transition";
-
         public string GameObjectName { get; set; }
         public Encounter Encounter { get; set; }
     }
 
     public class Encounter
     {
-        public EncounterType? Type { get; set; }       // Strongly typed encounter types
-        public EventType? EventType { get; set; }      // Nullable for non-event encounters
-        public int Probability { get; set; }           // Encounter chance
-        public string Description { get; set; }        // Additional info for encounters/events
+        public EncounterType? Type { get; set; }
+        public EventType? EventType { get; set; }
+        public int Probability { get; set; }
+        public string Description { get; set; }
     }
 }
