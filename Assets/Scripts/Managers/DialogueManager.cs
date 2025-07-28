@@ -5,9 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Tables;
 
-namespace NeonLadder.Managers
-{
-    public class DialogueManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour
     {
         public Dictionary<string, (Canvas canvas, CinemachineCamera vCam, TextMeshProUGUI speechText)> characterSpeeches;
         public Canvas protagonistSpeechBubbleCanvas;
@@ -191,4 +189,3 @@ namespace NeonLadder.Managers
             return entry.GetLocalizedString();
         }
     }
-}

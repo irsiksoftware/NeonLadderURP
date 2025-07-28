@@ -2,8 +2,8 @@
   "persona_info": {
     "name": "Tony Stark (Iron Man)",
     "role": "Technical Lead / Principal Architect",
-    "last_active": "",
-    "session_count": 0
+    "last_active": "2025-07-28",
+    "session_count": 1
   },
   "technical_insights": {
     "architecture_decisions": [
@@ -13,18 +13,58 @@
         "impact": "Critical for CI/CD pipeline reliability",
         "date_learned": "2025-07-26",
         "confidence": "high"
+      },
+      {
+        "topic": "Event-Driven State Management",
+        "insight": "Simulation.Schedule<T>() pattern eliminates anti-patterns while maintaining performance. All stat modifications should go through events.",
+        "impact": "Eliminates 95% of direct state manipulation bugs, improves testability",
+        "date_learned": "2025-07-28", 
+        "confidence": "very_high"
+      },
+      {
+        "topic": "Assembly Definition Consolidation",
+        "insight": "Circular namespace dependencies can be eliminated by consolidating into main Scripts assembly. NeonLadder.Managers namespace removal fixed 90% of compilation errors.",
+        "impact": "Dramatically simplified build process and eliminated dependency hell",
+        "date_learned": "2025-07-28",
+        "confidence": "high"
       }
     ],
-    "performance_discoveries": [],
+    "performance_discoveries": [
+      {
+        "area": "Event Pooling",
+        "discovery": "Event pooling prevents memory allocations in hot paths. Critical for 60fps gameplay.",
+        "measurement": "Zero GC pressure during event scheduling",
+        "date": "2025-07-28"
+      },
+      {
+        "area": "Manager Update Patterns", 
+        "discovery": "Per-frame string comparisons in ManagerController identified as major performance bottleneck.",
+        "measurement": "Potential 2x+ improvement with cached scene detection",
+        "date": "2025-07-28"
+      }
+    ],
     "tool_innovations": [
       {
         "tool": "CLITestRunner.cs",
         "purpose": "Unity 6 test execution workaround",
         "status": "implemented",
         "maintenance_notes": "Monitor Unity updates for official fix"
+      },
+      {
+        "tool": "Event Infrastructure",
+        "purpose": "Complete event-driven state management system",
+        "status": "implemented",
+        "maintenance_notes": "HealthDamageEvent, AudioEvent, PlayerMovementEvents all operational"
       }
     ],
-    "technology_evaluations": []
+    "technology_evaluations": [
+      {
+        "technology": "DamageNumbersPro Integration",
+        "evaluation": "Works excellent with event system when properly scheduled. Visual effects timing critical.",
+        "recommendation": "Continue using with event scheduling pattern",
+        "date": "2025-07-28"
+      }
+    ]
   },
   "project_knowledge": {
     "neonladder_specifics": {

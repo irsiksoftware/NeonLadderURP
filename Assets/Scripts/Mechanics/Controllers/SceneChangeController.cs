@@ -1,5 +1,4 @@
 using NeonLadder.Core;
-using NeonLadder.Managers;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;

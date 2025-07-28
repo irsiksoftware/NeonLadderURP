@@ -10,7 +10,8 @@ namespace NeonLadder.Items
 
             if (healthComponent != null && healthComponent.IsAlive)
             {
-                healthComponent.Increment(amount);
+                // Schedule healing through event system
+                model.Player.ScheduleHealing(amount, 0f);
                 Destroy(gameObject);
             }
         }

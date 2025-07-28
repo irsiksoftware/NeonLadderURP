@@ -128,8 +128,8 @@ if (Test-Path $ResultsPath) {
     
     if (Test-Path $LogPath) {
         Write-Host ""
-        Write-Host "Last 20 lines of log file:" -ForegroundColor Yellow
-        Get-Content $LogPath | Select-Object -Last 20 | ForEach-Object { Write-Host "  $($_)" -ForegroundColor Gray }
+        Write-Host 'Last 20 lines of log file:' -ForegroundColor Yellow
+        Get-Content $LogPath | Select-Object -Last 20 | Out-Host
     }
     
     exit 1

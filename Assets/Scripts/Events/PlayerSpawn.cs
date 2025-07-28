@@ -1,3 +1,4 @@
+using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using System.Collections;
@@ -13,11 +14,16 @@ namespace NeonLadder.Events
         {
             if (model.Player.audioSource && model.Player.respawnAudio)
             {
-                model.Player.audioSource.PlayOneShot(model.Player.respawnAudio);
+                // Schedule respawn audio through event system
+                var audioEvent = Simulation.Schedule<AudioEvent>(0f);
+                audioEvent.audioSource = model.Player.audioSource;
+                audioEvent.audioClip = model.Player.respawnAudio;
+                audioEvent.audioType = AudioEventType.Respawn;
             }
 
-            model.Player.Health.Increment(model.Player.Health.max);
-            model.Player.Stamina.Increment(model.Player.Stamina.max);
+            // Schedule health and stamina restoration through event system
+            model.Player.ScheduleHealing(model.Player.Health.max, 0f);
+            model.Player.ScheduleStaminaDamage(-model.Player.Stamina.max, 0f); // Negative damage = healing
 
             // Start the coroutine to reset the Animator - THIS MUST be done inside of a coroutine for WebGL to function properly.
             model.Player.StartCoroutine(ResetAnimatorDelayed(model.Player));

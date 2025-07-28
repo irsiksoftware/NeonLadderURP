@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.Managers;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine.SceneManagement;
@@ -318,22 +318,22 @@ namespace NeonLadder.Tests.Runtime
 
     #region Mock Manager Classes for Testing
 
-    public class MockGameControllerManager : MonoBehaviour, IGameControllerManager
+    public class MockGameControllerManager : GameControllerManager
     {
         // Mock implementation for testing
     }
 
-    public class MockLootPurchaseManager : MonoBehaviour
+    public class MockLootPurchaseManager : LootPurchaseManager
     {
         // Mock implementation for testing
     }
 
-    public class MockLootDropManager : MonoBehaviour
+    public class MockLootDropManager : LootDropManager
     {
         // Mock implementation for testing
     }
 
-    public class MockPlayerCameraPositionManager : MonoBehaviour
+    public class MockPlayerCameraPositionManager : PlayerCameraPositionManager
     {
         // Mock implementation for testing
     }

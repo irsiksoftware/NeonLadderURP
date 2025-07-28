@@ -18,6 +18,11 @@ namespace NeonLadder.Mechanics.Controllers
         public LayerMask layerMask;
         public bool IsGrounded { get; private set; }
         protected Vector3 targetVelocity;
+        public Vector3 TargetVelocity 
+        { 
+            get => targetVelocity; 
+            set => targetVelocity = value; 
+        }
         protected Vector3 groundNormal;
         //https://github.com/Unity-Technologies/UnityCsReference/blob/master/Runtime/Export/Scripting/Component.deprecated.cs
         protected new Rigidbody rigidbody;

@@ -1,15 +1,13 @@
 using System;
 
-namespace NeonLadder.Managers.Optimization
-{
-    /// <summary>
+/// <summary>
     /// High-performance scene change detector that eliminates per-frame string comparisons.
     /// 
     /// This class caches the current scene name and only performs string comparisons when
     /// the scene actually changes, providing significant performance improvements for
     /// frame-rate critical applications.
-    /// </summary>
-    public class SceneChangeDetector
+/// </summary>
+public class SceneChangeDetector
     {
         private readonly ISceneProvider sceneProvider;
         private string cachedSceneName;
@@ -73,6 +71,12 @@ namespace NeonLadder.Managers.Optimization
         /// <returns>The cached scene name, or null if not initialized</returns>
         public string GetCachedSceneName()
         {
+            // Initialize if not already done
+            if (!isInitialized)
+            {
+                cachedSceneName = sceneProvider?.GetCurrentSceneName();
+                isInitialized = true;
+            }
             return cachedSceneName;
         }
 
@@ -96,4 +100,3 @@ namespace NeonLadder.Managers.Optimization
             isInitialized = false;
         }
     }
-}

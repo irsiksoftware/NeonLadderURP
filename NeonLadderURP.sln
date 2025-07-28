@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonLadder.Tests.Runtime", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonLadder.Tests.Editor", "NeonLadder.Tests.Editor.csproj", "{8E7E9E8D-9E7E-4F8D-9E7E-8E7E9E8D9E7E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonLadder.CLITestRunner", "NeonLadder.CLITestRunner.csproj", "{DBB0F7CE-3FFC-6E99-9A05-FF5612489691}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{8E7E9E8D-9E7E-4F8D-9E7E-8E7E9E8D9E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E7E9E8D-9E7E-4F8D-9E7E-8E7E9E8D9E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E7E9E8D-9E7E-4F8D-9E7E-8E7E9E8D9E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBB0F7CE-3FFC-6E99-9A05-FF5612489691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB0F7CE-3FFC-6E99-9A05-FF5612489691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB0F7CE-3FFC-6E99-9A05-FF5612489691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB0F7CE-3FFC-6E99-9A05-FF5612489691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

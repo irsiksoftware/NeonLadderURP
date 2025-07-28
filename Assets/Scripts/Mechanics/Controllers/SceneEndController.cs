@@ -1,5 +1,5 @@
-using NeonLadder.Managers;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
