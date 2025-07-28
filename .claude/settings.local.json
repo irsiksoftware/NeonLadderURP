@@ -70,7 +70,16 @@
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_compilation_check.txt\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_test_run.txt\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/successful_compilation_test.txt\")",
-      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr list)"
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr list)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 12)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 11)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr list --state all --limit 20)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 12 --web)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 11 --web)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr status)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr checks 12)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr checks 11)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 12 --json mergeable,mergeStateStatus,baseRefName,headRefName)"
     ],
     "deny": [
       "Bash(reg *)",
