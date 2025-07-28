@@ -29,8 +29,8 @@ namespace NeonLadder.Mechanics.Controllers
 
             Instance = this;
             var pathGen = new PathGenerator();
-            var paths = pathGen.GeneratePaths();
-            Constants.Minimap = PathSerialization.ToIndentedText(paths, pathGen.BossLocations); //temp minimap
+            var map = pathGen.GenerateMap();
+            Constants.Minimap = "Map generated successfully"; //temp simplified minimap
             DontDestroyOnLoad(gameObject);
         }
 

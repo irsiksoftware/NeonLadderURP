@@ -427,6 +427,12 @@ namespace NeonLadder.Tests.Runtime
             
             player.AddMetaCurrency(addAmount);
             
+            // Process any scheduled events in the simulation
+            if (Application.isPlaying)
+            {
+                Simulation.Tick();
+            }
+            
             Assert.AreEqual(initialAmount + addAmount, testMetaCurrency.current, 0.01f);
         }
 
@@ -437,6 +443,12 @@ namespace NeonLadder.Tests.Runtime
             int addAmount = 25;
             
             player.AddPermanentCurrency(addAmount);
+            
+            // Process any scheduled events in the simulation
+            if (Application.isPlaying)
+            {
+                Simulation.Tick();
+            }
             
             Assert.AreEqual(initialAmount + addAmount, testPermaCurrency.current, 0.01f);
         }
@@ -583,6 +595,12 @@ namespace NeonLadder.Tests.Runtime
             float initialAmount = player.MetaCurrency.current;
             player.AddMetaCurrency(100);
             
+            // Process any scheduled events in the simulation
+            if (Application.isPlaying)
+            {
+                Simulation.Tick();
+            }
+            
             Assert.AreEqual(initialAmount + 100, player.MetaCurrency.current, 0.01f, "Meta currency should increase");
             
             // This is the temporary currency that gets lost on death
@@ -596,6 +614,12 @@ namespace NeonLadder.Tests.Runtime
             // Test that permanent currency persists (unlike meta currency)
             float initialAmount = player.PermaCurrency.current;
             player.AddPermanentCurrency(50);
+            
+            // Process any scheduled events in the simulation
+            if (Application.isPlaying)
+            {
+                Simulation.Tick();
+            }
             
             Assert.AreEqual(initialAmount + 50, player.PermaCurrency.current, 0.01f, "Permanent currency should increase");
             

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Progression;
+using NeonLadder.Mechanics.Controllers;
 using System;
 
 namespace NeonLadder.Models
@@ -18,7 +19,7 @@ namespace NeonLadder.Models
         [SerializeField] private Sprite shopIcon; // Different icon for shop display
         
         [Header("Currency & Cost")]
-        [SerializeField] private CurrencyType currencyType;
+        [SerializeField] private NeonLadder.Mechanics.Progression.CurrencyType currencyType;
         [SerializeField] private int baseCost;
         [SerializeField] private bool canPurchaseMultiple = false;
         [SerializeField] private int maxPurchases = 1;
@@ -47,7 +48,7 @@ namespace NeonLadder.Models
         public string FlavorText => flavorText;
         public Sprite Icon => icon;
         public Sprite ShopIcon => shopIcon != null ? shopIcon : icon;
-        public CurrencyType CurrencyType => currencyType;
+        public NeonLadder.Mechanics.Progression.CurrencyType CurrencyType => currencyType;
         public int Cost => CalculateCost();
         public ItemType Type => itemType;
         public bool CanPurchase => timesPurchased < maxPurchases;
@@ -105,7 +106,7 @@ namespace NeonLadder.Models
         
         public void ResetPurchases()
         {
-            if (currencyType == CurrencyType.Meta)
+            if (currencyType == NeonLadder.Mechanics.Progression.CurrencyType.Meta)
             {
                 timesPurchased = 0;
             }

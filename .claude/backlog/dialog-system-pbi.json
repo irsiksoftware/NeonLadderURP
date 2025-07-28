@@ -1,0 +1,238 @@
+{
+  "feature": "Disco Elysium Dialog System",
+  "created_by": "T'Challa",
+  "created_date": "2025-07-28",
+  "epic": "Enhanced Dialog and Narrative System",
+  "backlog_items": [
+    {
+      "id": "PBI-DIALOG-001",
+      "title": "Fix Compilation Errors - Namespace Conflicts",
+      "description": "Resolve namespace conflicts between Dialog system enums and existing game enums",
+      "acceptance_criteria": [
+        "PersonalityTrait enum conflict resolved (Dialog vs existing)",
+        "CurrencyType ambiguous reference fixed",
+        "DamageNumbersPro missing reference resolved",
+        "All 4 compilation errors cleared",
+        "Unity CLI tests run successfully"
+      ],
+      "story_points": 2,
+      "priority": "Critical",
+      "type": "Bug Fix",
+      "assigned_to": "@tony-stark or @sue-storm",
+      "technical_notes": [
+        "Assets\\Scripts\\Dialog\\ConversationManager.cs(457,17): PersonalityTrait already defined",
+        "Assets\\Scripts\\Models\\PurchasableItem.cs(50,16): CurrencyType ambiguous reference",
+        "Consider namespace aliases or renaming enums"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-002",
+      "title": "Integrate Dialogue System for Unity Database",
+      "description": "Connect new dialog system with existing Dialogue System for Unity asset database",
+      "acceptance_criteria": [
+        "Create conversation database for all 7 sins + NPCs",
+        "Link ConversationManager to Dialogue System conversations",
+        "Implement conversation triggers in game world",
+        "Test dialog flow from trigger to completion",
+        "Preserve existing DialogueManager functionality"
+      ],
+      "story_points": 5,
+      "priority": "High",
+      "type": "Feature",
+      "assigned_to": "@jean-grey",
+      "technical_notes": [
+        "Use Dialogue System's conversation editor",
+        "Create Lua conditions for CVC level checks",
+        "Implement custom sequencer commands for personality effects"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-003",
+      "title": "Build Enhanced Dialog UI with Consequence Preview",
+      "description": "Create Disco Elysium-inspired UI showing choice consequences before selection",
+      "acceptance_criteria": [
+        "Dialog choice UI shows point changes (+15, -10, etc)",
+        "Skill requirements displayed for locked choices",
+        "Internal thoughts appear in distinct formatting",
+        "CVC level progress bar visible during conversations",
+        "Mobile-responsive design for all platforms"
+      ],
+      "story_points": 8,
+      "priority": "High",
+      "type": "Feature",
+      "assigned_to": "@storm",
+      "technical_notes": [
+        "Use Unity UI Toolkit or enhanced Canvas system",
+        "Implement smooth transitions and hover effects",
+        "Support gamepad/keyboard/touch input",
+        "Follow existing UI style guide"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-004",
+      "title": "Implement Voice Acting Pipeline",
+      "description": "Set up multi-language voice acting system with lip sync support",
+      "acceptance_criteria": [
+        "Audio import pipeline for 6 languages established",
+        "Voice clips linked to dialog entries",
+        "Subtitle timing synchronized with audio",
+        "Audio memory optimization for mobile",
+        "Fallback to text-only for missing audio"
+      ],
+      "story_points": 13,
+      "priority": "Medium",
+      "type": "Feature",
+      "assigned_to": "@wolverine",
+      "technical_notes": [
+        "Consider Unity Addressables for audio streaming",
+        "Implement audio pooling for frequent sounds",
+        "Support partial voice acting (key lines only)",
+        "Plan for 7 sins * 6 languages = 42 voice sets"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-005",
+      "title": "Connect Dialog Rewards to Currency System",
+      "description": "Integrate conversation outcomes with Meta/Perma currency rewards",
+      "acceptance_criteria": [
+        "Dialog choices can award Meta currency",
+        "Special conversations grant Perma currency",
+        "CVC levels unlock shop discounts",
+        "Currency UI updates during conversations",
+        "Save system preserves conversation rewards"
+      ],
+      "story_points": 3,
+      "priority": "High",
+      "type": "Integration",
+      "assigned_to": "@bruce-banner",
+      "technical_notes": [
+        "Use existing EnhancedPurchaseManager",
+        "Fire BatchCurrencyEvent from dialog outcomes",
+        "Test with save/load scenarios"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-006",
+      "title": "Create Dialog Content for All Characters",
+      "description": "Write actual dialog trees for 7 sins, NPCs, and spaceship",
+      "acceptance_criteria": [
+        "Each sin has 3+ conversation scenarios",
+        "NPCs have shop-specific dialogs",
+        "Spaceship has deep lore conversations",
+        "All dialogs support 6 languages",
+        "Personality traits consistently expressed"
+      ],
+      "story_points": 21,
+      "priority": "Medium",
+      "type": "Content",
+      "assigned_to": "@charles-xavier and @jean-grey",
+      "technical_notes": [
+        "Collaborate with narrative designer",
+        "Use CSV import for bulk dialog creation",
+        "Maintain character voice consistency",
+        "Plan branching paths based on CVC levels"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-007",
+      "title": "Implement Save System Integration",
+      "description": "Ensure conversation progress persists across game sessions",
+      "acceptance_criteria": [
+        "CVC levels saved per character",
+        "Conversation history preserved",
+        "Dialog choices affect New Game+",
+        "Character relationships carry over",
+        "Quick save during conversations"
+      ],
+      "story_points": 5,
+      "priority": "Medium",
+      "type": "Feature",
+      "assigned_to": "@reed-richards",
+      "technical_notes": [
+        "Extend existing save system",
+        "Consider save file size with history",
+        "Version save data for compatibility"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-008",
+      "title": "Performance Optimization for Mobile",
+      "description": "Optimize dialog system for smooth performance on Android/iOS",
+      "acceptance_criteria": [
+        "60 FPS maintained during conversations",
+        "Memory usage under 100MB for dialog assets",
+        "Fast conversation loading (<1 second)",
+        "Efficient string localization caching",
+        "Battery-friendly for long play sessions"
+      ],
+      "story_points": 8,
+      "priority": "Medium",
+      "type": "Optimization",
+      "assigned_to": "@johnny-storm",
+      "technical_notes": [
+        "Profile with Unity Profiler",
+        "Implement object pooling for UI elements",
+        "Lazy load conversation assets",
+        "Optimize texture atlases for character portraits"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-009",
+      "title": "QA Test Suite for Dialog System",
+      "description": "Comprehensive testing of all dialog features and edge cases",
+      "acceptance_criteria": [
+        "Unit tests achieve 80% code coverage",
+        "Integration tests for all character interactions",
+        "Localization tests for all 6 languages",
+        "Platform-specific tests (Android/iOS/PC)",
+        "Performance benchmarks established"
+      ],
+      "story_points": 8,
+      "priority": "High",
+      "type": "Testing",
+      "assigned_to": "@bruce-banner",
+      "technical_notes": [
+        "Extend DiscoElysiumDialogSystemTests.cs",
+        "Create automated conversation flow tests",
+        "Test save/load during conversations",
+        "Verify memory leaks don't occur"
+      ]
+    },
+    {
+      "id": "PBI-DIALOG-010",
+      "title": "Dialog Analytics and Telemetry",
+      "description": "Track player choices and conversation metrics for balancing",
+      "acceptance_criteria": [
+        "Track most/least chosen dialog options",
+        "Monitor CVC level progression rates",
+        "Identify conversation drop-off points",
+        "A/B test different dialog approaches",
+        "Privacy-compliant data collection"
+      ],
+      "story_points": 5,
+      "priority": "Low",
+      "type": "Analytics",
+      "assigned_to": "@nick-fury",
+      "technical_notes": [
+        "Integrate with existing analytics",
+        "Create dashboard for dialog metrics",
+        "Plan for GDPR compliance",
+        "Enable/disable in settings"
+      ]
+    }
+  ],
+  "total_story_points": 85,
+  "estimated_sprints": 6,
+  "dependencies": [
+    "Currency System (PR #13) should be merged first",
+    "Dialogue System for Unity asset must be in project",
+    "Narrative design document needed for content",
+    "Voice actor contracts for 6 languages"
+  ],
+  "risks": [
+    "Compilation errors blocking all development",
+    "Voice acting budget for 6 languages",
+    "Mobile performance with full voice acting",
+    "Save file size growth with conversation history"
+  ]
+}
