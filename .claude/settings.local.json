@@ -97,7 +97,16 @@
       "Bash(\"C:\\Users\\Ender\\NeonLadder\\Scripts\\run-tests-cli.bat\")",
       "Bash(\"Scripts\\run-tests-cli.bat\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput\\final_test_validation.txt\")",
-      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput\\test_validation_final.txt\")"
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput\\test_validation_final.txt\")",
+      "Bash(where rclone)",
+      "Bash(c:/tools/gdrive version)",
+      "Bash(c:/tools/gdrive files list --query \"name=''NeonLadder'' and mimeType=''application/vnd.google-apps.folder''\")",
+      "Bash(c:/tools/gdrive files list --query \"name=''NeonLadder''\")",
+      "Bash(c:/tools/gdrive files list --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z --query \"name=''Tutorials''\")",
+      "Bash(c:/tools/gdrive files mkdir Tutorials --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z)",
+      "Bash(c:/tools/gdrive files upload \"C:\\Users\\Ender\\NeonLadder\\TUTORIAL_BUNDLE_README.md\" --parent 1vqY_-Ncn2gdf4yZKTEYNPl2e95Im9MaV)",
+      "Bash(c:/tools/gdrive files upload \"C:\\Users\\Ender\\NeonLadder\\Assets\\Scripts\\ProceduralGeneration\\README.md\" --parent 1vqY_-Ncn2gdf4yZKTEYNPl2e95Im9MaV)",
+      "Bash(c:/tools/gdrive files upload:*)"
     ],
     "deny": [
       "Bash(reg *)",
