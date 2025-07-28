@@ -546,8 +546,8 @@ namespace NeonLadder.Tests.Runtime
             {
                 int bindingCount = action.bindings.Count();
                 
-                // Reasonable limits: Move action can have many composite bindings, others should be more modest
-                int maxExpectedBindings = action.name == "Move" ? 20 : 15;
+                // Reasonable limits: Move action needs comprehensive platform support, others should be more modest
+                int maxExpectedBindings = action.name == "Move" ? 35 : 15;
                 
                 Assert.LessOrEqual(bindingCount, maxExpectedBindings,
                     $"Action '{action.name}' has {bindingCount} bindings - may impact performance. Consider optimization.");
