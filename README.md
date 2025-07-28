@@ -87,10 +87,109 @@ Business Analyst personas can read Google Drive initiative documents and automat
 
 **Technical Details**: See `CLAUDE.md` for complete development workflows, testing infrastructure, and detailed priorities.
 
-**Current Sprint Focus:**
-- **CRITICAL**: SaveState Z-movement bug fix (blocks scene transitions)
-- **HIGH**: Performance optimization (string comparisons, Quaternion caching)
-- **MEDIUM**: Component refactoring and testing improvements
+**📚 Documentation Hub**: See [`.claude/documentation/README.md`](.claude/documentation/README.md) for comprehensive technical specifications, business analysis, and team documentation.
+
+## 🎯 Current Project Status (January 2025)
+
+### **Active Sprints & Priorities**
+
+**🚨 SPRINT 1: Steam Launch Readiness (Current)**
+- **PBI-001**: Fix SaveState Z-position bug during scene transitions (CRITICAL - **@tony-stark**)
+- **PBI-002**: Remove per-frame string comparisons in ManagerController (HIGH - **@johnny-storm**)
+- **PBI-003**: Cache Quaternion to Euler conversions in Player movement (HIGH - **@johnny-storm**)
+- **PBI-004**: Complete Steam achievements implementation (HIGH - **@wolverine**)
+- **PBI-005**: Implement Steam Cloud saves (HIGH - **@gamora**)
+
+**📋 Product Backlog Summary**
+- **85 total story points** across 4 major epics
+- **34 points** committed to Sprint 1 (Steam Launch Readiness)
+- **21 stories** in technical debt reduction pipeline
+- **10+ PBIs** for Disco Elysium dialog system integration
+
+### **Key Epic Status**
+1. **Technical Debt Reduction** (High Priority) - 30% development velocity increase expected
+2. **Steam Platform Integration** (High Priority) - Required for Q1 2025 launch
+3. **Mobile Platform Expansion** (Medium Priority) - $500K+ revenue potential
+4. **Disco Elysium Dialog System** (Medium Priority) - 85 story points, 6 sprints estimated
+
+### **Development Infrastructure Status**
+- 🚨 **CLI Testing**: **BLOCKED** - 100+ compilation errors preventing test execution
+- ✅ **Google Drive Integration**: 30GB asset management operational  
+- ✅ **AI Team Simulation**: 21 Marvel personas with persistent memory
+- ⚠️ **GitHub CLI**: Installed, authentication pending
+- ⚠️ **Unity CLI**: Ready but blocked by compilation failures
+
+### **🚨 CRITICAL BLOCKERS (Immediate Action Required)**
+1. **Missing Save System Files** - 4 critical DataManagement files not found
+2. **Namespace Conflicts** - PersonalityTrait and CurrencyType enum conflicts
+3. **Missing Dependencies** - DamageNumbersPro, Michsky.MUIP packages missing
+4. **Dialog System Integration** - 50+ errors from incomplete Disco Elysium integration
+5. **Scene Management API** - Method signature changes breaking existing code
+
+## 📋 **COMPREHENSIVE TODO LIST** (From PBI Analysis)
+
+### **🔥 SPRINT 1: Steam Launch Readiness** (34 Story Points)
+**CRITICAL Priority:**
+- [ ] **PBI-001**: Fix SaveState Z-position bug during scene transitions (**@tony-stark** - 5 pts)
+- [ ] **PBI-DIALOG-001**: Fix compilation errors - namespace conflicts (**@sue-storm** - 2 pts)
+- [ ] **PBI-INPUT-001**: Unit test Xbox/PlayStation/Switch controller mappings (**@bruce-banner** - 3 pts)
+
+**HIGH Priority:**
+- [ ] **PBI-002**: Remove per-frame string comparisons in ManagerController (**@johnny-storm** - 3 pts)
+- [ ] **PBI-003**: Cache Quaternion to Euler conversions in Player movement (**@johnny-storm** - 3 pts)
+- [ ] **PBI-004**: Complete Steam achievements implementation (**@wolverine** - 5 pts)
+- [ ] **PBI-005**: Implement Steam Cloud saves (**@gamora** - 3 pts)
+- [ ] **PBI-006**: Add Steam Rich Presence (**@wolverine** - 2 pts)
+
+**MEDIUM Priority:**
+- [ ] **PBI-007**: Implement Heat/Corruption difficulty system (**@stephen-strange** - 8 pts)
+- [ ] **PBI-008**: Add ability synergy detection system (**@stephen-strange** - 5 pts)
+
+### **🎯 TECHNICAL DEBT REDUCTION** (High Business Value)
+- [ ] **PBI-009**: Break Player ↔ PlayerAction circular dependency (**@sue-storm** - 5 pts)
+- [ ] **PBI-010**: Replace ManagerController singleton with service container (**@tony-stark** - 8 pts)  
+- [ ] **PBI-011**: Decouple scene-specific manager logic (**@reed-richards** - 5 pts)
+
+### **🎮 DISCO ELYSIUM DIALOG SYSTEM** (85 Story Points, 6 Sprints)
+- [ ] **PBI-DIALOG-002**: Integrate Dialogue System for Unity Database (**@jean-grey** - 5 pts)
+- [ ] **PBI-DIALOG-003**: Build Enhanced Dialog UI with Consequence Preview (**@storm** - 8 pts)
+- [ ] **PBI-DIALOG-004**: Implement Voice Acting Pipeline (**@wolverine** - 13 pts)
+- [ ] **PBI-DIALOG-005**: Connect Dialog Rewards to Currency System (**@bruce-banner** - 3 pts)
+- [ ] **PBI-DIALOG-006**: Create Dialog Content for All Characters (**@charles-xavier** + **@jean-grey** - 21 pts)
+- [ ] **PBI-DIALOG-007**: Implement Save System Integration (**@reed-richards** - 5 pts)
+- [ ] **PBI-DIALOG-008**: Performance Optimization for Mobile (**@johnny-storm** - 8 pts)
+- [ ] **PBI-DIALOG-009**: QA Test Suite for Dialog System (**@bruce-banner** - 8 pts)
+- [ ] **PBI-DIALOG-010**: Dialog Analytics and Telemetry (**@nick-fury** - 5 pts)
+
+### **📱 MOBILE PLATFORM EXPANSION** ($500K+ Revenue Potential)
+- [ ] **PBI-012**: Implement touch controls (8 pts)
+- [ ] **PBI-013**: Mobile UI/UX optimization (5 pts)
+- [ ] **PBI-014**: Performance optimization for mobile (8 pts)
+
+### **💰 MONETIZATION ENHANCEMENT** (25% Revenue Increase)
+- [ ] **PBI-015**: Implement cosmetic shop (5 pts)
+- [ ] **PBI-016**: Add season pass system (8 pts)
+- [ ] **PBI-017**: Create IAP infrastructure (5 pts)
+
+### **🔥 PIZZA PARTY QUICK WINS** (1-Day Tasks)
+- [ ] **QW-001**: Extract animation IDs to enum (1 pt)
+- [ ] **QW-002**: Add missing null checks (1 pt)
+- [ ] **QW-003**: Cache transform references (2 pts)
+
+### **🚀 FUTURE ARCHITECTURE** (Long-term Vision)
+- [ ] **TI-001**: Unity 6 URP optimization
+- [ ] **TI-002**: Addressables migration  
+- [ ] **TI-003**: CI/CD pipeline enhancement
+
+## 🎮 **INPUT SYSTEM TESTING SPECIFICATION**
+
+**PBI-INPUT-001 Details** (**@bruce-banner** assigned):
+- **Scope**: `Assets/Resources/Controls/PlayerControls.inputactions` mapping validation
+- **Target Actions**: Sprint, Move, Attack, WeaponSwap, Jump, Up (see PlayerAction.cs:207-225)
+- **Platforms**: Xbox (XInput), PlayStation (DualShock4/DualSense), Nintendo Switch (Pro Controller)
+- **Test Coverage**: Verify each platform controller properly triggers PlayerActionMap functions
+- **Validation**: Create automated tests for button press → action mapping consistency
+- **Critical**: Multi-platform input validation essential for Q1 2025 Steam launch
 
 **Architecture Highlights:**
 - Unity 6 with Universal Render Pipeline
