@@ -102,7 +102,9 @@
       "Bash(\"Scripts\\run-tests-cli.bat\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/upgrade_system_test_validation.txt\")",
       "Bash(grep:*)",
-      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 14 --json mergeable,mergeStateStatus,headRefName,baseRefName)"
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 14 --json mergeable,mergeStateStatus,headRefName,baseRefName)",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr edit 17 --add-label \"enhancement\" --add-label \"save-system\" --add-label \"designer-tools\")",
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr edit 17 --add-label \"enhancement\")"
     ],
     "deny": [
       "Bash(reg *)",
