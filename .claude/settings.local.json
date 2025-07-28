@@ -97,7 +97,10 @@
       "Bash(\"C:\\Users\\Ender\\NeonLadder\\Scripts\\run-tests-cli.bat\")",
       "Bash(\"Scripts\\run-tests-cli.bat\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput\\final_test_validation.txt\")",
-      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput\\test_validation_final.txt\")"
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput\\test_validation_final.txt\")",
+      "Bash(.Scriptsrun-tests-cli.bat)",
+      "Bash(\"Scripts\\run-tests-cli.bat\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/upgrade_system_test_validation.txt\")"
     ],
     "deny": [
       "Bash(reg *)",
