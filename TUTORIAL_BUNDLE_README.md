@@ -28,7 +28,7 @@ This tutorial bundle contains the complete documentation for the NeonLadder Myst
 1. **Read `README.md`** first for system overview
 2. **Follow `STRING_INPUT_GUIDE.md`** to understand input flexibility
 3. **Use `VISUAL_CONFIGURATION_GUIDE.md`** for ScriptableObject setup
-4. **Run unit tests** to verify everything works
+4. **Run tests** via Unity CLI: `Unity.exe -batchmode -executeMethod CLITestRunner.RunPlayModeTests`
 
 ### For Game Designers:
 1. **Create a PathGenerator Config asset** in Unity
@@ -69,7 +69,7 @@ var difficulty = (int)node.Properties["Difficulty"];
 - **Generation Time**: ~0.1ms for complete 6-layer map
 - **Memory Usage**: ~50KB per generated map  
 - **Determinism**: 100% reproducible across platforms
-- **Validation**: 37+ unit tests covering all edge cases
+- **Validation**: 50+ unit tests including deterministic hashing verification
 
 ## 🎮 Game Design Benefits
 
