@@ -71,6 +71,12 @@ public class SceneChangeDetector
         /// <returns>The cached scene name, or null if not initialized</returns>
         public string GetCachedSceneName()
         {
+            // Initialize if not already done
+            if (!isInitialized)
+            {
+                cachedSceneName = sceneProvider?.GetCurrentSceneName();
+                isInitialized = true;
+            }
             return cachedSceneName;
         }
 

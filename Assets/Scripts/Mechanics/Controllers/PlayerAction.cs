@@ -1,4 +1,6 @@
 using NeonLadder.Common;
+using NeonLadder.Core;
+using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers.Interfaces;
 using NeonLadder.Mechanics.Enums;
 using System.Collections;
@@ -467,6 +469,50 @@ namespace NeonLadder.Mechanics.Controllers
         {
             OnEnable();
             Debug.Log("Player controls enabled.");
+        }
+
+        // Event-driven methods to replace direct action execution
+        public void ScheduleJump(float delay = 0f)
+        {
+            if (player != null)
+            {
+                var jumpEvent = Simulation.Schedule<PlayerJumpValidationEvent>(delay);
+                jumpEvent.player = player;
+                jumpEvent.requestedJumpForce = jumpForce;
+            }
+        }
+
+        public void ScheduleSprintValidation(float delay = 0f)
+        {
+            if (player != null)
+            {
+                var sprintEvent = Simulation.Schedule<PlayerSprintValidationEvent>(delay);
+                sprintEvent.player = player;
+                sprintEvent.requestedSpeedMultiplier = Constants.SprintSpeedMultiplier;
+            }
+        }
+
+        public void ScheduleMovementStateChange(PlayerMovementState newState, float delay = 0f)
+        {
+            if (player != null)
+            {
+                var stateEvent = Simulation.Schedule<PlayerMovementStateChangeEvent>(delay);
+                stateEvent.player = player;
+                stateEvent.newState = newState;
+                stateEvent.previousState = GetCurrentMovementState();
+            }
+        }
+
+        private PlayerMovementState GetCurrentMovementState()
+        {
+            // Determine current state based on velocity and animation
+            if (player.velocity.y > 2) return PlayerMovementState.Jumping;
+            if (player.velocity.y < -2) return PlayerMovementState.Falling;
+            if (System.Math.Abs(player.velocity.x) > 4 || System.Math.Abs(player.velocity.z) > 4) 
+                return PlayerMovementState.Running;
+            if (System.Math.Abs(player.velocity.x) > 0.1 || System.Math.Abs(player.velocity.z) > 0.1) 
+                return PlayerMovementState.Walking;
+            return PlayerMovementState.Idle;
         }
     }
 }

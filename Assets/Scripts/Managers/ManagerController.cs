@@ -62,20 +62,25 @@ public class ManagerController : MonoBehaviour
             ToggleManagers();
         }
 
-        private void Update()
+        public void Update()
         {
             if (useOptimizedSceneDetection)
             {
-                // OPTIMIZED: Use efficient scene change detection instead of per-frame string comparison
-                if (sceneChangeDetector.HasSceneChanged())
+                if (sceneChangeDetector != null)
                 {
-                    var newSceneName = sceneChangeDetector.GetCachedSceneName();
-                    var oldScene = scene;
-                    scene = SceneEnumResolver.Resolve(newSceneName);
-                    
-                    OnSceneChangeDetected?.Invoke(oldScene, scene);
-                    ToggleManagers();
+                    // OPTIMIZED: Use efficient scene change detection instead of per-frame string comparison
+                    if (sceneChangeDetector.HasSceneChanged())
+                    {
+                        var newSceneName = sceneChangeDetector.GetCachedSceneName();
+                        var oldScene = scene;
+                        scene = SceneEnumResolver.Resolve(newSceneName);
+                        
+                        OnSceneChangeDetected?.Invoke(oldScene, scene);
+                        ToggleManagers();
+                    }
                 }
+                // When in optimized mode but detector is null (like in tests), 
+                // don't perform any scene change detection to avoid string comparisons
             }
             else
             {
@@ -107,17 +112,23 @@ public class ManagerController : MonoBehaviour
 
         public void ToggleManagers()
         {
-            eventManager.enabled = true; 
+            if (eventManager != null)
+                eventManager.enabled = true; 
             //steamManager.enabled = true;
             switch (scene)
             {
                 case Scenes.Title:
-                    gameControllerManager.enabled = true;
+                    if (gameControllerManager != null)
+                        gameControllerManager.enabled = true;
                     break;
                 case Scenes.Staging:
-                    lootPurchaseManager.enabled = true;
-                    playerCameraPositionManager.enabled = true;
-                    playerCameraPositionManager.EmptySceneStates();
+                    if (lootPurchaseManager != null)
+                        lootPurchaseManager.enabled = true;
+                    if (playerCameraPositionManager != null)
+                    {
+                        playerCameraPositionManager.enabled = true;
+                        playerCameraPositionManager.EmptySceneStates();
+                    }
                     if (monsterGroupActivationManager != null)
                     {
                         monsterGroupActivationManager.enabled = false;
@@ -129,19 +140,24 @@ public class ManagerController : MonoBehaviour
                     {
                         monsterGroupActivationManager.enabled = true;
                     }
-                    lootDropManager.enabled = true;
+                    if (lootDropManager != null)
+                        lootDropManager.enabled = true;
                     break;
                 case Scenes.MetaShop:
-                    lootDropManager.enabled = false;
-                    lootPurchaseManager.enabled = true;
+                    if (lootDropManager != null)
+                        lootDropManager.enabled = false;
+                    if (lootPurchaseManager != null)
+                        lootPurchaseManager.enabled = true;
                     if (monsterGroupActivationManager != null)
                     {
                         monsterGroupActivationManager.enabled = false;
                     }
                     break;
                 case Scenes.PermaShop:
-                    lootDropManager.enabled = false;
-                    lootPurchaseManager.enabled = true;
+                    if (lootDropManager != null)
+                        lootDropManager.enabled = false;
+                    if (lootPurchaseManager != null)
+                        lootPurchaseManager.enabled = true;
                     if (monsterGroupActivationManager != null)
                     {
                         monsterGroupActivationManager.enabled = false;

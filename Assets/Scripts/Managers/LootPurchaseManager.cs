@@ -15,7 +15,10 @@ public class LootPurchaseManager : MonoBehaviour
         void Start()
         {
             model = Simulation.GetModel<PlatformerModel>();
-            player = model.Player;
+            if (model != null)
+            {
+                player = model.Player;
+            }
         }
 
         private void Awake()

@@ -9,6 +9,7 @@ namespace NeonLadder.Events
     /// <summary>
     /// Event for regenerating health with visual and audio coordination
     /// Replaces direct Health.Increment() calls for healing throughout the codebase
+    /// Prevents regeneration for dead entities and respects max health limits
     /// </summary>
     public class HealthRegenerationEvent : Simulation.Event
     {
@@ -18,7 +19,8 @@ namespace NeonLadder.Events
 
         public override bool Precondition()
         {
-            return health != null && health.IsAlive && amount > 0;
+            // Don't regenerate health for dead entities or if already at max
+            return health != null && health.IsAlive && health.current < health.max && amount > 0;
         }
 
         public override void Execute()

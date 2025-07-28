@@ -30,13 +30,13 @@ namespace NeonLadder.Events
             }
 
             GameObject.FindGameObjectWithTag(Tags.Managers.ToString())
-                      .GetComponentInChildren<LootDropManager>()
+                      .GetComponentInChildren<NeonLadder.Managers.LootDropManager>()
                       .DropLoot(model.Player, enemy);
 
             var achievement = AchievementResolver.Resolve(enemy.transform.parent.name);
             if (achievement.HasValue)
             {
-                SteamManager.Instance.UnlockAchievement(achievement.Value.ToString());
+                NeonLadder.Managers.SteamManager.Instance.UnlockAchievement(achievement.Value.ToString());
             }
         }
     }

@@ -79,7 +79,19 @@
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr status)",
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr checks 12)",
       "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr checks 11)",
-      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 12 --json mergeable,mergeStateStatus,baseRefName,headRefName)"
+      "Bash(\"C:\\Program Files\\GitHub CLI\\gh.exe\" pr view 12 --json mergeable,mergeStateStatus,baseRefName,headRefName)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -quit -logFile \"TestOutput/compilation_fixed.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -quit -logFile \"TestOutput/compilation_steammanager_fix.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -quit -logFile \"TestOutput/final_compilation_test.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/unit_test_check.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/unit_test_failures.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/tests_fixed.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/final_test_run.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/tests_after_fixes.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/tests_verification.log\")",
+      "Bash(git fetch:*)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/event_driven_stats_tdd.log\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/event_driven_stats_implementation.log\")"
     ],
     "deny": [
       "Bash(reg *)",

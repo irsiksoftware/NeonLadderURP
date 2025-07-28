@@ -121,8 +121,8 @@ namespace NeonLadder.Mechanics.Controllers
             staminaRegenTimer += Time.deltaTime;
             if (staminaRegenTimer >= Constants.Physics.Stamina.RegenInterval) // Check if 1/10th of a second has passed
             {
-                // Use negative damage to heal stamina through event system
-                ScheduleStaminaDamage(-Constants.Physics.Stamina.RegenAmount, 0f);
+                // Replace direct modification with event-driven regeneration
+                ScheduleStaminaRegeneration(0f); // Immediate event scheduling
                 staminaRegenTimer -= Constants.Physics.Stamina.RegenInterval; // Decrease the timer by 0.1f instead of resetting to 0
             }
         }
@@ -141,16 +141,10 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 targetVelocity.x = Actions.playerInput.x * Constants.DefaultMaxSpeed * ((Actions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
 
-                // Handle jumping
-                if (Actions.isJumping && Actions.JumpCount < Actions.MaxJumps)
+                // Handle jumping through event system
+                if (Actions.isJumping)
                 {
-                    velocity.y = Actions.jumpForce;
-                    Actions.IncrementJumpCount();
-                    Actions.isJumping = false;
-                    if (audioSource != null && jumpAudio != null)
-                    {
-                        ScheduleAudioEvent(AudioEventType.Jump, 0f);
-                    }
+                    Actions.ScheduleJump(0f); // Immediate jump validation
                 }
             }
         }
@@ -293,6 +287,40 @@ namespace NeonLadder.Mechanics.Controllers
             currencyEvent.player = this;
             currencyEvent.currencyType = currencyType;
             currencyEvent.amount = amount;
+        }
+
+        // Event-driven movement methods to replace direct modifications
+        public void ScheduleVelocityChange(Vector3 newVelocity, float delay = 0f)
+        {
+            var velocityEvent = Simulation.Schedule<PlayerVelocityValidationEvent>(delay);
+            velocityEvent.player = this;
+            velocityEvent.requestedVelocity = newVelocity;
+        }
+
+        public void ScheduleGroundedStateChange(bool isGrounded, float delay = 0f)
+        {
+            var groundedEvent = Simulation.Schedule<PlayerGroundedStateChangeEvent>(delay);
+            groundedEvent.player = this;
+            groundedEvent.isGrounded = isGrounded;
+            groundedEvent.previousGroundedState = !isGrounded; // Toggle for testing
+        }
+
+        public void SchedulePlayerAudioEvent(PlayerAudioType audioType, float delay = 0f)
+        {
+            var audioEvent = Simulation.Schedule<PlayerAudioEvent>(delay);
+            audioEvent.player = this;
+            audioEvent.audioType = audioType;
+        }
+
+        // Replace direct stamina regeneration with event-driven approach
+        public void ScheduleStaminaRegeneration(float delay = Constants.Physics.Stamina.RegenInterval)
+        {
+            if (Stamina.current < Stamina.max)
+            {
+                var regenEvent = Simulation.Schedule<StaminaRegenerationEvent>(delay);
+                regenEvent.stamina = Stamina;
+                regenEvent.amount = Constants.Physics.Stamina.RegenAmount;
+            }
         }
     }
 }
