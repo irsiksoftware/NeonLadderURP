@@ -106,7 +106,8 @@
       "Bash(c:/tools/gdrive files mkdir Tutorials --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z)",
       "Bash(c:/tools/gdrive files upload \"C:\\Users\\Ender\\NeonLadder\\TUTORIAL_BUNDLE_README.md\" --parent 1vqY_-Ncn2gdf4yZKTEYNPl2e95Im9MaV)",
       "Bash(c:/tools/gdrive files upload \"C:\\Users\\Ender\\NeonLadder\\Assets\\Scripts\\ProceduralGeneration\\README.md\" --parent 1vqY_-Ncn2gdf4yZKTEYNPl2e95Im9MaV)",
-      "Bash(c:/tools/gdrive files upload:*)"
+      "Bash(c:/tools/gdrive files upload:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [
       "Bash(reg *)",
