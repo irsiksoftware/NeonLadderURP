@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace NeonLadder.Managers
-{
-    public class MonsterGroupActivationManager : MonoBehaviour
+public class MonsterGroupActivationManager : MonoBehaviour
     {
         public List<MonsterGroup> MonsterGroups { get; set; } = new List<MonsterGroup>();
         void OnEnable()
@@ -74,4 +72,3 @@ namespace NeonLadder.Managers
             }
         }
     }
-}

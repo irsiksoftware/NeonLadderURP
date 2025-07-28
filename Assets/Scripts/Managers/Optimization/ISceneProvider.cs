@@ -1,10 +1,8 @@
-namespace NeonLadder.Managers.Optimization
-{
-    /// <summary>
+/// <summary>
     /// Interface for providing scene information to the SceneChangeDetector.
     /// This abstraction allows for dependency injection and testability.
-    /// </summary>
-    public interface ISceneProvider
+/// </summary>
+public interface ISceneProvider
     {
         /// <summary>
         /// Gets the current scene name from the underlying scene management system.
@@ -12,4 +10,3 @@ namespace NeonLadder.Managers.Optimization
         /// <returns>The name of the currently active scene</returns>
         string GetCurrentSceneName();
     }
-}

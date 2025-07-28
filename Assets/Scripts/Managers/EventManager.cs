@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NeonLadder.Managers
-{
-    public class EventManager : MonoBehaviour
+public class EventManager : MonoBehaviour
     {
         private Dictionary<string, Dictionary<GameObject, Action<Collider>>> eventDictionary;
 
@@ -60,4 +58,3 @@ namespace NeonLadder.Managers
             }
         }
     }
-}

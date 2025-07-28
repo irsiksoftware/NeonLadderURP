@@ -1,9 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace NeonLadder.Managers
-{
-    public class CameraTransformManager : MonoBehaviour
+public class CameraTransformManager : MonoBehaviour
     {
         private Dictionary<string, Vector3> scenePositions = new Dictionary<string, Vector3>();
 
@@ -17,4 +15,3 @@ namespace NeonLadder.Managers
             return scenePositions.TryGetValue(sceneName, out position);
         }
     }
-}

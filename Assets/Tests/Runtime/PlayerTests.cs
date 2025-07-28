@@ -8,7 +8,6 @@ using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
 using NeonLadder.Core;
-using NeonLadder.Managers;
 using Michsky.MUIP;
 using System.Collections;
 using System.Collections.Generic;

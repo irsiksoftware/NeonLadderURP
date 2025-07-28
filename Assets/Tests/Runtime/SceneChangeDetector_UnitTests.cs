@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
 using NeonLadder.Mechanics.Enums;
-using NeonLadder.Managers.Optimization;
 
 namespace NeonLadder.Tests.Runtime
 {

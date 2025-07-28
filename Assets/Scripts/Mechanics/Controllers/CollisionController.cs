@@ -1,6 +1,6 @@
 using NeonLadder.Common;
+using NeonLadder.Core;
 using NeonLadder.Events;
-using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System;
@@ -135,7 +135,20 @@ namespace NeonLadder.Mechanics.Controllers
                     {
                         if (otherActorParent.tag == nameof(Tags.PlayerProjectile))
                         {
-                            health.Decrement(otherActorParent.GetComponent<ProjectileController>().Damage);
+                            // Schedule damage through event system
+                            var player = thisActorParent.GetComponent<Player>();
+                            if (player != null)
+                            {
+                                player.ScheduleDamage(otherActorParent.GetComponent<ProjectileController>().Damage, 0f);
+                            }
+                            else
+                            {
+                                // For non-player entities, schedule a direct health damage event
+                                var damageEvent = Schedule<HealthDamageEvent>(0f);
+                                damageEvent.health = health;
+                                damageEvent.damageAmount = otherActorParent.GetComponent<ProjectileController>().Damage;
+                                damageEvent.triggerEffects = true;
+                            }
                             Destroy(otherActorParent);
                         }
                         else if (otherActor.IsUsingMelee)
@@ -151,7 +164,20 @@ namespace NeonLadder.Mechanics.Controllers
                             //}
 
                             //Debug.Log($"{thisActor.transform.parent.gameObject.name} took {otherActor.GetComponent<MeleeController>().Damage} damage from {otherActorParent.name} @ {Time.time}");
-                            health.Decrement(otherActor.GetComponent<MeleeController>().Damage);
+                            // Schedule damage through event system
+                            var player = thisActorParent.GetComponent<Player>();
+                            if (player != null)
+                            {
+                                player.ScheduleDamage(otherActor.GetComponent<MeleeController>().Damage, 0f);
+                            }
+                            else
+                            {
+                                // For non-player entities, schedule a direct health damage event
+                                var damageEvent = Schedule<HealthDamageEvent>(0f);
+                                damageEvent.health = health;
+                                damageEvent.damageAmount = otherActor.GetComponent<MeleeController>().Damage;
+                                damageEvent.triggerEffects = true;
+                            }
                             StartCoroutine(thisActor.PlayGetHitAnimation());
                         }
                         else

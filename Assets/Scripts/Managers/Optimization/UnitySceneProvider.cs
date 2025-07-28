@@ -1,12 +1,10 @@
 using UnityEngine.SceneManagement;
 
-namespace NeonLadder.Managers.Optimization
-{
-    /// <summary>
+/// <summary>
     /// Unity-specific implementation of ISceneProvider that wraps SceneManager calls.
     /// This provides the actual scene information in production code.
-    /// </summary>
-    public class UnitySceneProvider : ISceneProvider
+/// </summary>
+public class UnitySceneProvider : ISceneProvider
     {
         /// <summary>
         /// Gets the current scene name from Unity's SceneManager.
@@ -17,4 +15,3 @@ namespace NeonLadder.Managers.Optimization
             return SceneManager.GetActiveScene().name;
         }
     }
-}
