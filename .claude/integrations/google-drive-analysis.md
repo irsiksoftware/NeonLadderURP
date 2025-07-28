@@ -135,19 +135,39 @@ echo "Assets downloaded! Import them via Unity Package Manager."
 5. 🔄 Test full workflow with new developer setup
 
 ## 🔧 **Command Reference**
+
+### **Verified Working Commands (gdrive v3.9.1)**
 ```bash
-# List all NeonLadder assets
-"C:\tools\gdrive" files list --query "name contains 'NeonLadder'"
+# Authentication check
+"C:\tools\gdrive" about
+
+# List files with filter
+"C:\tools\gdrive" files list --query "name contains 'NeonLadder'" --max 5
+
+# Upload file to specific folder
+"C:\tools\gdrive" files upload "path\to\file.md" --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z
+
+# Share file publicly
+"C:\tools\gdrive" permissions share <file-id> --role reader --type anyone
 
 # Download specific asset
-"C:\tools\gdrive" download <file-id>
+"C:\tools\gdrive" files download <file-id>
 
-# Upload new assets
-"C:\tools\gdrive" upload <local-file> --parent <folder-id>
-
-# Share for team access
-"C:\tools\gdrive" share <file-id> --role reader
+# Get file info
+"C:\tools\gdrive" files info <file-id>
 ```
+
+### **Key Folder IDs**
+- **Main "Neon Ladder" Folder**: `19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z`
+- **Steam Artwork Subfolder**: Check with files list command
+- **Documentation Storage**: Main folder (as demonstrated with tests-7-28-2025.md)
+
+### **Integration Discovery Process**
+1. **Check Tool Availability**: Run `"C:\tools\gdrive" --help` to verify installation
+2. **Verify Authentication**: Run `"C:\tools\gdrive" about` to check login status
+3. **Test Basic Commands**: Start with `files list` to confirm access
+4. **Document Working Commands**: Store successful syntax in integration docs
+5. **Update CLAUDE.md**: Add tool to approved automation list
 
 **Total Asset Size**: ~20GB across 25+ packages
 **Authentication**: Permanent (stored locally)
