@@ -116,7 +116,9 @@ namespace NeonLadder.Tests.Runtime
         public void JumpValidationEvent_ShouldPreventInvalidJumps()
         {
             // Arrange
-            player.Actions.JumpCount = player.Actions.MaxJumps; // Max jumps reached
+            // Set jump count to max by calling IncrementJumpCount
+            for (int i = 0; i < player.Actions.MaxJumps; i++)
+                player.Actions.IncrementJumpCount();
             var initialJumpCount = player.Actions.JumpCount;
 
             // Act
@@ -189,7 +191,9 @@ namespace NeonLadder.Tests.Runtime
         public void GroundedStateChangeEvent_ShouldResetJumpCount()
         {
             // Arrange
-            player.Actions.JumpCount = 2; // Player has double-jumped
+            // Set jump count to 2 by calling IncrementJumpCount twice
+            player.Actions.IncrementJumpCount();
+            player.Actions.IncrementJumpCount();
 
             // Act
             var groundedEvent = Simulation.Schedule<PlayerGroundedStateChangeEvent>(0.1f);
@@ -308,7 +312,7 @@ namespace NeonLadder.Tests.Runtime
             // Validate sprint conditions
             return player != null && 
                    player.Health.IsAlive && 
-                   player.Stamina.current > Constants.Physics.Stamina.SprintCost;
+                   player.Stamina.current > Constants.SprintStaminaCost;
         }
 
         public override void Execute()
@@ -316,7 +320,7 @@ namespace NeonLadder.Tests.Runtime
             if (player != null)
             {
                 // Consume stamina for sprinting
-                player.Stamina.Decrement(Constants.Physics.Stamina.SprintCost * Time.fixedDeltaTime);
+                player.Stamina.Decrement(Constants.SprintStaminaCost * Time.fixedDeltaTime);
                 
                 // Apply sprint speed (this would modify targetVelocity calculation)
                 // Implementation would integrate with ComputeVelocity method
@@ -386,7 +390,7 @@ namespace NeonLadder.Tests.Runtime
             if (player != null)
             {
                 // Apply validated velocity
-                player.targetVelocity = Vector3.ClampMagnitude(requestedVelocity, 
+                player.TargetVelocity = Vector3.ClampMagnitude(requestedVelocity, 
                     Constants.DefaultMaxSpeed * Constants.SprintSpeedMultiplier);
             }
         }
@@ -443,7 +447,7 @@ namespace NeonLadder.Tests.Runtime
                 // Reschedule for next validation
                 if (elapsed < duration)
                 {
-                    tick = Time.time + validationInterval;
+                    Simulation.Reschedule(this, validationInterval);
                 }
             }
         }

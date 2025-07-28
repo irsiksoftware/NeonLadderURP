@@ -27,7 +27,7 @@ namespace NeonLadder.Events
             if (player != null)
             {
                 // Apply validated velocity with clamping
-                player.targetVelocity = Vector3.ClampMagnitude(requestedVelocity, 
+                player.TargetVelocity = Vector3.ClampMagnitude(requestedVelocity, 
                     Constants.DefaultMaxSpeed * Constants.SprintSpeedMultiplier);
             }
         }

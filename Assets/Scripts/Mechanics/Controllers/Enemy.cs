@@ -72,6 +72,13 @@ namespace NeonLadder.Mechanics.Controllers
         private MonsterStates currentState = MonsterStates.Idle;
         [SerializeField]
         protected virtual float retreatBuffer { get; set; } = Constants.Physics.Combat.RetreatBuffer;
+        
+        // Public accessors for testing
+        public float AttackRangePublic => AttackRange;
+        public bool RetreatWhenTooClosePublic => RetreatWhenTooClose;
+        public float RetreatBufferPublic => retreatBuffer;
+        public MonsterStates CurrentStatePublic => currentState;
+        public int AttackDamagePublic => attackDamage;
         [SerializeField]
         private float _attackCooldown = Constants.Physics.Combat.AttackCooldown; // Default value if not set in the editor or overridden
 

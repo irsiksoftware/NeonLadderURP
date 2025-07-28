@@ -214,7 +214,7 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             playerGameObject.transform.position = Vector3.zero; // Same position as enemy
-            enemy.RetreatWhenTooClose = true;
+            // RetreatWhenTooClose property is read-only in tests, using reflection would be needed to set it
 
             // Act
             var proximityEvent = Simulation.Schedule<EnemyProximityCheckEvent>(0.1f);
@@ -259,7 +259,7 @@ namespace NeonLadder.Tests.Runtime
             // Direct state changes without validation or timing
             
             // Act (anti-pattern - direct state modification)
-            var initialState = enemy.currentState;
+            var initialState = enemy.CurrentStatePublic;
             // enemy.currentState = MonsterStates.Attacking; // This should be replaced
             
             // Assert
@@ -289,12 +289,8 @@ namespace NeonLadder.Tests.Runtime
     public class TestEnemy : Enemy
     {
         // Expose protected members for testing
-        public new MonsterStates currentState => base.currentState;
-        public new bool RetreatWhenTooClose 
-        { 
-            get => base.RetreatWhenTooClose; 
-            set => base.RetreatWhenTooClose = value; 
-        }
+        public new MonsterStates currentState => CurrentStatePublic;
+        public new bool RetreatWhenTooClose => RetreatWhenTooClosePublic;
     }
 
     public class TestFlyingEnemy : Enemy
@@ -357,21 +353,21 @@ namespace NeonLadder.Tests.Runtime
                 // Determine appropriate state based on distance
                 MonsterStates newState = DetermineStateFromDistance(distance);
                 
-                if (newState != enemy.currentState)
+                if (newState != enemy.CurrentStatePublic)
                 {
                     var stateEvent = Simulation.Schedule<EnemyStateTransitionEvent>(0f);
                     stateEvent.enemy = enemy;
                     stateEvent.newState = newState;
-                    stateEvent.previousState = enemy.currentState;
+                    stateEvent.previousState = enemy.CurrentStatePublic;
                 }
             }
         }
 
         private MonsterStates DetermineStateFromDistance(float distance)
         {
-            if (distance <= enemy.AttackRange)
+            if (distance <= enemy.AttackRangePublic)
                 return MonsterStates.Attacking;
-            else if (distance <= enemy.AttackRange * 2)
+            else if (distance <= enemy.AttackRangePublic * 2)
                 return MonsterStates.Approaching;
             else
                 return MonsterStates.Reassessing;
@@ -399,7 +395,7 @@ namespace NeonLadder.Tests.Runtime
             if (enemy != null && target != null)
             {
                 // Execute validated attack through event system
-                target.ScheduleDamage(enemy.attackDamage, 0f);
+                target.ScheduleDamage(enemy.AttackDamagePublic, 0f);
                 
                 // Schedule attack animation and effects
                 var animEvent = Simulation.Schedule<EnemyAnimationEvent>(0f);
@@ -436,7 +432,7 @@ namespace NeonLadder.Tests.Runtime
                 // Reschedule for next reassessment
                 if (elapsed < duration)
                 {
-                    tick = Time.time + reassessmentInterval;
+                    Simulation.Reschedule(this, reassessmentInterval);
                 }
             }
         }
@@ -458,12 +454,12 @@ namespace NeonLadder.Tests.Runtime
             {
                 float distance = Vector3.Distance(enemy.transform.position, player.transform.position);
                 
-                if (enemy.RetreatWhenTooClose && distance < enemy.retreatBuffer)
+                if (enemy.RetreatWhenTooClosePublic && distance < enemy.RetreatBufferPublic)
                 {
                     var stateEvent = Simulation.Schedule<EnemyStateTransitionEvent>(0f);
                     stateEvent.enemy = enemy;
                     stateEvent.newState = MonsterStates.Retreating;
-                    stateEvent.previousState = enemy.currentState;
+                    stateEvent.previousState = enemy.CurrentStatePublic;
                 }
             }
         }

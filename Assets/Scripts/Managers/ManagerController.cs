@@ -3,6 +3,7 @@ using NeonLadder.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using NeonLadder.Managers;
 
 public class ManagerController : MonoBehaviour
     {

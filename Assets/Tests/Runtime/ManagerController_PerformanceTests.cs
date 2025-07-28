@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.Managers;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine.SceneManagement;
@@ -317,7 +318,7 @@ namespace NeonLadder.Tests.Runtime
 
     #region Mock Manager Classes for Testing
 
-    public class MockGameControllerManager : GameControllerManager, IGameControllerManager
+    public class MockGameControllerManager : GameControllerManager
     {
         // Mock implementation for testing
     }

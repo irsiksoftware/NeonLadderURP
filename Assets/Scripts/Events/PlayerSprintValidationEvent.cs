@@ -19,7 +19,7 @@ namespace NeonLadder.Events
             // Validate sprint conditions
             return player != null && 
                    player.Health.IsAlive && 
-                   player.Stamina.current > Constants.Physics.Stamina.SprintCost;
+                   player.Stamina.current > Constants.SprintStaminaCost;
         }
 
         public override void Execute()
@@ -27,7 +27,7 @@ namespace NeonLadder.Events
             if (player != null)
             {
                 // Consume stamina for sprinting
-                player.Stamina.Decrement(Constants.Physics.Stamina.SprintCost * Time.fixedDeltaTime);
+                player.Stamina.Decrement(Constants.SprintStaminaCost * Time.fixedDeltaTime);
                 
                 // Sprint speed modification is handled in ComputeVelocity
                 // This event validates that sprinting is allowed

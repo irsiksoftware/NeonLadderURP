@@ -63,6 +63,8 @@
   <ItemGroup>
     <Compile Include="Assets\Tests\Runtime\SceneChangeDetector_UnitTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ManagerController_PerformanceTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\EventDrivenPlayerMovementTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\EventDrivenEnemyAITests.cs" />
     <Compile Include="Assets\Tests\Runtime\KinematicObjectTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PlayerTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenStatsTests.cs" />
