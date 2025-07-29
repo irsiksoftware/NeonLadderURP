@@ -1,12 +1,12 @@
 using UnityEngine;
-using DamageNumbersPro;
+// using DamageNumbersPro; // TODO: Re-enable when DamageNumbersPro package is installed
 using NeonLadder.Common;
 
 namespace NeonLadder.Mechanics.Controllers
 {
     public class DamageNumberController : MonoBehaviour
     {
-        public DamageNumber popupPrefab;
+        public GameObject popupPrefab; // TODO: Change back to DamageNumber when package is installed
         [SerializeField]
         private float yOffset = Constants.UI.DamageNumbers.YOffset; // Private backing field with a default minimum value of 1
         public float YOffset
@@ -26,6 +26,8 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void SpawnPopup(float number)
         {
+            // TODO: Re-implement when DamageNumbersPro package is installed
+            /*
             Vector3 spawnPosition = target.position + new Vector3(0, YOffset, 0);
             DamageNumber newPopup = popupPrefab.Spawn(spawnPosition, number);
             newPopup.SetFollowedTarget(target);
@@ -40,6 +42,10 @@ namespace NeonLadder.Mechanics.Controllers
                 newPopup.SetScale(Constants.UI.DamageNumbers.NormalHitScale);
                 newPopup.SetColor(new Color(1, 0.7f, 0.5f));
             }
+            */
+            
+            // Temporary fallback - just log the damage
+            UnityEngine.Debug.Log($"Damage: {number} at {target.position}");
         }
     }
 }

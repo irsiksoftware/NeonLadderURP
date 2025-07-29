@@ -9,6 +9,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Mechanics.Controllers
 {
@@ -70,7 +71,7 @@ namespace NeonLadder.Mechanics.Controllers
             var managerObj = GameObject.FindGameObjectWithTag(Tags.Managers.ToString());
             if (managerObj == null)
             {
-                Debug.Log("Managers prefab not found in the scene.");
+                Debugger.Log("Managers prefab not found in the scene.");
             }
             else
             {
@@ -135,14 +136,14 @@ namespace NeonLadder.Mechanics.Controllers
             var managerObj = GameObject.FindGameObjectWithTag(Tags.Managers.ToString());
             if (managerObj == null)
             {
-                Debug.Log("Managers prefab not found in the scene.");
+                Debugger.Log("Managers prefab not found in the scene.");
             }
             else
             {
                 playerPositionManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString()).GetComponentInChildren<PlayerCameraPositionManager>();
                 if (playerPositionManager == null)
                 {
-                    Debug.Log("PlayerPositionManager not found in the scene.");
+                    Debugger.Log("PlayerPositionManager not found in the scene.");
                 }
 
                 if (playerActionMap == null)
@@ -462,13 +463,13 @@ namespace NeonLadder.Mechanics.Controllers
             playerInput = Vector2.zero; // Stop movement
             playerActionMap.Disable(); // Disable input
             //OnDisable();
-            Debug.Log("Player controls disabled.");
+            Debugger.Log("Player controls disabled.");
         }
 
         public void EnableControls()
         {
             OnEnable();
-            Debug.Log("Player controls enabled.");
+            Debugger.Log("Player controls enabled.");
         }
 
         // Event-driven methods to replace direct action execution

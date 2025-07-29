@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Dialog
 {
@@ -164,15 +165,15 @@ namespace NeonLadder.Dialog
             // Log results
             if (result.HasErrors)
             {
-                Debug.LogError($"❌ Dialog System Config validation failed:\n{result.GetSummary()}");
+                Debugger.LogError($"❌ Dialog System Config validation failed:\n{result.GetSummary()}");
             }
             else if (result.HasWarnings)
             {
-                Debug.LogWarning($"⚠️ Dialog System Config has warnings:\n{result.GetSummary()}");
+                Debugger.LogWarning($"⚠️ Dialog System Config has warnings:\n{result.GetSummary()}");
             }
             else
             {
-                Debug.Log($"✅ Dialog System Config validation passed: {configurationName}");
+                Debugger.Log($"✅ Dialog System Config validation passed: {configurationName}");
             }
             
             return result;
@@ -210,7 +211,7 @@ namespace NeonLadder.Dialog
             enableSinSpecificDialogs = true;
             trackSinAlignment = true;
             
-            Debug.Log("🚀 Loaded production preset for dialog system");
+            Debugger.Log("🚀 Loaded production preset for dialog system");
         }
 
         /// <summary>
@@ -245,7 +246,7 @@ namespace NeonLadder.Dialog
             enableSinSpecificDialogs = true;
             trackSinAlignment = true;
             
-            Debug.Log("🔧 Loaded development preset for dialog system");
+            Debugger.Log("🔧 Loaded development preset for dialog system");
         }
 
         /// <summary>
@@ -266,7 +267,7 @@ namespace NeonLadder.Dialog
                 new SinCharacterMapping { sinType = SinType.Sloth, characterId = "sloth", displayName = "Sloth", sinColor = new Color(0.4f, 0.4f, 0.6f) }
             });
             
-            Debug.Log("😈 Initialized Seven Deadly Sins character mappings");
+            Debugger.Log("😈 Initialized Seven Deadly Sins character mappings");
         }
 
         private void OnValidate()

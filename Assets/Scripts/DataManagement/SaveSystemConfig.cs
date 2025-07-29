@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.DataManagement
 {
@@ -134,15 +135,15 @@ namespace NeonLadder.DataManagement
             // Log results
             if (result.HasErrors)
             {
-                Debug.LogError($"❌ Save System Config validation failed:\n{result.GetSummary()}");
+                Debugger.LogError($"❌ Save System Config validation failed:\n{result.GetSummary()}");
             }
             else if (result.HasWarnings)
             {
-                Debug.LogWarning($"⚠️ Save System Config has warnings:\n{result.GetSummary()}");
+                Debugger.LogWarning($"⚠️ Save System Config has warnings:\n{result.GetSummary()}");
             }
             else
             {
-                Debug.Log($"✅ Save System Config validation passed: {configurationName}");
+                Debugger.Log($"✅ Save System Config validation passed: {configurationName}");
             }
             
             return result;
@@ -166,7 +167,7 @@ namespace NeonLadder.DataManagement
             validateOnLoad = true;
             enableDebugLogging = false;
             
-            Debug.Log("🚀 Loaded production preset for save system");
+            Debugger.Log("🚀 Loaded production preset for save system");
         }
 
         /// <summary>
@@ -187,7 +188,7 @@ namespace NeonLadder.DataManagement
             validateOnLoad = false;
             enableDebugLogging = true;
             
-            Debug.Log("🔧 Loaded development preset for save system");
+            Debugger.Log("🔧 Loaded development preset for save system");
         }
 
         /// <summary>
@@ -201,7 +202,7 @@ namespace NeonLadder.DataManagement
                 string saveFile = GetSaveFilePath();
                 if (!System.IO.File.Exists(saveFile))
                 {
-                    Debug.LogWarning("❌ No save file found to export");
+                    Debugger.LogWarning("❌ No save file found to export");
                     return;
                 }
 
@@ -212,7 +213,7 @@ namespace NeonLadder.DataManagement
                 if (enableEncryption)
                 {
                     // Note: This would need actual decryption implementation
-                    Debug.LogWarning("🔐 Encrypted save detected - implement decryption for export");
+                    Debugger.LogWarning("🔐 Encrypted save detected - implement decryption for export");
                 }
 
                 // Create export file with timestamp
@@ -235,7 +236,7 @@ namespace NeonLadder.DataManagement
                 string exportJson = JsonUtility.ToJson(exportData, true);
                 System.IO.File.WriteAllText(exportPath, exportJson);
 
-                Debug.Log($"✅ Save data exported to: {exportPath}");
+                Debugger.Log($"✅ Save data exported to: {exportPath}");
                 
                 #if UNITY_EDITOR
                 UnityEditor.EditorUtility.RevealInFinder(exportPath);
@@ -243,7 +244,7 @@ namespace NeonLadder.DataManagement
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"❌ Failed to export save data: {ex.Message}");
+                Debugger.LogError($"❌ Failed to export save data: {ex.Message}");
             }
         }
 
@@ -264,13 +265,13 @@ namespace NeonLadder.DataManagement
 
                 if (string.IsNullOrEmpty(importPath))
                 {
-                    Debug.Log("📥 Import cancelled by user");
+                    Debugger.Log("📥 Import cancelled by user");
                     return;
                 }
 
                 if (!System.IO.File.Exists(importPath))
                 {
-                    Debug.LogError("❌ Selected file does not exist");
+                    Debugger.LogError("❌ Selected file does not exist");
                     return;
                 }
 
@@ -279,7 +280,7 @@ namespace NeonLadder.DataManagement
 
                 if (importData == null || string.IsNullOrEmpty(importData.originalSaveData))
                 {
-                    Debug.LogError("❌ Invalid save data format in JSON file");
+                    Debugger.LogError("❌ Invalid save data format in JSON file");
                     return;
                 }
 
@@ -294,7 +295,7 @@ namespace NeonLadder.DataManagement
                             $".backup_before_import_{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}{System.IO.Path.GetExtension(currentSave)}"
                         );
                         System.IO.File.Copy(currentSave, backupPath);
-                        Debug.Log($"💾 Created backup before import: {backupPath}");
+                        Debugger.Log($"💾 Created backup before import: {backupPath}");
                     }
                 }
 
@@ -302,15 +303,15 @@ namespace NeonLadder.DataManagement
                 string saveFile = GetSaveFilePath();
                 System.IO.File.WriteAllText(saveFile, importData.originalSaveData);
 
-                Debug.Log($"✅ Save data imported successfully from: {System.IO.Path.GetFileName(importPath)}");
-                Debug.Log($"📊 Import Details: Game Version: {importData.gameVersion}, Export Date: {importData.exportTimestamp}");
+                Debugger.Log($"✅ Save data imported successfully from: {System.IO.Path.GetFileName(importPath)}");
+                Debugger.Log($"📊 Import Details: Game Version: {importData.gameVersion}, Export Date: {importData.exportTimestamp}");
                 #else
-                Debug.LogWarning("❌ Import functionality only available in Unity Editor");
+                Debugger.LogWarning("❌ Import functionality only available in Unity Editor");
                 #endif
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"❌ Failed to import save data: {ex.Message}");
+                Debugger.LogError($"❌ Failed to import save data: {ex.Message}");
             }
         }
 
@@ -322,13 +323,13 @@ namespace NeonLadder.DataManagement
         {
             if (resetAllSaveData)
             {
-                Debug.LogWarning("🚨 RESETTING ALL SAVE DATA - This action cannot be undone!");
+                Debugger.LogWarning("🚨 RESETTING ALL SAVE DATA - This action cannot be undone!");
                 
                 string saveFile = GetSaveFilePath();
                 if (System.IO.File.Exists(saveFile))
                 {
                     System.IO.File.Delete(saveFile);
-                    Debug.Log($"🗑️ Deleted save file: {saveFile}");
+                    Debugger.Log($"🗑️ Deleted save file: {saveFile}");
                 }
                 
                 // Delete backups
@@ -339,16 +340,16 @@ namespace NeonLadder.DataManagement
                     if (System.IO.File.Exists(backupFile))
                     {
                         System.IO.File.Delete(backupFile);
-                        Debug.Log($"🗑️ Deleted backup file: {backupFile}");
+                        Debugger.Log($"🗑️ Deleted backup file: {backupFile}");
                     }
                 }
                 
                 resetAllSaveData = false; // Reset the flag
-                Debug.Log("✅ Save data reset complete");
+                Debugger.Log("✅ Save data reset complete");
             }
             else
             {
-                Debug.LogWarning("❌ Reset all save data flag is not set - enable it first");
+                Debugger.LogWarning("❌ Reset all save data flag is not set - enable it first");
             }
         }
 

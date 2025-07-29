@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Unity.Cinemachine;
+using NeonLadder.Debugging;
 
 public class RotationController : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class RotationController : MonoBehaviour
 
         if (_virtualCamera == null)
         {
-            Debug.LogError("CinemachineCamera component not found on the GameObject.");
+            Debugger.LogError("CinemachineCamera component not found on the GameObject.");
             return;
         }
 
@@ -29,7 +30,7 @@ public class RotationController : MonoBehaviour
 
         if (_framingTransposer == null)
         {
-            Debug.LogError("CinemachinePositionComposer component not found on the Virtual Camera.");
+            Debugger.LogError("CinemachinePositionComposer component not found on the Virtual Camera.");
             return;
         }
 
@@ -66,12 +67,12 @@ public class RotationController : MonoBehaviour
         else if (AxisToShiftOn.ToLower() == "z") rotationDelta = new Vector3(0f, 0f, DegreesShift);
 
         Vector3 targetRotation = _initialRotation + rotationDelta;
-        Debug.Log("Beginning to track Camera Sequence time");
+        Debugger.Log("Beginning to track Camera Sequence time");
         while (elapsedTime < AnimationDuration)
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / AnimationDuration;
-            //Debug.Log(elapsedTime);
+            //Debugger.Log(elapsedTime);
 
             // Interpolate rotation
             _virtualCamera.transform.eulerAngles = Vector3.Lerp(_initialRotation, targetRotation, t);
@@ -83,16 +84,16 @@ public class RotationController : MonoBehaviour
         _virtualCamera.transform.eulerAngles = targetRotation;
 
         // Disable the Cinemachine Virtual Camera component
-        Debug.Log("Disabling Cinemachine Virtual Camera component.");
+        Debugger.Log("Disabling Cinemachine Virtual Camera component.");
         _virtualCamera.enabled = false;
 
         if (!_virtualCamera.enabled)
         {
-            Debug.Log("Cinemachine Virtual Camera successfully disabled.");
+            Debugger.Log("Cinemachine Virtual Camera successfully disabled.");
         }
         else
         {
-            Debug.LogError("Failed to disable the Cinemachine Virtual Camera component.");
+            Debugger.LogError("Failed to disable the Cinemachine Virtual Camera component.");
         }
 
         _isAnimating = false;

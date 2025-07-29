@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.WebRequests
 {
@@ -27,11 +28,11 @@ namespace NeonLadder.WebRequests
 
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
-                Debug.LogError($"Error sending event data: {request.error}");
+                Debugger.LogError($"Error sending event data: {request.error}");
             }
             else
             {
-                Debug.Log("Event data sent successfully!");
+                Debugger.Log("Event data sent successfully!");
             }
         }
     }

@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd4130b97cf6494aad52a6749aba17b, type: 3}
+  m_Name: Default Logging Config
+  m_EditorClassIdentifier: 
+  enableLogging: 0
+  configurationName: Development (Verbose & Interactive)
+  description: Development logging with full debugging features and overlay
+  minimumLogLevel: 0
+  categorySettings:
+  - category: 1
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 2
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 3
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 4
+    enabled: 1
+    minimumLevel: 2
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 5
+    enabled: 1
+    minimumLevel: 2
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 6
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 7
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 8
+    enabled: 1
+    minimumLevel: 0
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 9
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 10
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 11
+    enabled: 1
+    minimumLevel: 2
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 12
+    enabled: 1
+    minimumLevel: 2
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 13
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 14
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 15
+    enabled: 1
+    minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  showStackTraces: 1
+  includeTimestamp: 1
+  enableDebugOverlay: 1
+  maxOverlayEntries: 100
+  autoScrollToNewest: 1
+  enableOverlayFiltering: 1
+  showOverlayOnStart: 1
+  enableFileLogging: 1
+  logFileName: neonladder_debug
+  maxLogFileSizeMB: 20
+  logFileRotationCount: 5
+  includeUnityConsoleLogs: 1
+  enableLogBuffering: 0
+  enableDebugDrawing: 1
+  logBufferSize: 20
+  maxBufferTime: 5
+  enableAsyncFileWriting: 0
+  performanceSettings:
+    frameRateThreshold: 30
+    memoryThresholdMB: 10
+    performanceSampleRate: 60
+    enableProfilerIntegration: 0
+  integrateWithTimedLogger: 1
+  enhancePerformanceProfiler: 1
+  enableErrorReporting: 0
+  enableCrashDumps: 1
+  developerEmail: 
+  colorTheme:
+    debugColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    infoColor: {r: 1, g: 1, b: 1, a: 1}
+    warningColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    errorColor: {r: 1, g: 0, b: 0, a: 1}
+    criticalColor: {r: 1, g: 0.5, b: 0, a: 1}
+  logMessageTemplate: '[{timestamp}] [{level}] [{category}] {message}'
+  categoryFormats: []
+  enableVerboseMode: 1
+  includeMethodInfo: 1
+  trackMemoryUsage: 1

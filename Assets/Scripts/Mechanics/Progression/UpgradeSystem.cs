@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NeonLadder.Mechanics.Currency;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Mechanics.Progression
 {
@@ -55,37 +56,37 @@ namespace NeonLadder.Mechanics.Progression
         {
             if (!upgradeDatabase.TryGetValue(upgradeId, out var upgrade))
             {
-                Debug.LogWarning($"Upgrade '{upgradeId}' not found");
+                Debugger.LogWarning($"Upgrade '{upgradeId}' not found");
                 return false;
             }
             
             if (upgrade.CurrencyType != currencyType)
             {
-                Debug.LogWarning($"Upgrade '{upgradeId}' requires {upgrade.CurrencyType} currency, not {currencyType}");
+                Debugger.LogWarning($"Upgrade '{upgradeId}' requires {upgrade.CurrencyType} currency, not {currencyType}");
                 return false;
             }
             
             if (!CanAffordUpgrade(upgradeId, currencyType))
             {
-                Debug.LogWarning($"Cannot afford upgrade '{upgradeId}'");
+                Debugger.LogWarning($"Cannot afford upgrade '{upgradeId}'");
                 return false;
             }
             
             if (!ArePrerequisitesMet(upgrade))
             {
-                Debug.LogWarning($"Prerequisites not met for upgrade '{upgradeId}'");
+                Debugger.LogWarning($"Prerequisites not met for upgrade '{upgradeId}'");
                 return false;
             }
             
             if (HasMutuallyExclusiveUpgrade(upgrade))
             {
-                Debug.LogWarning($"Mutually exclusive upgrade already owned for '{upgradeId}'");
+                Debugger.LogWarning($"Mutually exclusive upgrade already owned for '{upgradeId}'");
                 return false;
             }
             
             if (upgrade.IsMaxLevel)
             {
-                Debug.LogWarning($"Upgrade '{upgradeId}' is already at max level");
+                Debugger.LogWarning($"Upgrade '{upgradeId}' is already at max level");
                 return false;
             }
             
@@ -101,7 +102,7 @@ namespace NeonLadder.Mechanics.Progression
             // Fire event
             OnUpgradePurchased?.Invoke(upgrade);
             
-            Debug.Log($"Purchased upgrade '{upgrade.Name}' (Level {upgrade.CurrentLevel})");
+            Debugger.Log($"Purchased upgrade '{upgrade.Name}' (Level {upgrade.CurrentLevel})");
             return true;
         }
         
@@ -145,7 +146,7 @@ namespace NeonLadder.Mechanics.Progression
                 ownedUpgrades.Remove(upgrade.Id);
             }
             
-            Debug.Log($"Reset {metaUpgrades.Count} meta upgrades");
+            Debugger.Log($"Reset {metaUpgrades.Count} meta upgrades");
         }
         
         public void ApplyUpgradeEffects()
@@ -158,7 +159,7 @@ namespace NeonLadder.Mechanics.Progression
                 }
             }
             
-            Debug.Log($"Applied {ownedUpgrades.Count} upgrade effects");
+            Debugger.Log($"Applied {ownedUpgrades.Count} upgrade effects");
         }
         
         private bool ArePrerequisitesMet(IUpgrade upgrade)
@@ -175,12 +176,12 @@ namespace NeonLadder.Mechanics.Progression
         [ContextMenu("Debug: List All Upgrades")]
         private void DebugListUpgrades()
         {
-            Debug.Log("=== Upgrade System Debug ===");
+            Debugger.Log("=== Upgrade System Debug ===");
             foreach (var kvp in upgradeDatabase)
             {
                 var upgrade = kvp.Value;
                 var owned = HasUpgrade(upgrade.Id) ? $"OWNED (Level {upgrade.CurrentLevel})" : "NOT OWNED";
-                Debug.Log($"{upgrade.Name} ({upgrade.Id}): {owned} - {upgrade.CurrencyType} - {upgrade.Cost} cost");
+                Debugger.Log($"{upgrade.Name} ({upgrade.Id}): {owned} - {upgrade.CurrencyType} - {upgrade.Cost} cost");
             }
         }
         #endif

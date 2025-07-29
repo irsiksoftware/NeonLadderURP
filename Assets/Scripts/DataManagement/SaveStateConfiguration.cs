@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using NeonLadderURP.Models;
 using NeonLadder.Models;
+using NeonLadder.Debugging;
 
 namespace NeonLadderURP.DataManagement
 {
@@ -109,7 +110,7 @@ namespace NeonLadderURP.DataManagement
             
             if (enableDebugMode)
             {
-                Debug.Log($"[SaveStateConfiguration] Applied configuration '{configurationName}' to current session");
+                Debugger.Log($"[SaveStateConfiguration] Applied configuration '{configurationName}' to current session");
             }
         }
         
