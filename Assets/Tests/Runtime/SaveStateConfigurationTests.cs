@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NeonLadderURP.DataManagement;
 using NeonLadderURP.Models;
+using NeonLadder.Models;
 
 namespace NeonLadder.Tests
 {
@@ -185,6 +186,7 @@ namespace NeonLadder.Tests
         {
             // Arrange
             var sceneSet = CreateTestProceduralSceneSet();
+            SetCurrentSceneSet(sceneSet);
             
             // Act
             var saveData = testConfig.CreateSaveData();
@@ -383,30 +385,25 @@ namespace NeonLadder.Tests
             return saveData;
         }
         
-        // These methods would use reflection or direct property access based on implementation
+        // Access the actual configuration properties
         private PlayerProgressionSetup GetPlayerSetupFromConfig()
         {
-            // This would access the actual playerSetup field from SaveStateConfiguration
-            // For now, returning a mock object
-            return new PlayerProgressionSetup();
+            return testConfig.PlayerSetup;
         }
         
         private CurrencySetup GetCurrencySetupFromConfig()
         {
-            // This would access the actual currencySetup field from SaveStateConfiguration
-            return new CurrencySetup();
+            return testConfig.CurrencySetup;
         }
         
         private WorldStateSetup GetWorldSetupFromConfig()
         {
-            // This would access the actual worldSetup field from SaveStateConfiguration
-            return new WorldStateSetup();
+            return testConfig.WorldSetup;
         }
         
         private void SetCurrentSceneSet(ProceduralSceneSet sceneSet)
         {
-            // This would set the currentSceneSet field in SaveStateConfiguration
-            // Implementation depends on whether this field is publicly accessible
+            testConfig.CurrentSceneSet = sceneSet;
         }
         
         #endregion

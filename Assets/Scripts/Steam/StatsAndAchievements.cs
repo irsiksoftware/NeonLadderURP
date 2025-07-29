@@ -1,3 +1,4 @@
+using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Managers;
 using Steamworks;
@@ -172,7 +173,7 @@ namespace NeonLadder.Steam
             {
                 if (EResult.k_EResultOK == callback.m_eResult)
                 {
-                    Debug.Log("Received stats and achievements from Steam\n");
+                    Debugger.Log("Received stats and achievements from Steam\n");
 
                     statsValid = true;
                     LoadAchievements();
@@ -180,7 +181,7 @@ namespace NeonLadder.Steam
                 }
                 else
                 {
-                    Debug.Log("RequestStats - failed, " + callback.m_eResult);
+                    Debugger.Log("RequestStats - failed, " + callback.m_eResult);
                 }
             }
         }
@@ -196,7 +197,7 @@ namespace NeonLadder.Steam
                 }
                 else
                 {
-                    Debug.LogWarning("SteamUserStats.GetAchievement failed for Achievement " + achievement.AchievementID + "\nIs it registered in the Steam Partner site?");
+                    Debugger.LogWarning("SteamUserStats.GetAchievement failed for Achievement " + achievement.AchievementID + "\nIs it registered in the Steam Partner site?");
                 }
             }
         }
@@ -217,16 +218,16 @@ namespace NeonLadder.Steam
             {
                 if (EResult.k_EResultOK == callback.m_eResult)
                 {
-                    Debug.Log("StoreStats - success");
+                    Debugger.Log("StoreStats - success");
                 }
                 else if (EResult.k_EResultInvalidParam == callback.m_eResult)
                 {
-                    Debug.Log("StoreStats - some failed to validate");
+                    Debugger.Log("StoreStats - some failed to validate");
                     OnUserStatsReceived(new UserStatsReceived_t { m_eResult = EResult.k_EResultOK, m_nGameID = (ulong)gameID });
                 }
                 else
                 {
-                    Debug.Log("StoreStats - failed, " + callback.m_eResult);
+                    Debugger.Log("StoreStats - failed, " + callback.m_eResult);
                 }
             }
         }
@@ -237,11 +238,11 @@ namespace NeonLadder.Steam
             {
                 if (0 == callback.m_nMaxProgress)
                 {
-                    Debug.Log("Achievement '" + callback.m_rgchAchievementName + "' unlocked!");
+                    Debugger.Log("Achievement '" + callback.m_rgchAchievementName + "' unlocked!");
                 }
                 else
                 {
-                    Debug.Log("Achievement '" + callback.m_rgchAchievementName + "' progress callback, (" + callback.m_nCurProgress + "," + callback.m_nMaxProgress + ")");
+                    Debugger.Log("Achievement '" + callback.m_rgchAchievementName + "' progress callback, (" + callback.m_nCurProgress + "," + callback.m_nMaxProgress + ")");
                 }
             }
         }

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
+using NeonLadder.Debugging;
 
 namespace NeonLadderURP.DataManagement
 {
@@ -60,7 +61,7 @@ namespace NeonLadderURP.DataManagement
                 }
                 File.Move(TempFilePath, SaveFilePath);
                 
-                Debug.Log($"[EnhancedSaveSystem] Game saved successfully to: {SaveFilePath}");
+                Debugger.Log($"[EnhancedSaveSystem] Game saved successfully to: {SaveFilePath}");
                 OnSaveCompleted?.Invoke(saveData);
                 
                 return true;
@@ -68,7 +69,7 @@ namespace NeonLadderURP.DataManagement
             catch (Exception ex)
             {
                 string errorMessage = $"[EnhancedSaveSystem] Save failed: {ex.Message}";
-                Debug.LogError(errorMessage);
+                Debugger.LogError(errorMessage);
                 OnSaveError?.Invoke(errorMessage);
                 
                 // Attempt to restore from backup if save failed
@@ -86,7 +87,7 @@ namespace NeonLadderURP.DataManagement
             {
                 if (!SaveExists())
                 {
-                    Debug.Log("[EnhancedSaveSystem] No save file found, creating new save data");
+                    Debugger.Log("[EnhancedSaveSystem] No save file found, creating new save data");
                     return CreateNewSaveData();
                 }
                 
@@ -97,20 +98,20 @@ namespace NeonLadderURP.DataManagement
                 // Validate save data
                 if (ValidateSaveData(saveData))
                 {
-                    Debug.Log($"[EnhancedSaveSystem] Game loaded successfully from: {SaveFilePath}");
+                    Debugger.Log($"[EnhancedSaveSystem] Game loaded successfully from: {SaveFilePath}");
                     OnLoadCompleted?.Invoke(saveData);
                     return saveData;
                 }
                 else
                 {
-                    Debug.LogWarning("[EnhancedSaveSystem] Save data validation failed, attempting backup restore");
+                    Debugger.LogWarning("[EnhancedSaveSystem] Save data validation failed, attempting backup restore");
                     return LoadFromBackup();
                 }
             }
             catch (Exception ex)
             {
                 string errorMessage = $"[EnhancedSaveSystem] Load failed: {ex.Message}";
-                Debug.LogError(errorMessage);
+                Debugger.LogError(errorMessage);
                 OnSaveError?.Invoke(errorMessage);
                 
                 // Try to load from backup
@@ -175,17 +176,17 @@ namespace NeonLadderURP.DataManagement
             {
                 if (!SaveExists())
                 {
-                    Debug.LogError("[EnhancedSaveSystem] No save file to export");
+                    Debugger.LogError("[EnhancedSaveSystem] No save file to export");
                     return false;
                 }
                 
                 File.Copy(SaveFilePath, exportPath, true);
-                Debug.Log($"[EnhancedSaveSystem] Save exported to: {exportPath}");
+                Debugger.Log($"[EnhancedSaveSystem] Save exported to: {exportPath}");
                 return true;
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[EnhancedSaveSystem] Export failed: {ex.Message}");
+                Debugger.LogError($"[EnhancedSaveSystem] Export failed: {ex.Message}");
                 return false;
             }
         }
@@ -199,7 +200,7 @@ namespace NeonLadderURP.DataManagement
             {
                 if (!File.Exists(importPath))
                 {
-                    Debug.LogError($"[EnhancedSaveSystem] Import file not found: {importPath}");
+                    Debugger.LogError($"[EnhancedSaveSystem] Import file not found: {importPath}");
                     return false;
                 }
                 
@@ -209,7 +210,7 @@ namespace NeonLadderURP.DataManagement
                 
                 if (!ValidateSaveData(testData))
                 {
-                    Debug.LogError("[EnhancedSaveSystem] Import file validation failed");
+                    Debugger.LogError("[EnhancedSaveSystem] Import file validation failed");
                     return false;
                 }
                 
@@ -219,12 +220,12 @@ namespace NeonLadderURP.DataManagement
                 // Copy import file to save location
                 File.Copy(importPath, SaveFilePath, true);
                 
-                Debug.Log($"[EnhancedSaveSystem] Save imported from: {importPath}");
+                Debugger.Log($"[EnhancedSaveSystem] Save imported from: {importPath}");
                 return true;
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[EnhancedSaveSystem] Import failed: {ex.Message}");
+                Debugger.LogError($"[EnhancedSaveSystem] Import failed: {ex.Message}");
                 return false;
             }
         }
@@ -242,12 +243,12 @@ namespace NeonLadderURP.DataManagement
                 if (File.Exists(BackupFilePath))
                     File.Delete(BackupFilePath);
                     
-                Debug.Log("[EnhancedSaveSystem] Save files deleted");
+                Debugger.Log("[EnhancedSaveSystem] Save files deleted");
                 return true;
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[EnhancedSaveSystem] Delete failed: {ex.Message}");
+                Debugger.LogError($"[EnhancedSaveSystem] Delete failed: {ex.Message}");
                 return false;
             }
         }
@@ -259,7 +260,7 @@ namespace NeonLadderURP.DataManagement
             if (!Directory.Exists(GameDataDirectory))
             {
                 Directory.CreateDirectory(GameDataDirectory);
-                Debug.Log($"[EnhancedSaveSystem] Created GameData directory: {GameDataDirectory}");
+                Debugger.Log($"[EnhancedSaveSystem] Created GameData directory: {GameDataDirectory}");
             }
         }
         
@@ -276,7 +277,7 @@ namespace NeonLadderURP.DataManagement
             if (File.Exists(BackupFilePath))
             {
                 File.Copy(BackupFilePath, SaveFilePath, true);
-                Debug.Log("[EnhancedSaveSystem] Restored from backup");
+                Debugger.Log("[EnhancedSaveSystem] Restored from backup");
             }
         }
         
@@ -291,17 +292,17 @@ namespace NeonLadderURP.DataManagement
                     
                     if (ValidateSaveData(saveData))
                     {
-                        Debug.Log("[EnhancedSaveSystem] Loaded from backup successfully");
+                        Debugger.Log("[EnhancedSaveSystem] Loaded from backup successfully");
                         return saveData;
                     }
                 }
                 
-                Debug.LogWarning("[EnhancedSaveSystem] Backup load failed, creating new save");
+                Debugger.LogWarning("[EnhancedSaveSystem] Backup load failed, creating new save");
                 return CreateNewSaveData();
             }
             catch
             {
-                Debug.LogWarning("[EnhancedSaveSystem] Backup corrupted, creating new save");
+                Debugger.LogWarning("[EnhancedSaveSystem] Backup corrupted, creating new save");
                 return CreateNewSaveData();
             }
         }
@@ -316,7 +317,7 @@ namespace NeonLadderURP.DataManagement
             newSave.worldState.currentRun.runStartTime = DateTime.Now;
             newSave.statistics.sessionStartTime = DateTime.Now;
             
-            Debug.Log("[EnhancedSaveSystem] Created new save data");
+            Debugger.Log("[EnhancedSaveSystem] Created new save data");
             return newSave;
         }
         

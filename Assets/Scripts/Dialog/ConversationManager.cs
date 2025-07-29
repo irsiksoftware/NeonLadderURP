@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Dialog
 {
@@ -47,7 +48,7 @@ namespace NeonLadder.Dialog
             // Subscribe to legacy dialog manager events if available
             if (legacyDialogManager != null)
             {
-                Debug.Log("ConversationManager: Integrating with legacy DialogueManager");
+                Debugger.Log("ConversationManager: Integrating with legacy DialogueManager");
             }
         }
 
@@ -130,7 +131,7 @@ namespace NeonLadder.Dialog
             var character = GetCharacterConfig(characterId);
             if (character == null)
             {
-                Debug.LogError($"ConversationManager: Character '{characterId}' not found");
+                Debugger.LogError($"ConversationManager: Character '{characterId}' not found");
                 return;
             }
 
@@ -162,7 +163,7 @@ namespace NeonLadder.Dialog
             // Null check for dependencies
             if (pointTracker == null)
             {
-                Debug.LogError("ConversationManager: pointTracker is not assigned");
+                Debugger.LogError("ConversationManager: pointTracker is not assigned");
                 return;
             }
 
@@ -202,7 +203,7 @@ namespace NeonLadder.Dialog
                 legacyDialogManager.InitializeLanguage(language);
             }
             
-            Debug.Log($"ConversationManager: Language set to {language}");
+            Debugger.Log($"ConversationManager: Language set to {language}");
         }
 
         /// <summary>
@@ -336,14 +337,14 @@ namespace NeonLadder.Dialog
         private void ConfigureForMobile()
         {
             // Mobile-specific optimizations
-            Debug.Log("ConversationManager: Configured for mobile platform");
+            Debugger.Log("ConversationManager: Configured for mobile platform");
             // Adjust UI scaling, touch interactions, etc.
         }
 
         private void ConfigureForDesktop()
         {
             // Desktop-specific optimizations
-            Debug.Log("ConversationManager: Configured for desktop platform");
+            Debugger.Log("ConversationManager: Configured for desktop platform");
             // Keyboard shortcuts, mouse interactions, etc.
         }
 
@@ -355,7 +356,7 @@ namespace NeonLadder.Dialog
         {
             if (conversationHistory == null)
             {
-                Debug.LogError("ConversationManager: conversationHistory is not initialized");
+                Debugger.LogError("ConversationManager: conversationHistory is not initialized");
                 return;
             }
             
@@ -413,19 +414,19 @@ namespace NeonLadder.Dialog
         private void ShowInternalThought(string thought)
         {
             // Display internal thought in UI
-            Debug.Log($"<color=cyan>Internal Thought: {thought}</color>");
+            Debugger.Log($"<color=cyan>Internal Thought: {thought}</color>");
         }
 
         private void DisplayConversationUI(string characterId, List<DialogChoice> choices, string context)
         {
             // Show conversation UI with enhanced choices
-            Debug.Log($"Starting conversation with {characterId}, context: {context}");
+            Debugger.Log($"Starting conversation with {characterId}, context: {context}");
         }
 
         private void DisplayCharacterResponse(string characterId, string response)
         {
             // Display character response with personality-driven formatting
-            Debug.Log($"{characterId}: {response}");
+            Debugger.Log($"{characterId}: {response}");
         }
 
         #endregion

@@ -106,7 +106,7 @@ namespace NeonLadder.Tests
             Assert.AreEqual(originalSaveData.worldState.currentSceneName, newSaveData.worldState.currentSceneName, "Scene name should be preserved");
             
             // Clean up
-            Object.DestroyImmediate(newConfig);
+            UnityEngine.Object.DestroyImmediate(newConfig);
         }
         
         #endregion
@@ -140,7 +140,7 @@ namespace NeonLadder.Tests
                 Assert.IsTrue(saveData.progression.maxHealth > 0, "Max health should be valid");
                 
                 // Clean up
-                Object.DestroyImmediate(config);
+                UnityEngine.Object.DestroyImmediate(config);
             }
         }
         
@@ -155,8 +155,8 @@ namespace NeonLadder.Tests
             File.WriteAllText(savePath, json);
             
             // Act - Modify JSON externally (simulating manual editing)
-            var modifiedJson = json.Replace("\"playerLevel\":10", "\"playerLevel\":99");
-            modifiedJson = modifiedJson.Replace("\"metaCurrency\":250", "\"metaCurrency\":5000");
+            var modifiedJson = System.Text.RegularExpressions.Regex.Replace(json, "\"playerLevel\"\\s*:\\s*10", "\"playerLevel\": 99");
+            modifiedJson = System.Text.RegularExpressions.Regex.Replace(modifiedJson, "\"metaCurrency\"\\s*:\\s*250", "\"metaCurrency\": 5000");
             File.WriteAllText(savePath, modifiedJson);
             
             // Load modified data
@@ -171,7 +171,7 @@ namespace NeonLadder.Tests
             Assert.AreEqual(saveData.worldState.currentSceneName, loadedData.worldState.currentSceneName, "Unmodified data should remain intact");
             
             // Clean up
-            Object.DestroyImmediate(config);
+            UnityEngine.Object.DestroyImmediate(config);
         }
         
         #endregion
@@ -220,7 +220,7 @@ namespace NeonLadder.Tests
             Assert.AreEqual(saveData.worldState.completedScenes.Count, deserializedData.worldState.completedScenes.Count, "All data should be preserved");
             
             // Clean up
-            Object.DestroyImmediate(config);
+            UnityEngine.Object.DestroyImmediate(config);
         }
         
         #endregion
@@ -274,7 +274,7 @@ namespace NeonLadder.Tests
             Assert.IsFalse(gameDataDir.Contains("Temp"), "Should not save in temporary locations");
             
             // Clean up
-            Object.DestroyImmediate(config);
+            UnityEngine.Object.DestroyImmediate(config);
         }
         
         #endregion

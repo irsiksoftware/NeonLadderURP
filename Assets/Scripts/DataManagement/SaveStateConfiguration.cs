@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using NeonLadderURP.Models;
+using NeonLadder.Models;
+using NeonLadder.Debugging;
 
 namespace NeonLadderURP.DataManagement
 {
@@ -108,7 +110,7 @@ namespace NeonLadderURP.DataManagement
             
             if (enableDebugMode)
             {
-                Debug.Log($"[SaveStateConfiguration] Applied configuration '{configurationName}' to current session");
+                Debugger.Log($"[SaveStateConfiguration] Applied configuration '{configurationName}' to current session");
             }
         }
         
@@ -162,14 +164,14 @@ namespace NeonLadderURP.DataManagement
                     var unlockData = new UnlockData
                     {
                         unlockId = unlock.name,
-                        unlockName = unlock.Name,
+                        unlockName = unlock.unlockName,
                         isUnlocked = true,
                         unlockedAt = DateTime.Now,
-                        costPaid = unlock.Cost,
-                        unlockType = unlock.Type.ToString()
+                        costPaid = unlock.cost,
+                        unlockType = unlock.type.ToString()
                     };
                     saveData.progression.permanentUnlocks.Add(unlockData);
-                    saveData.progression.unlockedAbilities.Add(unlock.Name);
+                    saveData.progression.unlockedAbilities.Add(unlock.unlockName);
                 }
             }
             
@@ -250,6 +252,34 @@ namespace NeonLadderURP.DataManagement
                 seed = UnityEngine.Random.Range(1000, 9999)
             };
             sceneSetPresets.Add(newSceneSet);
+        }
+        
+        #endregion
+        
+        #region Public Properties for Testing
+        
+        /// <summary>
+        /// Public access to player setup for testing
+        /// </summary>
+        public PlayerProgressionSetup PlayerSetup => playerSetup;
+        
+        /// <summary>
+        /// Public access to currency setup for testing
+        /// </summary>
+        public CurrencySetup CurrencySetup => currencySetup;
+        
+        /// <summary>
+        /// Public access to world setup for testing
+        /// </summary>
+        public WorldStateSetup WorldSetup => worldSetup;
+        
+        /// <summary>
+        /// Public access to current scene set for testing
+        /// </summary>
+        public ProceduralSceneSet CurrentSceneSet
+        {
+            get => currentSceneSet;
+            set => currentSceneSet = value;
         }
         
         #endregion

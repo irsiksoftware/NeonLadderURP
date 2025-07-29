@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Dialog
 {
@@ -31,7 +32,7 @@ namespace NeonLadder.Dialog
             pointTracker = FindObjectOfType<ConversationPointTracker>();
             if (pointTracker == null)
             {
-                Debug.LogWarning("DialogChoiceValidator: ConversationPointTracker not found");
+                Debugger.LogWarning("DialogChoiceValidator: ConversationPointTracker not found");
             }
         }
 
@@ -386,11 +387,11 @@ namespace NeonLadder.Dialog
             
             var characters = new[] { "wrath", "pride", "elli", "aria", "spaceship" };
             
-            Debug.Log("=== Available Dialog Choices ===");
+            Debugger.Log("=== Available Dialog Choices ===");
             foreach (var character in characters)
             {
                 var choices = GetAvailableChoices(character, "general", testStats);
-                Debug.Log($"{character}: {string.Join(", ", choices)}");
+                Debugger.Log($"{character}: {string.Join(", ", choices)}");
             }
         }
 

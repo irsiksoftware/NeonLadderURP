@@ -1,5 +1,6 @@
 using NeonLadder.Common;
 using NeonLadder.Core;
+using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
 using System.Collections;
@@ -67,7 +68,7 @@ namespace NeonLadder.Mechanics.Controllers
             
             if (Animator == null || Animator.runtimeAnimatorController == null)
             {
-                Debug.LogWarning($"Animator or RuntimeAnimatorController not found on {gameObject.name}");
+                Debugger.LogWarning($"Animator or RuntimeAnimatorController not found on {gameObject.name}");
                 return;
             }
             
@@ -88,7 +89,7 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 return length;
             }
-            Debug.LogWarning($"Animation {animation} not found or animation clips not cached");
+            Debugger.LogWarning($"Animation {animation} not found or animation clips not cached");
             return 0f;
         }
 
@@ -150,13 +151,13 @@ namespace NeonLadder.Mechanics.Controllers
         public IEnumerator PlayGetHitAnimation(bool stopEarly = false)
         {
             var animationParamName = "animation";
-            Debug.Log("Getting hit...");
+            Debugger.Log("Getting hit...");
             if (transform.parent.name.Contains("Kaoru")) // kinematic's are on child game objects, but protagonist is more fleshed out in animations so far, what a hack, need to standardize.
             {
                 animationParamName = $"locomotion_animation";
             }
             Animator.SetInteger(animationParamName, (int)Animations.GetHit);
-            Debug.Log($"animation value: {Animator.GetInteger(animationParamName)}");
+            Debugger.Log($"animation value: {Animator.GetInteger(animationParamName)}");
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             yield return new WaitForSeconds(GetHitAnimationDuration);
             rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
