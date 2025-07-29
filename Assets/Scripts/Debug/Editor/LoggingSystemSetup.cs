@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
-namespace NeonLadder.Debug.Editor
+namespace NeonLadder.Debugging.Editor
 {
     /// <summary>
     /// Unity Editor utilities for setting up the NeonLadder Logging System

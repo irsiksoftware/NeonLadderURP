@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-namespace NeonLadder.Debug
+namespace NeonLadder.Debugging
 {
     /// <summary>
     /// ScriptableObject configuration for the NeonLadder Centralized Logging System

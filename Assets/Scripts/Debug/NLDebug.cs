@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace NeonLadder.Debug
+namespace NeonLadder.Debugging
 {
     /// <summary>
     /// NeonLadder custom debugger - avoids namespace conflicts with UnityEngine.Debug
     /// Provides centralized logging with category support and performance optimization
     /// </summary>
-    public static class NLDebug
+    public static class Debugger
     {
         /// <summary>
         /// Log a general info message

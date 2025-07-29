@@ -102,7 +102,8 @@
       "Bash(del \"C:\\Users\\Ender\\NeonLadder\\Assets\\Scripts\\Debug\\Debug.cs\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -quit -projectPath \"C:\\Users\\Ender\\NeonLadder\" -logFile \"C:\\Users\\Ender\\NeonLadder\\TestOutput\\build_check_nldebug.log\" -executeMethod UnityEditor.EditorApplication.Exit)",
       "Bash(dir:*)",
-      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -quit -projectPath \"C:\\Users\\Ender\\NeonLadder\" -logFile \"C:\\Users\\Ender\\NeonLadder\\TestOutput\\build_check_progress.log\" -executeMethod UnityEditor.EditorApplication.Exit)"
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -quit -projectPath \"C:\\Users\\Ender\\NeonLadder\" -logFile \"C:\\Users\\Ender\\NeonLadder\\TestOutput\\build_check_progress.log\" -executeMethod UnityEditor.EditorApplication.Exit)",
+      "Bash(del update_namespace.ps1)"
     ],
     "deny": [
       "Bash(reg *)",

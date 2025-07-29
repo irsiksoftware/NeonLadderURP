@@ -4,7 +4,7 @@ using UnityEngine.TestTools;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Tests
 {
@@ -228,6 +228,9 @@ namespace NeonLadder.Tests
             // Arrange
             testConfig.logFileName = ""; // Invalid empty filename
             testConfig.maxLogFileSizeMB = 0; // Invalid file size
+            
+            // Expect the validation error log message
+            LogAssert.Expect(LogType.Error, new System.Text.RegularExpressions.Regex("Logging System Config validation failed"));
             
             // Act
             var result = testConfig.ValidateConfiguration();

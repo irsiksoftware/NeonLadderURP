@@ -172,7 +172,6 @@
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneChangeController.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
-    <Compile Include="Assets\Scripts\Debug\Debug.cs" />
     <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
     <Compile Include="Assets\Scripts\Events\RestartScene.cs" />
@@ -259,6 +258,7 @@
     <Compile Include="Assets\Scripts\Managers\SceneExitAssignmentManager.cs" />
     <Compile Include="Assets\Scripts\UI\TitleScreen.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\SceneChangeDetector.cs" />
+    <Compile Include="Assets\Scripts\Debug\NLDebug.cs" />
     <Compile Include="Assets\Scripts\Cameras\RotationController.cs" />
     <Compile Include="Assets\Scripts\Events\BossDeath.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerHealthUIManager.cs" />
@@ -1402,6 +1402,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Michsky.MUIP.csproj">
+      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
+      <Name>Michsky.MUIP</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

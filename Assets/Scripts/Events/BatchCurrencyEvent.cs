@@ -2,7 +2,7 @@ using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 using System.Collections.Generic;
 using UnityEngine;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Events
 {
@@ -52,13 +52,13 @@ namespace NeonLadder.Events
             if (totalMeta > 0)
             {
                 player.MetaCurrency.Increment(totalMeta);
-                NLDebug.Log($"Collected {totalMeta} Meta currency from {currencyDrops.Count} sources");
+                Debugger.Log($"Collected {totalMeta} Meta currency from {currencyDrops.Count} sources");
             }
             
             if (totalPerma > 0)
             {
                 player.PermaCurrency.Increment(totalPerma);
-                NLDebug.Log($"Collected {totalPerma} Perma currency from {currencyDrops.Count} sources");
+                Debugger.Log($"Collected {totalPerma} Perma currency from {currencyDrops.Count} sources");
             }
             
             // Schedule batch VFX event for visual feedback
@@ -72,7 +72,7 @@ namespace NeonLadder.Events
         {
             // Could schedule a VFX event here to show currency collection
             // This would be much more efficient than individual VFX per pickup
-            NLDebug.Log($"Showing batch currency VFX at {position}: {metaAmount} Meta, {permaAmount} Perma");
+            Debugger.Log($"Showing batch currency VFX at {position}: {metaAmount} Meta, {permaAmount} Perma");
         }
         
         /// <summary>

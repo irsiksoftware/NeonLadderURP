@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Dialog
 {
@@ -67,10 +67,10 @@ namespace NeonLadder.Dialog
             if (newLevel != oldLevel)
             {
                 OnCVCLevelUp?.Invoke(characterId, oldLevel, newLevel);
-                Debug.Log($"<color=gold>CVC Level Up!</color> {characterId}: {oldLevel} → {newLevel}");
+                Debugger.Log($"<color=gold>CVC Level Up!</color> {characterId}: {oldLevel} → {newLevel}");
             }
             
-            Debug.Log($"ConversationPoints: {characterId} {(points >= 0 ? "+" : "")}{points} (Total: {characterPoints[characterId]}, Level: {newLevel})");
+            Debugger.Log($"ConversationPoints: {characterId} {(points >= 0 ? "+" : "")}{points} (Total: {characterPoints[characterId]}, Level: {newLevel})");
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace NeonLadder.Dialog
         {
             characterPoints.Clear();
             pointHistory.Clear();
-            Debug.Log("ConversationPointTracker: All points reset");
+            Debugger.Log("ConversationPointTracker: All points reset");
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace NeonLadder.Dialog
                 pointHistory[characterId].Clear();
             }
             
-            Debug.Log($"ConversationPointTracker: Points reset for {characterId}");
+            Debugger.Log($"ConversationPointTracker: Points reset for {characterId}");
         }
 
         #endregion
@@ -318,12 +318,12 @@ namespace NeonLadder.Dialog
         [ContextMenu("Debug: Print All Points")]
         public void DebugPrintAllPoints()
         {
-            Debug.Log("=== Conversation Points Summary ===");
+            Debugger.Log("=== Conversation Points Summary ===");
             foreach (var kvp in characterPoints.OrderByDescending(x => x.Value))
             {
-                Debug.Log($"{kvp.Key}: {kvp.Value} points (Level {GetCVCLevel(kvp.Key)})");
+                Debugger.Log($"{kvp.Key}: {kvp.Value} points (Level {GetCVCLevel(kvp.Key)})");
             }
-            Debug.Log($"Total: {GetTotalPoints()} points");
+            Debugger.Log($"Total: {GetTotalPoints()} points");
         }
 
         #endregion

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 //#if UNITY_STANDALONE_WIN
 //using System.Management;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Newtonsoft.Json;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.ProceduralGeneration
 {
@@ -79,7 +79,7 @@ namespace NeonLadder.ProceduralGeneration
             validationResults.Clear();
             previewMaps.Clear();
 
-            Debug.Log($"🔮 <color=cyan>Validating PathGenerator Config: {configurationName}</color>");
+            Debugger.Log($"🔮 <color=cyan>Validating PathGenerator Config: {configurationName}</color>");
 
             foreach (var seed in testSeeds)
             {
@@ -108,18 +108,18 @@ namespace NeonLadder.ProceduralGeneration
                     if (mapValidation.IsValid)
                     {
                         stats.validMaps++;
-                        Debug.Log($"✅ Seed '{seed}': <color=green>Valid</color>");
+                        Debugger.Log($"✅ Seed '{seed}': <color=green>Valid</color>");
                     }
                     else
                     {
                         stats.invalidMaps++;
-                        Debug.LogWarning($"⚠️ Seed '{seed}': <color=yellow>{mapValidation.Violations.Count} violations</color>");
+                        Debugger.LogWarning($"⚠️ Seed '{seed}': <color=yellow>{mapValidation.Violations.Count} violations</color>");
                         
                         if (showValidationDetails)
                         {
                             foreach (var violation in mapValidation.Violations)
                             {
-                                Debug.LogWarning($"   • {violation}");
+                                Debugger.LogWarning($"   • {violation}");
                             }
                         }
                     }
@@ -127,7 +127,7 @@ namespace NeonLadder.ProceduralGeneration
                 catch (Exception ex)
                 {
                     stats.errorMaps++;
-                    Debug.LogError($"❌ Seed '{seed}': <color=red>Error - {ex.Message}</color>");
+                    Debugger.LogError($"❌ Seed '{seed}': <color=red>Error - {ex.Message}</color>");
                 }
             }
 
@@ -140,10 +140,10 @@ namespace NeonLadder.ProceduralGeneration
             lastValidationStats = stats;
 
             // Log summary
-            Debug.Log($"📊 <color=cyan>Validation Summary for {configurationName}:</color>");
-            Debug.Log($"   ✅ Valid: {stats.validMaps}/{stats.totalMaps} ({stats.successRate:P1})");
-            Debug.Log($"   ⚠️ Invalid: {stats.invalidMaps}");
-            Debug.Log($"   ❌ Errors: {stats.errorMaps}");
+            Debugger.Log($"📊 <color=cyan>Validation Summary for {configurationName}:</color>");
+            Debugger.Log($"   ✅ Valid: {stats.validMaps}/{stats.totalMaps} ({stats.successRate:P1})");
+            Debugger.Log($"   ⚠️ Invalid: {stats.invalidMaps}");
+            Debugger.Log($"   ❌ Errors: {stats.errorMaps}");
 
             return stats;
         }
@@ -157,7 +157,7 @@ namespace NeonLadder.ProceduralGeneration
             if (generator == null)
                 generator = new PathGenerator();
 
-            Debug.Log($"🗺️ <color=cyan>Generating {previewMapCount} preview maps for {configurationName}</color>");
+            Debugger.Log($"🗺️ <color=cyan>Generating {previewMapCount} preview maps for {configurationName}</color>");
 
             for (int i = 0; i < previewMapCount; i++)
             {
@@ -220,11 +220,11 @@ namespace NeonLadder.ProceduralGeneration
             };
 
             var json = JsonConvert.SerializeObject(exportData, Formatting.Indented);
-            Debug.Log($"📤 <color=green>Configuration exported:</color>\n{json}");
+            Debugger.Log($"📤 <color=green>Configuration exported:</color>\n{json}");
             
             // Copy to clipboard if possible
             GUIUtility.systemCopyBuffer = json;
-            Debug.Log("📋 Configuration copied to clipboard!");
+            Debugger.Log("📋 Configuration copied to clipboard!");
             
             return json;
         }
@@ -243,7 +243,7 @@ namespace NeonLadder.ProceduralGeneration
                 rules = importData.rules;
                 testSeeds = importData.testSeeds ?? new List<string>();
 
-                Debug.Log($"📥 <color=green>Configuration imported: {configurationName}</color>");
+                Debugger.Log($"📥 <color=green>Configuration imported: {configurationName}</color>");
                 
                 if (autoValidateOnChange)
                 {
@@ -254,7 +254,7 @@ namespace NeonLadder.ProceduralGeneration
             }
             catch (Exception ex)
             {
-                Debug.LogError($"❌ Import failed: {ex.Message}");
+                Debugger.LogError($"❌ Import failed: {ex.Message}");
                 return false;
             }
         }
@@ -300,7 +300,7 @@ namespace NeonLadder.ProceduralGeneration
         /// </summary>
         private void LogMapPreview(MysticalMap map, int previewIndex)
         {
-            Debug.Log($"🗺️ <color=cyan>Preview Map #{previewIndex} (Seed: {map.Seed})</color>");
+            Debugger.Log($"🗺️ <color=cyan>Preview Map #{previewIndex} (Seed: {map.Seed})</color>");
             
             foreach (var layer in map.Layers)
             {
@@ -309,19 +309,19 @@ namespace NeonLadder.ProceduralGeneration
                 
                 var nodeTypesSummary = string.Join(", ", nodesByType.Select(kvp => $"{kvp.Key}: {kvp.Value}"));
                 
-                Debug.Log($"  🏰 Layer {layer.LayerIndex}: {layer.Boss} at {layer.Location}");
-                Debug.Log($"     📊 Nodes: {nodeTypesSummary}");
+                Debugger.Log($"  🏰 Layer {layer.LayerIndex}: {layer.Boss} at {layer.Location}");
+                Debugger.Log($"     📊 Nodes: {nodeTypesSummary}");
                 
                 if (showNodeProperties)
                 {
                     foreach (var node in layer.Nodes.Take(3)) // Show first 3 nodes as example
                     {
                         var props = string.Join(", ", node.Properties.Take(3).Select(kvp => $"{kvp.Key}={kvp.Value}"));
-                        Debug.Log($"     🔸 {node.Id}: {node.Type} [{props}]");
+                        Debugger.Log($"     🔸 {node.Id}: {node.Type} [{props}]");
                     }
                     if (layer.Nodes.Count > 3)
                     {
-                        Debug.Log($"     ... and {layer.Nodes.Count - 3} more nodes");
+                        Debugger.Log($"     ... and {layer.Nodes.Count - 3} more nodes");
                     }
                 }
             }

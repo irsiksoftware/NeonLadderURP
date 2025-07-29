@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Cinemachine;
 using System.Collections.Generic;
 using NeonLadder.Mechanics.Enums;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Cameras
 {
@@ -30,17 +30,17 @@ namespace NeonLadder.Cameras
                 if (virtualCamera != null)
                 {
                     // Disable the camera and store the reference
-                    NLDebug.LogWarning($"{virtualCamera.gameObject.name} with Cinemachine Virtual Cameras have been disabled and it's reference stored.");
+                    Debugger.LogWarning($"{virtualCamera.gameObject.name} with Cinemachine Virtual Cameras have been disabled and it's reference stored.");
                     virtualCamera.enabled = false;
                     altCameras.Add(virtualCamera);
                 }
                 else
                 {
-                    NLDebug.LogWarning($"GameObject '{cameraObject.name}' tagged as 'AltCamera' does not have a CinemachineCamera component.");
+                    Debugger.LogWarning($"GameObject '{cameraObject.name}' tagged as 'AltCamera' does not have a CinemachineCamera component.");
                 }
             }
 
-            NLDebug.Log("All AltCamera-tagged Cinemachine Virtual Cameras have been disabled and stored.");
+            Debugger.Log("All AltCamera-tagged Cinemachine Virtual Cameras have been disabled and stored.");
         }
 
         private void OnTriggerEnter(Collider other)
@@ -56,7 +56,7 @@ namespace NeonLadder.Cameras
         {
             if (string.IsNullOrEmpty(cameraName))
             {
-                NLDebug.LogError("Camera name is not set in the CameraActivator script.");
+                Debugger.LogError("Camera name is not set in the CameraActivator script.");
                 return;
             }
 
@@ -65,7 +65,7 @@ namespace NeonLadder.Cameras
 
             if (cameraObject == null)
             {
-                NLDebug.LogError($"Camera with name '{cameraName}' not found in the hierarchy.");
+                Debugger.LogError($"Camera with name '{cameraName}' not found in the hierarchy.");
                 return;
             }
 
@@ -74,7 +74,7 @@ namespace NeonLadder.Cameras
 
             if (virtualCamera == null)
             {
-                NLDebug.LogError($"GameObject '{cameraName}' does not have a CinemachineCamera component.");
+                Debugger.LogError($"GameObject '{cameraName}' does not have a CinemachineCamera component.");
                 return;
             }
 
@@ -85,7 +85,7 @@ namespace NeonLadder.Cameras
             rotationController.StartAnimationManually();
             virtualCamera.enabled = true;
 
-            NLDebug.Log($"Camera '{cameraName}' activated and enabled.");
+            Debugger.Log($"Camera '{cameraName}' activated and enabled.");
         }
     }
 }

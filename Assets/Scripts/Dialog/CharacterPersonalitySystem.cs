@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Dialog
 {
@@ -154,7 +154,7 @@ namespace NeonLadder.Dialog
                 return personalityLookup[characterId];
             }
             
-            Debug.LogWarning($"CharacterPersonalitySystem: No personality found for {characterId}");
+            Debugger.LogWarning($"CharacterPersonalitySystem: No personality found for {characterId}");
             return CreateDefaultPersonality(characterId);
         }
 
@@ -191,7 +191,7 @@ namespace NeonLadder.Dialog
                 var personality = personalityLookup[characterId];
                 personality.moodModifier = Mathf.Clamp(personality.moodModifier + moodChange, -2f, 2f);
                 
-                Debug.Log($"CharacterPersonalitySystem: {characterId} mood updated: {personality.moodModifier:F2}");
+                Debugger.Log($"CharacterPersonalitySystem: {characterId} mood updated: {personality.moodModifier:F2}");
             }
         }
 
@@ -219,7 +219,7 @@ namespace NeonLadder.Dialog
             
             if (oldLevel != personality.relationshipLevel)
             {
-                Debug.Log($"CharacterPersonalitySystem: {characterId} relationship changed: {oldLevel} → {personality.relationshipLevel}");
+                Debugger.Log($"CharacterPersonalitySystem: {characterId} relationship changed: {oldLevel} → {personality.relationshipLevel}");
             }
         }
 

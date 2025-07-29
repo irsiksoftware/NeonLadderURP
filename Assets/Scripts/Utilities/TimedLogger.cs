@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Utilities
 {
@@ -94,8 +94,8 @@ namespace NeonLadder.Utilities
             }
             else
             {
-                // Fallback to Unity Debug.Log
-                NLDebug.Log($"[TIMED] {message}");
+                // Fallback to Unity Debugger.Log
+                Debugger.Log($"[TIMED] {message}");
             }
         }
 
@@ -109,8 +109,8 @@ namespace NeonLadder.Utilities
             }
             else
             {
-                // Fallback to Unity Debug.Log
-                NLDebug.Log($"[TIMED] [{category}] {message}");
+                // Fallback to Unity Debugger.Log
+                Debugger.Log($"[TIMED] [{category}] {message}");
             }
         }
     }

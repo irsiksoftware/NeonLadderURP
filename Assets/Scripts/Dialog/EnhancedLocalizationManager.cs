@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Localization.Tables;
 using System.Collections.Generic;
 using System;
-using NeonLadder.Debug;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Dialog
 {
@@ -126,17 +126,17 @@ namespace NeonLadder.Dialog
                 if (stringTable != null)
                 {
                     languageStringTables[config.language] = stringTable;
-                    Debug.Log($"EnhancedLocalizationManager: Loaded {config.displayName} string table");
+                    Debugger.Log($"EnhancedLocalizationManager: Loaded {config.displayName} string table");
                 }
                 else
                 {
-                    Debug.LogWarning($"EnhancedLocalizationManager: Failed to load string table for {config.displayName} at {config.stringTablePath}");
+                    Debugger.LogWarning($"EnhancedLocalizationManager: Failed to load string table for {config.displayName} at {config.stringTablePath}");
                     OnLocalizationError?.Invoke($"Missing string table: {config.displayName}");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"EnhancedLocalizationManager: Error loading {config.displayName}: {ex.Message}");
+                Debugger.LogError($"EnhancedLocalizationManager: Error loading {config.displayName}: {ex.Message}");
                 OnLocalizationError?.Invoke($"Error loading {config.displayName}: {ex.Message}");
             }
         }
@@ -163,7 +163,7 @@ namespace NeonLadder.Dialog
             var systemLanguage = Application.systemLanguage;
             var currentPlatform = Application.platform;
             
-            Debug.Log($"EnhancedLocalizationManager: Detected system language: {systemLanguage}, platform: {currentPlatform}");
+            Debugger.Log($"EnhancedLocalizationManager: Detected system language: {systemLanguage}, platform: {currentPlatform}");
             
             // Check if the detected language is supported on this platform
             var languageConfig = GetLanguageConfig(systemLanguage);
@@ -220,13 +220,13 @@ namespace NeonLadder.Dialog
             var config = GetLanguageConfig(language);
             if (config == null)
             {
-                Debug.LogWarning($"EnhancedLocalizationManager: Language {language} not supported");
+                Debugger.LogWarning($"EnhancedLocalizationManager: Language {language} not supported");
                 return false;
             }
 
             if (!IsLanguageSupportedOnPlatform(config, Application.platform))
             {
-                Debug.LogWarning($"EnhancedLocalizationManager: Language {language} not supported on {Application.platform}");
+                Debugger.LogWarning($"EnhancedLocalizationManager: Language {language} not supported on {Application.platform}");
                 return false;
             }
 
@@ -242,7 +242,7 @@ namespace NeonLadder.Dialog
             // Clear cache to force reload of localized strings
             ClearDialogCache();
             
-            Debug.Log($"EnhancedLocalizationManager: Language changed from {previousLanguage} to {currentLanguage}");
+            Debugger.Log($"EnhancedLocalizationManager: Language changed from {previousLanguage} to {currentLanguage}");
             OnLanguageChanged?.Invoke(currentLanguage);
             
             return true;
@@ -323,7 +323,7 @@ namespace NeonLadder.Dialog
             languageStringTables.Clear();
             LoadAllStringTables();
             
-            Debug.Log("EnhancedLocalizationManager: Localization data reloaded");
+            Debugger.Log("EnhancedLocalizationManager: Localization data reloaded");
         }
 
         #endregion
@@ -334,7 +334,7 @@ namespace NeonLadder.Dialog
         {
             if (!languageStringTables.ContainsKey(language))
             {
-                Debug.LogWarning($"EnhancedLocalizationManager: No string table for language {language}");
+                Debugger.LogWarning($"EnhancedLocalizationManager: No string table for language {language}");
                 return GetFallbackString(key);
             }
 
@@ -343,7 +343,7 @@ namespace NeonLadder.Dialog
             
             if (entry == null)
             {
-                Debug.LogWarning($"EnhancedLocalizationManager: Key '{key}' not found in {language} string table");
+                Debugger.LogWarning($"EnhancedLocalizationManager: Key '{key}' not found in {language} string table");
                 return GetFallbackString(key);
             }
 
@@ -353,7 +353,7 @@ namespace NeonLadder.Dialog
             }
             catch (Exception ex)
             {
-                Debug.LogError($"EnhancedLocalizationManager: Error getting localized string for key '{key}': {ex.Message}");
+                Debugger.LogError($"EnhancedLocalizationManager: Error getting localized string for key '{key}': {ex.Message}");
                 return GetFallbackString(key);
             }
         }
@@ -422,7 +422,7 @@ namespace NeonLadder.Dialog
         private void ClearDialogCache()
         {
             dialogCache.Clear();
-            Debug.Log("EnhancedLocalizationManager: Dialog cache cleared");
+            Debugger.Log("EnhancedLocalizationManager: Dialog cache cleared");
         }
 
         #endregion
@@ -471,18 +471,18 @@ namespace NeonLadder.Dialog
         [ContextMenu("Debug: Print Localization Status")]
         public void DebugPrintLocalizationStatus()
         {
-            Debug.Log("=== Enhanced Localization Status ===");
-            Debug.Log($"Current Language: {currentLanguage}");
-            Debug.Log($"Platform: {Application.platform}");
-            Debug.Log($"Available Languages: {GetAvailableLanguages().Count}");
+            Debugger.Log("=== Enhanced Localization Status ===");
+            Debugger.Log($"Current Language: {currentLanguage}");
+            Debugger.Log($"Platform: {Application.platform}");
+            Debugger.Log($"Available Languages: {GetAvailableLanguages().Count}");
             
             foreach (var config in GetAvailableLanguages())
             {
                 var tableStatus = languageStringTables.ContainsKey(config.language) ? "✓" : "✗";
-                Debug.Log($"  {tableStatus} {config.displayName} ({config.language})");
+                Debugger.Log($"  {tableStatus} {config.displayName} ({config.language})");
             }
             
-            Debug.Log($"Cached Strings: {dialogCache.Count}");
+            Debugger.Log($"Cached Strings: {dialogCache.Count}");
         }
 
         #endregion

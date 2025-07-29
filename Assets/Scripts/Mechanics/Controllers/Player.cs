@@ -1,4 +1,4 @@
-// using Michsky.MUIP; // TODO: Re-enable when MUIP package is installed
+using Michsky.MUIP;
 using NeonLadder.Common;
 using NeonLadder.Core;
 using NeonLadder.Events;
@@ -14,9 +14,9 @@ namespace NeonLadder.Mechanics.Controllers
     public class Player : KinematicObject
     {
         [SerializeField]
-        private GameObject HealthBar; // TODO: Change back to ProgressBar when MUIP is installed
+        private ProgressBar HealthBar;
         [SerializeField]
-        private GameObject StaminaBar; // TODO: Change back to ProgressBar when MUIP is installed
+        private ProgressBar StaminaBar;
         public AudioSource audioSource;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;

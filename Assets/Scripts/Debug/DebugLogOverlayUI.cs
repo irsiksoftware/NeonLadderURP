@@ -6,7 +6,7 @@ using System.Linq;
 using System;
 using System.Text;
 
-namespace NeonLadder.Debug
+namespace NeonLadder.Debugging
 {
     /// <summary>
     /// In-game debug overlay UI for displaying centralized logging system messages

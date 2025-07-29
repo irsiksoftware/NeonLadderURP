@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Text;
 
-namespace NeonLadder.Debug
+namespace NeonLadder.Debugging
 {
     /// <summary>
     /// Centralized logging manager for NeonLadder
