@@ -1,5 +1,6 @@
 using NeonLadder.Common;
 using NeonLadder.Core;
+using NeonLadder.Debug;
 using NeonLadder.Events;
 using NeonLadder.Items.Loot;
 using NeonLadder.Mechanics.Enums;
@@ -95,7 +96,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (attackCooldown <= AttackAnimationDuration)
             {
-                Debug.LogWarning($"Attack cooldown is less than or equal to attack animation duration for enemy: {transform.parent.name}");
+                NLDebug.LogWarning($"Attack cooldown is less than or equal to attack animation duration for enemy: {transform.parent.name}");
             }
             base.Awake();
             health = GetComponentInParent<Health>();
@@ -206,9 +207,9 @@ namespace NeonLadder.Mechanics.Controllers
                 isIdlePlaying = true;
                 moveDirection = 0;
                 Animator.SetInteger("animation", (int)Animations.Idle);
-                Debug.Log($"{transform.parent.name} starting Idle animation. Expected duration: {IdleAnimationDuration}");
+                NLDebug.Log($"{transform.parent.name} starting Idle animation. Expected duration: {IdleAnimationDuration}");
                 yield return new WaitForSeconds(IdleAnimationDuration);
-                Debug.Log($"{transform.parent.name} completed Idle animation.");
+                NLDebug.Log($"{transform.parent.name} completed Idle animation.");
                 isIdlePlaying = false;
                 ReassessState(distanceToTarget);
             }
@@ -255,7 +256,7 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 if (!isIdlePlaying)
                 {
-                    //Debug.Log($"{transform.parent.name} entering Reassessing state.");
+                    //NLDebug.Log($"{transform.parent.name} entering Reassessing state.");
                     StartCoroutine(PlayIdleAnimation());
                 }
             }

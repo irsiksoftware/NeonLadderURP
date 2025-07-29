@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using NeonLadder.Debug;
 
 
 namespace NeonLadder.Core
@@ -117,7 +118,7 @@ namespace NeonLadder.Core
                 }
                 else
                 {
-                    // Debug.Log($"<color=green>{ev.tick} {ev.GetType().Name}</color>");
+                    // NLDebug.Log($"<color=green>{ev.tick} {ev.GetType().Name}</color>");
                     ev.Cleanup();
                     try
                     {
@@ -126,7 +127,7 @@ namespace NeonLadder.Core
                     catch (KeyNotFoundException)
                     {
                         //This really should never happen inside a production build.
-                        Debug.LogError($"No Pool for: {ev.GetType()}");
+                        NLDebug.LogError($"No Pool for: {ev.GetType()}");
                     }
                 }
                 executedEventCount++;

@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Items\Loot\LootItem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseCurrencyController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
+    <Compile Include="Assets\Scripts\Debug\LoggingSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneEndController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\TimeTrackerUI.cs" />
     <Compile Include="Assets\Scripts\UI\BossesDefeatedUIDisplayManager.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Assets\Scripts\DataManagement\EnhancedSaveSystem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\PlayerAnimationLayers.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerUnlock.cs" />
+    <Compile Include="Assets\Scripts\Debug\Editor\LoggingSystemSetup.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerTerrainCollision.cs" />
     <Compile Include="Assets\Scripts\WebRequests\WebRequestHandler.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerExhaustedEvent.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneChangeController.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
+    <Compile Include="Assets\Scripts\Debug\Debug.cs" />
     <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
     <Compile Include="Assets\Scripts\Events\RestartScene.cs" />
@@ -179,6 +182,7 @@
     <Compile Include="Assets\Scripts\Dialog\ConversationPointTracker.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerStopJump.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeCategory.cs" />
+    <Compile Include="Assets\Scripts\Debug\LoggingManager.cs" />
     <Compile Include="Assets\Scripts\Events\LoadGame.cs" />
     <Compile Include="Assets\Scripts\UI\StatUI.cs" />
     <Compile Include="Assets\Scripts\Dialog\EnhancedLocalizationManager.cs" />
@@ -204,6 +208,7 @@
     <Compile Include="Assets\Scripts\Items\HealthReplenishment.cs" />
     <Compile Include="Assets\Scripts\Events\CurrencyChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyStateTransitionEvent.cs" />
+    <Compile Include="Assets\Scripts\Debug\DebugLogOverlayUI.cs" />
     <Compile Include="Assets\Scripts\Utilities\Editor\AnimatorTransitionChanger.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerEnteredVictoryZone.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\DamageNumberController.cs" />
@@ -1397,14 +1402,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="DamageNumbersPro.csproj">
-      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
-      <Name>DamageNumbersPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
-      <Name>Michsky.MUIP</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using NeonLadder.Debug;
 
 namespace NeonLadder.Mechanics.Controllers
 {
@@ -21,7 +22,7 @@ namespace NeonLadder.Mechanics.Controllers
                     }
                     else
                     {
-                        Debug.LogError($"Transformation game object '{transformationName}' not found.");
+                        NLDebug.LogError($"Transformation game object '{transformationName}' not found.");
                     }
                 }
             }

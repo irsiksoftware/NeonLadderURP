@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System;
+using NeonLadder.Debug;
 
 //#if UNITY_STANDALONE_WIN
 //using System.Management;
@@ -17,8 +18,29 @@ using System.Text.RegularExpressions;
 #endif
 using UnityEngine.Profiling;
 
+/// <summary>
+/// Enhanced PerformanceProfiler with centralized logging integration
+/// Monitors frame rate, memory usage, and system performance metrics
+/// Now integrates with NeonLadder's centralized logging system
+/// </summary>
 public class PerformanceProfiler : MonoBehaviour
 {
+    [Header("🔧 Performance Monitoring Settings")]
+    [Tooltip("Enable integration with centralized logging system")]
+    public bool useCentralizedLogging = true;
+    
+    [Tooltip("Log performance warnings when frame rate drops below threshold")]
+    [Range(15, 60)]
+    public int frameRateWarningThreshold = 30;
+    
+    [Tooltip("Log memory warnings when allocation exceeds threshold (MB)")]
+    [Range(50, 1000)]
+    public int memoryWarningThresholdMB = 200;
+    
+    [Tooltip("Performance sampling interval (seconds)")]
+    [Range(0.5f, 10f)]
+    public float samplingInterval = 1f;
+
     private int frameCount = 0;
     private float totalTime = 0f;
     private float averageFrameRate = 0f;
@@ -31,16 +53,31 @@ public class PerformanceProfiler : MonoBehaviour
 
     void Start()
     {
-        //try
-        //{
+        try
+        {
             InitializeLogging();
             LogHardwareInfo();
             StartCoroutine(LogPerformanceData());
-        //}
-        //catch (System.Exception e)
-        //{
-        //    //UnityEngine.Debug.LogError("Error initializing PerformanceProfiler: " + e.Message);
-        //}
+            
+            // Log startup with centralized system
+            if (useCentralizedLogging)
+            {
+                LoggingManager.LogInfo(LogCategory.Performance, "📊 PerformanceProfiler initialized with centralized logging");
+                LoggingManager.LogInfo(LogCategory.Performance, $"⚙️ Frame rate threshold: {frameRateWarningThreshold} FPS");
+                LoggingManager.LogInfo(LogCategory.Performance, $"🧠 Memory threshold: {memoryWarningThresholdMB} MB");
+            }
+        }
+        catch (System.Exception e)
+        {
+            if (useCentralizedLogging)
+            {
+                LoggingManager.LogError(LogCategory.Performance, $"❌ Error initializing PerformanceProfiler: {e.Message}");
+            }
+            else
+            {
+                UnityEngine.Debug.LogError("Error initializing PerformanceProfiler: " + e.Message);
+            }
+        }
     }
 
     void Update()
@@ -52,7 +89,15 @@ public class PerformanceProfiler : MonoBehaviour
     private void InitializeLogging()
     {
         filePath = Path.Combine(Application.persistentDataPath, "PerformanceData.txt");
-        //UnityEngine.Debug.Log("Logging performance data to: " + filePath);
+        
+        if (useCentralizedLogging)
+        {
+            LoggingManager.LogInfo(LogCategory.Performance, $"📁 Performance data logging to: {filePath}");
+        }
+        else
+        {
+            UnityEngine.Debug.Log("Logging performance data to: " + filePath);
+        }
 
         sessionID = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         logData.Add($"Session: {sessionID}");
@@ -66,7 +111,7 @@ public class PerformanceProfiler : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f); // Log data every 1 second
+            yield return new WaitForSeconds(samplingInterval);
 
             if (totalTime > 0)
             {
@@ -84,10 +129,42 @@ public class PerformanceProfiler : MonoBehaviour
             int verticesCount = 0; // Implement vertices count calculation
             float physicsTime = 0; // Implement physics calculation time
             float renderTime = 0; // Implement render time calculation
-            bool below30FPS = averageFrameRate < 30.0f;
+            bool below30FPS = averageFrameRate < frameRateWarningThreshold;
 
             string logEntry = $"{Application.platform},{Time.time},{frameCount},{averageFrameRate},{totalAllocatedMemory},{totalReservedMemory},{totalUnusedReservedMemory},{cpuUsage},{gpuUsage},{frameTime},{gcAlloc},{drawCalls},{verticesCount},{physicsTime},{renderTime},{below30FPS},{SystemInfo.processorType},{SystemInfo.graphicsDeviceName},{SystemInfo.systemMemorySize}";
             logData.Add(logEntry);
+
+            // Enhanced logging with centralized system
+            if (useCentralizedLogging)
+            {
+                // Log performance warnings
+                if (below30FPS)
+                {
+                    LoggingManager.LogWarning(LogCategory.Performance, 
+                        $"⚠️ Low frame rate detected: {averageFrameRate:F1} FPS (threshold: {frameRateWarningThreshold})");
+                }
+
+                if (totalAllocatedMemory > memoryWarningThresholdMB)
+                {
+                    LoggingManager.LogWarning(LogCategory.Performance, 
+                        $"⚠️ High memory usage: {totalAllocatedMemory:F1} MB (threshold: {memoryWarningThresholdMB})");
+                }
+
+                // Periodic performance summary using LoggingManager's performance logging
+                LoggingManager.LogPerformance("Average FPS", averageFrameRate, " fps");
+                LoggingManager.LogPerformance("Allocated Memory", totalAllocatedMemory, " MB");
+                LoggingManager.LogPerformance("Frame Time", frameTime, " ms");
+                
+                if (cpuUsage > 0)
+                {
+                    LoggingManager.LogPerformance("CPU Usage", cpuUsage, "%");
+                }
+                
+                if (gpuUsage > 0)
+                {
+                    LoggingManager.LogPerformance("GPU Usage", gpuUsage, "%");
+                }
+            }
         }
     }
 

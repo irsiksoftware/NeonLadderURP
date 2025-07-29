@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Localization.Tables;
 using System.Collections.Generic;
 using System;
+using NeonLadder.Debug;
 
 namespace NeonLadder.Dialog
 {
