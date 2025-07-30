@@ -4,11 +4,13 @@ using UnityEditor.TestTools.TestRunner.Api;
 using System.IO;
 using System.Linq;
 
-/// <summary>
-/// CLI Test Runner for Unity 6 - Workaround for broken -runTests flag
-/// Usage: Unity.exe -batchmode -projectPath "path" -executeMethod CLITestRunner.RunPlayModeTests -quit
-/// </summary>
-public static class CLITestRunner
+namespace NeonLadder.Editor
+{
+    /// <summary>
+    /// CLI Test Runner for Unity 6 - Workaround for broken -runTests flag
+    /// Usage: Unity.exe -batchmode -projectPath "path" -executeMethod CLITestRunner.RunPlayModeTests -quit
+    /// </summary>
+    public static class CLITestRunner
 {
     private static string testResultsPath = "TestOutput/TestResults_CLI.xml";
     private static TestRunnerApi testRunnerApi;
@@ -129,4 +131,5 @@ public class TestCallbacks : ICallbacks
             }
         }
     }
+}
 }

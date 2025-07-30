@@ -9,11 +9,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
-    <ProjectGuid>{606890D8-CA42-F5E4-6972-7C97ECF195C1}</ProjectGuid>
+    <RootNamespace>NeonLadder.Tests.Editor.UI</RootNamespace>
+    <ProjectGuid>{855FE7EB-AFB1-6F0E-92E0-5A91C01363BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <AssemblyName>NeonLadder.Tests.Editor.UI</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -61,85 +61,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\PTNodeGraph.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Editor\NoiseStrings2D.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\TextureAverageColor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\GeneratorNodeEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\FromSavedNodeEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorResources.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Curves\AnimationCurveTexturePropertyDrawer.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenLiquidGUI.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\HeightmapNodeEditor.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\AbondonedDistrict\Editor\MultiplyRotationXWithMinusOne.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorReflection.cs" />
-    <Compile Include="Assets\Packages\Modern UI Pack\Editor\Scripts\InitMUIP.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\Script\Editor\ConvertTexturesToPNG.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorAction.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorGUI.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenCloudGUI.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\GradientEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\PreviewNodeEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\Drawers\NodeEnumDrawer.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorGUILayout.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Lightning\Editor\LightningRendererEditor.cs" />
-    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\UberFXShaderConverter.cs" />
-    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\HDRPMaterialSyncTool.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorUtilities.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\Editor\SavePrefabINfiniDy.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Scripts\Editor\WeatherScriptEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Editor\connectSuntoVolumeFogURPEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\SerializedPropertyExtensions.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Editor\NoiseCreator.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Editor\NoiseStrings3D.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Editor\SkyMasterInspector.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\unity-urp-vr-lens-flare\Editor\VRLensFlareEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\Utils.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\OperatorNodeEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapGenerator.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenMasterGUIBase.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\PropertyDrawerExtensions.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\MemberInfoExtensions.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\PlanetEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\Editor\TagsInfiniTREE.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorPreferences.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\RectExtensions.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Gradients\GradientAssetEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\Editor\SplinePEditorINfiniDy.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorWindow.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Lightning\Editor\LightningMeshEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapImporter.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\Editor\SkyMasterURP_Prefab_Manager.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenExplosionGUI.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenFireGUI.cs" />
-    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\UberFXShaderConverterWindow.cs" />
-    <Compile Include="Assets\Packages\Modern UI Pack\Editor\Scripts\ContextMenu.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\TypeExtensions.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorAssetModProcessor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\OldToNewHeightmap.cs" />
-    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\MaterialTransparencyFixerWindow.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapToRaw.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Gradients\GradientTexturePropertyDrawer.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.4 Scripts\Editor\CloudHandlerSM_SRPEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\Editor\CreatePlaneSM.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\DetailDistancesCalc.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenMasterGUI.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorBase.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Editor\ObjExporter.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\SavingNodeEditor.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeGraphEditor.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\SimpleCompilationTest.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\MenuSystemIntegrationTestsSimplified.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\SaveSystemCommandCenterTests.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\EditorUITestFramework.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\UpgradeSystemEditorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\Resources\ScriptTemplates\xNode_NodeGraphTemplate.cs.txt" />
-    <None Include="Assets\MobileDependencyResolver\Editor\Google.IOSResolver.dll" />
-    <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll" />
-    <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\Resources\ScriptTemplates\xNode_NodeTemplate.cs.txt" />
-    <None Include="Assets\MobileDependencyResolver\Editor\Google.VersionHandlerImpl.dll" />
-    <None Include="Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll" />
-    <None Include="Assets\MobileDependencyResolver\Editor\mobile-dependency-resolver.txt" />
-    <None Include="Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\AssetStoreTools\Editor\AssetStoreTools.dll" />
-    <None Include="Assets\Packages\ARTnGAME\InfiniSPLAT\TilingRandomization\Editor\TextureTilingRandomization.hlsl" />
+    <None Include="Assets\Tests\Editor\UI\NeonLadder.Tests.Editor.UI.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -634,100 +563,8 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>Library\PackageCache\com.unity.collections\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Tracker.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="EasyRoads3Dv3Editor">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="EasyRoads3Dv3">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.VersionHandlerImpl">
-      <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandlerImpl.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="log4netPlastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.IonicZip">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.JarResolver">
-      <HintPath>Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DelaunayER">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.VersionHandler">
-      <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AssetStoreTools">
-      <HintPath>Assets\Packages\LeartesStudios_TEMP\AssetStoreTools\Editor\AssetStoreTools.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json\Runtime\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>Library\PackageCache\com.unity.analytics\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1246,399 +1083,23 @@
       <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.AI.Navigation">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Cinemachine.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Purchasing.Common">
-      <HintPath>Library\ScriptAssemblies\Purchasing.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Multiplayer.Center.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Polybrush">
-      <HintPath>Library\ScriptAssemblies\Unity.Polybrush.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.FilmInternalUtilities.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.FilmInternalUtilities.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="PPv2URPConverters">
-      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Splines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Splines.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing.SecurityStub">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityStub.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Collections.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Profiling.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Updater">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="com.rlabrecque.steamworks.net.editor">
-      <HintPath>Library\ScriptAssemblies\com.rlabrecque.steamworks.net.editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing.SecurityCore">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityCore.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Services.Core.Analytics">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Play.Publisher.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Play.Publisher.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.SpatialTracking.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.SysrootPackage.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.SysrootPackage.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEditorBridgeDev.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridgeDev.001.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Advertisements.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Addressables.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Addressables.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing.Codeless">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Codeless.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Services.Analytics">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Analytics.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ResourceManager">
-      <HintPath>Library\ScriptAssemblies\Unity.ResourceManager.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Polybrush.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Polybrush.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Advertisements.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Toonshader.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Toonshader.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.Purchasing.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Splines">
-      <HintPath>Library\ScriptAssemblies\Unity.Splines.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.FilmInternalUtilities">
-      <HintPath>Library\ScriptAssemblies\Unity.FilmInternalUtilities.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline">
-      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Collections">
-      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Addressables">
-      <HintPath>Library\ScriptAssemblies\Unity.Addressables.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rendering.LightTransport.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="com.rlabrecque.steamworks.net">
-      <HintPath>Library\ScriptAssemblies\com.rlabrecque.steamworks.net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Multiplayer.Center.Common">
-      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Toonshader">
-      <HintPath>Library\ScriptAssemblies\Unity.Toonshader.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
-      <HintPath>Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Analytics">
-      <HintPath>Library\ScriptAssemblies\Analytics.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Services.Core.Environments">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Localization.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Localization.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Sysroot.Linux_x86_64">
-      <HintPath>Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Burst.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing.Stores">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Stores.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Services.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rendering.LightTransport.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Localization">
-      <HintPath>Library\ScriptAssemblies\Unity.Localization.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{03A4AE4C-33AF-BFE0-EC80-D07A4EBF912E}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
+    <ProjectReference Include="NeonLadder.Scripts.csproj">
+      <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
+      <Name>NeonLadder.Scripts</Name>
     </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{8BE43F1D-5BCF-47F7-AF46-6E3184EFA571}</Project>
-      <Name>Assembly-CSharp</Name>
+    <ProjectReference Include="NeonLadder.Tests.Runtime.csproj">
+      <Project>{DFF72330-1879-B153-DC36-8A047CEF02B9}</Project>
+      <Name>NeonLadder.Tests.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.csproj">
       <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
@@ -1647,22 +1108,6 @@
     <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
       <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
-      <Name>Michsky.MUIP</Name>
-    </ProjectReference>
-    <ProjectReference Include="NeonLadder.Scripts.csproj">
-      <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
-      <Name>NeonLadder.Scripts</Name>
-    </ProjectReference>
-    <ProjectReference Include="TAA.Runtime.csproj">
-      <Project>{E9A8BA52-FE77-948F-C8AD-825193FE381C}</Project>
-      <Name>TAA.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="DamageNumbersPro.csproj">
-      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
-      <Name>DamageNumbersPro</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

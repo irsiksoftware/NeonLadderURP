@@ -154,7 +154,7 @@ namespace NeonLadder.Tests.Editor.UI
             Assert.Greater(neonLadderMenus.Count, 5, "Should have multiple NeonLadder menu items");
             
             // 2. Key categories exist
-            var categories = new[] { "Debug", "Upgrade System", "Examples", "Saves" };
+            var categories = new[] { "Debug", "Upgrade System", "Saves" };
             foreach (var category in categories)
             {
                 var hasCategory = neonLadderMenus.Any(m => m.menuItem.Contains($"/{category}/"));

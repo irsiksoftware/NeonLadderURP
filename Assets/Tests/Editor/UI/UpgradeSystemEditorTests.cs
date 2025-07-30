@@ -142,25 +142,30 @@ namespace NeonLadder.Tests.Editor.UI
         [Test]
         public void ExamplePurchasableItems_MenuIntegration_ShouldExist()
         {
-            // Test that ExamplePurchasableItems class exists and has the MenuItem attribute
+            // Test that ExamplePurchasableItems class exists by searching menu items for the expected menu
+            // This approach is more robust as it doesn't rely on direct assembly loading
             
-            // First, verify the class exists (search all loaded assemblies)
-            var exampleItemsType = System.AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .FirstOrDefault(type => type.Name == "ExamplePurchasableItems" && 
-                               type.Namespace == "NeonLadder.Editor.UpgradeSystem");
-            Assert.IsNotNull(exampleItemsType, "ExamplePurchasableItems class should exist in loaded assemblies");
+            var menuItems = System.AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => {
+                    try 
+                    {
+                        return assembly.GetTypes();
+                    }
+                    catch 
+                    {
+                        return new System.Type[0]; // Handle assemblies that can't be reflected
+                    }
+                })
+                .SelectMany(type => type.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
+                .Select(method => (UnityEditor.MenuItem)System.Attribute.GetCustomAttribute(method, typeof(UnityEditor.MenuItem)))
+                .Where(attr => attr != null)
+                .ToArray();
             
-            // Find the CreateExampleItems method
-            var createMethod = exampleItemsType.GetMethod("CreateExampleItems", 
-                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-            Assert.IsNotNull(createMethod, "CreateExampleItems method should exist");
-            
-            // Check for MenuItem attribute
-            var menuItemAttr = (UnityEditor.MenuItem)System.Attribute.GetCustomAttribute(createMethod, typeof(UnityEditor.MenuItem));
-            Assert.IsNotNull(menuItemAttr, "CreateExampleItems should have MenuItem attribute");
-            Assert.IsTrue(menuItemAttr.menuItem.Contains("Create Example Purchasable Items"), 
-                $"Menu item should contain expected text, but was: {menuItemAttr.menuItem}");
+            // Look for the specific menu item we expect from ExamplePurchasableItems
+            var exampleItemsMenu = menuItems.FirstOrDefault(m => m.menuItem.Contains("Create Example Purchasable Items"));
+            Assert.IsNotNull(exampleItemsMenu, "Should find 'Create Example Purchasable Items' menu item");
+            Assert.IsTrue(exampleItemsMenu.menuItem.StartsWith("NeonLadder/"), 
+                $"Menu item should be in NeonLadder menu, but was: {exampleItemsMenu.menuItem}");
         }
         
         [Test]
