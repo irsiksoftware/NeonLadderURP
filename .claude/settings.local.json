@@ -124,6 +124,13 @@
       "Bash(del \"C:\\Users\\Ender\\NeonLadder\\Assets\\Scripts\\Editor\\UpgradeSystem\\ExamplePurchasableItems.cs.meta\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -quit -logFile \"TestOutput/RecompileCheck.txt\")",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Users\\Ender\\NeonLadder\" -runTests -testPlatform EditMode -testResults \"TestOutput/FixedTests.xml\" -logFile \"TestOutput/FixedTests.txt\")"
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run_v2.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run_v3.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run_v4.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_final.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_final_v2.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_final_v3.txt\")"
     ],
     "deny": [
       "Bash(reg *)",
