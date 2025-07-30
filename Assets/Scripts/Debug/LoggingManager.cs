@@ -27,7 +27,12 @@ namespace NeonLadder.Debugging
                     {
                         GameObject go = new GameObject("LoggingManager");
                         _instance = go.AddComponent<LoggingManager>();
-                        DontDestroyOnLoad(go);
+                        
+                        // Only use DontDestroyOnLoad in play mode (not in Editor tests)
+                        if (Application.isPlaying)
+                        {
+                            DontDestroyOnLoad(go);
+                        }
                     }
                 }
                 return _instance;
@@ -68,7 +73,13 @@ namespace NeonLadder.Debugging
             if (_instance == null)
             {
                 _instance = this;
-                DontDestroyOnLoad(gameObject);
+                
+                // Only use DontDestroyOnLoad in play mode (not in Editor tests)
+                if (Application.isPlaying)
+                {
+                    DontDestroyOnLoad(gameObject);
+                }
+                
                 Initialize();
             }
             else if (_instance != this)

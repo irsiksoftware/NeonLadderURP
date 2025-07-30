@@ -43,17 +43,17 @@ namespace NeonLadder.Models
         
         // Properties
         public string ItemId => string.IsNullOrEmpty(itemId) ? name : itemId;
-        public string ItemName => itemName;
-        public string Description => description;
+        public string ItemName => string.IsNullOrEmpty(itemName) ? name : itemName;
+        public string Description => string.IsNullOrEmpty(description) ? "No description available" : description;
         public string FlavorText => flavorText;
         public Sprite Icon => icon;
         public Sprite ShopIcon => shopIcon != null ? shopIcon : icon;
         public NeonLadder.Mechanics.Progression.CurrencyType CurrencyType => currencyType;
-        public int Cost => CalculateCost();
+        public int Cost => baseCost > 0 ? CalculateCost() : 1;
         public ItemType Type => itemType;
         public bool CanPurchase => timesPurchased < maxPurchases;
         public int TimesPurchased => timesPurchased;
-        public int MaxPurchases => maxPurchases;
+        public int MaxPurchases => maxPurchases > 0 ? maxPurchases : 1;
         public string[] RequiredUnlocks => requiredUnlocks;
         public bool IsAvailableInMetaShop => isAvailableInMetaShop;
         public bool IsAvailableInPermaShop => isAvailableInPermaShop;

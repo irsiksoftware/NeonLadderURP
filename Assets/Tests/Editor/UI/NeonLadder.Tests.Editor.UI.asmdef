@@ -1,0 +1,27 @@
+{
+    "name": "NeonLadder.Tests.Editor.UI",
+    "rootNamespace": "NeonLadder.Tests.Editor.UI",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "NeonLadder.Scripts",
+        "NeonLadder.Tests.Runtime",
+        "NeonLadder.Editor",
+        "NeonLadder.Editor.InputSystem"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

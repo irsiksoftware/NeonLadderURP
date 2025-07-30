@@ -1466,6 +1466,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="NeonLadder.Editor.csproj">
+      <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
+      <Name>NeonLadder.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
       <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>

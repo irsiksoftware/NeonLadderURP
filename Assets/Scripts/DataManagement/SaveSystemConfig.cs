@@ -89,7 +89,25 @@ namespace NeonLadder.DataManagement
             string basePath = string.IsNullOrEmpty(debugSavePath) ? 
                 Application.persistentDataPath : debugSavePath;
             
-            return System.IO.Path.Combine(basePath, saveFileName + extension);
+            // Create GameData subdirectory for save files organization
+            string gameDataPath = System.IO.Path.Combine(basePath, "GameData");
+            
+            // Ensure GameData directory exists
+            if (!System.IO.Directory.Exists(gameDataPath))
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(gameDataPath);
+                }
+                catch (System.Exception ex)
+                {
+                    // Fall back to base path if GameData creation fails
+                    Debug.LogWarning($"Could not create GameData directory: {ex.Message}. Using base path instead.");
+                    return System.IO.Path.Combine(basePath, saveFileName + extension);
+                }
+            }
+            
+            return System.IO.Path.Combine(gameDataPath, saveFileName + extension);
         }
 
         /// <summary>
