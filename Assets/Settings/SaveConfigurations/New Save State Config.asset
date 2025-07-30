@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246f495e266bff34193259378b17c2be, type: 3}
+  m_Name: New Save State Config
+  m_EditorClassIdentifier: 
+  configurationName: Default Save State
+  description: Describe this save state configuration...
+  isTestingConfiguration: 0
+  playerSetup:
+    playerLevel: 22
+    experiencePoints: 4543.2705
+    maxHealth: 466
+    currentHealth: 13
+    maxStamina: 195.87973
+    currentStamina: 97.77503
+    attackDamage: 10
+    attackSpeed: 1
+    movementSpeed: 5
+    jumpCount: 1
+  currencySetup:
+    startingMetaCurrency: 4975
+    startingPermaCurrency: 414
+    totalMetaEarned: 0
+    totalPermaEarned: 64556
+  sceneSetPresets: []
+  currentSceneSet:
+    setName: Mysterious Stronghold
+    description: Describe this scene configuration...
+    seed: 48137
+    pathType: maze
+    maxDepth: 10
+    sceneConfigurations:
+    - sceneName: ProcScene_1
+      depth: 1
+      pathType: main
+      spawnPosition: {x: -6.150877, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    - sceneName: ProcScene_2
+      depth: 2
+      pathType: main
+      spawnPosition: {x: 5.8644342, y: 0, z: 0}
+      isPreCompleted: 1
+      sceneSpecificData: []
+    - sceneName: ProcScene_3
+      depth: 3
+      pathType: main
+      spawnPosition: {x: -2.7294292, y: 0, z: 0}
+      isPreCompleted: 1
+      sceneSpecificData: []
+    - sceneName: ProcScene_4
+      depth: 4
+      pathType: main
+      spawnPosition: {x: 6.0447955, y: 0, z: 0}
+      isPreCompleted: 1
+      sceneSpecificData: []
+    - sceneName: ProcScene_5
+      depth: 5
+      pathType: main
+      spawnPosition: {x: 2.3434916, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    - sceneName: ProcScene_6
+      depth: 6
+      pathType: boss
+      spawnPosition: {x: 3.0781097, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    availableBossScenes: []
+    guaranteedBossSpawns: []
+  preUnlockedAbilities: []
+  prePurchasedItems: []
+  worldSetup:
+    currentSceneName: BossArena
+    playerPosition: {x: -26.379133, y: 17.34742, z: 0}
+    currentCheckpoint: 
+    currentDepth: 15
+    runNumber: 8
+    isActiveRun: 1
+    completedScenes:
+    - BossRoom1
+    - HiddenArea
+    - Level2
+    - SecondLevel
+    discoveredAreas:
+    - LavaFlows
+    - IceGrove
+    - AncientRuins
+    defeatedBosses:
+    - StormTitan
+  enableDebugMode: 0
+  testingScenarios: []

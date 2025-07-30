@@ -2155,6 +2155,10 @@
       <Project>{03A4AE4C-33AF-BFE0-EC80-D07A4EBF912E}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
+      <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
+      <Name>NeonLadder.Editor.InputSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
       <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
       <Name>Michsky.MUIP</Name>

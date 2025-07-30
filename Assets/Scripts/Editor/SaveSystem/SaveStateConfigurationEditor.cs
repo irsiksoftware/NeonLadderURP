@@ -30,31 +30,54 @@ namespace NeonLadderURP.Editor.SaveSystem
             // Action buttons
             EditorGUILayout.BeginHorizontal();
             
-            if (GUILayout.Button("Create Save Data", GUILayout.Height(30)))
+            try
             {
-                CreateSaveDataFromConfig();
+                if (GUILayout.Button("Create Save Data", GUILayout.Height(30)))
+                {
+                    CreateSaveDataFromConfig();
+                }
+                
+                if (GUILayout.Button("Load From Current Save", GUILayout.Height(30)))
+                {
+                    LoadFromCurrentSave();
+                }
             }
-            
-            if (GUILayout.Button("Load From Current Save", GUILayout.Height(30)))
+            catch (System.Exception ex)
             {
-                LoadFromCurrentSave();
+                Debug.LogError($"[SaveStateConfigurationEditor] GUI Error: {ex.Message}");
             }
-            
-            EditorGUILayout.EndHorizontal();
+            finally
+            {
+                EditorGUILayout.EndHorizontal();
+            }
             
             EditorGUILayout.BeginHorizontal();
             
-            if (GUILayout.Button("Apply to Session", GUILayout.Height(30)))
+            try
             {
-                ApplyToCurrentSession();
+                if (GUILayout.Button("Apply to Session", GUILayout.Height(30)))
+                {
+                    ApplyToCurrentSession();
+                }
+                
+                if (GUILayout.Button("Export Save File", GUILayout.Height(30)))
+                {
+                    ExportSaveFile();
+                }
+                
+                if (GUILayout.Button("🎲 Randomize", GUILayout.Height(30)))
+                {
+                    RandomizeConfiguration();
+                }
             }
-            
-            if (GUILayout.Button("Export Save File", GUILayout.Height(30)))
+            catch (System.Exception ex)
             {
-                ExportSaveFile();
+                Debug.LogError($"[SaveStateConfigurationEditor] GUI Error: {ex.Message}");
             }
-            
-            EditorGUILayout.EndHorizontal();
+            finally
+            {
+                EditorGUILayout.EndHorizontal();
+            }
             
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("Debug Information", EditorStyles.boldLabel);
@@ -167,6 +190,23 @@ namespace NeonLadderURP.Editor.SaveSystem
             else
             {
                 Debug.LogWarning($"[SaveStateConfigurationEditor] Save directory does not exist: {directory}");
+            }
+        }
+        
+        private void RandomizeConfiguration()
+        {
+            try
+            {
+                config.RandomizeAllDataForTesting();
+                EditorUtility.SetDirty(config);
+                Debug.Log("🎲 [SaveStateConfigurationEditor] Configuration randomized for testing!");
+                
+                // Trigger inspector refresh to show new values
+                Repaint();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[SaveStateConfigurationEditor] Failed to randomize configuration: {ex.Message}");
             }
         }
     }

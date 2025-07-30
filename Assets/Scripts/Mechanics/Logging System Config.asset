@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd4130b97cf6494aad52a6749aba17b, type: 3}
+  m_Name: Logging System Config
+  m_EditorClassIdentifier: 
+  enableLogging: 0
+  configurationName: Default Logging Config
+  description: Centralized logging system for debugging, performance monitoring,
+    and user feedback
+  minimumLogLevel: 1
+  categorySettings: []
+  showStackTraces: 1
+  includeTimestamp: 1
+  enableDebugOverlay: 0
+  maxOverlayEntries: 50
+  autoScrollToNewest: 1
+  enableOverlayFiltering: 1
+  showOverlayOnStart: 0
+  enableFileLogging: 1
+  logFileName: neonladder_debug
+  maxLogFileSizeMB: 10
+  logFileRotationCount: 3
+  includeUnityConsoleLogs: 1
+  enableLogBuffering: 1
+  enableDebugDrawing: 1
+  logBufferSize: 20
+  maxBufferTime: 5
+  enableAsyncFileWriting: 1
+  performanceSettings:
+    frameRateThreshold: 30
+    memoryThresholdMB: 10
+    performanceSampleRate: 60
+    enableProfilerIntegration: 0
+  integrateWithTimedLogger: 1
+  enhancePerformanceProfiler: 1
+  enableErrorReporting: 0
+  enableCrashDumps: 0
+  developerEmail: 
+  colorTheme:
+    debugColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    infoColor: {r: 1, g: 1, b: 1, a: 1}
+    warningColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    errorColor: {r: 1, g: 0, b: 0, a: 1}
+    criticalColor: {r: 1, g: 0.5, b: 0, a: 1}
+  logMessageTemplate: '[{timestamp}] [{level}] [{category}] {message}'
+  categoryFormats: []
+  enableVerboseMode: 0
+  includeMethodInfo: 0
+  trackMemoryUsage: 0

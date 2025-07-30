@@ -172,6 +172,7 @@
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneChangeController.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
+    <Compile Include="Assets\Scripts\DataManagement\SaveFormatConverter.cs" />
     <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
     <Compile Include="Assets\Scripts\Events\RestartScene.cs" />

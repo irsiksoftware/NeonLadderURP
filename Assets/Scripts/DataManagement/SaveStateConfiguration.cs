@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using NeonLadderURP.Models;
 using NeonLadder.Models;
 using NeonLadder.Debugging;
@@ -254,6 +255,20 @@ namespace NeonLadderURP.DataManagement
             sceneSetPresets.Add(newSceneSet);
         }
         
+        [ContextMenu("Randomize All Data (Testing)")]
+        private void RandomizeAllDataMenu()
+        {
+            RandomizeAllConfigurationData();
+            Debugger.Log("🎲 Save State Configuration randomized for testing!");
+        }
+        
+        // Public method for easier access - can be called from custom inspector
+        public void RandomizeAllDataForTesting()
+        {
+            RandomizeAllConfigurationData();
+            Debugger.Log("🎲 Save State Configuration randomized for testing!");
+        }
+        
         #endregion
         
         #region Public Properties for Testing
@@ -280,6 +295,224 @@ namespace NeonLadderURP.DataManagement
         {
             get => currentSceneSet;
             set => currentSceneSet = value;
+        }
+        
+        #endregion
+        
+        #region Randomization Methods
+        
+        /// <summary>
+        /// Tony Stark's Comprehensive Data Randomizer - Perfect for rapid testing scenarios!
+        /// Shuffles all configuration data with realistic but varied values.
+        /// </summary>
+        private void RandomizeAllConfigurationData()
+        {
+            // Randomize player progression
+            RandomizePlayerProgression();
+            
+            // Randomize currency values
+            RandomizeCurrencySetup();
+            
+            // Randomize world state
+            RandomizeWorldSetup();
+            
+            // Randomize purchased items
+            RandomizePurchasedItems();
+            
+            // Randomize procedural scene set
+            RandomizeCurrentSceneSet();
+            
+            // Mark as dirty for Unity Editor
+            #if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+            #endif
+        }
+        
+        private void RandomizePlayerProgression()
+        {
+            // Realistic level progression (1-50)
+            playerSetup.playerLevel = UnityEngine.Random.Range(1, 51);
+            
+            // Health values (50-500, max >= current) - NOTE: These are int types
+            playerSetup.maxHealth = UnityEngine.Random.Range(50, 501);
+            playerSetup.currentHealth = UnityEngine.Random.Range(10, playerSetup.maxHealth + 1);
+            
+            // Stamina values (30-200, max >= current)  
+            playerSetup.maxStamina = UnityEngine.Random.Range(30f, 200f);
+            playerSetup.currentStamina = UnityEngine.Random.Range(5f, playerSetup.maxStamina);
+            
+            // Experience points (0-10000) - NOTE: It's experiencePoints not currentExperience
+            playerSetup.experiencePoints = UnityEngine.Random.Range(0f, 10000f);
+            
+            Debugger.Log($"🎲 Randomized Player: Lvl {playerSetup.playerLevel}, HP {playerSetup.currentHealth}/{playerSetup.maxHealth}");
+        }
+        
+        private void RandomizeCurrencySetup()
+        {
+            // Meta currency (temporary, 0-5000) - NOTE: Correct property names
+            currencySetup.startingMetaCurrency = UnityEngine.Random.Range(0, 5001);
+            
+            // Perma currency (persistent, 0-50000)
+            currencySetup.startingPermaCurrency = UnityEngine.Random.Range(0, 50001);
+            
+            // Lifetime earned (always >= current perma)
+            currencySetup.totalPermaEarned = currencySetup.startingPermaCurrency + UnityEngine.Random.Range(0, 100000);
+            
+            Debugger.Log($"🎲 Randomized Currency: Meta {currencySetup.startingMetaCurrency}, Perma {currencySetup.startingPermaCurrency}");
+        }
+        
+        private void RandomizeWorldSetup()
+        {
+            // Random scene names for testing
+            string[] testScenes = { "TestLevel1", "TestLevel2", "TestLevel3", "BossArena", "TreasureRoom", "SecretArea" };
+            worldSetup.currentSceneName = testScenes[UnityEngine.Random.Range(0, testScenes.Length)];
+            
+            // Random player position (-50 to 50 in X/Y, 0 in Z for 2.5D)
+            worldSetup.playerPosition = new Vector3(
+                UnityEngine.Random.Range(-50f, 50f),
+                UnityEngine.Random.Range(-20f, 20f),
+                0f
+            );
+            
+            // Random depth and run number (1-20)
+            worldSetup.currentDepth = UnityEngine.Random.Range(1, 21);
+            worldSetup.runNumber = UnityEngine.Random.Range(1, 21);
+            
+            // Randomize completed content lists
+            RandomizeCompletedContent();
+            
+            Debugger.Log($"🎲 Randomized World: {worldSetup.currentSceneName}, Depth {worldSetup.currentDepth}, Run {worldSetup.runNumber}");
+        }
+        
+        private void RandomizeCompletedContent()
+        {
+            // Clear existing lists
+            worldSetup.completedScenes.Clear();
+            worldSetup.discoveredAreas.Clear();
+            worldSetup.defeatedBosses.Clear();
+            
+            // Add random completed scenes (2-6 scenes)
+            string[] scenePool = { "Level1", "Level2", "Level3", "BossRoom1", "TreasureVault", "SecondLevel", "ThirdLevel", "HiddenArea" };
+            int sceneCount = UnityEngine.Random.Range(2, 7);
+            for (int i = 0; i < sceneCount; i++)
+            {
+                string scene = scenePool[UnityEngine.Random.Range(0, scenePool.Length)];
+                if (!worldSetup.completedScenes.Contains(scene))
+                {
+                    worldSetup.completedScenes.Add(scene);
+                }
+            }
+            
+            // Add random discovered areas (1-4 areas)
+            string[] areaPool = { "DeepCaves", "AncientRuins", "CrystalChamber", "LavaFlows", "IceGrove", "ShadowRealm" };
+            int areaCount = UnityEngine.Random.Range(1, 5);
+            for (int i = 0; i < areaCount; i++)
+            {
+                string area = areaPool[UnityEngine.Random.Range(0, areaPool.Length)];
+                if (!worldSetup.discoveredAreas.Contains(area))
+                {
+                    worldSetup.discoveredAreas.Add(area);
+                }
+            }
+            
+            // Add random defeated bosses (0-3 bosses)
+            string[] bossPool = { "FireDragon", "IceGolem", "ShadowLord", "CrystalSpider", "VoidKnight", "StormTitan" };
+            int bossCount = UnityEngine.Random.Range(0, 4);
+            for (int i = 0; i < bossCount; i++)
+            {
+                string boss = bossPool[UnityEngine.Random.Range(0, bossPool.Length)];
+                if (!worldSetup.defeatedBosses.Contains(boss))
+                {
+                    worldSetup.defeatedBosses.Add(boss);
+                }
+            }
+            
+            Debugger.Log($"🎲 Populated Lists: {worldSetup.completedScenes.Count} scenes, {worldSetup.discoveredAreas.Count} areas, {worldSetup.defeatedBosses.Count} bosses");
+        }
+        
+        private void RandomizePurchasedItems()
+        {
+            // Clear existing items - NOTE: Using correct field name prePurchasedItems
+            prePurchasedItems.Clear();
+            preUnlockedAbilities.Clear();
+            
+            // Try to find existing assets in the project
+            #if UNITY_EDITOR
+            RandomizeScriptableObjectLists();
+            #endif
+            
+            Debugger.Log($"🎲 Randomized Items: Cleared asset lists (ready for manual assignment or auto-population)");
+        }
+        
+        #if UNITY_EDITOR
+        private void RandomizeScriptableObjectLists()
+        {
+            // Find PurchasableItem assets
+            string[] purchasableGuids = UnityEditor.AssetDatabase.FindAssets("t:PurchasableItem");
+            foreach (string guid in purchasableGuids.Take(UnityEngine.Random.Range(2, 6)))
+            {
+                string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+                var item = UnityEditor.AssetDatabase.LoadAssetAtPath<PurchasableItem>(path);
+                if (item != null)
+                {
+                    prePurchasedItems.Add(item);
+                }
+            }
+            
+            // Find UnlockScriptableObject assets
+            string[] unlockGuids = UnityEditor.AssetDatabase.FindAssets("t:UnlockScriptableObject");
+            foreach (string guid in unlockGuids.Take(UnityEngine.Random.Range(1, 4)))
+            {
+                string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+                var unlock = UnityEditor.AssetDatabase.LoadAssetAtPath<UnlockScriptableObject>(path);
+                if (unlock != null)
+                {
+                    preUnlockedAbilities.Add(unlock);
+                }
+            }
+            
+            Debugger.Log($"🎲 Found and added {prePurchasedItems.Count} PurchasableItems and {preUnlockedAbilities.Count} Unlocks");
+        }
+        #endif
+        
+        private void RandomizeCurrentSceneSet()
+        {
+            if (currentSceneSet == null)
+            {
+                currentSceneSet = new ProceduralSceneSet();
+            }
+            
+            // Random seed for procedural generation
+            currentSceneSet.seed = UnityEngine.Random.Range(1000, 99999);
+            
+            // Random path type
+            string[] pathTypes = { "linear", "branching", "circular", "maze", "boss_rush" };
+            currentSceneSet.pathType = pathTypes[UnityEngine.Random.Range(0, pathTypes.Length)];
+            
+            // Random set name
+            string[] adjectives = { "Chaotic", "Mysterious", "Dangerous", "Epic", "Twisted", "Ancient" };
+            string[] nouns = { "Depths", "Labyrinth", "Stronghold", "Catacombs", "Sanctum", "Ruins" };
+            currentSceneSet.setName = $"{adjectives[UnityEngine.Random.Range(0, adjectives.Length)]} {nouns[UnityEngine.Random.Range(0, nouns.Length)]}";
+            
+            // Generate 2-6 random scene configurations
+            currentSceneSet.sceneConfigurations.Clear();
+            int sceneCount = UnityEngine.Random.Range(2, 7);
+            
+            for (int i = 0; i < sceneCount; i++)
+            {
+                var sceneConfig = new SceneConfiguration
+                {
+                    sceneName = $"ProcScene_{i + 1}",
+                    depth = i + 1,
+                    pathType = i == sceneCount - 1 ? "boss" : "main",
+                    spawnPosition = new Vector3(UnityEngine.Random.Range(-10f, 10f), 0f, 0f),
+                    isPreCompleted = UnityEngine.Random.value < 0.3f // 30% chance pre-completed
+                };
+                
+                currentSceneSet.sceneConfigurations.Add(sceneConfig);
+            }
+            
+            Debugger.Log($"🎲 Randomized Scene Set: '{currentSceneSet.setName}' with {sceneCount} scenes, seed {currentSceneSet.seed}");
         }
         
         #endregion

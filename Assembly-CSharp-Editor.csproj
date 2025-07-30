@@ -1640,6 +1640,10 @@
       <Project>{8BE43F1D-5BCF-47F7-AF46-6E3184EFA571}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
+      <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
+      <Name>NeonLadder.Editor.InputSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
       <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
       <Name>Michsky.MUIP</Name>

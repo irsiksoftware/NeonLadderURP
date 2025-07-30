@@ -1,0 +1,19 @@
+{
+    "name": "NeonLadder.Editor.InputSystem",
+    "rootNamespace": "NeonLadder.Editor.InputSystem",
+    "references": [
+        "Unity.InputSystem",
+        "NeonLadder.Scripts"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
