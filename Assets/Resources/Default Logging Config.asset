@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd4130b97cf6494aad52a6749aba17b, type: 3}
   m_Name: Default Logging Config
   m_EditorClassIdentifier: 
-  enableLogging: 0
+  enableLogging: 1
   configurationName: Development (Verbose & Interactive)
   description: Development logging with full debugging features and overlay
   minimumLogLevel: 0
