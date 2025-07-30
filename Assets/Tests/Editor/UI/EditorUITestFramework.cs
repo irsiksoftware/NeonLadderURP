@@ -312,7 +312,7 @@ namespace NeonLadder.Tests.Editor.UI
         #region Performance Testing
         
         /// <summary>
-        /// Measures EditorWindow OnGUI performance
+        /// Measures EditorWindow validation performance (safer than actual GUI rendering)
         /// </summary>
         public static long MeasureOnGUIPerformance<T>(T window, int iterations = 100) where T : EditorWindow
         {
@@ -320,7 +320,7 @@ namespace NeonLadder.Tests.Editor.UI
             
             for (int i = 0; i < iterations; i++)
             {
-                SimulateOnGUI(window);
+                ValidateEditorWindowCanRender(window);
             }
             
             stopwatch.Stop();

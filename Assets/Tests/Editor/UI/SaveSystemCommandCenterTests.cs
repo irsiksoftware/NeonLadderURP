@@ -271,8 +271,9 @@ namespace NeonLadder.Tests.Editor.UI
             EditorUITestFramework.SetPrivateField<SaveSystemCommandCenter, ConsolidatedSaveData>(window, "loadedSaveData", null);
             
             // Act & Assert
+            UnityEngine.TestTools.LogAssert.Expect(LogType.Error, "❌ No save data loaded for export");
             Assert.DoesNotThrow(() => EditorUITestFramework.InvokePrivateMethod<SaveSystemCommandCenter>(window, "ExportSaveData"));
-            // Should handle error gracefully (would log error in real implementation)
+            // Should handle error gracefully by logging error message
         }
         
         #endregion
