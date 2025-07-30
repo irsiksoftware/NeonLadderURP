@@ -1440,16 +1440,16 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Stores.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Services.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Services.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Runtime">
@@ -1466,6 +1466,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="NeonLadder.Editor.csproj">
+      <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
+      <Name>NeonLadder.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
+      <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
+      <Name>NeonLadder.Editor.InputSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
       <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
       <Name>Michsky.MUIP</Name>

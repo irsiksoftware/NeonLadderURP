@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\Events\InstantiateEvent.cs" />
     <Compile Include="Assets\Scripts\Managers\EventManager.cs" />
     <Compile Include="Assets\Scripts\Core\Fuzzy.cs" />
+    <Compile Include="Assets\Scripts\Models\ActionPlatformerConstants.cs" />
     <Compile Include="Assets\Scripts\Events\BossStopJump.cs" />
     <Compile Include="Assets\Scripts\UI\AutoVerticalScrollText.cs" />
     <Compile Include="Assets\Scripts\Utilities\CoroutineRunner.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneChangeController.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
+    <Compile Include="Assets\Scripts\DataManagement\SaveFormatConverter.cs" />
     <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
     <Compile Include="Assets\Scripts\Events\RestartScene.cs" />
