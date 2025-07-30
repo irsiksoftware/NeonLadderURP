@@ -106,7 +106,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        protected virtual void Start()
+        protected virtual new void Start()
         {
             // Initialize event-driven AI system
             if (ShouldEngagePlayer && health.IsAlive)

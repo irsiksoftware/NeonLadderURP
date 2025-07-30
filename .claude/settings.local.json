@@ -104,7 +104,14 @@
       "Bash(dir:*)",
       "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -quit -projectPath \"C:\\Users\\Ender\\NeonLadder\" -logFile \"C:\\Users\\Ender\\NeonLadder\\TestOutput\\build_check_progress.log\" -executeMethod UnityEditor.EditorApplication.Exit)",
       "Bash(del update_namespace.ps1)",
-      "Bash(del nul)"
+      "Bash(del nul)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run_v2.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run_v3.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_run_v4.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_test_final.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_final_v2.txt\")",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.26f1\\Editor\\Unity.exe\" -batchmode -projectPath \"C:\\Code\\NeonLadderURP\" -executeMethod CLITestRunner.RunPlayModeTests -logFile \"TestOutput/steam_integration_final_v3.txt\")"
     ],
     "deny": [
       "Bash(reg *)",
