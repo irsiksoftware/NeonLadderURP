@@ -134,6 +134,12 @@ README-CLAUDE-BRIEFING.md
 # Claude settings now externalized - download from gdrive for multi-user deployment
 /.claude/settings.local.json
 
+# Mission tracking files - always external, never local
+mission-success-update.json
+README-CLAUDE-BRIEFING-UPDATED.md
+*-memory.json
+*-briefing*.md
+
 # Keep only integration configs local
 !/.claude/integrations/
 
