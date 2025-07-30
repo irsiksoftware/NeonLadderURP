@@ -61,6 +61,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Tests\Runtime\Mocks\MockStatsAndAchievements.cs" />
     <Compile Include="Assets\Tests\Runtime\SaveStateConfigurationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\UpgradeSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ControllerMappingTests.cs" />
@@ -68,15 +69,20 @@
     <Compile Include="Assets\Tests\Runtime\LoggingSystemConfigTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SceneChangeDetector_UnitTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ManagerController_PerformanceTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamManager.cs" />
+    <Compile Include="Assets\Tests\Runtime\Steam\SteamIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PathGeneratorTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenPlayerMovementTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\Steam\SteamPresenceTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\Mocks\MockGameStates.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenEnemyAITests.cs" />
     <Compile Include="Assets\Tests\Runtime\DeterministicHashingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\KinematicObjectTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EnhancedSaveSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PlayerTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenStatsTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamworksAPI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Tests\Runtime\NeonLadder.Tests.Runtime.asmdef" />

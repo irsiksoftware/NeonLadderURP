@@ -123,11 +123,19 @@ cli_test_*.txt
 # Unity Settings meta files (these change frequently)
 /Assets/Settings/*.meta
 
-# Claude AI assistant files (exclude by default, manually include for team memory updates)
-/.claude/
-!/.claude/extended-state.json
+# Claude AI assistant files - External Memory System (2025-07-30 Nick Fury deployment)
+# Volatile memory files now stored in gdrive for multi-user access
+/.claude/team-memory/
+/.claude/extended-state.json
+/.claude-external-memory/
+claude-consolidated-memory.json
+README-CLAUDE-BRIEFING.md
+
+# Claude settings now externalized - download from gdrive for multi-user deployment
+/.claude/settings.local.json
+
+# Keep only integration configs local
 !/.claude/integrations/
-!/.claude/team-memory/
 
 # Game data directory (save files, cache, etc.)
 /GameData/
