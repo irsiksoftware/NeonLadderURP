@@ -242,6 +242,7 @@ This creates the **world's first AI Scrum team simulation** for solo developers 
 - Always check file sizes before committing - files over 50MB should use Git LFS
 - Unity Library folders should never be committed
 - **ONLY commit when explicitly requested by the user**
+- **Commit messages should not exceed 2000 characters** - keep detailed descriptions concise and focused
 
 ### Unity-Specific Guidelines
 - Unity version: Check ProjectSettings/ProjectVersion.txt for the current version
