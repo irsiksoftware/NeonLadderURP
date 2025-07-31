@@ -143,5 +143,8 @@ README-CLAUDE-BRIEFING-UPDATED.md
 # Keep only integration configs local
 !/.claude/integrations/
 
+# Temporary staging directory for external documentation operations
+/briefing-temp/
+
 # Game data directory (save files, cache, etc.)
 /GameData/
