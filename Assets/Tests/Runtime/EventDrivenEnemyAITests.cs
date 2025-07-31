@@ -128,7 +128,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik - NullReferenceException in Player.ComputeVelocity needs investigation")]
+        [Ignore("Bug investigation needed: NullReferenceException in Player.ComputeVelocity")]
         public void StateTransitionEvent_ShouldExecuteAfterDelay_Disabled()
         {
             // @DakotaIrsik - This test is disabled due to NullReferenceException in Player.ComputeVelocity

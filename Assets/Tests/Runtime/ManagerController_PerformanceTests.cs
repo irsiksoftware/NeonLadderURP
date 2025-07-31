@@ -88,7 +88,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - missing ManagerController scene caching methods")]
+        [Ignore("Feature not implemented: ManagerController scene caching methods need development")]
         public void SceneChangeDetection_ShouldUseCachedSceneNameComparison()
         {
             // @DakotaIrsik - Test disabled - requires ManagerController.SetCurrentScene and GetCachedSceneName implementation
@@ -125,7 +125,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [UnityTest]
-        [Ignore("@DakotaIrsik review - missing ManagerController performance optimizations")]
+        [Ignore("Feature not implemented: ManagerController performance optimizations need development")]
         public IEnumerator Update_PerformanceTest_ShouldNotDegradeOverTime()
         {
             // @DakotaIrsik - Test disabled - requires ManagerController performance optimizations
@@ -141,7 +141,7 @@ namespace NeonLadder.Tests.Runtime
         #region End-to-End Tests - Scene Lifecycle
 
         [UnityTest]
-        [Ignore("@DakotaIrsik review - missing GameController scene setup")]
+        [Ignore("Feature not implemented: GameController scene setup needs development")]
         public IEnumerator SceneTransition_EndToEnd_ShouldMaintainManagerStateConsistency()
         {
             // @DakotaIrsik - Test disabled - requires complete GameController scene setup
@@ -153,7 +153,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik - Performance test failing - memory allocation during ManagerController updates")]
+        [Ignore("Performance issue: Memory allocation during ManagerController updates needs optimization")]
         public void MemoryAllocation_PerFrameUpdate_ShouldNotIncreaseGarbageCollection_Disabled()
         {
             // @DakotaIrsik - This performance test is disabled due to memory allocation issues

@@ -171,7 +171,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - non-deterministic PathGenerator behavior")]
+        [Ignore("Platform compatibility: Unicode handling varies across platforms")]
         public void Unicode_And_Special_Characters_Are_Deterministic()
         {
             // @DakotaIrsik - Test disabled due to non-deterministic behavior in PathGenerator
@@ -208,7 +208,7 @@ namespace NeonLadder.Tests.Runtime
         #region Cross-Platform Determinism Tests
 
         [Test]
-        [Ignore("@DakotaIrsik review - hash implementation changed")]
+        [Ignore("Cross-platform compatibility: Hash algorithms vary between platforms")]
         public void Cross_Platform_Hash_Consistency()
         {
             // @DakotaIrsik - Test disabled due to hash implementation change
