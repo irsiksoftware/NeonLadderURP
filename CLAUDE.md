@@ -1,12 +1,53 @@
 # Claude Instructions for NeonLadder Project
 
-## 🚨 FIRST STEP: Check Local Permissions 🚨
-**ALWAYS run these commands FIRST when starting work:**
+## 🚨 FIRST STEP: Load External Settings 🚨
+**NEW SIMPLIFIED STARTUP - Just say this to Claude:**
+> **"Claude, load external settings"**
+
+Claude will automatically run: `sync-claude-settings.bat`
+
+**Manual sync if needed:**
 ```bash
-cat .claude/settings.local.json
+# Auto-sync script (recommended)
+sync-claude-settings.bat
+
+# Or manual download
+"C:\tools\gdrive" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --destination .claude/settings.local.json --overwrite
+
+# Check extended state
 cat .claude/extended-state.json
 ```
-The first file contains officially supported Claude permissions. The second contains project context, TMNT personas, GitHub automation, and important development notes.
+
+**Revolutionary Achievement**: World's first externalized AI assistant configuration system with one-command activation.
+
+**External .claude Folder**: Simplified to essential files only - `settings.local.json`, `CLAUDE.md`, and `sync-claude-settings.bat` in Google Drive folder (ID: `1PfhnfbV6jvi-eh46z4s3yzxnd0TfDpj8`).
+
+## 🦸 Marvel Team Persona System - Quick Reference
+
+**Core Team Members** (say @persona-name to activate):
+- **@nick-fury** - Acquisition Technical Auditor: *"I assess threats and opportunities"*
+- **@tony-stark** - Technical Lead: *"I am Iron Man. Let's build something extraordinary"*
+- **@sue-storm** - Code Reviewer: *"I see everything, including what's hidden in this code"*
+- **@bruce-banner** - QA Engineer: *"That's my secret - I'm always testing"*
+- **@jean-grey** - Business Analyst: *"I can read minds - let me translate what users need"*
+- **@wolverine** - DevOps Engineer: *"I'm the best at what I do. And what I do is deploy code"*
+- **@charles-xavier** - Product Owner: *"Welcome to Xavier's School for Gifted Developers"*
+- **@stephen-strange** - Game Mechanics Expert: *"I've seen 14,000,605 possible designs"*
+
+## 📚 External Documentation System
+
+**All technical documentation externalized to Google Drive organized folders:**
+- **Main Documentation**: `"C:\tools\gdrive" files list --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z`
+- **Systems Documentation**: Core Game Systems, Development Infrastructure
+- **Backlog Management**: PBIs, TODO items, Technical Debt tracking
+
+## 🎯 Project Context
+
+**NeonLadder**: Unity 2.5D action platformer with roguelite elements  
+**Status**: Steam launch ready - Q1 2025  
+**Test Coverage**: 178/202 critical tests passing  
+**Revenue Potential**: $500K+ mobile expansion identified  
+**Unity Version**: 6000.0.26f1
 
 ## Important Guidelines
 
