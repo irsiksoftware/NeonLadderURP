@@ -28,6 +28,48 @@
 
 **NeonLadder features a complete Marvel-themed AI Scrum team simulation** - the ultimate collaborative development experience for solo developers. Instead of random AI persona selection, you get **role-based expertise on demand**.
 
+### 🔧 First-Time Setup for Claude Code
+
+**If you don't have `.claude/settings.local.json`, copy from the bootstrap template:**
+
+```bash
+# Copy the bootstrap template
+copy .claude\settings-bootstrap.json .claude\settings.local.json
+```
+
+**Or create manually with this content:**
+```json
+{
+  "external_memory_system": {
+    "description": "NeonLadder External Claude Configuration - Load team memory from Google Drive",
+    "startup_command": "Claude, load external settings"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(\"C:\\tools\\gdrive\" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --destination .claude/settings.local.json --overwrite)",
+      "Bash(sync-claude-settings.bat)",
+      "Read", "Write", "Edit", "MultiEdit", "Glob", "Grep", "LS", "TodoWrite",
+      "Bash(git:*)", "Bash(powershell:*)", "Bash(\"C:\\tools\\gdrive\":*)",
+      "Bash(\"C:\\Program Files\\Unity\\Hub\\Editor\\*\")"
+    ],
+    "deny": []
+  }
+}
+```
+
+**Then immediately run:**
+```bash
+# This loads the full external configuration with Marvel team system
+sync-claude-settings.bat
+```
+
+**Or manually:**
+```bash
+"C:\tools\gdrive" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --destination .claude/settings.local.json --overwrite
+```
+
+After loading external settings, you'll have access to 8 Marvel personas with complete project context.
+
 **🎯 How It Works:**
 ```bash
 # Need architectural guidance?

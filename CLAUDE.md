@@ -1,12 +1,53 @@
 # Claude Instructions for NeonLadder Project
 
-## 🚨 FIRST STEP: Check Local Permissions 🚨
-**ALWAYS run these commands FIRST when starting work:**
+## 🚨 FIRST STEP: Load External Settings 🚨
+**NEW SIMPLIFIED STARTUP - Just say this to Claude:**
+> **"Claude, load external settings"**
+
+Claude will automatically run: `sync-claude-settings.bat`
+
+**Manual sync if needed:**
 ```bash
-cat .claude/settings.local.json
+# Auto-sync script (recommended)
+sync-claude-settings.bat
+
+# Or manual download
+"C:\tools\gdrive" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --destination .claude/settings.local.json --overwrite
+
+# Check extended state
 cat .claude/extended-state.json
 ```
-The first file contains officially supported Claude permissions. The second contains project context, TMNT personas, GitHub automation, and important development notes.
+
+**Revolutionary Achievement**: World's first externalized AI assistant configuration system with one-command activation.
+
+**External .claude Folder**: Simplified to essential files only - `settings.local.json`, `CLAUDE.md`, and `sync-claude-settings.bat` in Google Drive folder (ID: `1PfhnfbV6jvi-eh46z4s3yzxnd0TfDpj8`).
+
+## 🦸 Marvel Team Persona System - Quick Reference
+
+**Core Team Members** (say @persona-name to activate):
+- **@nick-fury** - Acquisition Technical Auditor: *"I assess threats and opportunities"*
+- **@tony-stark** - Technical Lead: *"I am Iron Man. Let's build something extraordinary"*
+- **@sue-storm** - Code Reviewer: *"I see everything, including what's hidden in this code"*
+- **@bruce-banner** - QA Engineer: *"That's my secret - I'm always testing"*
+- **@jean-grey** - Business Analyst: *"I can read minds - let me translate what users need"*
+- **@wolverine** - DevOps Engineer: *"I'm the best at what I do. And what I do is deploy code"*
+- **@charles-xavier** - Product Owner: *"Welcome to Xavier's School for Gifted Developers"*
+- **@stephen-strange** - Game Mechanics Expert: *"I've seen 14,000,605 possible designs"*
+
+## 📚 External Documentation System
+
+**All technical documentation externalized to Google Drive organized folders:**
+- **Main Documentation**: `"C:\tools\gdrive" files list --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z`
+- **Systems Documentation**: Core Game Systems, Development Infrastructure
+- **Backlog Management**: PBIs, TODO items, Technical Debt tracking
+
+## 🎯 Project Context
+
+**NeonLadder**: Unity 2.5D action platformer with roguelite elements  
+**Status**: Steam launch ready - Q1 2025  
+**Test Coverage**: 178/202 critical tests passing  
+**Revenue Potential**: $500K+ mobile expansion identified  
+**Unity Version**: 6000.0.26f1
 
 ## Important Guidelines
 
@@ -41,6 +82,88 @@ Future Claude models should **immediately** load team memory and respond to **ro
 **Memory Persistence:** Each persona maintains learning continuity via `.claude/team-memory/personas/[name]-memory.json` files.
 
 This creates the **world's first AI Scrum team simulation** for solo developers with full team collaboration dynamics.
+
+## 📚 External Documentation System
+
+### **🗂️ NeonLadder Technical Documentation (Google Drive)**
+
+**All scattered source code documentation has been migrated to external storage for multi-user access:**
+
+#### **Quick Access Commands**
+```bash
+# List all Neon Ladder documentation
+"C:\tools\gdrive" files list --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z
+
+# Access Systems Documentation folder
+"C:\tools\gdrive" files list --parent 1XWBuGJ8-fGrjaglG2aYiYp-8Vn1byb8o
+
+# Download complete access guide
+"C:\tools\gdrive" files download 1ra4LEwNrYOXlBgPY2su0DopuxdU7IEz6
+```
+
+#### **📁 Document Categories**
+
+**Core Game Systems** (Folder ID: `1XfJYJPJY7faWladzLX0w8MUaMxE7fIBB`)
+- **Procedural Generation String Guide** - ID: `15jasDIc2fzVR8Sa2iQSjLtZGXoINvRC0` (413 lines)
+- **Procedural Generation Visual Guide** - ID: `1gjcZF9z8mhFZmnQUtDHCSQQsdY315P2n` (378 lines)  
+- **Upgrade System Complete Guide** - ID: `1QAu5SAcOwGeg_SbN1CQ4lRgUt9CyXSmE` (435 lines)
+
+**Development Infrastructure** (Folder ID: `1yyAvATMVTFCv74-v2N-FbRlvHK7KWgbD`)
+- **Logging System Framework** - ID: `1O_uooLcz9vaq_faDGz5J1y8C_KfQQHkz` (291 lines)
+- **Unity Menu System Guide** - ID: `1hGIrIdAXSTY_srBK4BqSfx04M7rG9_Kc` (212 lines)
+
+**Project Management** (Folder ID: `18Ifv4Yg0WmBeivDyQEC7hW65rdKrtsQp`)
+- **Menu System PBI Status** - ID: `1Aok8HVtdgsetGUjswGe0O65SKysjX41S` (459 lines)
+
+#### **🎯 Usage Examples**
+```bash
+# Need game mechanics info?
+"C:\tools\gdrive" files download 1QAu5SAcOwGeg_SbN1CQ4lRgUt9CyXSmE  # Upgrade system
+
+# Need technical implementation details?
+"C:\tools\gdrive" files download 1O_uooLcz9vaq_faDGz5J1y8C_KfQQHkz  # Logging system
+
+# Need level design info?
+"C:\tools\gdrive" files download 15jasDIc2fzVR8Sa2iQSjLtZGXoINvRC0  # Procedural generation
+```
+
+**Benefits**: Clean source control, multi-user access, organized by system, future-expandable
+
+## 📋 External Backlog & PBI System
+
+### **🗂️ NeonLadder Backlog Management (Google Drive)**
+
+**All Product Backlog Items, TODOs, and technical debt organized for sprint planning:**
+
+#### **Quick Access Commands**
+```bash
+# List all backlog categories
+"C:\tools\gdrive" files list --parent 1LJ8X-5whHNaMh2NeHGdzkLwTYgoDjL0p
+
+# Download complete backlog index
+"C:\tools\gdrive" files download 1foERIGyhNubkN7HSmxL7Ie6wJb6zSdcg
+```
+
+#### **📁 Backlog Categories**
+
+**PBIs (Product Backlog Items)** (Folder ID: `1wJ4jPSB41hdbMcaZc5l7I50IKBzr0zR0`)
+- **Procedural Scene Loading PBI** - ID: `18Oz6yXOyVVK-AK4gi9CTufBjmXUbCugJ` (13 story points)
+
+**TODO Items** (Folder ID: `1NyF4XwqS88Wj4K00bym6nUge_IIzhlm5`)
+- **URP Configuration TODO** - ID: `1lk6r7HcydUiTOsJ-d0sNpJc-vReL86cm` (Rendering pipeline setup)
+
+**Technical Debt** (Folder ID: `1d9bo8RyXXFW5KYunyB-grKuZLdTvYByR`)
+- **Code TODO Analysis** - ID: `1MbgyXSbBbdqV-UyUMBfLWA78XfUf0Rs9` (100+ files analyzed)
+
+#### **🚨 Steam Launch Priority Access**
+```bash
+# P0 Launch Blockers
+"C:\tools\gdrive" files download 18Oz6yXOyVVK-AK4gi9CTufBjmXUbCugJ  # Save system PBI
+"C:\tools\gdrive" files download 1lk6r7HcydUiTOsJ-d0sNpJc-vReL86cm  # URP configuration
+"C:\tools\gdrive" files download 1MbgyXSbBbdqV-UyUMBfLWA78XfUf0Rs9  # Technical debt priority matrix
+```
+
+**Sprint Planning**: Backlog index contains priority matrix and story point estimates for velocity planning
 
 ### 🍕 Pizza Party Coding Day - Complete Development Priorities
 
@@ -119,6 +242,7 @@ This creates the **world's first AI Scrum team simulation** for solo developers 
 - Always check file sizes before committing - files over 50MB should use Git LFS
 - Unity Library folders should never be committed
 - **ONLY commit when explicitly requested by the user**
+- **Commit messages should not exceed 2000 characters** - keep detailed descriptions concise and focused
 
 ### Unity-Specific Guidelines
 - Unity version: Check ProjectSettings/ProjectVersion.txt for the current version
