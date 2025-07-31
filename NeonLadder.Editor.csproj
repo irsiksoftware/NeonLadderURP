@@ -63,13 +63,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\TestSkippingExamples.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\UpgradeSystemEditor.cs" />
-    <Compile Include="Assets\Scripts\Editor\IgnoreAttributeTest.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\ExamplePurchasableItems.cs" />
     <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveStateConfigurationEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveSystemCommandCenter.cs" />
-    <Compile Include="Assets\Scripts\Editor\AutomatedUnityTestRunner.cs" />
-    <Compile Include="Assets\Scripts\Editor\UnityTestRunnerStyleReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Editor\NeonLadder.Editor.asmdef" />
