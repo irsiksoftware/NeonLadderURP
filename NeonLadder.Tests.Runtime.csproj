@@ -80,6 +80,7 @@
     <Compile Include="Assets\Tests\Runtime\DeterministicHashingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\KinematicObjectTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EnhancedSaveSystemTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\Steam\RealSteamAchievementE2ETests.cs" />
     <Compile Include="Assets\Tests\Runtime\PlayerTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenStatsTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamworksAPI.cs" />
@@ -1070,6 +1071,10 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="com.rlabrecque.steamworks.net">
+      <HintPath>Library\ScriptAssemblies\com.rlabrecque.steamworks.net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">
