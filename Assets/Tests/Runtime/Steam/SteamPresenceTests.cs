@@ -221,7 +221,6 @@ namespace NeonLadder.Tests.Runtime.Steam
             Assert.AreEqual("1,750", MockSteamworksAPI.GetRichPresence("currency_earned"));
             Assert.AreEqual("Victory", MockSteamworksAPI.GetRichPresence("outcome"));
         }
-
         #endregion
 
         #region Dynamic Presence Updates

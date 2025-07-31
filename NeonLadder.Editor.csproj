@@ -61,11 +61,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Editor\TestSkippingExamples.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\UpgradeSystemEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\IgnoreAttributeTest.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\ExamplePurchasableItems.cs" />
-    <Compile Include="Assets\Scripts\Editor\CLITestRunner.cs" />
+    <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveStateConfigurationEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveSystemCommandCenter.cs" />
+    <Compile Include="Assets\Scripts\Editor\AutomatedUnityTestRunner.cs" />
+    <Compile Include="Assets\Scripts\Editor\UnityTestRunnerStyleReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Editor\NeonLadder.Editor.asmdef" />

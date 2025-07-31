@@ -116,7 +116,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik - NullReferenceException in PlayerAction needs investigation")]
+        [Ignore("Bug investigation needed: NullReferenceException in PlayerAction.Update")]
         public void JumpValidationEvent_ShouldExecuteAfterDelay_Disabled()
         {
             // @DakotaIrsik - This test is disabled due to NullReferenceException in PlayerAction.Update

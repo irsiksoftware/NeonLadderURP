@@ -70,7 +70,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - GetCVCLevel method not implemented")]
+        [Ignore("Feature not implemented: CVC level calculation system needs development")]
         public void ConversationPointTracker_CVCLevelIncreasesWithPoints()
         {
             // @DakotaIrsik - Test disabled: ConversationPointTracker.GetCVCLevel() method not implemented
@@ -79,7 +79,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - DialogChoiceValidator.GetAvailableChoices method not implemented")]
+        [Ignore("Feature not implemented: Advanced dialog choice filtering system needs development")]
         public void ConversationPointTracker_UnlocksAdvancedDialogOptions()
         {
             // @DakotaIrsik - Test disabled: DialogChoiceValidator.GetAvailableChoices() method not implemented
@@ -92,7 +92,7 @@ namespace NeonLadder.Tests.Runtime
         #region Character Personality System Tests
 
         [Test]
-        [Ignore("@DakotaIrsik review - CharacterPersonalitySystem.GetPersonality method not implemented")]
+        [Ignore("Feature not implemented: Seven Deadly Sins personality system needs development")]
         public void CharacterPersonality_SevenDeadlySinsHaveUniqueTraits()
         {
             // @DakotaIrsik - Test disabled: CharacterPersonalitySystem.GetPersonality() method not implemented
@@ -101,7 +101,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - CharacterPersonalitySystem.GetPersonality method not implemented")]
+        [Ignore("Feature not implemented: Character personality system needs development")]
         public void CharacterPersonality_NPCVendorsHaveDistinctVoices()
         {
             // @DakotaIrsik - Test disabled: CharacterPersonalitySystem.GetPersonality() method not implemented
@@ -110,7 +110,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - CharacterPersonalitySystem.GenerateResponse method not implemented")]
+        [Ignore("Feature not implemented: Dynamic response generation system needs development")]
         public void CharacterPersonality_RespondsToPlayerChoiceHistory()
         {
             // @DakotaIrsik - Test disabled: CharacterPersonalitySystem.GenerateResponse() method not implemented
@@ -123,7 +123,7 @@ namespace NeonLadder.Tests.Runtime
         #region Multi-Language & Localization Tests
 
         [Test]
-        [Ignore("@DakotaIrsik review - ConversationManager localization methods not implemented")]
+        [Ignore("Feature not implemented: Multi-language localization system needs development")]
         public void MultiLanguageSupport_LoadsCorrectStringTable()
         {
             // @DakotaIrsik - Test disabled: ConversationManager.SetLanguage() and .GetLocalizedDialog() not implemented
@@ -132,7 +132,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - ConversationManager.InitializeForPlatform method not implemented")]
+        [Ignore("Feature not implemented: Platform-specific dialog initialization needs development")]
         public void MultiLanguageSupport_HandlesAndroidIOSWindowsLinux()
         {
             // @DakotaIrsik - Test disabled: ConversationManager.InitializeForPlatform() method not implemented
@@ -145,7 +145,7 @@ namespace NeonLadder.Tests.Runtime
         #region Dialog Choice Validation Tests
 
         [Test]
-        [Ignore("@DakotaIrsik review - DialogChoiceValidator.GetAvailableChoices method not implemented")]
+        [Ignore("Feature not implemented: Dialog choice filtering system needs development")]
         public void DialogChoiceValidator_FiltersChoicesByPlayerStats()
         {
             // @DakotaIrsik - Test disabled: DialogChoiceValidator.GetAvailableChoices() method not implemented
@@ -154,7 +154,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - DialogChoiceValidator.PreviewChoiceConsequence method not implemented")]
+        [Ignore("Feature not implemented: Choice consequence preview system needs development")]
         public void DialogChoiceValidator_ShowsConsequencePreview()
         {
             // @DakotaIrsik - Test disabled: DialogChoiceValidator.PreviewChoiceConsequence() method not implemented
@@ -180,7 +180,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - ConversationManager event system not implemented")]
+        [Ignore("Feature not implemented: Dialog choice event system needs development")]
         public void DialogSystem_TriggersGameplayEvents()
         {
             // @DakotaIrsik - Test disabled: ConversationManager.OnDialogChoiceConfirmed event and ProcessPlayerChoice method not implemented
@@ -193,7 +193,7 @@ namespace NeonLadder.Tests.Runtime
         #region Advanced Dialog Features Tests
 
         [Test]
-        [Ignore("@DakotaIrsik review - ConversationManager.GetInternalThought method not implemented")]
+        [Ignore("Feature not implemented: Internal thought system needs development")]
         public void InternalThoughts_ProvideContextualInsights()
         {
             // @DakotaIrsik - Test disabled: ConversationManager.GetInternalThought() method not implemented
@@ -202,7 +202,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - DialogChoiceValidator.GetSkillBasedChoices method not implemented")]
+        [Ignore("Feature not implemented: Skill-based dialog choices need development")]
         public void SkillChecks_DetermineDialogAvailability()
         {
             // @DakotaIrsik - Test disabled: DialogChoiceValidator.GetSkillBasedChoices() method not implemented
@@ -211,7 +211,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik review - ConversationManager.RecordChoice method not implemented")]
+        [Ignore("Feature not implemented: Dialog choice history tracking needs development")]
         public void DialogHistory_InfluencesLaterConversations()
         {
             // @DakotaIrsik - Test disabled: ConversationManager.RecordChoice() method not implemented

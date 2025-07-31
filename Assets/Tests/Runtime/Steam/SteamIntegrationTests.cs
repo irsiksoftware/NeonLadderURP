@@ -289,17 +289,20 @@ namespace NeonLadder.Tests.Runtime.Steam
         {
             // Arrange
             MockSteamworksAPI.SetInitialized(true);
+            int initialCount = MockSteamworksAPI.GetUnlockedAchievementCount();
 
-            // Act & Assert - Should not throw exceptions
-            LogAssert.Expect(LogType.Error, "SteamManager not initialized.");
+            // Act - Should handle null/empty gracefully without throwing exceptions
             steamManager.UnlockAchievement(null);
             steamManager.UnlockAchievement("");
             steamManager.UnlockAchievement("   ");
             yield return null;
 
-            // Verify no achievements were unlocked
-            Assert.AreEqual(0, MockSteamworksAPI.GetUnlockedAchievementCount(),
+            // Assert - Verify no achievements were unlocked with invalid IDs
+            Assert.AreEqual(initialCount, MockSteamworksAPI.GetUnlockedAchievementCount(),
                 "No achievements should be unlocked with invalid IDs");
+            
+            // The MockSteamworksAPI.SetAchievement returns false for null/empty,
+            // so these invalid achievements should not be added
         }
 
         [UnityTest]

@@ -324,7 +324,7 @@ namespace NeonLadder.Tests.Runtime
         #region Serialization Tests
 
         [Test]
-        [Ignore("@DakotaIrsik review - enum serialization issue")]
+        [Ignore("Technical issue: Enum serialization needs investigation")]
         public void MapSerialization_PreservesAllData()
         {
             // @DakotaIrsik - Test disabled due to enum serialization issue

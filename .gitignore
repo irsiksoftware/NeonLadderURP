@@ -88,7 +88,6 @@ crashlytics-build.properties
 /Assets/GabrielAguiarProductions/UPMPVol1_*.unitypackage
 
 /HeroEditor_BACKUP
-/TestOutput
 console.log
 
 Assets/Audio/Background/**
@@ -114,11 +113,18 @@ Assets/Audio/Background/**
 /Assets/PerformanceData.txt
 /Assets/PerformanceData.txt.meta
 
-# Test artifacts and output
-/TestOutput/
+# Test artifacts and output - Allow HTML reports but exclude temporary files
+/TestOutput/*.xml
+/TestOutput/*.txt
+/TestOutput/*.log
+/TestOutput/*.json
+/TestOutput/*.md
 TestResults.xml
 test_results_*.xml
 cli_test_*.txt
+
+# Keep HTML test reports for GitHub Pages access
+!/TestOutput/*.html
 
 # Unity Settings meta files (these change frequently)
 /Assets/Settings/*.meta
@@ -148,3 +154,13 @@ README-CLAUDE-BRIEFING-UPDATED.md
 
 # Game data directory (save files, cache, etc.)
 /GameData/
+
+# Unity Editor test automation scripts - externalized to Google Drive
+# These scripts are now in Development-Infrastructure folder for multi-user access
+/Assets/Scripts/Editor/AutomatedUnityTestRunner.cs
+/Assets/Scripts/Editor/AutomatedUnityTestRunner.cs.meta
+/Assets/Scripts/Editor/UnityTestRunnerStyleReport.cs
+/Assets/Scripts/Editor/UnityTestRunnerStyleReport.cs.meta
+/Assets/Scripts/Editor/IgnoreAttributeTest.cs
+/Assets/Scripts/Editor/IgnoreAttributeTest.cs.meta
+UNITY-EDITOR-SCRIPTS-ACCESS.md

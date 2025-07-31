@@ -132,7 +132,7 @@ namespace NeonLadder.Tests.Runtime
         #region Currency Integration Tests
         
         [Test]
-        [Ignore("@DakotaIrsik - Currency deduction logic needs investigation - cost scaling issue")]
+        [Ignore("Bug investigation needed: Currency deduction cost scaling issue")]
         public void PurchaseUpgrade_WithSufficientMetaCurrency_DeductsCostAndOwnsUpgrade_Disabled()
         {
             // @DakotaIrsik - This test is disabled due to cost scaling issues

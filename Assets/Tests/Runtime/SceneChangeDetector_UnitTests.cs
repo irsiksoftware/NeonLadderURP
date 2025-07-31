@@ -135,7 +135,7 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        [Ignore("@DakotaIrsik - Performance test failing - memory allocation during scene change detection")]
+        [Ignore("Performance issue: Memory allocation during scene change detection needs optimization")]
         public void MemoryAllocation_DuringSceneChecks_ShouldBeMinimal_Disabled()
         {
             // @DakotaIrsik - This performance test is disabled due to memory allocation issues

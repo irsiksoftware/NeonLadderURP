@@ -206,6 +206,13 @@ namespace NeonLadder.Testing.Mocks
         {
             if (!isInitialized) return false;
             
+            // Handle null or empty keys gracefully
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                Debug.LogWarning("[MockSteam] SetRichPresence called with null or empty key");
+                return false;
+            }
+            
             richPresence[key] = value;
             Debug.Log($"[MockSteam] Rich presence set: {key} = {value}");
             return true;
