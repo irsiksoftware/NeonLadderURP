@@ -255,24 +255,24 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnJumpPerformed(InputAction.CallbackContext context)
         {
-            if (player.IsGrounded || jumpCount < maxJumps)
-            {
-                isJumping = true;
-            }
+            // Schedule input buffer event for jump
+            var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
+            inputEvent.player = player;
+            inputEvent.inputType = InputType.Jump;
+            inputEvent.context = context;
+            inputEvent.bufferWindow = 0.15f;
+            inputEvent.priority = 1;
         }
 
         private void OnWeaponSwap(InputAction.CallbackContext context)
         {
-            if (player.IsUsingMelee)
-            {
-                SwapWeapons(meleeWeaponGroups, rangedWeaponGroups);
-            }
-            else
-            {
-                SwapWeapons(rangedWeaponGroups, meleeWeaponGroups);
-            }
-
-            player.IsUsingMelee = !player.IsUsingMelee;
+            // Schedule input buffer event for weapon swap
+            var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
+            inputEvent.player = player;
+            inputEvent.inputType = InputType.WeaponSwap;
+            inputEvent.context = context;
+            inputEvent.bufferWindow = 0.1f;
+            inputEvent.priority = 0;
         }
 
         private void SwapWeapons(List<GameObject> currentWeapons, List<GameObject> newWeapons)
@@ -292,14 +292,13 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnAttackPerformed(InputAction.CallbackContext context)
         {
-            if (!player.Stamina.IsExhausted)
-            {
-                if (attackState == ActionStates.Ready)
-                {
-                    attackState = ActionStates.Preparing;
-                    stopAttack = false;
-                }
-            }
+            // Schedule input buffer event for attack
+            var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
+            inputEvent.player = player;
+            inputEvent.inputType = InputType.Attack;
+            inputEvent.context = context;
+            inputEvent.bufferWindow = 0.2f;
+            inputEvent.priority = 2;
         }
 
         public void OnAttackCanceled(InputAction.CallbackContext context)
@@ -365,14 +364,13 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
-            if (!player.Stamina.IsExhausted)
-            {
-                if (sprintState == ActionStates.Ready)
-                {
-                    sprintState = ActionStates.Preparing;
-                    stopSprint = false;
-                }
-            }
+            // Schedule input buffer event for sprint
+            var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
+            inputEvent.player = player;
+            inputEvent.inputType = InputType.Sprint;
+            inputEvent.context = context;
+            inputEvent.bufferWindow = 0.1f;
+            inputEvent.priority = 0;
         }
 
         private void OnSprintCanceled(InputAction.CallbackContext context)

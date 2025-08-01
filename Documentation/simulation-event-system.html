@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonLadder - Simulation Event System Architecture</title>
+    <style>
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --bg-dark: #0a0a0a;
+            --bg-medium: #1a1a1a;
+            --bg-light: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --success: #00ff00;
+            --warning: #ffff00;
+            --danger: #ff0000;
+            --code-bg: #1e1e1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px var(--primary-color);
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+        }
+
+        .section {
+            background-color: var(--bg-medium);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--bg-light);
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .warning {
+            background-color: rgba(255, 255, 0, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .success {
+            background-color: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid var(--primary-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .flow-diagram {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flow-step {
+            display: inline-block;
+            background-color: var(--bg-medium);
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+
+        .flow-arrow {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--bg-light);
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        tr:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+
+        .tab-container {
+            margin: 20px 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .author-note {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid var(--secondary-color);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 NeonLadder Simulation Event System</h1>
+        
+        <div class="author-note">
+            <strong>Architecture by @tony-stark</strong><br>
+            "I am Iron Man. Let's build something extraordinary."<br>
+            Revolutionary event-driven architecture for deterministic gameplay and advanced input handling.
+        </div>
+
+        <div class="section">
+            <h2>🚀 Overview</h2>
+            <p>The NeonLadder Simulation Event System is a discrete event simulator that provides:</p>
+            <ul>
+                <li><span class="highlight">Deterministic Gameplay</span> - Same inputs = same outputs, always</li>
+                <li><span class="highlight">Event Sourcing</span> - All game state changes through events</li>
+                <li><span class="highlight">Input Buffering</span> - Frame-perfect combos and responsive controls</li>
+                <li><span class="highlight">Testability</span> - Simulate exact scenarios in unit tests</li>
+                <li><span class="highlight">Performance</span> - Object pooling and efficient heap-based scheduling</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🏗️ Core Architecture</h2>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">Input System</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Event Creation</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Simulation Queue</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Event Execution</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Game State Change</div>
+            </div>
+
+            <h3>Key Components</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Simulation.cs</h4>
+                    <p>Core event scheduler with heap-based priority queue. Manages event lifecycle and object pooling.</p>
+                </div>
+                <div class="card">
+                    <h4>Simulation.Event</h4>
+                    <p>Base class for all events. Provides Precondition(), Execute(), and Cleanup() lifecycle methods.</p>
+                </div>
+                <div class="card">
+                    <h4>Event Pooling</h4>
+                    <p>Automatic object pooling with 4-instance default capacity to minimize GC pressure.</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+<pre>// Schedule an event for immediate execution
+var damageEvent = Simulation.Schedule&lt;HealthDamageEvent&gt;(0f);
+damageEvent.health = targetHealth;
+damageEvent.damageAmount = 10f;
+
+// Schedule an event for future execution (0.5 seconds)
+var regenEvent = Simulation.Schedule&lt;HealthRegenerationEvent&gt;(0.5f);
+regenEvent.health = playerHealth;
+regenEvent.amount = 5f;</pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 Event Categories</h2>
+            
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="showTab('state')">State Transitions</button>
+                    <button class="tab-button" onclick="showTab('validation')">Validation</button>
+                    <button class="tab-button" onclick="showTab('resource')">Resources</button>
+                    <button class="tab-button" onclick="showTab('visual')">Visual/Audio</button>
+                    <button class="tab-button" onclick="showTab('input')">Input Buffer</button>
+                </div>
+                
+                <div id="state" class="tab-content active">
+                    <h3>State Transition Events</h3>
+                    <table>
+                        <tr>
+                            <th>Event</th>
+                            <th>Purpose</th>
+                            <th>Key Features</th>
+                        </tr>
+                        <tr>
+                            <td>PlayerMovementStateChangeEvent</td>
+                            <td>Manages player movement states</td>
+                            <td>Animation sync, state validation</td>
+                        </tr>
+                        <tr>
+                            <td>EnemyStateTransitionEvent</td>
+                            <td>Enemy AI state machine</td>
+                            <td>Behavior transitions, target tracking</td>
+                        </tr>
+                        <tr>
+                            <td>PlayerGroundedStateChangeEvent</td>
+                            <td>Ground/air state tracking</td>
+                            <td>Jump validation, landing effects</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="validation" class="tab-content">
+                    <h3>Validation Events</h3>
+                    <table>
+                        <tr>
+                            <th>Event</th>
+                            <th>Purpose</th>
+                            <th>Preconditions</th>
+                        </tr>
+                        <tr>
+                            <td>PlayerJumpValidationEvent</td>
+                            <td>Validate jump attempts</td>
+                            <td>Grounded or jump count check</td>
+                        </tr>
+                        <tr>
+                            <td>PlayerSprintValidationEvent</td>
+                            <td>Sprint activation check</td>
+                            <td>Stamina and movement validation</td>
+                        </tr>
+                        <tr>
+                            <td>EnemyAttackValidationEvent</td>
+                            <td>Enemy attack checks</td>
+                            <td>Range, cooldown, target alive</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="resource" class="tab-content">
+                    <h3>Resource Management Events</h3>
+                    <table>
+                        <tr>
+                            <th>Event</th>
+                            <th>Resource</th>
+                            <th>Features</th>
+                        </tr>
+                        <tr>
+                            <td>HealthDamageEvent</td>
+                            <td>Health</td>
+                            <td>Auto damage numbers, death handling</td>
+                        </tr>
+                        <tr>
+                            <td>StaminaChangeEvent</td>
+                            <td>Stamina</td>
+                            <td>Depletion effects, regen delay</td>
+                        </tr>
+                        <tr>
+                            <td>CurrencyChangeEvent</td>
+                            <td>Meta/Perma Currency</td>
+                            <td>Batching, UI updates</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="visual" class="tab-content">
+                    <h3>Visual & Audio Events</h3>
+                    <table>
+                        <tr>
+                            <th>Event</th>
+                            <th>System</th>
+                            <th>Features</th>
+                        </tr>
+                        <tr>
+                            <td>DamageNumberEvent</td>
+                            <td>Damage Numbers</td>
+                            <td>Type-based styling, position tracking</td>
+                        </tr>
+                        <tr>
+                            <td>AudioEvent</td>
+                            <td>Sound Effects</td>
+                            <td>3D spatial audio, volume control</td>
+                        </tr>
+                        <tr>
+                            <td>InstantiateEvent</td>
+                            <td>Object Spawning</td>
+                            <td>Pooled instantiation, cleanup</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="input" class="tab-content">
+                    <h3>Input Buffer Events</h3>
+                    <div class="success">
+                        <strong>NEW!</strong> Advanced input buffering system for fighting game mechanics
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Event</th>
+                            <th>Purpose</th>
+                            <th>Features</th>
+                        </tr>
+                        <tr>
+                            <td>InputBufferEvent</td>
+                            <td>Capture raw input</td>
+                            <td>Priority, buffer window, combo tracking</td>
+                        </tr>
+                        <tr>
+                            <td>InputConsumeEvent</td>
+                            <td>Execute buffered input</td>
+                            <td>State validation, combo detection</td>
+                        </tr>
+                        <tr>
+                            <td>ComboAttackEvent</td>
+                            <td>Multi-hit combos</td>
+                            <td>Damage scaling, special animations</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Damage Number System Integration</h2>
+            
+            <h3>Architecture Overview</h3>
+            <p>The damage number system demonstrates perfect third-party integration through abstraction:</p>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">BaseStat.Decrement()</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">DamageNumberEvent</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">DamageNumberSystem</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">IDamageNumberRenderer</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">DamageNumbersPro</div>
+            </div>
+
+            <div class="code-block">
+<pre>// Game code - no knowledge of DamageNumbersPro
+public void Decrement(float amount = 1)
+{
+    current = Mathf.Clamp(current - amount, 0, max);
+    
+    // Schedule damage number through simulation
+    if (amount > 0)
+    {
+        var damageEvent = Simulation.Schedule&lt;DamageNumberEvent&gt;(0f);
+        damageEvent.targetObject = gameObject;
+        damageEvent.amount = amount;
+        damageEvent.numberType = DamageNumberType.Damage;
+    }
+}</pre>
+            </div>
+
+            <h3>Benefits</h3>
+            <ul>
+                <li>✅ Complete decoupling from third-party libraries</li>
+                <li>✅ Testable without rendering</li>
+                <li>✅ Swappable implementations</li>
+                <li>✅ Centralized styling logic</li>
+                <li>✅ Part of deterministic simulation</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>⚡ Input Buffering & Combo System</h2>
+            
+            <h3>Revolutionary Input Handling</h3>
+            <p>Transform button mashing into precise combo execution:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>Frame-Perfect Execution</h4>
+                    <p>Buffer inputs during animations, execute on exact frame when valid.</p>
+                </div>
+                <div class="card">
+                    <h4>Input Priority</h4>
+                    <p>Special moves override normal attacks in the buffer queue.</p>
+                </div>
+                <div class="card">
+                    <h4>Combo Detection</h4>
+                    <p>Pattern matching on input history with configurable windows.</p>
+                </div>
+            </div>
+
+            <h3>Example Combo Flow</h3>
+            <div class="code-block">
+<pre>// Basic 3-hit combo definition
+new ComboDefinition
+{
+    id = "basic_3hit",
+    name = "Triple Strike",
+    inputs = new[] { InputType.Attack, InputType.Attack, InputType.Attack },
+    damageMultipliers = new[] { 1.0f, 1.2f, 1.5f },
+    windowTimes = new[] { 0.5f, 0.4f, 0.3f } // Gets tighter
+}
+
+// Frame timeline
+Frame 0:   Attack pressed → InputBufferEvent(priority=1)
+Frame 1:   Animation starts
+Frame 15:  Attack pressed → InputBufferEvent(priority=1) [BUFFERED]
+Frame 30:  Animation ends → Buffer consumed → Combo step 2!
+Frame 45:  Attack pressed → InputBufferEvent(priority=1) [BUFFERED]
+Frame 60:  Animation ends → Buffer consumed → COMBO COMPLETE!</pre>
+            </div>
+
+            <div class="warning">
+                <strong>Integration Note:</strong> The existing PlayerAction callbacks need to be updated to feed into the buffer system instead of directly modifying state.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Implementation Guide</h2>
+            
+            <h3>Adding New Events</h3>
+            <ol>
+                <li>Create event class extending <code>Simulation.Event</code></li>
+                <li>Implement <code>Precondition()</code> for validation</li>
+                <li>Implement <code>Execute()</code> for logic</li>
+                <li>Implement <code>Cleanup()</code> to null references</li>
+                <li>Schedule via <code>Simulation.Schedule&lt;T&gt;(delay)</code></li>
+            </ol>
+
+            <div class="code-block">
+<pre>public class MyCustomEvent : Simulation.Event
+{
+    public Player player;
+    public float value;
+    
+    public override bool Precondition()
+    {
+        return player != null && player.Health.IsAlive;
+    }
+    
+    public override void Execute()
+    {
+        // Your event logic here
+        Debug.Log($"Event executed with value: {value}");
+    }
+    
+    internal override void Cleanup()
+    {
+        player = null;
+        value = 0f;
+    }
+}</pre>
+            </div>
+
+            <h3>Best Practices</h3>
+            <ul>
+                <li>🎯 Keep events atomic - one clear purpose per event</li>
+                <li>🎯 Always implement Cleanup() to prevent memory leaks</li>
+                <li>🎯 Use Precondition() for validation, not Execute()</li>
+                <li>🎯 Pool events automatically handles by Simulation</li>
+                <li>🎯 Chain events for complex behaviors</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Future Enhancements</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>Network Events</h4>
+                    <p>NetworkMessageReceivedEvent, NetworkStateSync for multiplayer</p>
+                </div>
+                <div class="card">
+                    <h4>Physics Events</h4>
+                    <p>CollisionEnterEvent, TriggerExitEvent for deterministic physics</p>
+                </div>
+                <div class="card">
+                    <h4>Tutorial Events</h4>
+                    <p>TutorialTriggerEvent, ObjectiveCompleteEvent for onboarding</p>
+                </div>
+                <div class="card">
+                    <h4>Scene Events</h4>
+                    <p>SceneLoadRequestEvent, SceneTransitionCompleteEvent</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Performance Metrics</h2>
+            
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Event Pool Size</td>
+                    <td>4 per type</td>
+                    <td>Configurable, auto-expands</td>
+                </tr>
+                <tr>
+                    <td>Scheduling Cost</td>
+                    <td>O(log n)</td>
+                    <td>Heap insertion</td>
+                </tr>
+                <tr>
+                    <td>Execution Cost</td>
+                    <td>O(1)</td>
+                    <td>Per event</td>
+                </tr>
+                <tr>
+                    <td>Memory Allocation</td>
+                    <td>~0 after warmup</td>
+                    <td>Full pooling</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="author-note">
+            <strong>Final Notes from @tony-stark:</strong><br>
+            This simulation system is the backbone of deterministic gameplay in NeonLadder. By routing all state changes through events, we achieve perfect reproducibility, testability, and the foundation for advanced features like replay systems and rollback netcode. The input buffering system specifically enables fighting game mechanics that would be impossible with traditional Unity input handling.<br><br>
+            Remember: "Sometimes you gotta run before you can walk." - But with this system, every step is perfectly tracked and reproducible.
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Mark button as active
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

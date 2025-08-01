@@ -271,18 +271,7 @@ namespace NeonLadder.Mechanics.Controllers
             staminaEvent.stamina = Stamina;
             staminaEvent.amount = -amount; // Negative for damage, positive for healing
             
-            // Schedule visual effects for positive damage amounts only
-            if (amount > 0)
-            {
-                var damageNumberController = GetComponent<DamageNumberController>();
-                if (damageNumberController != null)
-                {
-                    var damageNumberEvent = Simulation.Schedule<DamageNumberEvent>(delay);
-                    damageNumberEvent.controller = damageNumberController;
-                    damageNumberEvent.amount = amount;
-                    damageNumberEvent.numberType = DamageNumberType.StaminaLoss;
-                }
-            }
+            // Damage numbers are now handled automatically by Stamina.Decrement()
         }
 
         public void ScheduleAudioEvent(AudioEventType audioType, float delay = 0f)

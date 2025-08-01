@@ -16,26 +16,40 @@ namespace NeonLadder.Mechanics.Stats
 
         public void Increment(float amount = 1)
         {
+            float previousValue = current;
             current = Mathf.Clamp(current + amount, 0, max);
+            float actualAmount = current - previousValue;
+            
+            // Schedule healing number through simulation event system
+            if (actualAmount > 0 && this is Health)
+            {
+                var healEvent = Simulation.Schedule<DamageNumberEvent>(0f);
+                healEvent.targetObject = gameObject;
+                healEvent.amount = actualAmount;
+                healEvent.numberType = DamageNumberType.Healing;
+            }
         }
 
         public void Decrement(float amount = 1)
         {
             current = Mathf.Clamp(current - amount, 0, max);
 
-            //use parent objects type to determine if damage or stamina
-
-            switch (this)
+            // Schedule damage number through simulation event system
+            if (amount > 0)
             {
-                case Health:
-                    if (damageNumberController != null)
-                    {
-                        damageNumberController.SpawnPopup(amount);
-                    }
-                    break;
-                case Stamina:
-                    //damageNumber.Spawn(transform.position, amount.ToString());
-                    break;
+                var damageEvent = Simulation.Schedule<DamageNumberEvent>(0f);
+                damageEvent.targetObject = gameObject;
+                damageEvent.amount = amount;
+                
+                switch (this)
+                {
+                    case Health:
+                        damageEvent.numberType = DamageNumberType.Damage;
+                        break;
+                    case Stamina:
+                        damageEvent.numberType = DamageNumberType.StaminaLoss;
+                        break;
+                }
             }
 
             if (current == 0)
@@ -109,17 +123,22 @@ namespace NeonLadder.Mechanics.Stats
 
         private void TriggerDamageEffects(float amount)
         {
-            switch (this)
+            // Schedule damage number through simulation event system
+            if (amount > 0)
             {
-                case Health:
-                    if (damageNumberController != null)
-                    {
-                        damageNumberController.SpawnPopup(amount);
-                    }
-                    break;
-                case Stamina:
-                    //damageNumber.Spawn(transform.position, amount.ToString());
-                    break;
+                var damageEvent = Simulation.Schedule<DamageNumberEvent>(0f);
+                damageEvent.targetObject = gameObject;
+                damageEvent.amount = amount;
+                
+                switch (this)
+                {
+                    case Health:
+                        damageEvent.numberType = DamageNumberType.Damage;
+                        break;
+                    case Stamina:
+                        damageEvent.numberType = DamageNumberType.StaminaLoss;
+                        break;
+                }
             }
         }
     }

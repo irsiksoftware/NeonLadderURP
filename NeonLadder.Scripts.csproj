@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Debug\ControllerDebugging.cs" />
     <Compile Include="Assets\Scripts\Models\MeleeWeapons.cs" />
     <Compile Include="Assets\Scripts\Models\Firearms.cs" />
+    <Compile Include="Assets\Scripts\Integrations\DamageNumberProRenderer.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Minor.cs" />
     <Compile Include="Assets\Scripts\Items\PermaCurrencyReplenishment.cs" />
     <Compile Include="Assets\Scripts\Events\HealthRegenerationEvent.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Major.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Animations.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Loot\LootHelper.cs" />
+    <Compile Include="Assets\Scripts\Events\PlayerAttackEvent.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\CharacterPersonalitySystem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Currency\Perma.cs" />
@@ -194,10 +196,12 @@
     <Compile Include="Assets\Scripts\Events\PlayerEnemyCollision.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerLanded.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Boss.cs" />
+    <Compile Include="Assets\Scripts\Core\ComboSystem.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\PathGenerator.cs" />
     <Compile Include="Assets\Scripts\Utilities\ButtonHelper.cs" />
     <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RemoveAppendedCounts.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Managers\DamageNumberSystemSetup.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
     <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\CurrencyType.cs" />
@@ -205,6 +209,7 @@
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Stamina.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Zones\DeathZone.cs" />
+    <Compile Include="Assets\Scripts\Events\ComboAttackEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Collectibles\Buff.cs" />
     <Compile Include="Assets\Scripts\Items\HealthReplenishment.cs" />
     <Compile Include="Assets\Scripts\Events\CurrencyChangeEvent.cs" />
@@ -223,10 +228,12 @@
     <Compile Include="Assets\Scripts\Managers\SceneChangeManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CameraTransformManager.cs" />
     <Compile Include="Assets\Scripts\Managers\RaycastManager.cs" />
+    <Compile Include="Assets\Scripts\Core\DamageNumberSystem.cs" />
     <Compile Include="Assets\Scripts\Documentation\MarvelSquadPersona.cs" />
     <Compile Include="Assets\Scripts\Models\MonsterGroups.cs" />
     <Compile Include="Assets\Scripts\Utilities\AchevementResolver.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\GameStates.cs" />
+    <Compile Include="Assets\Scripts\Events\InputBufferEvent.cs" />
     <Compile Include="Assets\Scripts\Utilities\Editor\DeleteAllTransitions.cs" />
     <Compile Include="Assets\Scripts\Utilities\PlatformVisibilityController.cs" />
     <Compile Include="Assets\Scripts\Cameras\DemoSceneCloseness.cs" />

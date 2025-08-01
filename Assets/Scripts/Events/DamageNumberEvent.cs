@@ -10,28 +10,48 @@ namespace NeonLadder.Events
     /// </summary>
     public class DamageNumberEvent : Simulation.Event
     {
-        public DamageNumberController controller;
+        public GameObject targetObject;
         public float amount;
-        public Vector3 position;
-        public DamageNumberType numberType;
+        public Vector3 worldPosition;
+        public DamageNumberType numberType = DamageNumberType.Damage;
+        public Color? customColor;
+        public float? customScale;
 
         public override bool Precondition()
         {
-            return controller != null && amount > 0;
+            return amount > 0;
         }
 
         public override void Execute()
         {
-            if (controller != null)
+            // Get damage number system from simulation model
+            var dnSystem = Simulation.GetModel<DamageNumberSystem>();
+            if (dnSystem != null)
             {
-                // Spawn damage number through DamageNumbersPro
-                controller.SpawnPopup(amount);
+                // Determine position - use world position if set, otherwise get from target
+                Vector3 spawnPosition = worldPosition;
+                if (spawnPosition == Vector3.zero && targetObject != null)
+                {
+                    spawnPosition = targetObject.transform.position;
+                    
+                    // Try to get offset from DamageNumberController if present
+                    var controller = targetObject.GetComponent<DamageNumberController>();
+                    if (controller != null)
+                    {
+                        spawnPosition += new Vector3(0, controller.YOffset, 0);
+                    }
+                }
+                
+                dnSystem.SpawnNumber(spawnPosition, amount, numberType, customColor, customScale);
             }
         }
 
         internal override void Cleanup()
         {
-            controller = null;
+            targetObject = null;
+            customColor = null;
+            customScale = null;
+            worldPosition = Vector3.zero;
         }
     }
 
