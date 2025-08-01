@@ -25,21 +25,11 @@ namespace NeonLadder.Events
         {
             if (health != null)
             {
-                // Apply damage
-                health.Increment(-damageAmount); // Use negative increment to avoid direct Decrement
+                // Apply damage using Decrement which now handles damage numbers automatically
+                health.Decrement(damageAmount);
                 
                 if (triggerEffects)
                 {
-                    // Schedule damage number display
-                    var damageNumberController = health.GetComponent<DamageNumberController>();
-                    if (damageNumberController != null)
-                    {
-                        var damageNumberEvent = Simulation.Schedule<DamageNumberEvent>(0f);
-                        damageNumberEvent.controller = damageNumberController;
-                        damageNumberEvent.amount = damageAmount;
-                        damageNumberEvent.numberType = DamageNumberType.Damage;
-                    }
-                    
                     // Schedule damage audio
                     var audioSource = health.GetComponentInParent<AudioSource>();
                     if (audioSource != null)

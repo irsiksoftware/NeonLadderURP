@@ -27,21 +27,11 @@ namespace NeonLadder.Events
         {
             if (health != null)
             {
-                // Apply healing
+                // Apply healing using Increment which now handles healing numbers automatically
                 health.Increment(amount);
                 
                 if (triggerEffects)
                 {
-                    // Schedule healing number display
-                    var damageNumberController = health.GetComponent<DamageNumberController>();
-                    if (damageNumberController != null)
-                    {
-                        var damageNumberEvent = Simulation.Schedule<DamageNumberEvent>(0f);
-                        damageNumberEvent.controller = damageNumberController;
-                        damageNumberEvent.amount = amount;
-                        damageNumberEvent.numberType = DamageNumberType.Healing;
-                    }
-                    
                     // Schedule healing audio
                     var audioSource = health.GetComponent<AudioSource>();
                     if (audioSource != null)
