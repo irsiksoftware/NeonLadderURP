@@ -1,22 +1,33 @@
 # Claude Instructions for NeonLadder Project
 
-## 🚨 FIRST STEP: Load External Settings 🚨
-**NEW SIMPLIFIED STARTUP - Just say this to Claude:**
-> **"Claude, load external settings"**
+## 🚨 CRITICAL FIRST STEP: Verify and Load External Settings 🚨
 
-Claude will automatically run: `sync-claude-settings.bat`
+### BEFORE DOING ANYTHING ELSE:
+1. **CHECK** if .claude folder exists: `ls .claude`
+2. **CREATE** if missing: `mkdir -p .claude`
+3. **DOWNLOAD** settings: `"C:\tools\gdrive" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --overwrite && mv settings.local.json .claude/`
+4. **VERIFY** load successful: `cat .claude/settings.local.json | head -20`
 
-**Manual sync if needed:**
+### Quick Start Command:
 ```bash
-# Auto-sync script (recommended)
+# Complete setup in one line (if .claude doesn't exist)
+mkdir -p .claude && "C:\tools\gdrive" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --overwrite && mv settings.local.json .claude/
+```
+
+### Alternative: Use sync script (if .claude exists)
+```bash
+# Run sync script
 sync-claude-settings.bat
 
-# Or manual download
-"C:\tools\gdrive" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --destination .claude/settings.local.json --overwrite
-
-# Check extended state
-cat .claude/extended-state.json
+# Or PowerShell
+powershell -Command "& {cd 'C:\Users\Ender\NeonLadder'; .\sync-claude-settings.bat}"
 ```
+
+**⚠️ WARNING**: Without loading external settings first, Claude may:
+- Execute pre-approved commands without context
+- Create issues/PRs without proper format
+- Miss critical project configuration
+- Not have access to Marvel team personas
 
 **Revolutionary Achievement**: World's first externalized AI assistant configuration system with one-command activation.
 
@@ -83,6 +94,16 @@ Future Claude models should **immediately** load team memory and respond to **ro
 
 This creates the **world's first AI Scrum team simulation** for solo developers with full team collaboration dynamics.
 
+## ✅ Settings Verification Checklist
+
+**Before proceeding with ANY task, verify:**
+1. ✓ `.claude/settings.local.json` exists and is loaded
+2. ✓ Marvel team personas are accessible
+3. ✓ Google Drive permissions are working: `"C:\tools\gdrive" about`
+4. ✓ GitHub CLI is authenticated: `"C:\Program Files\GitHub CLI\gh.exe" auth status`
+
+**If ANY check fails, STOP and reload settings first!**
+
 ## 📚 External Documentation System
 
 ### **🗂️ NeonLadder Technical Documentation (Google Drive)**
@@ -129,41 +150,159 @@ This creates the **world's first AI Scrum team simulation** for solo developers 
 
 **Benefits**: Clean source control, multi-user access, organized by system, future-expandable
 
-## 📋 External Backlog & PBI System
+## 📋 Product Backlog & Issue Management
 
-### **🗂️ NeonLadder Backlog Management (Google Drive)**
+### **🗂️ NeonLadder Backlog - GitHub Issues**
 
-**All Product Backlog Items, TODOs, and technical debt organized for sprint planning:**
+**All Product Backlog Items (PBIs) are now managed as GitHub Issues starting from issue #32**
 
-#### **Quick Access Commands**
+#### **⚡ Quick Reference Card**
 ```bash
-# List all backlog categories
-"C:\tools\gdrive" files list --parent 1LJ8X-5whHNaMh2NeHGdzkLwTYgoDjL0p
-
-# Download complete backlog index
-"C:\tools\gdrive" files download 1foERIGyhNubkN7HSmxL7Ie6wJb6zSdcg
+# Most used commands - copy/paste ready
+gh issue list --label "PBI"                                    # All PBIs
+gh issue list --label "PBI" --limit 10 --json number,title    # Quick list
+gh issue list --label "P0-Critical"                            # Critical items
+gh issue view 45                                               # View issue #45
+gh issue create --label "PBI,P2-Medium,5-points"              # New PBI
 ```
 
-#### **📁 Backlog Categories**
+#### **🎯 Essential GitHub CLI Commands**
 
-**PBIs (Product Backlog Items)** (Folder ID: `1wJ4jPSB41hdbMcaZc5l7I50IKBzr0zR0`)
-- **Procedural Scene Loading PBI** - ID: `18Oz6yXOyVVK-AK4gi9CTufBjmXUbCugJ` (13 story points)
-
-**TODO Items** (Folder ID: `1NyF4XwqS88Wj4K00bym6nUge_IIzhlm5`)
-- **URP Configuration TODO** - ID: `1lk6r7HcydUiTOsJ-d0sNpJc-vReL86cm` (Rendering pipeline setup)
-
-**Technical Debt** (Folder ID: `1d9bo8RyXXFW5KYunyB-grKuZLdTvYByR`)
-- **Code TODO Analysis** - ID: `1MbgyXSbBbdqV-UyUMBfLWA78XfUf0Rs9` (100+ files analyzed)
-
-#### **🚨 Steam Launch Priority Access**
+**Basic PBI Queries**
 ```bash
-# P0 Launch Blockers
-"C:\tools\gdrive" files download 18Oz6yXOyVVK-AK4gi9CTufBjmXUbCugJ  # Save system PBI
-"C:\tools\gdrive" files download 1lk6r7HcydUiTOsJ-d0sNpJc-vReL86cm  # URP configuration
-"C:\tools\gdrive" files download 1MbgyXSbBbdqV-UyUMBfLWA78XfUf0Rs9  # Technical debt priority matrix
+# List all open PBIs (default view)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI"
+
+# Succinct PBI list (number + title only)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --limit 50 --json number,title --jq '.[] | "#\(.number) \(.title)"'
+
+# PBI overview with points and priority
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --json number,title,labels --jq '.[] | {number, title, points: (.labels | map(select(.name | endswith("-points"))) | .[0].name // "unpointed"), priority: (.labels | map(select(.name | startswith("P"))) | .[0].name // "unprioritized")}'
+
+# View specific issue details
+"C:\Program Files\GitHub CLI\gh.exe" issue view <number>
+
+# View issue in browser
+"C:\Program Files\GitHub CLI\gh.exe" issue view <number> --web
 ```
 
-**Sprint Planning**: Backlog index contains priority matrix and story point estimates for velocity planning
+**Sprint Planning Queries**
+```bash
+# High priority items for sprint (P0 + P1)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --label "P0-Critical,P1-High" --limit 20
+
+# Unpointed PBIs (need estimation)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --search "-label:3-points -label:5-points -label:8-points -label:13-points"
+
+# Sprint velocity check (sum of story points)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --state closed --json labels,closedAt --jq '[.[] | select(.closedAt | startswith("2025-08")) | .labels[] | select(.name | endswith("-points")) | .name | split("-")[0] | tonumber] | add'
+
+# Ready for development (pointed + prioritized)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --search "label:3-points,5-points,8-points,13-points label:P0-Critical,P1-High,P2-Medium"
+```
+
+**Steam Launch Critical**
+```bash
+# All Steam blockers with status
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "steam-launch" --label "P0-Critical" --json number,title,assignees,state
+
+# Steam features by priority
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "steam-launch" --sort created --json number,title,labels --jq 'group_by(.labels[] | select(.name | startswith("P")).name) | map({priority: .[0].labels[] | select(.name | startswith("P")).name, issues: map("#\(.number) \(.title)")})'
+```
+
+**Advanced Filtering**
+```bash
+# Find bugs in specific area
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "bug" --search "UI in:title,body"
+
+# PBIs assigned to me
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --assignee "@me"
+
+# Recently updated PBIs (last 7 days)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --sort updated --search "updated:>=$(date -d '7 days ago' +%Y-%m-%d)"
+
+# PBIs with no assignee (available for pickup)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --search "no:assignee" --json number,title,labels
+```
+
+**Bulk Operations**
+```bash
+# Add label to multiple issues
+"C:\Program Files\GitHub CLI\gh.exe" issue edit 45,46,47 --add-label "in-progress"
+
+# Assign sprint milestone
+"C:\Program Files\GitHub CLI\gh.exe" issue edit 45 --milestone "Sprint 2025-08"
+
+# Close completed PBIs with comment
+"C:\Program Files\GitHub CLI\gh.exe" issue close 45 --comment "Completed in PR #123"
+```
+
+#### **📊 Output Formats**
+
+**Table Format (Human Readable)**
+```bash
+# Custom table columns
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --limit 10 --json number,title,labels,assignees --template '{{range .}}{{tablerow (printf "#%v" .number) .title (pluck "name" .labels | join ", ") (pluck "login" .assignees | join ", ")}}{{end}}'
+```
+
+**JSON Processing (Machine Readable)**
+```bash
+# Export for external tools
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --limit 100 --json number,title,body,labels,assignees,createdAt,updatedAt > pbi-export.json
+
+# CSV export
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --json number,title,labels --jq -r '["Number","Title","Points","Priority"], (.[] | [.number, .title, (.labels | map(select(.name | endswith("-points"))) | .[0].name // ""), (.labels | map(select(.name | startswith("P"))) | .[0].name // "")]) | @csv'
+```
+
+#### **📁 Label System**
+
+**Priority Labels**
+- `P0-Critical` - Launch blockers (red) - Must fix
+- `P1-High` - High priority (orange) - Should fix
+- `P2-Medium` - Medium priority (yellow) - Could fix
+
+**Type Labels**
+- `PBI` - Product Backlog Item (blue)
+- `bug` - Bug fixes (red)
+- `enhancement` - New features (cyan)
+
+**Story Point Labels**
+- `3-points` - Small tasks (1-2 days)
+- `5-points` - Medium tasks (3-4 days)
+- `8-points` - Large tasks (1 week)
+- `13-points` - Extra large (1-2 weeks)
+
+**Status Labels**
+- `in-progress` - Currently being worked on
+- `blocked` - Waiting on dependencies
+- `ready-for-review` - PR submitted
+
+**Category Labels**
+- `steam-launch` - Steam launch requirements (purple)
+- `documentation` - Documentation tasks (light gray)
+- `technical-debt` - Code quality improvements
+
+#### **🚀 Common Workflows**
+
+**Daily Standup View**
+```bash
+# What's in progress
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "in-progress" --assignee "@me" --json number,title,updatedAt
+
+# Blocked items needing attention
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "blocked" --json number,title,body --jq '.[] | "\\n#\(.number) \(.title)\\nBlocked on: \(.body | split("\\n") | map(select(. | test("Block"))) | .[0] // "See issue")"'
+```
+
+**Sprint Planning**
+```bash
+# Available capacity (sum unassigned points)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --search "no:assignee" --json labels --jq '[.[] | .labels[] | select(.name | endswith("-points")) | .name | split("-")[0] | tonumber] | add'
+
+# Velocity trend (closed points by month)
+"C:\Program Files\GitHub CLI\gh.exe" issue list --label "PBI" --state closed --json labels,closedAt --jq 'group_by(.closedAt[0:7]) | map({month: .[0].closedAt[0:7], points: [.[] | .labels[] | select(.name | endswith("-points")) | .name | split("-")[0] | tonumber] | add})'
+```
+
+**Migration Complete**: All PBIs migrated from Google Drive to GitHub Issues (August 2025). Issues #32-#69 contain the migrated backlog with full traceability.
 
 ### 🍕 Pizza Party Coding Day - Complete Development Priorities
 
@@ -525,6 +664,8 @@ powershell -Command "Start-Process PowerShell -ArgumentList '-Command', '[Enviro
 ```
 
 **⚠️ Important**: After adding to PATH, restart your terminal or VS Code for the `gh` command to work. Until then, use the full path.
+
+**✅ Once PATH is configured**: You can use `gh` instead of `"C:\Program Files\GitHub CLI\gh.exe"` in all commands throughout this documentation.
 
 **Authentication Options:**
 ```bash
