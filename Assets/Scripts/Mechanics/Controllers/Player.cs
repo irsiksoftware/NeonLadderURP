@@ -39,6 +39,7 @@ namespace NeonLadder.Mechanics.Controllers
         public Stamina Stamina { get; private set; }
         public Meta MetaCurrency { get; private set; }
         public Perma PermaCurrency { get; private set; }
+        public MeleeController MeleeController { get; private set; }
         [SerializeField]
         private InputActionAsset controls;
         public InputActionAsset Controls
@@ -77,6 +78,13 @@ namespace NeonLadder.Mechanics.Controllers
             rigidbody = GetComponentInParent<Rigidbody>();
             Health = GetComponentInParent<Health>();
             Stamina = GetComponentInParent<Stamina>();
+            
+            // Ensure MeleeController exists for damage calculations
+            MeleeController = GetComponent<MeleeController>();
+            if (MeleeController == null)
+            {
+                MeleeController = gameObject.AddComponent<MeleeController>();
+            }
             var healthBarComponent = transform.parent.GetComponentInChildren<HealthBar>();
             HealthBar = healthBarComponent?.gameObject.GetComponent<ProgressBar>();
             

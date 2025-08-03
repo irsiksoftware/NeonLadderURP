@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Events\HealthDamageEvent.cs" />
     <Compile Include="Assets\Scripts\Trackers\PlayerStateTracker.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeSystem.cs" />
+    <Compile Include="Assets\Scripts\Cameras\CameraConfiguration.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\LootItem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseCurrencyController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Assets\Scripts\DataManagement\LoadSystem.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Major.cs" />
+    <Compile Include="Assets\Scripts\Cameras\CameraRotationProvider.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Animations.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Loot\LootHelper.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerAttackEvent.cs" />
@@ -201,7 +203,6 @@
     <Compile Include="Assets\Scripts\Utilities\ButtonHelper.cs" />
     <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RemoveAppendedCounts.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Managers\DamageNumberSystemSetup.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
     <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\CurrencyType.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Stamina.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Zones\DeathZone.cs" />
+    <Compile Include="Assets\Scripts\Managers\DamageNumberManager.cs" />
     <Compile Include="Assets\Scripts\Events\ComboAttackEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Collectibles\Buff.cs" />
     <Compile Include="Assets\Scripts\Items\HealthReplenishment.cs" />
@@ -1414,6 +1416,10 @@
     <ProjectReference Include="Michsky.MUIP.csproj">
       <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
       <Name>Michsky.MUIP</Name>
+    </ProjectReference>
+    <ProjectReference Include="DamageNumbersPro.csproj">
+      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
+      <Name>DamageNumbersPro</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

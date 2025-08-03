@@ -1644,6 +1644,10 @@
       <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
       <Name>NeonLadder.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="DamageNumbersPro.csproj">
+      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
+      <Name>DamageNumbersPro</Name>
+    </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
       <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>
@@ -1659,10 +1663,6 @@
     <ProjectReference Include="TAA.Runtime.csproj">
       <Project>{E9A8BA52-FE77-948F-C8AD-825193FE381C}</Project>
       <Name>TAA.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="DamageNumbersPro.csproj">
-      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
-      <Name>DamageNumbersPro</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

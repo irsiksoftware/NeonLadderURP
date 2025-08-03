@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.Cameras;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +18,60 @@ namespace NeonLadder.Models
             {
                 if (SceneManager.GetActiveScene().name != Scenes.Title.ToString())
                 {
-                    return virtualCamera ?? (virtualCamera = GameObject.FindGameObjectWithTag(Tags.GameController.ToString()).GetComponentInChildren<CinemachineCamera>());
+                    if (virtualCamera == null)
+                    {
+                        Debug.Log($"[VirtualCamera] Looking for camera in scene: {SceneManager.GetActiveScene().name}");
+                        
+                        // First try to find by PlayerCamera tag (preferred)
+                        var playerCameraObj = GameObject.FindGameObjectWithTag(Tags.PlayerCamera.ToString());
+                        if (playerCameraObj != null)
+                        {
+                            Debug.Log($"[VirtualCamera] Found object with PlayerCamera tag: {playerCameraObj.name}");
+                            virtualCamera = playerCameraObj.GetComponent<CinemachineCamera>();
+                            if (virtualCamera == null)
+                            {
+                                Debug.LogError($"[VirtualCamera] Object '{playerCameraObj.name}' has PlayerCamera tag but no CinemachineCamera component!");
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("[VirtualCamera] No object found with PlayerCamera tag");
+                        }
+                        
+                        // Fallback: try to find as child of GameController
+                        if (virtualCamera == null)
+                        {
+                            var gameControllerObj = GameObject.FindGameObjectWithTag(Tags.GameController.ToString());
+                            if (gameControllerObj != null)
+                            {
+                                Debug.Log($"[VirtualCamera] Found GameController: {gameControllerObj.name}");
+                                virtualCamera = gameControllerObj.GetComponentInChildren<CinemachineCamera>();
+                                if (virtualCamera == null)
+                                {
+                                    Debug.LogError($"[VirtualCamera] GameController '{gameControllerObj.name}' has no CinemachineCamera in children!");
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogError("[VirtualCamera] No object found with GameController tag!");
+                            }
+                        }
+                        
+                        // Last resort: find any CinemachineCamera in scene
+                        if (virtualCamera == null)
+                        {
+                            virtualCamera = GameObject.FindObjectOfType<CinemachineCamera>();
+                            if (virtualCamera != null)
+                            {
+                                Debug.LogWarning($"[VirtualCamera] Found CinemachineCamera by type search: {virtualCamera.name} (consider tagging it properly)");
+                            }
+                            else
+                            {
+                                Debug.LogError("[VirtualCamera] No CinemachineCamera found anywhere in the scene!");
+                            }
+                        }
+                    }
+                    return virtualCamera;
                 }
                 return null;
             }

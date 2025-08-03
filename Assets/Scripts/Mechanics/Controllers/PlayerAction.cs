@@ -47,8 +47,8 @@ namespace NeonLadder.Mechanics.Controllers
 
         #region Attacking
         [SerializeField]
-        private float attackAnimationDuration;
-        public float AttackAnimationDuration;
+        private float attackAnimationDuration = 1.0f; // Default attack duration
+        public float AttackAnimationDuration => attackAnimationDuration;
 
         private int meleeAttackAnimation = 23;
         private int rangedAttackAnimation = 75;
@@ -86,6 +86,9 @@ namespace NeonLadder.Mechanics.Controllers
                 {
                     rangedWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("Firearms"));
                 }
+
+                // Initialize weapon states to match player.IsUsingMelee
+                InitializeWeaponStates();
             }
         }
 
@@ -95,7 +98,8 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 UpdateSprintState(ref player.velocity);
 
-                UpdateAttackState();
+                // NOTE: UpdateAttackState() disabled - new InputBufferEvent system handles attacks
+                // UpdateAttackState();
             }
 
             if (AnimationDebuggingText != null)
@@ -236,13 +240,23 @@ namespace NeonLadder.Mechanics.Controllers
             if (isInZMovementZone)
             {
                 var sceneName = SceneManager.GetActiveScene().name;
-                var cameraPosition = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString()).transform.position;
-                var cvcRotation = Game.Instance.model.VirtualCamera.gameObject.transform.rotation;
+                
+                // Find main camera position
+                var cameraGO = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString());
+                if (cameraGO == null)
+                {
+                    Debug.LogError("MainCamera not found!");
+                    return;
+                }
+                var cameraPosition = cameraGO.transform.position;
+                
+                // Get camera rotation using the new provider
+                var cameraRotation = NeonLadder.Cameras.CameraRotationProvider.GetCameraRotation();
 
                 playerPositionManager.SaveState(sceneName,
                                                 player.transform.parent.position,
                                                 cameraPosition,
-                                                cvcRotation);
+                                                cameraRotation);
 
                 player.EnableZMovement();
             }
@@ -275,20 +289,7 @@ namespace NeonLadder.Mechanics.Controllers
             inputEvent.priority = 0;
         }
 
-        private void SwapWeapons(List<GameObject> currentWeapons, List<GameObject> newWeapons)
-        {
-            foreach (GameObject weaponGroup in currentWeapons)
-            {
-                var weapon = weaponGroup.transform.GetChild(0).gameObject;
-                weapon.SetActive(false);
-            }
-
-            foreach (GameObject weaponGroup in newWeapons)
-            {
-                var weapon = weaponGroup.transform.GetChild(0).gameObject;
-                weapon.SetActive(true);
-            }
-        }
+        // REMOVED: SwapWeapons method - now handled by InputBufferEvent system
 
         private void OnAttackPerformed(InputAction.CallbackContext context)
         {
@@ -346,6 +347,8 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
+        // DEPRECATED: UpdateAttackState - replaced by InputBufferEvent → PlayerAttackEvent system
+        // Kept for reference only - not called anywhere
         public void UpdateAttackState()
         {
             switch (attackState)
@@ -402,10 +405,13 @@ namespace NeonLadder.Mechanics.Controllers
         [SerializeField]
         private float percentageOfAnimationToIgnore = Constants.Animation.IgnorePercentage; // Adjust this value to experiment with different timings
 
+        // DEPRECATED: TryAttackEnemy - replaced by PlayerAttackEvent with weapon collider events
+        // Kept for reference only - not called anywhere  
         private IEnumerator TryAttackEnemy()
         {
             var attackComponents = transform.parent.gameObject.GetComponentsInChildren<Collider>()
                                                            .Where(c => c.gameObject != transform.parent.gameObject).ToList();
+            
             if (attackComponents != null && attackComponents.Count > 0)
             {
                 player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
@@ -438,8 +444,52 @@ namespace NeonLadder.Mechanics.Controllers
                 player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
                 player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
             }
+            else
+            {
+                // CRITICAL FIX: Always reset state even if no attack components
+                // Still play attack animation even without valid targets
+                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1);
+                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 
+                    (player.IsUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
+                
+                yield return new WaitForSeconds(player.AttackAnimationDuration);
+                
+                // Reset animation
+                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
+                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0);
+            }
         }
 
+        private void InitializeWeaponStates()
+        {
+            if (player.IsUsingMelee)
+            {
+                // Player starts with melee - activate melee, deactivate ranged
+                SetWeaponGroupsActive(meleeWeaponGroups, true);
+                SetWeaponGroupsActive(rangedWeaponGroups, false);
+            }
+            else
+            {
+                // Player starts with ranged - activate ranged, deactivate melee
+                SetWeaponGroupsActive(rangedWeaponGroups, true);
+                SetWeaponGroupsActive(meleeWeaponGroups, false);
+            }
+        }
+
+        private void SetWeaponGroupsActive(List<GameObject> weaponGroups, bool active)
+        {
+            if (weaponGroups != null)
+            {
+                foreach (GameObject weaponGroup in weaponGroups)
+                {
+                    if (weaponGroup != null && weaponGroup.transform.childCount > 0)
+                    {
+                        var weapon = weaponGroup.transform.GetChild(0).gameObject;
+                        weapon.SetActive(active);
+                    }
+                }
+            }
+        }
 
         public void IncrementAvailableMidAirJumps()
         {

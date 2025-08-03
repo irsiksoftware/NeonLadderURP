@@ -1,8 +1,8 @@
 # NeonLadder - Unity 2.5D Action Platformer with Roguelite Elements
 
-## Current Game State (January 2025)
+## 🎮 Game Overview
 
-**NeonLadder** is a 2.5D action platformer with roguelite elements, featuring procedural level generation and a seven deadly sins theme. The game combines classic platforming mechanics with modern roguelite progression systems in a visually striking neon-lit world. Currently in mature development with most core systems implemented and functional.
+**NeonLadder** is a 2.5D action platformer with roguelite elements, featuring procedural level generation and a seven deadly sins theme. The game combines classic platforming mechanics with modern roguelite progression systems in a visually striking neon-lit world. Currently in mature development with most core systems implemented and functional, targeting Steam launch Q1 2025.
 
 ### Key Features Implemented ✅
 - **Player System**: Full-featured character with health, stamina, dual currency systems
@@ -25,7 +25,7 @@
 ## 🧪 Test Reports - Live HTML Coverage
 
 ### **📊 Latest Test Results (Interactive HTML)**
-- **[🎨 Unity Test Report 2025-07-31](https://raw.githubusercontent.com/irsiksoftware/NeonLadderURP/develop/TestOutput/unity_test_report_2025-07-31_12-40-00.html)** - Latest develop branch report (301 tests: 277 ✓, 24 ⚠)
+- **[🎨 Unity Test Report 2025-07-31](https://htmlpreview.github.io/?https://raw.githubusercontent.com/irsiksoftware/NeonLadderURP/main/TestOutput/unity_test_report_2025-07-31_12-50-04.html)** - Latest main branch report (Interactive HTML with Unity styling)
 - **[📁 All Test Reports](./TestOutput/README-TESTOUTPUT.md)** - Complete test documentation and links
 
 **Features:**
@@ -37,7 +37,7 @@
 
 **Automated Generation:** Run `🚀 Run All Tests & Generate Unity-Style Report` in Unity Editor for fresh timestamped reports.
 
-## For AI Development Teams - Marvel Scrum Simulation 🦸
+## 🤖 AI Development with Claude Code
 
 ### 🚨 REVOLUTIONARY: World's First AI Scrum Team for Solo Developers 🚨
 
@@ -45,14 +45,8 @@
 
 ### 🔧 First-Time Setup for Claude Code
 
-**If you don't have `.claude/settings.local.json`, copy from the bootstrap template:**
+**If you don't have `.claude/settings.local.json`, create it with this default template:**
 
-```bash
-# Copy the bootstrap template
-copy .claude\settings-bootstrap.json .claude\settings.local.json
-```
-
-**Or create manually with this content:**
 ```json
 {
   "external_memory_system": {
@@ -72,18 +66,16 @@ copy .claude\settings-bootstrap.json .claude\settings.local.json
 }
 ```
 
-**Then immediately run:**
+**Then load the full external configuration:**
 ```bash
-# This loads the full external configuration with Marvel team system
+# Loads Marvel team system and project context
 sync-claude-settings.bat
-```
 
-**Or manually:**
-```bash
+# Or manually:
 "C:\tools\gdrive" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --destination .claude/settings.local.json --overwrite
 ```
 
-After loading external settings, you'll have access to 8 Marvel personas with complete project context.
+**After loading external settings, you'll have access to specialized Marvel personas:**
 
 **🎯 How It Works:**
 ```bash
@@ -146,122 +138,74 @@ Business Analyst personas can read Google Drive initiative documents and automat
 
 **📚 Documentation Hub**: See [`.claude/documentation/README.md`](.claude/documentation/README.md) for comprehensive technical specifications, business analysis, and team documentation.
 
-## 🎯 Current Project Status (January 2025)
+## 📋 Project Management & Issue Tracking
 
-### **Active Sprints & Priorities**
+### **GitHub Issues - Product Backlog Items (PBIs)**
 
-**🚨 SPRINT 1: Steam Launch Readiness (Current)**
-- **PBI-001**: Fix SaveState Z-position bug during scene transitions (CRITICAL - **@tony-stark**)
-- **PBI-002**: Remove per-frame string comparisons in ManagerController (HIGH - **@johnny-storm**)
-- **PBI-003**: Cache Quaternion to Euler conversions in Player movement (HIGH - **@johnny-storm**)
-- **PBI-004**: Complete Steam achievements implementation (HIGH - **@wolverine**)
-- **PBI-005**: Implement Steam Cloud saves (HIGH - **@gamora**)
+**All development tasks are tracked as GitHub Issues with PBI labels:**
 
-**📋 Product Backlog Summary**
-- **85 total story points** across 4 major epics
-- **34 points** committed to Sprint 1 (Steam Launch Readiness)
-- **21 stories** in technical debt reduction pipeline
-- **10+ PBIs** for Disco Elysium dialog system integration
+- **📊 [View All PBIs](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3APBI)**
+- **🔥 [Critical Issues](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3APBI+label%3AP0-Critical)**
+- **⚡ [Steam Launch Items](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3Asteam-launch)**
 
-### **Key Epic Status**
-1. **Technical Debt Reduction** (High Priority) - 30% development velocity increase expected
-2. **Steam Platform Integration** (High Priority) - Required for Q1 2025 launch
-3. **Mobile Platform Expansion** (Medium Priority) - $500K+ revenue potential
-4. **Disco Elysium Dialog System** (Medium Priority) - 85 story points, 6 sprints estimated
+**Recent Critical Resolutions:**
+- ✅ **Issue #32**: SaveState Z-position bug (Steam launch blocker) - **RESOLVED**
+- 🔄 **Issue #33**: Remove per-frame string comparisons in ManagerController
+- 🔄 **Issue #34**: Cache Quaternion to Euler conversions in Player movement
+
+### **Current Sprint Status (January 2025)**
+
+**🚨 Steam Launch Readiness Sprint:**
+- **Total PBIs**: 73+ issues with full traceability
+- **Critical blockers**: Resolved (Issue #32 fixed)
+- **Sprint velocity**: 15-20 story points per sprint
+- **Target launch**: Q1 2025
+
+**Key Epic Status:**
+1. **Steam Platform Integration** - Q1 2025 launch ready
+2. **Technical Debt Reduction** - Performance optimization ongoing  
+3. **Dialog System Integration** - Enhanced narrative features
+4. **Mobile Platform Expansion** - Future revenue opportunity
 
 ### **Development Infrastructure Status**
-- 🚨 **CLI Testing**: **BLOCKED** - 100+ compilation errors preventing test execution
+- ✅ **CLI Testing**: Fully operational with 36/36 tests passing
 - ✅ **Google Drive Integration**: 30GB asset management operational  
 - ✅ **AI Team Simulation**: 21 Marvel personas with persistent memory
-- ⚠️ **GitHub CLI**: Installed, authentication pending
-- ⚠️ **Unity CLI**: Ready but blocked by compilation failures
+- ✅ **GitHub CLI**: Installed and authenticated
+- ✅ **Unity CLI**: Ready with automated test execution
 
-### **🚨 CRITICAL BLOCKERS (Immediate Action Required)**
-1. **Missing Save System Files** - 4 critical DataManagement files not found
-2. **Namespace Conflicts** - PersonalityTrait and CurrencyType enum conflicts
-3. **Missing Dependencies** - DamageNumbersPro, Michsky.MUIP packages missing
-4. **Dialog System Integration** - 50+ errors from incomplete Disco Elysium integration
-5. **Scene Management API** - Method signature changes breaking existing code
-
-## 📋 **COMPREHENSIVE TODO LIST** (From PBI Analysis)
-
-### **🔥 SPRINT 1: Steam Launch Readiness** (34 Story Points)
-**CRITICAL Priority:**
-- [ ] **PBI-001**: Fix SaveState Z-position bug during scene transitions (**@tony-stark** - 5 pts)
-- [ ] **PBI-DIALOG-001**: Fix compilation errors - namespace conflicts (**@sue-storm** - 2 pts)
-- [ ] **PBI-INPUT-001**: Unit test Xbox/PlayStation/Switch controller mappings (**@bruce-banner** - 3 pts)
-
-**HIGH Priority:**
-- [ ] **PBI-002**: Remove per-frame string comparisons in ManagerController (**@johnny-storm** - 3 pts)
-- [ ] **PBI-003**: Cache Quaternion to Euler conversions in Player movement (**@johnny-storm** - 3 pts)
-- [ ] **PBI-004**: Complete Steam achievements implementation (**@wolverine** - 5 pts)
-- [ ] **PBI-005**: Implement Steam Cloud saves (**@gamora** - 3 pts)
-- [ ] **PBI-006**: Add Steam Rich Presence (**@wolverine** - 2 pts)
-
-**MEDIUM Priority:**
-- [ ] **PBI-007**: Implement Heat/Corruption difficulty system (**@stephen-strange** - 8 pts)
-- [ ] **PBI-008**: Add ability synergy detection system (**@stephen-strange** - 5 pts)
-
-### **🎯 TECHNICAL DEBT REDUCTION** (High Business Value)
-- [ ] **PBI-009**: Break Player ↔ PlayerAction circular dependency (**@sue-storm** - 5 pts)
-- [ ] **PBI-010**: Replace ManagerController singleton with service container (**@tony-stark** - 8 pts)  
-- [ ] **PBI-011**: Decouple scene-specific manager logic (**@reed-richards** - 5 pts)
-
-### **🎮 DISCO ELYSIUM DIALOG SYSTEM** (85 Story Points, 6 Sprints)
-- [ ] **PBI-DIALOG-002**: Integrate Dialogue System for Unity Database (**@jean-grey** - 5 pts)
-- [ ] **PBI-DIALOG-003**: Build Enhanced Dialog UI with Consequence Preview (**@storm** - 8 pts)
-- [ ] **PBI-DIALOG-004**: Implement Voice Acting Pipeline (**@wolverine** - 13 pts)
-- [ ] **PBI-DIALOG-005**: Connect Dialog Rewards to Currency System (**@bruce-banner** - 3 pts)
-- [ ] **PBI-DIALOG-006**: Create Dialog Content for All Characters (**@charles-xavier** + **@jean-grey** - 21 pts)
-- [ ] **PBI-DIALOG-007**: Implement Save System Integration (**@reed-richards** - 5 pts)
-- [ ] **PBI-DIALOG-008**: Performance Optimization for Mobile (**@johnny-storm** - 8 pts)
-- [ ] **PBI-DIALOG-009**: QA Test Suite for Dialog System (**@bruce-banner** - 8 pts)
-- [ ] **PBI-DIALOG-010**: Dialog Analytics and Telemetry (**@nick-fury** - 5 pts)
-
-### **📱 MOBILE PLATFORM EXPANSION** ($500K+ Revenue Potential)
-- [ ] **PBI-012**: Implement touch controls (8 pts)
-- [ ] **PBI-013**: Mobile UI/UX optimization (5 pts)
-- [ ] **PBI-014**: Performance optimization for mobile (8 pts)
-
-### **💰 MONETIZATION ENHANCEMENT** (25% Revenue Increase)
-- [ ] **PBI-015**: Implement cosmetic shop (5 pts)
-- [ ] **PBI-016**: Add season pass system (8 pts)
-- [ ] **PBI-017**: Create IAP infrastructure (5 pts)
-
-### **🔥 PIZZA PARTY QUICK WINS** (1-Day Tasks)
-- [ ] **QW-001**: Extract animation IDs to enum (1 pt)
-- [ ] **QW-002**: Add missing null checks (1 pt)
-- [ ] **QW-003**: Cache transform references (2 pts)
-
-### **🚀 FUTURE ARCHITECTURE** (Long-term Vision)
-- [ ] **TI-001**: Unity 6 URP optimization
-- [ ] **TI-002**: Addressables migration  
-- [ ] **TI-003**: CI/CD pipeline enhancement
-
-## 🎮 **INPUT SYSTEM TESTING SPECIFICATION**
-
-**PBI-INPUT-001 Details** (**@bruce-banner** assigned):
-- **Scope**: `Assets/Resources/Controls/PlayerControls.inputactions` mapping validation
-- **Target Actions**: Sprint, Move, Attack, WeaponSwap, Jump, Up (see PlayerAction.cs:207-225)
-- **Platforms**: Xbox (XInput), PlayStation (DualShock4/DualSense), Nintendo Switch (Pro Controller)
-- **Test Coverage**: Verify each platform controller properly triggers PlayerActionMap functions
-- **Validation**: Create automated tests for button press → action mapping consistency
-- **Critical**: Multi-platform input validation essential for Q1 2025 Steam launch
+### **Development Workflow:**
+1. **Review Issues**: Check [GitHub Issues](https://github.com/irsiksoftware/NeonLadderURP/issues) for current PBIs
+2. **Load AI Context**: Use `CLAUDE.md` for complete setup instructions and Marvel team personas
+3. **Follow Patterns**: Manager architecture, Assembly definitions, Event-driven design
+4. **Run Tests**: Ensure all 36 tests pass before committing
+5. **Track Progress**: All work managed through GitHub Issues with PBI labels
 
 **Architecture Highlights:**
 - Unity 6 with Universal Render Pipeline
-- Event-driven simulation system
-- Comprehensive testing with 36+ behavioral tests
-- CLI test automation ready for CI/CD
+- Event-driven simulation system with custom HeapQueue
+- Comprehensive automated testing (36+ behavioral tests)
+- CLI test automation ready for CI/CD integration
+- Marvel AI team simulation for solo development
 
-**Development Workflow:**
-1. Check `CLAUDE.md` for complete setup instructions
-2. Use Marvel team personas for specialized expertise: `@tony-stark`, `@sue-storm`, etc.
-3. Follow existing patterns: Manager architecture, Assembly definitions, Event-driven design
+## 🚀 Getting Started
 
-## Project Setup
-Download and install the latest version of Unity Hub from the [Official Unity Website](https://unity.com/download).
-> Scroll down to select the download link for your Operating system (Windows, Linux, Mac)
+### Prerequisites
+
+1. **Unity Hub & Editor**
+   - Download Unity Hub from [Official Unity Website](https://unity.com/download)
+   - Install **Unity 6000.0.26f1** (specific version required)
+   - Enable Windows Build Support (IL2CPP) for your platform
+
+2. **Git**
+   - Ensure Git is installed for version control
+   - GitHub account for issue tracking and contributions
+
+3. **Optional: Claude Code Integration**
+   - Google Drive CLI tools for external documentation
+   - Claude Code for AI-assisted development
+
+### Project Setup
 
 ## How to Clone the Repository
 Clone this repository to your local machine.
@@ -323,19 +267,37 @@ Repeat Download Additional Assets Steps for all remaining packages. making sure 
 
 You should now experience the game as if it were deployed to a specified build platform.
 
-## CLI Testing & Automation
+## 🧪 Testing & Quality Assurance
 
 **Status**: ✅ Fully functional CLI test automation system with 36/36 tests passing
 
-The project includes a robust CLI testing system ready for CI/CD integration. For complete testing infrastructure details, automation commands, and performance metrics, see `CLAUDE.md`.
+### **Automated Testing**
+The project includes a robust CLI testing system ready for CI/CD integration:
 
-**Quick Test Run:**
 ```bash
-"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Code\NeonLadderURP" -executeMethod CLITestRunner.RunPlayModeTests
+# Quick test run
+"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\YourName\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
 ```
 
 **Key Features:**
-- Custom TestRunnerApi workaround for Unity 6's broken `-runTests` flag
-- 35-second execution time (Unity startup + compilation + tests)
-- Enterprise-level mock infrastructure for Unity component testing
-- CI/CD ready with reliable exit codes and XML test output
+- ✅ Custom TestRunnerApi workaround for Unity 6
+- ✅ 35-second execution time (Unity startup + compilation + tests)  
+- ✅ Enterprise-level mock infrastructure for Unity component testing
+- ✅ CI/CD ready with reliable exit codes and XML test output
+- ✅ **[Interactive HTML reports](https://htmlpreview.github.io/?https://raw.githubusercontent.com/irsiksoftware/NeonLadderURP/main/TestOutput/unity_test_report_2025-07-31_12-50-04.html)** with Unity styling
+
+### **Quality Metrics**
+- **Test Coverage**: 36 behavioral validation tests
+- **Code Quality**: SaveState Z-position bug resolved (Issue #32)
+- **Performance**: Frame rate optimization targets identified
+- **Documentation**: Complete testing infrastructure in `CLAUDE.md`
+
+## 🤝 Contributing
+
+1. **Check existing issues**: Browse [GitHub Issues](https://github.com/irsiksoftware/NeonLadderURP/issues) for open PBIs
+2. **Follow development patterns**: See `CLAUDE.md` for coding standards and workflows
+3. **Use AI assistance**: Load Claude Code configuration for specialized team personas
+4. **Run tests**: Ensure all tests pass before submitting PRs
+5. **Track progress**: All work items managed as GitHub Issues with PBI labels
+
+For detailed development workflows, AI team usage, and technical specifications, see **[CLAUDE.md](./CLAUDE.md)**.

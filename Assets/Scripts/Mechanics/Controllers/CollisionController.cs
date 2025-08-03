@@ -153,17 +153,6 @@ namespace NeonLadder.Mechanics.Controllers
                         }
                         else if (otherActor.IsUsingMelee)
                         {
-                            //if (otherActor is Player)
-                            //{
-                            //    Debug.Log($"Other actor is player");
-                            //}
-
-                            //if (otherActor is Enemy)
-                            //{
-                            //    Debug.Log($"Other actor is enemy");
-                            //}
-
-                            //Debug.Log($"{thisActor.transform.parent.gameObject.name} took {otherActor.GetComponent<MeleeController>().Damage} damage from {otherActorParent.name} @ {Time.time}");
                             // Schedule damage through event system
                             var player = thisActorParent.GetComponent<Player>();
                             if (player != null)

@@ -1,4 +1,5 @@
 using NeonLadder.Core;
+using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using System.Collections.Generic;
@@ -142,6 +143,7 @@ namespace NeonLadder.Events
         private void ExecuteAttack()
         {
             var playerAction = player.GetComponent<PlayerAction>();
+            
             if (playerAction != null && playerAction.attackState == ActionStates.Ready)
             {
                 // Set attack state to preparing
@@ -190,6 +192,12 @@ namespace NeonLadder.Events
             var playerAction = player.GetComponent<PlayerAction>();
             if (playerAction != null)
             {
+                // GUARD: Don't allow weapon swap during attack
+                if (playerAction.attackState == ActionStates.Acting || playerAction.attackState == ActionStates.Preparing)
+                {
+                    return; // Block weapon swap during attack sequence
+                }
+                
                 // Swap the weapon state
                 player.IsUsingMelee = !player.IsUsingMelee;
                 
@@ -236,9 +244,12 @@ namespace NeonLadder.Events
 
         private bool IsComboAttack()
         {
+            // TEMPORARY: Disable combo system until weapon swap issues are resolved
+            return false;
+            
             // Check if we're within combo window of last attack
-            var comboSystem = Simulation.GetModel<ComboSystem>();
-            return comboSystem != null && comboSystem.IsInComboWindow(player);
+            // var comboSystem = Simulation.GetModel<ComboSystem>();
+            // return comboSystem != null && comboSystem.IsInComboWindow(player);
         }
 
         private string DetermineComboId()

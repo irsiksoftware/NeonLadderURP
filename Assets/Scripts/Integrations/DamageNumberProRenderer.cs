@@ -1,6 +1,6 @@
 using UnityEngine;
 using NeonLadder.Core;
-// using DamageNumbersPro; // TODO: Uncomment when package is installed
+using DamageNumbersPro;
 
 namespace NeonLadder.Integrations
 {
@@ -10,12 +10,10 @@ namespace NeonLadder.Integrations
     /// </summary>
     public class DamageNumberProRenderer : MonoBehaviour, IDamageNumberRenderer
     {
-        [SerializeField] private GameObject damageNumberPrefab; // TODO: Change to DamageNumber type when available
+        [SerializeField] public DamageNumber damageNumberPrefab;
         
         public void SpawnNumber(Vector3 position, float value, DamageNumberConfig config)
         {
-            // TODO: Implement when DamageNumbersPro is available
-            /*
             if (damageNumberPrefab != null)
             {
                 DamageNumber newPopup = damageNumberPrefab.Spawn(position, value);
@@ -27,10 +25,11 @@ namespace NeonLadder.Integrations
                 // Optional: Set motion, duration, etc. based on config
                 // newPopup.SetVelocity(config.motion);
             }
-            */
-            
-            // Temporary fallback
-            Debug.Log($"DamageNumbersPro: {value} at {position} (color: {config.color}, scale: {config.scale})");
+            else
+            {
+                // Fallback when prefab is not assigned
+                Debug.Log($"DamageNumbersPro: {value} at {position} (color: {config.color}, scale: {config.scale})");
+            }
         }
     }
 }

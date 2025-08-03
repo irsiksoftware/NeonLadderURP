@@ -350,6 +350,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aria
       objectReference: {fileID: 0}
+    - target: {fileID: 1357104306832285162, guid: 16d867a6bb3edc44d9497819032ae15d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6833014437911015139, guid: 16d867a6bb3edc44d9497819032ae15d,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1022,7 +1027,7 @@ PrefabInstance:
     - target: {fileID: 3573746339638141356, guid: 17d85a3cc4576ff499178beb1ccd0acc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7962897331645798684, guid: 17d85a3cc4576ff499178beb1ccd0acc,
         type: 3}
@@ -2260,6 +2265,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7730191531964246, guid: f8e1d7e51b8764b4fbe85220f91831cb, type: 3}
+      propertyPath: m_Size.x
+      value: 3.6082153
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730191531964246, guid: f8e1d7e51b8764b4fbe85220f91831cb, type: 3}
+      propertyPath: m_Center.x
+      value: 0.12524414
+      objectReference: {fileID: 0}
     - target: {fileID: 5537732115832064241, guid: f8e1d7e51b8764b4fbe85220f91831cb,
         type: 3}
       propertyPath: SceneName
@@ -2817,6 +2830,31 @@ PrefabInstance:
       propertyPath: 'panels.Array.data[4]'
       value: 
       objectReference: {fileID: 1529400403}
+    - target: {fileID: 5425067504335382103, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425067504335382103, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: CameraDistance
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425067504335382103, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: TargetOffset.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425067504335382103, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: CenterOnActivate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493377723559976155, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: Lens.ModeOverride
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6026354099878159609, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_text
@@ -2834,8 +2872,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6054133859628449912, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054133859628449912, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
       propertyPath: field of view
-      value: 75
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054133859628449912, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: orthographic size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6097981501050384232, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -2843,7 +2891,7 @@ PrefabInstance:
       value: "\nBinding warning: Some generic clip(s) animate transforms that are
         already bound by a Humanoid avatar. These transforms can only be changed
         by Humanoid clips.\n\tTransform 'Jaw_M'\n\tTransform 'Jaw_M'\n\tTransform
-        'Jaw_M'\n\tFrom animation clip 'Die'\n\tFrom animation clip 'Idle_A_wing'\n\tFrom
+        'Jaw_M'\n\tFrom animation clip 'Die'\n\tFrom animation clip 'Idle'\n\tFrom
         animation clip 'Run_wing'\n\tFrom animation clip 'WalkForward'\n\tFrom animation
         clip 'Attack1'"
       objectReference: {fileID: 0}
@@ -2870,17 +2918,37 @@ PrefabInstance:
     - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7600002
+      value: 2.7600002
       objectReference: {fileID: 0}
     - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320888297099831904, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7439663405200563838, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -2917,25 +2985,25 @@ PrefabInstance:
       propertyPath: m_StreamingVersion
       value: 20241001
       objectReference: {fileID: 0}
-    - target: {fileID: 8828112130496461240, guid: dc08c1230b5ad794196a9aba8b090723,
+    - target: {fileID: 8717210592117414648, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
-      propertyPath: m_IsActive
+      propertyPath: LensModeOverride.Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7600002
+      value: 2.7600002
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -2970,6 +3038,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1794705024}
+    - targetCorrespondingSourceObject: {fileID: 8828112130496461240, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2070912126}
     - targetCorrespondingSourceObject: {fileID: 532023389084190675, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       insertIndex: -1
@@ -3920,6 +3992,43 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 600b17249570a9045bee1d06c5b71380, type: 3}
+--- !u!1 &2070912121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8828112130496461240, guid: dc08c1230b5ad794196a9aba8b090723,
+    type: 3}
+  m_PrefabInstance: {fileID: 1529400401}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2070912126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070912121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraDistance: 12
+  DeadZoneDepth: 0
+  Composition:
+    ScreenPosition: {x: 0, y: 0}
+    DeadZone:
+      Enabled: 0
+      Size: {x: 0.2, y: 0.2}
+    HardLimits:
+      Enabled: 0
+      Size: {x: 0.8, y: 0.8}
+      Offset: {x: 0, y: 0}
+  CenterOnActivate: 0
+  TargetOffset: {x: 0, y: 2.75, z: 0}
+  Damping: {x: 1, y: 1, z: 1}
+  Lookahead:
+    Enabled: 0
+    Time: 0
+    Smoothing: 0
+    IgnoreY: 0
 --- !u!1001 &2077879777
 PrefabInstance:
   m_ObjectHideFlags: 0
