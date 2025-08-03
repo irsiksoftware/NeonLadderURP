@@ -4,6 +4,7 @@ using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.UI;
 using NeonLadder.Utilities;
+using NeonLadder.Cameras;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static NeonLadder.Core.Simulation;
@@ -109,7 +110,6 @@ namespace NeonLadder.Managers
             case Scenes.Staging:
                 player.transform.parent.GetComponentInChildren<Canvas>().enabled = true;
                 Schedule<LoadGame>();
-                Game.Instance.model.VirtualCamera.GetComponent<CinemachinePositionComposer>().CameraDistance = 6;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = false;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = true;
                 break;
@@ -118,22 +118,46 @@ namespace NeonLadder.Managers
                 break;
             case Scenes.Start:
             case Scenes.SidePath1:
-                Game.Instance.model.VirtualCamera.GetComponent<CinemachinePositionComposer>().CameraDistance = 6;
                 break;
             case Scenes.MetaShop:
-                Game.Instance.model.VirtualCamera.GetComponent<CinemachinePositionComposer>().CameraDistance = 2.2f;
                 break;
             case Scenes.PermaShop:
-                Game.Instance.model.VirtualCamera.GetComponent<CinemachinePositionComposer>().CameraDistance = 2.2f;
                 break;
             case Scenes.Credits:
                 break;
             default:
                 playerActions.enabled = true;
                 gameController.gameObject.SetActive(true);
-                Game.Instance.model.VirtualCamera.GetComponent<CinemachinePositionComposer>().CameraDistance = 6;
                 break;
         }
+        
+        // Apply camera configuration for the current scene
+        ApplyCameraConfiguration();
+    }
+    
+    private void ApplyCameraConfiguration()
+    {
+        if (Game.Instance == null || Game.Instance.model == null) return;
+        
+        var virtualCamera = Game.Instance.model.VirtualCamera;
+        if (virtualCamera == null)
+        {
+            Debug.LogWarning($"No VirtualCamera found to apply configuration for scene: {scene}");
+            return;
+        }
+        
+        var composer = virtualCamera.GetComponent<CinemachinePositionComposer>();
+        if (composer == null)
+        {
+            Debug.LogWarning($"No CinemachinePositionComposer found on VirtualCamera for scene: {scene}");
+            return;
+        }
+        
+        // Get and apply the camera configuration for this scene
+        var config = NeonLadder.Cameras.CameraSettings.GetConfigForScene(scene);
+        NeonLadder.Cameras.CameraSettings.ApplyConfig(composer, config);
+        
+        Debug.Log($"Applied camera config for {scene}: Distance={config.cameraDistance}, Offset={config.targetOffset}");
     }
 }
 }

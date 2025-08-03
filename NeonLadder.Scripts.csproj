@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Events\HealthDamageEvent.cs" />
     <Compile Include="Assets\Scripts\Trackers\PlayerStateTracker.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeSystem.cs" />
+    <Compile Include="Assets\Scripts\Cameras\CameraConfiguration.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\LootItem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseCurrencyController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Assets\Scripts\DataManagement\LoadSystem.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Major.cs" />
+    <Compile Include="Assets\Scripts\Cameras\CameraRotationProvider.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Animations.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Loot\LootHelper.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerAttackEvent.cs" />

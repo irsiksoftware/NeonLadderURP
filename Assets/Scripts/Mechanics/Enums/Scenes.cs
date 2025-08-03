@@ -14,7 +14,9 @@ namespace NeonLadder.Mechanics.Enums
         //testing - not-ready
         Recife_2050_Final,
         BossBrawl,
-        SidePath1
-
+        SidePath1,
+        MainPath3,
+        MainPath2,
+        MainPath1
     }
 }

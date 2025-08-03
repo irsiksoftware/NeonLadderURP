@@ -236,13 +236,23 @@ namespace NeonLadder.Mechanics.Controllers
             if (isInZMovementZone)
             {
                 var sceneName = SceneManager.GetActiveScene().name;
-                var cameraPosition = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString()).transform.position;
-                var cvcRotation = Game.Instance.model.VirtualCamera.gameObject.transform.rotation;
+                
+                // Find main camera position
+                var cameraGO = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString());
+                if (cameraGO == null)
+                {
+                    Debug.LogError("MainCamera not found!");
+                    return;
+                }
+                var cameraPosition = cameraGO.transform.position;
+                
+                // Get camera rotation using the new provider
+                var cameraRotation = NeonLadder.Cameras.CameraRotationProvider.GetCameraRotation();
 
                 playerPositionManager.SaveState(sceneName,
                                                 player.transform.parent.position,
                                                 cameraPosition,
-                                                cvcRotation);
+                                                cameraRotation);
 
                 player.EnableZMovement();
             }
