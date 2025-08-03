@@ -304,71 +304,28 @@ gh issue create --label "PBI,P2-Medium,5-points"              # New PBI
 
 **Migration Complete**: All PBIs migrated from Google Drive to GitHub Issues (August 2025). Issues #32-#69 contain the migrated backlog with full traceability.
 
-### 🍕 Pizza Party Coding Day - Complete Development Priorities
+### 📋 Development Priorities
 
-**🍕 MEGA TODO LIST - 50+ ITEMS FOR EPIC REFACTORING MARATHON! 🐢⚡**
+**All development tasks are now tracked as GitHub Issues with PBI (Product Backlog Item) labels.**
 
-#### **🔥 LEVEL 2: CRITICAL PRIORITIES (Shell-shocking performance wins!)**
-- **2a** - Fix SaveState Z-movement bug blocking scene transitions (CRITICAL)
-- **2b** - Remove per-frame string comparisons in ManagerController.Update()
-- **2c** - Cache Quaternion to Euler conversions in Player movement (10-15% FPS boost)
-- **2d** - Break Player ↔ PlayerAction circular dependency cycle
-- **2e** - Replace ManagerController singleton pattern with service container
-- **2f** - Decouple scene-specific manager logic from ManagerController
-- **2g** - Implement proper dependency injection container for managers
+**Quick Access:**
+- **[View All PBIs](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3APBI)** - Complete product backlog
+- **[Critical Issues](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3APBI+label%3AP0-Critical)** - Immediate priorities
+- **[Steam Launch Items](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3Asteam-launch)** - Q1 2025 launch requirements
 
-#### **🎯 LEVEL 3: MEDIUM PRIORITIES (Game feel boosters!)**
-- **3a** - Extract Player animation IDs (walkAnimation=6, etc.) to enum/ScriptableObject
-- **3b** - Move hard-coded physics values (attack ranges, timers) to Constants.cs
-- **3c** - Extract UI layout values and debug settings to configuration
-- **3d** - Replace integer-based animation IDs with string hash system
-- **3e** - Implement animation event callbacks for precise timing
-- **3f** - Optimize blend tree transitions for smoother movement
-- **3g** - Create animation cancellation system for responsive controls
-- **3h** - Split KinematicObject.cs (329 lines) into focused components
-- **3i** - Separate UI update logic from Player.cs gameplay code
-- **3j** - Fix brittle parent/child component dependencies in Player.cs
-- **3k** - Clean up PathGenerator dependency issues
-- **3l** - Fix memory allocations in PathGenerator LINQ operations
-- **3m** - Make RaycastHit buffer size (16) configurable constant
-- **3n** - Add unit tests for ManagerController scene switching logic
-- **3o** - Create tests for PathGenerator seed determinism and boss placement
-- **3p** - Add validation tests for PerformanceProfiler memory allocation patterns
-- **3q** - Replace Resources.Load with Addressables in Player.cs controls loading
-- **3r** - Add cancellation token support to KinematicObject coroutines
-- **3s** - Remove static Simulation.GetModel dependencies for better testability
-- **3t** - Build Pipeline Automation - Steam builds, CI/CD
+**Recent Resolutions:**
+- ✅ **Issue #32** - SaveState Z-movement bug (Critical Steam launch blocker) - **RESOLVED**
+- 🔄 **Issue #33** - Remove per-frame string comparisons in ManagerController  
+- 🔄 **Issue #34** - Cache Quaternion to Euler conversions in Player movement
+- 🔄 **Issue #37** - Break Player ↔ PlayerAction circular dependency
+- 🔄 **Issue #38** - Replace ManagerController singleton with service container
 
-#### **🎨 LEVEL 4: POLISH & MAINTENANCE (Making it maintainable!)**
-- **4a** - Implement audio pooling for frequent sounds (jump, ouch, respawn)
-- **4b** - Add proper spatial audio configuration for 2.5D gameplay
-- **4c** - Create dynamic audio mixing system for gameplay context
-- **4d** - Implement event-driven UI updates with proper MVP pattern
-- **4e** - Create centralized debug overlay system to replace scattered debug UI
-- **4f** - Decouple health/stamina bar updates from Player.cs via events
-- **4g** - Standardize Manager vs Controller naming across all classes
-- **4h** - Fix inconsistent event naming (noun vs past tense verbs)
-- **4i** - Ensure consistent camelCase/PascalCase usage across properties
-- **4j** - Add XML documentation to KinematicObject public methods (29% → 100%)
-- **4k** - Add XML documentation to Player class properties (15% → 100%)
-- **4l** - Add XML documentation to all Manager interfaces (0% → 100%)
-- **4m** - Remove unclear comments like 'do we need this?' and 'what a hack'
-- **4n** - Remove commented-out code like velocity resets in KinematicObject
-- **4o** - Clean up GitHub URL references in code comments
-- **4p** - Standardize naming conventions
-
-#### **⚡ LEVEL 5: QUICK WINS (1-day pizza-fueled tasks!)**
-- **5a** - QUICK WIN: Extract Player animation IDs to enum (1-day task)
-- **5b** - QUICK WIN: Cache frequently accessed transform references
-- **5c** - QUICK WIN: Add missing null checks in manager operations
-- **5d** - QUICK WIN: Replace string.Format with StringBuilder in hot paths
-
-#### **🚀 LEVEL 6: FUTURE ARCHITECTURE (Long-term vision!)**
-- **6a** - FUTURE: Design and implement IGameServices container pattern
-- **6b** - FUTURE: Create centralized IEventBus for system decoupling
-- **6c** - FUTURE: Build ScriptableObject-based configuration system
-
-**Target**: 15-20 items for pizza party day. Ask user "What's the status on 2c?" for specific item updates.
+**Benefits of GitHub Issue Tracking:**
+- ✅ Full traceability and history for all development work
+- ✅ Priority labels (P0-Critical, P1-High, P2-Medium) for clear focus
+- ✅ Story point estimation for sprint planning
+- ✅ Integration with GitHub Actions for automated workflows
+- ✅ Better collaboration and visibility for team members
 
 ### File Management
 - **DO NOT** create a `nul` file in the repository root
