@@ -37,14 +37,10 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            Debugger.Log($"🔹 STEP 2: InputBufferEvent.Execute - {inputType}");
-            
             // Try to consume this input
             var consumeEvent = Simulation.Schedule<InputConsumeEvent>(0f);
             consumeEvent.player = player;
             consumeEvent.bufferedInput = this;
-            
-            Debugger.Log("🔹 InputConsumeEvent scheduled successfully");
         }
 
         internal override void Cleanup()
@@ -84,8 +80,6 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            Debugger.Log($"🔹 STEP 3: InputConsumeEvent.Execute - {bufferedInput.inputType}");
-            
             switch (bufferedInput.inputType)
             {
                 case InputType.Jump:
@@ -132,12 +126,7 @@ namespace NeonLadder.Events
         {
             // Can swap weapons anytime except mid-attack
             var playerAction = player.GetComponent<PlayerAction>();
-            bool canSwap = playerAction.attackState != ActionStates.Acting;
-            if (!canSwap)
-            {
-                Debugger.Log($"Weapon swap blocked: attackState={playerAction.attackState}");
-            }
-            return canSwap;
+            return playerAction.attackState != ActionStates.Acting;
         }
 
         private void ExecuteJump()
@@ -153,14 +142,10 @@ namespace NeonLadder.Events
 
         private void ExecuteAttack()
         {
-            Debugger.Log("🔹 STEP 4: ExecuteAttack called");
-            
             var playerAction = player.GetComponent<PlayerAction>();
             
             if (playerAction != null && playerAction.attackState == ActionStates.Ready)
             {
-                Debugger.Log($"🔹 Attack conditions met - scheduling PlayerAttackEvent (isRanged: {!player.IsUsingMelee})");
-                
                 // Set attack state to preparing
                 playerAction.attackState = ActionStates.Preparing;
                 playerAction.stopAttack = false;
@@ -168,7 +153,6 @@ namespace NeonLadder.Events
                 // Check if this is part of a combo
                 if (IsComboAttack())
                 {
-                    Debugger.Log("🔹 Combo attack detected - scheduling ComboAttackEvent");
                     var comboEvent = Simulation.Schedule<ComboAttackEvent>(0f);
                     comboEvent.player = player;
                     comboEvent.comboStep = bufferedInput.comboStep + 1;
@@ -176,15 +160,10 @@ namespace NeonLadder.Events
                 }
                 else
                 {
-                    Debugger.Log("🔹 Normal attack - scheduling PlayerAttackEvent");
                     var attackEvent = Simulation.Schedule<PlayerAttackEvent>(0f);
                     attackEvent.player = player;
                     attackEvent.isRanged = !player.IsUsingMelee;
                 }
-            }
-            else
-            {
-                Debugger.LogWarning($"🔹 Attack blocked - playerAction: {playerAction != null}, attackState: {playerAction?.attackState}");
             }
         }
 

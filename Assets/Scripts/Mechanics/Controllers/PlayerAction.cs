@@ -293,8 +293,6 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnAttackPerformed(InputAction.CallbackContext context)
         {
-            Debugger.Log("🔹 STEP 1: OnAttackPerformed - scheduling InputBufferEvent");
-            
             // Schedule input buffer event for attack
             var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
             inputEvent.player = player;
@@ -302,8 +300,6 @@ namespace NeonLadder.Mechanics.Controllers
             inputEvent.context = context;
             inputEvent.bufferWindow = 0.2f;
             inputEvent.priority = 2;
-            
-            Debugger.Log("🔹 InputBufferEvent scheduled successfully");
         }
 
         public void OnAttackCanceled(InputAction.CallbackContext context)

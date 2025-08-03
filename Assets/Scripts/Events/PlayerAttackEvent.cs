@@ -27,19 +27,14 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            Debugger.Log("🔹 STEP 5: PlayerAttackEvent.Execute - ANIMATION AND COLLIDERS");
-            
             var playerAction = player.GetComponent<PlayerAction>();
             
             // CRITICAL: Player uses layered animation system
             // Step 1: Activate the action layer  
-            Debugger.Log($"Activating action layer {Constants.PlayerActionLayerIndex} with weight 1");
             player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1.0f);
             
             // Step 2: Set the action animation parameter
             int attackAnimation = isRanged ? 75 : 23; // 75 = ranged, 23 = melee
-            string weaponType = isRanged ? "ranged" : "melee";
-            Debugger.Log($"Setting action_animation to {attackAnimation} ({weaponType} attack)");
             player.Animator.SetInteger("action_animation", attackAnimation);
             
             // Simple state management
@@ -51,8 +46,6 @@ namespace NeonLadder.Events
             // Schedule reset after 2 seconds
             var completeEvent = Simulation.Schedule<PlayerAttackCompleteEvent>(2.0f);
             completeEvent.player = player;
-            
-            Debugger.Log("Action layer activated + weapon colliders scheduled - attack should be fully functional!");
         }
         
         private void ScheduleWeaponColliderEvents(PlayerAction playerAction)
@@ -60,15 +53,14 @@ namespace NeonLadder.Events
             var attackComponents = playerAction.transform.parent.gameObject.GetComponentsInChildren<Collider>()
                                                        .Where(c => c.gameObject != playerAction.transform.parent.gameObject).ToList();
             
-            Debugger.Log($"Found {attackComponents?.Count ?? 0} weapon colliders on player");
             
             if (attackComponents != null && attackComponents.Count > 0)
             {
                 // Calculate the duration to ignore based on the percentage
-                float ignoreDuration = playerAction.AttackAnimationDuration * Constants.Animation.IgnorePercentage;
-                float totalDuration = playerAction.AttackAnimationDuration;
+                float baseDuration = Mathf.Max(playerAction.AttackAnimationDuration, 1.0f); // Ensure minimum 1 second
+                float ignoreDuration = baseDuration * Constants.Animation.IgnorePercentage;
+                float totalDuration = baseDuration;
 
-                Debugger.Log($"Scheduling collider activation after {ignoreDuration}s, deactivation after {totalDuration}s");
 
                 // Schedule collider activation
                 var activateEvent = Simulation.Schedule<WeaponColliderActivateEvent>(ignoreDuration);
@@ -77,10 +69,6 @@ namespace NeonLadder.Events
                 // Schedule collider deactivation
                 var deactivateEvent = Simulation.Schedule<WeaponColliderDeactivateEvent>(totalDuration);
                 deactivateEvent.attackComponents = attackComponents;
-            }
-            else
-            {
-                Debugger.LogWarning("No weapon colliders found - enemies won't take damage!");
             }
         }
     }
@@ -94,16 +82,12 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            Debugger.Log("=== ATTACK COMPLETE - RESETTING LAYERS ===");
-            
             var playerAction = player.GetComponent<PlayerAction>();
             playerAction.attackState = ActionStates.Ready;
             
             // Reset action animation and deactivate layer
             player.Animator.SetInteger("action_animation", 0);
             player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0.0f);
-            
-            Debugger.Log("Action layer deactivated - back to locomotion");
         }
     }
 
@@ -118,16 +102,10 @@ namespace NeonLadder.Events
         {
             if (attackComponents != null)
             {
-                Debugger.Log($"ACTIVATING {attackComponents.Count} weapon colliders to Battle layer");
                 foreach (var attackComponent in attackComponents)
                 {
                     attackComponent.gameObject.layer = LayerMask.NameToLayer("Battle");
-                    Debugger.Log($"  - {attackComponent.gameObject.name} → Battle layer");
                 }
-            }
-            else
-            {
-                Debugger.LogWarning("No weapon colliders found to activate!");
             }
         }
     }
@@ -143,7 +121,6 @@ namespace NeonLadder.Events
         {
             if (attackComponents != null)
             {
-                Debugger.Log($"DEACTIVATING {attackComponents.Count} weapon colliders back to Default layer");
                 foreach (var attackComponent in attackComponents)
                 {
                     attackComponent.gameObject.layer = LayerMask.NameToLayer("Default");
