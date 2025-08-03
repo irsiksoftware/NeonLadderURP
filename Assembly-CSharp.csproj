@@ -89,6 +89,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Tornado\TornadoMath.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.4 Scripts\CloudHandlerSM.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example2\SimpleActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\TreeBashCollider.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\MeshGeneration.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Test\Tester.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BaseQuadMeshes.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\SkyMaster.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\MobileSSPR\ReusableCore\MobileSSPRRendererFeature.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\SceneControl.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\DragRigidbodySKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Clouds\GlobalShaderVariablesTORNADO.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 3.3\River\River Scripts\RiverHandlerSM.cs" />
@@ -132,7 +134,9 @@
     <Compile Include="Assets\Packages\ARTnGAME\0 GRAPH DEMOS\SCRIPTS\cycleLightColorSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\PLANET GENERATION\Fluid Planets\SkyMasterFLUID\Scripts\FluidSimulationSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\DestroyAfterSM.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\UIScaler.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Quad.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\TouchesGizmo.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Tornado\volumeCloudsTornadoControl.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Char Controller Plugins\InfiniTREE\Character Controllers\Sources\Scripts INfiniTree\FPSInputControllerINfiniDy.cs" />
     <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkMegapack\Scripts\CarIdleWiggle.cs" />
@@ -147,10 +151,12 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\MeshGenerationBurst.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\DragTransformINfiniDy.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\PivotBasedCameraRigSM.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example4\ThirdPersonCameraSystem.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.4 Scripts\CloudHandlerSM_SRP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\ProceduralNoiseGIPROXY.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\BlitPassVolumeFogSRP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SunShaftsSRP\Shaders - Scripts\URP Version\BlitSunShaftsSRP.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example\MessageBox.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\rain-urp-master\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\TextureProvider.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\Underwater\cycleCausticsSKYMASTER.cs" />
@@ -196,12 +202,15 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\ComputeShaderGenerator.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\WaterTileSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\ShaderIDs.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example\ExampleActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\PLANET GENERATION\Fluid Planets\SkyMasterFLUID\Scripts\PlanetFluidsSceneSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\FlyCam.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Math\Vector3d.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\QuadSplitQueue.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Helper scripts\DragTransformSKYMASTER.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example3\AIFollow.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Scripts\URP\BlitVolumeCloudsSRP.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\SkillCanceller.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\VolumetricUtils.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\ChunkedPlanePLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\NodeGraph.cs" />
@@ -221,6 +230,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\0 URP\ATMOS\BlitPassAtmosSRP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\unity-urp-vr-lens-flare\URP\VRLensFlareFeature.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\depthBufferSecondCameraSM.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\UIAnchorSnapper.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Ethereal2024.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Ethereal Volumetric Lighting\Per Area Fog Volume Control\controlFogVolumeOnTriggerSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SunShaftsSRP\Shaders - Scripts\URP Version\BlitPassSunShaftsSRP.cs" />
@@ -237,10 +247,12 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\LITE\ScreenSpaceSnowLITE_SM_URP.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\LWRP Scripts\PlanarRefractionsSM_LWRP.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example\SkillRotatingBox.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\INfiniDyTreeDEMO.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\LightStreamer\volumeLightStreamerSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\CopyShadowMapSM_URP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\ShoreLine\TerrainDepthSM.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example5\CCActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\WaterHandlerSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Tornado\TornadoDebug.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\BuildingShaker.cs" />
@@ -253,6 +265,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\GeneratorNode.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Volume Clouds\SM_CloudRot.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Volumetric\VolumeClouds_SM.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\UniversalButton.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\GenerateMaxZPass.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\AtmosphereMesh.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\MoveTarget.cs" />
@@ -266,6 +279,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\LoomSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\Control_Jove_light.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\INfiniDyTree.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\AnalogStick.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AeroplaneAudioSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Rotate.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\ControlCombineChildrenINfiniDy.cs" />
@@ -282,6 +296,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\ORION_SkyMaster_Controller.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Math\Math.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Full volume clouds\Prefabs\lightningCameraVolumeCloudsSM_URP.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example7\SimpleActor2D.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V4.9.2 Scripts\infiniteParticleLifeSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Noise.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V5.0 Scripts\SKYMASTER_API_5_0_URP.cs" />
@@ -295,6 +310,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\LoomINfiniDy.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V1.0 Scripts\Helper scripts\Circle_Around_ParticleSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\LWRP Scripts\PlanarReflectionsSM_LWRP.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\ConsoleLog.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\ControlCombineChildrenSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Helper scripts\ControlGIPROXY_ATTRIUM_SM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Scripts\WeatherScript.cs" />
@@ -305,7 +321,9 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\LWRP Scripts\RenderRefractPassSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\setPlanetCloudsAtmosphere.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\SplinerPINfiniDy.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example4\ThirdPersonActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\SimplexNoiseSKYMASTER.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\TouchArea.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Scripts\URP\BlitPassVolumeCloudsSRP.cs" />
     <Compile Include="Assets\Packages\ILRanch\CyberRoom\Scripts\FreeCam.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V5.0 Scripts\Camera_Shake\CameraShakeManager.cs" />
@@ -313,8 +331,10 @@
     <Compile Include="Assets\Packages\Suriyun\Scripts\MouseOrbitImproved.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\ControlGIPROXY_ATTRIUM.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example6\FPSActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\Model.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\rotateLightSM.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\CameraSystem.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\CONSTANTS.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FoliageExperimental.cs" />
     <Compile Include="Assets\Packages\ILRanch\CyberRoom\Scripts\FPMouseLook.cs" />
@@ -343,6 +363,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\ExtrudeMeshBranchINfiniDy.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Scripts\ProjectileShowcase\ProjectileController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Timer and Weather Controllers\WeatherRandomizerSKYMASTER.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\TouchAssistance.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\SAs GI PROXY\Characters\FirstPersonCharacter\Scripts\FirstPersonControllerGIPROXY.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.5 Scripts\Light\LightFlash.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FloatingOrigin.cs" />
@@ -377,6 +398,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\AutoMoveAndRotate.cs" />
     <Compile Include="Assets\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\RecalcBOUNDS_SM.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\SceneNavigator.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\LoadSceneAdditive.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\UnityTerrainAdapterPLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\offsetUVsSM.cs" />
@@ -384,6 +406,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\BlitVolumeFogSRP.cs" />
     <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkMegapack\Scripts\HoverCarController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FastNoise.cs" />
+    <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example3\NavMeshActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AeroplaneControllerSM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +444,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Skybox shaders\Skybox-Procedural_SkyMaster MAIN U4.shader" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumetricLightingCommon.hlsl" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\shaders\ER Road Detail.shader" />
+    <None Include="Assets\Packages\Suriyun\MobileControllerSystem\readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Shaders\Resources\noiseWorley.cginc" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.8\Shaders InfiniGRASS\InfiniTREE_Transp_Wind_SNOW.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\Planet Shader\Shader\SubGraphs\MainLightPLANET.hlsl" />

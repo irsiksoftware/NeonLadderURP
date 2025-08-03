@@ -29,7 +29,7 @@ namespace NeonLadder.Events
             
             // Set special animation for combo attacks
             int comboAnimation = GetComboAnimation(comboStep);
-            player.Animator.SetInteger("attack_animation", comboAnimation);
+            player.Animator.SetInteger("action_animation", comboAnimation);
             
             // Schedule attack validation with combo modifiers
             var attackEvent = Simulation.Schedule<EnemyAttackValidationEvent>(0.1f);

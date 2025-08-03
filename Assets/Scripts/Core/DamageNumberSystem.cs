@@ -10,33 +10,30 @@ namespace NeonLadder.Core
     /// Abstract damage number system that decouples game logic from third-party UI libraries
     /// This allows swapping DamageNumbersPro for any other damage number system
     /// </summary>
-    public class DamageNumberSystem : MonoBehaviour
+    [System.Serializable]
+    public class DamageNumberSystem
     {
         private IDamageNumberRenderer renderer;
 
-        private void Awake()
+        public DamageNumberSystem()
         {
-            // Register this system with the simulation
-            Simulation.SetModel(this);
-            
             // Initialize the renderer - this could be configured via inspector or code
             InitializeRenderer();
         }
 
-        private void OnDestroy()
-        {
-            Simulation.DestroyModel<DamageNumberSystem>();
-        }
-
         private void InitializeRenderer()
         {
-            // Try to find DamageNumbersPro renderer first
-            renderer = GetComponent<DamageNumberProRenderer>();
-            
-            // Fall back to simple debug renderer
-            if (renderer == null)
+            // Try to find DamageNumbersPro renderer in scene
+            var damageNumbersPro = GameObject.FindObjectOfType<DamageNumberProRenderer>();
+            if (damageNumbersPro != null)
             {
-                renderer = gameObject.AddComponent<DebugDamageNumberRenderer>();
+                renderer = damageNumbersPro;
+            }
+            else
+            {
+                // Fall back to simple debug renderer - create a GameObject for it
+                var debugRendererGO = new GameObject("DebugDamageNumberRenderer");
+                renderer = debugRendererGO.AddComponent<DebugDamageNumberRenderer>();
                 Debugger.LogWarning("DamageNumbersPro not found, using debug renderer");
             }
         }

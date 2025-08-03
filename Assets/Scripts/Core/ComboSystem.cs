@@ -9,9 +9,9 @@ namespace NeonLadder.Core
     /// Manages combo detection, timing windows, and special move execution
     /// Works with the input buffer system to enable fighting game mechanics
     /// </summary>
-    public class ComboSystem : MonoBehaviour
+    [System.Serializable]
+    public class ComboSystem
     {
-        [Header("Combo Configuration")]
         [SerializeField] private float comboWindowTime = 0.5f; // Time between inputs for combos
         [SerializeField] private float inputBufferTime = 0.2f; // How long inputs stay buffered
         
@@ -21,15 +21,9 @@ namespace NeonLadder.Core
         // Define available combos
         private List<ComboDefinition> combos = new List<ComboDefinition>();
 
-        private void Awake()
+        public ComboSystem()
         {
-            Simulation.SetModel(this);
             InitializeCombos();
-        }
-
-        private void OnDestroy()
-        {
-            Simulation.DestroyModel<ComboSystem>();
         }
 
         private void InitializeCombos()

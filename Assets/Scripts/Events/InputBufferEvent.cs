@@ -1,4 +1,5 @@
 using NeonLadder.Core;
+using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using System.Collections.Generic;
@@ -36,10 +37,14 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
+            Debugger.Log($"🔹 STEP 2: InputBufferEvent.Execute - {inputType}");
+            
             // Try to consume this input
             var consumeEvent = Simulation.Schedule<InputConsumeEvent>(0f);
             consumeEvent.player = player;
             consumeEvent.bufferedInput = this;
+            
+            Debugger.Log("🔹 InputConsumeEvent scheduled successfully");
         }
 
         internal override void Cleanup()
@@ -79,6 +84,8 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
+            Debugger.Log($"🔹 STEP 3: InputConsumeEvent.Execute - {bufferedInput.inputType}");
+            
             switch (bufferedInput.inputType)
             {
                 case InputType.Jump:
@@ -125,7 +132,12 @@ namespace NeonLadder.Events
         {
             // Can swap weapons anytime except mid-attack
             var playerAction = player.GetComponent<PlayerAction>();
-            return playerAction.attackState != ActionStates.Acting;
+            bool canSwap = playerAction.attackState != ActionStates.Acting;
+            if (!canSwap)
+            {
+                Debugger.Log($"Weapon swap blocked: attackState={playerAction.attackState}");
+            }
+            return canSwap;
         }
 
         private void ExecuteJump()
@@ -141,9 +153,14 @@ namespace NeonLadder.Events
 
         private void ExecuteAttack()
         {
+            Debugger.Log("🔹 STEP 4: ExecuteAttack called");
+            
             var playerAction = player.GetComponent<PlayerAction>();
+            
             if (playerAction != null && playerAction.attackState == ActionStates.Ready)
             {
+                Debugger.Log($"🔹 Attack conditions met - scheduling PlayerAttackEvent (isRanged: {!player.IsUsingMelee})");
+                
                 // Set attack state to preparing
                 playerAction.attackState = ActionStates.Preparing;
                 playerAction.stopAttack = false;
@@ -151,6 +168,7 @@ namespace NeonLadder.Events
                 // Check if this is part of a combo
                 if (IsComboAttack())
                 {
+                    Debugger.Log("🔹 Combo attack detected - scheduling ComboAttackEvent");
                     var comboEvent = Simulation.Schedule<ComboAttackEvent>(0f);
                     comboEvent.player = player;
                     comboEvent.comboStep = bufferedInput.comboStep + 1;
@@ -158,10 +176,15 @@ namespace NeonLadder.Events
                 }
                 else
                 {
+                    Debugger.Log("🔹 Normal attack - scheduling PlayerAttackEvent");
                     var attackEvent = Simulation.Schedule<PlayerAttackEvent>(0f);
                     attackEvent.player = player;
                     attackEvent.isRanged = !player.IsUsingMelee;
                 }
+            }
+            else
+            {
+                Debugger.LogWarning($"🔹 Attack blocked - playerAction: {playerAction != null}, attackState: {playerAction?.attackState}");
             }
         }
 
@@ -190,6 +213,12 @@ namespace NeonLadder.Events
             var playerAction = player.GetComponent<PlayerAction>();
             if (playerAction != null)
             {
+                // GUARD: Don't allow weapon swap during attack
+                if (playerAction.attackState == ActionStates.Acting || playerAction.attackState == ActionStates.Preparing)
+                {
+                    return; // Block weapon swap during attack sequence
+                }
+                
                 // Swap the weapon state
                 player.IsUsingMelee = !player.IsUsingMelee;
                 
@@ -236,9 +265,12 @@ namespace NeonLadder.Events
 
         private bool IsComboAttack()
         {
+            // TEMPORARY: Disable combo system until weapon swap issues are resolved
+            return false;
+            
             // Check if we're within combo window of last attack
-            var comboSystem = Simulation.GetModel<ComboSystem>();
-            return comboSystem != null && comboSystem.IsInComboWindow(player);
+            // var comboSystem = Simulation.GetModel<ComboSystem>();
+            // return comboSystem != null && comboSystem.IsInComboWindow(player);
         }
 
         private string DetermineComboId()

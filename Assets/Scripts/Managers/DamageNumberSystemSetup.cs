@@ -25,7 +25,7 @@ namespace NeonLadder.Managers
             }
             
             // Add the core system
-            var system = gameObject.AddComponent<DamageNumberSystem>();
+            //var system = gameObject.AddComponent<DamageNumberSystem>();
             
             // Add the appropriate renderer
             if (useDamageNumbersPro && damageNumberProPrefab != null)
