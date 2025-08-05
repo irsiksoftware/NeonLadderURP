@@ -9,10 +9,15 @@ namespace NeonLadder.Steam
     class StatsAndAchievements : MonoBehaviour
     {
         private Achievement[] achievements = new Achievement[] {
-        //new Achievement(Achievements.ACH_WIN_ONE_GAME, "Winner", ""),
-        //new Achievement(Achievements.ACH_WIN_100_GAMES, "Champion", ""),
-        //new Achievement(Achievements.ACH_TRAVEL_FAR_ACCUM, "Interstellar", ""),
-        //new Achievement(Achievements.ACH_TRAVEL_FAR_SINGLE, "Orbiter", "")
+        new Achievement { AchievementID = Achievements.DEMO_LEVEL_COMPLETE, Name = "Demo Complete", Description = "Complete the demo level" },
+        new Achievement { AchievementID = Achievements.WRATH_SIN_DEFEATED, Name = "Wrath Vanquished", Description = "Defeat the Sin of Wrath" },
+        new Achievement { AchievementID = Achievements.ENVY_SIN_DEFEATED, Name = "Envy Eliminated", Description = "Defeat the Sin of Envy" },
+        new Achievement { AchievementID = Achievements.GREED_SIN_DEFEATED, Name = "Greed Conquered", Description = "Defeat the Sin of Greed" },
+        new Achievement { AchievementID = Achievements.LUST_SIN_DEFEATED, Name = "Lust Overcome", Description = "Defeat the Sin of Lust" },
+        new Achievement { AchievementID = Achievements.GLUTTONY_SIN_DEFEATED, Name = "Gluttony Destroyed", Description = "Defeat the Sin of Gluttony" },
+        new Achievement { AchievementID = Achievements.SLOTH_SIN_DEFEATED, Name = "Sloth Awakened", Description = "Defeat the Sin of Sloth" },
+        new Achievement { AchievementID = Achievements.PRIDE_SIN_DEFEATED, Name = "Pride Humbled", Description = "Defeat the Sin of Pride" },
+        new Achievement { AchievementID = Achievements.DEVIL_SIN_DEFEATED, Name = "Devil's Downfall", Description = "Defeat the Devil and complete your journey" }
     };
 
         private CGameID gameID;
