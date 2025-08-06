@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonLadder Dialogue System Setup Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin: 30px 0 15px 0;
+            padding: 10px;
+            background: #ecf0f1;
+            border-left: 5px solid #3498db;
+            border-radius: 5px;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin: 20px 0 10px 0;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 5px;
+        }
+        
+        .step {
+            background: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            background: #f39c12;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .warning {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .success {
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .info {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .component-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #17a2b8;
+            margin: 15px 0;
+        }
+        
+        .component-list h4 {
+            color: #17a2b8;
+            margin-bottom: 10px;
+        }
+        
+        .component-list ul {
+            margin-left: 20px;
+        }
+        
+        .component-list li {
+            margin: 5px 0;
+        }
+        
+        .visual-guide {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .visual-box {
+            display: inline-block;
+            padding: 20px;
+            margin: 10px;
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            background: #ecf0f1;
+        }
+        
+        .character-left {
+            background: #e8f5e8;
+            border-color: #27ae60;
+        }
+        
+        .character-right {
+            background: #ffe8e8;
+            border-color: #e74c3c;
+        }
+        
+        .trigger-box {
+            background: #fff3cd;
+            border-color: #f39c12;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #34495e;
+            color: white;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .menu-path {
+            background: #6c757d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .asset-create {
+            background: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎭 NeonLadder Dialogue System Setup Guide</h1>
+        
+        <div class="info">
+            <strong>📋 What This Guide Covers:</strong><br>
+            Complete setup for drag-and-drop dialogue scenes with left/right character positioning, 
+            trigger boxes for protagonist interaction, and dictionary-based choice selection with 
+            multi-language support (English, Chinese Simplified, Urdu).
+        </div>
+
+        <h2>🚀 Quick Start: One-Click Scene Generation</h2>
+        
+        <div class="step">
+            <h3><span class="step-number">1</span>Create Scene Configuration</h3>
+            <p>Right-click in Project window → <span class="asset-create">Create → NeonLladder → Dialogue Scene Configuration</span></p>
+            <div class="code-block">
+Assets/DialogueConfigs/MyDialogueScene.asset
+</div>
+            <p>This ScriptableObject contains all settings for your dialogue scene setup.</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">2</span>Configure Characters</h3>
+            <div class="visual-guide">
+                <div class="visual-box character-left">
+                    <strong>Left Character</strong><br>
+                    (Usually NPC/Boss)<br>
+                    Position: (-2, 0, 0)
+                </div>
+                <div class="visual-box trigger-box">
+                    <strong>Trigger Box</strong><br>
+                    (Protagonist enters here)<br>
+                    Size: (2, 2, 2)
+                </div>
+                <div class="visual-box character-right">
+                    <strong>Right Character</strong><br>
+                    (Usually Player/Other NPC)<br>
+                    Position: (2, 0, 0)
+                </div>
+            </div>
+            
+            <p><strong>In the DialogueSceneConfiguration inspector:</strong></p>
+            <ul>
+                <li><strong>Left Character:</strong> Drag character prefab, set position/rotation</li>
+                <li><strong>Right Character:</strong> Drag second character prefab</li>
+                <li><strong>Trigger Box Size:</strong> Adjust collision area for dialogue trigger</li>
+                <li><strong>Conversation Name:</strong> Must match Pixel Crushers Database conversation</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">3</span>Generate Complete Scene</h3>
+            <p>Select your DialogueSceneConfiguration asset, then:</p>
+            <div class="menu-path">Tools → NeonLadder → Generate Dialogue Scene</div>
+            <p><strong>OR</strong> Right-click the asset → <span class="highlight">Generate Dialogue Scene</span></p>
+            
+            <div class="success">
+                ✅ <strong>Automatically Creates:</strong>
+                <ul>
+                    <li>Character GameObjects with proper positioning</li>
+                    <li>Trigger box with BoxCollider (isTrigger = true)</li>
+                    <li>DialogueSystemTrigger component</li>
+                    <li>BossBanterManager / ProtagonistDialogueSystem</li>
+                    <li>Camera setup for dialogue scenes</li>
+                    <li>UI Canvas for dialogue display</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>📚 Component Reference Guide</h2>
+
+        <div class="component-list">
+            <h4>🎯 Required Components (Auto-Generated)</h4>
+            <ul>
+                <li><strong>DialogueSystemTrigger</strong> - Detects protagonist entry</li>
+                <li><strong>BoxCollider (isTrigger=true)</strong> - Collision detection</li>
+                <li><strong>BossBanterManager</strong> - Simple one-way dialogue</li>
+                <li><strong>ProtagonistDialogueSystem</strong> - Interactive conversations</li>
+                <li><strong>DialogueActor</strong> - Links characters to database actors</li>
+            </ul>
+        </div>
+
+        <div class="component-list">
+            <h4>🔧 Optional Components</h4>
+            <ul>
+                <li><strong>Animator</strong> - Character animations during dialogue</li>
+                <li><strong>AudioSource</strong> - Voice clips and sound effects</li>
+                <li><strong>DialogueSystemController</strong> - Pixel Crushers main controller</li>
+                <li><strong>Canvas</strong> - Custom UI for dialogue display</li>
+            </ul>
+        </div>
+
+        <h2>🗃️ Dictionary-Based Choice System</h2>
+
+        <div class="step">
+            <h3><span class="step-number">1</span>Create Choice Database</h3>
+            <p>Right-click in Project → <span class="asset-create">Create → NeonLadder → Dialogue Choice Database</span></p>
+            
+            <div class="code-block">
+// Example structure:
+├── Boss Encounters/
+│   ├── Wrath Dialogue Choices
+│   ├── Pride Conversation Options
+│   └── Devil Final Battle Choices
+├── NPC Interactions/
+│   ├── Merchant Bargaining
+│   └── Ally Conversations
+└── Story Moments/
+    ├── Moral Decisions
+    └── Character Development
+</div>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">2</span>Configure Multi-Language Choices</h3>
+            <p>Each choice contains text in all supported languages:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th>Code</th>
+                        <th>Example Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>English</td>
+                        <td>en</td>
+                        <td>"I won't back down!"</td>
+                    </tr>
+                    <tr>
+                        <td>Chinese Simplified</td>
+                        <td>zh-Hans</td>
+                        <td>"我不会退缩！"</td>
+                    </tr>
+                    <tr>
+                        <td>Urdu</td>
+                        <td>ur</td>
+                        <td>"میں پیچھے نہیں ہٹوں گا!"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">3</span>Runtime Dictionary Lookup</h3>
+            <div class="code-block">
+// Get choices by key
+var choiceSet = dialogueDatabase.GetChoiceSet("BossEncounters.WrathDialogue");
+
+// Get localized choices
+var localizedChoices = dialogueDatabase.GetLocalizedChoices(
+    "BossEncounters.WrathDialogue", 
+    "ur" // Urdu language
+);
+
+// Search choices by content
+var searchResults = dialogueDatabase.SearchChoices("defiant");
+</div>
+        </div>
+
+        <h2>🎮 Unity Editor Workflow</h2>
+
+        <div class="step">
+            <h3><span class="step-number">1</span>Scene Setup Workflow</h3>
+            <ol>
+                <li>Create empty scene or use existing level</li>
+                <li>Create <strong>DialogueSceneConfiguration</strong> asset</li>
+                <li>Drag character prefabs to Left/Right Character slots</li>
+                <li>Set positions: Left (-2,0,0), Right (2,0,0)</li>
+                <li>Configure trigger box size (default: 2x2x2)</li>
+                <li>Set conversation name (must match Dialogue Database)</li>
+                <li>Click <strong>"Generate Dialogue Scene"</strong></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">2</span>Pixel Crushers Integration</h3>
+            <ol>
+                <li>Open <span class="menu-path">Tools → Pixel Crushers → Dialogue System → Dialogue Editor</span></li>
+                <li>Create new Database or open existing</li>
+                <li>Add Actors for your characters (match ActorName in config)</li>
+                <li>Create Conversations (match ConversationName in config)</li>
+                <li>Set up Text Tables for localization</li>
+                <li>Assign Database to DialogueSystemController</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">3</span>Testing Your Setup</h3>
+            <div class="info">
+                <strong>🔍 Testing Checklist:</strong>
+                <ul>
+                    <li>✅ Character prefabs instantiate at correct positions</li>
+                    <li>✅ Trigger box detects player GameObject</li>
+                    <li>✅ Conversation starts when triggered</li>
+                    <li>✅ Multi-language switching works</li>
+                    <li>✅ Dictionary lookup returns correct choices</li>
+                    <li>✅ UI displays dialogue properly</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>⚡ Advanced Features</h2>
+
+        <div class="step">
+            <h3>🎪 Interaction Types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SimpleBanter</strong></td>
+                        <td>Boss speaks, no player input</td>
+                        <td>Approach triggers, intimidation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ProtagonistReply</strong></td>
+                        <td>Boss speaks, auto protagonist response</td>
+                        <td>Pre-fight cinematics</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PlayerChoice</strong></td>
+                        <td>Boss speaks, player chooses response</td>
+                        <td>Moral decisions, negotiations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FullConversation</strong></td>
+                        <td>Multi-turn dialogue with branching</td>
+                        <td>Story moments, NPC interactions</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="step">
+            <h3>🌍 Multi-Language Support</h3>
+            <p><strong>Automatic Language Detection:</strong></p>
+            <div class="code-block">
+// System automatically detects user's language
+banterManager.SetLanguage(Application.systemLanguage);
+
+// Manual language switching
+banterManager.SetLanguage("ur"); // Switch to Urdu
+protagonistSystem.SetLanguage("zh-Hans"); // Switch to Chinese
+</div>
+
+            <p><strong>Supported Languages:</strong></p>
+            <ul>
+                <li><strong>English (en):</strong> Default, fallback language</li>
+                <li><strong>Chinese Simplified (zh-Hans):</strong> Full character support</li>
+                <li><strong>Urdu (ur):</strong> RTL script support with proper formatting</li>
+            </ul>
+        </div>
+
+        <h2>🔧 Troubleshooting</h2>
+
+        <div class="warning">
+            <strong>⚠️ Common Issues:</strong>
+            <ul>
+                <li><strong>Trigger not working:</strong> Check BoxCollider isTrigger = true</li>
+                <li><strong>Conversation not starting:</strong> Verify conversation name matches database</li>
+                <li><strong>Characters not appearing:</strong> Check prefab references in config</li>
+                <li><strong>Wrong language displaying:</strong> Verify Text Table setup in Dialogue Editor</li>
+                <li><strong>Missing components:</strong> Ensure autoSetupPixelCrushersComponents = true</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>📋 Validation Tools</h3>
+            <p>Built-in validation helps catch configuration errors:</p>
+            <div class="code-block">
+// DialogueSceneConfiguration validation
+config.ValidateConfiguration(out string error);
+
+// DialogueChoiceDatabase validation  
+choiceDatabase.ValidateDatabase(); // Logs issues to Console
+</div>
+        </div>
+
+        <h2>🎯 Performance Considerations</h2>
+
+        <div class="component-list">
+            <h4>⚡ Optimization Features</h4>
+            <ul>
+                <li><strong>Dictionary Lookups:</strong> O(1) choice retrieval by key</li>
+                <li><strong>Cooldown System:</strong> Prevents dialogue spam</li>
+                <li><strong>Language Caching:</strong> Localized text cached for performance</li>
+                <li><strong>Component Pooling:</strong> Reuse dialogue UI components</li>
+                <li><strong>Lazy Loading:</strong> Dialogue content loaded on-demand</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <strong>🎉 You're All Set!</strong><br>
+            Your dialogue system is now configured for easy drag-and-drop setup with full 
+            multi-language support and dictionary-based choice selection. Create as many 
+            DialogueSceneConfiguration assets as needed for different dialogue scenarios.
+        </div>
+
+        <hr style="margin: 40px 0;">
+        
+        <div style="text-align: center; color: #7f8c8d; font-size: 14px;">
+            <p><strong>NeonLadder Dialogue System v1.0</strong></p>
+            <p>Generated with ❤️ by Claude Code Assistant</p>
+            <p>For support: Check the Unity Console for validation messages and errors</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="80" result="Failed(Child)" total="80" passed="59" failed="10" inconclusive="0" skipped="11" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:12Z" duration="7.4120382">
+  <test-suite type="TestSuite" id="1000" name="NeonLadder" fullname="NeonLadder" runstate="Runnable" testcasecount="80" result="Failed" site="Child" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:12Z" duration="7.412038" total="80" passed="59" failed="10" inconclusive="0" skipped="11" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1016" name="NeonLadder.Editor.dll" fullname="C:/Users/Ender/NeonLadder/Library/ScriptAssemblies/NeonLadder.Editor.dll" runstate="Runnable" testcasecount="13" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.022983" total="13" passed="2" failed="0" inconclusive="0" skipped="11" asserts="0">
+      <properties>
+        <property name="_PID" value="166184" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <reason>
+        <message><![CDATA[One or more child tests were ignored]]></message>
+      </reason>
+      <test-suite type="TestSuite" id="1017" name="NeonLadder" fullname="NeonLadder" runstate="Runnable" testcasecount="13" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.022605" total="13" passed="2" failed="0" inconclusive="0" skipped="11" asserts="0">
+        <properties />
+        <reason>
+          <message><![CDATA[One or more child tests were ignored]]></message>
+        </reason>
+        <test-suite type="TestSuite" id="1018" name="Tests" fullname="NeonLadder.Tests" runstate="Runnable" testcasecount="13" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.022392" total="13" passed="2" failed="0" inconclusive="0" skipped="11" asserts="0">
+          <properties />
+          <reason>
+            <message><![CDATA[One or more child tests were ignored]]></message>
+          </reason>
+          <test-suite type="TestSuite" id="1019" name="Examples" fullname="NeonLadder.Tests.Examples" runstate="Runnable" testcasecount="13" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.022148" total="13" passed="2" failed="0" inconclusive="0" skipped="11" asserts="0">
+            <properties />
+            <reason>
+              <message><![CDATA[One or more child tests were ignored]]></message>
+            </reason>
+            <test-suite type="TestFixture" id="1014" name="SteamIntegrationTestsExample" fullname="NeonLadder.Tests.Examples.SteamIntegrationTestsExample" classname="NeonLadder.Tests.Examples.SteamIntegrationTestsExample" runstate="Runnable" testcasecount="1" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.013284" total="1" passed="0" failed="0" inconclusive="0" skipped="1" asserts="0">
+              <properties>
+                <property name="Category" value="Steam" />
+              </properties>
+              <reason>
+                <message><![CDATA[One or more child tests were ignored]]></message>
+              </reason>
+              <test-case id="1015" name="SteamAPITest" fullname="NeonLadder.Tests.Examples.SteamIntegrationTestsExample.SteamAPITest" methodname="SteamAPITest" classname="NeonLadder.Tests.Examples.SteamIntegrationTestsExample" runstate="Runnable" seed="197394603" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.005513" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Steam client not running - cannot test Steam API]]></message>
+                </reason>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1001" name="TestSkippingExamples" fullname="NeonLadder.Tests.Examples.TestSkippingExamples" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Runnable" testcasecount="12" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.008018" total="12" passed="2" failed="0" inconclusive="0" skipped="10" asserts="0">
+              <properties />
+              <reason>
+                <message><![CDATA[One or more child tests were ignored]]></message>
+              </reason>
+              <test-case id="1006" name="ConditionalSkipAtRuntime" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.ConditionalSkipAtRuntime" methodname="ConditionalSkipAtRuntime" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Runnable" seed="1315898102" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000235" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Device doesn't support vibration - skipping haptic test]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1009" name="DatabaseConnectionTest" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.DatabaseConnectionTest" methodname="DatabaseConnectionTest" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Runnable" seed="134321381" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000156" asserts="0">
+                <properties>
+                  <property name="Category" value="IntegrationTest" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Test database not available - run 'start-test-db.bat' first]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1013" name="EnvironmentDependentTest" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.EnvironmentDependentTest" methodname="EnvironmentDependentTest" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Runnable" seed="184693902" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000164" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <reason>
+                  <message><![CDATA[This test only runs in DEVELOPMENT environment]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1003" name="FeatureNotImplementedYet" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.FeatureNotImplementedYet" methodname="FeatureNotImplementedYet" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Ignored" seed="81723528" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000102" asserts="0">
+                <properties>
+                  <property name="_SKIPREASON" value="Feature not implemented yet" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Feature not implemented yet]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1011" name="ManualControllerTest" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.ManualControllerTest" methodname="ManualControllerTest" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Ignored" seed="536226978" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000001" asserts="0">
+                <properties>
+                  <property name="Category" value="Manual" />
+                  <property name="_SKIPREASON" value="Manual test - requires human interaction" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Manual test - requires human interaction]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1005" name="PerformanceTest_RunManually" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.PerformanceTest_RunManually" methodname="PerformanceTest_RunManually" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Ignored" seed="147918899" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000001" asserts="0">
+                <properties>
+                  <property name="_SKIPREASON" value="Performance test - run manually" />
+                  <property name="Category" value="Performance" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Performance test - run manually]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1010" name="PlatformSpecificTest" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.PlatformSpecificTest" methodname="PlatformSpecificTest" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Runnable" seed="1393124347" result="Passed" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.002784" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1002" name="SimpleIgnoreExample" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.SimpleIgnoreExample" methodname="SimpleIgnoreExample" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Ignored" seed="168287629" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000002" asserts="0">
+                <properties>
+                  <property name="_SKIPREASON" value="This test is intentionally skipped for demonstration" />
+                </properties>
+                <reason>
+                  <message><![CDATA[This test is intentionally skipped for demonstration]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1007" name="SkipBasedOnConfiguration" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.SkipBasedOnConfiguration" methodname="SkipBasedOnConfiguration" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Runnable" seed="1619767508" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000163" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Steam integration disabled in project settings]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1012" name="SlowIntegrationTest" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.SlowIntegrationTest" methodname="SlowIntegrationTest" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Ignored" seed="1871495816" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000002" asserts="0">
+                <properties>
+                  <property name="Category" value="Slow" />
+                  <property name="_SKIPREASON" value="Slow test - enable for full test suite" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Slow test - enable for full test suite]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1008" name="UnityTestWithConditionalSkip" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.UnityTestWithConditionalSkip" methodname="UnityTestWithConditionalSkip" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Runnable" seed="682012363" result="Passed" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.002543" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="WindowsOnlyTest" fullname="NeonLadder.Tests.Examples.TestSkippingExamples.WindowsOnlyTest" methodname="WindowsOnlyTest" classname="NeonLadder.Tests.Examples.TestSkippingExamples" runstate="Ignored" seed="407725863" result="Skipped" label="Ignored" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000002" asserts="0">
+                <properties>
+                  <property name="_SKIPREASON" value="Only runs on Windows" />
+                  <property name="Category" value="WindowsOnly" />
+                </properties>
+                <reason>
+                  <message><![CDATA[Only runs on Windows]]></message>
+                </reason>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1048" name="NeonLadder.Tests.Editor.dll" fullname="C:/Users/Ender/NeonLadder/Library/ScriptAssemblies/NeonLadder.Tests.Editor.dll" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:06Z" duration="1.263275" total="27" passed="17" failed="10" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="166184" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1049" name="NeonLadder" fullname="NeonLadder" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:06Z" duration="1.262951" total="27" passed="17" failed="10" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1050" name="Tests" fullname="NeonLadder.Tests" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:06Z" duration="1.262633" total="27" passed="17" failed="10" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1051" name="Editor" fullname="NeonLadder.Tests.Editor" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:06Z" duration="1.262290" total="27" passed="17" failed="10" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1020" name="DialogueSceneGeneratorTests" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:06Z" duration="1.261650" total="27" passed="17" failed="10" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1045" name="GenerateDialogueSceneFromMenu_SelectsGeneratedScene" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_SelectsGeneratedScene" methodname="GenerateDialogueSceneFromMenu_SelectsGeneratedScene" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="961702425" result="Passed" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.012266" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1043" name="GenerateDialogueSceneFromMenu_ShowsErrorForNoSelection" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_ShowsErrorForNoSelection" methodname="GenerateDialogueSceneFromMenu_ShowsErrorForNoSelection" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="996343198" result="Failed" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.001648" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[Unhandled log message: '[Assert] Cancelling DisplayDialog: No Configuration Selected Please select a DialogueSceneConfiguration asset and try again.
+This should not be called in batch mode.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                  <stack-trace><![CDATA[UnityEditor.EditorUtility:DisplayDialog (string,string,string)
+NeonLadder.Dialog.Editor.DialogueSceneGenerator:GenerateDialogueSceneFromMenu () (at Assets/Scripts/Dialog/Editor/DialogueSceneGenerator.cs:307)
+NeonLadder.Tests.Editor.DialogueSceneGeneratorTests:GenerateDialogueSceneFromMenu_ShowsErrorForNoSelection () (at Assets/Tests/Editor/DialogueSceneGeneratorTests.cs:483)
+System.Reflection.MethodBase:Invoke (object,object[])
+NUnit.Framework.Internal.Reflect:InvokeMethod (System.Reflection.MethodInfo,object,object[])
+NUnit.Framework.Internal.MethodWrapper:Invoke (object,object[])
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Cancelling DisplayDialog: No Configuration Selected Please select a DialogueSceneConfiguration asset and try again.
+This should not be called in batch mode.
+]]></output>
+              </test-case>
+              <test-case id="1044" name="GenerateDialogueSceneFromMenu_ShowsErrorForWrongSelectionType" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_ShowsErrorForWrongSelectionType" methodname="GenerateDialogueSceneFromMenu_ShowsErrorForWrongSelectionType" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1105446733" result="Failed" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.000772" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[Unhandled log message: '[Assert] Cancelling DisplayDialog: No Configuration Selected Please select a DialogueSceneConfiguration asset and try again.
+This should not be called in batch mode.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                  <stack-trace><![CDATA[UnityEditor.EditorUtility:DisplayDialog (string,string,string)
+NeonLadder.Dialog.Editor.DialogueSceneGenerator:GenerateDialogueSceneFromMenu () (at Assets/Scripts/Dialog/Editor/DialogueSceneGenerator.cs:307)
+NeonLadder.Tests.Editor.DialogueSceneGeneratorTests:GenerateDialogueSceneFromMenu_ShowsErrorForWrongSelectionType () (at Assets/Tests/Editor/DialogueSceneGeneratorTests.cs:495)
+System.Reflection.MethodBase:Invoke (object,object[])
+NUnit.Framework.Internal.Reflect:InvokeMethod (System.Reflection.MethodInfo,object,object[])
+NUnit.Framework.Internal.MethodWrapper:Invoke (object,object[])
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Cancelling DisplayDialog: No Configuration Selected Please select a DialogueSceneConfiguration asset and try again.
+This should not be called in batch mode.
+]]></output>
+              </test-case>
+              <test-case id="1042" name="GenerateDialogueSceneFromMenu_WorksWithSelectedConfiguration" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_WorksWithSelectedConfiguration" methodname="GenerateDialogueSceneFromMenu_WorksWithSelectedConfiguration" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1336214346" result="Passed" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:05Z" duration="0.003707" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1040" name="GenerateScene_AddsAnimatorWhenSpecified" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsAnimatorWhenSpecified" methodname="GenerateScene_AddsAnimatorWhenSpecified" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="2113013848" result="Failed" label="Error" start-time="2025-08-06 01:50:05Z" end-time="2025-08-06 01:50:06Z" duration="1.166336" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+                  <stack-trace><![CDATA[  at NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsAnimatorWhenSpecified () [0x0005d] in C:\Users\Ender\NeonLadder\Assets\Tests\Editor\DialogueSceneGeneratorTests.cs:433 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <321eb2db7c6d43ea8fc39b54eaca3452>:0 ]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1041" name="GenerateScene_AddsAudioSourceWhenVoiceClipsSpecified" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsAudioSourceWhenVoiceClipsSpecified" methodname="GenerateScene_AddsAudioSourceWhenVoiceClipsSpecified" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1524539653" result="Failed" label="Error" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.003257" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+                  <stack-trace><![CDATA[  at NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsAudioSourceWhenVoiceClipsSpecified () [0x00070] in C:\Users\Ender\NeonLadder\Assets\Tests\Editor\DialogueSceneGeneratorTests.cs:452 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <321eb2db7c6d43ea8fc39b54eaca3452>:0 ]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1032" name="GenerateScene_AddsCorrectComponentForFullConversation" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsCorrectComponentForFullConversation" methodname="GenerateScene_AddsCorrectComponentForFullConversation" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="418512182" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002503" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1031" name="GenerateScene_AddsCorrectComponentForPlayerChoice" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsCorrectComponentForPlayerChoice" methodname="GenerateScene_AddsCorrectComponentForPlayerChoice" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1769878467" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002524" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1030" name="GenerateScene_AddsCorrectComponentForSimpleBanter" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsCorrectComponentForSimpleBanter" methodname="GenerateScene_AddsCorrectComponentForSimpleBanter" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="547589232" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002872" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added BossBanterManager component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1039" name="GenerateScene_AddsDialogueActorToCharacters" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsDialogueActorToCharacters" methodname="GenerateScene_AddsDialogueActorToCharacters" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1473688808" result="Failed" label="Error" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002620" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+                  <stack-trace><![CDATA[  at NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsDialogueActorToCharacters () [0x0004b] in C:\Users\Ender\NeonLadder\Assets\Tests\Editor\DialogueSceneGeneratorTests.cs:409 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <321eb2db7c6d43ea8fc39b54eaca3452>:0 ]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1033" name="GenerateScene_AddsDialogueSystemControllerWhenNeeded" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsDialogueSystemControllerWhenNeeded" methodname="GenerateScene_AddsDialogueSystemControllerWhenNeeded" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="615107838" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002599" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1027" name="GenerateScene_AddsDialogueSystemTriggerComponent" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsDialogueSystemTriggerComponent" methodname="GenerateScene_AddsDialogueSystemTriggerComponent" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="424843282" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.003514" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1037" name="GenerateScene_CreatesBasicUICanvasWhenNoPrefab" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesBasicUICanvasWhenNoPrefab" methodname="GenerateScene_CreatesBasicUICanvasWhenNoPrefab" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="30975577" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.003751" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1023" name="GenerateScene_CreatesCharactersContainer" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesCharactersContainer" methodname="GenerateScene_CreatesCharactersContainer" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1802468018" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002663" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1035" name="GenerateScene_CreatesDefaultCameraSetup" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesDefaultCameraSetup" methodname="GenerateScene_CreatesDefaultCameraSetup" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1292574133" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.004134" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Created dialogue camera
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1029" name="GenerateScene_CreatesDialogueSystemContainer" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesDialogueSystemContainer" methodname="GenerateScene_CreatesDialogueSystemContainer" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="939695030" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002549" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1021" name="GenerateScene_CreatesSceneRootWithCorrectName" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesSceneRootWithCorrectName" methodname="GenerateScene_CreatesSceneRootWithCorrectName" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="89884855" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002482" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1026" name="GenerateScene_CreatesTriggerBoxWithCorrectProperties" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesTriggerBoxWithCorrectProperties" methodname="GenerateScene_CreatesTriggerBoxWithCorrectProperties" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="32049311" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002802" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1034" name="GenerateScene_DoesNotAddDuplicateDialogueSystemController" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_DoesNotAddDuplicateDialogueSystemController" methodname="GenerateScene_DoesNotAddDuplicateDialogueSystemController" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="768636035" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002281" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1022" name="GenerateScene_FailsForInvalidConfiguration" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_FailsForInvalidConfiguration" methodname="GenerateScene_FailsForInvalidConfiguration" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="134405930" result="Failed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.000705" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[Unhandled log message: '[Assert] Cancelling DisplayDialog: Configuration Error Conversation name is empty
+This should not be called in batch mode.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                  <stack-trace><![CDATA[UnityEditor.EditorUtility:DisplayDialog (string,string,string)
+NeonLadder.Dialog.Editor.DialogueSceneGenerator:GenerateScene (NeonLadder.Dialog.DialogueSceneConfiguration) (at Assets/Scripts/Dialog/Editor/DialogueSceneGenerator.cs:21)
+NeonLadder.Tests.Editor.DialogueSceneGeneratorTests:GenerateScene_FailsForInvalidConfiguration () (at Assets/Tests/Editor/DialogueSceneGeneratorTests.cs:103)
+System.Reflection.MethodBase:Invoke (object,object[])
+NUnit.Framework.Internal.Reflect:InvokeMethod (System.Reflection.MethodInfo,object,object[])
+NUnit.Framework.Internal.MethodWrapper:Invoke (object,object[])
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Cancelling DisplayDialog: Configuration Error Conversation name is empty
+This should not be called in batch mode.
+]]></output>
+              </test-case>
+              <test-case id="1046" name="GenerateScene_HandlesNullCharacterPrefabsGracefully" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_HandlesNullCharacterPrefabsGracefully" methodname="GenerateScene_HandlesNullCharacterPrefabsGracefully" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1994949587" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.003297" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1036" name="GenerateScene_InstantiatesCustomCameraPrefab" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesCustomCameraPrefab" methodname="GenerateScene_InstantiatesCustomCameraPrefab" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1688781233" result="Failed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.004132" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Custom camera should be instantiated
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesCustomCameraPrefab () [0x00063] in C:\Users\Ender\NeonLadder\Assets\Tests\Editor\DialogueSceneGeneratorTests.cs:341
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1038" name="GenerateScene_InstantiatesCustomUIPrefab" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesCustomUIPrefab" methodname="GenerateScene_InstantiatesCustomUIPrefab" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="973344967" result="Failed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002339" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Custom UI should be instantiated
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesCustomUIPrefab () [0x00051] in C:\Users\Ender\NeonLadder\Assets\Tests\Editor\DialogueSceneGeneratorTests.cs:389
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1024" name="GenerateScene_InstantiatesLeftCharacterCorrectly" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesLeftCharacterCorrectly" methodname="GenerateScene_InstantiatesLeftCharacterCorrectly" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="305769513" result="Failed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002665" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Left character should be instantiated
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesLeftCharacterCorrectly () [0x0003f] in C:\Users\Ender\NeonLadder\Assets\Tests\Editor\DialogueSceneGeneratorTests.cs:130
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1025" name="GenerateScene_InstantiatesRightCharacterCorrectly" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesRightCharacterCorrectly" methodname="GenerateScene_InstantiatesRightCharacterCorrectly" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="774769713" result="Failed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002703" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Right character should be instantiated
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesRightCharacterCorrectly () [0x0003f] in C:\Users\Ender\NeonLadder\Assets\Tests\Editor\DialogueSceneGeneratorTests.cs:145
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1028" name="GenerateScene_TriggerBoxPositionedCorrectly" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_TriggerBoxPositionedCorrectly" methodname="GenerateScene_TriggerBoxPositionedCorrectly" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1146854300" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.002631" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1047" name="Integration_GeneratedSceneWorksWithUnityEditorUndo" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.Integration_GeneratedSceneWorksWithUnityEditorUndo" methodname="Integration_GeneratedSceneWorksWithUnityEditorUndo" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="888418444" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.013498" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1095" name="NeonLadder.Tests.Editor.UI.dll" fullname="C:/Users/Ender/NeonLadder/Library/ScriptAssemblies/NeonLadder.Tests.Editor.UI.dll" runstate="Runnable" testcasecount="39" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:12Z" duration="6.116382" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="166184" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1096" name="NeonLadder" fullname="NeonLadder" runstate="Runnable" testcasecount="39" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:12Z" duration="6.110014" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1097" name="Tests" fullname="NeonLadder.Tests" runstate="Runnable" testcasecount="39" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:12Z" duration="6.109562" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1098" name="Editor" fullname="NeonLadder.Tests.Editor" runstate="Runnable" testcasecount="39" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:12Z" duration="6.109140" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestSuite" id="1099" name="UI" fullname="NeonLadder.Tests.Editor.UI" runstate="Runnable" testcasecount="39" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:12Z" duration="6.108645" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="TestFixture" id="1052" name="MenuSystemIntegrationTestsSimplified" fullname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified" classname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified" runstate="Runnable" testcasecount="5" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:07Z" duration="1.036370" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1053" name="MenuHierarchy_NeonLadderMenuItems_ShouldExist" fullname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified.MenuHierarchy_NeonLadderMenuItems_ShouldExist" methodname="MenuHierarchy_NeonLadderMenuItems_ShouldExist" classname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified" runstate="Runnable" seed="1445624538" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:06Z" duration="0.495381" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1056" name="MenuSystem_ConcurrentUsage_ShouldRemainResponsive" fullname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified.MenuSystem_ConcurrentUsage_ShouldRemainResponsive" methodname="MenuSystem_ConcurrentUsage_ShouldRemainResponsive" classname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified" runstate="Runnable" seed="525772734" result="Passed" start-time="2025-08-06 01:50:06Z" end-time="2025-08-06 01:50:07Z" duration="0.123827" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1054" name="SaveSystemAndUpgradeSystem_Integration_ShouldWorkTogether" fullname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified.SaveSystemAndUpgradeSystem_Integration_ShouldWorkTogether" methodname="SaveSystemAndUpgradeSystem_Integration_ShouldWorkTogether" classname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified" runstate="Runnable" seed="1737539411" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.116940" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1055" name="ScriptableObjects_CoreTypes_ShouldBeAccessible" fullname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified.ScriptableObjects_CoreTypes_ShouldBeAccessible" methodname="ScriptableObjects_CoreTypes_ShouldBeAccessible" classname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified" runstate="Runnable" seed="617353853" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.000871" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1057" name="TesterValidation_MenuSystemReadiness_AllCriticalSystemsWork" fullname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified.TesterValidation_MenuSystemReadiness_AllCriticalSystemsWork" methodname="TesterValidation_MenuSystemReadiness_AllCriticalSystemsWork" classname="NeonLadder.Tests.Editor.UI.MenuSystemIntegrationTestsSimplified" runstate="Runnable" seed="172657824" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.298009" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1058" name="SaveSystemCommandCenterTests" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" testcasecount="21" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:10Z" duration="2.666532" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1064" name="CurrentConfig_WhenSet_ShouldUpdateSavePathCorrectly" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.CurrentConfig_WhenSet_ShouldUpdateSavePathCorrectly" methodname="CurrentConfig_WhenSet_ShouldUpdateSavePathCorrectly" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1045892782" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.062662" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1069" name="ExportSaveData_WithNullData_ShouldHandleError" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.ExportSaveData_WithNullData_ShouldHandleError" methodname="ExportSaveData_WithNullData_ShouldHandleError" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1658347284" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.060603" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[❌ No save data loaded for export
+]]></output>
+                </test-case>
+                <test-case id="1068" name="ExportSaveData_WithValidData_ShouldPrepareExportCorrectly" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.ExportSaveData_WithValidData_ShouldPrepareExportCorrectly" methodname="ExportSaveData_WithValidData_ShouldPrepareExportCorrectly" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1845377205" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.059289" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1078" name="FullWorkflow_LoadConfigLoadDataExport_ShouldCompleteSuccessfully" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.FullWorkflow_LoadConfigLoadDataExport_ShouldCompleteSuccessfully" methodname="FullWorkflow_LoadConfigLoadDataExport_ShouldCompleteSuccessfully" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1735196707" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.090799" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[✅ Save data loaded successfully
+🔍 Running FRIDAY diagnostics...
+✅ Save system configuration is valid
+🦾 Diagnostics complete
+]]></output>
+                </test-case>
+                <test-case id="1070" name="GenerateTestData_WithValidProfile_ShouldCreateValidSaveData" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.GenerateTestData_WithValidProfile_ShouldCreateValidSaveData" methodname="GenerateTestData_WithValidProfile_ShouldCreateValidSaveData" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1092719748" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.077541" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[🧪 Generating test data: Unit Test Profile
+✅ Test data generated: Unit Test Profile
+✅ Save data loaded successfully
+🧪 Generating test data: Unit Test Profile
+✅ Test data generated: Unit Test Profile
+✅ Save data loaded successfully
+]]></output>
+                </test-case>
+                <test-case id="1063" name="LoadDefaultConfig_WhenConfigAvailable_ShouldLoadSuccessfully" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.LoadDefaultConfig_WhenConfigAvailable_ShouldLoadSuccessfully" methodname="LoadDefaultConfig_WhenConfigAvailable_ShouldLoadSuccessfully" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1862122130" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.120030" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1073" name="LoadEndGamePreset_ShouldSetCorrectValues" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.LoadEndGamePreset_ShouldSetCorrectValues" methodname="LoadEndGamePreset_ShouldSetCorrectValues" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="259678026" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:07Z" duration="0.061667" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1072" name="LoadMidGamePreset_ShouldSetCorrectValues" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.LoadMidGamePreset_ShouldSetCorrectValues" methodname="LoadMidGamePreset_ShouldSetCorrectValues" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1324946413" result="Passed" start-time="2025-08-06 01:50:07Z" end-time="2025-08-06 01:50:08Z" duration="0.059579" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1071" name="LoadNewPlayerPreset_ShouldSetCorrectValues" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.LoadNewPlayerPreset_ShouldSetCorrectValues" methodname="LoadNewPlayerPreset_ShouldSetCorrectValues" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1980470612" result="Passed" start-time="2025-08-06 01:50:08Z" end-time="2025-08-06 01:50:08Z" duration="0.058365" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1066" name="LoadSaveData_WithNullConfig_ShouldHandleGracefully" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.LoadSaveData_WithNullConfig_ShouldHandleGracefully" methodname="LoadSaveData_WithNullConfig_ShouldHandleGracefully" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1733399761" result="Passed" start-time="2025-08-06 01:50:08Z" end-time="2025-08-06 01:50:08Z" duration="0.062785" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1065" name="LoadSaveData_WithValidConfig_ShouldLoadDataSuccessfully" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.LoadSaveData_WithValidConfig_ShouldLoadDataSuccessfully" methodname="LoadSaveData_WithValidConfig_ShouldLoadDataSuccessfully" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="83814376" result="Passed" start-time="2025-08-06 01:50:08Z" end-time="2025-08-06 01:50:08Z" duration="0.060339" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[✅ Save data loaded successfully
+✅ Save data loaded successfully
+]]></output>
+                </test-case>
+                <test-case id="1077" name="MemoryAllocation_DuringNormalOperation_ShouldNotLeak" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.MemoryAllocation_DuringNormalOperation_ShouldNotLeak" methodname="MemoryAllocation_DuringNormalOperation_ShouldNotLeak" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="670724526" result="Passed" start-time="2025-08-06 01:50:08Z" end-time="2025-08-06 01:50:09Z" duration="1.202661" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[✅ Save data loaded successfully
+🔍 Running FRIDAY diagnostics...
+✅ Save system configuration is valid
+🦾 Diagnostics complete
+]]></output>
+                </test-case>
+                <test-case id="1076" name="OnGUI_Performance_ShouldRenderUnder16ms" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.OnGUI_Performance_ShouldRenderUnder16ms" methodname="OnGUI_Performance_ShouldRenderUnder16ms" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1469449473" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.058276" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1067" name="RefreshSaveData_ShouldReloadCurrentData" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.RefreshSaveData_ShouldReloadCurrentData" methodname="RefreshSaveData_ShouldReloadCurrentData" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="421529409" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.059488" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[✅ Save data loaded successfully
+✅ Save data loaded successfully
+]]></output>
+                </test-case>
+                <test-case id="1075" name="RunDiagnostics_WithNullConfig_ShouldHandleGracefully" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.RunDiagnostics_WithNullConfig_ShouldHandleGracefully" methodname="RunDiagnostics_WithNullConfig_ShouldHandleGracefully" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1243619395" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.058043" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[🔍 Running FRIDAY diagnostics...
+🦾 Diagnostics complete
+]]></output>
+                </test-case>
+                <test-case id="1074" name="RunDiagnostics_WithValidConfig_ShouldExecuteWithoutErrors" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.RunDiagnostics_WithValidConfig_ShouldExecuteWithoutErrors" methodname="RunDiagnostics_WithValidConfig_ShouldExecuteWithoutErrors" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="937012923" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.063147" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[🔍 Running FRIDAY diagnostics...
+✅ Save system configuration is valid
+🦾 Diagnostics complete
+]]></output>
+                </test-case>
+                <test-case id="1061" name="TabIndex_WhenChanged_ShouldUpdateSelectedTabCorrectly" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.TabIndex_WhenChanged_ShouldUpdateSelectedTabCorrectly" methodname="TabIndex_WhenChanged_ShouldUpdateSelectedTabCorrectly" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="448606442" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.056446" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1062" name="TabNames_ShouldContainAllExpectedTabs" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.TabNames_ShouldContainAllExpectedTabs" methodname="TabNames_ShouldContainAllExpectedTabs" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1665454740" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.058830" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1079" name="TesterValidation_AllCriticalFunctionsWork_PassingTestsIndicateReadyForQA" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.TesterValidation_AllCriticalFunctionsWork_PassingTestsIndicateReadyForQA" methodname="TesterValidation_AllCriticalFunctionsWork_PassingTestsIndicateReadyForQA" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="2020970758" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.123135" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[✅ Save data loaded successfully
+✅ Save data loaded successfully
+🔍 Running FRIDAY diagnostics...
+✅ Save system configuration is valid
+🦾 Diagnostics complete
+]]></output>
+                </test-case>
+                <test-case id="1059" name="Window_WhenCreated_ShouldInitializeWithCorrectDefaults" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.Window_WhenCreated_ShouldInitializeWithCorrectDefaults" methodname="Window_WhenCreated_ShouldInitializeWithCorrectDefaults" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1804759805" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:09Z" duration="0.089630" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1060" name="Window_WhenOnEnableCalled_ShouldAttemptToLoadDefaultConfig" fullname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests.Window_WhenOnEnableCalled_ShouldAttemptToLoadDefaultConfig" methodname="Window_WhenOnEnableCalled_ShouldAttemptToLoadDefaultConfig" classname="NeonLadder.Tests.Editor.UI.SaveSystemCommandCenterTests" runstate="Runnable" seed="1480761069" result="Passed" start-time="2025-08-06 01:50:09Z" end-time="2025-08-06 01:50:10Z" duration="0.117865" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1080" name="SimpleCompilationTest" fullname="NeonLadder.Tests.Editor.UI.SimpleCompilationTest" classname="NeonLadder.Tests.Editor.UI.SimpleCompilationTest" runstate="Runnable" testcasecount="2" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.017064" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1081" name="SimpleTest_ShouldCompileAndRun" fullname="NeonLadder.Tests.Editor.UI.SimpleCompilationTest.SimpleTest_ShouldCompileAndRun" methodname="SimpleTest_ShouldCompileAndRun" classname="NeonLadder.Tests.Editor.UI.SimpleCompilationTest" runstate="Runnable" seed="516545974" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.000223" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1082" name="UnityEditor_ShouldBeAccessible" fullname="NeonLadder.Tests.Editor.UI.SimpleCompilationTest.UnityEditor_ShouldBeAccessible" methodname="UnityEditor_ShouldBeAccessible" classname="NeonLadder.Tests.Editor.UI.SimpleCompilationTest" runstate="Runnable" seed="1299644592" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.000169" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1083" name="UpgradeSystemEditorTests" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:12Z" duration="2.387456" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1089" name="ExamplePurchasableItems_MenuIntegration_ShouldExist" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.ExamplePurchasableItems_MenuIntegration_ShouldExist" methodname="ExamplePurchasableItems_MenuIntegration_ShouldExist" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1697692651" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.240510" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1086" name="MenuItem_UpgradeDesigner_ShouldExistInNeonLadderMenu" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.MenuItem_UpgradeDesigner_ShouldExistInNeonLadderMenu" methodname="MenuItem_UpgradeDesigner_ShouldExistInNeonLadderMenu" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="290917845" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.058337" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1090" name="PurchasableItem_Validation_ShouldAcceptValidData" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.PurchasableItem_Validation_ShouldAcceptValidData" methodname="PurchasableItem_Validation_ShouldAcceptValidData" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1622588190" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.058729" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1085" name="ShowWindow_WhenCalled_ShouldCreateAndShowWindow" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.ShowWindow_WhenCalled_ShouldCreateAndShowWindow" methodname="ShowWindow_WhenCalled_ShouldCreateAndShowWindow" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1506244571" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.059003" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1094" name="TesterValidation_MenuSystem_IsAccessible" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.TesterValidation_MenuSystem_IsAccessible" methodname="TesterValidation_MenuSystem_IsAccessible" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1184301873" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.244903" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1093" name="TesterValidation_UpgradeDesigner_AllCriticalFunctionsWork" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.TesterValidation_UpgradeDesigner_AllCriticalFunctionsWork" methodname="TesterValidation_UpgradeDesigner_AllCriticalFunctionsWork" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1841475550" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:10Z" duration="0.095012" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1092" name="UpgradeDesigner_MemoryUsage_ShouldNotLeak" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.UpgradeDesigner_MemoryUsage_ShouldNotLeak" methodname="UpgradeDesigner_MemoryUsage_ShouldNotLeak" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1790395166" result="Passed" start-time="2025-08-06 01:50:10Z" end-time="2025-08-06 01:50:12Z" duration="1.254096" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1088" name="UpgradeDesigner_OnGUI_ShouldRenderDesignerInterface" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.UpgradeDesigner_OnGUI_ShouldRenderDesignerInterface" methodname="UpgradeDesigner_OnGUI_ShouldRenderDesignerInterface" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1284810072" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.096863" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1091" name="UpgradeDesigner_Performance_ShouldRenderEfficiently" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.UpgradeDesigner_Performance_ShouldRenderEfficiently" methodname="UpgradeDesigner_Performance_ShouldRenderEfficiently" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="954391399" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.094354" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1087" name="UpgradeDesigner_WhenUpgradeSelected_ShouldDisplayProperties" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.UpgradeDesigner_WhenUpgradeSelected_ShouldDisplayProperties" methodname="UpgradeDesigner_WhenUpgradeSelected_ShouldDisplayProperties" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="522083961" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.090309" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1084" name="Window_WhenCreated_ShouldInitializeUpgradeDesigner" fullname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests.Window_WhenCreated_ShouldInitializeUpgradeDesigner" methodname="Window_WhenCreated_ShouldInitializeUpgradeDesigner" classname="NeonLadder.Tests.Editor.UI.UpgradeSystemEditorTests" runstate="Runnable" seed="1086030047" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.092280" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1102" name="Unity.Addressables.Editor.Tests.DocExampleCode.dll" fullname="C:/Users/Ender/NeonLadder/Library/ScriptAssemblies/Unity.Addressables.Editor.Tests.DocExampleCode.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.005707" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="166184" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1103" name="AddressableAssets" fullname="AddressableAssets" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.003466" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1104" name="DocExampleCode" fullname="AddressableAssets.DocExampleCode" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.000864" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1100" name="TestStub" fullname="AddressableAssets.DocExampleCode.TestStub" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.000657" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1101" name="RequiredTest" fullname="AddressableAssets.DocExampleCode.TestStub.RequiredTest" methodname="RequiredTest" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" seed="2076435476" result="Passed" start-time="2025-08-06 01:50:12Z" end-time="2025-08-06 01:50:12Z" duration="0.000123" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/Ender/AppData/LocalLow/ShorelineGames, LLC/NeonLadder\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

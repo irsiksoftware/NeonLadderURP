@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="27" result="Failed(Child)" total="27" passed="26" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.2936671">
+  <test-suite type="TestSuite" id="1000" name="NeonLadder" fullname="NeonLadder" runstate="Runnable" testcasecount="80" result="Failed" site="Child" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.293667" total="27" passed="26" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1048" name="NeonLadder.Tests.Editor.dll" fullname="C:/Users/Ender/NeonLadder/Library/ScriptAssemblies/NeonLadder.Tests.Editor.dll" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.289979" total="27" passed="26" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="175112" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1049" name="NeonLadder" fullname="NeonLadder" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.289441" total="27" passed="26" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1050" name="Tests" fullname="NeonLadder.Tests" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.289036" total="27" passed="26" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1051" name="Editor" fullname="NeonLadder.Tests.Editor" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.288588" total="27" passed="26" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1020" name="DialogueSceneGeneratorTests" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" testcasecount="27" result="Failed" site="Child" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.287404" total="27" passed="26" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1045" name="GenerateDialogueSceneFromMenu_SelectsGeneratedScene" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_SelectsGeneratedScene" methodname="GenerateDialogueSceneFromMenu_SelectsGeneratedScene" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1528941394" result="Passed" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:21Z" duration="0.019471" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1043" name="GenerateDialogueSceneFromMenu_ShowsErrorForNoSelection" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_ShowsErrorForNoSelection" methodname="GenerateDialogueSceneFromMenu_ShowsErrorForNoSelection" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="514957371" result="Passed" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:21Z" duration="0.000850" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DisplayDialog - No Configuration Selected] Please select a DialogueSceneConfiguration asset and try again.
+]]></output>
+              </test-case>
+              <test-case id="1044" name="GenerateDialogueSceneFromMenu_ShowsErrorForWrongSelectionType" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_ShowsErrorForWrongSelectionType" methodname="GenerateDialogueSceneFromMenu_ShowsErrorForWrongSelectionType" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1140226370" result="Passed" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:21Z" duration="0.000727" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DisplayDialog - No Configuration Selected] Please select a DialogueSceneConfiguration asset and try again.
+]]></output>
+              </test-case>
+              <test-case id="1042" name="GenerateDialogueSceneFromMenu_WorksWithSelectedConfiguration" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateDialogueSceneFromMenu_WorksWithSelectedConfiguration" methodname="GenerateDialogueSceneFromMenu_WorksWithSelectedConfiguration" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="2656685" result="Passed" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:21Z" duration="0.003900" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1040" name="GenerateScene_AddsAnimatorWhenSpecified" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsAnimatorWhenSpecified" methodname="GenerateScene_AddsAnimatorWhenSpecified" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="351549162" result="Failed" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:21Z" duration="0.172875" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[Unhandled log message: '[Error] Destroying assets is not permitted to avoid data loss.
+If you really want to remove an asset use DestroyImmediate (theObject, true);'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                  <stack-trace><![CDATA[UnityEngine.Object:DestroyImmediate (UnityEngine.Object)
+NeonLadder.Tests.Editor.DialogueSceneGeneratorTests:GenerateScene_AddsAnimatorWhenSpecified () (at Assets/Tests/Editor/DialogueSceneGeneratorTests.cs:437)
+System.Reflection.MethodBase:Invoke (object,object[])
+NUnit.Framework.Internal.Reflect:InvokeMethod (System.Reflection.MethodInfo,object,object[])
+NUnit.Framework.Internal.MethodWrapper:Invoke (object,object[])
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod (NUnit.Framework.Internal.ITestExecutionContext)
+NUnit.Framework.Internal.Commands.TestMethodCommand:Execute (NUnit.Framework.Internal.ITestExecutionContext)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+Destroying assets is not permitted to avoid data loss.
+If you really want to remove an asset use DestroyImmediate (theObject, true);
+]]></output>
+              </test-case>
+              <test-case id="1041" name="GenerateScene_AddsAudioSourceWhenVoiceClipsSpecified" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsAudioSourceWhenVoiceClipsSpecified" methodname="GenerateScene_AddsAudioSourceWhenVoiceClipsSpecified" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="444997965" result="Passed" start-time="2025-08-06 02:10:21Z" end-time="2025-08-06 02:10:22Z" duration="0.004442" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1032" name="GenerateScene_AddsCorrectComponentForFullConversation" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsCorrectComponentForFullConversation" methodname="GenerateScene_AddsCorrectComponentForFullConversation" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="12423120" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002689" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1031" name="GenerateScene_AddsCorrectComponentForPlayerChoice" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsCorrectComponentForPlayerChoice" methodname="GenerateScene_AddsCorrectComponentForPlayerChoice" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="645474958" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002687" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1030" name="GenerateScene_AddsCorrectComponentForSimpleBanter" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsCorrectComponentForSimpleBanter" methodname="GenerateScene_AddsCorrectComponentForSimpleBanter" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="589483608" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.003050" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added BossBanterManager component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1039" name="GenerateScene_AddsDialogueActorToCharacters" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsDialogueActorToCharacters" methodname="GenerateScene_AddsDialogueActorToCharacters" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1829529065" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002788" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1033" name="GenerateScene_AddsDialogueSystemControllerWhenNeeded" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsDialogueSystemControllerWhenNeeded" methodname="GenerateScene_AddsDialogueSystemControllerWhenNeeded" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="356256056" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002699" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1027" name="GenerateScene_AddsDialogueSystemTriggerComponent" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_AddsDialogueSystemTriggerComponent" methodname="GenerateScene_AddsDialogueSystemTriggerComponent" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1638762608" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.003343" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1037" name="GenerateScene_CreatesBasicUICanvasWhenNoPrefab" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesBasicUICanvasWhenNoPrefab" methodname="GenerateScene_CreatesBasicUICanvasWhenNoPrefab" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="669625042" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.003794" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1023" name="GenerateScene_CreatesCharactersContainer" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesCharactersContainer" methodname="GenerateScene_CreatesCharactersContainer" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="354048745" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002807" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1035" name="GenerateScene_CreatesDefaultCameraSetup" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesDefaultCameraSetup" methodname="GenerateScene_CreatesDefaultCameraSetup" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1044466811" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.003772" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Created dialogue camera
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1029" name="GenerateScene_CreatesDialogueSystemContainer" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesDialogueSystemContainer" methodname="GenerateScene_CreatesDialogueSystemContainer" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="260475162" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002668" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1021" name="GenerateScene_CreatesSceneRootWithCorrectName" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesSceneRootWithCorrectName" methodname="GenerateScene_CreatesSceneRootWithCorrectName" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1411266316" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002663" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1026" name="GenerateScene_CreatesTriggerBoxWithCorrectProperties" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_CreatesTriggerBoxWithCorrectProperties" methodname="GenerateScene_CreatesTriggerBoxWithCorrectProperties" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="207135749" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.003075" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1034" name="GenerateScene_DoesNotAddDuplicateDialogueSystemController" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_DoesNotAddDuplicateDialogueSystemController" methodname="GenerateScene_DoesNotAddDuplicateDialogueSystemController" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1187768417" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002454" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1022" name="GenerateScene_FailsForInvalidConfiguration" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_FailsForInvalidConfiguration" methodname="GenerateScene_FailsForInvalidConfiguration" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="81511134" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.000673" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DisplayDialog - Configuration Error] Conversation name is empty
+]]></output>
+              </test-case>
+              <test-case id="1046" name="GenerateScene_HandlesNullCharacterPrefabsGracefully" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_HandlesNullCharacterPrefabsGracefully" methodname="GenerateScene_HandlesNullCharacterPrefabsGracefully" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1527614795" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.003207" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1036" name="GenerateScene_InstantiatesCustomCameraPrefab" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesCustomCameraPrefab" methodname="GenerateScene_InstantiatesCustomCameraPrefab" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1717924254" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002809" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Added custom dialogue camera
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1038" name="GenerateScene_InstantiatesCustomUIPrefab" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesCustomUIPrefab" methodname="GenerateScene_InstantiatesCustomUIPrefab" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="676967314" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002688" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Added dialogue UI prefab
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1024" name="GenerateScene_InstantiatesLeftCharacterCorrectly" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesLeftCharacterCorrectly" methodname="GenerateScene_InstantiatesLeftCharacterCorrectly" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="545536683" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002999" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1025" name="GenerateScene_InstantiatesRightCharacterCorrectly" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_InstantiatesRightCharacterCorrectly" methodname="GenerateScene_InstantiatesRightCharacterCorrectly" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="502492458" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.003962" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1028" name="GenerateScene_TriggerBoxPositionedCorrectly" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.GenerateScene_TriggerBoxPositionedCorrectly" methodname="GenerateScene_TriggerBoxPositionedCorrectly" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="1828953362" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.002874" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+]]></output>
+              </test-case>
+              <test-case id="1047" name="Integration_GeneratedSceneWorksWithUnityEditorUndo" fullname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests.Integration_GeneratedSceneWorksWithUnityEditorUndo" methodname="Integration_GeneratedSceneWorksWithUnityEditorUndo" classname="NeonLadder.Tests.Editor.DialogueSceneGeneratorTests" runstate="Runnable" seed="2051641677" result="Passed" start-time="2025-08-06 02:10:22Z" end-time="2025-08-06 02:10:22Z" duration="0.014302" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Created dialogue trigger for conversation: TestConversation
+Added ProtagonistDialogueSystem component
+Added DialogueSystemController - don't forget to assign the dialogue database!
+Camera setup is null, skipping camera generation
+Created basic dialogue UI canvas
+✅ Generated dialogue scene: Generated Test Scene
+Saving results to: C:/Users/Ender/AppData/LocalLow/ShorelineGames, LLC/NeonLadder\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
