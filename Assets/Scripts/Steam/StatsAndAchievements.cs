@@ -9,15 +9,15 @@ namespace NeonLadder.Steam
     class StatsAndAchievements : MonoBehaviour
     {
         private Achievement[] achievements = new Achievement[] {
-        new Achievement { AchievementID = Achievements.DEMO_LEVEL_COMPLETE, Name = "Demo Complete", Description = "Complete the demo level" },
-        new Achievement { AchievementID = Achievements.WRATH_SIN_DEFEATED, Name = "Wrath Vanquished", Description = "Defeat the Sin of Wrath" },
-        new Achievement { AchievementID = Achievements.ENVY_SIN_DEFEATED, Name = "Envy Eliminated", Description = "Defeat the Sin of Envy" },
-        new Achievement { AchievementID = Achievements.GREED_SIN_DEFEATED, Name = "Greed Conquered", Description = "Defeat the Sin of Greed" },
-        new Achievement { AchievementID = Achievements.LUST_SIN_DEFEATED, Name = "Lust Overcome", Description = "Defeat the Sin of Lust" },
-        new Achievement { AchievementID = Achievements.GLUTTONY_SIN_DEFEATED, Name = "Gluttony Destroyed", Description = "Defeat the Sin of Gluttony" },
-        new Achievement { AchievementID = Achievements.SLOTH_SIN_DEFEATED, Name = "Sloth Awakened", Description = "Defeat the Sin of Sloth" },
-        new Achievement { AchievementID = Achievements.PRIDE_SIN_DEFEATED, Name = "Pride Humbled", Description = "Defeat the Sin of Pride" },
-        new Achievement { AchievementID = Achievements.DEVIL_SIN_DEFEATED, Name = "Devil's Downfall", Description = "Defeat the Devil and complete your journey" }
+        new Achievement(Achievements.DEMO_LEVEL_COMPLETE, "Demo Complete", "Complete the demo level"),
+        new Achievement(Achievements.WRATH_SIN_DEFEATED, "Wrath Vanquished", "Defeat the Sin of Wrath"),
+        new Achievement(Achievements.ENVY_SIN_DEFEATED, "Envy Eliminated", "Defeat the Sin of Envy"),
+        new Achievement(Achievements.GREED_SIN_DEFEATED, "Greed Conquered", "Defeat the Sin of Greed"),
+        new Achievement(Achievements.LUST_SIN_DEFEATED, "Lust Overcome", "Defeat the Sin of Lust"),
+        new Achievement(Achievements.GLUTTONY_SIN_DEFEATED, "Gluttony Destroyed", "Defeat the Sin of Gluttony"),
+        new Achievement(Achievements.SLOTH_SIN_DEFEATED, "Sloth Awakened", "Defeat the Sin of Sloth"),
+        new Achievement(Achievements.PRIDE_SIN_DEFEATED, "Pride Humbled", "Defeat the Sin of Pride"),
+        new Achievement(Achievements.DEVIL_SIN_DEFEATED, "Devil's Downfall", "Defeat the Devil and complete your journey")
     };
 
         private CGameID gameID;
