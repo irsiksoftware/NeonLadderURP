@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 using NeonLadder.Models;
-using NeonLadder.Events;
+using NeonLadder.Mechanics.Progression;
 using System.IO;
+using System.Reflection;
 using static NeonLadder.Models.ActionPlatformerConstants;
 
 namespace NeonLadder.Editor.UpgradeSystem
@@ -44,8 +45,12 @@ namespace NeonLadder.Editor.UpgradeSystem
             
             // Permanent Upgrades (Perma Currency)
             CreateHealthUpgrade();
-            CreateSpeedUpgrade();
-            CreateDamageUpgrade();
+            var speedUpgrade = CreateSpeedUpgrade();
+            var damageUpgrade = CreateDamageUpgrade();
+            
+            // Create assets from the returned items for the actual CreateExampleItems method
+            AssetDatabase.CreateAsset(speedUpgrade, Path.Combine(AssetPath, "SpeedUpgrade.asset"));
+            AssetDatabase.CreateAsset(damageUpgrade, Path.Combine(AssetPath, "DamageUpgrade.asset"));
             
             // Utility Items (Perma Currency)
             CreateStartingGold();
@@ -223,13 +228,21 @@ namespace NeonLadder.Editor.UpgradeSystem
             AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "DashAbility.asset"));
         }
         
-        private static void CreateHealthUpgrade()
+        [MenuItem("Assets/Create/NeonLadder/Purchasable Items/Health Upgrade")]
+        public static void CreateHealthUpgradeAsset()
+        {
+            var item = CreateHealthUpgrade();
+            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "HealthUpgrade.asset"));
+            AssetDatabase.Refresh();
+        }
+        
+        private static PurchasableItem CreateHealthUpgrade()
         {
             var item = ScriptableObject.CreateInstance<PurchasableItem>();
             
             var type = typeof(PurchasableItem);
             type.GetField("itemId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "health_upgrade");
-            type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Vitality Enhancement");
+            type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Health Upgrade");
             type.GetField("description", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Permanently increases maximum health by 25");
             type.GetField("flavorText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "\"More health means more mistakes I can make!\" - Wade Wilson");
             type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, CurrencyType.Perma);
@@ -246,7 +259,7 @@ namespace NeonLadder.Editor.UpgradeSystem
             };
             type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
             
-            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "HealthUpgrade.asset"));
+            return item;
         }
         
         private static void CreateStartingGold()
@@ -447,7 +460,7 @@ namespace NeonLadder.Editor.UpgradeSystem
             AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "ShieldBlock.asset"));
         }
         
-        private static void CreateSpeedUpgrade()
+        private static PurchasableItem CreateSpeedUpgrade()
         {
             var item = ScriptableObject.CreateInstance<PurchasableItem>();
             var type = typeof(PurchasableItem);
@@ -466,10 +479,11 @@ namespace NeonLadder.Editor.UpgradeSystem
             
             var effects = new ItemEffect[] { CreateItemEffect(EffectType.StatBoost, 15f, Stats.MoveSpeed) };
             type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
-            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "SpeedUpgrade.asset"));
+            
+            return item;
         }
         
-        private static void CreateDamageUpgrade()
+        private static PurchasableItem CreateDamageUpgrade()
         {
             var item = ScriptableObject.CreateInstance<PurchasableItem>();
             var type = typeof(PurchasableItem);
@@ -488,7 +502,8 @@ namespace NeonLadder.Editor.UpgradeSystem
             
             var effects = new ItemEffect[] { CreateItemEffect(EffectType.StatBoost, 20f, Stats.AttackDamage) };
             type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
-            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "DamageUpgrade.asset"));
+            
+            return item;
         }
         
         private static void CreateExtraLife()
@@ -537,6 +552,184 @@ namespace NeonLadder.Editor.UpgradeSystem
         
         #endregion
         
+        #region Test Support Methods
+        
+        /// <summary>
+        /// Creates a Stamina Upgrade item for testing
+        /// </summary>
+        [MenuItem("Assets/Create/NeonLadder/Purchasable Items/Stamina Upgrade")]
+        public static void CreateStaminaUpgradeAsset()
+        {
+            var item = CreateStaminaUpgrade();
+            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "StaminaUpgrade.asset"));
+            AssetDatabase.Refresh();
+        }
+        
+        private static PurchasableItem CreateStaminaUpgrade()
+        {
+            var item = ScriptableObject.CreateInstance<PurchasableItem>();
+            var type = typeof(PurchasableItem);
+            
+            type.GetField("itemId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "stamina_upgrade");
+            type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Stamina Boost");
+            type.GetField("description", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Increases maximum stamina by 20");
+            type.GetField("flavorText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "\"More stamina means more running away!\" - Wade Wilson");
+            type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, CurrencyType.Perma);
+            type.GetField("baseCost", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 150);
+            type.GetField("itemType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, ItemType.Upgrade);
+            type.GetField("canPurchaseMultiple", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, true);
+            type.GetField("maxPurchases", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 5);
+            type.GetField("isAvailableInPermaShop", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, true);
+            type.GetField("rarityColor", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, Color.cyan);
+            
+            var effects = new ItemEffect[]
+            {
+                CreateItemEffect(EffectType.StatBoost, 20f, "maxstamina")
+            };
+            type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
+            
+            return item;
+        }
+        
+        
+        /// <summary>
+        /// Creates a Special Ability item for testing
+        /// </summary>
+        [MenuItem("Assets/Create/NeonLadder/Purchasable Items/Special Ability")]
+        public static void CreateSpecialAbilityAsset()
+        {
+            var item = CreateSpecialAbility();
+            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "SpecialAbility.asset"));
+            AssetDatabase.Refresh();
+        }
+        
+        private static PurchasableItem CreateSpecialAbility()
+        {
+            var item = ScriptableObject.CreateInstance<PurchasableItem>();
+            var type = typeof(PurchasableItem);
+            
+            type.GetField("itemId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "special_ability");
+            type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Special Power");
+            type.GetField("description", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Grants a powerful special ability");
+            type.GetField("flavorText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "\"With great power comes great irresponsibility!\" - Wade Wilson");
+            type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, CurrencyType.Perma);
+            type.GetField("baseCost", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 500);
+            type.GetField("itemType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, ItemType.Ability);
+            type.GetField("maxPurchases", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 1);
+            type.GetField("isAvailableInPermaShop", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, true);
+            type.GetField("rarityColor", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, Color.magenta);
+            
+            var effects = new ItemEffect[]
+            {
+                CreateItemEffect(EffectType.GrantAbility, 1f, "special_power")
+            };
+            type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
+            
+            return item;
+        }
+        
+        /// <summary>
+        /// Creates a Weapon Unlock item for testing
+        /// </summary>
+        [MenuItem("Assets/Create/NeonLadder/Purchasable Items/Weapon Unlock")]
+        public static void CreateWeaponUnlockAsset()
+        {
+            var item = CreateWeaponUnlock();
+            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "WeaponUnlock.asset"));
+            AssetDatabase.Refresh();
+        }
+        
+        private static PurchasableItem CreateWeaponUnlock()
+        {
+            var item = ScriptableObject.CreateInstance<PurchasableItem>();
+            var type = typeof(PurchasableItem);
+            
+            type.GetField("itemId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "weapon_unlock");
+            type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "New Weapon");
+            type.GetField("description", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Unlocks a powerful new weapon");
+            type.GetField("flavorText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "\"Ooh, shiny new toys!\" - Wade Wilson");
+            type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, CurrencyType.Perma);
+            type.GetField("baseCost", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 300);
+            type.GetField("itemType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, ItemType.Unlock);
+            type.GetField("maxPurchases", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 1);
+            type.GetField("isAvailableInPermaShop", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, true);
+            type.GetField("rarityColor", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, Color.yellow);
+            
+            var effects = new ItemEffect[]
+            {
+                CreateItemEffect(EffectType.CustomEvent, 1f, "unlock_weapon")
+            };
+            type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
+            
+            return item;
+        }
+        
+        /// <summary>
+        /// Creates a Cosmetic Item for testing
+        /// </summary>
+        [MenuItem("Assets/Create/NeonLadder/Purchasable Items/Cosmetic Item")]
+        public static void CreateCosmeticItemAsset()
+        {
+            var item = CreateCosmeticItem();
+            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "CosmeticItem.asset"));
+            AssetDatabase.Refresh();
+        }
+        
+        private static PurchasableItem CreateCosmeticItem()
+        {
+            var item = ScriptableObject.CreateInstance<PurchasableItem>();
+            var type = typeof(PurchasableItem);
+            
+            type.GetField("itemId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "cosmetic_item");
+            type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Cool Outfit");
+            type.GetField("description", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "A stylish cosmetic item that makes you look awesome");
+            type.GetField("flavorText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "\"Fashion is my middle name!\" - Wade Wilson");
+            type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, CurrencyType.Perma);
+            type.GetField("baseCost", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 250);
+            type.GetField("itemType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, ItemType.Cosmetic);
+            type.GetField("maxPurchases", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 1);
+            type.GetField("isAvailableInPermaShop", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, true);
+            type.GetField("rarityColor", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, Color.white);
+            
+            var effects = new ItemEffect[]
+            {
+                CreateItemEffect(EffectType.CustomEvent, 1f, "equip_cosmetic")
+            };
+            type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
+            
+            return item;
+        }
+        
+        /// <summary>
+        /// Creates a Health Potion item for testing (Consumable type)
+        /// </summary>
+        private static PurchasableItem CreateConsumablePotion()
+        {
+            var item = ScriptableObject.CreateInstance<PurchasableItem>();
+            var type = typeof(PurchasableItem);
+            
+            type.GetField("itemId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "health_potion_test");
+            type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Health Potion Test");
+            type.GetField("description", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "Restores 25 health instantly");
+            type.GetField("flavorText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, "\"A classic red potion. Tastes like victory.\" - Wade Wilson");
+            type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, CurrencyType.Meta);
+            type.GetField("baseCost", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 25);
+            type.GetField("itemType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, ItemType.Consumable);
+            type.GetField("canPurchaseMultiple", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, true);
+            type.GetField("maxPurchases", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, 99);
+            type.GetField("rarityColor", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, Color.red);
+            
+            var effects = new ItemEffect[]
+            {
+                CreateItemEffect(EffectType.Heal, 25f, "health")
+            };
+            type.GetField("effects", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, effects);
+            
+            return item;
+        }
+        
+        #endregion
+        
         private static ItemEffect CreateItemEffect(EffectType effectType, float value, string targetProperty)
         {
             var effect = new ItemEffect();
@@ -549,5 +742,58 @@ namespace NeonLadder.Editor.UpgradeSystem
             
             return effect;
         }
+
+        #region Individual MenuItem Methods
+        
+        /// <summary>
+        /// Individual MenuItem methods for specific item creation for testing purposes
+        /// </summary>
+        
+        [MenuItem("NeonLadder/Examples/Items/Health Upgrade", priority = 1)]
+        public static void CreateHealthUpgradeMenuItem()
+        {
+            CreateHealthUpgrade();
+            AssetDatabase.Refresh();
+        }
+
+        [MenuItem("NeonLadder/Examples/Items/Speed Upgrade", priority = 2)]
+        public static void CreateSpeedUpgradeMenuItem()
+        {
+            CreateSpeedUpgrade();
+            AssetDatabase.Refresh();
+        }
+
+        [MenuItem("NeonLadder/Examples/Items/Damage Upgrade", priority = 3)]
+        public static void CreateDamageUpgradeMenuItem()
+        {
+            CreateDamageUpgrade();
+            AssetDatabase.Refresh();
+        }
+
+        [MenuItem("Assets/Create/NeonLadder/Purchasable Items/Speed Upgrade")]
+        public static void CreateSpeedUpgradeAsset()
+        {
+            var item = CreateSpeedUpgrade();
+            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "SpeedUpgrade.asset"));
+            AssetDatabase.Refresh();
+        }
+
+        [MenuItem("Assets/Create/NeonLadder/Purchasable Items/Damage Upgrade")]
+        public static void CreateDamageUpgradeAsset()
+        {
+            var item = CreateDamageUpgrade();
+            AssetDatabase.CreateAsset(item, Path.Combine(AssetPath, "DamageUpgrade.asset"));
+            AssetDatabase.Refresh();
+        }
+
+        [MenuItem("NeonLadder/Examples/Items/Health Potion", priority = 4)]
+        public static void CreateHealthPotionMenuItem()
+        {
+            CreateHealthPotion();
+            AssetDatabase.Refresh();
+        }
+
+        
+        #endregion
     }
 }

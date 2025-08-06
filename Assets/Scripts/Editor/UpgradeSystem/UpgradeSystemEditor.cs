@@ -355,7 +355,7 @@ namespace NeonLadder.Editor.UpgradeSystem
                 return;
             }
             
-            var upgradeSystem = FindObjectOfType<NeonLadder.Mechanics.Progression.UpgradeSystem>();
+            var upgradeSystem = FindFirstObjectByType<NeonLadder.Mechanics.Progression.UpgradeSystem>();
             if (upgradeSystem != null)
             {
                 // Apply the upgrade effect for testing

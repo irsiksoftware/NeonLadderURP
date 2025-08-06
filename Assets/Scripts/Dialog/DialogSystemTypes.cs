@@ -24,9 +24,18 @@ namespace NeonLadder.Dialog
     }
 
     [System.Serializable]
+    public class DialogChoiceData
+    {
+        public string text;
+        public string consequence;
+        public DialogReward reward;
+    }
+
+    [System.Serializable]
     public class SkillBasedChoice
     {
-        public DialogChoice choice;
+        public DialogChoiceData choiceData;
+        public DialogChoice choiceType;
         public SkillType requiredSkill;
         public int requiredLevel;
         public string description;

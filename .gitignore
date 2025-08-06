@@ -123,6 +123,10 @@ TestResults.xml
 test_results_*.xml
 cli_test_*.txt
 
+# TestResults directory - exclude all XML files but keep README
+/TestResults/*.xml
+!/TestResults/README.md
+
 # Keep HTML test reports for GitHub Pages access
 !/TestOutput/*.html
 

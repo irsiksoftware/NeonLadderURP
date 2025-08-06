@@ -29,7 +29,7 @@ namespace NeonLadder.Dialog
 
         void Start()
         {
-            pointTracker = FindObjectOfType<ConversationPointTracker>();
+            pointTracker = FindFirstObjectByType<ConversationPointTracker>();
             if (pointTracker == null)
             {
                 Debugger.LogWarning("DialogChoiceValidator: ConversationPointTracker not found");
@@ -139,7 +139,7 @@ namespace NeonLadder.Dialog
                 {
                     skillChoices.Add(new SkillBasedChoice
                     {
-                        choice = requirement.choice,
+                        choiceType = requirement.choice,
                         requiredSkill = requirement.requiredSkill,
                         requiredLevel = requirement.requiredLevel,
                         description = requirement.description

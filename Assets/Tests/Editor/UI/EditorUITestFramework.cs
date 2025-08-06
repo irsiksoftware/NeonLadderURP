@@ -220,6 +220,17 @@ namespace NeonLadder.Tests.Editor.UI
         #region Mock Infrastructure
         
         /// <summary>
+        /// Creates a mock gamepad for input system testing
+        /// </summary>
+        public static object CreateMockGamepad()
+        {
+            // For EditMode tests, we can't create real input devices
+            // Return null as a placeholder - tests should check for null and handle appropriately
+            // In a real implementation, you'd use InputSystem test fixtures
+            return null;
+        }
+        
+        /// <summary>
         /// Mock file system operations for testing without actual files
         /// </summary>
         public class MockFileSystem

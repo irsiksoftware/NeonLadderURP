@@ -20,7 +20,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <NoWarn>0169;USG0001</NoWarn>
-    <DefineConstants>UNITY_6000_0_26;UNITY_6000_0;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;STEAMWORKS_NET;CROSS_PLATFORM_INPUT;EASYROADS3D_PRO;DOTWEEN;UNITY_PIPELINE_URP;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_6000_0_26;UNITY_6000_0;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;STEAMWORKS_NET;CROSS_PLATFORM_INPUT;EASYROADS3D_PRO;DOTWEEN;UNITY_PIPELINE_URP;TMP_PRESENT;USE_NEW_INPUT;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -61,10 +61,12 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\QuickStart.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\ToggleObjectLayerSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Tornado\Tornado.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\LoadHeightmapComputeShader.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\HELPER SCRIPTS\manageParticleRotationSM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\Serializer.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FoliageGenerator.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\controlWeatherTOD_SM_URP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Timer and Weather Controllers\TimerSKYMASTER.cs" />
@@ -92,29 +94,39 @@
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example2\SimpleActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\TreeBashCollider.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\MeshGeneration.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\MonsterState.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Test\Tester.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\PRO_LITE\DepthNormalsProviderSM_URP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\PTNode.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\SaveLoadExample.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Collections\FirearmCollection.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BaseQuadMeshes.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\SkyMaster.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\MobileSSPR\ReusableCore\MobileSSPRRendererFeature.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\SceneControl.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ItemSlot.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\DragRigidbodySKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Clouds\GlobalShaderVariablesTORNADO.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\StateHandler.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 3.3\River\River Scripts\RiverHandlerSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\WaterBoundaryPLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Volumetric\PlaceParticleOnGroundSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\SphericalGravity.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\CyberpunkGigapack\Scripts\CableComponent.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Runtime\Curves\AnimationCurveTexture.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Volumetric\ParticleSheetOnGroundSKYMASTER.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\NovaSpaceBurgers\Scripts\BurgerTurnBehaviour.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\WaterFlow.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\disableParticleShadowReceiveSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\CBRead.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\ParticlePropagationSKYMASTER.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\Tweens\TweenBase.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Collections\IconCollection.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\DepthNormalsSkyMasterURPFeature.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\DensityProfileLayer.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\NavigateButton.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Camera\GI PROXY SEGI\FirstPersonFlyingController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\Wheel.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\SimpleRotationSM.cs" />
@@ -124,10 +136,17 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Math\Mathd.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.0 Scripts\ParticleShadows\ParticleShadowsSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\SKYMASTER_DemoV30_AIRPLANE.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\AnimationManager.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Data\Modifier.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterAppearance.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Debris\Debris.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\VolumetricConfig.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\Projectile.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Scripts\URP\connectSuntoVolumeCloudsURP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\ItemCollection.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Helper scripts\MoveItemOverGroundSM.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\CyberpunkMegapack\Scripts\HoverCarController.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\CaptureOptions.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\MobileDemoInfiniCLOUD.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Scripts\Rendering\RaymarchingMaterialProperties.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Camera\FPSController.cs" />
@@ -138,37 +157,44 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Quad.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\TouchesGizmo.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Tornado\volumeCloudsTornadoControl.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\CyberpunkMegapack\Scripts\CarIdleWiggle.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Char Controller Plugins\InfiniTREE\Character Controllers\Sources\Scripts INfiniTree\FPSInputControllerINfiniDy.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkMegapack\Scripts\CarIdleWiggle.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Debris\TornadoData.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\StreamingHeightmap.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\AppearanceExample.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.8\LocationToShaderINFINITREE.cs" />
     <Compile Include="Assets\Packages\ILRanch\CyberRoom\Scripts\FPCharacter.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\AbondonedDistrict\Scripts\BlinkingLight.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\LayerMaskCreateSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\playMusicAtTimeSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\SeasonalTerrainSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Helper scripts\SmoothLookAtSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\MeshGenerationBurst.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\EquipmentExample.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\DragTransformINfiniDy.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\PivotBasedCameraRigSM.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example4\ThirdPersonCameraSystem.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.4 Scripts\CloudHandlerSM_SRP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\ProceduralNoiseGIPROXY.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\BlitPassVolumeFogSRP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\TestRoom.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SunShaftsSRP\Shaders - Scripts\URP Version\BlitSunShaftsSRP.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example\MessageBox.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\rain-urp-master\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Character.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\TextureProvider.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\Underwater\cycleCausticsSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\connectSuntoVolumeFogURP.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Scripts\ParticleShowcase.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FoliageRenderer.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\rainDropsControlerSM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\Firearm.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\InventoryItem.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V1.0 Scripts\Helper scripts\MouseLookSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.5 Scripts\Chain Lightning\ChainLightningShuriken_SM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\SoloState.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\PerlinSKYMASTER.cs" />
     <Compile Include="Assets\Packages\EasyRoads3D\EasyRoads3D\Scripts\runtimeScript.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkGigapack\Scripts\CableComponent.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\WaterDisplaceSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Math\QuaternionD.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\CBWrite.cs" />
@@ -180,37 +206,50 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.0 Scripts\Volume Clouds\Camera2WorldSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\ScaledSpace.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Lightning\Lightning.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\CharacterReferencesResolver.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Tornado\GroundDust.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\CameraFollowController.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\SpriteSheetCapture.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Helpers\CharacterInventorySetup.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Stylized Powerups &amp; Powered Auras\SampleScene_Assets\SimpleCameraController.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Data\Item.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\TextureUtil.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\BowExample.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\JetParticleEffectSM.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkMegapack\Scripts\WaypointManager.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\AbondonedDistrict\Scripts\BlinkingLight.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Scripts\ParticleHandler.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\Tweens\ScaleSpring.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V5.1 Scripts\biomesSkyMaster.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Camera\Fade.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Runtime\Curves\AnimationCurveAsset.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\MeshCombineUtilitySKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\LWRP Scripts\DepthRendererSM_LWRP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Enums\ItemRarity.cs" />
     <Compile Include="Assets\Packages\EasyRoads3D\EasyRoads3D\Scripts\ERVegetationStudio.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\TEMPORAL 2\VolumetricLightedSEGI_TAA_ENABLE.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\DrawWithMouse.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\FlashingLights.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\Springs\SpringBase.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SunShaftsSRP\Shaders - Scripts\PlaceSunSHAFTS.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\Underwater\ProjectionSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\ComputeShaderGenerator.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\SimpleColorPicker\Scripts\RainbowGenerator.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\WaterTileSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\ShaderIDs.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example\ExampleActor.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\FirearmReload.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\PLANET GENERATION\Fluid Planets\SkyMasterFLUID\Scripts\PlanetFluidsSceneSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\FlyCam.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Math\Vector3d.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\QuadSplitQueue.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Helper scripts\DragTransformSKYMASTER.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Enums\PropertyId.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\PlayingAnimations.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example3\AIFollow.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Scripts\URP\BlitVolumeCloudsSRP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\AnchorManager.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\SkillCanceller.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\SimpleColorPicker\Scripts\ColorMode.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\VolumetricUtils.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\ChunkedPlanePLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\NodeGraph.cs" />
@@ -219,7 +258,10 @@
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Planet.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\TextureBuffer.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ScrollInventoryFilter.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterExtensions.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\DepthNormalsByLayerSMURPFeature.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\MovementExample.cs" />
     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Attributes\NodeEnum.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\NodeDataCache.cs" />
@@ -232,7 +274,9 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\depthBufferSecondCameraSM.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\UIAnchorSnapper.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Ethereal2024.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\FirearmFire.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Ethereal Volumetric Lighting\Per Area Fog Volume Control\controlFogVolumeOnTriggerSM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterBodySculptor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SunShaftsSRP\Shaders - Scripts\URP Version\BlitPassSunShaftsSRP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AeroplaneControlSurfaceAnimatorSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Debris\SpawnDebris.cs" />
@@ -240,19 +284,23 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.0 Scripts\SetRenderQueue.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V5.0 Scripts\Camera_Shake\CameraShakeA.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\unity-urp-vr-lens-flare\URP\VRLensFlarePass.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\Enums\FirearmType.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Utils\ShowRendererBoundsPLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\DragTransformGI.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\PerlinGIPROXY.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\GerstnerDisplaceSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\LITE\ScreenSpaceSnowLITE_SM_URP.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\ParticleSystemController\ParticleSystemController.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\Springs\ScaleSpring.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\LWRP Scripts\PlanarRefractionsSM_LWRP.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example\SkillRotatingBox.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\INfiniDyTreeDEMO.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\LightStreamer\volumeLightStreamerSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\CopyShadowMapSM_URP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\Equipment.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\ShoreLine\TerrainDepthSM.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example5\CCActor.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Data\LocalizedValue.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\WaterHandlerSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Tornado\TornadoDebug.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\BuildingShaker.cs" />
@@ -262,6 +310,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\FreezeBurnControlSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\LocalVolumetricFog\LocalVolumetricFog.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Heightmap.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterState.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\GeneratorNode.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Volume Clouds\SM_CloudRot.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Volumetric\VolumeClouds_SM.cs" />
@@ -273,20 +322,26 @@
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Utils\MeshUtilsPLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\FPVolumetricFog.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ItemInfo.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\addBuildingToPlanetSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\MobileSSPR\Scene\ExampleSceneScript_MobileSSPR.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\LoomSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\Control_Jove_light.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Data\ItemIcon.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\INfiniDyTree.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Enums\ItemClass.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\AnalogStick.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AeroplaneAudioSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Rotate.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\ControlCombineChildrenINfiniDy.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\AttractParticlesSKYMASTER.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\SimpleColorPicker\Scripts\ColorJoystick.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\NodePort.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\AttackingExample.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Utils\FixedSizeStackPLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Pools.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\ShopBase.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Audio\AudioTrigger.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\MeshContainerSM.cs" />
@@ -294,13 +349,24 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\unity-urp-vr-lens-flare\URP\VRLensFlareCore.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\RadialOceanSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\ORION_SkyMaster_Controller.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\Monster.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Math\Math.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\CyberpunkMegapack\Scripts\WaypointManager.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Full volume clouds\Prefabs\lightningCameraVolumeCloudsSM_URP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Data\FirearmParams.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example7\SimpleActor2D.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V4.9.2 Scripts\infiniteParticleLifeSM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\SimpleColorPicker\Scripts\ColorSlider.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterAnimation.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Noise.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\SimpleColorPicker\Scripts\ColorPicker.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Enums\ItemTag.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\Screenshot.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\SortingOrderExample.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\MonsterVariation.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V5.0 Scripts\SKYMASTER_API_5_0_URP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\LightCollisionsPDM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\Enums\FirearmLoadType.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\directBranchGrowthINfiniDy.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\Snow\DemoSnow.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\WheelTracks.cs" />
@@ -314,12 +380,15 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\ControlCombineChildrenSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Helper scripts\ControlGIPROXY_ATTRIUM_SM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Scripts\WeatherScript.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\RuntimeSetup.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\IMeshGenerator.cs" />
     <Compile Include="Assets\Packages\ILRanch\CyberRoom\Scripts\HCRotater.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Data\ItemParams.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SunShaftsSRP\Shaders - Scripts\URP Version\connectSuntoSunShaftsURP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\0 URP\ATMOS\connectSuntoAtmosURP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\LWRP Scripts\RenderRefractPassSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\setPlanetCloudsAtmosphere.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\MeleeWeapon.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\SplinerPINfiniDy.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example4\ThirdPersonActor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\SimplexNoiseSKYMASTER.cs" />
@@ -328,29 +397,39 @@
     <Compile Include="Assets\Packages\ILRanch\CyberRoom\Scripts\FreeCam.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V5.0 Scripts\Camera_Shake\CameraShakeManager.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\CanvasInputs\UICanvasControllerInput.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\StandaloneFilePicker.cs" />
     <Compile Include="Assets\Packages\Suriyun\Scripts\MouseOrbitImproved.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Data\Property.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\ControlGIPROXY_ATTRIUM.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example6\FPSActor.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Enums\ItemType.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\Model.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\rotateLightSM.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\CameraSystem.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\CONSTANTS.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\ScreenshotTransparent.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\SimpleColorPicker\Scripts\PaletteGradient.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FoliageExperimental.cs" />
     <Compile Include="Assets\Packages\ILRanch\CyberRoom\Scripts\FPMouseLook.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Lightning\AddLightning.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V5.0 Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\SkyMasterManager.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\ConstantBuffers.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkGigapack\Scripts\CableParticle.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Enums\ElementId.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\Scarecrow.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Atmosphere.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\LayerManager.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\unity-urp-vr-lens-flare\VRLensFlare.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\EvenSeparate.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\moveMapOriginSM_URP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\WaterSM.cs" />
     <Compile Include="Assets\Packages\Planet Earth Free\SpinFree.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\InventoryExample.cs" />
     <Compile Include="Assets\Packages\Suriyun\Scripts\Swapper.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterSerializer.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V4.9 Scripts\GameObjectTypeLoggingSM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\StateHandler.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Utils.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\_Scripts\BlitTest.cs" />
@@ -359,23 +438,33 @@
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\LocalVolumetricFog\SmokeVolume.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.0 Scripts\Volume Clouds\VolumeParticleShadePDM.cs" />
     <Compile Include="Assets\Packages\ILRanch\CyberRoom\Scripts\CCTvMovie.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\FingerTrigger.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\CyberpunkMegapack\Scripts\CarAI.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\LayerManager.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Utils\LazySingletonPLANET.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\CyberpunkGigapack\Scripts\CableParticle.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\ExtrudeMeshBranchINfiniDy.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\Extensions.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Scripts\ProjectileShowcase\ProjectileController.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\AnimationEvents.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Timer and Weather Controllers\WeatherRandomizerSKYMASTER.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\Code\TouchAssistance.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\SAs GI PROXY\Characters\FirstPersonCharacter\Scripts\FirstPersonControllerGIPROXY.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.5 Scripts\Light\LightFlash.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FloatingOrigin.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ItemWorkspace.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\LITE\ScreenSpaceSnowLITE_SMFeature.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ItemContainer.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Scripts\TGALoader.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Runtime\Gradients\GradientAsset.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\ChainLightning_SKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Camera\Coordinates.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\Enums\HoldType.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Enums\ModificatorType.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Utils\FlyingCameraPLANET.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\AutoConfigureSM_URP.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\ExtensionMethods.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\HeightmapNode.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\ExtensionMethods.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\PlanarReflectionSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Runtime\Gradients\GradientTexture.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AeroplaneUserControl2AxisSM.cs" />
@@ -386,16 +475,21 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Scripts\Rendering\AuroraBorealis.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V2.0.1 Scripts\CycleShield_UVs.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\connectSuntoFullVolumeCloudsURP.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkMegapack\Scripts\CarAI.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\VertexSnowRain\SnowRainVERTEX_SM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Curve.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\FromSavedNode.cs" />
     <Compile Include="Assets\Logging\AppLogger.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\SpriteSequenceCapture.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Char Controller Plugins\InfiniTREE\Character Controllers\Sources\Scripts INfiniTree\CharacterMotorINfiniDy.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\NovaSpaceBurgers\Scripts\BurgerTurnBehaviour.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\Shell.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\SoloState.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\Firearms\Enums\MagazineType.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Runtime\Extensions\AnimationCurveExtensions.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AutoCamSM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ScrollInventory.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\AutoMoveAndRotate.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\AvatarSetup.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\CharacterEditor.cs" />
     <Compile Include="Assets\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\RecalcBOUNDS_SM.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\SceneNavigator.cs" />
@@ -404,16 +498,18 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\offsetUVsSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\PreviewNode.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\BlitVolumeFogSRP.cs" />
-    <Compile Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkMegapack\Scripts\HoverCarController.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FastNoise.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example3\NavMeshActor.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\InventoryBase.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AeroplaneControllerSM.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\BrunetonsImprovedAtmosphere\TransmittanceFunctions.cginc" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\Scatter Shaded Clouds\ScatterShadedCloud MOTION.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 2.2\WindowShader\GlassStainedBumpDistortSM.shader" />
+    <None Include="Assets\Packages\HeroEditor\Extensions\EpicHeroes\Readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\TerrainShading\Resources\TreeCreatorLeavesOptimized.shader" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Shaders\Resources\createColorMapPLANET.shader" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Shaders\Resources\Water PLANET.shader" />
@@ -440,12 +536,13 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\FBM.cginc" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VBuffer.hlsl" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\SkyShading\Skybox-Procedural_SkyMaster MAIN U5 TEXTURED v3.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\AbandonedFactory\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\AbandonedFactory\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Skybox shaders\Skybox-Procedural_SkyMaster MAIN U4.shader" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumetricLightingCommon.hlsl" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\shaders\ER Road Detail.shader" />
     <None Include="Assets\Packages\Suriyun\MobileControllerSystem\readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Shaders\Resources\noiseWorley.cginc" />
+    <None Include="Assets\Packages\HeroEditor\Common\Shaders\GrayPaint.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.8\Shaders InfiniGRASS\InfiniTREE_Transp_Wind_SNOW.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\Planet Shader\Shader\SubGraphs\MainLightPLANET.hlsl" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\Planet Shader\Shader\SubGraphs\CustomLighting.hlsl" />
@@ -455,9 +552,10 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\Shaders\depthHistory.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\EXTRA DEMO ASSETS\DEMOS\Crytek Atrium\Crytek Atrium copyright.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\BrunetonsImprovedAtmosphere\IrradianceFunctions.cginc" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\DownloadInstructions.txt" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\shaders\ER Road.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.1\Shaders\Dual Sun Skybox\Skybox-Procedural_SkyMaster MAIN U5 TEXTURED DUAL.shader" />
+    <None Include="Assets\Packages\HeroEditor\MilitaryHeroes\TestRoom\BackgroundLicense.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\VolumeFogSRP_FORWARD_URP Legacy 8 LIGHTS Before added ifninite Lights.shader" />
     <None Include="Assets\Packages\RPGMonsterBundlePolyart\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\VolumeFogSRP_FORWARD_URP Legacy1 Before added ifninite Lights.shader" />
@@ -471,7 +569,7 @@
     <None Include="Assets\Packages\Synty\SimpleApocalypse\ReadMe.txt" />
     <None Include="Assets\Packages\Monsters Full Pack Vol 1\DownloadInstructions.txt" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\prefab meshes\_custom prefabs.txt" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\YeniMesh\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\YeniMesh\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Terrain Shaders\UnityTerrain\SMFoggyTerrainFP.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\Resources\ClassicNoise3D.hlsl" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Assets\Snow Shader HDRP\SnowShaderSM4.shader" />
@@ -482,7 +580,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 2.2\TerrainShading\Resources\TreeCreatorLeavesRendertex.shader" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\shaders\ER Road Transparency.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\AURORA_NEBULA_BLACKHOLE\AuroraRenderer\SphereUtils\RaytraceDraw.cginc" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\MedievalTavern\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\MedievalTavern\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\SDF.cginc" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\Framework2D.cginc" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 3.3\Stars\StarsShaderSM.shader" />
@@ -496,13 +594,15 @@
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\LICENSE MIT Temporal AA Reprojection.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\Planet Shader\Shader\StochasticNode.hlsl" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\SRP Support Packages\_Readme.txt" />
+    <None Include="Assets\Packages\HeroEditor\Extensions\Style\Readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumetricLighting.compute" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Materials\VegetationWindyINfiniDy.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Noise Modules\GPUTerrainGeneration A.compute" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\FXWater4Advanced SM.shader" />
+    <None Include="Assets\Packages\HeroEditor\MilitaryHeroes\Sounds\Weapons\License.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Shaders\Nature\AuroraBorealis BACKGROUND.shader" />
     <None Include="Assets\Packages\Piloto Studio\Stylized Powerups &amp; Powered Auras\Shaders\SoftUnlitAdditive.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\SiegeOfPonthus\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\SiegeOfPonthus\DownloadInstructions.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Packages\EasyRoads3D\DownloadInstructions.txt" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\Release - Install Notes.txt" />
@@ -512,9 +612,9 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Assets\Version 2.2\Scatter Shaded Clouds\SM_Cloud_Dome_Shader.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\ComputeShaders\NoiseOperatorsGPU.compute" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Ancient Cathedral\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Ancient Cathedral\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\PlanetFadeShaderBumpSM_URP.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\AssetStoreTools\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\AssetStoreTools\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.8\Shaders InfiniGRASS\InfiniGRASS_Transp_Wind_FENCE 1-ROOF.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 2.0\Shaders\Water\Refraction 2 SM.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.4 Scripts\ShaderVolumeClouds\ShaderVolumeCloudsSMV3.4b SM30 v3.4.3.shader" />
@@ -524,6 +624,7 @@
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Shaders\Resources\SurfacePLANET.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\RAIN SHADERS LINKS.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\FXWater4Advanced SM3.2 - Waves TOON MOBILEv0.2.shader" />
+    <None Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\BackgroundLicense.txt" />
     <None Include="Assets\Packages\ARTnGAME\SunShaftsSRP\Shaders - Scripts\URP Version\Resources\BlitSunShafts.hlsl" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\WaterIncludeSM.cginc" />
     <None Include="Assets\Packages\Modern UI Pack\DownloadInstructions.txt" />
@@ -533,7 +634,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Skybox shaders\Skybox-Procedural_SkyMaster MAIN U5 TEXTURED.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\PlanetSurfaceShaderBump.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Licences\license_atmoscattering.txt" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkRooftop\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\CyberpunkRooftop\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Resources\shader.template" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\SkyShading\Skybox-Procedural_SkyMaster MAIN U5 TEXTURED v4.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -548,7 +649,7 @@
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\LocalVolumetricFog\SmokeVolumeMaterial.compute" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.2\Sky Shader\SkyMasterShaderF_Textured.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\ShurikenCloud.cginc" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Cyberpunk Lab\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Cyberpunk Lab\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\SNOW\SnowShaderSM3.shader" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\ClassicNoise3D.hlsl" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\Shader\Resources\TAA.shader" />
@@ -574,12 +675,13 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\README URP SETUP.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Assets\Version 2.2\Scatter Shaded Clouds\SM_Cloud_Dome_ShaderADD.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\Math.cginc" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkGigapack\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\CyberpunkGigapack\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\HeroEditor.Common.dll" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\ClassicNoise3D.hlsl" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\NovaSpaceBurgers\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\NovaSpaceBurgers\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\MainLight InfiniSNOW.hlsl" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\RomanStreet\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\RomanStreet\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\Resources\FullVolumeCloudsSRP_FORWARD_URP LAYERS_FOGWAR Test RING WORLD.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\MOBILE Assets\Shaders\Mobile-Transparent-VertexColor.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\BrunetonsImprovedAtmosphere\RenderSky.shader" />
@@ -599,7 +701,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Shaders\Resources\noiseSimplex.cginc" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\Scatter Shaded Clouds\ScatterShadedCloud MOTION Soft v3.3.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Cyberpunk City\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Cyberpunk City\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.8\Shaders InfiniGRASS\InfiniTREE_Wind_Circular.shader" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Prefabs\CONVERT TO UNITY 5 GUIDE.txt" />
@@ -609,6 +711,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Terrain Shaders\UnityTerrain\SMDistFoggyTerrainFP.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Scripts\URP\Resources\VolumeCloudsSRP_FORWARD_URP.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Packages\HeroEditor\InventorySystem\ReadMe.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\README.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\VertexSnowRain\snowVORTEX.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
@@ -623,17 +726,17 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 5.0\Trees CC0\FoliageShader\SurfaceShaderBasic.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\BrunetonsImprovedAtmosphere\AtmosSRP_FORWARD_URP.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\FantasyCastle\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\FantasyCastle\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\VolumeFogSRP_FORWARD_URP Legacy1 Before added ifninite Lights and Cookies.shader" />
     <None Include="Assets\Packages\Synty\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Shaders\Resources\Water ROUND PLANET.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\AURORA_NEBULA_BLACKHOLE\AuroraRenderer\Earth\EarthCloudShader.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\AbandonedPool\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\AbandonedPool\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\GrassShaderShadows URP.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.6\WIP DEMOS\Shaders\Grass\TEM GRASS A.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\TEMPORAL 2\Resources\SEGI_TEMPORAL_ENABLE.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\CyberpunkMegapack\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\CyberpunkMegapack\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\Noise.cginc" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\SHADOWS_URP\URP_7.3.1_NATIVE_SHADOWS_GRAPH URP10.shader" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Shaders\Resources\WaterBoundaryPLANET.shader" />
@@ -646,8 +749,10 @@
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\LICENSE.txt" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\_URP &amp; HDRP Readme.txt" />
     <None Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Opaque UberFX.shader" />
+    <None Include="Assets\Packages\HeroEditor\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 3.3\Stars\StarsShaderOPAQUE_SM.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Wills Room\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\HeroEditor\Common\RangedWeapons\Sounds\Firearms\License.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Wills Room\DownloadInstructions.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\UberFX.shader" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\shaders\ER Road Mask Blend.shader" />
@@ -660,7 +765,7 @@
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\SHADOWS_URP\ShadowsURP10.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\Common.cginc" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Shaders\Resources\InitHeightmapPLANET.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\AbondonedDistrict\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\AbondonedDistrict\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.6\WIP DEMOS\Shaders\Grass\TEM GRASS B TRANSP.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\InfiniCLOUD URP\Assets\Version 2.2\VolumetricShader\VolumeLitParticlesPDM_Unity2020.shader" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\shaders\ER I Connector Blend.shader" />
@@ -693,7 +798,7 @@
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Noise Modules\GPUTerrainGeneration A NEW1.compute" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 3.0\UnderWater\Caustic Textures\CAUSTIC TEXTURES SOURCE.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\FXWater4Advanced SM3.2 - Waves TOON MOBILE.shader" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Bar\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Bar\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 2.2\TerrainShading\Resources\BillboardTree.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.0\Shaders\SkyMasterShaderE.shader" />
@@ -711,7 +816,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\WaterIncludeSM30.cginc" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\BrunetonsImprovedAtmosphere\RenderingFunctions.cginc" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\PATCHES\LIGHT COOKIES SUPPORT\License.txt" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Cyberpunk Lab\Readme.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Cyberpunk Lab\Readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\FXWater4Advanced SM30 LOCAL LIGHTS.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 2.2\VolumetricShader\VolumeLitParticlesPointPDM.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\Moon Shader\MoonShaderSM.shader" />
@@ -731,6 +836,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Full volume clouds\BackgroundVolumecloudsBlendSM.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\MOBILE Assets\Shaders\Alpha-VertexLit - SM - MOBILE.shader" />
+    <None Include="Assets\Packages\HeroEditor\Extensions\AbandonedWorkshop\Readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Shaders\Nature\Master.cginc" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 3.3\River\River Shader\RiverWaterShaderSM.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Resources\computeShaderTemplate.txt" />
@@ -741,7 +847,7 @@
     <None Include="Assets\Packages\Piloto Studio\Stylized Powerups &amp; Powered Auras\Shaders\ShieldShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumetricLightingPass.hlsl" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Cyberpunk Apartment\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Cyberpunk Apartment\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\Scripts - Shaders\Shaders\Resources\Surface ROUND PLANET.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\GrassGeometryShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -762,7 +868,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\ComputeShaders\FastNoiseGPU.compute" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\Resources\BlitSkyMaster.hlsl" />
-    <None Include="Assets\Packages\LeartesStudios_TEMP\Script\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\Script\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 2.2\SkyShading\Skybox-Procedural_SkyMaster MAIN U5 TEXTURED v3.0.2.shader" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\prefab sources\_custom prefabs.txt" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Lightning\Shader\Lightning.shader" />
@@ -1267,6 +1373,10 @@
     </Reference>
     <Reference Include="EasyRoads3Dv3">
       <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HeroEditor.Common">
+      <HintPath>Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\HeroEditor.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DelaunayER">
@@ -2149,16 +2259,16 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Stores.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Services.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Services.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Runtime">
@@ -2179,9 +2289,17 @@
       <Project>{03A4AE4C-33AF-BFE0-EC80-D07A4EBF912E}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="DialogueSystem.csproj">
+      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
+      <Name>DialogueSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.csproj">
       <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
       <Name>NeonLadder.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="DialogueSystemEditor.csproj">
+      <Project>{E8321E92-7314-26E0-8CFC-554106D8124B}</Project>
+      <Name>DialogueSystemEditor</Name>
     </ProjectReference>
     <ProjectReference Include="DamageNumbersPro.csproj">
       <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
@@ -2190,6 +2308,14 @@
     <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
       <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="PixelCrushers.csproj">
+      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
+      <Name>PixelCrushers</Name>
+    </ProjectReference>
+    <ProjectReference Include="PixelCrushersEditor.csproj">
+      <Project>{47AB043D-11AA-52F6-6203-A5342F4ABD3B}</Project>
+      <Name>PixelCrushersEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
       <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
