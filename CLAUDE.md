@@ -45,6 +45,45 @@ powershell -Command "& {cd 'C:\Users\Ender\NeonLadder'; .\sync-claude-settings.b
 - **@charles-xavier** - Product Owner: *"Welcome to Xavier's School for Gifted Developers"*
 - **@stephen-strange** - Game Mechanics Expert: *"I've seen 14,000,605 possible designs"*
 
+## 🤖 Dual-AI Integration System
+
+**🆕 NEW: OpenAI GPT-4o Integration for Specialized Analysis**
+
+**Usage Syntax:**
+- **"ask GPT about [topic]"** - Claude will consult GPT-4o for specialized analysis
+- **"ask GPT to analyze [code/system]"** - Get second opinion on complex implementations
+- **"ask GPT about Unity [specific pattern]"** - Unity-specific expertise consultation
+
+**When to Use GPT-4o Integration:**
+- Complex game mechanics analysis requiring different perspective
+- Unity-specific architectural decisions needing validation
+- Code review assistance for critical systems
+- Performance optimization strategies
+- Technical debt assessment from external viewpoint
+
+**Example Commands:**
+```
+"Claude, ask GPT about the roguelite progression system design"
+"Ask GPT to analyze our procedural generation approach" 
+"Ask GPT about Unity 6 URP performance optimization patterns"
+"Get GPT's opinion on our NavMesh agent overlap issue"
+```
+
+**Discord Bot Integration:**
+- **Active Bot**: `bot-dynamic.js` - Production Discord bot for team collaboration
+- **Commands**: `/ask-claude`, `/ask-gpt`, `/export-for-analysis`
+- **Start**: `start-neonladder-bot.bat` or `npm start` in bot directory
+- **Deploy**: `deploy-discord-bot.ps1` for server deployment
+
+**Configuration:**
+- Model: GPT-4o (latest reasoning model)
+- Budget: $5 testing integration
+- Config: `.claude/openai.config.json` (synced via Google Drive)
+- Discord Config: `.env` file with bot token and OpenAI API key
+- Collaborators: Available to all team members
+
+**Revolutionary Achievement**: World's first dual-AI development assistance system combining Claude's coding expertise with GPT-4o's specialized analysis, accessible through Discord for team collaboration.
+
 ## 📚 External Documentation System
 
 **All technical documentation externalized to Google Drive organized folders:**

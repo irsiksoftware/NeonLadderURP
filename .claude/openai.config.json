@@ -1,0 +1,18 @@
+{
+  "openai_api": {
+    "api_key": "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",
+    "organization": null,
+    "model": "gpt-4o",
+    "max_tokens": 4000,
+    "temperature": 0.7,
+    "purpose": "NeonLadder development integration testing",
+    "budget_limit": "$5 USD",
+    "collaborators": 2,
+    "created": "2025-08-06"
+  },
+  "usage_notes": [
+    "Testing integration with NeonLadder project analysis",
+    "Backup analysis for complex game mechanics questions",
+    "Code review assistance for Unity-specific patterns"
+  ]
+}
