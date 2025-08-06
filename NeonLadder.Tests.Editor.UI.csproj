@@ -64,6 +64,7 @@
     <Compile Include="Assets\Tests\Editor\UI\SimpleCompilationTest.cs" />
     <Compile Include="Assets\Tests\Editor\UI\MenuSystemIntegrationTestsSimplified.cs" />
     <Compile Include="Assets\Tests\Editor\UI\SaveSystemCommandCenterTests.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\ExamplePurchasableItemsTests.cs" />
     <Compile Include="Assets\Tests\Editor\UI\EditorUITestFramework.cs" />
     <Compile Include="Assets\Tests\Editor\UI\UpgradeSystemEditorTests.cs" />
   </ItemGroup>
@@ -1081,6 +1082,10 @@
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">
