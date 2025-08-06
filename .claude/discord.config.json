@@ -1,0 +1,29 @@
+{
+  "discord_integration": {
+    "bot_token": "MTQwMjYxNTM4ODEzNDcwMzIwNA.GFflMv.ZO3Je_QlaJHMnFJfkq6OduzLHl6qlwzt4BUIzE",
+    "application_id": "1402615388134703204",
+    "bot_name": "NeonLadder Assistant",
+    "server_name": "NeonLadder Discord",
+    "guild_id": "1222082585468080148",
+    "channels": {
+      "dev_updates": "TBD",
+      "test_results": "TBD", 
+      "claude_chat": "TBD",
+      "pbi_tracker": "TBD"
+    },
+    "features": [
+      "GitHub integration notifications",
+      "Unity test result posting",
+      "Interactive slash commands",
+      "Dual-AI GPT integration",
+      "Steam launch progress tracking"
+    ],
+    "hosting": {
+      "platform": "Railway.app",
+      "type": "24/7 cloud hosting",
+      "free_tier": "500 hours/month"
+    },
+    "created": "2025-08-06",
+    "status": "development"
+  }
+}

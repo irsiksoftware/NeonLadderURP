@@ -19,8 +19,21 @@
 - **Unity 6** (6000.0.26f1) with Universal Render Pipeline
 - **Event-driven simulation system** with custom HeapQueue for efficient scheduling
 - **Assembly definitions** for proper code organization and testing
-- **Comprehensive testing infrastructure** with 1000+ lines of unit tests
+- **Comprehensive testing infrastructure** with 449 unit tests across 33 test files
 - **Manager pattern** with modular system coordination
+- **🤖 Dual-AI Development System** - Claude + GPT-4o integration for specialized analysis
+
+### 🧠 AI-Assisted Development
+**Revolutionary dual-AI system combining Claude's coding expertise with GPT-4o specialized analysis:**
+
+**Usage:** Ask Claude to "ask GPT about [topic]" for:
+- Complex game mechanics analysis
+- Unity-specific architectural validation  
+- Performance optimization strategies
+- Technical debt assessment
+- Code review assistance
+
+**Example:** `"Claude, ask GPT about our roguelite progression system design"`
 
 ## 🧪 Test Reports - Live HTML Coverage
 
