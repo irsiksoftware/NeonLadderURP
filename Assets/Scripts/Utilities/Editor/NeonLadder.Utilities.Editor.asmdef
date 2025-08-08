@@ -1,0 +1,21 @@
+{
+    "name": "NeonLadder.Utilities.Editor",
+    "rootNamespace": "NeonLadder.Utilities.Editor",
+    "references": [
+        "NeonLadder.Scripts",
+        "UnityEngine.CoreModule",
+        "UnityEditor.CoreModule",
+        "UnityEditor.AnimationModule"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

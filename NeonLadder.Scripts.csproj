@@ -87,7 +87,6 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneEndController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\TimeTrackerUI.cs" />
     <Compile Include="Assets\Scripts\UI\BossesDefeatedUIDisplayManager.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RemoveNumericSuffix.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\ActionStates.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgrade.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\RangedAttackController.cs" />
@@ -104,7 +103,6 @@
     <Compile Include="Assets\Scripts\ProceduralGeneration\SceneManagement.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyAttackValidationEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\AllowZMovementController.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Editor\WebGLExcludeRemover.cs" />
     <Compile Include="Assets\Scripts\DataManagement\ConsolidatedSaveData.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeData.cs" />
     <Compile Include="Assets\Scripts\DataManagement\Examples\ExampleSaveConfigurations.cs" />
@@ -139,7 +137,6 @@
     <Compile Include="Assets\Scripts\DataManagement\EnhancedSaveSystem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\PlayerAnimationLayers.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerUnlock.cs" />
-    <Compile Include="Assets\Scripts\Debug\Editor\LoggingSystemSetup.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerTerrainCollision.cs" />
     <Compile Include="Assets\Scripts\WebRequests\WebRequestHandler.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerExhaustedEvent.cs" />
@@ -171,7 +168,6 @@
     <Compile Include="Assets\Scripts\Managers\SceneCycleManager.cs" />
     <Compile Include="Assets\Scripts\Events\FadeInCamera.cs" />
     <Compile Include="Assets\Scripts\Models\UnlockScriptableObject.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RecalculateObjectNames.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Colliders\ParentCollider.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyAnimationEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\ShopKeeperWindow.cs" />
@@ -204,7 +200,6 @@
     <Compile Include="Assets\Scripts\Core\ComboSystem.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\PathGenerator.cs" />
     <Compile Include="Assets\Scripts\Utilities\ButtonHelper.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RemoveAppendedCounts.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterContent.cs" />
@@ -221,7 +216,6 @@
     <Compile Include="Assets\Scripts\Events\CurrencyChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyStateTransitionEvent.cs" />
     <Compile Include="Assets\Scripts\Debug\DebugLogOverlayUI.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Editor\AnimatorTransitionChanger.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerEnteredVictoryZone.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\DamageNumberController.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerEnteredDeathZone.cs" />
@@ -240,7 +234,6 @@
     <Compile Include="Assets\Scripts\Utilities\AchevementResolver.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\GameStates.cs" />
     <Compile Include="Assets\Scripts\Events\InputBufferEvent.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Editor\DeleteAllTransitions.cs" />
     <Compile Include="Assets\Scripts\Dialog\Editor\DialogueSystemMenuItems.cs" />
     <Compile Include="Assets\Scripts\Utilities\PlatformVisibilityController.cs" />
     <Compile Include="Assets\Scripts\Cameras\DemoSceneCloseness.cs" />
@@ -288,7 +281,6 @@
     <Compile Include="Assets\Scripts\Effects\Text\Typewriter.cs" />
     <Compile Include="Assets\Scripts\Events\StaminaIsZero.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerSprintValidationEvent.cs" />
-    <Compile Include="Assets\Scripts\Utilities\Editor\BuildReportGenerator.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\FlyingMajor.cs" />
     <Compile Include="Assets\Scripts\Managers\MonsterGroupActivationManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\BuffTypes.cs" />

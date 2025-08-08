@@ -595,7 +595,6 @@
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\Planet Shader\Shader\StochasticNode.hlsl" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\SRP Support Packages\_Readme.txt" />
     <None Include="Assets\Packages\HeroEditor\Extensions\Style\Readme.txt" />
-    <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumetricLighting.compute" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Materials\VegetationWindyINfiniDy.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Noise Modules\GPUTerrainGeneration A.compute" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\FXWater4Advanced SM.shader" />
@@ -692,7 +691,6 @@
     <None Include="Assets\Packages\ILRanch\CyberRoom\ReadMe.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.0\Shaders\InvisibleShadowCaster.shader" />
     <None Include="Assets\Packages\Synty\SimpleRacer\Materials\UnlitVertexColour_Alpha.shader" />
-    <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumetricLightingFiltering.compute" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\Scatter Shaded Clouds\ScatterShadedCloud.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\RiverWater.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\TEMPORAL 2\Resources\TemporalAAShader.shader" />
@@ -2297,6 +2295,10 @@
       <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
       <Name>NeonLadder.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="NeonLadder.Debug.Editor.csproj">
+      <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
+      <Name>NeonLadder.Debug.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="DialogueSystemEditor.csproj">
       <Project>{E8321E92-7314-26E0-8CFC-554106D8124B}</Project>
       <Name>DialogueSystemEditor</Name>
@@ -2328,6 +2330,10 @@
     <ProjectReference Include="TAA.Runtime.csproj">
       <Project>{E9A8BA52-FE77-948F-C8AD-825193FE381C}</Project>
       <Name>TAA.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="NeonLadder.Utilities.Editor.csproj">
+      <Project>{94789BE6-96C4-2051-FEEE-FA37176F865B}</Project>
+      <Name>NeonLadder.Utilities.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
