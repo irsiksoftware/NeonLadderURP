@@ -37,6 +37,9 @@ namespace NeonLadderURP.DataManagement
         [Header("Statistics & Analytics")]
         public GameStatistics statistics = new GameStatistics();
         
+        [Header("Dialogue System")]
+        public DialogueSaveData dialogueData = new DialogueSaveData();
+        
         public void UpdateLastSaved()
         {
             lastSaved = DateTime.Now;
