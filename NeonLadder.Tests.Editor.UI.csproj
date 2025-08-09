@@ -1114,6 +1114,10 @@
       <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="NeonLadder.Debug.Editor.csproj">
+      <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
+      <Name>NeonLadder.Debug.Editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
