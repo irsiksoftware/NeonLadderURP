@@ -173,29 +173,90 @@ Settings stored in `.claude/package_export_config.json`:
 - **Error**: "Permission denied"
 - **Solution**: `chmod +x Scripts/export-packages.sh`
 
+## Complete Package Automation System
+
+### Quick Start - Main Command
+```bash
+./Scripts/package-automation.sh [command] [options]
+```
+
+### Available Commands
+
+| Command | Description | Example |
+|---------|-------------|------|
+| `download` | Download packages from Google Drive | `./Scripts/package-automation.sh download` |
+| `export` | Export Unity packages | `./Scripts/package-automation.sh export --dry-run` |
+| `upload` | Upload to Google Drive | `./Scripts/package-automation.sh upload` |
+| `sync` | Complete workflow (export + upload) | `./Scripts/package-automation.sh sync` |
+| `list` | Generate markdown package list | `./Scripts/package-automation.sh list` |
+| `verify` | Verify downloaded packages | `./Scripts/package-automation.sh verify` |
+
+## Download Packages (No Authentication Required)
+
+### Download All Packages
+```bash
+# Download all 35+ packages with Google Drive links
+./Scripts/package-automation.sh download
+```
+
+### Download Specific Packages
+```bash
+# Download specific packages by name
+./Scripts/package-automation.sh download --packages "HeroEditor" "Synty" "Modern UI Pack"
+
+# Download LeartesStudios packages
+./Scripts/package-automation.sh download --packages "LeartesStudios/Cyberpunk City"
+```
+
+### Direct Python Usage
+```bash
+# Download with progress tracking
+python3 Scripts/download_unity_packages.py
+
+# Verify existing downloads
+python3 Scripts/download_unity_packages.py --verify-only
+```
+
 ## Google Drive Integration
 
 ### Setup (First Time)
-1. Install gdrive CLI tool
-2. Authenticate: `gdrive account add`
-3. Configure folder ID in config file
+```bash
+# macOS/Linux
+brew install gdrive
+gdrive account add
 
-### Upload Process
-1. Exports create .unitypackage files
-2. Files upload to configured Google Drive folder
-3. Shareable links generated
-4. DownloadInstructions.txt updated with new links
+# Follow browser authentication
+```
+
+### Upload Workflow
+1. Export packages: `./Scripts/package-automation.sh export`
+2. Upload to Drive: `./Scripts/package-automation.sh upload`
+3. Links auto-update in DownloadInstructions.txt
+4. Generate list: `./Scripts/package-automation.sh list`
+
+### Complete Sync
+```bash
+# Full workflow: export → upload → update links
+./Scripts/package-automation.sh sync
+```
 
 ## Performance
 
-### Export Times (Approximate)
+### Download Performance (Tested)
+- **5Gbps Fiber**: Downloads limited by Google Drive (~10-50 Mbps)
+- **Small packages (<10MB)**: 1-2 seconds
+- **Medium packages (10-100MB)**: 5-30 seconds
+- **Large packages (>100MB)**: 30-120 seconds
+
+### Export Times (With Unity)
 - Small package (<10MB): 30-60 seconds
 - Medium package (10-100MB): 1-3 minutes
 - Large package (>100MB): 3-10 minutes
 
-### With 5Gbps Fiber
-- Upload 100MB: ~2 seconds
-- Upload 1GB: ~20 seconds
+### Package Statistics
+- **Total Packages**: 35+ with Google Drive links
+- **Categories**: LeartesStudios (20+), Third Party (15+)
+- **Total Size**: Varies by package selection
 
 ## Security Notes
 
