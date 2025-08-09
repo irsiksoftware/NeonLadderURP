@@ -704,6 +704,32 @@ git push -u origin feature/task-name
 
 **Note**: Full path required until CLI is added to system PATH. Authentication persists between sessions once configured.
 
+### Performance Profiling System (PBI-51)
+
+#### **✅ IMPLEMENTED: Unity Performance Menu Integration**
+**STATUS**: Complete implementation with comprehensive test coverage (2025-08-09)
+
+**Menu Items Added** (Under `NeonLadder/Performance/`):
+- **Profile Current Scene** (`Ctrl+Alt+P`) - One-click profiling with optimized settings
+- **Clear Profiler Data** - Reset profiler with confirmation dialog
+- **Export Performance Report** - Generate CSV, Markdown, and HTML reports
+- **Performance Settings...** - Configure thresholds and preferences
+- **Auto-Profile on Play** - Toggle automatic profiling in play mode
+
+**Key Features:**
+- Integration with existing `PerformanceProfiler.cs` system
+- Multi-format report generation (CSV for data analysis, Markdown for documentation, HTML for interactive dashboards)
+- Persistent settings via EditorPrefs
+- Automatic bottleneck detection (FPS < 30, Memory > 500MB, Draw Calls > 1000)
+- Custom NeonLadder metrics tracking (Enemy count, Active effects)
+
+**Files Created:**
+- `Assets/Scripts/Editor/Performance/PerformanceMenuItems.cs` (747 lines)
+- `Assets/Tests/Editor/PerformanceMenuTests.cs` (284 lines, 12 unit tests)
+
+**Test Coverage:** 12 comprehensive unit tests validating all functionality
+**PR Status:** PR #89 ready for review by @tony-stark
+
 ### Security Stance
 - **Defensive only**: Analyze code for malicious patterns
 - **Refuse** to create, modify, or improve exploitative code

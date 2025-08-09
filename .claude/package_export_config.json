@@ -1,0 +1,15 @@
+{
+  "packages_to_export": [
+    "Synty"
+  ],
+  "exclude_patterns": [
+    "*.meta",
+    ".git",
+    "__pycache__",
+    "*.pyc",
+    ".DS_Store",
+    "Thumbs.db"
+  ],
+  "google_drive_folder_id": null,
+  "last_export": "2025-08-09T00:34:37.240966"
+}
