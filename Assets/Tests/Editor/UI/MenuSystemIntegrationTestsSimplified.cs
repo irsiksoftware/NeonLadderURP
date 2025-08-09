@@ -8,7 +8,6 @@ using NUnit.Framework;
 using NeonLadder.Editor.SaveSystem;
 using NeonLadder.Editor.UpgradeSystem;
 using NeonLadder.Editor.InputSystem;
-using NeonLadder.Debugging.Editor;
 
 namespace NeonLadder.Tests.Editor.UI
 {

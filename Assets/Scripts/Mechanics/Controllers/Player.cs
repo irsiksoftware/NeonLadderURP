@@ -6,13 +6,14 @@ using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using NeonLadder.Optimization;
+using NeonLadder.Mechanics.Controllers.Interfaces;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class Player : KinematicObject
+    public class Player : KinematicObject, IPlayerState
     {
         [SerializeField]
         private ProgressBar HealthBar;
@@ -37,7 +38,9 @@ namespace NeonLadder.Mechanics.Controllers
         public bool IsMovingInZDimension { get; private set; }
 
 
-        public PlayerAction Actions { get; private set; }
+        // REFACTORED: Removed direct PlayerAction reference to break circular dependency
+        // Now using PlayerStateMediator for all action-related communication
+        private PlayerStateMediator mediator;
         public PlayerUnlock Unlocks { get; private set; }
         public Health Health { get; private set; }
         public Stamina Stamina { get; private set; }
@@ -76,7 +79,13 @@ namespace NeonLadder.Mechanics.Controllers
         protected override void Awake()
         {
             base.Awake();
-            Actions = GetComponent<PlayerAction>();
+            // REFACTORED: Get mediator instead of direct PlayerAction reference
+            mediator = GetComponent<PlayerStateMediator>();
+            if (mediator == null)
+            {
+                // Create mediator if it doesn't exist
+                mediator = gameObject.AddComponent<PlayerStateMediator>();
+            }
             Unlocks = GetComponent<PlayerUnlock>();
             audioSource = GetComponentInParent<AudioSource>();
             rigidbody = GetComponentInParent<Rigidbody>();
@@ -113,7 +122,8 @@ namespace NeonLadder.Mechanics.Controllers
             base.FixedUpdate();
             if (IsGrounded)
             {
-                Actions.ResetJumpCount();
+                // Use mediator to reset jump count instead of direct reference
+                mediator?.ResetJumpCount();
             }
         }
 
@@ -169,12 +179,16 @@ namespace NeonLadder.Mechanics.Controllers
             }
             else
             {
-                targetVelocity.x = Actions.playerInput.x * Constants.DefaultMaxSpeed * ((Actions?.IsSprinting ?? false) ? Constants.SprintSpeedMultiplier : 1);
+                // Use mediator to get player input and sprint state
+                var playerInput = mediator != null ? mediator.GetPlayerInput() : Vector2.zero;
+                var isSprinting = mediator != null && mediator.IsPlayerSprinting();
+                
+                targetVelocity.x = playerInput.x * Constants.DefaultMaxSpeed * (isSprinting ? Constants.SprintSpeedMultiplier : 1);
 
-                // Handle jumping through event system
-                if (Actions.isJumping)
+                // Handle jumping through mediator
+                if (mediator != null && mediator.IsJumpRequested())
                 {
-                    Actions.ScheduleJump(0f); // Immediate jump validation
+                    mediator.ScheduleJump(0f); // Immediate jump validation
                 }
             }
         }
@@ -205,7 +219,8 @@ namespace NeonLadder.Mechanics.Controllers
         {
             if (velocity.y > 2)
             {
-                if (Actions.JumpCount == 2)
+                // Use mediator to get jump count
+                if (mediator != null && mediator.GetJumpCount() == 2)
                 {
                     Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), rollAnimation); // roll
                 }
@@ -348,6 +363,14 @@ namespace NeonLadder.Mechanics.Controllers
             audioEvent.player = this;
             audioEvent.audioType = audioType;
         }
+        
+        /// <summary>
+        /// Sets the mediator for decoupled communication with PlayerAction
+        /// </summary>
+        public void SetMediator(PlayerStateMediator mediator)
+        {
+            this.mediator = mediator;
+        }
 
         // Replace direct stamina regeneration with event-driven approach
         public void ScheduleStaminaRegeneration(float delay = Constants.Physics.Stamina.RegenInterval)
@@ -359,5 +382,30 @@ namespace NeonLadder.Mechanics.Controllers
                 regenEvent.amount = Constants.Physics.Stamina.RegenAmount;
             }
         }
+        
+        #region IPlayerState Implementation
+        
+        // Movement State
+        public Vector3 Velocity => velocity;
+        public bool IsAlive => Health != null && Health.IsAlive;
+        public float CurrentHealth => Health?.current ?? 0f;
+        public float MaxHealth => Health?.max ?? 100f;
+        public float CurrentStamina => Stamina?.current ?? 0f;
+        public float MaxStamina => Stamina?.max ?? 100f;
+        public Transform Transform => transform;
+        
+        // Already defined in KinematicObject:
+        // public bool IsGrounded { get; }
+        // public bool IsFacingLeft { get; set; }
+        // public bool IsMovingInZDimension { get; private set; }
+        // public bool IsUsingMelee { get; set; }
+        // public float AttackAnimationDuration { get; }
+        // public Animator Animator { get; }
+        
+        // Z-Movement methods already exist:
+        // public void EnableZMovement()
+        // public void DisableZMovement()
+        
+        #endregion
     }
 }

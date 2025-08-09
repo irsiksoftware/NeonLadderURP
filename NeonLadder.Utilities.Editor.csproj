@@ -9,11 +9,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>NeonLadder.Tests.Editor.UI</RootNamespace>
-    <ProjectGuid>{855FE7EB-AFB1-6F0E-92E0-5A91C01363BB}</ProjectGuid>
+    <RootNamespace>NeonLadder.Utilities.Editor</RootNamespace>
+    <ProjectGuid>{94789BE6-96C4-2051-FEEE-FA37176F865B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>NeonLadder.Tests.Editor.UI</AssemblyName>
+    <AssemblyName>NeonLadder.Utilities.Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -61,18 +61,16 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Tests\Editor\UI\SimpleCompilationTest.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\PackageManagementMenuTests.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\MenuSystemIntegrationTestsSimplified.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\SaveSystemCommandCenterTests.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\PackageManagementDynamicTests.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\ExamplePurchasableItemsTests.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\PackageManagerWindowTests.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\EditorUITestFramework.cs" />
-    <Compile Include="Assets\Tests\Editor\UI\UpgradeSystemEditorTests.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RemoveNumericSuffix.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Editor\WebGLExcludeRemover.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RecalculateObjectNames.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Editor\RenamingHelpers\RemoveAppendedCounts.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Editor\AnimatorTransitionChanger.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Editor\DeleteAllTransitions.cs" />
+    <Compile Include="Assets\Scripts\Utilities\Editor\BuildReportGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Tests\Editor\UI\NeonLadder.Tests.Editor.UI.asmdef" />
+    <None Include="Assets\Scripts\Utilities\Editor\NeonLadder.Utilities.Editor.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -567,8 +565,108 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="HeroEditor.Common.Editor">
+      <HintPath>Assets\Packages\HeroEditor\Common\Scripts\Editor\HeroEditor.Common.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.YamlDotNet">
+      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+      <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Tracker.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.Editor">
+      <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EasyRoads3Dv3Editor">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EasyRoads3Dv3">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl">
+      <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandlerImpl.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.IonicZip">
+      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HeroEditor.Common">
+      <HintPath>Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\HeroEditor.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.JarResolver">
+      <HintPath>Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DelaunayER">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AssetStoreTools">
+      <HintPath>Assets\Packages\LeartesStudios\AssetStoreTools\Editor\AssetStoreTools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>Library\PackageCache\com.unity.analytics\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1079,18 +1177,6 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
@@ -1099,27 +1185,19 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NeonLadder.Scripts.csproj">
       <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
       <Name>NeonLadder.Scripts</Name>
-    </ProjectReference>
-    <ProjectReference Include="NeonLadder.Tests.Runtime.csproj">
-      <Project>{DFF72330-1879-B153-DC36-8A047CEF02B9}</Project>
-      <Name>NeonLadder.Tests.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="NeonLadder.Editor.csproj">
-      <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
-      <Name>NeonLadder.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
-      <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
-      <Name>NeonLadder.Editor.InputSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="NeonLadder.Debug.Editor.csproj">
-      <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
-      <Name>NeonLadder.Debug.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
