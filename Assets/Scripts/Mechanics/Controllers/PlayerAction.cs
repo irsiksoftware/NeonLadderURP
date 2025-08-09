@@ -13,10 +13,12 @@ using NeonLadder.Debugging;
 
 namespace NeonLadder.Mechanics.Controllers
 {
-    public class PlayerAction : BaseAction, IControllable
+    public class PlayerAction : BaseAction, IControllable, IPlayerActions
     {
         private PlayerCameraPositionManager playerPositionManager;
-        private Player player;
+        // REFACTORED: Removed direct Player reference to break circular dependency
+        // Now using PlayerStateMediator for all player state access
+        private PlayerStateMediator mediator;
         public Vector2 playerInput = new Vector2(0, 0);
         private float sprintTimeAccumulator = 0f;
         public bool isClimbing { get; set; }
@@ -67,7 +69,13 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected void Start()
         {
-            player = GetComponent<Player>();
+            // REFACTORED: Get mediator instead of direct Player reference
+            mediator = GetComponent<PlayerStateMediator>();
+            if (mediator == null)
+            {
+                // Create mediator if it doesn't exist
+                mediator = gameObject.AddComponent<PlayerStateMediator>();
+            }
             var managerObj = GameObject.FindGameObjectWithTag(Tags.Managers.ToString());
             if (managerObj == null)
             {
@@ -76,8 +84,13 @@ namespace NeonLadder.Mechanics.Controllers
             else
             {
                 playerPositionManager = managerObj.GetComponentInChildren<PlayerCameraPositionManager>();
-                ConfigureControls(player);
-                ControllerDebugging.PrintDebugControlConfiguration(player);
+                // Pass mediator's player reference for configuration
+                var player = GetComponent<Player>();
+                if (player != null)
+                {
+                    ConfigureControls(player);
+                    ControllerDebugging.PrintDebugControlConfiguration(player);
+                }
                 if (meleeWeaponGroups == null || meleeWeaponGroups.Count == 0)
                 {
                     meleeWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("MeleeWeapons"));
@@ -87,16 +100,18 @@ namespace NeonLadder.Mechanics.Controllers
                     rangedWeaponGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("Firearms"));
                 }
 
-                // Initialize weapon states to match player.IsUsingMelee
+                // Initialize weapon states to match player's melee state
                 InitializeWeaponStates();
             }
         }
 
         protected override void Update()
         {
-            if (playerActionMap.enabled)
+            if (playerActionMap.enabled && mediator != null)
             {
-                UpdateSprintState(ref player.velocity);
+                // Get velocity from mediator and update sprint state
+                var velocity = mediator.GetPlayerVelocity();
+                UpdateSprintState(ref velocity);
 
                 // NOTE: UpdateAttackState() disabled - new InputBufferEvent system handles attacks
                 // UpdateAttackState();
@@ -107,7 +122,11 @@ namespace NeonLadder.Mechanics.Controllers
                 AnimationDebuggingText.gameObject.SetActive(Constants.DisplayAnimationDebugInfo);
                 if (Constants.DisplayAnimationDebugInfo)
                 {
-                    AnimationDebuggingText.text = AnimationDebugging.GetAnimationParameters(player.Animator);
+                    var animator = mediator?.GetPlayerAnimator();
+                    if (animator != null)
+                    {
+                        AnimationDebuggingText.text = AnimationDebugging.GetAnimationParameters(animator);
+                    }
                 }
             }
 
@@ -152,7 +171,11 @@ namespace NeonLadder.Mechanics.Controllers
 
                 if (playerActionMap == null)
                 {
-                    ConfigureControls(player);
+                    var player = GetComponent<Player>();
+                    if (player != null)
+                    {
+                        ConfigureControls(player);
+                    }
                 }
 
                 playerActionMap.Enable();
@@ -206,7 +229,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void ConfigureControls(Player player)
         {
-            playerActionMap = player.Controls.FindActionMap("Player");
+            playerActionMap = player?.Controls?.FindActionMap("Player");
             playerActionMap.Enable();
 
             var sprintAction = playerActionMap.FindAction("Sprint");
@@ -254,11 +277,11 @@ namespace NeonLadder.Mechanics.Controllers
                 var cameraRotation = NeonLadder.Cameras.CameraRotationProvider.GetCameraRotation();
 
                 playerPositionManager.SaveState(sceneName,
-                                                player.transform.parent.position,
+                                                mediator?.GetPlayerTransform()?.parent.position ?? Vector3.zero,
                                                 cameraPosition,
                                                 cameraRotation);
 
-                player.EnableZMovement();
+                mediator?.EnablePlayerZMovement();
             }
         }
 
@@ -332,7 +355,7 @@ namespace NeonLadder.Mechanics.Controllers
                         sprintTimeAccumulator += Time.deltaTime;
                         if (sprintTimeAccumulator >= 0.1f)
                         {
-                            player.ScheduleStaminaDamage(staminaCostPerTenthSecond, 0f); // Schedule stamina consumption
+                            mediator?.SchedulePlayerStaminaDamage(staminaCostPerTenthSecond, 0f); // Schedule stamina consumption
                             sprintTimeAccumulator -= 0.1f; // Subtract 0.1 seconds from the accumulator
                         }
 
@@ -386,7 +409,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnMovePerformed(InputAction.CallbackContext context)
         {
-            if (player.Health.IsAlive)
+            if (mediator != null && mediator.IsPlayerAlive())
             {
                 playerInput = context.ReadValue<Vector2>();
                 if (playerInput.x != 0)
@@ -414,13 +437,18 @@ namespace NeonLadder.Mechanics.Controllers
             
             if (attackComponents != null && attackComponents.Count > 0)
             {
-                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
-
-                // Start the attack animation
-                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), (player.IsUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
+                var animator = mediator?.GetPlayerAnimator();
+                if (animator != null)
+                {
+                    animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1); // Activate action layer
+                    
+                    // Start the attack animation
+                    var isUsingMelee = mediator.IsUsingMelee();
+                    animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), isUsingMelee ? meleeAttackAnimation : rangedAttackAnimation);
+                }
 
                 // Calculate the duration to ignore based on the percentage
-                float ignoreDuration = player.AttackAnimationDuration * percentageOfAnimationToIgnore;
+                float ignoreDuration = mediator.GetAttackAnimationDuration() * percentageOfAnimationToIgnore;
 
                 // Wait for the ignore duration
                 yield return new WaitForSeconds(ignoreDuration);
@@ -432,7 +460,7 @@ namespace NeonLadder.Mechanics.Controllers
                 }
 
                 // Wait for the remaining duration of the attack animation
-                yield return new WaitForSeconds(player.AttackAnimationDuration - ignoreDuration);
+                yield return new WaitForSeconds(mediator.GetAttackAnimationDuration() - ignoreDuration);
 
                 // Reset the attack components back to the default layer
                 foreach (var attackComponent in attackComponents)
@@ -441,28 +469,41 @@ namespace NeonLadder.Mechanics.Controllers
                 }
 
                 // Reset the action layer weight and animation state
-                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
-                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
+                var resetAnimator = mediator?.GetPlayerAnimator();
+                if (resetAnimator != null)
+                {
+                    resetAnimator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
+                    resetAnimator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0); // Deactivate action layer
+                }
             }
             else
             {
                 // CRITICAL FIX: Always reset state even if no attack components
                 // Still play attack animation even without valid targets
-                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1);
-                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 
-                    (player.IsUsingMelee) ? meleeAttackAnimation : rangedAttackAnimation);
+                var noTargetAnimator = mediator?.GetPlayerAnimator();
+                if (noTargetAnimator != null)
+                {
+                    noTargetAnimator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1);
+                    var isUsingMelee = mediator.IsUsingMelee();
+                    noTargetAnimator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 
+                        isUsingMelee ? meleeAttackAnimation : rangedAttackAnimation);
+                }
                 
-                yield return new WaitForSeconds(player.AttackAnimationDuration);
+                yield return new WaitForSeconds(mediator?.GetAttackAnimationDuration() ?? 1.0f);
                 
                 // Reset animation
-                player.Animator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
-                player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0);
+                var finalAnimator = mediator?.GetPlayerAnimator();
+                if (finalAnimator != null)
+                {
+                    finalAnimator.SetInteger(nameof(PlayerAnimationLayers.action_animation), 0);
+                    finalAnimator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0);
+                }
             }
         }
 
         private void InitializeWeaponStates()
         {
-            if (player.IsUsingMelee)
+            if (mediator != null && mediator.IsUsingMelee())
             {
                 // Player starts with melee - activate melee, deactivate ranged
                 SetWeaponGroupsActive(meleeWeaponGroups, true);
@@ -555,13 +596,72 @@ namespace NeonLadder.Mechanics.Controllers
         private PlayerMovementState GetCurrentMovementState()
         {
             // Determine current state based on velocity and animation
-            if (player.velocity.y > 2) return PlayerMovementState.Jumping;
-            if (player.velocity.y < -2) return PlayerMovementState.Falling;
-            if (System.Math.Abs(player.velocity.x) > 4 || System.Math.Abs(player.velocity.z) > 4) 
+            var velocity = mediator?.GetPlayerVelocity() ?? Vector3.zero;
+            if (velocity.y > 2) return PlayerMovementState.Jumping;
+            if (velocity.y < -2) return PlayerMovementState.Falling;
+            if (System.Math.Abs(velocity.x) > 4 || System.Math.Abs(velocity.z) > 4) 
                 return PlayerMovementState.Running;
-            if (System.Math.Abs(player.velocity.x) > 0.1 || System.Math.Abs(player.velocity.z) > 0.1) 
+            if (System.Math.Abs(velocity.x) > 0.1 || System.Math.Abs(velocity.z) > 0.1) 
                 return PlayerMovementState.Walking;
             return PlayerMovementState.Idle;
         }
+        
+        /// <summary>
+        /// Sets the mediator for decoupled communication with Player
+        /// </summary>
+        public void SetMediator(PlayerStateMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+        
+        #region IPlayerActions Implementation
+        
+        // Input State
+        public Vector2 PlayerInput => playerInput;
+        public bool IsJumping => isJumping;
+        public bool IsClimbing => isClimbing;
+        // IsSprinting already defined as property
+        
+        // Combat State
+        public bool IsAttacking => attackState == ActionStates.Acting;
+        // AttackAnimationDuration already defined as property
+        
+        // JumpCount and MaxJumps already defined as properties
+        // JumpForce already defined as field
+        public float JumpForce => jumpForce;
+        
+        // Action Methods - most already exist
+        // ResetJumpCount() already defined
+        // ScheduleJump() already defined
+        // StartAttack() needs to be added
+        public void StartAttack()
+        {
+            StartCoroutine(HandleAttack());
+        }
+        
+        // StopAttack() needs to be added  
+        public void StopAttack()
+        {
+            stopAttack = true;
+            attackState = ActionStates.Ready;
+        }
+        
+        // StartSprint() needs to be added
+        public void StartSprint()
+        {
+            if (sprintState == ActionStates.Ready)
+            {
+                sprintState = ActionStates.Acting;
+            }
+        }
+        
+        // StopSprint() needs to be added
+        public void StopSprint()
+        {
+            stopSprint = true;
+            sprintState = ActionStates.Ready;
+        }
+        
+        #endregion
     }
 }
