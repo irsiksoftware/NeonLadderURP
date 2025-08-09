@@ -68,8 +68,10 @@
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildMenuItems.cs" />
     <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveStateConfigurationEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\PackageManagementDynamic.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildSystemTester.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveSystemCommandCenter.cs" />
+    <Compile Include="Assets\Scripts\Editor\PackageManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Editor\NeonLadder.Editor.asmdef" />
