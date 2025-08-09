@@ -170,7 +170,12 @@ Synced with UnityPackageSync
 """
         
         txt_file.write_text(content)
-        logger.info(f"Updated: {txt_file.relative_to(self.project_path)}")
+        try:
+            relative_path = txt_file.relative_to(self.project_path)
+        except ValueError:
+            # Handle case where paths don't match exactly (e.g., symlinks)
+            relative_path = txt_file.name
+        logger.info(f"Updated: {relative_path}")
     
     def create_placeholder_package(self, package_path: Path, package_name: str) -> Path:
         """Create a placeholder .unitypackage for packages without Unity"""
