@@ -367,6 +367,169 @@ namespace NeonLadder.Dialog.Editor
                     "Could not find DialogueSystemSetupGuide.html in the documentation folder.", "OK");
             }
         }
+        
+        [MenuItem("Tools/NeonLadder/Dialogue System/Initialize Integration", priority = 1)]
+        public static void InitializeDialogueSystemIntegration()
+        {
+            // Check if DialogueSystemIntegration exists in scene
+            var integration = GameObject.FindObjectOfType<DialogueSystemIntegration>();
+            
+            if (integration == null)
+            {
+                // Create new GameObject with integration component
+                GameObject go = new GameObject("DialogueSystemIntegration");
+                integration = go.AddComponent<DialogueSystemIntegration>();
+                
+                // Configure default settings
+                var serializedObject = new SerializedObject(integration);
+                serializedObject.FindProperty("autoLoadDatabase").boolValue = true;
+                serializedObject.FindProperty("integrateWithSaveSystem").boolValue = true;
+                serializedObject.FindProperty("integrateWithCurrencySystem").boolValue = true;
+                serializedObject.FindProperty("integrateWithProgressionSystem").boolValue = true;
+                serializedObject.ApplyModifiedProperties();
+                
+                // Mark as dirty for save
+                EditorUtility.SetDirty(integration);
+                
+                Debug.Log("✅ Dialogue System Integration initialized in scene");
+                EditorUtility.DisplayDialog("Integration Initialized", 
+                    "DialogueSystemIntegration has been added to the scene.\n\n" +
+                    "Configure the database path and integration settings in the inspector.", 
+                    "OK");
+            }
+            else
+            {
+                Debug.Log("ℹ️ DialogueSystemIntegration already exists in scene");
+                EditorUtility.DisplayDialog("Already Initialized", 
+                    "DialogueSystemIntegration already exists in the scene.", 
+                    "OK");
+                
+                // Select the existing integration
+                Selection.activeGameObject = integration.gameObject;
+            }
+        }
+        
+        [MenuItem("Tools/NeonLadder/Dialogue System/Create Database", priority = 2)]
+        public static void CreateDialogueDatabase()
+        {
+            // Create database folder if it doesn't exist
+            string databasePath = "Assets/Resources/DialogueData";
+            if (!AssetDatabase.IsValidFolder(databasePath))
+            {
+                System.IO.Directory.CreateDirectory(databasePath);
+                AssetDatabase.Refresh();
+            }
+            
+            // Create new database configuration asset
+            var databaseConfig = CreateScriptableObjectAsset<DialogueChoiceDatabase>("NewDialogueDatabase");
+            
+            if (databaseConfig != null)
+            {
+                PopulateSampleChoiceData(databaseConfig);
+                
+                Debug.Log($"✅ Created dialogue database: {databaseConfig.name}");
+                EditorUtility.DisplayDialog("Database Created", 
+                    $"New dialogue database created: {databaseConfig.name}\n\n" +
+                    "Sample data has been populated for testing.", 
+                    "OK");
+            }
+        }
+        
+        [MenuItem("Tools/NeonLadder/Dialogue System/Test Integration", priority = 3)]
+        public static void TestDialogueSystemIntegration()
+        {
+            var integration = GameObject.FindObjectOfType<DialogueSystemIntegration>();
+            
+            if (integration == null)
+            {
+                EditorUtility.DisplayDialog("Integration Not Found", 
+                    "DialogueSystemIntegration not found in scene.\n\n" +
+                    "Please initialize the integration first.", 
+                    "OK");
+                return;
+            }
+            
+            // Run basic integration tests
+            bool testsPass = true;
+            string testResults = "Dialogue System Integration Test Results:\n\n";
+            
+            // Test 1: Check if singleton works
+            var instance = DialogueSystemIntegration.Instance;
+            if (instance != null)
+            {
+                testResults += "✅ Singleton instance accessible\n";
+            }
+            else
+            {
+                testResults += "❌ Singleton instance failed\n";
+                testsPass = false;
+            }
+            
+            // Test 2: Check variable system
+            instance.SetVariable("TestVar", 42);
+            int testValue = instance.GetVariable<int>("TestVar");
+            if (testValue == 42)
+            {
+                testResults += "✅ Variable system working\n";
+            }
+            else
+            {
+                testResults += "❌ Variable system failed\n";
+                testsPass = false;
+            }
+            
+            // Test 3: Check event system
+            try
+            {
+                instance.TriggerEvent("TestEvent");
+                testResults += "✅ Event system working\n";
+            }
+            catch
+            {
+                testResults += "❌ Event system failed\n";
+                testsPass = false;
+            }
+            
+            // Test 4: Check analytics
+            var report = instance.GetAnalyticsReport();
+            if (report != null)
+            {
+                testResults += "✅ Analytics system working\n";
+            }
+            else
+            {
+                testResults += "❌ Analytics system failed\n";
+                testsPass = false;
+            }
+            
+            // Display results
+            string title = testsPass ? "Tests Passed" : "Tests Failed";
+            EditorUtility.DisplayDialog(title, testResults, "OK");
+            
+            Debug.Log(testResults);
+        }
+        
+        [MenuItem("Tools/NeonLadder/Dialogue System/Generate Sample Content", priority = 10)]
+        public static void GenerateSampleDialogueContent()
+        {
+            // Create sample boss conversation
+            CreateSampleBossDialogueScene();
+            
+            // Create sample NPC conversation
+            CreateSampleNPCDialogueScene();
+            
+            // Create sample choice database
+            CreateDialogueChoiceDatabase();
+            
+            Debug.Log("✅ Generated sample dialogue content");
+            EditorUtility.DisplayDialog("Sample Content Generated", 
+                "Created:\n" +
+                "- Sample Boss Dialogue Scene\n" +
+                "- Sample NPC Dialogue Scene\n" +
+                "- Sample Choice Database\n\n" +
+                "Check your project folder for the new assets.", 
+                "OK");
+        }
     }
 }
 #endif
