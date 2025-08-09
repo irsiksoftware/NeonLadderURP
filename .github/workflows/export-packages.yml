@@ -1,0 +1,148 @@
+name: Export Unity Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: 'Specific packages to export (space-separated, leave empty for all)'
+        required: false
+        default: ''
+      skip_upload:
+        description: 'Skip Google Drive upload'
+        required: false
+        type: boolean
+        default: false
+  
+  schedule:
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+  
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'Assets/Packages/**'
+      - 'Scripts/export_unity_packages.py'
+
+jobs:
+  export-packages:
+    name: Export Unity Packages
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        unity-version: ['6000.0.26f1']
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Cache Unity installation
+        uses: actions/cache@v3
+        with:
+          path: |
+            /opt/Unity
+            C:\Program Files\Unity
+            /Applications/Unity
+          key: unity-${{ matrix.unity-version }}-${{ matrix.os }}
+      
+      - name: Install Unity (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q https://beta.unity3d.com/download/linux/UnitySetup-${{ matrix.unity-version }}
+          chmod +x UnitySetup-${{ matrix.unity-version }}
+          sudo ./UnitySetup-${{ matrix.unity-version }} --unattended --install-location=/opt/Unity
+        continue-on-error: true
+      
+      - name: Install Unity (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco install unity-hub -y
+          # Unity installation would be pre-configured in self-hosted runners
+        continue-on-error: true
+      
+      - name: Install Unity (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install --cask unity-hub
+          # Unity installation would be pre-configured in self-hosted runners
+        continue-on-error: true
+      
+      - name: Set Unity path environment variable
+        run: |
+          if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+            echo "UNITY_PATH=/opt/Unity/Editor/Unity" >> $GITHUB_ENV
+          elif [ "${{ matrix.os }}" == "windows-latest" ]; then
+            echo "UNITY_PATH=C:\Program Files\Unity\Hub\Editor\${{ matrix.unity-version }}\Editor\Unity.exe" >> $GITHUB_ENV
+          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
+            echo "UNITY_PATH=/Applications/Unity/Hub/Editor/${{ matrix.unity-version }}/Unity.app/Contents/MacOS/Unity" >> $GITHUB_ENV
+          fi
+        shell: bash
+      
+      - name: Run package export (dry run for PRs)
+        if: github.event_name == 'pull_request'
+        run: |
+          python Scripts/export_unity_packages.py \
+            --project-path . \
+            --dry-run \
+            ${{ github.event.inputs.packages }}
+      
+      - name: Run package export (actual export)
+        if: github.event_name != 'pull_request'
+        run: |
+          python Scripts/export_unity_packages.py \
+            --project-path . \
+            ${{ github.event.inputs.skip_upload && '--skip-upload' || '' }} \
+            ${{ github.event.inputs.packages }}
+      
+      - name: Upload exported packages as artifacts
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v3
+        with:
+          name: unity-packages-${{ matrix.os }}
+          path: PackageExports/*.unitypackage
+          retention-days: 30
+      
+      - name: Upload manifest
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v3
+        with:
+          name: export-manifest-${{ matrix.os }}
+          path: PackageExports/manifest_*.json
+          retention-days: 90
+      
+      - name: Create release (on tag)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            PackageExports/*.unitypackage
+            PackageExports/manifest_*.json
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notify-completion:
+    name: Notify Export Completion
+    needs: export-packages
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Send notification
+        run: |
+          echo "Package export workflow completed"
+          echo "Status: ${{ needs.export-packages.result }}"
+          # Add Slack, Discord, or email notification here if needed
