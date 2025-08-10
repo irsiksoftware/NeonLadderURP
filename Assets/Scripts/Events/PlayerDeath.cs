@@ -1,4 +1,5 @@
 ﻿using NeonLadder.Common;
+using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using System.Collections;
 using UnityEngine;
@@ -19,7 +20,8 @@ namespace NeonLadder.Events
             model.Player.Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), 5);
             model.Player.MetaCurrency.Deplete();
             model.Player.Stamina.Deplete();
-            model.Player.Actions.playerActionMap.Disable();
+            var mediator = model.Player.GetComponent<PlayerStateMediator>();
+            mediator?.DisablePlayerActionMap();
             model.Player.StartCoroutine(HandleDeathAnimation());
         }
 

@@ -119,7 +119,7 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        protected override void ComputeVelocity()
+        public override void ComputeVelocity()
         {
             base.ComputeVelocity();
             if (health.IsAlive)

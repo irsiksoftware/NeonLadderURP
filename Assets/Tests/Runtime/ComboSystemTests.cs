@@ -5,7 +5,7 @@ using System.Collections;
 using NeonLadder.Core;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
-using NeonLadder.Mechanics.Events;
+using NeonLadder.Mechanics.Stats;
 
 namespace NeonLadder.Tests.Runtime
 {
@@ -27,16 +27,26 @@ namespace NeonLadder.Tests.Runtime
             comboSystem = new ComboSystem();
             Simulation.SetModel(comboSystem);
             
-            // Create test player
+            // Create test player with proper dependencies
             playerObject = new GameObject("TestPlayer");
-            player = playerObject.AddComponent<Player>();
             
-            // Add required components
-            var controller = playerObject.AddComponent<CharacterController>();
+            // Add required base components first
+            var rigidbody = playerObject.AddComponent<Rigidbody>();
+            rigidbody.useGravity = false;
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            
             var animator = playerObject.AddComponent<Animator>();
             
-            // Initialize player
-            player.controlEnabled = true;
+            // Add required Player dependencies
+            var health = playerObject.AddComponent<Health>();
+            var stamina = playerObject.AddComponent<Stamina>();
+            
+            // Add both Player and PlayerAction components first
+            var playerAction = playerObject.AddComponent<PlayerAction>();
+            player = playerObject.AddComponent<Player>();
+            
+            // Add PlayerStateMediator last so it can find both components
+            var mediator = playerObject.AddComponent<PlayerStateMediator>();
         }
         
         [TearDown]
@@ -130,11 +140,8 @@ namespace NeonLadder.Tests.Runtime
             {
                 inputType = InputType.Attack,
                 player = player,
-                bufferedInput = new BufferedInput
-                {
-                    inputType = InputType.Attack,
-                    timestamp = Time.time
-                }
+                comboStep = 0,
+                comboId = "test-combo"
             };
             
             // Act - Execute first attack to start combo window
@@ -145,11 +152,8 @@ namespace NeonLadder.Tests.Runtime
             {
                 inputType = InputType.Attack,
                 player = player,
-                bufferedInput = new BufferedInput
-                {
-                    inputType = InputType.Attack,
-                    timestamp = Time.time
-                }
+                comboStep = 1,
+                comboId = "test-combo"
             };
             
             // Check if second attack would be a combo

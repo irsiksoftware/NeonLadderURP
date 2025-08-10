@@ -107,7 +107,10 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
-            if (playerActionMap.enabled && mediator != null)
+            // Only proceed if both mediator and input system are properly initialized
+            if (mediator == null || playerActionMap == null) return;
+            
+            if (playerActionMap.enabled)
             {
                 // Get velocity from mediator and update sprint state
                 var velocity = mediator.GetPlayerVelocity();
@@ -135,6 +138,7 @@ namespace NeonLadder.Mechanics.Controllers
                 PlayerActionsDebugText.gameObject.SetActive(Constants.DisplayPlayerActionDebugInfo);
                 if (Constants.DisplayPlayerActionDebugInfo)
                 {
+                    var player = GetComponent<Player>();
                     PlayerActionsDebugText.text = PlayerActionDebugging.GetPlayerActionParameters(player, this);
                 }
             }
@@ -294,7 +298,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             // Schedule input buffer event for jump
             var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
-            inputEvent.player = player;
+            inputEvent.player = GetComponent<Player>();
             inputEvent.inputType = InputType.Jump;
             inputEvent.context = context;
             inputEvent.bufferWindow = 0.15f;
@@ -305,7 +309,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             // Schedule input buffer event for weapon swap
             var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
-            inputEvent.player = player;
+            inputEvent.player = GetComponent<Player>();
             inputEvent.inputType = InputType.WeaponSwap;
             inputEvent.context = context;
             inputEvent.bufferWindow = 0.1f;
@@ -318,7 +322,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             // Schedule input buffer event for attack
             var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
-            inputEvent.player = player;
+            inputEvent.player = GetComponent<Player>();
             inputEvent.inputType = InputType.Attack;
             inputEvent.context = context;
             inputEvent.bufferWindow = 0.2f;
@@ -392,7 +396,7 @@ namespace NeonLadder.Mechanics.Controllers
         {
             // Schedule input buffer event for sprint
             var inputEvent = Simulation.Schedule<InputBufferEvent>(0f);
-            inputEvent.player = player;
+            inputEvent.player = GetComponent<Player>();
             inputEvent.inputType = InputType.Sprint;
             inputEvent.context = context;
             inputEvent.bufferWindow = 0.1f;
@@ -564,6 +568,7 @@ namespace NeonLadder.Mechanics.Controllers
         // Event-driven methods to replace direct action execution
         public void ScheduleJump(float delay = 0f)
         {
+            var player = GetComponent<Player>();
             if (player != null)
             {
                 var jumpEvent = Simulation.Schedule<PlayerJumpValidationEvent>(delay);
@@ -574,6 +579,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void ScheduleSprintValidation(float delay = 0f)
         {
+            var player = GetComponent<Player>();
             if (player != null)
             {
                 var sprintEvent = Simulation.Schedule<PlayerSprintValidationEvent>(delay);
@@ -584,6 +590,7 @@ namespace NeonLadder.Mechanics.Controllers
 
         public void ScheduleMovementStateChange(PlayerMovementState newState, float delay = 0f)
         {
+            var player = GetComponent<Player>();
             if (player != null)
             {
                 var stateEvent = Simulation.Schedule<PlayerMovementStateChangeEvent>(delay);
@@ -637,6 +644,14 @@ namespace NeonLadder.Mechanics.Controllers
         public void StartAttack()
         {
             StartCoroutine(HandleAttack());
+        }
+        
+        private IEnumerator HandleAttack()
+        {
+            // Perform attack logic
+            attackState = ActionStates.Acting;
+            yield return new WaitForSeconds(attackAnimationDuration);
+            attackState = ActionStates.Ready;
         }
         
         // StopAttack() needs to be added  

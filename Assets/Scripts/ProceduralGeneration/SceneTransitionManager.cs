@@ -453,8 +453,8 @@ namespace NeonLadder.ProceduralGeneration
             var playerComponent = player.GetComponent<Player>();
             if (playerComponent != null)
             {
-                playerSnapshot.health = playerComponent.health;
-                playerSnapshot.stamina = playerComponent.stamina;
+                playerSnapshot.health = Mathf.RoundToInt(playerComponent.health.current);
+                playerSnapshot.stamina = playerComponent.stamina.current;
                 playerSnapshot.facingDirection = playerComponent.facingDirection;
                 playerSnapshot.velocity = playerComponent.velocity;
             }
@@ -473,8 +473,8 @@ namespace NeonLadder.ProceduralGeneration
             var playerComponent = player.GetComponent<Player>();
             if (playerComponent != null)
             {
-                playerComponent.health = playerSnapshot.health;
-                playerComponent.stamina = playerSnapshot.stamina;
+                playerComponent.health.current = playerSnapshot.health;
+                playerComponent.stamina.current = playerSnapshot.stamina;
                 playerComponent.facingDirection = playerSnapshot.facingDirection;
                 
                 // Note: Position is set by ProceduralSceneLoader spawn position

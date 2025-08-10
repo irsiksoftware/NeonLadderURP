@@ -2,8 +2,9 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEditor;
 using NeonLadder.ProceduralGeneration;
-using NeonLadder.Editor.ProceduralGeneration;
+// using NeonLadder.Editor.ProceduralGeneration; // TODO: Fix assembly reference
 using System.Collections.Generic;
+using System;
 
 namespace NeonLadder.Tests.Editor
 {
@@ -69,34 +70,34 @@ namespace NeonLadder.Tests.Editor
             
             // Assert
             Assert.IsNotNull(rules, "Balanced rules should be created");
-            Assert.Greater(rules.MinRoomsPerLayer, 0, "Min rooms should be positive");
-            Assert.GreaterOrEqual(rules.MaxRoomsPerLayer, rules.MinRoomsPerLayer, 
+            Assert.Greater(rules.minPathsPerLayer, 0, "Min rooms should be positive");
+            Assert.GreaterOrEqual(rules.maxPathsPerLayer, rules.minPathsPerLayer, 
                 "Max rooms should be >= min rooms");
-            Assert.GreaterOrEqual(rules.BranchProbability, 0f, "Branch probability should be >= 0");
-            Assert.LessOrEqual(rules.BranchProbability, 1f, "Branch probability should be <= 1");
+            Assert.GreaterOrEqual(rules.baseEventChance, 0f, "Branch probability should be >= 0");
+            Assert.LessOrEqual(rules.baseEventChance, 1f, "Branch probability should be <= 1");
         }
         
         [Test]
         public void GenerationRules_CreateEasyRules()
         {
             // Act
-            var rules = GenerationRules.CreateEasyRules();
+            var rules = GenerationRules.CreateSafeRules();
             
             // Assert
             Assert.IsNotNull(rules, "Easy rules should be created");
-            Assert.Greater(rules.ShopFrequency, 0, "Shops should appear in easy mode");
-            Assert.LessOrEqual(rules.EliteRoomChance, 0.3f, "Elite room chance should be low in easy mode");
+            Assert.IsTrue(rules.guaranteedRestShopPerLayer, "Shops should appear in easy mode");
+            Assert.LessOrEqual(rules.ruleFlexibility, 0.3f, "Rule flexibility should be low in easy mode");
         }
         
         [Test]
         public void GenerationRules_CreateHardRules()
         {
             // Act
-            var rules = GenerationRules.CreateHardRules();
+            var rules = GenerationRules.CreateChaoticRules();
             
             // Assert
             Assert.IsNotNull(rules, "Hard rules should be created");
-            Assert.GreaterOrEqual(rules.EliteRoomChance, 0.2f, "Elite room chance should be higher in hard mode");
+            Assert.GreaterOrEqual(rules.ruleFlexibility, 0.2f, "Rule flexibility should be higher in hard mode");
         }
         
         [Test]
@@ -105,12 +106,18 @@ namespace NeonLadder.Tests.Editor
             // Arrange
             var customRules = new GenerationRules
             {
-                MinRoomsPerLayer = 1,
-                MaxRoomsPerLayer = 2,
-                BranchProbability = 0f,
-                SecretRoomChance = 0f,
-                ShopFrequency = 0,
-                EliteRoomChance = 0f
+                minNodesPerPath = 1,
+                maxNodesPerPath = 2,
+                minPathsPerLayer = 1,
+                maxPathsPerLayer = 1, // Only 1 path per layer
+                pathsGrowWithDepth = false, // Disable scaling
+                moreChoicesInLaterLayers = false, // Disable scaling
+                baseEventChance = 0f,
+                ruleFlexibility = 0f,
+                guaranteedCombatPerLayer = 0,
+                guaranteedMinorEnemiesPerLayer = 0, // Disable guarantee
+                guaranteedRestShopPerLayer = false, // Disable guarantee
+                maxMajorEnemiesPerLayer = 0
             };
             
             // Act
@@ -137,16 +144,16 @@ namespace NeonLadder.Tests.Editor
             var node = new MapNode
             {
                 Id = "test-node",
-                RoomType = "Combat",
-                Connections = new List<int> { 0, 1, 2 },
-                Position = new Vector2(100, 200)
+                Type = NodeType.Encounter,
+                ConnectedNodeIds = new List<string> { "0", "1", "2" },
+                // Position = new Vector2(100, 200) // Position not available in current MapNode
             };
             
             // Assert
             Assert.AreEqual("test-node", node.Id);
-            Assert.AreEqual("Combat", node.RoomType);
-            Assert.AreEqual(3, node.Connections.Count);
-            Assert.AreEqual(new Vector2(100, 200), node.Position);
+            Assert.AreEqual(NodeType.Encounter, node.Type);
+            Assert.AreEqual(3, node.ConnectedNodeIds.Count);
+            // Assert.AreEqual(new Vector2(100, 200), node.Position); // Position not available
         }
         
         [Test]
@@ -162,7 +169,7 @@ namespace NeonLadder.Tests.Editor
             bool hasBoss = false;
             foreach (var layer in map.Layers)
             {
-                if (!string.IsNullOrEmpty(layer.BossName))
+                if (!string.IsNullOrEmpty(layer.Boss))
                 {
                     hasBoss = true;
                     break;
@@ -178,8 +185,8 @@ namespace NeonLadder.Tests.Editor
             // Arrange
             var rules = new GenerationRules
             {
-                SecretRoomChance = 1.0f, // Force secret rooms
-                ShopFrequency = 1 // Frequent shops
+                ruleFlexibility = 1.0f, // Max rule flexibility
+                guaranteedCombatPerLayer = 1 // Guaranteed combat
             };
             
             // Act
@@ -193,8 +200,8 @@ namespace NeonLadder.Tests.Editor
                 
                 foreach (var node in layer.Nodes)
                 {
-                    if (node.RoomType == "Secret" || node.RoomType == "Shop" || 
-                        node.RoomType == "Treasure" || node.RoomType == "Elite")
+                    if (node.Type == NodeType.Mystery || node.Type == NodeType.RestShop || 
+                        node.Type == NodeType.Treasure || node.Type == NodeType.Elite)
                     {
                         hasSpecialRoom = true;
                         break;
@@ -226,8 +233,8 @@ namespace NeonLadder.Tests.Editor
                 
                 foreach (var node in layer.Nodes)
                 {
-                    if (node.RoomType == "Boss") bossRooms++;
-                    if (node.RoomType == "Secret") secretRooms++;
+                    if (node.Type == NodeType.Boss) bossRooms++;
+                    if (node.Type == NodeType.Mystery) secretRooms++;
                 }
             }
             
@@ -275,11 +282,12 @@ namespace NeonLadder.Tests.Editor
             var map = pathGenerator.GenerateMap("export-test");
             
             // Act - Simulate JSON serialization
-            string json = JsonUtility.ToJson(map);
+            string json = JsonUtility.ToJson(map, true);
             
             // Assert
             Assert.IsNotNull(json, "JSON should be generated");
-            Assert.IsTrue(json.Contains("export-test"), "JSON should contain seed");
+            Assert.AreEqual("export-test", map.Seed, "Map should have the correct seed");
+            Assert.IsTrue(json.Contains("export-test"), "JSON should contain seed value");
             
             // Verify it can be deserialized
             var deserializedMap = JsonUtility.FromJson<MysticalMap>(json);

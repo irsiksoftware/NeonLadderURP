@@ -381,8 +381,8 @@ namespace NeonLadder.Tests.Runtime.Optimization
         private GameObject managerObject;
         private EulerAngleCacheManager manager;
 
-        [UnitySetUp]
-        public IEnumerator Setup()
+        [SetUp]
+        public void Setup()
         {
             // Clean up any existing manager
             var existing = GameObject.Find("EulerAngleCacheManager");
@@ -394,18 +394,15 @@ namespace NeonLadder.Tests.Runtime.Optimization
             // Access Instance to create the manager
             manager = EulerAngleCacheManager.Instance;
             managerObject = manager.gameObject;
-            
-            yield return null;
         }
 
-        [UnityTearDown]
-        public IEnumerator TearDown()
+        [TearDown]
+        public void TearDown()
         {
             if (managerObject != null)
             {
                 Object.DestroyImmediate(managerObject);
             }
-            yield return null;
         }
 
         [UnityTest]

@@ -39,11 +39,11 @@ namespace NeonLadder.Tests.Runtime
         {
             if (loaderObject != null)
             {
-                Object.DestroyImmediate(loaderObject);
+                UnityEngine.Object.DestroyImmediate(loaderObject);
             }
             if (transitionObject != null)
             {
-                Object.DestroyImmediate(transitionObject);
+                UnityEngine.Object.DestroyImmediate(transitionObject);
             }
         }
         
@@ -79,7 +79,7 @@ namespace NeonLadder.Tests.Runtime
         public void GenerateMap_WithCustomRules_AppliesRules()
         {
             // Arrange
-            var rules = GenerationRules.CreateEasyRules();
+            var rules = GenerationRules.CreateSafeRules();
             
             // Act
             var map = sceneLoader.GenerateMap("test-seed", rules);
@@ -106,7 +106,7 @@ namespace NeonLadder.Tests.Runtime
             
             // Cleanup
             ProceduralSceneLoader.OnSceneGenerationStarted -= (data) => eventFired = true;
-            Object.DestroyImmediate(config);
+            UnityEngine.Object.DestroyImmediate(config);
         }
         
         [Test]
@@ -114,7 +114,7 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             var saveData = new ConsolidatedSaveData();
-            saveData.worldState.proceduralState.currentSeed = "test-seed";
+            saveData.worldState.proceduralState.currentSeed = 12345; // test-seed as int
             saveData.worldState.proceduralState.currentDepth = 3;
             
             // Act
@@ -177,7 +177,7 @@ namespace NeonLadder.Tests.Runtime
             // Arrange
             var saveData = new ConsolidatedSaveData();
             var procState = saveData.worldState.proceduralState;
-            procState.currentSeed = "integration-test";
+            procState.currentSeed = 67890; 
             procState.currentDepth = 7;
             procState.currentPath = "boss";
             
@@ -187,7 +187,7 @@ namespace NeonLadder.Tests.Runtime
             // Assert
             var map = sceneLoader.GetCurrentMap();
             Assert.IsNotNull(map, "Map should be generated");
-            Assert.AreEqual("integration-test", map.Seed, "Seed should be preserved");
+            Assert.AreEqual("67890", map.Seed, "Seed should be preserved");
         }
         
         [Test]
@@ -285,7 +285,7 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             var originalSave = new ConsolidatedSaveData();
-            originalSave.worldState.proceduralState.currentSeed = "persistence-test";
+            originalSave.worldState.proceduralState.currentSeed = 11111;
             originalSave.worldState.proceduralState.currentDepth = 10;
             originalSave.worldState.proceduralState.generatedScenes = new List<GeneratedSceneData>
             {
@@ -303,7 +303,7 @@ namespace NeonLadder.Tests.Runtime
             // Assert
             var map = sceneLoader.GetCurrentMap();
             Assert.IsNotNull(map, "Map should be restored");
-            Assert.AreEqual("persistence-test", map.Seed, "Seed should persist");
+            Assert.AreEqual("11111", map.Seed, "Seed should persist");
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using NeonLadderURP.DataManagement;
@@ -167,13 +168,13 @@ namespace NeonLadder.ProceduralGeneration
             else
             {
                 // Generate new procedural content
-                GenerateNewProceduralContent(procState.currentSeed, procState.currentDepth);
+                GenerateNewProceduralContent(procState.currentSeed.ToString(), procState.currentDepth);
             }
             
             // Load the specified scene
             if (!string.IsNullOrEmpty(saveData.worldState.currentSceneName))
             {
-                LoadProceduralScene(procState.currentSeed, procState.currentDepth, procState.currentPath);
+                LoadProceduralScene(procState.currentSeed.ToString(), procState.currentDepth, procState.currentPath);
             }
         }
         
@@ -591,7 +592,7 @@ namespace NeonLadder.ProceduralGeneration
             // Restore the map from saved state
             if (!string.IsNullOrEmpty(state.currentPath))
             {
-                currentMap = pathGenerator.GenerateMap(state.currentSeed);
+                currentMap = pathGenerator.GenerateMap(state.currentSeed.ToString());
                 LogDebug($"Restored procedural map with seed: {state.currentSeed}");
             }
             
@@ -624,7 +625,7 @@ namespace NeonLadder.ProceduralGeneration
             var procState = currentSaveData.worldState.proceduralState;
             
             // Update procedural state
-            procState.currentSeed = sceneData.sceneSpecificData["seed"]?.ToString() ?? "";
+            procState.currentSeed = int.TryParse(sceneData.sceneSpecificData["seed"]?.ToString(), out int seed) ? seed : 0;
             procState.currentDepth = sceneData.depth;
             procState.currentPath = sceneData.pathType;
             
@@ -656,7 +657,7 @@ namespace NeonLadder.ProceduralGeneration
             if (currentSaveData == null || map == null) return;
             
             var procState = currentSaveData.worldState.proceduralState;
-            procState.currentSeed = map.Seed;
+            procState.currentSeed = int.TryParse(map.Seed, out int mapSeed) ? mapSeed : 0;
             
             // Store path generator state
             procState.pathGeneratorState["mapSeed"] = map.Seed;

@@ -1,4 +1,5 @@
 using Platformer.Mechanics;
+using NeonLadder.Mechanics.Controllers;
 
 namespace NeonLadder.Events
 {
@@ -14,7 +15,8 @@ namespace NeonLadder.Events
         public override void Execute()
         {
             model.Player.Animator.SetTrigger("victory");
-            model.Player.Actions.playerActionMap.Disable();
+            var mediator = model.Player.GetComponent<PlayerStateMediator>();
+            mediator?.DisablePlayerActionMap();
         }
     }
 }

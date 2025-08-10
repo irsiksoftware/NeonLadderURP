@@ -182,7 +182,7 @@ namespace NeonLadder.Mechanics.Controllers
             ComputeVelocity();
         }
 
-        protected virtual void ComputeVelocity()
+        public virtual void ComputeVelocity()
         {
             targetVelocity = Vector3.zero;
         }
@@ -321,7 +321,8 @@ namespace NeonLadder.Mechanics.Controllers
         public void EnableZMovement()
         {
             transform.parent.rotation = Quaternion.Euler(0, 0, 0);
-            player.Actions.playerActionMap.Disable();
+            var mediator = player.GetComponent<PlayerStateMediator>();
+            mediator?.DisablePlayerActionMap();
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation |
                                     RigidbodyConstraints.FreezePositionX |
                                     RigidbodyConstraints.FreezePositionY;
@@ -330,7 +331,8 @@ namespace NeonLadder.Mechanics.Controllers
         public void DisableZMovement()
         {
             targetVelocity.z = 0;
-            player.Actions.playerActionMap.Enable();
+            var mediator = player.GetComponent<PlayerStateMediator>();
+            mediator?.EnablePlayerActionMap();
             rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
         }
 

@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Enums\ActionStates.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgrade.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\RangedAttackController.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.Mover.cs" />
     <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Zones\VictoryZone.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerUnlock.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerTerrainCollision.cs" />
     <Compile Include="Assets\Scripts\WebRequests\WebRequestHandler.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IPlayerActions.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerExhaustedEvent.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\PathExtensions.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Player.cs" />
@@ -152,6 +154,8 @@
     <Compile Include="Assets\Scripts\Cameras\CameraRotationProvider.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Animations.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Loot\LootHelper.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\ProceduralSceneLoader.cs" />
+    <Compile Include="Assets\Scripts\Utilities\OptimizedSceneEnumResolver.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerAttackEvent.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\CharacterPersonalitySystem.cs" />
@@ -170,6 +174,7 @@
     <Compile Include="Assets\Scripts\Models\UnlockScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Colliders\ParentCollider.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyAnimationEvent.cs" />
+    <Compile Include="Assets\Scripts\Optimization\EulerAngleCache.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\ShopKeeperWindow.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
@@ -240,6 +245,7 @@
     <Compile Include="Assets\Scripts\Managers\LootDropManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Do\ActorCutsceneMovement.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveData.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerStateMediator.cs" />
     <Compile Include="Assets\Scripts\Events\BaseGameEvent.cs" />
     <Compile Include="Assets\Scripts\UI\MetaGameController.cs" />
     <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterCamera.cs" />
@@ -262,6 +268,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\UnlockTypes.cs" />
     <Compile Include="Assets\Scripts\Performance\PerformanceProfiler.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IPlayerState.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\SceneSizes.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterTrigger.cs" />
     <Compile Include="Assets\Scripts\Cameras\CameraActivator.cs" />

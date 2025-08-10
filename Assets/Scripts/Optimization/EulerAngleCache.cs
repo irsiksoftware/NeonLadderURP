@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NeonLadder.Optimization
@@ -102,10 +103,26 @@ namespace NeonLadder.Optimization
                 if (cache.Count >= maxCacheSize)
                 {
                     PerformCleanup();
+                    
+                    // If cleanup didn't make enough room, force removal of oldest entries
+                    if (cache.Count >= maxCacheSize)
+                    {
+                        // Force remove entries to make room (should not normally happen)
+                        var entriesToForceRemove = cache.OrderBy(kvp => kvp.Value.FrameNumber)
+                                                       .ThenBy(kvp => kvp.Value.HitCount)
+                                                       .Take(cache.Count - maxCacheSize + 1)
+                                                       .ToList();
+                        
+                        foreach (var entry in entriesToForceRemove)
+                        {
+                            cache.Remove(entry.Key);
+                        }
+                    }
                 }
                 
                 cache[transform] = cached;
                 totalMisses++;
+                cached.MissCount++; // Count this as a miss for the transform
             }
             
             // Perform the expensive conversion
@@ -286,27 +303,21 @@ namespace NeonLadder.Optimization
         /// </summary>
         private void PerformCleanup()
         {
-            if (Time.time - lastCleanupTime < cleanupInterval && cache.Count < maxCacheSize * 2)
-            {
-                return; // Skip cleanup if not needed
-            }
-            
             lastCleanupTime = Time.time;
             
-            // Remove entries that haven't been accessed recently
+            // First pass: Remove null/destroyed transforms and very old entries
             int currentFrame = Time.frameCount;
             var keysToRemove = new List<Transform>();
             
             foreach (var kvp in cache)
             {
-                // Remove if not accessed in last 300 frames (~5 seconds at 60 FPS)
-                if (currentFrame - kvp.Value.FrameNumber > 300)
+                // Remove if transform is null (destroyed)
+                if (kvp.Key == null)
                 {
                     keysToRemove.Add(kvp.Key);
                 }
-                
-                // Also remove if transform is null (destroyed)
-                if (kvp.Key == null)
+                // Remove if not accessed in last 300 frames (~5 seconds at 60 FPS)
+                else if (currentFrame - kvp.Value.FrameNumber > 300)
                 {
                     keysToRemove.Add(kvp.Key);
                 }
@@ -315,6 +326,22 @@ namespace NeonLadder.Optimization
             foreach (var key in keysToRemove)
             {
                 cache.Remove(key);
+            }
+            
+            // Second pass: If still over limit, remove least recently used entries
+            if (cache.Count >= maxCacheSize)
+            {
+                // Sort by FrameNumber first, then by HitCount (prefer removing less-used entries)
+                var sortedEntries = cache.OrderBy(kvp => kvp.Value.FrameNumber)
+                                         .ThenBy(kvp => kvp.Value.HitCount)
+                                         .ThenBy(kvp => kvp.Key.GetInstanceID()) // Final deterministic tie-breaker
+                                         .ToList();
+                int entriesToRemove = cache.Count - maxCacheSize + 1; // +1 to make room for new entry
+                
+                for (int i = 0; i < entriesToRemove && i < sortedEntries.Count; i++)
+                {
+                    cache.Remove(sortedEntries[i].Key);
+                }
             }
         }
         

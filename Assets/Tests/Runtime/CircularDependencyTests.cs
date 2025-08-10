@@ -20,18 +20,24 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void Setup()
         {
-            // Create test game object with all components
+            // Create test game object with proper hierarchy (like other tests)
             testObject = new GameObject("TestPlayer");
             
-            // Add required components in correct order
+            // Add required components to parent object
             var rigidbody = testObject.AddComponent<Rigidbody>();
             rigidbody.useGravity = false;
             rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             
-            // Add player components
-            player = testObject.AddComponent<Player>();
-            playerAction = testObject.AddComponent<PlayerAction>();
-            mediator = testObject.AddComponent<PlayerStateMediator>();
+            // Create child object for Player components (matches game hierarchy)
+            var playerChild = new GameObject("PlayerChild");
+            playerChild.transform.SetParent(testObject.transform);
+            
+            // Add both Player and PlayerAction components to child first
+            playerAction = playerChild.AddComponent<PlayerAction>();
+            player = playerChild.AddComponent<Player>();
+            
+            // Now add the mediator last so it can find both components in its Awake()
+            mediator = playerChild.AddComponent<PlayerStateMediator>();
         }
         
         [TearDown]

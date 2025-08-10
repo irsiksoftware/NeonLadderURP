@@ -171,6 +171,22 @@ namespace NeonLadder.Mechanics.Controllers
         }
         
         /// <summary>
+        /// Gets maximum jumps
+        /// </summary>
+        public int GetMaxJumps()
+        {
+            return playerAction != null ? playerAction.MaxJumps : 1;
+        }
+        
+        /// <summary>
+        /// Increments jump count
+        /// </summary>
+        public void IncrementJumpCount()
+        {
+            playerAction?.IncrementJumpCount();
+        }
+        
+        /// <summary>
         /// Resets jump count when grounded
         /// </summary>
         public void ResetJumpCount()
@@ -184,6 +200,36 @@ namespace NeonLadder.Mechanics.Controllers
         public void ScheduleJump(float delay)
         {
             playerAction?.ScheduleJump(delay);
+        }
+        
+        /// <summary>
+        /// Increments available mid-air jumps for upgrades
+        /// </summary>
+        public void IncrementAvailableMidAirJumps()
+        {
+            playerAction?.IncrementAvailableMidAirJumps();
+        }
+        
+        /// <summary>
+        /// Disables player action map
+        /// </summary>
+        public void DisablePlayerActionMap()
+        {
+            if (playerAction?.playerActionMap != null)
+            {
+                playerAction.playerActionMap.Disable();
+            }
+        }
+        
+        /// <summary>
+        /// Enables player action map
+        /// </summary>
+        public void EnablePlayerActionMap()
+        {
+            if (playerAction?.playerActionMap != null)
+            {
+                playerAction.playerActionMap.Enable();
+            }
         }
         
         #endregion

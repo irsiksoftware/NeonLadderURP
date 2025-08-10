@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 using NeonLadder.ProceduralGeneration;
-using Newtonsoft.Json;
+// using Newtonsoft.Json; // Replaced with Unity JsonUtility
 
 namespace NeonLadder.Editor.ProceduralGeneration
 {
@@ -225,13 +225,13 @@ namespace NeonLadder.Editor.ProceduralGeneration
             
             if (GUILayout.Button("Easy Rules"))
             {
-                currentRules = GenerationRules.CreateEasyRules();
+                currentRules = GenerationRules.CreateSafeRules();
                 if (autoGenerate) GenerateMap();
             }
             
             if (GUILayout.Button("Hard Rules"))
             {
-                currentRules = GenerationRules.CreateHardRules();
+                currentRules = GenerationRules.CreateChaoticRules();
                 if (autoGenerate) GenerateMap();
             }
             
@@ -242,23 +242,23 @@ namespace NeonLadder.Editor.ProceduralGeneration
             {
                 EditorGUILayout.LabelField("Custom Parameters", EditorStyles.boldLabel);
                 
-                currentRules.MinRoomsPerLayer = EditorGUILayout.IntSlider(
-                    "Min Rooms/Layer", currentRules.MinRoomsPerLayer, 3, 10);
+                currentRules.minPathsPerLayer = EditorGUILayout.IntSlider(
+                    "Min Paths/Layer", currentRules.minPathsPerLayer, 3, 10);
                 
-                currentRules.MaxRoomsPerLayer = EditorGUILayout.IntSlider(
-                    "Max Rooms/Layer", currentRules.MaxRoomsPerLayer, 5, 15);
+                currentRules.maxPathsPerLayer = EditorGUILayout.IntSlider(
+                    "Max Paths/Layer", currentRules.maxPathsPerLayer, 5, 15);
                 
-                currentRules.BranchProbability = EditorGUILayout.Slider(
-                    "Branch Probability", currentRules.BranchProbability, 0f, 1f);
+                currentRules.baseEventChance = EditorGUILayout.Slider(
+                    "Event Chance", currentRules.baseEventChance, 0f, 1f);
                 
-                currentRules.SecretRoomChance = EditorGUILayout.Slider(
-                    "Secret Room Chance", currentRules.SecretRoomChance, 0f, 0.5f);
+                currentRules.ruleFlexibility = EditorGUILayout.Slider(
+                    "Rule Flexibility", currentRules.ruleFlexibility, 0f, 0.5f);
                 
-                currentRules.ShopFrequency = EditorGUILayout.IntSlider(
-                    "Shop Frequency", currentRules.ShopFrequency, 1, 5);
+                currentRules.guaranteedCombatPerLayer = EditorGUILayout.IntSlider(
+                    "Guaranteed Combat/Layer", currentRules.guaranteedCombatPerLayer, 1, 5);
                 
-                currentRules.EliteRoomChance = EditorGUILayout.Slider(
-                    "Elite Room Chance", currentRules.EliteRoomChance, 0f, 0.5f);
+                currentRules.maxMajorEnemiesPerLayer = EditorGUILayout.IntSlider(
+                    "Max Major Enemies/Layer", currentRules.maxMajorEnemiesPerLayer, 0, 3);
             }
             
             if (EditorGUI.EndChangeCheck() && autoGenerate)
@@ -396,7 +396,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
                 
                 GUI.Box(previewRect, GUIContent.none, EditorStyles.helpBox);
                 
-                if (Event.current.type == EventType.Repaint)
+                if (Event.current.type == UnityEngine.EventType.Repaint)
                 {
                     DrawPreview(previewRect);
                 }
@@ -518,9 +518,9 @@ namespace NeonLadder.Editor.ProceduralGeneration
                     Vector2 startPos = nodePositions[nodeId];
                     
                     // Draw connections to next layer
-                    foreach (var connection in node.Connections)
+                    foreach (var connection in node.ConnectedNodeIds)
                     {
-                        string targetId = GetNodeId(layerIndex + 1, connection);
+                        string targetId = connection; // ConnectedNodeIds are already formatted node IDs
                         if (nodePositions.ContainsKey(targetId))
                         {
                             Vector2 endPos = nodePositions[targetId];
@@ -567,8 +567,8 @@ namespace NeonLadder.Editor.ProceduralGeneration
                     }
                     
                     // Highlight special rooms
-                    if ((highlightBosses && node.RoomType == "Boss") ||
-                        (highlightSecrets && node.RoomType == "Secret"))
+                    if ((highlightBosses && node.Type == NodeType.Boss) ||
+                        (highlightSecrets && node.Type == NodeType.Mystery))
                     {
                         DrawNodeHighlight(nodeRect, nodeColor);
                     }
@@ -606,9 +606,9 @@ namespace NeonLadder.Editor.ProceduralGeneration
                 float y = (i + 1) * layerHeight + panOffset.y;
                 string depthText = $"Depth {i + 1}";
                 
-                if (i < currentMap.Layers.Count && currentMap.Layers[i].BossName != null)
+                if (i < currentMap.Layers.Count && currentMap.Layers[i].Boss != null)
                 {
-                    depthText += $" - {currentMap.Layers[i].BossName}";
+                    depthText += $" - {currentMap.Layers[i].Boss}";
                 }
                 
                 GUI.Label(new Rect(10, y - 10, 200, 20), depthText, depthStyle);
@@ -624,7 +624,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
             Event e = Event.current;
             
             // Keyboard shortcuts
-            if (e.type == EventType.KeyDown)
+            if (e.type == UnityEngine.EventType.KeyDown)
             {
                 switch (e.keyCode)
                 {
@@ -677,7 +677,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
             if (!rect.Contains(e.mousePosition)) return;
             
             // Mouse wheel zoom
-            if (e.type == EventType.ScrollWheel)
+            if (e.type == UnityEngine.EventType.ScrollWheel)
             {
                 float zoomDelta = -e.delta.y * 0.05f;
                 zoomLevel = Mathf.Clamp(zoomLevel + zoomDelta, 0.5f, 3f);
@@ -686,14 +686,14 @@ namespace NeonLadder.Editor.ProceduralGeneration
             }
             
             // Pan with middle mouse or alt+left mouse
-            if (e.type == EventType.MouseDown && (e.button == 2 || (e.button == 0 && e.alt)))
+            if (e.type == UnityEngine.EventType.MouseDown && (e.button == 2 || (e.button == 0 && e.alt)))
             {
                 isDragging = true;
                 lastMousePosition = e.mousePosition;
                 e.Use();
             }
             
-            if (e.type == EventType.MouseDrag && isDragging)
+            if (e.type == UnityEngine.EventType.MouseDrag && isDragging)
             {
                 Vector2 delta = e.mousePosition - lastMousePosition;
                 panOffset += delta;
@@ -702,7 +702,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
                 e.Use();
             }
             
-            if (e.type == EventType.MouseUp && isDragging)
+            if (e.type == UnityEngine.EventType.MouseUp && isDragging)
             {
                 isDragging = false;
                 e.Use();
@@ -749,7 +749,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
             
             metrics.TotalRooms = map.Layers.Sum(l => l.Nodes?.Count ?? 0);
             metrics.TotalConnections = map.Layers.Sum(l => 
-                l.Nodes?.Sum(n => n.Connections?.Count ?? 0) ?? 0);
+                l.Nodes?.Sum(n => n.ConnectedNodeIds?.Count ?? 0) ?? 0);
             
             metrics.MaxDepth = map.Layers.Count;
             
@@ -759,21 +759,21 @@ namespace NeonLadder.Editor.ProceduralGeneration
                 
                 foreach (var node in layer.Nodes)
                 {
-                    switch (node.RoomType)
+                    switch (node.Type)
                     {
-                        case "Boss":
+                        case NodeType.Boss:
                             metrics.BossRoomCount++;
                             break;
-                        case "Secret":
+                        case NodeType.Mystery:
                             metrics.SecretRoomCount++;
                             break;
-                        case "Shop":
+                        case NodeType.RestShop:
                             metrics.ShopRoomCount++;
                             break;
-                        case "Treasure":
+                        case NodeType.Treasure:
                             metrics.TreasureRoomCount++;
                             break;
-                        case "Elite":
+                        case NodeType.Elite:
                             metrics.EliteRoomCount++;
                             break;
                     }
@@ -832,7 +832,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
             
             if (!string.IsNullOrEmpty(path))
             {
-                string json = JsonConvert.SerializeObject(currentMap, Formatting.Indented);
+                string json = JsonUtility.ToJson(currentMap, true);
                 File.WriteAllText(path, json);
                 EditorUtility.DisplayDialog("Export Complete", $"Map exported to:\n{path}", "OK");
             }
@@ -979,27 +979,27 @@ namespace NeonLadder.Editor.ProceduralGeneration
         
         private Color GetNodeColor(MapNode node)
         {
-            switch (node.RoomType)
+            switch (node.Type)
             {
-                case "Boss": return bossRoomColor;
-                case "Secret": return secretRoomColor;
-                case "Shop": return shopRoomColor;
-                case "Treasure": return treasureRoomColor;
-                case "Elite": return Color.Lerp(normalRoomColor, bossRoomColor, 0.5f);
+                case NodeType.Boss: return bossRoomColor;
+                case NodeType.Mystery: return secretRoomColor;
+                case NodeType.RestShop: return shopRoomColor;
+                case NodeType.Treasure: return treasureRoomColor;
+                case NodeType.Elite: return Color.Lerp(normalRoomColor, bossRoomColor, 0.5f);
                 default: return normalRoomColor;
             }
         }
         
         private string GetRoomTypeLabel(MapNode node)
         {
-            switch (node.RoomType)
+            switch (node.Type)
             {
-                case "Boss": return "B";
-                case "Secret": return "?";
-                case "Shop": return "$";
-                case "Treasure": return "T";
-                case "Elite": return "E";
-                case "Combat": return "⚔";
+                case NodeType.Boss: return "B";
+                case NodeType.Mystery: return "?";
+                case NodeType.RestShop: return "$";
+                case NodeType.Treasure: return "T";
+                case NodeType.Elite: return "E";
+                case NodeType.Encounter: return "⚔";
                 default: return "•";
             }
         }

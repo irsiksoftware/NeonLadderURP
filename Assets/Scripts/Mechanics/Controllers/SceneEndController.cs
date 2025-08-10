@@ -15,7 +15,9 @@ public class SceneEndController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SteamManager.Instance.UnlockAchievement(nameof(Achievements.DEMO_LEVEL_COMPLETE));
-            other.GetComponentInChildren<Player>().Actions.playerActionMap.Disable();
+            var player = other.GetComponentInChildren<Player>();
+            var mediator = player.GetComponent<PlayerStateMediator>();
+            mediator?.DisablePlayerActionMap();
             var meleeweapons = other.GetComponentsInChildren<MeleeWeapons>();
             var firearms = other.GetComponentsInChildren<Firearms>();
             foreach (var melee in meleeweapons)

@@ -23,7 +23,8 @@ namespace NeonLadder.Events
             if (player != null && isGrounded)
             {
                 // Reset jump count when player lands
-                player.Actions.ResetJumpCount();
+                var mediator = player.GetComponent<PlayerStateMediator>();
+                mediator?.ResetJumpCount();
                 
                 // Trigger landing audio
                 var audioEvent = Simulation.Schedule<PlayerAudioEvent>(0f);

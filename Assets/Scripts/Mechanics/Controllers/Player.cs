@@ -41,9 +41,20 @@ namespace NeonLadder.Mechanics.Controllers
         // REFACTORED: Removed direct PlayerAction reference to break circular dependency
         // Now using PlayerStateMediator for all action-related communication
         private PlayerStateMediator mediator;
+        
         public PlayerUnlock Unlocks { get; private set; }
         public Health Health { get; private set; }
         public Stamina Stamina { get; private set; }
+        
+        // Provide lowercase property accessors for backward compatibility
+        public Health health => Health;
+        public Stamina stamina => Stamina;
+        public int facingDirection 
+        { 
+            get => IsFacingLeft ? -1 : 1;
+            set => IsFacingLeft = value < 0;
+        }
+        
         public Meta MetaCurrency { get; private set; }
         public Perma PermaCurrency { get; private set; }
         public MeleeController MeleeController { get; private set; }
@@ -81,11 +92,7 @@ namespace NeonLadder.Mechanics.Controllers
             base.Awake();
             // REFACTORED: Get mediator instead of direct PlayerAction reference
             mediator = GetComponent<PlayerStateMediator>();
-            if (mediator == null)
-            {
-                // Create mediator if it doesn't exist
-                mediator = gameObject.AddComponent<PlayerStateMediator>();
-            }
+            // Don't create mediator in Awake - do it in Start when all components are ready
             Unlocks = GetComponent<PlayerUnlock>();
             audioSource = GetComponentInParent<AudioSource>();
             rigidbody = GetComponentInParent<Rigidbody>();
@@ -103,10 +110,10 @@ namespace NeonLadder.Mechanics.Controllers
             {
                 MeleeController = gameObject.AddComponent<MeleeController>();
             }
-            var healthBarComponent = transform.parent.GetComponentInChildren<HealthBar>();
+            var healthBarComponent = transform.parent?.GetComponentInChildren<HealthBar>();
             HealthBar = healthBarComponent?.gameObject.GetComponent<ProgressBar>();
             
-            var staminaBarComponent = transform.parent.GetComponentInChildren<StaminaBar>();
+            var staminaBarComponent = transform.parent?.GetComponentInChildren<StaminaBar>();
             StaminaBar = staminaBarComponent?.gameObject.GetComponent<ProgressBar>();
             MetaCurrency = GetComponentInParent<Meta>();
             PermaCurrency = GetComponentInParent<Perma>();
@@ -114,6 +121,20 @@ namespace NeonLadder.Mechanics.Controllers
             if (controls == null)
             {
                 controls = Resources.Load<InputActionAsset>("Controls/PlayerControls");
+            }
+        }
+
+        protected virtual void Start()
+        {
+            // Create mediator if it doesn't exist (for backward compatibility with existing prefabs)
+            if (mediator == null)
+            {
+                var playerAction = GetComponent<PlayerAction>();
+                if (playerAction != null)
+                {
+                    // Both Player and PlayerAction exist, safe to create mediator
+                    mediator = gameObject.AddComponent<PlayerStateMediator>();
+                }
             }
         }
 
@@ -146,7 +167,7 @@ namespace NeonLadder.Mechanics.Controllers
 
             //TimedLogger.Log($"Player transform position: {transform.position}", 1f);
             base.Update();
-            if (Health.IsAlive)
+            if (Health != null && Health.IsAlive)
             {
                 HandleAnimations();
                 RegenerateStamina();
@@ -167,8 +188,15 @@ namespace NeonLadder.Mechanics.Controllers
             }
         }
 
-        protected override void ComputeVelocity()
+        public override void ComputeVelocity()
         {
+            // Early return if Health component is not properly initialized
+            if (Health == null)
+            {
+                targetVelocity = Vector3.zero;
+                return;
+            }
+            
             if (!Health.IsAlive)
             {
                 targetVelocity = Vector3.zero;

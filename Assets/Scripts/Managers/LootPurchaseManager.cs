@@ -74,7 +74,8 @@ public class LootPurchaseManager : MonoBehaviour
                 switch (itemName)
                 {
                     case "Double Jump":
-                        player.Actions.IncrementAvailableMidAirJumps();
+                        var mediator = player.GetComponent<PlayerStateMediator>();
+                        mediator?.IncrementAvailableMidAirJumps();
                         break;
                     default:
                         break;
