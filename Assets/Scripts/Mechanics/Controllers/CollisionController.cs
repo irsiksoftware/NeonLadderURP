@@ -1,6 +1,8 @@
 using NeonLadder.Common;
 using NeonLadder.Core;
+using NeonLadder.Core.ServiceContainer;
 using NeonLadder.Events;
+using NeonLadder.Managers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Mechanics.Stats;
 using System;
@@ -50,27 +52,40 @@ namespace NeonLadder.Mechanics.Controllers
 
         private void OnEnable()
         {
-            if (ManagerController.Instance == null)
+            // Use service container to get EventManager
+            var eventManager = ServiceLocator.Instance.TryGet<EventManager>(out var manager) ? manager : null;
+            
+            if (eventManager == null)
             {
-                Debug.Log("Managers prefab is missing, or it's instance is missing an implementaiton.");
+                // Fallback to migration helper
+                eventManager = ManagerControllerMigration.GetEventManager();
+            }
+            
+            if (eventManager == null)
+            {
+                Debug.Log("EventManager service is not registered. Managers prefab may be missing.");
             }
             else
             {
-                ManagerController.Instance.eventManager.StartListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
+                eventManager.StartListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
             }
         }
 
         private void OnDisable()
         {
-            //This stuff happens on Actor death.
-            //if (ManagerController.Instance == null)
-            //{
-            //    Debug.Log("Managers prefab is missing, or it's instance is missing an implementaiton.");
-            //}
-            //else
-            //{
-            //    ManagerController.Instance.eventManager.StopListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
-            //}
+            // Use service container to get EventManager
+            var eventManager = ServiceLocator.Instance.TryGet<EventManager>(out var manager) ? manager : null;
+            
+            if (eventManager == null)
+            {
+                // Fallback to migration helper
+                eventManager = ManagerControllerMigration.GetEventManager();
+            }
+            
+            if (eventManager != null)
+            {
+                eventManager.StopListening("OnTriggerEnter", thisActorParent, OnTriggerEnter);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
