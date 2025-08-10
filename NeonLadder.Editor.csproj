@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\BuildSystem\ShaderFixUtility.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\UpgradeSystemEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\Performance\PerformanceMenuItems.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\ExamplePurchasableItems.cs" />
     <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\PathGeneratorEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\CLITestRunner.cs" />
