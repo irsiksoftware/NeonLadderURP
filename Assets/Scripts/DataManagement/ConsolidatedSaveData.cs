@@ -99,6 +99,7 @@ namespace NeonLadderURP.DataManagement
         public int currentSeed = 0;
         public int currentDepth = 0;
         public string currentPath = "";
+        public string mapData = ""; // Serialized MysticalMap
         public List<GeneratedSceneData> generatedScenes = new List<GeneratedSceneData>();
         
         // Boss and special room tracking
@@ -114,10 +115,12 @@ namespace NeonLadderURP.DataManagement
         public string sceneName;
         public Vector3 playerSpawnPosition;
         public int depth;
+        public int seed;
         public string pathType; // "main", "branch", "boss", "secret"
         public bool isCompleted;
         public DateTime generatedAt;
         public Dictionary<string, object> sceneSpecificData = new Dictionary<string, object>();
+        public Dictionary<string, string> interactiveObjectStates = new Dictionary<string, string>();
     }
     
     [Serializable]
