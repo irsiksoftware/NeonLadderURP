@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Tests\Editor\ProceduralGenerationToolsTests.cs" />
     <Compile Include="Assets\Tests\Editor\DialogueSceneGeneratorTests.cs" />
+    <Compile Include="Assets\Tests\Editor\PerformanceMenuTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Tests\Editor\NeonLadder.Tests.Editor.asmdef" />
@@ -1097,6 +1098,10 @@
     <ProjectReference Include="NeonLadder.Scripts.csproj">
       <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
       <Name>NeonLadder.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="NeonLadder.Editor.csproj">
+      <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
+      <Name>NeonLadder.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
       <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
