@@ -587,8 +587,8 @@ namespace NeonLadder.ProceduralGeneration
     [Serializable]
     public class MysticalMap
     {
-        public string Seed { get; set; }
-        public List<MapLayer> Layers { get; set; } = new List<MapLayer>();
+        public string Seed;
+        public List<MapLayer> Layers = new List<MapLayer>();
     }
 
     /// <summary>

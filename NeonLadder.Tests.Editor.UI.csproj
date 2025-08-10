@@ -62,9 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Tests\Editor\UI\SimpleCompilationTest.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\PackageManagementMenuTests.cs" />
     <Compile Include="Assets\Tests\Editor\UI\MenuSystemIntegrationTestsSimplified.cs" />
     <Compile Include="Assets\Tests\Editor\UI\SaveSystemCommandCenterTests.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\PackageManagementDynamicTests.cs" />
     <Compile Include="Assets\Tests\Editor\UI\ExamplePurchasableItemsTests.cs" />
+    <Compile Include="Assets\Tests\Editor\UI\PackageManagerWindowTests.cs" />
     <Compile Include="Assets\Tests\Editor\UI\EditorUITestFramework.cs" />
     <Compile Include="Assets\Tests\Editor\UI\UpgradeSystemEditorTests.cs" />
   </ItemGroup>
@@ -1113,6 +1116,10 @@
     <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
       <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="NeonLadder.Debug.Editor.csproj">
+      <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
+      <Name>NeonLadder.Debug.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

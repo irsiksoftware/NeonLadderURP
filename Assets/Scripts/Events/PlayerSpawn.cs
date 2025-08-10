@@ -35,7 +35,8 @@ namespace NeonLadder.Events
 
             player.Animator.enabled = true;
             player.Animator.SetInteger(nameof(PlayerAnimationLayers.locomotion_animation), 777);
-            player.Actions.playerActionMap.Enable();
+            var mediator = player.GetComponent<PlayerStateMediator>();
+            mediator?.EnablePlayerActionMap();
         }
     }
 }

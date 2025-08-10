@@ -85,11 +85,19 @@ public class ManagerController : MonoBehaviour
             }
             else
             {
-                // LEGACY: Original per-frame string comparison (for performance comparison)
+                // LEGACY: Original implementation (disabled by default - only for performance testing)
+                // WARNING: This path performs expensive per-frame string comparisons and allocations
                 OnStringComparisonPerformed?.Invoke();
-                if (SceneManager.GetActiveScene().name != scene.ToString())
+                
+                // PERFORMANCE ISSUE: scene.ToString() allocates a new string every frame
+                // PERFORMANCE ISSUE: SceneManager.GetActiveScene().name also allocates
+                // This entire branch should never be used in production
+                var currentSceneName = SceneManager.GetActiveScene().name;
+                var currentSceneEnum = SceneEnumResolver.Resolve(currentSceneName);
+                
+                if (currentSceneEnum != scene)
                 {
-                    scene = SceneEnumResolver.Resolve(SceneManager.GetActiveScene().name);
+                    scene = currentSceneEnum;
                     ToggleManagers();
                 }
             }

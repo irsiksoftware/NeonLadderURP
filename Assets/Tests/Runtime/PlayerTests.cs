@@ -90,13 +90,10 @@ namespace NeonLadder.Tests.Runtime
             // Add PlayerAction while GameObject is disabled (OnEnable won't run)
             testPlayerAction = playerChild.AddComponent<PlayerAction>();
             
-            // Manually set the player field that would normally be set in Start()
-            System.Reflection.FieldInfo playerField = typeof(PlayerAction).GetField("player", 
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            playerField.SetValue(testPlayerAction, player);
-            
-            // Now re-enable the GameObject - OnEnable will run with player field set
+            // Now re-enable the GameObject - PlayerStateMediator will handle Player <-> PlayerAction communication
             playerChild.SetActive(true);
+            
+            // Player.Start() will automatically create PlayerStateMediator since both components exist
             
             // Disable PlayerAction component to prevent further issues in tests
             testPlayerAction.enabled = false;
@@ -547,7 +544,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void Actions_ConnectedToInputSystem()
         {
-            Assert.IsNotNull(player.Actions, "PlayerAction component should be initialized");
+            var playerAction = player.GetComponent<PlayerAction>();
+            Assert.IsNotNull(playerAction, "PlayerAction component should be initialized");
             
             // Test that Actions component has proper input bindings
             Assert.IsNotNull(player.Controls, "Input controls should be assigned");

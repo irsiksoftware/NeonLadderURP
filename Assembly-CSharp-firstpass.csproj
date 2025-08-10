@@ -1479,6 +1479,10 @@
       <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
       <Name>NeonLadder.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="NeonLadder.Debug.Editor.csproj">
+      <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
+      <Name>NeonLadder.Debug.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="DialogueSystemEditor.csproj">
       <Project>{E8321E92-7314-26E0-8CFC-554106D8124B}</Project>
       <Name>DialogueSystemEditor</Name>
@@ -1510,6 +1514,10 @@
     <ProjectReference Include="TAA.Runtime.csproj">
       <Project>{E9A8BA52-FE77-948F-C8AD-825193FE381C}</Project>
       <Name>TAA.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="NeonLadder.Utilities.Editor.csproj">
+      <Project>{94789BE6-96C4-2051-FEEE-FA37176F865B}</Project>
+      <Name>NeonLadder.Utilities.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -244,12 +244,9 @@ namespace NeonLadder.Events
 
         private bool IsComboAttack()
         {
-            // TEMPORARY: Disable combo system until weapon swap issues are resolved
-            return false;
-            
             // Check if we're within combo window of last attack
-            // var comboSystem = Simulation.GetModel<ComboSystem>();
-            // return comboSystem != null && comboSystem.IsInComboWindow(player);
+            var comboSystem = Simulation.GetModel<ComboSystem>();
+            return comboSystem != null && comboSystem.IsInComboWindow(player);
         }
 
         private string DetermineComboId()

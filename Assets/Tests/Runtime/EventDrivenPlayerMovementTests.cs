@@ -130,9 +130,9 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             // Set jump count to max by calling IncrementJumpCount
-            for (int i = 0; i < player.Actions.MaxJumps; i++)
-                player.Actions.IncrementJumpCount();
-            var initialJumpCount = player.Actions.JumpCount;
+            for (int i = 0; i < player.GetComponent<PlayerStateMediator>().GetMaxJumps(); i++)
+                player.GetComponent<PlayerStateMediator>().IncrementJumpCount();
+            var initialJumpCount = player.GetComponent<PlayerStateMediator>().GetJumpCount();
 
             // Act
             var jumpEvent = Simulation.Schedule<PlayerJumpValidationEvent>(0.1f);
@@ -143,7 +143,7 @@ namespace NeonLadder.Tests.Runtime
             // Event should be queued but precondition should prevent execution
             var queueCount = Simulation.Tick();
             Assert.GreaterOrEqual(queueCount, 0, "Event should be processed");
-            Assert.AreEqual(initialJumpCount, player.Actions.JumpCount, 
+            Assert.AreEqual(initialJumpCount, player.GetComponent<PlayerStateMediator>().GetJumpCount(), 
                 "Jump count should not increase when max jumps reached");
         }
 
@@ -205,8 +205,8 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             // Set jump count to 2 by calling IncrementJumpCount twice
-            player.Actions.IncrementJumpCount();
-            player.Actions.IncrementJumpCount();
+            player.GetComponent<PlayerStateMediator>().IncrementJumpCount();
+            player.GetComponent<PlayerStateMediator>().IncrementJumpCount();
 
             // Act
             var groundedEvent = Simulation.Schedule<PlayerGroundedStateChangeEvent>(0.1f);
@@ -295,17 +295,17 @@ namespace NeonLadder.Tests.Runtime
             // Validate jump conditions
             return player != null && 
                    player.Health.IsAlive && 
-                   player.Actions.JumpCount < player.Actions.MaxJumps &&
-                   player.IsGrounded || player.Actions.JumpCount < player.Actions.MaxJumps;
+                   player.GetComponent<PlayerStateMediator>().GetJumpCount() < player.GetComponent<PlayerStateMediator>().GetMaxJumps() &&
+                   player.IsGrounded || player.GetComponent<PlayerStateMediator>().GetJumpCount() < player.GetComponent<PlayerStateMediator>().GetMaxJumps();
         }
 
         public override void Execute()
         {
-            if (player != null && player.Actions != null)
+            if (player != null && player.GetComponent<PlayerStateMediator>() != null)
             {
                 // Apply jump force through validated path
                 player.velocity.y = requestedJumpForce;
-                player.Actions.IncrementJumpCount();
+                player.GetComponent<PlayerStateMediator>().IncrementJumpCount();
                 
                 // Trigger audio through event system
                 var audioEvent = Simulation.Schedule<PlayerAudioEvent>(0f);
@@ -425,7 +425,7 @@ namespace NeonLadder.Tests.Runtime
             if (player != null && isGrounded)
             {
                 // Reset jump count when player lands
-                player.Actions.ResetJumpCount();
+                player.GetComponent<PlayerStateMediator>().ResetJumpCount();
                 
                 // Trigger landing audio
                 var audioEvent = Simulation.Schedule<PlayerAudioEvent>(0f);

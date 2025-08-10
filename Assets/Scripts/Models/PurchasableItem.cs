@@ -173,7 +173,8 @@ namespace NeonLadder.Models
             {
                 case "double_jump":
                 case "doublejump":
-                    player.Actions.IncrementAvailableMidAirJumps();
+                    var mediator = player.GetComponent<PlayerStateMediator>();
+                    mediator?.IncrementAvailableMidAirJumps();
                     break;
                     
                 case "dash":

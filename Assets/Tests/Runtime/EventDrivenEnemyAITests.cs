@@ -42,11 +42,17 @@ namespace NeonLadder.Tests.Runtime
             playerGameObject.AddComponent<Health>(); // Add Health component for player
             playerGameObject.AddComponent<Stamina>(); // Add Stamina component for player
             
-            // Create Player as child object (like PlayerTests)
+            // Create Player as child object (like PlayerTests)  
             var playerChild = new GameObject("PlayerChild");
             playerChild.transform.SetParent(playerGameObject.transform);
             playerChild.SetActive(false); // Disable to prevent Awake issues
+            
+            // Add both Player and PlayerAction components first
+            playerChild.AddComponent<PlayerAction>();
             player = playerChild.AddComponent<Player>();
+            
+            // Add PlayerStateMediator last so it can find both components  
+            playerChild.AddComponent<PlayerStateMediator>();
             
             // Create test Enemy (use child pattern like Player)
             enemyGameObject = new GameObject("TestEnemy");
