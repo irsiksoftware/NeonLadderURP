@@ -34,6 +34,9 @@ namespace NeonLadderURP.DataManagement
         [Header("Settings & Preferences")]
         public PlayerSettings settings = new PlayerSettings();
         
+        [Header("Dialogue & Story")]
+        public string dialogueDataJson = ""; // Serialized DialogueSaveData
+        
         [Header("Statistics & Analytics")]
         public GameStatistics statistics = new GameStatistics();
         
