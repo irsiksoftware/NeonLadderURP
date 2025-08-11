@@ -5,16 +5,18 @@ namespace NeonLadder.ProceduralGeneration
     /// <summary>
     /// Boss location data containing both display names for localization/title cards
     /// and simplified identifiers for procedural generation and scene management
-    /// Extends the base LocationData with boss-specific functionality
     /// </summary>
     [Serializable]
-    public class BossLocationData : LocationData
+    public class BossLocationData
     {
+        public string Identifier { get; }
+        public string DisplayName { get; }
         public string Boss { get; }
 
         public BossLocationData(string identifier, string displayName, string boss)
-            : base(identifier, displayName, $"boss.{identifier.ToLower()}")
         {
+            Identifier = identifier;
+            DisplayName = displayName;
             Boss = boss;
         }
 
