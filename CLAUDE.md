@@ -383,6 +383,9 @@ gh issue create --label "PBI,P2-Medium,5-points"              # New PBI
 - Unity version: Check ProjectSettings/ProjectVersion.txt for the current version
 - Test framework: Unity Test Framework (if tests are needed)
 - Assembly definitions are already set up in Assets/Scripts/NeonLadder.Scripts.asmdef
+- **NEVER create .meta files manually** - Let Unity generate them automatically via Editor refresh (Ctrl+R)
+  - Creating .meta files with incorrect GUIDs causes Unity errors
+  - Unity will auto-generate proper .meta files when detecting new assets
 
 ### Testing
 - Only create test infrastructure when explicitly asked
