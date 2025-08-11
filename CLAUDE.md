@@ -387,6 +387,14 @@ gh issue create --label "PBI,P2-Medium,5-points"              # New PBI
   - Creating .meta files with incorrect GUIDs causes Unity errors
   - Unity will auto-generate proper .meta files when detecting new assets
 
+### Scene Creation Best Practices
+- **ALWAYS copy existing scene templates** rather than creating from scratch
+- **BAREBONES Templates Available**: `Assets/Scenes/Claude-Tests/Basic-Loadable-Scene-Template-v1.unity` (minimal) and `v2.unity` (with floor)
+- **Minimize verbose scene file reading** unless explicitly requested or debugging specific issues
+- **Copy-first workflow**: Use `cp` commands to duplicate scenes, then modify incrementally
+- **Token efficiency**: Avoid deep Unity scene file analysis - focus on copying and extending templates
+- **Template hierarchy**: v1 = minimal, v2 = with collision floor - choose appropriate starting point
+
 ### Testing
 - Only create test infrastructure when explicitly asked
 - Use the existing test structure if tests are requested
