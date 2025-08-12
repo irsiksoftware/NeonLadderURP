@@ -395,6 +395,49 @@ gh issue create --label "PBI,P2-Medium,5-points"              # New PBI
 - **Token efficiency**: Avoid deep Unity scene file analysis - focus on copying and extending templates
 - **Template hierarchy**: v1 = minimal, v2 = with collision floor - choose appropriate starting point
 
+## 🎮 NeonLadder Gameplay Loop & Procedural Generation
+
+### **Complete Game Flow Architecture**
+```
+Title Screen -> Staging Area (Ship) -> Main City Hub -> [2 Connector Scenes] -> Boss Arena
+Death: Teleport back to Staging Area | Victory: Beat Devil to end game
+```
+
+### **Procedural Generation System**
+- **Main City Hub**: Player chooses left or right path
+- **Connector Generation**: 2 procedurally chosen connector scenes between hub and boss
+- **Boss Destinations**: 7 Deadly Sins + Devil finale (8 total boss arenas)
+- **Service Integration**: Shops, rest areas, upgrade stations as Z-axis doorways/alleys
+
+### **Master Location Registry**
+- **File**: `Assets/Scripts/ProceduralGeneration/MasterLocationRegistry.cs` 
+- **Purpose**: THE definitive list of ALL scenes/locations Claude can generate
+- **Categories**: Navigation, Combat, Service, Social, Connector, Event, System
+- **Usage**: `MasterLocationRegistry.GetSceneGenerationTargets()` returns all scenes Claude can scaffold
+
+### **Connector Scene Types (Procedurally Selected)**
+- **Z-Axis Alleys**: Neon-lit alleys, steam-filled passages
+- **Z-Axis Doorways**: Shop fronts, clinic entrances with glowing neon "OPEN" signs  
+- **Elevated Connectors**: Sky bridges, walkways with city views
+- **Service Connectors**: Combined rest/shop areas with Z-axis depth
+
+### **Boss Arena Locations (Fixed Destinations)**
+1. **Cathedral** - Grand Cathedral of Hubris (Pride)
+2. **Necropolis** - The Necropolis of Vengeance (Wrath)
+3. **Vault** - The Vault of Avarice (Greed)  
+4. **Mirage** - Envious Mirage: Jewelry Store (Envy)
+5. **Garden** - Infinite Garden, Eden of Desires (Lust)
+6. **Banquet** - The Banquet of Infinity (Gluttony)
+7. **Lounge** - The Lethargy Lounge (Sloth)
+8. **Finale** - Devil's domain (final boss)
+
+### **Claude Scene Generation Workflow**
+1. **Analyze**: `MasterLocationRegistry.AllLocations` to understand all possible scenes
+2. **Select Template**: Copy appropriate BAREBONES template (v1 minimal, v2 with floor)
+3. **Apply Theme**: Use `EnvironmentalTags` and `RequiredPrefabs` from location data
+4. **Add Connectors**: For connector scenes, implement Z-axis depth with doorways/alleys
+5. **Integrate Systems**: Ensure Managers.prefab and GameController.prefab are present
+
 ### Testing
 - Only create test infrastructure when explicitly asked
 - Use the existing test structure if tests are requested

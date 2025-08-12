@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Tests\Editor\ProceduralGenerationToolsTests.cs" />
     <Compile Include="Assets\Tests\Editor\DialogueSceneGeneratorTests.cs" />
+    <Compile Include="Assets\Tests\Editor\Performance\PerformanceMenuItemsTests.cs" />
     <Compile Include="Assets\Tests\Editor\PerformanceMenuTests.cs" />
   </ItemGroup>
   <ItemGroup>

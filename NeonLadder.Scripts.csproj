@@ -259,6 +259,7 @@
     <Compile Include="Assets\Scripts\Utilities\SceneEnumResolver.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\MonsterStates.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\BossLocationData.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Audio\PlayAudioClip.cs" />
     <Compile Include="Assets\Scripts\Managers\GameControllerManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\MeleeController.cs" />

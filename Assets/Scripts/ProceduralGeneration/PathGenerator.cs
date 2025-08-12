@@ -27,19 +27,13 @@ namespace NeonLadder.ProceduralGeneration
             "Envy",      // Layer 4
             "Lust",      // Layer 5
             "Gluttony",  // Layer 6
-            "Sloth"      // Final Layer (if all others defeated)
+            "Sloth",     // Layer 7
+            "Devil"      // Final Layer (if all sins defeated)
         };
 
-        private static readonly string[] BossLocations = new[]
-        {
-            "Grand Cathedral of Hubris",
-            "The Necropolis of Vengeance", 
-            "The Vault of Avarice",
-            "The Community Center",
-            "Infinite Forest (Eden of Desires)",
-            "The Feast of Infinity",
-            "The Lethargy Lounge"
-        };
+        // Boss locations are now managed through BossLocationData class
+        // This preserves both display names for localization/title cards 
+        // and simplified identifiers for procedural generation
 
         // Random instance seeded from the mystical string
         private System.Random _seededRandom;
@@ -146,7 +140,7 @@ namespace NeonLadder.ProceduralGeneration
             {
                 LayerIndex = layerIndex,
                 Boss = boss,
-                Location = BossLocations[layerIndex],
+                Location = BossLocationData.GetByLayer(layerIndex)?.DisplayName ?? "Unknown Location",
                 Nodes = new List<MapNode>()
             };
 
@@ -429,7 +423,7 @@ namespace NeonLadder.ProceduralGeneration
                 Properties = new Dictionary<string, object>
                 {
                     ["BossName"] = boss,
-                    ["Location"] = BossLocations[layerIndex],
+                    ["Location"] = BossLocationData.GetByLayer(layerIndex)?.DisplayName ?? "Unknown Location",
                     ["Difficulty"] = layerIndex + 1
                 }
             };
