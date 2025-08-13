@@ -3,6 +3,7 @@ using NeonLadder.Core;
 using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
+using NeonLadder.Optimization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +51,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual float lastAttackTime { get; set; } = Constants.Physics.Combat.InitialLastAttackTime;
 
         private Dictionary<Animations, float> animationClipLengths;
+        private EulerAngleCache eulerCache;
 
         public void Bounce(float value)
         {
@@ -96,6 +98,10 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual void OnEnable()
         {
             GuaranteeModelAndPlayer();
+            
+            // Initialize Euler angle cache for performance
+            eulerCache = EulerAngleCacheManager.Cache;
+            eulerCache?.PrewarmCache(transform.parent);
         }
 
         protected virtual void OnDisable()
@@ -180,6 +186,12 @@ namespace NeonLadder.Mechanics.Controllers
         {
             //targetVelocity = Vector3.zero;
             ComputeVelocity();
+            
+            // Update facing direction using cached Euler angles for performance
+            if (eulerCache != null)
+            {
+                IsFacingLeft = eulerCache.IsFacingLeft(transform.parent, 270f, 1f);
+            }
         }
 
         public virtual void ComputeVelocity()
