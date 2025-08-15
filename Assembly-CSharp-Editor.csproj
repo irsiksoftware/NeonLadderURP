@@ -69,6 +69,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\FromSavedNodeEditor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorResources.cs" />
+    <Compile Include="Assets\Tests\Editor\ProceduralGenerationToolsTests.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Curves\AnimationCurveTexturePropertyDrawer.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenLiquidGUI.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\HeightmapNodeEditor.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Packages\LeartesStudios\Script\Editor\ConvertTexturesToPNG.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorGUILayout.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Lightning\Editor\LightningRendererEditor.cs" />
+    <Compile Include="Assets\Tests\Editor\DialogueSceneGeneratorTests.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\UberFXShaderConverter.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\HDRPMaterialSyncTool.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorUtilities.cs" />
@@ -116,8 +118,8 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapImporter.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\Editor\SkyMasterURP_Prefab_Manager.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenExplosionGUI.cs" />
-    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenFireGUI.cs" />
     <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\UberFXShaderConverterWindow.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenFireGUI.cs" />
     <Compile Include="Assets\Packages\Modern UI Pack\Editor\Scripts\ContextMenu.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\TypeExtensions.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorAssetModProcessor.cs" />
@@ -126,12 +128,14 @@
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapToRaw.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Gradients\GradientTexturePropertyDrawer.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.4 Scripts\Editor\CloudHandlerSM_SRPEditor.cs" />
+    <Compile Include="Assets\Tests\Editor\Performance\PerformanceMenuItemsTests.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\Editor\CreatePlaneSM.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\DetailDistancesCalc.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\FirearmCollectionEditor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenMasterGUI.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorBase.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Editor\ObjExporter.cs" />
+    <Compile Include="Assets\Tests\Editor\PerformanceMenuTests.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\SavingNodeEditor.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeGraphEditor.cs" />
   </ItemGroup>

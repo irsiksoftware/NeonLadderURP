@@ -208,9 +208,11 @@ namespace NeonLadder.Tests.Editor.UI
                 .ToList();
             
             // Assert
-            Assert.AreEqual(1, menuItems.Count, "TestAnalysisMenu should have exactly one menu item");
-            Assert.AreEqual("RunCLITestsAndAnalyze", menuItems[0].Name, 
-                "Menu item method should be RunCLITestsAndAnalyze");
+            Assert.AreEqual(2, menuItems.Count, "TestAnalysisMenu should have exactly two menu items");
+            
+            var methodNames = menuItems.Select(m => m.Name).OrderBy(n => n).ToArray();
+            Assert.Contains("RunCLITestsAndAnalyze", methodNames, "Should contain RunCLITestsAndAnalyze menu item");
+            Assert.Contains("QuickAnalysisOfExistingResults", methodNames, "Should contain QuickAnalysisOfExistingResults menu item");
         }
         
         [Test]

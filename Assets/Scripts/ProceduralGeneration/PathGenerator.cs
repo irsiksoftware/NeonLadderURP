@@ -627,7 +627,9 @@ namespace NeonLadder.ProceduralGeneration
         Boss,        // Boss encounters
         Treasure,    // Future: Treasure rooms
         Elite,       // Future: Elite encounters
-        Mystery      // Future: Mystery nodes
+        Mystery,     // Future: Mystery nodes
+        Start,       // Starting node (MainCityHub)
+        Connection   // Connection scenes between areas
     }
 
     /// <summary>

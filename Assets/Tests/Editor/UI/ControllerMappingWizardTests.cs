@@ -98,8 +98,8 @@ namespace NeonLadder.Tests.Editor.UI
             EditorUITestFramework.SimulateOnEnable(window);
             
             // Act - Simulate no gamepad connected
-            SetPrivateField("currentGamepad", null);
-            SetPrivateField("controllerInfo", "No controller detected");
+            SetPrivateField<object>("currentGamepad", null);
+            SetPrivateField<string>("controllerInfo", "No controller detected");
             
             // Assert
             var controllerInfo = GetPrivateField<string>("controllerInfo");
@@ -152,9 +152,9 @@ namespace NeonLadder.Tests.Editor.UI
             SetPrivateField("listeningAction", mockJumpAction);
             
             // Act - Stop listening
-            SetPrivateField("isListening", false);
-            SetPrivateField("currentListeningAction", "");
-            SetPrivateField("listeningAction", null);
+            SetPrivateField<bool>("isListening", false);
+            SetPrivateField<string>("currentListeningAction", "");
+            SetPrivateField<object>("listeningAction", null);
             
             // Assert
             Assert.IsFalse(GetPrivateField<bool>("isListening"), "Should not be in listening state");
@@ -235,15 +235,25 @@ namespace NeonLadder.Tests.Editor.UI
         }
         
         [Test]
-        public void UIState_ActionFoldouts_InitializedEmpty()
+        public void UIState_ActionFoldouts_InitializedCorrectly()
         {
-            // Arrange & Act
-            EditorUITestFramework.SimulateOnEnable(window);
-            
-            // Assert
+            // Arrange & Act - Test that dictionary is initialized with project input actions
             var actionFoldouts = GetPrivateField<Dictionary<string, bool>>("actionFoldouts");
+            
+            // Assert - Dictionary should be initialized with project's input actions
             Assert.IsNotNull(actionFoldouts, "Action foldouts dictionary should be initialized");
-            Assert.AreEqual(0, actionFoldouts.Count, "Action foldouts should start empty");
+            Assert.Greater(actionFoldouts.Count, 0, "Action foldouts should contain project input actions");
+            
+            // Verify all values are initially false (collapsed)
+            foreach (var kvp in actionFoldouts)
+            {
+                Assert.IsFalse(kvp.Value, $"Action '{kvp.Key}' should start collapsed");
+            }
+            
+            // Additional test: Verify OnEnable doesn't change the count
+            int initialCount = actionFoldouts.Count;
+            EditorUITestFramework.SimulateOnEnable(window);
+            Assert.AreEqual(initialCount, actionFoldouts.Count, "OnEnable should not change action count");
         }
         
         #endregion
@@ -287,16 +297,21 @@ namespace NeonLadder.Tests.Editor.UI
             EditorUITestFramework.SimulateOnEnable(window);
             var actionFoldouts = GetPrivateField<Dictionary<string, bool>>("actionFoldouts");
             
-            // Act - Add multiple actions to track
-            actionFoldouts["Move"] = true;
-            actionFoldouts["Jump"] = false;
-            actionFoldouts["Fire"] = true;
-            actionFoldouts["Reload"] = false;
+            // Store initial count of project actions
+            int initialCount = actionFoldouts.Count;
+            
+            // Act - Add multiple test actions to track
+            actionFoldouts["TestMove"] = true;
+            actionFoldouts["TestJump"] = false;
+            actionFoldouts["TestFire"] = true;
+            actionFoldouts["TestReload"] = false;
             
             // Assert
-            Assert.AreEqual(4, actionFoldouts.Count, "Should track multiple actions");
-            Assert.IsTrue(actionFoldouts["Move"], "Move action should be expanded");
-            Assert.IsFalse(actionFoldouts["Jump"], "Jump action should be collapsed");
+            Assert.AreEqual(initialCount + 4, actionFoldouts.Count, "Should track original actions plus 4 test actions");
+            Assert.IsTrue(actionFoldouts["TestMove"], "TestMove action should be expanded");
+            Assert.IsFalse(actionFoldouts["TestJump"], "TestJump action should be collapsed");
+            Assert.IsTrue(actionFoldouts["TestFire"], "TestFire action should be expanded");
+            Assert.IsFalse(actionFoldouts["TestReload"], "TestReload action should be collapsed");
         }
         
         #endregion

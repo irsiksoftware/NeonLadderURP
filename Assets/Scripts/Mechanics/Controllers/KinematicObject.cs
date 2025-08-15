@@ -3,6 +3,7 @@ using NeonLadder.Core;
 using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Models;
+using NeonLadder.Optimization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +51,7 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual float lastAttackTime { get; set; } = Constants.Physics.Combat.InitialLastAttackTime;
 
         private Dictionary<Animations, float> animationClipLengths;
+        private EulerAngleCache eulerCache;
 
         public void Bounce(float value)
         {
@@ -96,6 +98,10 @@ namespace NeonLadder.Mechanics.Controllers
         protected virtual void OnEnable()
         {
             GuaranteeModelAndPlayer();
+            
+            // Initialize Euler angle cache for performance
+            eulerCache = EulerAngleCacheManager.Cache;
+            eulerCache?.PrewarmCache(transform.parent);
         }
 
         protected virtual void OnDisable()
@@ -111,21 +117,26 @@ namespace NeonLadder.Mechanics.Controllers
         {
             rigidbody = GetComponentInParent<Rigidbody>();
             Animator = GetComponentInParent<Animator>();
-            switch (this)
+            
+            // Only configure rigidbody if it exists (important for tests)
+            if (rigidbody != null)
             {
-                case FlyingMinor:
-                case Minor:
-                case FlyingMajor:
-                case Major:
-                case Boss:
-                case Enemy:
-                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-                    break;
-                case Player:
-                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-                    break;
-                default:
-                    break;
+                switch (this)
+                {
+                    case FlyingMinor:
+                    case Minor:
+                    case FlyingMajor:
+                    case Major:
+                    case Boss:
+                    case Enemy:
+                        rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+                        break;
+                    case Player:
+                        rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             //if (this.GetType() == typeof(Enemy))
@@ -180,6 +191,12 @@ namespace NeonLadder.Mechanics.Controllers
         {
             //targetVelocity = Vector3.zero;
             ComputeVelocity();
+            
+            // Update facing direction using cached Euler angles for performance
+            if (eulerCache != null)
+            {
+                IsFacingLeft = eulerCache.IsFacingLeft(transform.parent, 270f, 1f);
+            }
         }
 
         public virtual void ComputeVelocity()
