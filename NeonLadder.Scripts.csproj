@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\FlyingMinor.cs" />
     <Compile Include="Assets\Scripts\Events\BossTransformationEvent.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerJumpValidationEvent.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Enums\SpawnPointTypes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\CollisionController.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveStateConfiguration.cs" />
     <Compile Include="Assets\Scripts\Steam\StatsAndAchievements.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Assets\Scripts\Events\PlayerStopJump.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeCategory.cs" />
     <Compile Include="Assets\Scripts\Debug\LoggingManager.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Enums\TransitionDirections.cs" />
     <Compile Include="Assets\Scripts\Events\LoadGame.cs" />
     <Compile Include="Assets\Scripts\UI\StatUI.cs" />
     <Compile Include="Assets\Scripts\Dialog\EnhancedLocalizationManager.cs" />
@@ -262,7 +264,9 @@
     <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterCamera.cs" />
     <Compile Include="Assets\Scripts\Events\BossJumped.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\ControlDisabler.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionTriggerDetector.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyDeath.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Enums\TransitionModes.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\PathGeneratorConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Game.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerJumped.cs" />
@@ -297,6 +301,7 @@
     <Compile Include="Assets\Scripts\Debug\AnimationDebugging.cs" />
     <Compile Include="Assets\Scripts\Managers\LootPurchaseManager.cs" />
     <Compile Include="Assets\Scripts\Events\DamageNumberEvent.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Enums\DestinationTypes.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerDeath.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\Effects\Text\Typewriter.cs" />

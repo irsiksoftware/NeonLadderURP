@@ -5,6 +5,7 @@ using UnityEngine.TestTools;
 using NeonLadder.ProceduralGeneration;
 using UnityEngine.SceneManagement;
 using NeonLadder.Gameplay;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Tests.Runtime
 {
@@ -19,12 +20,22 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void Setup()
         {
-            // Create trigger object with collider (3D for 2.5D game)
+            // Create trigger object (main SceneTransitionTrigger component)
             triggerObject = new GameObject("TestTrigger");
-            triggerCollider = triggerObject.AddComponent<BoxCollider>();
+            
+            // Create separate collider object first (new pattern)
+            var colliderObject = new GameObject("TriggerCollider");
+            colliderObject.transform.SetParent(triggerObject.transform);
+            triggerCollider = colliderObject.AddComponent<BoxCollider>();
             triggerCollider.isTrigger = true;
             triggerCollider.size = new Vector3(2f, 2f, 1f);
+            
+            // Temporarily disable the object to prevent Awake from running
+            triggerObject.SetActive(false);
             trigger = triggerObject.AddComponent<SceneTransitionTrigger>();
+            trigger.SetTriggerColliderObject(colliderObject);
+            // Re-enable the object now that collider is assigned
+            triggerObject.SetActive(true);
             
             // Create player object with collider (3D for 2.5D game)
             playerObject = new GameObject("Player");
@@ -49,23 +60,26 @@ namespace NeonLadder.Tests.Runtime
         }
         
         [Test]
-        public void SceneTransitionTrigger_RequiresCollider()
+        public void SceneTransitionTrigger_RequiresTriggerColliderObject()
         {
             // Arrange
-            var testObject = new GameObject("WithColliderObject");
+            var triggerObject = new GameObject("TriggerObject");
+            var colliderObject = new GameObject("ColliderObject");
+            colliderObject.AddComponent<BoxCollider>().isTrigger = true;
             
-            // First add a collider (required by SceneTransitionTrigger)
-            testObject.AddComponent<BoxCollider>();
+            // Act - Create trigger without assigning collider object initially, then assign it
+            triggerObject.SetActive(false);
+            var trigger = triggerObject.AddComponent<SceneTransitionTrigger>();
+            triggerObject.SetActive(true); // This will trigger validation and show missing collider
             
-            // Act & Assert - Should not throw when collider is present
-            Assert.DoesNotThrow(() => testObject.AddComponent<SceneTransitionTrigger>());
+            // Now assign the collider object - should work without errors
+            trigger.SetTriggerColliderObject(colliderObject);
             
-            // Verify both components exist
-            var addedTrigger = testObject.GetComponent<SceneTransitionTrigger>();
-            Assert.IsNotNull(addedTrigger);
-            Assert.IsNotNull(testObject.GetComponent<Collider>());
+            // Assert - Verify assignment worked
+            Assert.AreEqual(colliderObject, trigger.GetTriggerColliderObject());
             
-            Object.DestroyImmediate(testObject);
+            Object.DestroyImmediate(triggerObject);
+            Object.DestroyImmediate(colliderObject);
         }
         
         [Test]
@@ -241,47 +255,68 @@ namespace NeonLadder.Tests.Runtime
         }
         
         [Test]
-        public void ColliderConfiguration_IsTriggerByDefault()
+        public void ColliderConfiguration_AutoFixesTriggerFlag()
         {
             // Arrange
-            var newTriggerObject = new GameObject("NewTrigger");
-            var collider = newTriggerObject.AddComponent<BoxCollider>();
+            var triggerObject = new GameObject("TriggerObject");
+            var colliderObject = new GameObject("ColliderObject");
+            var collider = colliderObject.AddComponent<BoxCollider>();
             collider.isTrigger = false; // Set to false initially
             
-            // Act
-            newTriggerObject.AddComponent<SceneTransitionTrigger>();
+            // Act - Auto-fixing trigger flag behavior test
+            triggerObject.SetActive(false);
+            var trigger = triggerObject.AddComponent<SceneTransitionTrigger>();
+            trigger.SetTriggerColliderObject(colliderObject);
+            triggerObject.SetActive(true);
             
-            // Assert
+            // Assert - Should be auto-fixed to true
             Assert.IsTrue(collider.isTrigger);
             
             // Cleanup
-            Object.DestroyImmediate(newTriggerObject);
+            Object.DestroyImmediate(triggerObject);
+            Object.DestroyImmediate(colliderObject);
         }
         
         [Test]
         public void SupportsMultipleColliderTypes()
         {
-            // Test BoxCollider (3D for 2.5D game)
-            var boxObject = new GameObject("BoxTrigger");
-            boxObject.AddComponent<BoxCollider>();
-            var boxTrigger = boxObject.AddComponent<SceneTransitionTrigger>();
-            Assert.IsNotNull(boxTrigger);
-            Object.DestroyImmediate(boxObject);
+            // Test BoxCollider on separate object
+            var triggerObject1 = new GameObject("BoxTrigger");
+            var colliderObject1 = new GameObject("BoxColliderObject");
+            colliderObject1.AddComponent<BoxCollider>().isTrigger = true;
+            triggerObject1.SetActive(false);
+            var trigger1 = triggerObject1.AddComponent<SceneTransitionTrigger>();
+            trigger1.SetTriggerColliderObject(colliderObject1);
+            triggerObject1.SetActive(true);
+            Assert.IsNotNull(trigger1);
+            Object.DestroyImmediate(triggerObject1);
+            Object.DestroyImmediate(colliderObject1);
             
-            // Test SphereCollider (3D equivalent of circle for 2.5D game)
-            var sphereObject = new GameObject("SphereTrigger");
-            sphereObject.AddComponent<SphereCollider>();
-            var sphereTrigger = sphereObject.AddComponent<SceneTransitionTrigger>();
-            Assert.IsNotNull(sphereTrigger);
-            Object.DestroyImmediate(sphereObject);
+            // Test SphereCollider on separate object
+            var triggerObject2 = new GameObject("SphereTrigger");
+            var colliderObject2 = new GameObject("SphereColliderObject");
+            colliderObject2.AddComponent<SphereCollider>().isTrigger = true;
+            triggerObject2.SetActive(false);
+            var trigger2 = triggerObject2.AddComponent<SceneTransitionTrigger>();
+            trigger2.SetTriggerColliderObject(colliderObject2);
+            triggerObject2.SetActive(true);
+            Assert.IsNotNull(trigger2);
+            Object.DestroyImmediate(triggerObject2);
+            Object.DestroyImmediate(colliderObject2);
             
-            // Test MeshCollider (3D equivalent of polygon for 2.5D game)
-            var meshObject = new GameObject("MeshTrigger");
-            var meshCollider = meshObject.AddComponent<MeshCollider>();
+            // Test MeshCollider on separate object
+            var triggerObject3 = new GameObject("MeshTrigger");
+            var colliderObject3 = new GameObject("MeshColliderObject");
+            var meshCollider = colliderObject3.AddComponent<MeshCollider>();
             meshCollider.convex = true; // Required for triggers
-            var meshTrigger = meshObject.AddComponent<SceneTransitionTrigger>();
-            Assert.IsNotNull(meshTrigger);
-            Object.DestroyImmediate(meshObject);
+            meshCollider.isTrigger = true;
+            triggerObject3.SetActive(false);
+            var trigger3 = triggerObject3.AddComponent<SceneTransitionTrigger>();
+            trigger3.SetTriggerColliderObject(colliderObject3);
+            triggerObject3.SetActive(true);
+            Assert.IsNotNull(trigger3);
+            Object.DestroyImmediate(triggerObject3);
+            Object.DestroyImmediate(colliderObject3);
         }
         
         [Test]

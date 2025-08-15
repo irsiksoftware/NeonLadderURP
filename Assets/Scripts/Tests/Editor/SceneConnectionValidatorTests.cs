@@ -6,6 +6,7 @@ using UnityEngine.TestTools;
 using NeonLadder.ProceduralGeneration;
 using UnityEditor;
 using NeonLadder.Editor;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Tests.Editor
 {
@@ -21,11 +22,18 @@ namespace NeonLadder.Tests.Editor
             // Create test objects for validation
             testObject = new GameObject("TestValidationObject");
             
-            // Add required components (3D collider for 2.5D game)
-            var collider = testObject.AddComponent<BoxCollider>();
+            // Create separate collider object (new pattern)
+            var colliderObject = new GameObject("TriggerCollider");
+            colliderObject.transform.SetParent(testObject.transform);
+            var collider = colliderObject.AddComponent<BoxCollider>();
             collider.isTrigger = true;
             
+            // Add transition trigger and assign collider
+            testObject.SetActive(false);
             trigger = testObject.AddComponent<SceneTransitionTrigger>();
+            trigger.SetTriggerColliderObject(colliderObject);
+            testObject.SetActive(true);
+            
             override_ = testObject.AddComponent<SceneConnectionOverride>();
         }
         

@@ -1,5 +1,6 @@
 using UnityEngine;
 using NeonLadder.ProceduralGeneration;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Gameplay
 {

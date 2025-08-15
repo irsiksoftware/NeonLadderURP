@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\PathGeneratorEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\CLITestRunner.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildMenuItems.cs" />
+    <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\SceneTransitionTriggerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\SceneConnectionOverrideEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\SceneConnectionValidatorWindow.cs" />

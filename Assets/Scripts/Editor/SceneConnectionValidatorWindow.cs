@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using NeonLadder.ProceduralGeneration;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Editor
 {

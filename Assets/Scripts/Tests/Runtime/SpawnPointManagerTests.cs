@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using NeonLadder.Gameplay;
 using NeonLadder.ProceduralGeneration;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Tests.Runtime
 {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.ProceduralGeneration
 {
@@ -275,14 +276,4 @@ namespace NeonLadder.ProceduralGeneration
         public float SnapshotTime;
     }
     
-    public enum TransitionDirection
-    {
-        Forward,
-        Backward,
-        Left,
-        Right,
-        Up,
-        Down,
-        Any         // No specific direction
-    }
 }

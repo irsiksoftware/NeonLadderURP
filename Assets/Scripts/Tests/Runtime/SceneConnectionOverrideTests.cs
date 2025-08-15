@@ -13,21 +13,40 @@ namespace NeonLadder.Tests.Runtime
         private SceneTransitionTrigger trigger;
         private SceneConnectionOverride override_;
         
+        /// <summary>
+        /// Helper method to create a properly configured SceneTransitionTrigger for testing
+        /// </summary>
+        private SceneTransitionTrigger CreateTestTrigger(GameObject parent, string name = "TestTrigger")
+        {
+            var triggerObj = new GameObject(name);
+            triggerObj.transform.SetParent(parent.transform);
+            
+            // Create collider object
+            var colliderObj = new GameObject($"{name}_Collider");
+            colliderObj.transform.SetParent(triggerObj.transform);
+            var collider = colliderObj.AddComponent<BoxCollider>();
+            collider.isTrigger = true;
+            
+            // Use the same pattern as SceneTransitionTriggerTests: disable, add component, assign collider, enable
+            triggerObj.SetActive(false);
+            var triggerComponent = triggerObj.AddComponent<SceneTransitionTrigger>();
+            triggerComponent.SetTriggerColliderObject(colliderObj);
+            triggerObj.SetActive(true);
+            
+            return triggerComponent;
+        }
+        
         [SetUp]
         public void Setup()
         {
-            // Create test object with required components
+            // Create test object (main object with override component)
             testObject = new GameObject("TestOverrideObject");
             
-            // Add collider for trigger (3D collider for 2.5D game)
-            var collider = testObject.AddComponent<BoxCollider>();
-            collider.isTrigger = true;
+            // Create trigger with proper collider setup using helper method
+            trigger = CreateTestTrigger(testObject, "TestTrigger");
             
-            // Add transition trigger (required)
-            trigger = testObject.AddComponent<SceneTransitionTrigger>();
-            
-            // Add override component
-            override_ = testObject.AddComponent<SceneConnectionOverride>();
+            // Add override component to the trigger's parent object
+            override_ = trigger.gameObject.AddComponent<SceneConnectionOverride>();
         }
         
         [TearDown]
@@ -52,11 +71,28 @@ namespace NeonLadder.Tests.Runtime
             // Arrange
             var newObject = new GameObject("NoTriggerObject");
             
-            // Act & Assert - Should log warning but not throw
+            // Create collider object first to avoid validation error
+            var colliderObj = new GameObject("TestCollider");
+            colliderObj.transform.SetParent(newObject.transform);
+            colliderObj.AddComponent<BoxCollider>().isTrigger = true;
+            
+            // Disable object to prevent Awake validation errors
+            newObject.SetActive(false);
+            
+            // Act & Assert - Adding SceneConnectionOverride should automatically add SceneTransitionTrigger
             Assert.DoesNotThrow(() => newObject.AddComponent<SceneConnectionOverride>());
+            
+            // Verify that SceneTransitionTrigger was automatically added
+            var trigger = newObject.GetComponent<SceneTransitionTrigger>();
+            Assert.IsNotNull(trigger, "SceneTransitionTrigger should be automatically added due to RequireComponent");
+            
+            // Set up the trigger properly and re-enable
+            trigger.SetTriggerColliderObject(colliderObj);
+            newObject.SetActive(true);
             
             // Cleanup
             Object.DestroyImmediate(newObject);
+            Object.DestroyImmediate(colliderObj);
         }
         
         [Test]
@@ -383,20 +419,32 @@ namespace NeonLadder.Tests.Runtime
         {
             // Create multiple override objects
             var obj1 = new GameObject("Override1");
-            obj1.AddComponent<BoxCollider>();
+            var collider1 = new GameObject("Collider1");
+            collider1.AddComponent<BoxCollider>().isTrigger = true;
+            obj1.SetActive(false);
             var trigger1 = obj1.AddComponent<SceneTransitionTrigger>();
+            trigger1.SetTriggerColliderObject(collider1);
+            obj1.SetActive(true);
             var override1 = obj1.AddComponent<SceneConnectionOverride>();
             override1.SetPriority(100);
             
             var obj2 = new GameObject("Override2");
-            obj2.AddComponent<BoxCollider>();
+            var collider2 = new GameObject("Collider2");
+            collider2.AddComponent<BoxCollider>().isTrigger = true;
+            obj2.SetActive(false);
             var trigger2 = obj2.AddComponent<SceneTransitionTrigger>();
+            trigger2.SetTriggerColliderObject(collider2);
+            obj2.SetActive(true);
             var override2 = obj2.AddComponent<SceneConnectionOverride>();
             override2.SetPriority(200);
             
             var obj3 = new GameObject("Override3");
-            obj3.AddComponent<BoxCollider>();
+            var collider3 = new GameObject("Collider3");
+            collider3.AddComponent<BoxCollider>().isTrigger = true;
+            obj3.SetActive(false);
             var trigger3 = obj3.AddComponent<SceneTransitionTrigger>();
+            trigger3.SetTriggerColliderObject(collider3);
+            obj3.SetActive(true);
             var override3 = obj3.AddComponent<SceneConnectionOverride>();
             override3.SetPriority(50);
             

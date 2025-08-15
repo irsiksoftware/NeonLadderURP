@@ -4,26 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using NeonLadder.Gameplay;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.ProceduralGeneration
 {
-    public enum TransitionMode
-    {
-        Automatic,      // Trigger on enter
-        Interactive     // Press key to trigger
-    }
-
-    public enum DestinationType
-    {
-        Procedural,     // Use procedural generation
-        Manual,         // Use override scene name
-        NextInPath      // Use next node in path
-    }
-
-
-    [RequireComponent(typeof(Collider))]
     public class SceneTransitionTrigger : MonoBehaviour
     {
+        [Header("Transition Configuration")]
+        [SerializeField] private EventType transitionType = EventType.Portal;
+        [SerializeField] private GameObject triggerColliderObject;
+        
         [Header("Transition Settings")]
         [SerializeField] private TransitionMode mode = TransitionMode.Automatic;
         [SerializeField] private string interactionPrompt = "Press E to Enter";
@@ -33,7 +23,8 @@ namespace NeonLadder.ProceduralGeneration
         [Header("Destination")]
         [SerializeField] private DestinationType destinationType = DestinationType.Procedural;
         [SerializeField] private string overrideSceneName;
-        [SerializeField] private string targetSpawnPointName;
+        [SerializeField] private SpawnPointType spawnPointType = SpawnPointType.Auto;
+        [SerializeField] private string customSpawnPointName;
         
         [Header("Direction")]
         [SerializeField] private TransitionDirection direction = TransitionDirection.Forward;
@@ -62,20 +53,52 @@ namespace NeonLadder.ProceduralGeneration
         
         private void Awake()
         {
-            // Ensure collider is set as trigger
-            var collider = GetComponent<Collider>();
-            if (collider != null)
+            ValidateConfiguration();
+        }
+        
+        private void ValidateConfiguration()
+        {
+            if (triggerColliderObject == null)
             {
+                Debug.LogError($"[SceneTransitionTrigger] {gameObject.name}: No trigger collider object assigned!", this);
+                return;
+            }
+            
+            var collider = triggerColliderObject.GetComponent<Collider>();
+            if (collider == null)
+            {
+                Debug.LogError($"[SceneTransitionTrigger] {gameObject.name}: Assigned trigger object '{triggerColliderObject.name}' has no Collider component!", this);
+                return;
+            }
+            
+            if (!collider.isTrigger)
+            {
+                Debug.LogWarning($"[SceneTransitionTrigger] {gameObject.name}: Collider on '{triggerColliderObject.name}' is not set as trigger. Auto-fixing...", this);
                 collider.isTrigger = true;
             }
         }
         
-        private void OnTriggerEnter(Collider other)
+        private void Start()
         {
-            if (isTransitioning || !IsPlayer(other)) return;
+            // Set up trigger detection on the assigned collider object
+            if (triggerColliderObject != null)
+            {
+                // Add this script's trigger detection to the collider object if needed
+                var triggerDetector = triggerColliderObject.GetComponent<SceneTransitionTriggerDetector>();
+                if (triggerDetector == null)
+                {
+                    triggerDetector = triggerColliderObject.AddComponent<SceneTransitionTriggerDetector>();
+                }
+                triggerDetector.Initialize(this);
+            }
+        }
+        
+        public void OnPlayerEnterTrigger(Collider playerCollider)
+        {
+            if (isTransitioning || !IsPlayer(playerCollider)) return;
             
             playerInTrigger = true;
-            currentPlayer = other.gameObject;
+            currentPlayer = playerCollider.gameObject;
             
             if (mode == TransitionMode.Automatic)
             {
@@ -94,9 +117,9 @@ namespace NeonLadder.ProceduralGeneration
             }
         }
         
-        private void OnTriggerExit(Collider other)
+        public void OnPlayerExitTrigger(Collider playerCollider)
         {
-            if (!IsPlayer(other)) return;
+            if (!IsPlayer(playerCollider)) return;
             
             playerInTrigger = false;
             currentPlayer = null;
@@ -151,7 +174,8 @@ namespace NeonLadder.ProceduralGeneration
             // Store transition context for spawn system
             if (SpawnPointManager.Instance != null)
             {
-                SpawnPointManager.Instance.SetTransitionContext(direction, targetSpawnPointName);
+                string spawnPointName = GetTargetSpawnPointName();
+                SpawnPointManager.Instance.SetTransitionContext(direction, spawnPointName);
             }
             
             // Determine destination scene
@@ -286,6 +310,27 @@ namespace NeonLadder.ProceduralGeneration
             // TODO: Update loading bar
         }
         
+        private string GetTargetSpawnPointName()
+        {
+            switch (spawnPointType)
+            {
+                case SpawnPointType.Auto:
+                    return null; // Let SpawnPointManager decide based on direction
+                case SpawnPointType.Default:
+                    return "Default";
+                case SpawnPointType.FromLeft:
+                    return "FromLeft";
+                case SpawnPointType.FromRight:
+                    return "FromRight";
+                case SpawnPointType.BossArena:
+                    return "BossArena";
+                case SpawnPointType.Custom:
+                    return customSpawnPointName;
+                default:
+                    return null;
+            }
+        }
+        
         #region Editor Visualization
         
         private void OnDrawGizmos()
@@ -300,7 +345,13 @@ namespace NeonLadder.ProceduralGeneration
         
         private void DrawGizmoVisualization(float alpha)
         {
-            var collider = GetComponent<Collider>();
+            // Use the assigned trigger collider object for visualization
+            Collider collider = null;
+            if (triggerColliderObject != null)
+            {
+                collider = triggerColliderObject.GetComponent<Collider>();
+            }
+            
             if (collider == null) return;
             
             // Set color based on state
@@ -311,11 +362,12 @@ namespace NeonLadder.ProceduralGeneration
             
             Gizmos.color = drawColor;
             
-            // Draw collider bounds
+            // Draw collider bounds using the trigger object's transform
+            Transform triggerTransform = triggerColliderObject.transform;
             if (collider is BoxCollider box)
             {
                 Matrix4x4 oldMatrix = Gizmos.matrix;
-                Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.localScale);
+                Gizmos.matrix = Matrix4x4.TRS(triggerTransform.position, triggerTransform.rotation, triggerTransform.localScale);
                 Gizmos.DrawWireCube(box.center, box.size);
                 Gizmos.color = new Color(drawColor.r, drawColor.g, drawColor.b, 0.1f * alpha);
                 Gizmos.DrawCube(box.center, box.size);
@@ -323,10 +375,10 @@ namespace NeonLadder.ProceduralGeneration
             }
             else if (collider is SphereCollider sphere)
             {
-                Vector3 center = transform.position + sphere.center;
-                Gizmos.DrawWireSphere(center, sphere.radius * transform.localScale.x);
+                Vector3 center = triggerTransform.position + sphere.center;
+                Gizmos.DrawWireSphere(center, sphere.radius * triggerTransform.localScale.x);
                 Gizmos.color = new Color(drawColor.r, drawColor.g, drawColor.b, 0.1f * alpha);
-                Gizmos.DrawSphere(center, sphere.radius * transform.localScale.x);
+                Gizmos.DrawSphere(center, sphere.radius * triggerTransform.localScale.x);
             }
             
             // Draw direction arrow
@@ -403,13 +455,49 @@ namespace NeonLadder.ProceduralGeneration
         
         #region Public API
         
-        public void SetDestination(string sceneName, string spawnPoint = null)
+        public void SetDestination(string sceneName, SpawnPointType spawnType = SpawnPointType.Auto, string customSpawnPoint = null)
         {
             destinationType = DestinationType.Manual;
             overrideSceneName = sceneName;
-            if (!string.IsNullOrEmpty(spawnPoint))
+            spawnPointType = spawnType;
+            if (spawnType == SpawnPointType.Custom && !string.IsNullOrEmpty(customSpawnPoint))
             {
-                targetSpawnPointName = spawnPoint;
+                customSpawnPointName = customSpawnPoint;
+            }
+        }
+        
+        // Backward compatibility overload for existing code
+        public void SetDestination(string sceneName, string spawnPointName)
+        {
+            destinationType = DestinationType.Manual;
+            overrideSceneName = sceneName;
+            
+            // Convert string spawn point name to enum
+            if (string.IsNullOrEmpty(spawnPointName))
+            {
+                spawnPointType = SpawnPointType.Auto;
+            }
+            else
+            {
+                switch (spawnPointName.ToLowerInvariant())
+                {
+                    case "default":
+                        spawnPointType = SpawnPointType.Default;
+                        break;
+                    case "fromleft":
+                        spawnPointType = SpawnPointType.FromLeft;
+                        break;
+                    case "fromright":
+                        spawnPointType = SpawnPointType.FromRight;
+                        break;
+                    case "bossarena":
+                        spawnPointType = SpawnPointType.BossArena;
+                        break;
+                    default:
+                        spawnPointType = SpawnPointType.Custom;
+                        customSpawnPointName = spawnPointName;
+                        break;
+                }
             }
         }
         
@@ -436,6 +524,14 @@ namespace NeonLadder.ProceduralGeneration
         public bool IsOneWay() => oneWayOnly;
         public bool RequiresKey() => requiresKey;
         public string GetRequiredKey() => requiredKeyId;
+        public EventType GetTransitionType() => transitionType;
+        public GameObject GetTriggerColliderObject() => triggerColliderObject;
+        
+        public void SetTriggerColliderObject(GameObject colliderObject)
+        {
+            triggerColliderObject = colliderObject;
+            ValidateConfiguration();
+        }
         
         #endregion
     }
