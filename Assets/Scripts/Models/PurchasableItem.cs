@@ -83,9 +83,12 @@ namespace NeonLadder.Models
             timesPurchased++;
             
             // Apply effects
-            foreach (var effect in effects)
+            if (effects != null)
             {
-                effect.Apply(player);
+                foreach (var effect in effects)
+                {
+                    effect?.Apply(player);
+                }
             }
             
             // Schedule VFX and audio

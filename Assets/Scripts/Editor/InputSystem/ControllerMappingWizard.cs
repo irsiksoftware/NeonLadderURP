@@ -46,6 +46,9 @@ namespace NeonLadder.Editor.InputSystem
 
         private void OnEnable()
         {
+            // Set minimum window size
+            minSize = new Vector2(600, 800);
+            
             LoadPlayerControls();
             DetectController();
             EditorApplication.update += UpdateRealtimeInput;

@@ -74,8 +74,11 @@
     <Compile Include="Assets\Tests\Runtime\Steam\SteamIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ComboSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogueChoiceDatabaseTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\EnhancedPurchaseManagerTests.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ProceduralSceneLoadingTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\PurchasableItemTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\BatchCurrencyEventTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EulerAngleCacheTests.cs" />
     <Compile Include="Assets\Tests\Runtime\OptimizedSceneEnumResolverTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PathGeneratorTests.cs" />

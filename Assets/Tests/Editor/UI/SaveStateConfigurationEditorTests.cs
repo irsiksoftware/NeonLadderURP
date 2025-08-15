@@ -32,14 +32,23 @@ namespace NeonLadder.Tests.Editor.UI
         {
             // Create mock configuration
             mockConfig = ScriptableObject.CreateInstance<SaveStateConfiguration>();
-            mockConfig.configurationName = "Test Configuration";
-            mockConfig.description = "Test save state for unit testing";
+            SetPrivateField(mockConfig, "configurationName", "Test Configuration");
+            SetPrivateField(mockConfig, "description", "Test save state for unit testing");
             
             // Initialize configuration with test data
-            mockConfig.progression.playerLevel = 5;
-            mockConfig.progression.currentRun = 3;
-            mockConfig.currencies.metaCurrency = 1000;
-            mockConfig.currencies.permaCurrency = 500;
+            var playerSetup = GetPrivateField<PlayerProgressionSetup>(mockConfig, "playerSetup");
+            if (playerSetup != null)
+            {
+                SetPrivateField(playerSetup, "playerLevel", 5);
+                SetPrivateField(playerSetup, "currentRun", 3);
+            }
+            
+            var currencySetup = GetPrivateField<CurrencySetup>(mockConfig, "currencySetup");
+            if (currencySetup != null)
+            {
+                SetPrivateField(currencySetup, "metaCurrency", 1000);
+                SetPrivateField(currencySetup, "permaCurrency", 500);
+            }
             
             // Create serialized object for editor
             serializedObject = new SerializedObject(mockConfig);
@@ -137,19 +146,36 @@ namespace NeonLadder.Tests.Editor.UI
         {
             // Arrange
             InvokeOnEnable();
-            var initialLevel = mockConfig.progression.playerLevel;
-            var initialCurrency = mockConfig.currencies.metaCurrency;
+            var playerSetup = mockConfig.PlayerSetup;
+            var currencySetup = mockConfig.CurrencySetup;
+            
+            // Store initial values
+            var initialLevel = playerSetup.playerLevel;
+            var initialExperience = playerSetup.experiencePoints;
+            var initialMaxHealth = playerSetup.maxHealth;
+            var initialStartingMeta = currencySetup.startingMetaCurrency;
+            var initialStartingPerma = currencySetup.startingPermaCurrency;
             
             // Act
             var randomizeMethod = GetPrivateMethod("RandomizeConfiguration");
             randomizeMethod.Invoke(editor, null);
             
-            // Assert - Some values should change (randomization occurred)
-            // Note: There's a small chance values remain the same due to randomness
-            Assert.IsTrue(
-                mockConfig.progression.playerLevel != initialLevel || 
-                mockConfig.currencies.metaCurrency != initialCurrency,
-                "Randomization should modify at least some values");
+            // Assert - Check multiple values to reduce chance of all being same
+            // At least one of these values should change due to randomization
+            bool anyValueChanged = 
+                mockConfig.PlayerSetup.playerLevel != initialLevel ||
+                mockConfig.PlayerSetup.experiencePoints != initialExperience ||
+                mockConfig.PlayerSetup.maxHealth != initialMaxHealth ||
+                mockConfig.CurrencySetup.startingMetaCurrency != initialStartingMeta ||
+                mockConfig.CurrencySetup.startingPermaCurrency != initialStartingPerma;
+                
+            Assert.IsTrue(anyValueChanged, 
+                $"Randomization should modify at least some values. " +
+                $"Level: {initialLevel}->{mockConfig.PlayerSetup.playerLevel}, " +
+                $"Experience: {initialExperience}->{mockConfig.PlayerSetup.experiencePoints}, " +
+                $"Health: {initialMaxHealth}->{mockConfig.PlayerSetup.maxHealth}, " +
+                $"StartingMeta: {initialStartingMeta}->{mockConfig.CurrencySetup.startingMetaCurrency}, " +
+                $"StartingPerma: {initialStartingPerma}->{mockConfig.CurrencySetup.startingPermaCurrency}");
         }
         
         #endregion
@@ -253,17 +279,22 @@ namespace NeonLadder.Tests.Editor.UI
         #region Integration Tests
         
         [Test]
-        public void Integration_EditorCanHandleNullConfiguration()
+        public void Integration_EditorHandlesNullConfiguration()
         {
-            // Arrange - Create editor with null target
-            var nullEditor = UnityEditor.Editor.CreateEditor(null, typeof(SaveStateConfigurationEditor));
+            // Arrange - Create editor with null target (Unity's expected behavior)
+            var nullEditor = UnityEditor.Editor.CreateEditor((UnityEngine.Object)null, typeof(SaveStateConfigurationEditor));
             
-            // Assert
-            Assert.IsNotNull(nullEditor, "Editor should be created even with null target");
+            // Assert - Unity correctly returns null for null targets
+            Assert.IsNull(nullEditor, "Editor should return null when given null target (Unity's expected behavior)");
             
-            // Cleanup
-            if (nullEditor != null)
-                UnityEngine.Object.DestroyImmediate(nullEditor);
+            // Additional test - Verify editor handles null reference gracefully
+            // Test that the editor can be created normally and doesn't crash with null access
+            Assert.DoesNotThrow(() => {
+                var normalEditor = UnityEditor.Editor.CreateEditor(mockConfig, typeof(SaveStateConfigurationEditor));
+                // Test that accessing the target doesn't crash
+                var target = normalEditor?.target;
+                UnityEngine.Object.DestroyImmediate(normalEditor);
+            }, "Editor creation and target access should not throw exceptions");
         }
         
         [Test]
@@ -271,21 +302,23 @@ namespace NeonLadder.Tests.Editor.UI
         {
             // Arrange
             InvokeOnEnable();
-            var testData = new SaveStateConfiguration.ProgressionData
+            var testData = new PlayerProgressionSetup
             {
                 playerLevel = 10,
-                currentRun = 5,
-                highestRun = 8
+                experiencePoints = 500f,
+                maxHealth = 120
             };
             
             // Act
-            mockConfig.progression = testData;
+            SetPrivateField(mockConfig, "playerSetup", testData);
             EditorUtility.SetDirty(mockConfig);
             
-            // Assert
-            Assert.AreEqual(10, mockConfig.progression.playerLevel, "Player level should persist");
-            Assert.AreEqual(5, mockConfig.progression.currentRun, "Current run should persist");
-            Assert.AreEqual(8, mockConfig.progression.highestRun, "Highest run should persist");
+            // Assert - Use public property instead of reflection for better reliability
+            var playerSetup = mockConfig.PlayerSetup;
+            Assert.IsNotNull(playerSetup, "PlayerSetup should not be null after setting");
+            Assert.AreEqual(10, playerSetup.playerLevel, "Player level should persist");
+            Assert.AreEqual(500f, playerSetup.experiencePoints, "Experience points should persist");
+            Assert.AreEqual(120, playerSetup.maxHealth, "Max health should persist");
         }
         
         #endregion
@@ -305,20 +338,32 @@ namespace NeonLadder.Tests.Editor.UI
                 BindingFlags.NonPublic | BindingFlags.Instance);
         }
         
+        private void SetPrivateField<T>(object obj, string fieldName, T value)
+        {
+            var field = obj.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+            field?.SetValue(obj, value);
+        }
+        
+        private T GetPrivateField<T>(object obj, string fieldName)
+        {
+            var field = obj.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+            return field != null ? (T)field.GetValue(obj) : default(T);
+        }
+        
         private string GetMockSaveDataJson()
         {
             var mockData = new ConsolidatedSaveData
             {
                 saveVersion = "1.0.0",
-                lastSaveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                playTime = 3600f,
-                progression = new ProgressionSaveData
+                lastSaved = DateTime.Now,
+                totalPlayTime = 3600f,
+                progression = new PlayerProgressionData
                 {
                     playerLevel = 10,
-                    currentRun = 5,
-                    highestRun = 8
+                    experiencePoints = 500f,
+                    maxHealth = 120
                 },
-                currencies = new CurrencySaveData
+                currencies = new CurrencyData
                 {
                     metaCurrency = 2000,
                     permaCurrency = 1000

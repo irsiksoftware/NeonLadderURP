@@ -22,6 +22,24 @@ namespace NeonLadder.Mechanics.Progression
         
         public event Action<IUpgrade> OnUpgradePurchased;
         
+        /// <summary>
+        /// Set upgrades for testing purposes
+        /// </summary>
+        public void SetTestUpgrades(UpgradeData[] testUpgrades)
+        {
+            availableUpgrades = testUpgrades;
+            InitializeUpgradeSystem();
+        }
+        
+        /// <summary>
+        /// Set currency references for testing purposes
+        /// </summary>
+        public void SetTestCurrencies(Meta testMetaCurrency, Perma testPermaCurrency)
+        {
+            metaCurrency = testMetaCurrency;
+            permaCurrency = testPermaCurrency;
+        }
+        
         private void Awake()
         {
             InitializeUpgradeSystem();

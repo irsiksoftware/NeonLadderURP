@@ -64,11 +64,15 @@
     <Compile Include="Assets\Scripts\Editor\BuildSystem\ShaderFixUtility.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\UpgradeSystemEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Performance\PerformanceMenuItems.cs" />
+    <Compile Include="Assets\Scripts\Editor\TestModeHelper.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\ExamplePurchasableItems.cs" />
     <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\PathGeneratorEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\CLITestRunner.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildMenuItems.cs" />
+    <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\SceneTransitionTriggerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
+    <Compile Include="Assets\Scripts\Editor\SceneConnectionOverrideEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\SceneConnectionValidatorWindow.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveStateConfigurationEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\PackageManagementDynamic.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildSystemTester.cs" />

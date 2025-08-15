@@ -113,12 +113,8 @@ Assets/Audio/Background/**
 /Assets/PerformanceData.txt
 /Assets/PerformanceData.txt.meta
 
-# Test artifacts and output - Allow HTML reports but exclude temporary files
-/TestOutput/*.xml
-/TestOutput/*.txt
-/TestOutput/*.log
-/TestOutput/*.json
-/TestOutput/*.md
+# Test artifacts and output directories
+/TestOutput/
 TestResults.xml
 test_results_*.xml
 cli_test_*.txt
@@ -126,9 +122,6 @@ cli_test_*.txt
 # TestResults directory - exclude all XML files but keep README
 /TestResults/*.xml
 !/TestResults/README.md
-
-# Keep HTML test reports for GitHub Pages access
-!/TestOutput/*.html
 
 # Unity Settings meta files (these change frequently)
 /Assets/Settings/*.meta

@@ -115,8 +115,8 @@ namespace NeonLadder.Mechanics.Controllers
             
             var staminaBarComponent = transform.parent?.GetComponentInChildren<StaminaBar>();
             StaminaBar = staminaBarComponent?.gameObject.GetComponent<ProgressBar>();
-            MetaCurrency = GetComponentInParent<Meta>();
-            PermaCurrency = GetComponentInParent<Perma>();
+            MetaCurrency = GetComponentInParent<Meta>() ?? GetComponent<Meta>();
+            PermaCurrency = GetComponentInParent<Perma>() ?? GetComponent<Perma>();
 
             if (controls == null)
             {
