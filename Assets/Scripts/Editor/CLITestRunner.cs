@@ -20,6 +20,10 @@ public static class CLITestRunner
     {
         Debug.Log("CLITestRunner: Starting PlayMode tests using TestRunnerApi workaround");
         
+        // Enable test mode to disable performance popups and auto-profiling
+        EditorPrefs.SetBool("NeonLadder_TestMode", true);
+        Debug.Log("CLITestRunner: Enabled test mode (disabled performance popups and auto-profiling)");
+        
         try
         {
             var testRunnerApi = ScriptableObject.CreateInstance<TestRunnerApi>();
@@ -62,6 +66,10 @@ public static class CLITestRunner
     public static void RunEditModeTests()
     {
         Debug.Log("CLITestRunner: Starting EditMode tests using TestRunnerApi workaround");
+        
+        // Enable test mode to disable performance popups and auto-profiling
+        EditorPrefs.SetBool("NeonLadder_TestMode", true);
+        Debug.Log("CLITestRunner: Enabled test mode (disabled performance popups and auto-profiling)");
         
         try
         {
@@ -122,6 +130,10 @@ public class TestResultCallback : ICallbacks
         Debug.Log($"CLITestRunner: Test run completed");
         Debug.Log($"CLITestRunner: Total: {totalTests}, Passed: {passedTests}, Failed: {failedTests}");
         Debug.Log($"CLITestRunner: Saving results to: {xmlResultsPath}");
+        
+        // Disable test mode when tests complete
+        EditorPrefs.SetBool("NeonLadder_TestMode", false);
+        Debug.Log("CLITestRunner: Disabled test mode (restored normal performance settings)");
         
         try
         {

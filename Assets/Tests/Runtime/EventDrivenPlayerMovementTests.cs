@@ -64,6 +64,9 @@ namespace NeonLadder.Tests.Runtime
             player = playerChild.AddComponent<Player>();
             playerAction = playerChild.AddComponent<PlayerAction>();
             
+            // Add PlayerStateMediator for tests that require it
+            playerChild.AddComponent<PlayerStateMediator>();
+            
             // Re-enable the child after setup
             playerChild.SetActive(true);
             

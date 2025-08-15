@@ -7,6 +7,7 @@ using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Currency;
 using NeonLadder.Mechanics.Progression;
+using NeonLadder.Mechanics.Stats;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,16 +34,28 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void SetUp()
         {
+            Debug.Log("=== EnhancedPurchaseManagerTests SetUp START ===");
+            
             // Create manager object
             testManagerObject = new GameObject("TestPurchaseManager");
             purchaseManager = testManagerObject.AddComponent<EnhancedPurchaseManager>();
             
-            // Create player object
+            // Create player object (add all required components BEFORE Player component)
             testPlayerObject = new GameObject("TestPlayer");
-            testPlayer = testPlayerObject.AddComponent<Player>();
+            
+            // Add required components that Player.Awake() looks for
+            testPlayerObject.AddComponent<Rigidbody>();
+            testPlayerObject.AddComponent<Animator>();
+            testPlayerObject.AddComponent<Health>();
+            testPlayerObject.AddComponent<Stamina>();
+            
+            // Add currency and upgrade components
             testMetaCurrency = testPlayerObject.AddComponent<Meta>();
             testPermaCurrency = testPlayerObject.AddComponent<Perma>();
             testUpgradeSystem = testPlayerObject.AddComponent<UpgradeSystem>();
+            
+            // Add Player last so it finds all required components
+            testPlayer = testPlayerObject.AddComponent<Player>();
             
             // Setup currencies
             testMetaCurrency.current = 1000;
@@ -53,6 +66,8 @@ namespace NeonLadder.Tests.Runtime
             
             // Configure purchase manager
             ConfigurePurchaseManager();
+            
+            Debug.Log("=== EnhancedPurchaseManagerTests SetUp END ===");
         }
         
         [TearDown]
@@ -78,7 +93,7 @@ namespace NeonLadder.Tests.Runtime
             testMetaItem = CreateTestPurchasableItem(
                 "test_meta_item",
                 "Test Meta Item",
-                CurrencyType.Meta,
+                NeonLadder.Mechanics.Progression.CurrencyType.Meta,
                 50,
                 ItemType.Consumable
             );
@@ -87,7 +102,7 @@ namespace NeonLadder.Tests.Runtime
             testPermaItem = CreateTestPurchasableItem(
                 "test_perma_item",
                 "Test Perma Item",
-                CurrencyType.Perma,
+                NeonLadder.Mechanics.Progression.CurrencyType.Perma,
                 100,
                 ItemType.Ability
             );
@@ -96,14 +111,14 @@ namespace NeonLadder.Tests.Runtime
             testUpgrade = CreateTestUpgrade(
                 "test_upgrade",
                 "Test Upgrade",
-                CurrencyType.Meta,
+                NeonLadder.Mechanics.Progression.CurrencyType.Meta,
                 75,
                 3,
                 UpgradeCategory.Offense
             );
         }
         
-        private PurchasableItem CreateTestPurchasableItem(string id, string name, CurrencyType currencyType, int cost, ItemType itemType)
+        private PurchasableItem CreateTestPurchasableItem(string id, string name, NeonLadder.Mechanics.Progression.CurrencyType currencyType, int cost, ItemType itemType)
         {
             var item = ScriptableObject.CreateInstance<PurchasableItem>();
             
@@ -118,7 +133,7 @@ namespace NeonLadder.Tests.Runtime
             return item;
         }
         
-        private UpgradeData CreateTestUpgrade(string id, string name, CurrencyType currencyType, int cost, int maxLevel, UpgradeCategory category)
+        private UpgradeData CreateTestUpgrade(string id, string name, NeonLadder.Mechanics.Progression.CurrencyType currencyType, int cost, int maxLevel, UpgradeCategory category)
         {
             var upgrade = ScriptableObject.CreateInstance<UpgradeData>();
             
@@ -135,23 +150,23 @@ namespace NeonLadder.Tests.Runtime
         
         private void ConfigurePurchaseManager()
         {
-            // Set up available items and upgrades using reflection
-            var managerType = typeof(EnhancedPurchaseManager);
+            Debug.Log($"ConfigurePurchaseManager: testMetaItem={testMetaItem?.name}, testPermaItem={testPermaItem?.name}, testUpgrade={testUpgrade?.name}");
             
-            var availableItemsField = managerType.GetField("availableItems", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            availableItemsField?.SetValue(purchaseManager, new PurchasableItem[] { testMetaItem, testPermaItem });
+            // Set currency references explicitly for testing
+            testUpgradeSystem.SetTestCurrencies(testMetaCurrency, testPermaCurrency);
             
-            var availableUpgradesField = managerType.GetField("availableUpgrades", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            availableUpgradesField?.SetValue(purchaseManager, new UpgradeData[] { testUpgrade });
+            // Configure the UpgradeSystem with test upgrade
+            testUpgradeSystem.SetTestUpgrades(new UpgradeData[] { testUpgrade });
             
-            var playerField = managerType.GetField("player", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            playerField?.SetValue(purchaseManager, testPlayer);
+            // Use the new SetTestData method instead of reflection
+            purchaseManager.SetTestData(
+                new PurchasableItem[] { testMetaItem, testPermaItem },
+                new UpgradeData[] { testUpgrade },
+                testPlayer,
+                testUpgradeSystem
+            );
             
-            var upgradeSystemField = managerType.GetField("upgradeSystem", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            upgradeSystemField?.SetValue(purchaseManager, testUpgradeSystem);
-            
-            // Initialize databases
-            purchaseManager.SendMessage("InitializeDatabases", SendMessageOptions.DontRequireReceiver);
+            Debug.Log("ConfigurePurchaseManager completed");
         }
         
         #region Item Purchase Tests
@@ -242,7 +257,7 @@ namespace NeonLadder.Tests.Runtime
             purchaseManager.OnUpgradePurchased += (upgrade) => eventFired = true;
             
             // Act
-            bool success = purchaseManager.PurchaseUpgrade("test_upgrade", CurrencyType.Meta);
+            bool success = purchaseManager.PurchaseUpgrade("test_upgrade", NeonLadder.Mechanics.Progression.CurrencyType.Meta);
             
             // Assert
             Assert.IsTrue(success, "Upgrade purchase should succeed");
@@ -258,7 +273,7 @@ namespace NeonLadder.Tests.Runtime
             purchaseManager.OnPurchaseFailed += (reason) => failEventFired = true;
             
             // Act
-            bool success = purchaseManager.PurchaseUpgrade("nonexistent_upgrade", CurrencyType.Meta);
+            bool success = purchaseManager.PurchaseUpgrade("nonexistent_upgrade", NeonLadder.Mechanics.Progression.CurrencyType.Meta);
             
             // Assert
             Assert.IsFalse(success, "Purchase should fail");
@@ -273,18 +288,18 @@ namespace NeonLadder.Tests.Runtime
         public void GetAvailableItems_MetaCurrency_ReturnsMetaItems()
         {
             // Act
-            var metaItems = purchaseManager.GetAvailableItems(CurrencyType.Meta, metaShop: true);
+            var metaItems = purchaseManager.GetAvailableItems(NeonLadder.Events.CurrencyType.Meta, metaShop: true);
             
             // Assert
             Assert.Greater(metaItems.Count, 0, "Should return meta items");
-            Assert.IsTrue(metaItems.All(item => item.CurrencyType == CurrencyType.Meta), "All items should be meta currency");
+            Assert.IsTrue(metaItems.All(item => item.CurrencyType == NeonLadder.Mechanics.Progression.CurrencyType.Meta), "All items should be meta currency");
         }
         
         [Test]
         public void GetAvailableItems_PermaCurrency_ReturnsPermaItems()
         {
             // Act
-            var permaItems = purchaseManager.GetAvailableItems(CurrencyType.Perma, metaShop: false);
+            var permaItems = purchaseManager.GetAvailableItems(NeonLadder.Events.CurrencyType.Perma, metaShop: false);
             
             // Assert
             // Note: Test items are configured for meta shop by default, so this might return empty
@@ -299,7 +314,7 @@ namespace NeonLadder.Tests.Runtime
             testMetaCurrency.current = 1000;
             
             // Act
-            var affordableItems = purchaseManager.GetAffordableItems(CurrencyType.Meta, metaShop: true);
+            var affordableItems = purchaseManager.GetAffordableItems(NeonLadder.Events.CurrencyType.Meta, metaShop: true);
             
             // Assert
             Assert.IsNotNull(affordableItems, "Should return collection");
@@ -312,7 +327,7 @@ namespace NeonLadder.Tests.Runtime
             testMetaCurrency.current = 1;
             
             // Act
-            var affordableItems = purchaseManager.GetAffordableItems(CurrencyType.Meta, metaShop: true);
+            var affordableItems = purchaseManager.GetAffordableItems(NeonLadder.Events.CurrencyType.Meta, metaShop: true);
             
             // Assert
             Assert.IsNotNull(affordableItems, "Should return collection");
@@ -397,10 +412,10 @@ namespace NeonLadder.Tests.Runtime
         public void PurchaseManager_IntegratesWithUpgradeSystem_WithoutConflicts()
         {
             // Arrange & Act - Use both purchase manager and direct upgrade system
-            bool managerPurchase = purchaseManager.PurchaseUpgrade("test_upgrade", CurrencyType.Meta);
+            bool managerPurchase = purchaseManager.PurchaseUpgrade("test_upgrade", NeonLadder.Mechanics.Progression.CurrencyType.Meta);
             
             // Direct upgrade system access
-            var availableUpgrades = testUpgradeSystem.GetAvailableUpgrades(CurrencyType.Meta);
+            var availableUpgrades = testUpgradeSystem.GetAvailableUpgrades(NeonLadder.Mechanics.Progression.CurrencyType.Meta);
             
             // Assert - Both should work without conflicts
             Assert.IsTrue(managerPurchase, "Manager purchase should succeed");
@@ -431,7 +446,7 @@ namespace NeonLadder.Tests.Runtime
             upgradeSystemField?.SetValue(purchaseManager, null);
             
             // Act & Assert - Should handle null upgrade system gracefully
-            bool success = purchaseManager.PurchaseUpgrade("test_upgrade", CurrencyType.Meta);
+            bool success = purchaseManager.PurchaseUpgrade("test_upgrade", NeonLadder.Mechanics.Progression.CurrencyType.Meta);
             Assert.IsFalse(success, "Upgrade purchase should fail gracefully with null upgrade system");
         }
         
@@ -445,7 +460,7 @@ namespace NeonLadder.Tests.Runtime
             purchaseManager.SendMessage("InitializeDatabases", SendMessageOptions.DontRequireReceiver);
             
             // Act & Assert - Should handle empty databases gracefully
-            var items = purchaseManager.GetAvailableItems(CurrencyType.Meta);
+            var items = purchaseManager.GetAvailableItems(NeonLadder.Events.CurrencyType.Meta);
             Assert.IsNotNull(items, "Should return empty collection, not null");
             Assert.AreEqual(0, items.Count, "Should return empty collection");
         }

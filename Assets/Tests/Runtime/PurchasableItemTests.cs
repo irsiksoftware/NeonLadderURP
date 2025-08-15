@@ -26,11 +26,11 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void SetUp()
         {
-            // Create test player
+            // Create test player - add currency components first
             testPlayerObject = new GameObject("TestPlayer");
-            testPlayer = testPlayerObject.AddComponent<Player>();
             testMetaCurrency = testPlayerObject.AddComponent<Meta>();
             testPermaCurrency = testPlayerObject.AddComponent<Perma>();
+            testPlayer = testPlayerObject.AddComponent<Player>();
             
             // Setup currency
             testMetaCurrency.current = 1000;
@@ -100,7 +100,11 @@ namespace NeonLadder.Tests.Runtime
             type.GetField("itemId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, id);
             type.GetField("itemName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, name);
             type.GetField("description", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, $"Test description for {name}");
-            type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, currencyType);
+            // Convert Events.CurrencyType to Progression.CurrencyType
+            var progressionCurrencyType = currencyType == CurrencyType.Meta 
+                ? NeonLadder.Mechanics.Progression.CurrencyType.Meta 
+                : NeonLadder.Mechanics.Progression.CurrencyType.Perma;
+            type.GetField("currencyType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, progressionCurrencyType);
             type.GetField("baseCost", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, cost);
             type.GetField("itemType", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, itemType);
             type.GetField("maxPurchases", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(item, maxPurchases);
@@ -117,7 +121,7 @@ namespace NeonLadder.Tests.Runtime
             // Act & Assert
             Assert.AreEqual("health_potion", testConsumableItem.ItemId);
             Assert.AreEqual("Health Potion", testConsumableItem.ItemName);
-            Assert.AreEqual(CurrencyType.Meta, testConsumableItem.CurrencyType);
+            Assert.AreEqual(NeonLadder.Mechanics.Progression.CurrencyType.Meta, testConsumableItem.CurrencyType);
             Assert.AreEqual(25, testConsumableItem.Cost);
             Assert.AreEqual(ItemType.Consumable, testConsumableItem.Type);
             Assert.AreEqual(99, testConsumableItem.MaxPurchases);
@@ -322,11 +326,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void PurchasableItem_IntegratesWithPlayer_WithoutErrors()
         {
-            // Arrange - Ensure player has required components
-            if (testPlayer.MetaCurrency == null)
-            {
-                LogAssert.Expect(LogType.Error, new System.Text.RegularExpressions.Regex(".*"));
-            }
+            // Arrange - Player should have properly initialized currency components
+            Assert.IsNotNull(testPlayer.MetaCurrency, "Player should have MetaCurrency component");
             
             // Act - Purchase should not throw exceptions
             Assert.DoesNotThrow(() => testConsumableItem.Purchase(testPlayer));
@@ -365,8 +366,9 @@ namespace NeonLadder.Tests.Runtime
             var item = ScriptableObject.CreateInstance<PurchasableItem>();
             item.name = "test_item_name";
             
-            // Act - OnValidate should set ID
-            item.SendMessage("OnValidate", SendMessageOptions.DontRequireReceiver);
+            // Act - OnValidate should set ID (use reflection since it's a ScriptableObject)
+            var onValidateMethod = typeof(PurchasableItem).GetMethod("OnValidate", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            onValidateMethod?.Invoke(item, null);
             
             // Assert
             Assert.AreEqual("test_item_name", item.ItemId);

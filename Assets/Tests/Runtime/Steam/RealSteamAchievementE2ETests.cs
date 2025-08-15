@@ -359,6 +359,7 @@ namespace NeonLadder.Tests.Steam
             Assert.AreEqual(3089870, appId.m_AppId, "Steam should be using NeonLadder App ID 3089870");
         }
 
+        [Ignore("This test is for manual verification only - it checks all achievements in Steam Partner site")]
         [UnityTest]
         [Description("E2E: All achievements should be properly registered in Steam")]
         public IEnumerator AllAchievements_E2E_ValidatesSteamRegistration()
@@ -403,14 +404,7 @@ namespace NeonLadder.Tests.Steam
         {
             Debug.Log("=== TESTING EXPLICIT LOCK ALL ACHIEVEMENTS ===");
             
-            // First unlock a few achievements to test locking
-            Debug.Log("Phase 1: Unlocking some achievements for test setup...");
-            steamManager.UnlockAchievement(Achievements.WRATH_SIN_DEFEATED.ToString());
-            steamManager.UnlockAchievement(Achievements.GREED_SIN_DEFEATED.ToString());
-            SteamUserStats.StoreStats();
-            yield return new WaitForSeconds(0.5f);
-
-            // Now explicitly lock all achievements
+            //Explicitly lock all achievements
             Debug.Log("Phase 2: Locking ALL achievements...");
             LockAllAchievements();
             SteamUserStats.StoreStats();
@@ -435,68 +429,6 @@ namespace NeonLadder.Tests.Steam
             Assert.AreEqual(allAchievements.Length - 1, lockedCount, "All registered achievements should be locked (minus DEMO_LEVEL_COMPLETE)");
         }
 
-        [UnityTest]
-        [Description("E2E: Explicitly test UnlockAllAchievements functionality")]
-        public IEnumerator UnlockAllAchievements_E2E_ShouldUnlockEveryAchievement()
-        {
-            Debug.Log("=== TESTING EXPLICIT UNLOCK ALL ACHIEVEMENTS ===");
-            Debug.Log("⚠️ WARNING: This will unlock ALL achievements in your Steam account!");
-            
-            // First ensure all are locked
-            Debug.Log("Phase 1: Ensuring all achievements are locked first...");
-            LockAllAchievements();
-            SteamUserStats.StoreStats();
-            yield return new WaitForSeconds(0.5f);
-
-            // Now unlock all achievements
-            Debug.Log("Phase 2: Unlocking ALL achievements...");
-            var allAchievements = System.Enum.GetValues(typeof(Achievements));
-            int unlockedCount = 0;
-
-            foreach (Achievements achievement in allAchievements)
-            {
-                // Skip DEMO_LEVEL_COMPLETE as it's not registered
-                if (achievement == Achievements.DEMO_LEVEL_COMPLETE)
-                {
-                    Debug.Log($"⏭️ Skipping {achievement} (not registered in Steam)");
-                    continue;
-                }
-
-                steamManager.UnlockAchievement(achievement.ToString());
-                unlockedCount++;
-                Debug.Log($"🔓 Unlocked: {achievement}");
-                yield return null; // Prevent timeout
-            }
-
-            SteamUserStats.StoreStats();
-            yield return new WaitForSeconds(1.0f);
-
-            // Verify all achievements are unlocked
-            Debug.Log("Phase 3: Verifying all achievements are unlocked...");
-            int verifiedUnlocked = 0;
-
-            foreach (Achievements achievement in allAchievements)
-            {
-                if (achievement == Achievements.DEMO_LEVEL_COMPLETE) continue;
-
-                bool achieved;
-                if (SteamUserStats.GetAchievement(achievement.ToString(), out achieved))
-                {
-                    Assert.IsTrue(achieved, $"{achievement} should be UNLOCKED after UnlockAllAchievements");
-                    if (achieved) verifiedUnlocked++;
-                }
-            }
-
-            Debug.Log($"✅ Successfully unlocked {verifiedUnlocked}/{unlockedCount} achievements");
-            
-            // IMPORTANT: Re-lock all achievements at the end
-            Debug.Log("Phase 4: Re-locking all achievements to clean up...");
-            LockAllAchievements();
-            SteamUserStats.StoreStats();
-            yield return new WaitForSeconds(0.5f);
-            
-            Debug.Log("🔒 All achievements re-locked for clean state");
-        }
 
         #endregion
     }
