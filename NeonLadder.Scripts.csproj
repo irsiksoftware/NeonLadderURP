@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Utilities\WebGLExclude.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\BaseStat.cs" />
     <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneConnectionOverride.cs" />
     <Compile Include="Assets\Scripts\Items\Collectible.cs" />
     <Compile Include="Assets\Scripts\Utilities\ChildObjectsAnimationSynchronization.cs" />
     <Compile Include="Assets\Scripts\Debug\PlayerActionDebugging.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\Scripts\Events\StaminaContinuousRegenerationEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterManager.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerGroundedStateChangeEvent.cs" />
+    <Compile Include="Assets\Scripts\Tests\Runtime\SceneTransitionTriggerTests.cs" />
     <Compile Include="Assets\Scripts\Dialog\Editor\DialogueSceneGenerator.cs" />
     <Compile Include="Assets\Scripts\Events\InstantiateEvent.cs" />
     <Compile Include="Assets\Scripts\Managers\EventManager.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Assets\Scripts\Steam\StatsAndAchievements.cs" />
     <Compile Include="Assets\Scripts\Effects\Text\FollowCharacter.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionTrigger.cs" />
     <Compile Include="Assets\Scripts\DataManagement\EnhancedSaveSystem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\PlayerAnimationLayers.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerUnlock.cs" />
@@ -147,6 +150,7 @@
     <Compile Include="Assets\Scripts\Dialog\ConversationManager.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerCurrencyCollision.cs" />
     <Compile Include="Assets\Scripts\Events\StaminaChangeEvent.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\PlayerSpawner.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseAction.cs" />
     <Compile Include="Assets\Scripts\DataManagement\LoadSystem.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveSystemConfig.cs" />
@@ -160,7 +164,9 @@
     <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\CharacterPersonalitySystem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Currency\Perma.cs" />
+    <Compile Include="Assets\Scripts\Tests\Runtime\SpawnPointManagerTests.cs" />
     <Compile Include="Assets\Scripts\Events\SaveGame.cs" />
+    <Compile Include="Assets\Scripts\Events\BatchCurrencyEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\KinematicObject.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyTerrainCollision.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\UnitySceneProvider.cs" />
@@ -168,6 +174,7 @@
     <Compile Include="Assets\Scripts\Managers\ManagerController.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerStaminaUIManager.cs" />
     <Compile Include="Assets\Scripts\Utilities\TimedLogger.cs" />
+    <Compile Include="Assets\Scripts\Tests\Runtime\SceneConnectionOverrideTests.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgradeSystem.cs" />
     <Compile Include="Assets\Scripts\Managers\SceneCycleManager.cs" />
     <Compile Include="Assets\Scripts\Events\FadeInCamera.cs" />
@@ -195,6 +202,7 @@
     <Compile Include="Assets\Scripts\UI\StatUI.cs" />
     <Compile Include="Assets\Scripts\Dialog\EnhancedLocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogueChoiceDatabase.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneRoutingContext.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\LootTable.cs" />
     <Compile Include="Assets\Scripts\Items\MetaCurrencyReplenishment.cs" />
     <Compile Include="Assets\Scripts\Mechanics\BossTransformations.cs" />
@@ -204,8 +212,10 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Boss.cs" />
     <Compile Include="Assets\Scripts\Core\ComboSystem.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\PathGenerator.cs" />
+    <Compile Include="Assets\Scripts\Tests\Runtime\SceneRouterTests.cs" />
     <Compile Include="Assets\Scripts\Utilities\ButtonHelper.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Managers\EnhancedPurchaseManager.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterContent.cs" />
     <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
@@ -237,6 +247,7 @@
     <Compile Include="Assets\Scripts\Documentation\MarvelSquadPersona.cs" />
     <Compile Include="Assets\Scripts\Models\MonsterGroups.cs" />
     <Compile Include="Assets\Scripts\Utilities\AchevementResolver.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneNameMapper.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\GameStates.cs" />
     <Compile Include="Assets\Scripts\Events\InputBufferEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\Editor\DialogueSystemMenuItems.cs" />
@@ -269,6 +280,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\UnlockTypes.cs" />
     <Compile Include="Assets\Scripts\Performance\PerformanceProfiler.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneRouter.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IPlayerState.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\SceneSizes.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterTrigger.cs" />
@@ -279,6 +291,7 @@
     <Compile Include="Assets\Scripts\Debug\NLDebug.cs" />
     <Compile Include="Assets\Scripts\Cameras\RotationController.cs" />
     <Compile Include="Assets\Scripts\Events\BossDeath.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\SpawnPointManager.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerHealthUIManager.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerBossCollision.cs" />
     <Compile Include="Assets\Scripts\Debug\AnimationDebugging.cs" />
@@ -294,6 +307,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Enums\BuffTypes.cs" />
     <Compile Include="Assets\Scripts\Events\HealthIsZero.cs" />
     <Compile Include="Assets\Scripts\Dialog\ProtagonistDialogueSystem.cs" />
+    <Compile Include="Assets\Scripts\Optimization\EulerAngleCacheBenchmark.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Health.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Bosses.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Scenes.cs" />

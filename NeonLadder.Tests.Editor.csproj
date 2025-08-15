@@ -61,13 +61,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Tests\Editor\ProceduralGenerationToolsTests.cs" />
-    <Compile Include="Assets\Tests\Editor\DialogueSceneGeneratorTests.cs" />
-    <Compile Include="Assets\Tests\Editor\Performance\PerformanceMenuItemsTests.cs" />
-    <Compile Include="Assets\Tests\Editor\PerformanceMenuTests.cs" />
+    <Compile Include="Assets\Scripts\Tests\Editor\SceneConnectionValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Tests\Editor\NeonLadder.Tests.Editor.asmdef" />
+    <None Include="Assets\Scripts\Tests\Editor\NeonLadder.Tests.Editor.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1082,10 +1079,6 @@
       <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
@@ -1103,18 +1096,6 @@
     <ProjectReference Include="NeonLadder.Editor.csproj">
       <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
       <Name>NeonLadder.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
-      <Name>Michsky.MUIP</Name>
-    </ProjectReference>
-    <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
-      <Name>PixelCrushers</Name>
-    </ProjectReference>
-    <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
-      <Name>DialogueSystem</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

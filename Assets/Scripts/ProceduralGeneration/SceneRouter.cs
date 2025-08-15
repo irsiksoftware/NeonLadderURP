@@ -57,9 +57,13 @@ namespace NeonLadder.ProceduralGeneration
                 sceneMapper = new SceneNameMapper();
             
             if (routingContext == null)
-                routingContext = new SceneRoutingContext();
+                routingContext = SceneRoutingContext.Instance;
                 
-            pathGenerator = FindObjectOfType<PathGenerator>();
+            // PathGenerator is not a MonoBehaviour, create instance if needed
+            if (pathGenerator == null)
+            {
+                pathGenerator = new PathGenerator();
+            }
         }
         
         public async Task<bool> LoadSceneFromMapNode(MapNode node, LoadSceneMode mode = LoadSceneMode.Single)
@@ -79,7 +83,7 @@ namespace NeonLadder.ProceduralGeneration
             string sceneName = GetSceneNameFromMapNode(node);
             if (string.IsNullOrEmpty(sceneName))
             {
-                LogError($"Could not determine scene name for node: {node.NodeType}");
+                LogError($"Could not determine scene name for node: {node.Type}");
                 OnSceneLoadFailed?.Invoke(sceneName);
                 return false;
             }
@@ -91,7 +95,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (node == null) return null;
             
-            switch (node.NodeType)
+            switch (node.Type)
             {
                 case NodeType.Start:
                     return "MainCityHub";
@@ -109,7 +113,7 @@ namespace NeonLadder.ProceduralGeneration
                     return GetConnectionSceneName(node);
                     
                 default:
-                    LogWarning($"Unknown node type: {node.NodeType}");
+                    LogWarning($"Unknown node type: {node.Type}");
                     return null;
             }
         }
@@ -158,7 +162,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (routingContext.CurrentPath != null && routingContext.CurrentPath.Count > 0)
             {
-                var bossNode = routingContext.CurrentPath.FirstOrDefault(n => n.NodeType == NodeType.Boss);
+                var bossNode = routingContext.CurrentPath.FirstOrDefault(n => n.Type == NodeType.Boss);
                 if (bossNode != null)
                 {
                     return GetBossSceneName(bossNode);
@@ -266,7 +270,14 @@ namespace NeonLadder.ProceduralGeneration
         
         public void ResetRoutingContext()
         {
-            routingContext = new SceneRoutingContext();
+            if (routingContext != null)
+            {
+                routingContext.Reset();
+            }
+            else
+            {
+                routingContext = SceneRoutingContext.Instance;
+            }
         }
         
         public bool ValidateSceneExists(string sceneName)

@@ -27,7 +27,7 @@ namespace NeonLadder.ProceduralGeneration
             
             // Use BossLocationData to get the actual scene name
             var bossLocation = BossLocationData.GetByIdentifier(identifier);
-            return bossLocation?.Identifier;
+            return bossLocation?.Identifier?.ToLowerInvariant();
         }
         
         public string GetServiceSceneFromEventType(string eventType)
@@ -77,7 +77,7 @@ namespace NeonLadder.ProceduralGeneration
             if (string.IsNullOrEmpty(sceneName))
                 return false;
             
-            return BossLocationData.AllLocations.Any(b => b.Identifier == sceneName);
+            return BossLocationData.Locations.Any(b => b.Identifier.Equals(sceneName, StringComparison.OrdinalIgnoreCase));
         }
         
         public bool IsConnectionScene(string sceneName)
@@ -90,7 +90,7 @@ namespace NeonLadder.ProceduralGeneration
         
         public List<string> GetAllBossSceneNames()
         {
-            return BossLocationData.AllLocations.Select(b => b.Identifier).ToList();
+            return BossLocationData.Locations.Select(b => b.Identifier).ToList();
         }
         
         public List<string> GetAllServiceSceneNames()

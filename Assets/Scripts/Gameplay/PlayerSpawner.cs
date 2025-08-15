@@ -104,14 +104,14 @@ namespace NeonLadder.Gameplay
                 Rigidbody rb = playerGameObject.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    rb.velocity = Vector3.zero;
+                    rb.linearVelocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                 }
                 
                 Rigidbody2D rb2D = playerGameObject.GetComponent<Rigidbody2D>();
                 if (rb2D != null)
                 {
-                    rb2D.velocity = Vector2.zero;
+                    rb2D.linearVelocity = Vector2.zero;
                     rb2D.angularVelocity = 0f;
                 }
             }
@@ -248,7 +248,7 @@ namespace NeonLadder.Gameplay
             }
         }
         
-        public static void SpawnPlayerByDirection(TransitionDirection direction)
+        public static void SpawnPlayerStaticByDirection(TransitionDirection direction)
         {
             var spawner = FindObjectOfType<PlayerSpawner>();
             if (spawner != null)
@@ -257,7 +257,7 @@ namespace NeonLadder.Gameplay
             }
         }
         
-        public static void SpawnPlayerAtNamedPoint(string spawnPointName)
+        public static void SpawnPlayerStaticAtNamedPoint(string spawnPointName)
         {
             var spawner = FindObjectOfType<PlayerSpawner>();
             if (spawner != null)

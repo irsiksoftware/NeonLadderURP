@@ -5,8 +5,27 @@ using UnityEngine;
 namespace NeonLadder.ProceduralGeneration
 {
     [Serializable]
-    public class SceneRoutingContext
+    public class SceneRoutingContext : MonoBehaviour
     {
+        private static SceneRoutingContext instance;
+        public static SceneRoutingContext Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = FindObjectOfType<SceneRoutingContext>();
+                    if (instance == null)
+                    {
+                        GameObject go = new GameObject("SceneRoutingContext");
+                        instance = go.AddComponent<SceneRoutingContext>();
+                        DontDestroyOnLoad(go);
+                    }
+                }
+                return instance;
+            }
+        }
+        
         [Header("Current State")]
         public string currentScene;
         public string previousScene;
@@ -27,13 +46,13 @@ namespace NeonLadder.ProceduralGeneration
         
         public string CurrentScene
         {
-            get => currentScene;
+            get => currentScene ?? "";
             set => currentScene = value;
         }
         
         public string PreviousScene
         {
-            get => previousScene;
+            get => previousScene ?? "";
             set => previousScene = value;
         }
         
@@ -79,7 +98,19 @@ namespace NeonLadder.ProceduralGeneration
             set => intendedSpawnPoint = value;
         }
         
-        public SceneRoutingContext()
+        private void Awake()
+        {
+            if (instance != null && instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            InitializeContext();
+        }
+        
+        private void InitializeContext()
         {
             currentScene = "";
             previousScene = "";
@@ -91,6 +122,16 @@ namespace NeonLadder.ProceduralGeneration
             lastTransitionDirection = TransitionDirection.Forward;
             intendedSpawnPoint = "";
             transitionStartTime = 0f;
+        }
+        
+        public string GetNextSceneInPath()
+        {
+            var nextNode = GetNextNode();
+            if (nextNode != null && SceneRouter.Instance != null)
+            {
+                return SceneRouter.Instance.GetSceneNameFromMapNode(nextNode);
+            }
+            return null;
         }
         
         public bool HasVisitedScene(string sceneName)
@@ -241,6 +282,7 @@ namespace NeonLadder.ProceduralGeneration
         Left,
         Right,
         Up,
-        Down
+        Down,
+        Any         // No specific direction
     }
 }

@@ -117,21 +117,26 @@ namespace NeonLadder.Mechanics.Controllers
         {
             rigidbody = GetComponentInParent<Rigidbody>();
             Animator = GetComponentInParent<Animator>();
-            switch (this)
+            
+            // Only configure rigidbody if it exists (important for tests)
+            if (rigidbody != null)
             {
-                case FlyingMinor:
-                case Minor:
-                case FlyingMajor:
-                case Major:
-                case Boss:
-                case Enemy:
-                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-                    break;
-                case Player:
-                    rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-                    break;
-                default:
-                    break;
+                switch (this)
+                {
+                    case FlyingMinor:
+                    case Minor:
+                    case FlyingMajor:
+                    case Major:
+                    case Boss:
+                    case Enemy:
+                        rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+                        break;
+                    case Player:
+                        rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             //if (this.GetType() == typeof(Enemy))

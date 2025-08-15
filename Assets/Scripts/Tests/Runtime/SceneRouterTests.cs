@@ -20,7 +20,9 @@ namespace NeonLadder.Tests.Runtime
             GameObject routerGO = new GameObject("TestSceneRouter");
             sceneRouter = routerGO.AddComponent<SceneRouter>();
             sceneMapper = new SceneNameMapper();
-            routingContext = new SceneRoutingContext();
+            
+            GameObject contextGO = new GameObject("TestSceneRoutingContext");
+            routingContext = contextGO.AddComponent<SceneRoutingContext>();
         }
         
         [TearDown]
@@ -29,6 +31,21 @@ namespace NeonLadder.Tests.Runtime
             if (sceneRouter != null)
             {
                 Object.DestroyImmediate(sceneRouter.gameObject);
+            }
+            
+            if (routingContext != null)
+            {
+                Object.DestroyImmediate(routingContext.gameObject);
+            }
+            
+            // Clean up any test context objects
+            var testContexts = GameObject.FindGameObjectsWithTag("Untagged");
+            foreach (var go in testContexts)
+            {
+                if (go.name.StartsWith("TestContext"))
+                {
+                    Object.DestroyImmediate(go);
+                }
             }
         }
         
@@ -223,7 +240,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneRoutingContext_InitializesCorrectly()
         {
-            var context = new SceneRoutingContext();
+            GameObject contextGO = new GameObject("TestContext");
+            var context = contextGO.AddComponent<SceneRoutingContext>();
             
             Assert.AreEqual("", context.CurrentScene);
             Assert.AreEqual("", context.PreviousScene);
@@ -237,7 +255,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneRoutingContext_HasVisitedScene_WorksCorrectly()
         {
-            var context = new SceneRoutingContext();
+            GameObject contextGO = new GameObject("TestContext");
+            var context = contextGO.AddComponent<SceneRoutingContext>();
             
             Assert.IsFalse(context.HasVisitedScene("Cathedral"));
             
@@ -248,7 +267,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneRoutingContext_PersistentData_WorksCorrectly()
         {
-            var context = new SceneRoutingContext();
+            GameObject contextGO = new GameObject("TestContext");
+            var context = contextGO.AddComponent<SceneRoutingContext>();
             
             context.SetPersistentData("TestKey", "TestValue");
             Assert.IsTrue(context.HasPersistentData("TestKey"));
@@ -263,7 +283,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneRoutingContext_PathNavigation_WorksCorrectly()
         {
-            var context = new SceneRoutingContext();
+            GameObject contextGO = new GameObject("TestContext");
+            var context = contextGO.AddComponent<SceneRoutingContext>();
             var path = new List<MapNode>
             {
                 new MapNode { Id = "Node1", Type = NodeType.Start },
@@ -291,7 +312,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneRoutingContext_GetPathProgress_CalculatesCorrectly()
         {
-            var context = new SceneRoutingContext();
+            GameObject contextGO = new GameObject("TestContext");
+            var context = contextGO.AddComponent<SceneRoutingContext>();
             var path = new List<MapNode>
             {
                 new MapNode { Id = "Node1" },
@@ -316,7 +338,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneRoutingContext_CreateAndRestoreSnapshot_WorksCorrectly()
         {
-            var context = new SceneRoutingContext();
+            GameObject contextGO = new GameObject("TestContext");
+            var context = contextGO.AddComponent<SceneRoutingContext>();
             context.CurrentScene = "TestScene";
             context.PreviousScene = "PreviousScene";
             context.AddVisitedScene("Scene1");
@@ -417,7 +440,8 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneRoutingContext_InvalidPathIndex_HandledGracefully()
         {
-            var context = new SceneRoutingContext();
+            GameObject contextGO = new GameObject("TestContext");
+            var context = contextGO.AddComponent<SceneRoutingContext>();
             var path = new List<MapNode> { new MapNode { Id = "Test" } };
             context.CurrentPath = path;
             

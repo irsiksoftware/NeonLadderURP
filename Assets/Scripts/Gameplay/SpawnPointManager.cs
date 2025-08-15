@@ -121,16 +121,16 @@ namespace NeonLadder.Gameplay
         private TransitionDirection ParseDirectionFromName(string name)
         {
             if (name.Contains("LEFT") && name.Contains("INSCENE"))
-                return TransitionDirection.Right; // Player enters from left, so they came from right
+                return TransitionDirection.Left; // This is a left-side spawn point
                 
             if (name.Contains("RIGHT") && name.Contains("INSCENE"))
-                return TransitionDirection.Left; // Player enters from right, so they came from left
+                return TransitionDirection.Right; // This is a right-side spawn point
                 
             if (name.Contains("UP") && name.Contains("INSCENE"))
-                return TransitionDirection.Down; // Player enters from up, so they came from down
+                return TransitionDirection.Up; // This is an up-side spawn point
                 
             if (name.Contains("DOWN") && name.Contains("INSCENE"))
-                return TransitionDirection.Up; // Player enters from down, so they came from up
+                return TransitionDirection.Down; // This is a down-side spawn point
                 
             return TransitionDirection.Forward; // Default
         }

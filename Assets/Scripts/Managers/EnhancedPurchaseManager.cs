@@ -6,6 +6,7 @@ using NeonLadder.Events;
 using NeonLadder.Mechanics.Progression;
 using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Currency;
 
 namespace NeonLadder.Managers
 {
@@ -47,23 +48,32 @@ namespace NeonLadder.Managers
         
         private void InitializeDatabases()
         {
+            Debug.Log($"InitializeDatabases called from: {System.Environment.StackTrace.Split('\n')[1]}");
+            Debug.Log($"availableItems is {(availableItems == null ? "null" : $"array with {availableItems.Length} items")}");
+            
             // Initialize item database
             itemDatabase = new Dictionary<string, PurchasableItem>();
-            foreach (var item in availableItems)
+            if (availableItems != null)
             {
-                if (item != null)
+                foreach (var item in availableItems)
                 {
-                    itemDatabase[item.ItemId] = item;
+                    if (item != null)
+                    {
+                        itemDatabase[item.ItemId] = item;
+                    }
                 }
             }
             
             // Initialize upgrade database
             upgradeDatabase = new Dictionary<string, UpgradeData>();
-            foreach (var upgrade in availableUpgrades)
+            if (availableUpgrades != null)
             {
-                if (upgrade != null)
+                foreach (var upgrade in availableUpgrades)
                 {
-                    upgradeDatabase[upgrade.Id] = upgrade;
+                    if (upgrade != null)
+                    {
+                        upgradeDatabase[upgrade.Id] = upgrade;
+                    }
                 }
             }
             
@@ -100,7 +110,7 @@ namespace NeonLadder.Managers
             
             if (player == null)
             {
-                Debug.LogError("Player reference is null");
+                Debug.LogWarning("Player reference is null");
                 OnPurchaseFailed?.Invoke("Player not found");
                 return false;
             }
@@ -120,15 +130,16 @@ namespace NeonLadder.Managers
             }
             
             // Check currency
-            var currency = GetCurrency(item.CurrencyType);
-            if (!item.CanAfford(currency.current))
+            var currency = GetCurrency(ConvertCurrencyType(item.CurrencyType));
+            if (currency == null || !item.CanAfford(currency.current))
             {
-                OnPurchaseFailed?.Invoke($"Not enough {item.CurrencyType} currency for {item.ItemName} (Need: {item.Cost}, Have: {currency.current})");
+                var currentAmount = currency?.current ?? 0;
+                OnPurchaseFailed?.Invoke($"Not enough {item.CurrencyType} currency for {item.ItemName} (Need: {item.Cost}, Have: {currentAmount})");
                 return false;
             }
             
             // Deduct currency using event system for immediate feedback
-            BatchCurrencyEvent.CollectCurrencyImmediate(player, item.CurrencyType, -item.Cost);
+            BatchCurrencyEvent.CollectCurrencyImmediate(player, ConvertCurrencyType(item.CurrencyType), -item.Cost);
             
             // Purchase the item
             item.Purchase(player);
@@ -147,11 +158,11 @@ namespace NeonLadder.Managers
         /// <summary>
         /// Purchase an upgrade via the upgrade system
         /// </summary>
-        public bool PurchaseUpgrade(string upgradeId, CurrencyType currencyType)
+        public bool PurchaseUpgrade(string upgradeId, NeonLadder.Mechanics.Progression.CurrencyType currencyType)
         {
             if (upgradeSystem == null)
             {
-                Debug.LogError("UpgradeSystem not found");
+                Debug.LogWarning("UpgradeSystem not found");
                 OnPurchaseFailed?.Invoke("Upgrade system not available");
                 return false;
             }
@@ -177,10 +188,10 @@ namespace NeonLadder.Managers
         /// <summary>
         /// Get all items available for a specific currency type
         /// </summary>
-        public List<PurchasableItem> GetAvailableItems(CurrencyType currencyType, bool metaShop = true)
+        public List<PurchasableItem> GetAvailableItems(NeonLadder.Events.CurrencyType currencyType, bool metaShop = true)
         {
             return itemDatabase.Values
-                .Where(item => item.CurrencyType == currencyType)
+                .Where(item => ConvertCurrencyType(item.CurrencyType) == currencyType)
                 .Where(item => metaShop ? item.IsAvailableInMetaShop : item.IsAvailableInPermaShop)
                 .Where(item => ArePrerequisitesMet(item))
                 .Where(item => item.CanPurchase)
@@ -190,7 +201,7 @@ namespace NeonLadder.Managers
         /// <summary>
         /// Get all upgrades available for a specific currency type
         /// </summary>
-        public List<UpgradeData> GetAvailableUpgrades(CurrencyType currencyType)
+        public List<UpgradeData> GetAvailableUpgrades(NeonLadder.Mechanics.Progression.CurrencyType currencyType)
         {
             if (upgradeSystem == null) return new List<UpgradeData>();
             
@@ -200,9 +211,11 @@ namespace NeonLadder.Managers
         /// <summary>
         /// Get all affordable items for current currency
         /// </summary>
-        public List<PurchasableItem> GetAffordableItems(CurrencyType currencyType, bool metaShop = true)
+        public List<PurchasableItem> GetAffordableItems(NeonLadder.Events.CurrencyType currencyType, bool metaShop = true)
         {
             var currency = GetCurrency(currencyType);
+            if (currency == null) return new List<PurchasableItem>();
+            
             return GetAvailableItems(currencyType, metaShop)
                 .Where(item => item.CanAfford(currency.current))
                 .ToList();
@@ -213,17 +226,31 @@ namespace NeonLadder.Managers
         /// </summary>
         public bool CanAffordItem(string itemId)
         {
+            Debug.Log($"CanAffordItem called with itemId: {itemId}, itemDatabase.Count: {itemDatabase?.Count ?? -1}");
+            
             if (!itemDatabase.TryGetValue(itemId, out var item))
+            {
+                Debug.Log($"Item '{itemId}' not found in database. Available items: {(itemDatabase != null ? string.Join(", ", itemDatabase.Keys) : "null")}");
                 return false;
+            }
                 
-            var currency = GetCurrency(item.CurrencyType);
-            return item.CanAfford(currency.current);
+            var currency = GetCurrency(ConvertCurrencyType(item.CurrencyType));
+            if (currency == null)
+            {
+                Debug.Log($"Currency is null for item {itemId}");
+                return false;
+            }
+            
+            bool canAfford = item.CanAfford(currency.current);
+            Debug.Log($"Item {itemId}: currency.current={currency.current}, item.Cost={item.Cost}, item.CanPurchase={item.CanPurchase}, result={canAfford}");
+            
+            return canAfford;
         }
         
         /// <summary>
         /// Check if player can afford an upgrade
         /// </summary>
-        public bool CanAffordUpgrade(string upgradeId, CurrencyType currencyType)
+        public bool CanAffordUpgrade(string upgradeId, NeonLadder.Mechanics.Progression.CurrencyType currencyType)
         {
             if (upgradeSystem == null) return false;
             return upgradeSystem.CanAffordUpgrade(upgradeId, currencyType);
@@ -240,7 +267,7 @@ namespace NeonLadder.Managers
         {
             foreach (var item in itemDatabase.Values)
             {
-                if (item.CurrencyType == CurrencyType.Meta)
+                if (item.CurrencyType == NeonLadder.Mechanics.Progression.CurrencyType.Meta)
                 {
                     item.ResetPurchases();
                 }
@@ -262,7 +289,7 @@ namespace NeonLadder.Managers
             // Apply persistent item effects
             foreach (var item in itemDatabase.Values)
             {
-                if (item.CurrencyType == CurrencyType.Perma && item.TimesPurchased > 0)
+                if (item.CurrencyType == NeonLadder.Mechanics.Progression.CurrencyType.Perma && item.TimesPurchased > 0)
                 {
                     // Re-apply persistent item effects
                     for (int i = 0; i < item.TimesPurchased; i++)
@@ -281,26 +308,83 @@ namespace NeonLadder.Managers
         
         private bool ArePrerequisitesMet(PurchasableItem item)
         {
-            foreach (var requiredUnlock in item.RequiredUnlocks)
+            if (item?.RequiredUnlocks != null)
             {
-                // Check if prerequisite is met (would integrate with your unlock system)
-                // For now, assume all prerequisites are met
-                Debug.Log($"Checking prerequisite: {requiredUnlock}");
+                foreach (var requiredUnlock in item.RequiredUnlocks)
+                {
+                    // Check if prerequisite is met (would integrate with your unlock system)
+                    // For now, assume all prerequisites are met
+                    Debug.Log($"Checking prerequisite: {requiredUnlock}");
+                }
             }
             return true;
         }
         
-        private BaseCurrency GetCurrency(CurrencyType currencyType)
+        private NeonLadder.Events.CurrencyType ConvertCurrencyType(NeonLadder.Mechanics.Progression.CurrencyType progressionCurrency)
         {
+            switch (progressionCurrency)
+            {
+                case NeonLadder.Mechanics.Progression.CurrencyType.Meta:
+                    return NeonLadder.Events.CurrencyType.Meta;
+                case NeonLadder.Mechanics.Progression.CurrencyType.Perma:
+                    return NeonLadder.Events.CurrencyType.Perma;
+                default:
+                    return NeonLadder.Events.CurrencyType.Meta; // Default fallback
+            }
+        }
+        
+        private BaseCurrency GetCurrency(NeonLadder.Events.CurrencyType currencyType)
+        {
+            if (player == null) 
+            {
+                Debug.Log("GetCurrency: player is null");
+                return null;
+            }
+            
+            Debug.Log($"GetCurrency: currencyType={currencyType}, player.MetaCurrency={player.MetaCurrency}, player.PermaCurrency={player.PermaCurrency}");
+            
+            BaseCurrency result = null;
             switch (currencyType)
             {
-                case CurrencyType.Meta:
-                    return player.MetaCurrency;
-                case CurrencyType.Perma:
-                    return player.PermaCurrency;
+                case NeonLadder.Events.CurrencyType.Meta:
+                    result = player.MetaCurrency;
+                    Debug.Log($"Meta currency: {(result != null ? $"current={result.current}" : "null")}");
+                    break;
+                case NeonLadder.Events.CurrencyType.Perma:
+                    result = player.PermaCurrency;
+                    Debug.Log($"Perma currency: {(result != null ? $"current={result.current}" : "null")}");
+                    break;
                 default:
-                    return null;
+                    result = null;
+                    break;
             }
+            
+            return result;
+        }
+        
+        /// <summary>
+        /// Public method to reinitialize databases (useful for tests)
+        /// </summary>
+        public void ReinitializeDatabases()
+        {
+            InitializeDatabases();
+        }
+        
+        /// <summary>
+        /// Set available items and upgrades for testing
+        /// </summary>
+        public void SetTestData(PurchasableItem[] items, UpgradeData[] upgrades, Player testPlayer, UpgradeSystem testUpgradeSystem)
+        {
+            Debug.Log($"SetTestData called: items.Length={items?.Length ?? -1}, upgrades.Length={upgrades?.Length ?? -1}");
+            
+            availableItems = items;
+            availableUpgrades = upgrades;
+            player = testPlayer;
+            upgradeSystem = testUpgradeSystem;
+            
+            Debug.Log($"Before InitializeDatabases: availableItems.Length={availableItems?.Length ?? -1}");
+            InitializeDatabases();
+            Debug.Log($"After InitializeDatabases: itemDatabase.Count={itemDatabase?.Count ?? -1}");
         }
         
         #endregion

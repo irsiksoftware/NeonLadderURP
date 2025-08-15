@@ -26,8 +26,13 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void SetUp()
         {
-            // Create test player
+            // Create test player with required components
             testPlayerObject = new GameObject("TestPlayer");
+            
+            // Add required components for Player (KinematicObject needs Rigidbody)
+            testPlayerObject.AddComponent<Rigidbody>();
+            testPlayerObject.AddComponent<Animator>();
+            
             testPlayer = testPlayerObject.AddComponent<Player>();
             testMetaCurrency = testPlayerObject.AddComponent<Meta>();
             testPermaCurrency = testPlayerObject.AddComponent<Perma>();
@@ -80,17 +85,9 @@ namespace NeonLadder.Tests.Runtime
             BatchCurrencyEvent.CollectCurrencyImmediate(testPlayer, CurrencyType.Meta, 50);
             
             // Execute any pending events
-            if (Simulation.IsActive)
-            {
-                // In a real scenario, the simulation would process this immediately
-                // For testing, we'll verify the event was scheduled
-                Assert.Pass("Immediate collection scheduled successfully");
-            }
-            else
-            {
-                // If simulation isn't active, we can't test the actual execution
-                Assert.Pass("Simulation not active - testing event scheduling only");
-            }
+            // In a real scenario, the simulation would process this immediately
+            // For testing, we'll verify the event was scheduled
+            Assert.Pass("Immediate collection scheduled successfully");
         }
         
         [Test]

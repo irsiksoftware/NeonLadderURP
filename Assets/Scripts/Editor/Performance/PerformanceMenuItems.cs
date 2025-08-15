@@ -23,6 +23,9 @@ namespace NeonLadder.Editor.Performance
         private static ProfilerWindow profilerWindow;
         private static bool isProfilerConfigured = false;
         
+        // Test mode flag to disable popups and auto-profiling during tests
+        private static bool IsTestMode => EditorPrefs.GetBool("NeonLadder_TestMode", false);
+        
         #region Menu Items
         
         /// <summary>
@@ -33,10 +36,14 @@ namespace NeonLadder.Editor.Performance
         {
             try
             {
-                // Open or focus the Profiler window
-                profilerWindow = EditorWindow.GetWindow<ProfilerWindow>("Profiler");
+                // Don't open profiler window in test mode
+                if (!IsTestMode)
+                {
+                    // Open or focus the Profiler window
+                    profilerWindow = EditorWindow.GetWindow<ProfilerWindow>("Profiler");
+                }
                 
-                if (profilerWindow != null)
+                if (profilerWindow != null || IsTestMode)
                 {
                     // Configure profiler for NeonLadder-specific metrics
                     ConfigureProfilerForNeonLadder();
@@ -59,11 +66,15 @@ namespace NeonLadder.Editor.Performance
                     }
                     
                     Debug.Log("[Performance] ✅ Started profiling current scene: " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-                    EditorUtility.DisplayDialog("Performance Profiling", 
-                        "Profiling started for current scene.\n\n" +
-                        "The Profiler is now recording performance data.\n" +
-                        "Play the scene to capture gameplay metrics.", 
-                        "OK");
+                    
+                    if (!IsTestMode)
+                    {
+                        EditorUtility.DisplayDialog("Performance Profiling", 
+                            "Profiling started for current scene.\n\n" +
+                            "The Profiler is now recording performance data.\n" +
+                            "Play the scene to capture gameplay metrics.", 
+                            "OK");
+                    }
                 }
             }
             catch (Exception e)
@@ -98,9 +109,13 @@ namespace NeonLadder.Editor.Performance
                     }
                     
                     Debug.Log("[Performance] 🗑️ Profiler data cleared successfully");
-                    EditorUtility.DisplayDialog("Profiler Cleared", 
-                        "All profiler data has been cleared.", 
-                        "OK");
+                    
+                    if (!IsTestMode)
+                    {
+                        EditorUtility.DisplayDialog("Profiler Cleared", 
+                            "All profiler data has been cleared.", 
+                            "OK");
+                    }
                 }
                 catch (Exception e)
                 {
@@ -147,21 +162,24 @@ namespace NeonLadder.Editor.Performance
                 
                 Debug.Log($"[Performance] 📊 Performance reports exported to {outputDir}");
                 
-                // Show success dialog with options
-                int result = EditorUtility.DisplayDialogComplex("Performance Report Exported", 
-                    $"Performance reports have been generated:\n\n" +
-                    $"• CSV: {Path.GetFileName(csvPath)}\n" +
-                    $"• Markdown: {Path.GetFileName(mdPath)}\n" +
-                    $"• HTML: {Path.GetFileName(htmlPath)}", 
-                    "Open Folder", "Open HTML Report", "OK");
-                
-                if (result == 0) // Open Folder
+                if (!IsTestMode)
                 {
-                    EditorUtility.RevealInFinder(csvPath);
-                }
-                else if (result == 1) // Open HTML
-                {
-                    Application.OpenURL("file://" + htmlPath);
+                    // Show success dialog with options
+                    int result = EditorUtility.DisplayDialogComplex("Performance Report Exported", 
+                        $"Performance reports have been generated:\n\n" +
+                        $"• CSV: {Path.GetFileName(csvPath)}\n" +
+                        $"• Markdown: {Path.GetFileName(mdPath)}\n" +
+                        $"• HTML: {Path.GetFileName(htmlPath)}", 
+                        "Open Folder", "Open HTML Report", "OK");
+                    
+                    if (result == 0) // Open Folder
+                    {
+                        EditorUtility.RevealInFinder(csvPath);
+                    }
+                    else if (result == 1) // Open HTML
+                    {
+                        Application.OpenURL("file://" + htmlPath);
+                    }
                 }
             }
             catch (Exception e)
@@ -198,6 +216,25 @@ namespace NeonLadder.Editor.Performance
         {
             Menu.SetChecked(MENU_ROOT + "Auto-Profile on Play", 
                 EditorPrefs.GetBool("NeonLadder_AutoProfile", false));
+            return true;
+        }
+        
+        /// <summary>
+        /// Toggle test mode to disable popups and auto-profiling during tests
+        /// </summary>
+        [MenuItem(MENU_ROOT + "Test Mode (No Popups)", false, 202)]
+        public static void ToggleTestMode()
+        {
+            bool currentState = EditorPrefs.GetBool("NeonLadder_TestMode", false);
+            EditorPrefs.SetBool("NeonLadder_TestMode", !currentState);
+            Debug.Log($"[Performance] Test mode: {(!currentState ? "Enabled" : "Disabled")} (disables popups and auto-profiling)");
+        }
+        
+        [MenuItem(MENU_ROOT + "Test Mode (No Popups)", true)]
+        public static bool ToggleTestModeValidate()
+        {
+            Menu.SetChecked(MENU_ROOT + "Test Mode (No Popups)", 
+                EditorPrefs.GetBool("NeonLadder_TestMode", false));
             return true;
         }
         
@@ -252,7 +289,7 @@ namespace NeonLadder.Editor.Performance
         {
             if (state == PlayModeStateChange.EnteredPlayMode)
             {
-                if (EditorPrefs.GetBool("NeonLadder_AutoProfile", false))
+                if (EditorPrefs.GetBool("NeonLadder_AutoProfile", false) && !IsTestMode)
                 {
                     ProfilerDriver.enabled = true;
                     Debug.Log("[Performance] 🎮 Auto-profiling started in play mode");
