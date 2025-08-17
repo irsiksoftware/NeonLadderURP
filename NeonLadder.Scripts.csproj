@@ -312,8 +312,8 @@
     <Compile Include="Assets\Scripts\Mechanics\Enums\BuffTypes.cs" />
     <Compile Include="Assets\Scripts\Events\HealthIsZero.cs" />
     <Compile Include="Assets\Scripts\Dialog\ProtagonistDialogueSystem.cs" />
-    <Compile Include="Assets\Scripts\Optimization\EulerAngleCacheBenchmark.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Health.cs" />
+    <Compile Include="Assets\Scripts\Optimization\EulerAngleCacheBenchmark.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Bosses.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Scenes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\MetaCurrencyController.cs" />

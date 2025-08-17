@@ -29,11 +29,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Editor.InputSystem", "NeonLadder.Editor.InputSystem.csproj", "{273033E9-C898-4B02-9E52-5EA08B23267B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Tests.Editor", "NeonLadder.Tests.Editor.csproj", "{E5626AE3-93B9-EFB9-8119-7A9F78842F21}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Utilities.Editor", "NeonLadder.Utilities.Editor.csproj", "{0F5D490F-0C67-05C6-02B3-146A47F83A8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Debug.Editor", "NeonLadder.Debug.Editor.csproj", "{677A9358-2C6A-D0DE-5A51-50C1E39D2859}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Tests.Editor", "NeonLadder.Tests.Editor.csproj", "{E5626AE3-93B9-EFB9-8119-7A9F78842F21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,10 +97,6 @@ Global
 		{273033E9-C898-4B02-9E52-5EA08B23267B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{273033E9-C898-4B02-9E52-5EA08B23267B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{273033E9-C898-4B02-9E52-5EA08B23267B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F5D490F-0C67-05C6-02B3-146A47F83A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F5D490F-0C67-05C6-02B3-146A47F83A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F5D490F-0C67-05C6-02B3-146A47F83A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,6 +105,10 @@ Global
 		{677A9358-2C6A-D0DE-5A51-50C1E39D2859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{677A9358-2C6A-D0DE-5A51-50C1E39D2859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{677A9358-2C6A-D0DE-5A51-50C1E39D2859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5626AE3-93B9-EFB9-8119-7A9F78842F21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

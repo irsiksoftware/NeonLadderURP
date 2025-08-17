@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246f495e266bff34193259378b17c2be, type: 3}
+  m_Name: New Save State Config
+  m_EditorClassIdentifier: 
+  configurationName: Default Save State
+  description: Describe this save state configuration...
+  isTestingConfiguration: 0
+  playerSetup:
+    playerLevel: 42
+    experiencePoints: 2940.4802
+    maxHealth: 345
+    currentHealth: 175
+    maxStamina: 129.73387
+    currentStamina: 18.277946
+    attackDamage: 10
+    attackSpeed: 1
+    movementSpeed: 5
+    jumpCount: 1
+  currencySetup:
+    startingMetaCurrency: 3764
+    startingPermaCurrency: 46913
+    totalMetaEarned: 0
+    totalPermaEarned: 118068
+  sceneSetPresets: []
+  currentSceneSet:
+    setName: Dangerous Ruins
+    description: Describe this scene configuration...
+    seed: 38725
+    pathType: circular
+    maxDepth: 10
+    sceneConfigurations:
+    - sceneName: ProcScene_1
+      depth: 1
+      pathType: main
+      spawnPosition: {x: 9.45236, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    - sceneName: ProcScene_2
+      depth: 2
+      pathType: main
+      spawnPosition: {x: 9.738533, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    - sceneName: ProcScene_3
+      depth: 3
+      pathType: main
+      spawnPosition: {x: -3.208066, y: 0, z: 0}
+      isPreCompleted: 1
+      sceneSpecificData: []
+    - sceneName: ProcScene_4
+      depth: 4
+      pathType: main
+      spawnPosition: {x: -9.04188, y: 0, z: 0}
+      isPreCompleted: 1
+      sceneSpecificData: []
+    - sceneName: ProcScene_5
+      depth: 5
+      pathType: boss
+      spawnPosition: {x: -9.175291, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    availableBossScenes: []
+    guaranteedBossSpawns: []
+  preUnlockedAbilities: []
+  prePurchasedItems: []
+  worldSetup:
+    currentSceneName: BossArena
+    playerPosition: {x: 45.959045, y: 15.377549, z: 0}
+    currentCheckpoint: 
+    currentDepth: 10
+    runNumber: 9
+    isActiveRun: 1
+    completedScenes:
+    - SecondLevel
+    discoveredAreas:
+    - IceGrove
+    - ShadowRealm
+    - DeepCaves
+    - CrystalChamber
+    defeatedBosses:
+    - StormTitan
+    - ShadowLord
+  enableDebugMode: 0
+  testingScenarios: []
