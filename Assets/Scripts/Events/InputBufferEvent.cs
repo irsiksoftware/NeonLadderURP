@@ -150,20 +150,18 @@ namespace NeonLadder.Events
                 playerAction.attackState = ActionStates.Preparing;
                 playerAction.stopAttack = false;
                 
-                // Check if this is part of a combo
-                if (IsComboAttack())
-                {
-                    var comboEvent = Simulation.Schedule<ComboAttackEvent>(0f);
-                    comboEvent.player = player;
-                    comboEvent.comboStep = bufferedInput.comboStep + 1;
-                    comboEvent.comboId = DetermineComboId();
-                }
-                else
-                {
-                    var attackEvent = Simulation.Schedule<PlayerAttackEvent>(0f);
-                    attackEvent.player = player;
-                    attackEvent.isRanged = !player.IsUsingMelee;
-                }
+                // FIXED: Only check combo after the input is registered with ComboSystem
+                // This prevents every single attack from being treated as a combo
+                Debugger.Log($"[ExecuteAttack] Attack state: Ready, IsRanged: {!player.IsUsingMelee}");
+                
+                // Always schedule a regular attack - combo system will override if needed
+                var attackEvent = Simulation.Schedule<PlayerAttackEvent>(0f);
+                attackEvent.player = player;
+                attackEvent.isRanged = !player.IsUsingMelee;
+            }
+            else
+            {
+                Debugger.LogWarning($"[ExecuteAttack] Cannot execute - PlayerAction: {playerAction != null}, AttackState: {playerAction?.attackState}");
             }
         }
 
@@ -188,77 +186,21 @@ namespace NeonLadder.Events
 
         private void ExecuteWeaponSwap()
         {
-            // Trigger weapon swap through PlayerAction component
-            var playerAction = player.GetComponent<PlayerAction>();
-            if (playerAction != null)
-            {
-                // GUARD: Don't allow weapon swap during attack
-                if (playerAction.attackState == ActionStates.Acting || playerAction.attackState == ActionStates.Preparing)
-                {
-                    return; // Block weapon swap during attack sequence
-                }
-                
-                // Swap the weapon state
-                player.IsUsingMelee = !player.IsUsingMelee;
-                
-                // Handle the visual weapon swap
-                if (player.IsUsingMelee)
-                {
-                    // Switch from ranged to melee
-                    SwapWeaponGroups(playerAction.rangedWeaponGroups, playerAction.meleeWeaponGroups);
-                }
-                else
-                {
-                    // Switch from melee to ranged
-                    SwapWeaponGroups(playerAction.meleeWeaponGroups, playerAction.rangedWeaponGroups);
-                }
-            }
-        }
-        
-        private void SwapWeaponGroups(List<GameObject> currentWeapons, List<GameObject> newWeapons)
-        {
-            if (currentWeapons != null)
-            {
-                foreach (GameObject weaponGroup in currentWeapons)
-                {
-                    if (weaponGroup != null && weaponGroup.transform.childCount > 0)
-                    {
-                        var weapon = weaponGroup.transform.GetChild(0).gameObject;
-                        weapon.SetActive(false);
-                    }
-                }
-            }
-            
-            if (newWeapons != null)
-            {
-                foreach (GameObject weaponGroup in newWeapons)
-                {
-                    if (weaponGroup != null && weaponGroup.transform.childCount > 0)
-                    {
-                        var weapon = weaponGroup.transform.GetChild(0).gameObject;
-                        weapon.SetActive(true);
-                    }
-                }
-            }
+            // Use proper Simulation Event for weapon swapping
+            var swapEvent = Simulation.Schedule<WeaponSwapEvent>(0f);
+            swapEvent.player = player;
+            swapEvent.forceSwap = false;
         }
 
-        private bool IsComboAttack()
-        {
-            // Check if we're within combo window of last attack
-            var comboSystem = Simulation.GetModel<ComboSystem>();
-            return comboSystem != null && comboSystem.IsInComboWindow(player);
-        }
-
-        private string DetermineComboId()
-        {
-            // Build combo ID based on input sequence
-            return $"{bufferedInput.comboId}_ATK";
-        }
 
         private void CheckCombos()
         {
-            var comboSystem = Simulation.GetModel<ComboSystem>();
-            comboSystem?.CheckComboCompletion(player, bufferedInput);
+            // Only check combos for attack inputs, not movement/utility inputs
+            if (bufferedInput.inputType == InputType.Attack)
+            {
+                var comboSystem = Simulation.GetModel<ComboSystem>();
+                comboSystem?.CheckComboCompletion(player, bufferedInput);
+            }
         }
 
         internal override void Cleanup()

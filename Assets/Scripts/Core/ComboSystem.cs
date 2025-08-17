@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Core
 {
@@ -134,7 +135,21 @@ namespace NeonLadder.Core
         {
             Debug.Log($"COMBO! {combo.name}");
             
-            // Schedule combo execution event
+            // IMPORTANT: Cancel any pending regular attack and replace with combo attack
+            var playerAction = player.GetComponent<PlayerAction>();
+            if (playerAction != null && playerAction.attackState == ActionStates.Preparing)
+            {
+                // Schedule combo attack to override the regular attack
+                var comboAttackEvent = Simulation.Schedule<ComboAttackEvent>(0f);
+                comboAttackEvent.player = player;
+                comboAttackEvent.comboStep = combo.inputs.Length; // Current step in combo
+                comboAttackEvent.comboId = combo.id;
+                comboAttackEvent.damageMultiplier = combo.damageMultipliers?[combo.inputs.Length - 1] ?? 1.0f;
+                
+                Debug.Log($"[ComboSystem] Scheduled ComboAttackEvent for {combo.name}, step {combo.inputs.Length}");
+            }
+            
+            // Schedule combo execution event for special effects
             var comboEvent = Simulation.Schedule<ComboExecutionEvent>(0f);
             comboEvent.player = player;
             comboEvent.combo = combo;
