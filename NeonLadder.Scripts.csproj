@@ -237,6 +237,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\DamageNumberController.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerEnteredDeathZone.cs" />
     <Compile Include="Assets\Scripts\Events\WeaponBossCollision.cs" />
+    <Compile Include="Assets\Scripts\Events\WeaponSwapEvent.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerExhausted.cs" />
     <Compile Include="Assets\Scripts\DataManagement\PlayerSettings.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Collectibles\CurrencyInstance.cs" />

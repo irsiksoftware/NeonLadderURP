@@ -67,8 +67,10 @@
     <Compile Include="Assets\Tests\Runtime\ControllerMappingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\CircularDependencyTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SaveSystemIntegrationTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\MeleeCombatSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\LoggingSystemConfigTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SceneChangeDetector_UnitTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\MeleeCombatBugFixTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ManagerController_PerformanceTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamManager.cs" />
     <Compile Include="Assets\Tests\Runtime\Steam\SteamIntegrationTests.cs" />

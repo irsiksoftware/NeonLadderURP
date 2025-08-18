@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Core
 {
@@ -67,6 +68,15 @@ namespace NeonLadder.Core
             return Time.time - state.lastInputTime <= comboWindowTime;
         }
 
+        public void ClearComboState(Player player)
+        {
+            if (playerComboStates.TryGetValue(player, out var state))
+            {
+                state.inputHistory.Clear();
+                state.lastInputTime = 0f;
+            }
+        }
+        
         public void CheckComboCompletion(Player player, InputBufferEvent input)
         {
             if (!playerComboStates.TryGetValue(player, out var state))
@@ -86,17 +96,30 @@ namespace NeonLadder.Core
             state.inputHistory.RemoveAll(i => Time.time - i.time > comboWindowTime * 3);
 
             // Check for combo matches
+            bool foundCombo = false;
             foreach (var combo in combos)
             {
                 if (MatchesCombo(state.inputHistory, combo))
                 {
                     ExecuteCombo(player, combo);
                     state.inputHistory.Clear(); // Reset after successful combo
+                    foundCombo = true;
                     break;
                 }
             }
 
-            state.lastInputTime = Time.time;
+            // CRITICAL FIX: Only set lastInputTime if we found a combo or if there's potential for one
+            // This prevents single attacks from creating false combo windows
+            if (foundCombo || HasPotentialCombo(state.inputHistory))
+            {
+                state.lastInputTime = Time.time;
+            }
+            else
+            {
+                // Clear the combo state for single attacks that don't match any combo
+                state.inputHistory.Clear();
+                state.lastInputTime = 0f; // Clear the combo window
+            }
         }
 
         private bool MatchesCombo(List<TimedInput> history, ComboDefinition combo)
@@ -130,11 +153,51 @@ namespace NeonLadder.Core
             return true;
         }
 
+        private bool HasPotentialCombo(List<TimedInput> history)
+        {
+            if (history.Count == 0) return false;
+            
+            // Check if the current input sequence could be the start of any combo
+            foreach (var combo in combos)
+            {
+                if (combo.inputs.Length <= history.Count) continue; // Not a potential combo if we already have too many inputs
+                
+                // Check if the current history matches the beginning of this combo
+                bool matches = true;
+                for (int i = 0; i < history.Count; i++)
+                {
+                    if (history[i].type != combo.inputs[i])
+                    {
+                        matches = false;
+                        break;
+                    }
+                }
+                
+                if (matches) return true; // This could be the start of a combo
+            }
+            
+            return false; // No potential combos found
+        }
+
         private void ExecuteCombo(Player player, ComboDefinition combo)
         {
             Debug.Log($"COMBO! {combo.name}");
             
-            // Schedule combo execution event
+            // IMPORTANT: Cancel any pending regular attack and replace with combo attack
+            var playerAction = player.GetComponent<PlayerAction>();
+            if (playerAction != null && playerAction.attackState == ActionStates.Preparing)
+            {
+                // Schedule combo attack to override the regular attack
+                var comboAttackEvent = Simulation.Schedule<ComboAttackEvent>(0f);
+                comboAttackEvent.player = player;
+                comboAttackEvent.comboStep = combo.inputs.Length; // Current step in combo
+                comboAttackEvent.comboId = combo.id;
+                comboAttackEvent.damageMultiplier = combo.damageMultipliers?[combo.inputs.Length - 1] ?? 1.0f;
+                
+                Debug.Log($"[ComboSystem] Scheduled ComboAttackEvent for {combo.name}, step {combo.inputs.Length}");
+            }
+            
+            // Schedule combo execution event for special effects
             var comboEvent = Simulation.Schedule<ComboExecutionEvent>(0f);
             comboEvent.player = player;
             comboEvent.combo = combo;
