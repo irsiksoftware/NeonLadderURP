@@ -428,19 +428,42 @@ namespace NeonLadder.Tests.Editor
             var tempPath = "Assets/test_animator.controller";
             var animatorController = UnityEditor.Animations.AnimatorController.CreateAnimatorControllerAtPath(tempPath);
             
-            testConfig.leftCharacter.animatorController = animatorController;
-            
-            DialogueSceneGenerator.GenerateScene(testConfig);
-            
-            generatedScene = GameObject.Find("Generated Test Scene");
-            var charactersContainer = generatedScene.transform.Find("Characters");
-            var leftCharacter = charactersContainer.Find("Boss (Left)");
-            
-            var animator = leftCharacter.GetComponent<Animator>();
-            Assert.IsNotNull(animator, "Animator should be added when controller is specified");
-            Assert.AreEqual(animatorController, animator.runtimeAnimatorController);
-            
-            Object.DestroyImmediate(animatorController, true);
+            try
+            {
+                testConfig.leftCharacter.animatorController = animatorController;
+                
+                DialogueSceneGenerator.GenerateScene(testConfig);
+                
+                generatedScene = GameObject.Find("Generated Test Scene");
+                var charactersContainer = generatedScene.transform.Find("Characters");
+                var leftCharacter = charactersContainer.Find("Boss (Left)");
+                
+                var animator = leftCharacter.GetComponent<Animator>();
+                Assert.IsNotNull(animator, "Animator should be added when controller is specified");
+                Assert.AreEqual(animatorController, animator.runtimeAnimatorController);
+            }
+            finally
+            {
+                // Clean up both the Unity object and the file
+                if (animatorController != null)
+                    Object.DestroyImmediate(animatorController, true);
+                
+                // Delete the file directly if it exists
+                if (System.IO.File.Exists(tempPath))
+                {
+                    System.IO.File.Delete(tempPath);
+                }
+                
+                // Also delete the .meta file if it exists
+                var metaPath = tempPath + ".meta";
+                if (System.IO.File.Exists(metaPath))
+                {
+                    System.IO.File.Delete(metaPath);
+                }
+                
+                // Refresh Unity's asset database
+                AssetDatabase.Refresh();
+            }
         }
 
         [Test]

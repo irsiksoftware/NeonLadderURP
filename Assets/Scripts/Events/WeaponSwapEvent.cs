@@ -29,9 +29,9 @@ namespace NeonLadder.Events
             // If not forcing, check if we can swap
             if (!forceSwap)
             {
-                // Don't allow swap during attack unless forced
-                if (playerAction.attackState == ActionStates.Acting || 
-                    playerAction.attackState == ActionStates.Preparing)
+                // Don't allow swap during active attack unless forced
+                // Allow swap during Preparing state, but block during Acting state
+                if (playerAction.attackState == ActionStates.Acting)
                 {
                     // Only retry if we haven't exceeded max attempts
                     if (retryCount < MaxRetries)

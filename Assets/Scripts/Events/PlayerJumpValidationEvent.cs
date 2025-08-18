@@ -37,6 +37,7 @@ namespace NeonLadder.Events
         {
             var mediator = player?.GetComponent<PlayerStateMediator>();
             var playerAction = player?.GetComponent<PlayerAction>();
+            
             if (player != null && mediator != null && playerAction != null)
             {
                 // Apply jump force through validated path

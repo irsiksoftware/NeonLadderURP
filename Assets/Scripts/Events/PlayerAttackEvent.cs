@@ -67,9 +67,14 @@ namespace NeonLadder.Events
         
         private void ScheduleWeaponColliderEvents(PlayerAction playerAction)
         {
+            // Safety check for test environment where transform.parent might be null
+            if (playerAction == null || playerAction.transform.parent == null)
+            {
+                return; // Skip weapon collider events in test environment
+            }
+            
             var attackComponents = playerAction.transform.parent.gameObject.GetComponentsInChildren<Collider>()
                                                        .Where(c => c.gameObject != playerAction.transform.parent.gameObject).ToList();
-            
             
             if (attackComponents != null && attackComponents.Count > 0)
             {
@@ -111,13 +116,16 @@ namespace NeonLadder.Events
             player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 0.0f);
             
             // Ensure weapon colliders are reset to default layer
-            var attackComponents = playerAction.transform.parent.gameObject.GetComponentsInChildren<Collider>()
-                .Where(c => c.gameObject != playerAction.transform.parent.gameObject).ToList();
-            foreach (var collider in attackComponents)
+            if (playerAction != null && playerAction.transform.parent != null)
             {
-                if (collider.gameObject.layer == LayerMask.NameToLayer("Battle"))
+                var attackComponents = playerAction.transform.parent.gameObject.GetComponentsInChildren<Collider>()
+                    .Where(c => c.gameObject != playerAction.transform.parent.gameObject).ToList();
+                foreach (var collider in attackComponents)
                 {
-                    collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                    if (collider.gameObject.layer == LayerMask.NameToLayer("Battle"))
+                    {
+                        collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                    }
                 }
             }
         }
