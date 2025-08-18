@@ -1,5 +1,7 @@
 using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
+using NeonLadder.Common;
 using UnityEngine;
 
 namespace NeonLadder.Events
@@ -27,22 +29,35 @@ namespace NeonLadder.Events
         {
             var playerAction = player.GetComponent<PlayerAction>();
             
-            // Set special animation for combo attacks
+            Debug.Log($"[ComboAttackEvent] Executing combo attack: {comboId}, step {comboStep}");
+            
+            // CRITICAL: Player uses layered animation system  
+            // Step 1: Activate the action layer
+            player.Animator.SetLayerWeight(Constants.PlayerActionLayerIndex, 1.0f);
+            
+            // Step 2: Set special animation for combo attacks
             int comboAnimation = GetComboAnimation(comboStep);
             player.Animator.SetInteger("action_animation", comboAnimation);
             
-            // Schedule attack validation with combo modifiers
-            var attackEvent = Simulation.Schedule<EnemyAttackValidationEvent>(0.1f);
-            // Apply combo damage multiplier
-            
-            // Schedule next input window
-            if (HasNextComboStep())
+            // IMPORTANT: Transition from Preparing to Acting
+            if (playerAction.attackState == ActionStates.Preparing)
             {
-                var windowEvent = Simulation.Schedule<ComboWindowEvent>(0.3f);
-                windowEvent.player = player;
-                windowEvent.comboId = comboId;
-                windowEvent.nextStep = comboStep + 1;
+                playerAction.attackState = ActionStates.Acting;
+                Debug.Log($"[ComboAttackEvent] Transitioned to Acting state");
             }
+            
+            // Apply combo damage multiplier for this hit
+            // TODO: Implement combo damage application
+            
+            // Schedule completion after animation duration
+            float attackDuration = player.AttackAnimationDuration;
+            if (attackDuration <= 0) attackDuration = 1.0f; // Fallback
+            
+            var completeEvent = Simulation.Schedule<PlayerAttackCompleteEvent>(attackDuration);
+            completeEvent.player = player;
+            
+            // REMOVED: Automatic combo window scheduling
+            // Combo windows are now only created by successful combo matches in ComboSystem
         }
 
         private int GetComboAnimation(int step)

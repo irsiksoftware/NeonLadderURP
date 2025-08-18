@@ -348,7 +348,9 @@ namespace NeonLadder.Tests.Runtime
                 Object.DestroyImmediate(mockSpawnPointObject);
             }
             
-            // Clear the simulation model
+            // CRITICAL: Clear ALL simulation state to prevent test pollution
+            // This fixes the currency/stamina test failures when "Run All Tests" is used
+            Simulation.Clear();
             Simulation.DestroyModel<PlatformerModel>();
             
             // Reset Game singleton

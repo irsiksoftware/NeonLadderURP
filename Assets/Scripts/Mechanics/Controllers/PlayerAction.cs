@@ -650,7 +650,9 @@ namespace NeonLadder.Mechanics.Controllers
         {
             // Perform attack logic
             attackState = ActionStates.Acting;
-            yield return new WaitForSeconds(attackAnimationDuration);
+            // Use actual animation duration from mediator/player
+            float duration = mediator?.GetAttackAnimationDuration() ?? attackAnimationDuration;
+            yield return new WaitForSeconds(duration);
             attackState = ActionStates.Ready;
         }
         
