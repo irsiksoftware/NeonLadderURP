@@ -62,24 +62,42 @@ namespace NeonLadder.Tests.Runtime
         [Test]
         public void SceneTransitionTrigger_RequiresTriggerColliderObject()
         {
-            // Arrange
-            var triggerObject = new GameObject("TriggerObject");
-            var colliderObject = new GameObject("ColliderObject");
-            colliderObject.AddComponent<BoxCollider>().isTrigger = true;
+            // Test that SceneTransitionTrigger properly works with a trigger collider object
             
-            // Act - Create trigger without assigning collider object initially, then assign it
+            // Arrange - Create trigger collider first to avoid validation error
+            var triggerObject = new GameObject("TriggerObject");
+            var triggerCollider = new GameObject("TriggerCollider");
+            triggerCollider.AddComponent<BoxCollider>().isTrigger = true;
+            
+            // Deactivate to avoid Awake() validation error
             triggerObject.SetActive(false);
             var trigger = triggerObject.AddComponent<SceneTransitionTrigger>();
-            triggerObject.SetActive(true); // This will trigger validation and show missing collider
             
-            // Now assign the collider object - should work without errors
-            trigger.SetTriggerColliderObject(colliderObject);
+            // Set the trigger collider before activating
+            trigger.SetTriggerColliderObject(triggerCollider);
+            triggerObject.SetActive(true); // Now it should validate successfully
             
-            // Assert - Verify assignment worked
-            Assert.AreEqual(colliderObject, trigger.GetTriggerColliderObject());
+            // Act & Assert - Verify the requirement is satisfied
+            Assert.AreEqual(triggerCollider, trigger.GetTriggerColliderObject(),
+                "Should have the assigned trigger collider object");
             
+            // Verify the collider has the required properties
+            var collider = trigger.GetTriggerColliderObject().GetComponent<Collider>();
+            Assert.IsNotNull(collider, "Assigned object should have a Collider component");
+            Assert.IsTrue(collider.isTrigger, "Collider should be marked as trigger");
+            
+            // Test that we can change the collider object
+            var newTriggerCollider = new GameObject("NewTriggerCollider");
+            newTriggerCollider.AddComponent<SphereCollider>().isTrigger = true;
+            
+            trigger.SetTriggerColliderObject(newTriggerCollider);
+            Assert.AreEqual(newTriggerCollider, trigger.GetTriggerColliderObject(),
+                "Should be able to change trigger collider object");
+            
+            // Cleanup
             Object.DestroyImmediate(triggerObject);
-            Object.DestroyImmediate(colliderObject);
+            Object.DestroyImmediate(triggerCollider);
+            Object.DestroyImmediate(newTriggerCollider);
         }
         
         [Test]

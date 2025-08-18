@@ -17,21 +17,35 @@ namespace NeonLadder.Events
         {
             // Validate jump conditions
             var mediator = player?.GetComponent<PlayerStateMediator>();
-            return player != null && 
-                   player.Health.IsAlive && 
-                   mediator != null &&
-                   mediator.GetJumpCount() < mediator.GetMaxJumps();
+            var playerAction = player?.GetComponent<PlayerAction>();
+            
+            // If jump validation fails, reset the isJumping flag to prevent infinite loop
+            if (player == null || !player.Health.IsAlive || mediator == null || 
+                mediator.GetJumpCount() >= mediator.GetMaxJumps())
+            {
+                if (playerAction != null)
+                {
+                    playerAction.isJumping = false; // Reset flag even if jump fails
+                }
+                return false;
+            }
+            
+            return true;
         }
 
         public override void Execute()
         {
             var mediator = player?.GetComponent<PlayerStateMediator>();
-            if (player != null && mediator != null)
+            var playerAction = player?.GetComponent<PlayerAction>();
+            
+            if (player != null && mediator != null && playerAction != null)
             {
                 // Apply jump force through validated path
                 player.velocity.y = requestedJumpForce;
                 mediator.IncrementJumpCount();
-                // Note: isJumping flag is handled internally by PlayerAction
+                
+                // CRITICAL FIX: Reset isJumping flag to prevent infinite jumping
+                playerAction.isJumping = false;
                 
                 // Trigger audio through event system
                 var audioEvent = Simulation.Schedule<PlayerAudioEvent>(0f);
