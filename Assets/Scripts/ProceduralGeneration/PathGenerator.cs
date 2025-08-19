@@ -42,7 +42,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Generates a complete mystical map from any seed string
         /// </summary>
-        public MysticalMap GenerateMap(string seedString = null)
+        public ProceduralMap GenerateMap(string seedString = null)
         {
             return GenerateMapWithRules(seedString, GenerationRules.CreateBalancedRules());
         }
@@ -50,7 +50,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Generates a complete mystical map from any seed string with custom rules
         /// </summary>
-        public MysticalMap GenerateMapWithRules(string seedString = null, GenerationRules rules = null)
+        public ProceduralMap GenerateMapWithRules(string seedString = null, GenerationRules rules = null)
         {
             // If no seed provided, generate a mystical one
             if (string.IsNullOrWhiteSpace(seedString))
@@ -69,7 +69,7 @@ namespace NeonLadder.ProceduralGeneration
             // Convert the mystical string to deterministic randomness
             _seededRandom = new System.Random(ConvertSeedToInt(seedString));
 
-            var map = new MysticalMap
+            var map = new ProceduralMap
             {
                 Seed = seedString,
                 Layers = new List<MapLayer>()
@@ -561,7 +561,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Serializes the mystical map for persistence
         /// </summary>
-        public string SerializeMap(MysticalMap map)
+        public string SerializeMap(ProceduralMap map)
         {
             return JsonConvert.SerializeObject(map, Formatting.Indented);
         }
@@ -569,9 +569,9 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Deserializes a mystical map from the astral plane
         /// </summary>
-        public MysticalMap DeserializeMap(string json)
+        public ProceduralMap DeserializeMap(string json)
         {
-            return JsonConvert.DeserializeObject<MysticalMap>(json);
+            return JsonConvert.DeserializeObject<ProceduralMap>(json);
         }
     }
 
@@ -579,7 +579,7 @@ namespace NeonLadder.ProceduralGeneration
     /// The complete mystical map structure
     /// </summary>
     [Serializable]
-    public class MysticalMap
+    public class ProceduralMap
     {
         public string Seed;
         public List<MapLayer> Layers = new List<MapLayer>();

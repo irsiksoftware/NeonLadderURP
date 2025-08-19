@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using NeonLadder.Gameplay;
@@ -10,6 +11,11 @@ namespace NeonLadder.ProceduralGeneration
 {
     public class SceneTransitionTrigger : MonoBehaviour
     {
+        [Header("Bidirectional Configuration")]
+        [SerializeField] private bool canSpawnHere = true;
+        [SerializeField] private bool canExitHere = true;
+        [SerializeField] private string spawnPointName;
+        
         [Header("Transition Configuration")]
         [SerializeField] private EventType transitionType = EventType.Portal;
         [SerializeField] private GameObject triggerColliderObject;
@@ -20,7 +26,7 @@ namespace NeonLadder.ProceduralGeneration
         [SerializeField] private KeyCode interactionKey = KeyCode.E;
         [SerializeField] private float activationDelay = 0f;
         
-        [Header("Destination")]
+        [Header("Destination Routing")]
         [SerializeField] private DestinationType destinationType = DestinationType.Procedural;
         [SerializeField] private string overrideSceneName;
         [SerializeField] private SpawnPointType spawnPointType = SpawnPointType.Auto;
@@ -28,6 +34,10 @@ namespace NeonLadder.ProceduralGeneration
         
         [Header("Direction")]
         [SerializeField] private TransitionDirection direction = TransitionDirection.Forward;
+        
+        [Header("Seed-Based Generation")]
+        [SerializeField] private bool useSeededGeneration = true;
+        [SerializeField] private string debugSeedOverride; // For testing specific seeds
         
         [Header("Restrictions")]
         [SerializeField] private bool oneWayOnly = false;
@@ -50,6 +60,12 @@ namespace NeonLadder.ProceduralGeneration
         public static event Action<SceneTransitionTrigger> OnTransitionStarted;
         public static event Action<SceneTransitionTrigger> OnTransitionCompleted;
         public static event Action<SceneTransitionTrigger, string> OnTransitionFailed;
+        
+        // Public properties for spawn point functionality
+        public Vector3 SpawnPosition => transform.position;
+        public TransitionDirection Direction => direction;
+        public bool CanSpawnHere => canSpawnHere;
+        public bool CanExitHere => canExitHere;
         
         private void Awake()
         {
@@ -81,7 +97,7 @@ namespace NeonLadder.ProceduralGeneration
         private void Start()
         {
             // Set up trigger detection on the assigned collider object
-            if (triggerColliderObject != null)
+            if (triggerColliderObject != null && canExitHere)
             {
                 // Add this script's trigger detection to the collider object if needed
                 var triggerDetector = triggerColliderObject.GetComponent<SceneTransitionTriggerDetector>();
@@ -90,6 +106,47 @@ namespace NeonLadder.ProceduralGeneration
                     triggerDetector = triggerColliderObject.AddComponent<SceneTransitionTriggerDetector>();
                 }
                 triggerDetector.Initialize(this);
+            }
+            
+            // Register as spawn point if enabled
+            if (canSpawnHere)
+            {
+                RegisterAsSpawnPoint();
+            }
+        }
+        
+        /// <summary>
+        /// Registers this transition trigger as a spawn point for bidirectional functionality
+        /// </summary>
+        private void RegisterAsSpawnPoint()
+        {
+            var spawnManager = SpawnPointManager.Instance;
+            if (spawnManager != null)
+            {
+                string spawnName = !string.IsNullOrEmpty(spawnPointName) ? spawnPointName : GetDefaultSpawnPointName();
+                spawnManager.RegisterSpawnPoint(spawnName, transform);
+                
+                Debug.Log($"[SceneTransitionTrigger] Registered as spawn point: {spawnName} (Direction: {direction})");
+            }
+        }
+        
+        /// <summary>
+        /// Gets the default spawn point name based on direction
+        /// </summary>
+        private string GetDefaultSpawnPointName()
+        {
+            switch (direction)
+            {
+                case TransitionDirection.Left:
+                    return "FromRight"; // Player exits left, spawns from right
+                case TransitionDirection.Right:
+                    return "FromLeft"; // Player exits right, spawns from left
+                case TransitionDirection.Up:
+                    return "FromDown";
+                case TransitionDirection.Down:
+                    return "FromUp";
+                default:
+                    return "Default";
             }
         }
         
@@ -200,16 +257,7 @@ namespace NeonLadder.ProceduralGeneration
                     return overrideSceneName;
                     
                 case DestinationType.Procedural:
-                    // Use SceneRouter to get next procedural scene
-                    if (SceneRouter.Instance != null)
-                    {
-                        var nextNode = GetNextProceduralNode();
-                        if (nextNode != null)
-                        {
-                            return SceneRouter.Instance.GetSceneNameFromMapNode(nextNode);
-                        }
-                    }
-                    break;
+                    return GetSeededDestination();
                     
                 case DestinationType.NextInPath:
                     // Get next scene from current path context
@@ -221,6 +269,107 @@ namespace NeonLadder.ProceduralGeneration
             }
             
             return null;
+        }
+        
+        /// <summary>
+        /// Gets destination scene using seed-based deterministic generation
+        /// </summary>
+        private string GetSeededDestination()
+        {
+            if (!useSeededGeneration)
+            {
+                Debug.LogWarning("Procedural routing requested but seeded generation is disabled!");
+                return null;
+            }
+            
+            // Get the current seed (menu selection or debug override)
+            string currentSeed = GetCurrentSeed();
+            
+            // Use seed to determine boss assignments
+            var bossAssignments = GetSeededBossAssignments(currentSeed);
+            
+            // Return the appropriate destination based on direction
+            return GetDestinationFromAssignments(bossAssignments);
+        }
+        
+        /// <summary>
+        /// Gets the current seed from GameController or debug override
+        /// </summary>
+        private string GetCurrentSeed()
+        {
+            // Debug override takes priority
+            if (!string.IsNullOrEmpty(debugSeedOverride))
+            {
+                return debugSeedOverride;
+            }
+            
+            // Get from main menu selection or GameController
+            if (Game.Instance != null && !string.IsNullOrEmpty(Game.Instance.ProceduralMap.Seed))
+            {
+                return Game.Instance.ProceduralMap.Seed;
+            }
+            
+            // Fallback to default seed
+            return "default_seed";
+        }
+        
+        /// <summary>
+        /// Uses seed to deterministically assign bosses to left/right exits
+        /// This is the foundation that will expand to handle enemy spawns, powerups, etc.
+        /// </summary>
+        private Dictionary<TransitionDirection, string> GetSeededBossAssignments(string seed)
+        {
+            // Create seeded random for deterministic results
+            var seededRandom = new System.Random(seed.GetHashCode());
+            
+            // Available boss arenas (will expand this list)
+            var availableBosses = new List<string>
+            {
+                "Banquet",    // Gluttony
+                "Cathedral",  // Pride  
+                "Necropolis", // Wrath
+                "Vault",      // Greed
+                "Garden",     // Lust
+                "Mirage",     // Envy
+                "Lounge"      // Sloth
+                // "Finale" - Devil (unlocked after other bosses)
+            };
+            
+            // Shuffle the list using the seeded random
+            for (int i = availableBosses.Count - 1; i > 0; i--)
+            {
+                int randomIndex = seededRandom.Next(i + 1);
+                string temp = availableBosses[i];
+                availableBosses[i] = availableBosses[randomIndex];
+                availableBosses[randomIndex] = temp;
+            }
+            
+            // Assign first two bosses to left/right paths
+            var assignments = new Dictionary<TransitionDirection, string>
+            {
+                [TransitionDirection.Left] = availableBosses[0],
+                [TransitionDirection.Right] = availableBosses[1]
+            };
+            
+            Debug.Log($"[SceneTransitionTrigger] Seed '{seed}' assigned: Left={assignments[TransitionDirection.Left]}, Right={assignments[TransitionDirection.Right]}");
+            
+            return assignments;
+        }
+        
+        /// <summary>
+        /// Gets the destination scene based on this trigger's direction and boss assignments
+        /// </summary>
+        private string GetDestinationFromAssignments(Dictionary<TransitionDirection, string> bossAssignments)
+        {
+            if (!bossAssignments.TryGetValue(direction, out string bossName))
+            {
+                Debug.LogWarning($"No boss assigned for direction {direction}!");
+                return null;
+            }
+            
+            // For now, go directly to Connection1 scenes
+            // Later this will be expanded with more complex path generation
+            return $"{bossName}_Connection1";
         }
         
         private MapNode GetNextProceduralNode()

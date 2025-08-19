@@ -30,7 +30,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
         
         // Generation
         private PathGenerator pathGenerator;
-        private MysticalMap currentMap;
+        private ProceduralMap currentMap;
         private string currentSeed = "";
         private GenerationRules currentRules;
         
@@ -741,7 +741,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
             return Guid.NewGuid().ToString().Substring(0, 8);
         }
         
-        private GenerationMetrics CalculateMetrics(MysticalMap map)
+        private GenerationMetrics CalculateMetrics(ProceduralMap map)
         {
             if (map == null) return null;
             

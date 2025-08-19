@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4F71A4DC-5659-3E35-E59E-AB49A3113F87}</ProjectGuid>
+    <ProjectGuid>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>DamageNumbersPro</AssemblyName>
@@ -61,9 +61,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Packages\DamageNumbersPro\Demo\Scripts\DNP_Target.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Demo\Scripts\DNP_SineFadeText.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Demo\Scripts\DNP_UIArea.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\CombinationSettings.cs" />
+    <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Utility\DamageNumberSprite.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\CollisionSettings.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\LerpSettings.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\ScaleByNumberSettings.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\ShakeSettings.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\DistanceScalingSettings.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Internal\Editor\DNPPresetEditor.cs" />
+    <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Utility\Editor\DamageNumberSpriteEditor.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Demo\Scripts\DNP_Player.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\VelocitySettings.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Settings\PushSettings.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Internal\DNPUpdater.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Internal\Editor\DNPEditorInternal.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Internal\Editor\DamageNumberEditor.cs" />
+    <Compile Include="Assets\Packages\DamageNumbersPro\Scripts\Internal\DNPType.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Demo\Scripts\DNP_DemoManager.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Demo\Scripts\DNP_Enemy.cs" />
     <Compile Include="Assets\Packages\DamageNumbersPro\Demo\Scripts\DNP_VillagerSpawner.cs" />
@@ -104,8 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Packages\DamageNumbersPro\Demo\Shaders\Darkness.shader" />
-    <None Include="Assets\Packages\DamageNumbersPro\DownloadInstructions.txt" />
     <None Include="Assets\Packages\DamageNumbersPro\Shaders\Sprite Overlay.shader" />
+    <None Include="Assets\Packages\DamageNumbersPro\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\DamageNumbersPro\Demo\Shaders\Target.shader" />
     <None Include="Assets\Packages\DamageNumbersPro\DamageNumbersPro.asmdef" />
   </ItemGroup>
   <ItemGroup>
@@ -577,8 +582,20 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HeroEditor.Common.Editor">
@@ -605,6 +622,10 @@
       <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="EasyRoads3Dv3Editor">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -619,6 +640,10 @@
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EasyRoads3Dv3">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.VersionHandlerImpl">
@@ -641,6 +666,10 @@
       <HintPath>Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DelaunayER">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
       <Private>False</Private>
@@ -651,6 +680,10 @@
     </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AssetStoreTools">
+      <HintPath>Assets\Packages\LeartesStudios\AssetStoreTools\Editor\AssetStoreTools.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -667,6 +700,14 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">

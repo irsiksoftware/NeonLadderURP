@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>NeonLadder.Tests.Runtime</RootNamespace>
-    <ProjectGuid>{E1583481-267E-624D-FEE9-41164DF07931}</ProjectGuid>
+    <ProjectGuid>{DFF72330-1879-B153-DC36-8A047CEF02B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>NeonLadder.Tests.Runtime</AssemblyName>
@@ -571,6 +571,14 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
       <Private>False</Private>
@@ -1094,19 +1102,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NeonLadder.Scripts.csproj">
-      <Project>{8C1333FE-EE30-ECE3-4825-F9C3A1A4C674}</Project>
+      <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
       <Name>NeonLadder.Scripts</Name>
     </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{82979875-7A34-37F1-0A40-AB73C17F3003}</Project>
+      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
       <Name>Michsky.MUIP</Name>
     </ProjectReference>
     <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{84967CA0-0A9C-86A7-15E8-0182DA83392B}</Project>
+      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
       <Name>PixelCrushers</Name>
     </ProjectReference>
     <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{0C752152-CAA4-0B1C-7BDD-4CF4EFB62981}</Project>
+      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
       <Name>DialogueSystem</Name>
     </ProjectReference>
   </ItemGroup>

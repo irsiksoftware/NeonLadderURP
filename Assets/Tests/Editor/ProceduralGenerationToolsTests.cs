@@ -290,7 +290,7 @@ namespace NeonLadder.Tests.Editor
             Assert.IsTrue(json.Contains("export-test"), "JSON should contain seed value");
             
             // Verify it can be deserialized
-            var deserializedMap = JsonUtility.FromJson<MysticalMap>(json);
+            var deserializedMap = JsonUtility.FromJson<ProceduralMap>(json);
             Assert.IsNotNull(deserializedMap, "Should be able to deserialize JSON");
         }
         

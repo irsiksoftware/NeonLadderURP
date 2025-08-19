@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{93652F0F-47E3-71BE-3477-BBBEA120FE67}</ProjectGuid>
+    <ProjectGuid>{606890D8-CA42-F5E4-6972-7C97ECF195C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -62,25 +62,95 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\PackageFeedback.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\PTNodeGraph.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Editor\NoiseStrings2D.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\TextureAverageColor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\GeneratorNodeEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\FromSavedNodeEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorResources.cs" />
     <Compile Include="Assets\Tests\Editor\ProceduralGenerationToolsTests.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Curves\AnimationCurveTexturePropertyDrawer.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenLiquidGUI.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\HeightmapNodeEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorReflection.cs" />
     <Compile Include="Assets\Packages\Modern UI Pack\Editor\Scripts\InitMUIP.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\IconCollectionEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorAction.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorGUI.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenCloudGUI.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\GradientEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\PreviewNodeEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\Drawers\NodeEnumDrawer.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\Script\Editor\ConvertTexturesToPNG.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorGUILayout.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Lightning\Editor\LightningRendererEditor.cs" />
     <Compile Include="Assets\Tests\Editor\DialogueSceneGeneratorTests.cs" />
+    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\UberFXShaderConverter.cs" />
+    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\HDRPMaterialSyncTool.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorUtilities.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Scripts\Editor\SavePrefabINfiniDy.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Scripts\Editor\WeatherScriptEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Editor\connectSuntoVolumeFogURPEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\SerializedPropertyExtensions.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Editor\NoiseCreator.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\AbondonedDistrict\Editor\MultiplyRotationXWithMinusOne.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\LayerManagerEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Editor\NoiseStrings3D.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Editor\SkyMasterInspector.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\unity-urp-vr-lens-flare\Editor\VRLensFlareEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\Utils.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\OperatorNodeEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapGenerator.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenMasterGUIBase.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\PropertyDrawerExtensions.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\MemberInfoExtensions.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\PlanetEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\Editor\TagsInfiniTREE.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\PackageUpdater.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorPreferences.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\SpriteCollectionEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\RectExtensions.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Gradients\GradientAssetEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Work in Progress\Editor\SplinePEditorINfiniDy.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorWindow.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\Spektr\Lightning\Editor\LightningMeshEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapImporter.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\Editor\SkyMasterURP_Prefab_Manager.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenExplosionGUI.cs" />
+    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\UberFXShaderConverterWindow.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenFireGUI.cs" />
     <Compile Include="Assets\Packages\Modern UI Pack\Editor\Scripts\ContextMenu.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Extensions\TypeExtensions.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorAssetModProcessor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\OldToNewHeightmap.cs" />
+    <Compile Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Editor\MaterialTransparencyFixerWindow.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\HeightmapToRaw.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\Editor\Gradients\GradientTexturePropertyDrawer.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.4 Scripts\Editor\CloudHandlerSM_SRPEditor.cs" />
     <Compile Include="Assets\Tests\Editor\Performance\PerformanceMenuItemsTests.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Water\Editor\CreatePlaneSM.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Editor\DetailDistancesCalc.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\FirearmCollectionEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\Editor\ShurikenMasterGUI.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeEditorBase.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.5\Scripts\Editor\ObjExporter.cs" />
     <Compile Include="Assets\Tests\Editor\PerformanceMenuTests.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Nodes\Editor\SavingNodeEditor.cs" />
+    <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\NodeGraphEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Packages\HeroEditor\Common\Scripts\Editor\HeroEditor.Common.Editor.dll" />
+    <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\Resources\ScriptTemplates\xNode_NodeGraphTemplate.cs.txt" />
     <None Include="Assets\MobileDependencyResolver\Editor\Google.IOSResolver.dll" />
+    <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll" />
+    <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\xNode\Editor\Resources\ScriptTemplates\xNode_NodeTemplate.cs.txt" />
     <None Include="Assets\MobileDependencyResolver\Editor\Google.VersionHandlerImpl.dll" />
     <None Include="Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll" />
     <None Include="Assets\MobileDependencyResolver\Editor\mobile-dependency-resolver.txt" />
     <None Include="Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll" />
+    <None Include="Assets\Packages\LeartesStudios\AssetStoreTools\Editor\AssetStoreTools.dll" />
+    <None Include="Assets\Packages\ARTnGAME\InfiniSPLAT\TilingRandomization\Editor\TextureTilingRandomization.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -559,8 +629,20 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HeroEditor.Common.Editor">
@@ -587,6 +669,10 @@
       <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="EasyRoads3Dv3Editor">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -601,6 +687,10 @@
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EasyRoads3Dv3">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.VersionHandlerImpl">
@@ -623,6 +713,10 @@
       <HintPath>Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DelaunayER">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
       <Private>False</Private>
@@ -633,6 +727,10 @@
     </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AssetStoreTools">
+      <HintPath>Assets\Packages\LeartesStudios\AssetStoreTools\Editor\AssetStoreTools.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -649,6 +747,14 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">
@@ -1546,55 +1652,59 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{454F8AED-E947-7B56-12EB-97AC11451EFE}</Project>
+      <Project>{03A4AE4C-33AF-BFE0-EC80-D07A4EBF912E}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{44EF02CE-B31D-12A9-3366-8F8832CA6210}</Project>
+      <Project>{8BE43F1D-5BCF-47F7-AF46-6E3184EFA571}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
     <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{0C752152-CAA4-0B1C-7BDD-4CF4EFB62981}</Project>
+      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
       <Name>DialogueSystem</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.csproj">
-      <Project>{197542A1-50CC-02B9-4499-7EE2CD9D0782}</Project>
+      <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
       <Name>NeonLadder.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Debug.Editor.csproj">
-      <Project>{677A9358-2C6A-D0DE-5A51-50C1E39D2859}</Project>
+      <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
       <Name>NeonLadder.Debug.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="DialogueSystemEditor.csproj">
-      <Project>{E5121AA8-A67B-AD8D-A133-1ADECB1C0A60}</Project>
+      <Project>{E8321E92-7314-26E0-8CFC-554106D8124B}</Project>
       <Name>DialogueSystemEditor</Name>
     </ProjectReference>
     <ProjectReference Include="DamageNumbersPro.csproj">
-      <Project>{4F71A4DC-5659-3E35-E59E-AB49A3113F87}</Project>
+      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
       <Name>DamageNumbersPro</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
-      <Project>{273033E9-C898-4B02-9E52-5EA08B23267B}</Project>
+      <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>
     </ProjectReference>
     <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{84967CA0-0A9C-86A7-15E8-0182DA83392B}</Project>
+      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
       <Name>PixelCrushers</Name>
     </ProjectReference>
     <ProjectReference Include="PixelCrushersEditor.csproj">
-      <Project>{BDA12ECD-76D3-B766-D002-C32665258969}</Project>
+      <Project>{47AB043D-11AA-52F6-6203-A5342F4ABD3B}</Project>
       <Name>PixelCrushersEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{82979875-7A34-37F1-0A40-AB73C17F3003}</Project>
+      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
       <Name>Michsky.MUIP</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Scripts.csproj">
-      <Project>{8C1333FE-EE30-ECE3-4825-F9C3A1A4C674}</Project>
+      <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
       <Name>NeonLadder.Scripts</Name>
     </ProjectReference>
+    <ProjectReference Include="TAA.Runtime.csproj">
+      <Project>{E9A8BA52-FE77-948F-C8AD-825193FE381C}</Project>
+      <Name>TAA.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="NeonLadder.Utilities.Editor.csproj">
-      <Project>{0F5D490F-0C67-05C6-02B3-146A47F83A8C}</Project>
+      <Project>{94789BE6-96C4-2051-FEEE-FA37176F865B}</Project>
       <Name>NeonLadder.Utilities.Editor</Name>
     </ProjectReference>
   </ItemGroup>

@@ -15,9 +15,12 @@ namespace NeonLadder.Mechanics.Controllers
     /// </summary> 
     public class Game : MonoBehaviour
     {
+        public ProceduralMap ProceduralMap { get; private set; }
         public static Game Instance { get; private set; }
 
         public PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+
+        
 
         void Awake()
         {
@@ -28,9 +31,11 @@ namespace NeonLadder.Mechanics.Controllers
             }
 
             Instance = this;
-            var pathGen = new PathGenerator();
-            var map = pathGen.GenerateMap();
-            Constants.Minimap = "Map generated successfully"; //temp simplified minimap
+            if (Instance.ProceduralMap == null)
+            {
+                Instance.ProceduralMap = new PathGenerator().GenerateMap();
+            }
+
             DontDestroyOnLoad(gameObject);
         }
 

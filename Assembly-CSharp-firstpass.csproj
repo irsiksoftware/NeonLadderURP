@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{454F8AED-E947-7B56-12EB-97AC11451EFE}</ProjectGuid>
+    <ProjectGuid>{03A4AE4C-33AF-BFE0-EC80-D07A4EBF912E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
@@ -557,8 +557,16 @@
       <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="EasyRoads3Dv3">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="HeroEditor.Common">
       <HintPath>Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\HeroEditor.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DelaunayER">
+      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DOTween">
@@ -579,6 +587,14 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1456,47 +1472,51 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{0C752152-CAA4-0B1C-7BDD-4CF4EFB62981}</Project>
+      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
       <Name>DialogueSystem</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.csproj">
-      <Project>{197542A1-50CC-02B9-4499-7EE2CD9D0782}</Project>
+      <Project>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</Project>
       <Name>NeonLadder.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Debug.Editor.csproj">
-      <Project>{677A9358-2C6A-D0DE-5A51-50C1E39D2859}</Project>
+      <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
       <Name>NeonLadder.Debug.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="DialogueSystemEditor.csproj">
-      <Project>{E5121AA8-A67B-AD8D-A133-1ADECB1C0A60}</Project>
+      <Project>{E8321E92-7314-26E0-8CFC-554106D8124B}</Project>
       <Name>DialogueSystemEditor</Name>
     </ProjectReference>
     <ProjectReference Include="DamageNumbersPro.csproj">
-      <Project>{4F71A4DC-5659-3E35-E59E-AB49A3113F87}</Project>
+      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
       <Name>DamageNumbersPro</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Editor.InputSystem.csproj">
-      <Project>{273033E9-C898-4B02-9E52-5EA08B23267B}</Project>
+      <Project>{34B5379A-7C17-A0CF-491A-090284354AED}</Project>
       <Name>NeonLadder.Editor.InputSystem</Name>
     </ProjectReference>
     <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{84967CA0-0A9C-86A7-15E8-0182DA83392B}</Project>
+      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
       <Name>PixelCrushers</Name>
     </ProjectReference>
     <ProjectReference Include="PixelCrushersEditor.csproj">
-      <Project>{BDA12ECD-76D3-B766-D002-C32665258969}</Project>
+      <Project>{47AB043D-11AA-52F6-6203-A5342F4ABD3B}</Project>
       <Name>PixelCrushersEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{82979875-7A34-37F1-0A40-AB73C17F3003}</Project>
+      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
       <Name>Michsky.MUIP</Name>
     </ProjectReference>
     <ProjectReference Include="NeonLadder.Scripts.csproj">
-      <Project>{8C1333FE-EE30-ECE3-4825-F9C3A1A4C674}</Project>
+      <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
       <Name>NeonLadder.Scripts</Name>
     </ProjectReference>
+    <ProjectReference Include="TAA.Runtime.csproj">
+      <Project>{E9A8BA52-FE77-948F-C8AD-825193FE381C}</Project>
+      <Name>TAA.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="NeonLadder.Utilities.Editor.csproj">
-      <Project>{0F5D490F-0C67-05C6-02B3-146A47F83A8C}</Project>
+      <Project>{94789BE6-96C4-2051-FEEE-FA37176F865B}</Project>
       <Name>NeonLadder.Utilities.Editor</Name>
     </ProjectReference>
   </ItemGroup>

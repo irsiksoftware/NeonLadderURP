@@ -19,7 +19,6 @@ namespace NeonLadder.Common
         public static List<string> DefeatedBosses { get; set; } = new List<string>();
         #endregion
 
-        public static string Minimap = string.Empty;
         public static string PlayerWeapon => nameof(PlayerWeapon);
 
         #region Resources

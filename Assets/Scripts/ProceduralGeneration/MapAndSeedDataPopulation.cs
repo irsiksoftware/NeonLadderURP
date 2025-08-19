@@ -1,4 +1,5 @@
 using NeonLadder.Common;
+using NeonLadder.Mechanics.Controllers;
 using TMPro;
 using UnityEngine;
 
@@ -16,14 +17,9 @@ public class MapAndSeedDataPopulation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!string.IsNullOrWhiteSpace(Constants.Seed) && seed.text != Constants.Seed)
+        if (!string.IsNullOrWhiteSpace(Game.Instance.ProceduralMap.Seed) && seed.text != Game.Instance.ProceduralMap.Seed)
         {
-            seed.text = Constants.Seed;
-        }
-
-        if (!string.IsNullOrWhiteSpace(Constants.Minimap) && map.text != Constants.Minimap)
-        {
-            map.text = Constants.Minimap;
+            seed.text = Game.Instance.ProceduralMap.Seed;
         }
     }
 }

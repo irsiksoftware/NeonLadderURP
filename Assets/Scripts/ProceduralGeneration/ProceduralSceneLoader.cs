@@ -53,7 +53,7 @@ namespace NeonLadder.ProceduralGeneration
         #region Private Fields
         
         private PathGenerator pathGenerator;
-        private MysticalMap currentMap;
+        private ProceduralMap currentMap;
         private GeneratedSceneData currentSceneData;
         private ConsolidatedSaveData currentSaveData;
         private bool isLoadingScene = false;
@@ -181,7 +181,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Generate a new procedural map with specific seed
         /// </summary>
-        public MysticalMap GenerateMap(string seed = null, GenerationRules rules = null)
+        public ProceduralMap GenerateMap(string seed = null, GenerationRules rules = null)
         {
             currentMap = pathGenerator.GenerateMapWithRules(seed, rules);
             
@@ -198,7 +198,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Get the current procedural map
         /// </summary>
-        public MysticalMap GetCurrentMap()
+        public ProceduralMap GetCurrentMap()
         {
             return currentMap;
         }
@@ -652,7 +652,7 @@ namespace NeonLadder.ProceduralGeneration
             }
         }
         
-        private void UpdateSaveDataWithMap(MysticalMap map)
+        private void UpdateSaveDataWithMap(ProceduralMap map)
         {
             if (currentSaveData == null || map == null) return;
             

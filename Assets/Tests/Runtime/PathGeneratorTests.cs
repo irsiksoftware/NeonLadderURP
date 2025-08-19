@@ -63,7 +63,7 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             var seeds = new[] { "Seed1", "Seed2", "Seed3", "DifferentSeed", "AnotherOne" };
-            var maps = new List<MysticalMap>();
+            var maps = new List<ProceduralMap>();
             
             // Act
             foreach (var seed in seeds)
