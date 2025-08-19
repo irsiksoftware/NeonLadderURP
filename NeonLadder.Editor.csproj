@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Editor\PackageManagementDynamic.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildSystemTester.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveSystemCommandCenter.cs" />
+    <Compile Include="Assets\Scripts\Editor\AddGeneratedScenesToBuild.cs" />
     <Compile Include="Assets\Scripts\Editor\PackageManagement.cs" />
   </ItemGroup>
   <ItemGroup>
