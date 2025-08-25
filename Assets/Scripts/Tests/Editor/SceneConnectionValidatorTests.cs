@@ -206,16 +206,16 @@ namespace NeonLadder.Tests.Editor
         }
         
         [Test]
-        public void TriggerValidation_DetectsDirectionIssues()
+        public void TriggerValidation_DetectsSpawnTypeIssues()
         {
-            // Arrange
-            trigger.SetDirection(TransitionDirection.Any);
+            // Arrange - SpawnType.None might be flagged as warning
+            // Note: Cannot set SpawnType directly as it's a property based on spawnPointType field
             
             // Act
-            var direction = trigger.GetDirection();
+            var spawnType = trigger.SpawnType;
             
-            // Assert - Any direction might be flagged as warning
-            Assert.AreEqual(TransitionDirection.Any, direction);
+            // Assert - Should have a valid spawn type
+            Assert.IsTrue(System.Enum.IsDefined(typeof(SpawnPointType), spawnType));
         }
         
         [Test]

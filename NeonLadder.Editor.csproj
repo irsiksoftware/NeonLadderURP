@@ -61,7 +61,9 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\SceneTransitionPrefabRootEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\ShaderFixUtility.cs" />
+    <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\SpawnTesterEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\UpgradeSystemEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Performance\PerformanceMenuItems.cs" />
     <Compile Include="Assets\Scripts\Editor\TestModeHelper.cs" />
@@ -73,11 +75,14 @@
     <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\SceneConnectionOverrideEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\SceneConnectionValidatorWindow.cs" />
+    <Compile Include="Assets\Scripts\Editor\SceneTransitionMenuItems.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveStateConfigurationEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\PackageManagementDynamic.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildSystemTester.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveSystemCommandCenter.cs" />
     <Compile Include="Assets\Scripts\Editor\AddGeneratedScenesToBuild.cs" />
+    <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\SpawnPointConfigurationEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\SpawnPointMonitorEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\PackageManagement.cs" />
   </ItemGroup>
   <ItemGroup>

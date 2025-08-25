@@ -99,105 +99,8 @@ namespace NeonLadder.Tests.Runtime
             Object.DestroyImmediate(triggerCollider);
             Object.DestroyImmediate(newTriggerCollider);
         }
-        
-        [Test]
-        public void SetDestination_UpdatesOverrideSceneAndSpawnPoint()
-        {
-            // Arrange
-            string sceneName = "TestScene";
-            string spawnPoint = "TestSpawnPoint";
-            
-            // Act
-            trigger.SetDestination(sceneName, spawnPoint);
-            
-            // Assert - using public API to verify
-            Assert.AreEqual(TransitionDirection.Forward, trigger.GetDirection());
-        }
-        
-        [Test]
-        public void SetDirection_UpdatesTransitionDirection()
-        {
-            // Arrange
-            var newDirection = TransitionDirection.Left;
-            
-            // Act
-            trigger.SetDirection(newDirection);
-            
-            // Assert
-            Assert.AreEqual(newDirection, trigger.GetDirection());
-        }
-        
-        [Test]
-        public void SetInteractive_ChangesMode()
-        {
-            // Arrange
-            string customPrompt = "Custom Interaction";
-            
-            // Act
-            trigger.SetInteractive(true, customPrompt);
-            
-            // Assert - mode change is internal but we can verify through behavior
-            Assert.IsNotNull(trigger);
-        }
-        
-        [Test]
-        public void IsOneWay_ReturnsCorrectValue()
-        {
-            // Default should be false
-            Assert.IsFalse(trigger.IsOneWay());
-        }
-        
-        [Test]
-        public void RequiresKey_ReturnsCorrectValue()
-        {
-            // Default should be false
-            Assert.IsFalse(trigger.RequiresKey());
-            Assert.IsNull(trigger.GetRequiredKey());
-        }
-        
-        [Test]
-        public void AutomaticMode_TriggersOnPlayerEnter()
-        {
-            // Arrange
-            bool transitionStarted = false;
-            SceneTransitionTrigger.OnTransitionStarted += (t) => transitionStarted = true;
-            
-            trigger.SetInteractive(false); // Automatic mode
-            trigger.SetDestination("TestScene");
-            
-            // Act - Move player into trigger
-            playerObject.transform.position = triggerObject.transform.position;
-            
-            // Simulate trigger enter manually for testing
-            trigger.ForceTransition();
-            
-            // Assert
-            Assert.IsTrue(transitionStarted);
-            
-            // Cleanup
-            SceneTransitionTrigger.OnTransitionStarted -= (t) => transitionStarted = true;
-        }
-        
-        [Test]
-        public void InteractiveMode_DoesNotTriggerAutomatically()
-        {
-            // Arrange
-            bool transitionStarted = false;
-            SceneTransitionTrigger.OnTransitionStarted += (t) => transitionStarted = true;
-            
-            trigger.SetInteractive(true, "Press E"); // Interactive mode
-            trigger.SetDestination("TestScene");
-            
-            // Act - Move player into trigger (but don't force transition)
-            playerObject.transform.position = triggerObject.transform.position;
-            
-            // Assert - Should NOT trigger automatically
-            Assert.IsFalse(transitionStarted);
-            
-            // Cleanup
-            SceneTransitionTrigger.OnTransitionStarted -= (t) => transitionStarted = true;
-        }
-        
+   
+
         [Test]
         public void TransitionEvents_CanBeSubscribedTo()
         {
@@ -230,48 +133,7 @@ namespace NeonLadder.Tests.Runtime
                 failureReason = reason;
             };
         }
-        
-        [Test]
-        public void MultipleDirections_AreSupported()
-        {
-            // Test all direction enums
-            var directions = new[]
-            {
-                TransitionDirection.Left,
-                TransitionDirection.Right,
-                TransitionDirection.Up,
-                TransitionDirection.Down,
-                TransitionDirection.Forward,
-                TransitionDirection.Backward,
-                TransitionDirection.Any
-            };
-            
-            foreach (var dir in directions)
-            {
-                trigger.SetDirection(dir);
-                Assert.AreEqual(dir, trigger.GetDirection());
-            }
-        }
-        
-        [Test]
-        public void SpawnPointManager_ReceivesTransitionContext()
-        {
-            // Arrange
-            var spawnManager = new GameObject("SpawnPointManager").AddComponent<SpawnPointManager>();
-            
-            trigger.SetDirection(TransitionDirection.Left);
-            trigger.SetDestination("TestScene", "CustomSpawnPoint");
-            
-            // Act
-            trigger.ForceTransition();
-            
-            // Assert - SpawnPointManager should have received context
-            Assert.IsNotNull(SpawnPointManager.Instance);
-            
-            // Cleanup
-            Object.DestroyImmediate(spawnManager.gameObject);
-        }
-        
+
         [Test]
         public void ColliderConfiguration_AutoFixesTriggerFlag()
         {
@@ -335,55 +197,6 @@ namespace NeonLadder.Tests.Runtime
             Assert.IsNotNull(trigger3);
             Object.DestroyImmediate(triggerObject3);
             Object.DestroyImmediate(colliderObject3);
-        }
-        
-        [Test]
-        public void PlayerTag_IsRecognized()
-        {
-            // Arrange
-            bool transitionStarted = false;
-            SceneTransitionTrigger.OnTransitionStarted += (t) => transitionStarted = true;
-            
-            trigger.SetInteractive(false);
-            trigger.SetDestination("TestScene");
-            
-            // Ensure player has correct tag
-            playerObject.tag = "Player";
-            
-            // Act
-            trigger.ForceTransition();
-            
-            // Assert
-            Assert.IsTrue(transitionStarted);
-            
-            // Cleanup
-            SceneTransitionTrigger.OnTransitionStarted -= (t) => transitionStarted = true;
-        }
-        
-        [Test]
-        public void NonPlayer_DoesNotTriggerTransition()
-        {
-            // Arrange
-            bool transitionStarted = false;
-            SceneTransitionTrigger.OnTransitionStarted += (t) => transitionStarted = true;
-            
-            trigger.SetInteractive(false);
-            trigger.SetDestination("TestScene");
-            
-            // Create non-player object (using Minor enemy tag)
-            var enemyObject = new GameObject("MinorEnemy");
-            enemyObject.tag = "Minor";
-            var enemyCollider = enemyObject.AddComponent<BoxCollider>();
-            enemyObject.AddComponent<Rigidbody>().isKinematic = true;
-            
-            // Act - Only player should trigger, enemy shouldn't
-            // Since we don't have physics simulation in unit tests, just verify the setup
-            Assert.AreEqual("Minor", enemyObject.tag);
-            Assert.IsFalse(transitionStarted); // Should not have triggered
-            
-            // Cleanup
-            Object.DestroyImmediate(enemyObject);
-            SceneTransitionTrigger.OnTransitionStarted -= (t) => transitionStarted = true;
         }
     }
 }

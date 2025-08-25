@@ -8,6 +8,7 @@ namespace NeonLadder.Mechanics.Enums
         GetHit,
         Die,
         Victory,
+        Excited,
         WalkBackward,
         Run,
         Jump

@@ -1,5 +1,6 @@
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.ProceduralGeneration;
 using System;
 using TMPro;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class AutoScrollText : MonoBehaviour
     private Image targetGraphicImage;
     private Image handleImage;
     private string text;
-    public float scrollSpeed = 20f;
+    public float scrollSpeed = 100f;
     private bool isScrolling = true;
     public float bufferHeightMultiplier = 0.15f;
     public float lineBreakHeightMultiplier = 10f;
@@ -32,7 +33,7 @@ public class AutoScrollText : MonoBehaviour
     void Awake()
     {
         #if UNITY_EDITOR
-        scrollSpeed = 500f;
+        scrollSpeed = 200f;
         #endif
 
         scrollRect = GetComponent<ScrollRect>();
@@ -51,17 +52,7 @@ public class AutoScrollText : MonoBehaviour
         text = textMeshPro.text;
         bufferHeight = (text.Split('\n').Length - 1) * lineBreakHeightMultiplier + text.Length * bufferHeightMultiplier;
 
-        SceneManager.activeSceneChanged += OnSceneChange;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.activeSceneChanged -= OnSceneChange;
-    }
-
-    private void OnSceneChange(Scene arg0, Scene arg1)
-    {
-        Schedule<PlayerSpawn>(10);
+        // Scene change handling is now done by SceneTransitionManager
     }
 
     void Start()
@@ -90,7 +81,17 @@ public class AutoScrollText : MonoBehaviour
 
     private void OnScrollFinished()
     {
-        SceneManager.LoadScene(targetScene.ToString());
+        // Use SceneTransitionManager for proper spawn handling
+        if (SceneTransitionManager.Instance != null)
+        {
+            Debug.Log($"[AutoScrollText] Using SceneTransitionManager to transition to: {targetScene}");
+            SceneTransitionManager.Instance.TransitionToScene(targetScene.ToString());
+        }
+        else
+        {
+            Debug.LogWarning($"[AutoScrollText] SceneTransitionManager not found, falling back to direct load of: {targetScene}");
+            SceneManager.LoadScene(targetScene.ToString());
+        }
     }
 
     private void SetTextMeshProWidth()

@@ -45,6 +45,7 @@ namespace NeonLadder.Mechanics.Controllers
         public virtual float DeathAnimationDuration { get; set; }
         public virtual float AttackAnimationDuration { get; set; }
         public virtual float VictoryAnimationDuration { get; set; }
+        public virtual float ExcitedAnimationDuration { get; set; }
         public virtual float IdleAnimationDuration { get; set; }
         public virtual float GetHitAnimationDuration { get; set; }
 
@@ -156,6 +157,7 @@ namespace NeonLadder.Mechanics.Controllers
             DeathAnimationDuration = GetAnimationClipLength(Animations.Die);
             VictoryAnimationDuration = GetAnimationClipLength(Animations.Victory);
             IdleAnimationDuration = GetAnimationClipLength(Animations.Idle);
+            ExcitedAnimationDuration = GetAnimationClipLength(Animations.Excited);
             GetHitAnimationDuration = GetAnimationClipLength(Animations.GetHit);
         }
 

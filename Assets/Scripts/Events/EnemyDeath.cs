@@ -1,3 +1,4 @@
+using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace NeonLadder.Events
             if (achievement.HasValue)
             {
                 NeonLadder.Managers.SteamManager.Instance.UnlockAchievement(achievement.Value.ToString());
+                Simulation.Schedule<PlayerDefeatedBossEvent>(1f);
             }
         }
     }

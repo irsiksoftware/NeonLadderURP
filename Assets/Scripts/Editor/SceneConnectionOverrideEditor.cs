@@ -399,11 +399,6 @@ namespace NeonLadder.Editor
                     {
                         override_.ApplyOverride();
                     }
-                    
-                    if (GUILayout.Button("Restore Original"))
-                    {
-                        override_.RestoreOriginalDestination();
-                    }
                 }
                 
                 EditorGUILayout.Space();

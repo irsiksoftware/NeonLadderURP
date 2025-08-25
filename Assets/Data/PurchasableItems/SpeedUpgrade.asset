@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdef123456789abcadef789ef8904bc, type: 3}
+  m_Name: SpeedUpgrade
+  m_EditorClassIdentifier: 
+  itemId: speed_upgrade
+  itemName: Speed Enhancement
+  description: Permanently increases movement speed by 15%
+  flavorText: '"Gotta go fast! But not too fast, I still want to see the scenery."
+    - Wade Wilson'
+  icon: {fileID: 0}
+  shopIcon: {fileID: 0}
+  currencyType: 1
+  baseCost: 125
+  canPurchaseMultiple: 1
+  maxPurchases: 5
+  itemType: 2
+  effects:
+  - effectType: 3
+    value: 15
+    targetProperty: speed
+    isPermanent: 1
+    duration: 0
+  requiredUnlocks: []
+  isAvailableInMetaShop: 1
+  isAvailableInPermaShop: 1
+  purchaseVFX: {fileID: 0}
+  purchaseSound: {fileID: 0}
+  rarityColor: {r: 0, g: 1, b: 0, a: 1}

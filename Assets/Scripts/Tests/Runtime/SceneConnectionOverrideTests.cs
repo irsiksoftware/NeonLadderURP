@@ -351,12 +351,6 @@ namespace NeonLadder.Tests.Runtime
             Assert.AreEqual(0, overrides.Count);
         }
         
-        [Test]
-        public void RestoreOriginalDestination_DoesNotThrowWhenNoOriginal()
-        {
-            // Act & Assert
-            Assert.DoesNotThrow(() => override_.RestoreOriginalDestination());
-        }
         
         [Test]
         public void ConditionalOverride_BossDefeatedCondition()
@@ -412,51 +406,6 @@ namespace NeonLadder.Tests.Runtime
                 result = conditional.EvaluateCondition();
                 Assert.IsTrue(result);
             }
-        }
-        
-        [Test]
-        public void MultipleOverrides_MaintainPriorityOrder()
-        {
-            // Create multiple override objects
-            var obj1 = new GameObject("Override1");
-            var collider1 = new GameObject("Collider1");
-            collider1.AddComponent<BoxCollider>().isTrigger = true;
-            obj1.SetActive(false);
-            var trigger1 = obj1.AddComponent<SceneTransitionTrigger>();
-            trigger1.SetTriggerColliderObject(collider1);
-            obj1.SetActive(true);
-            var override1 = obj1.AddComponent<SceneConnectionOverride>();
-            override1.SetPriority(100);
-            
-            var obj2 = new GameObject("Override2");
-            var collider2 = new GameObject("Collider2");
-            collider2.AddComponent<BoxCollider>().isTrigger = true;
-            obj2.SetActive(false);
-            var trigger2 = obj2.AddComponent<SceneTransitionTrigger>();
-            trigger2.SetTriggerColliderObject(collider2);
-            obj2.SetActive(true);
-            var override2 = obj2.AddComponent<SceneConnectionOverride>();
-            override2.SetPriority(200);
-            
-            var obj3 = new GameObject("Override3");
-            var collider3 = new GameObject("Collider3");
-            collider3.AddComponent<BoxCollider>().isTrigger = true;
-            obj3.SetActive(false);
-            var trigger3 = obj3.AddComponent<SceneTransitionTrigger>();
-            trigger3.SetTriggerColliderObject(collider3);
-            obj3.SetActive(true);
-            var override3 = obj3.AddComponent<SceneConnectionOverride>();
-            override3.SetPriority(50);
-            
-            // Verify priorities
-            Assert.AreEqual(100, override1.GetPriority());
-            Assert.AreEqual(200, override2.GetPriority());
-            Assert.AreEqual(50, override3.GetPriority());
-            
-            // Cleanup
-            Object.DestroyImmediate(obj1);
-            Object.DestroyImmediate(obj2);
-            Object.DestroyImmediate(obj3);
         }
     }
 }

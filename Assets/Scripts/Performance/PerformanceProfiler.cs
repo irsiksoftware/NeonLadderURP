@@ -34,8 +34,8 @@ public class PerformanceProfiler : MonoBehaviour
     public int frameRateWarningThreshold = 30;
     
     [Tooltip("Log memory warnings when allocation exceeds threshold (MB)")]
-    [Range(50, 1000)]
-    public int memoryWarningThresholdMB = 200;
+    [Range(50, 5000)]
+    public int memoryWarningThresholdMB = 3500;
     
     [Tooltip("Performance sampling interval (seconds)")]
     [Range(0.5f, 10f)]
