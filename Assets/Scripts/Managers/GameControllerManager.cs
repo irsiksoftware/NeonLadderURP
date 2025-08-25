@@ -126,8 +126,8 @@ namespace NeonLadder.Managers
             case Scenes.Credits:
                 break;
             default:
-                playerActions.enabled = true;
-                gameController.gameObject.SetActive(true);
+                //playerActions.enabled = true;
+                //gameController.gameObject.SetActive(true);
                 break;
         }
         

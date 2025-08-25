@@ -22,14 +22,11 @@ public class ManagerController : MonoBehaviour
         public event Action<Scenes, Scenes> OnSceneChangeDetected;
         public EnemyDefeatedManager enemyDefeatedManager;
         public DialogueManager dialogueManager;
-        public SceneExitAssignmentManager sceneExitAssignmentManager;
         public LootDropManager lootDropManager;
         public LootPurchaseManager lootPurchaseManager;
         public MonsterGroupActivationManager monsterGroupActivationManager;
         public PlayerCameraPositionManager playerCameraPositionManager;
         public GameControllerManager gameControllerManager;
-        public SceneCycleManager sceneCycleManager;
-        public SceneChangeManager sceneChangeManager;
         public EventManager eventManager;
         // public SteamManager steamManager;
 
@@ -106,17 +103,14 @@ public class ManagerController : MonoBehaviour
         private void InitializeChildComponents()
         {
             enemyDefeatedManager = GetComponentInChildren<EnemyDefeatedManager>();
-            sceneExitAssignmentManager = GetComponentInChildren<SceneExitAssignmentManager>();
             lootDropManager = GetComponentInChildren<LootDropManager>();
             lootPurchaseManager = GetComponentInChildren<LootPurchaseManager>();
             playerCameraPositionManager = GetComponentInChildren<PlayerCameraPositionManager>();
             gameControllerManager = GetComponentInChildren<GameControllerManager>();
-            sceneChangeManager = GetComponentInChildren<SceneChangeManager>();
             dialogueManager = GetComponentInChildren<DialogueManager>();
             eventManager = GetComponentInChildren<EventManager>();
             monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
             //steamManager = GetComponentInChildren<SteamManager>();
-            sceneCycleManager = GetComponentInChildren<SceneCycleManager>();
         }
 
         public void ToggleManagers()

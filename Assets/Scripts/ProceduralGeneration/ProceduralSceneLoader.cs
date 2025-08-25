@@ -42,6 +42,7 @@ namespace NeonLadder.ProceduralGeneration
         
         [Header("Scene Loading Configuration")]
         [SerializeField] private float sceneTransitionDelay = 0.5f;
+        [SerializeField] private float minimumLoadingTime = 2.0f;
         [SerializeField] private bool useAsyncLoading = true;
         [SerializeField] private bool maintainProceduralState = true;
         
@@ -53,7 +54,7 @@ namespace NeonLadder.ProceduralGeneration
         #region Private Fields
         
         private PathGenerator pathGenerator;
-        private MysticalMap currentMap;
+        private ProceduralMap currentMap;
         private GeneratedSceneData currentSceneData;
         private ConsolidatedSaveData currentSaveData;
         private bool isLoadingScene = false;
@@ -181,7 +182,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Generate a new procedural map with specific seed
         /// </summary>
-        public MysticalMap GenerateMap(string seed = null, GenerationRules rules = null)
+        public ProceduralMap GenerateMap(string seed = null, GenerationRules rules = null)
         {
             currentMap = pathGenerator.GenerateMapWithRules(seed, rules);
             
@@ -198,7 +199,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Get the current procedural map
         /// </summary>
-        public MysticalMap GetCurrentMap()
+        public ProceduralMap GetCurrentMap()
         {
             return currentMap;
         }
@@ -263,6 +264,8 @@ namespace NeonLadder.ProceduralGeneration
         
         private IEnumerator LoadSceneAsync(string sceneName, GeneratedSceneData sceneData)
         {
+            float loadingStartTime = Time.realtimeSinceStartup;
+            
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
             asyncLoad.allowSceneActivation = false;
             
@@ -270,6 +273,14 @@ namespace NeonLadder.ProceduralGeneration
             while (asyncLoad.progress < 0.9f)
             {
                 yield return null;
+            }
+            
+            // Ensure minimum loading time has passed
+            float elapsedTime = Time.realtimeSinceStartup - loadingStartTime;
+            if (elapsedTime < minimumLoadingTime)
+            {
+                LogDebug($"Scene loaded quickly ({elapsedTime:F1}s), waiting additional {minimumLoadingTime - elapsedTime:F1}s for minimum loading time");
+                yield return new WaitForSeconds(minimumLoadingTime - elapsedTime);
             }
             
             // Apply scene data before activation
@@ -652,7 +663,7 @@ namespace NeonLadder.ProceduralGeneration
             }
         }
         
-        private void UpdateSaveDataWithMap(MysticalMap map)
+        private void UpdateSaveDataWithMap(ProceduralMap map)
         {
             if (currentSaveData == null || map == null) return;
             
@@ -681,7 +692,12 @@ namespace NeonLadder.ProceduralGeneration
             // Apply any pending scene data
             if (currentSceneData != null && currentSceneData.sceneName == scene.name)
             {
+                LogDebug($"ProceduralSceneLoader applying scene data for: {scene.name}");
                 ApplySceneData(currentSceneData);
+            }
+            else
+            {
+                LogDebug($"ProceduralSceneLoader: No pending scene data for {scene.name} (currentSceneData: {(currentSceneData?.sceneName ?? "null")})");
             }
         }
         

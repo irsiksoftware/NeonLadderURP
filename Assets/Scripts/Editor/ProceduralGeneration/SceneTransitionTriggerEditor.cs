@@ -10,21 +10,12 @@ namespace NeonLadder.Editor.ProceduralGeneration
     {
         private SerializedProperty transitionType;
         private SerializedProperty triggerColliderObject;
-        private SerializedProperty mode;
-        private SerializedProperty interactionPrompt;
-        private SerializedProperty interactionKey;
-        private SerializedProperty activationDelay;
         private SerializedProperty destinationType;
         private SerializedProperty overrideSceneName;
         private SerializedProperty spawnPointType;
         private SerializedProperty customSpawnPointName;
-        private SerializedProperty direction;
         private SerializedProperty oneWayOnly;
-        private SerializedProperty requiresKey;
-        private SerializedProperty requiredKeyId;
-        private SerializedProperty showPromptUI;
-        private SerializedProperty promptOffset;
-        private SerializedProperty gizmoColor;
+        
         
         private GUIStyle headerStyle;
         private GUIStyle warningStyle;
@@ -34,26 +25,22 @@ namespace NeonLadder.Editor.ProceduralGeneration
         {
             transitionType = serializedObject.FindProperty("transitionType");
             triggerColliderObject = serializedObject.FindProperty("triggerColliderObject");
-            mode = serializedObject.FindProperty("mode");
-            interactionPrompt = serializedObject.FindProperty("interactionPrompt");
-            interactionKey = serializedObject.FindProperty("interactionKey");
-            activationDelay = serializedObject.FindProperty("activationDelay");
             destinationType = serializedObject.FindProperty("destinationType");
             overrideSceneName = serializedObject.FindProperty("overrideSceneName");
             spawnPointType = serializedObject.FindProperty("spawnPointType");
             customSpawnPointName = serializedObject.FindProperty("customSpawnPointName");
-            direction = serializedObject.FindProperty("direction");
             oneWayOnly = serializedObject.FindProperty("oneWayOnly");
-            requiresKey = serializedObject.FindProperty("requiresKey");
-            requiredKeyId = serializedObject.FindProperty("requiredKeyId");
-            showPromptUI = serializedObject.FindProperty("showPromptUI");
-            promptOffset = serializedObject.FindProperty("promptOffset");
-            gizmoColor = serializedObject.FindProperty("gizmoColor");
         }
         
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+            
+            // Show the clickable Script field first
+            using (new EditorGUI.DisabledScope(true))
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
+            }
             
             InitializeStyles();
             
@@ -95,36 +82,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
             
             EditorGUILayout.Space(5);
             
-            // Transition Settings
-            EditorGUILayout.BeginVertical("box");
-            EditorGUILayout.LabelField("Transition Settings", EditorStyles.boldLabel);
-            EditorGUILayout.Space(3);
-            
-            EditorGUILayout.PropertyField(mode);
-            if (mode.enumValueIndex == 1) // Interactive mode
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(interactionPrompt);
-                EditorGUILayout.PropertyField(interactionKey);
-                EditorGUI.indentLevel--;
-            }
-            else // Automatic mode
-            {
-                if (activationDelay.floatValue > 0)
-                {
-                    EditorGUI.indentLevel++;
-                    EditorGUILayout.PropertyField(activationDelay);
-                    EditorGUI.indentLevel--;
-                }
-                else
-                {
-                    EditorGUILayout.PropertyField(activationDelay);
-                }
-            }
-            
-            EditorGUILayout.EndVertical();
-            
-            EditorGUILayout.Space(5);
+            // Transition Settings section removed - using automatic mode only
             
             // Destination Settings
             EditorGUILayout.BeginVertical("box");
@@ -133,7 +91,7 @@ namespace NeonLadder.Editor.ProceduralGeneration
             
             EditorGUILayout.PropertyField(destinationType);
             
-            if (destinationType.enumValueIndex == 1) // Manual
+            if (destinationType.enumValueIndex == 2) // Manual
             {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(overrideSceneName, new GUIContent("Scene Name"));
@@ -141,15 +99,21 @@ namespace NeonLadder.Editor.ProceduralGeneration
             }
             
             // Spawn Point Configuration
-            EditorGUILayout.PropertyField(spawnPointType, new GUIContent("Spawn Point", "Which spawn point to use in destination scene"));
-            if (spawnPointType.enumValueIndex == 5) // Custom
+            EditorGUILayout.Space(3);
+            EditorGUILayout.LabelField("Spawn Settings for Next Scene", EditorStyles.miniBoldLabel);
+            EditorGUILayout.PropertyField(spawnPointType, new GUIContent("Player Should Spawn At", "Which type of spawn point should the player appear at in the destination scene"));
+            if ((SpawnPointType)spawnPointType.enumValueIndex == SpawnPointType.Custom)
             {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(customSpawnPointName, new GUIContent("Custom Spawn Point Name"));
                 EditorGUI.indentLevel--;
             }
             
-            EditorGUILayout.PropertyField(direction);
+            // Add helpful context
+            if (spawnPointType.enumValueIndex == (int)SpawnPointType.Auto)
+            {
+                EditorGUILayout.HelpBox("Auto mode: System will choose first available spawn point", MessageType.Info);
+            }
             
             EditorGUILayout.EndVertical();
             
@@ -161,33 +125,12 @@ namespace NeonLadder.Editor.ProceduralGeneration
             EditorGUILayout.Space(3);
             
             EditorGUILayout.PropertyField(oneWayOnly);
-            EditorGUILayout.PropertyField(requiresKey);
-            if (requiresKey.boolValue)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(requiredKeyId, new GUIContent("Required Key ID"));
-                EditorGUI.indentLevel--;
-            }
             
             EditorGUILayout.EndVertical();
             
             EditorGUILayout.Space(5);
             
-            // Visual Feedback
-            EditorGUILayout.BeginVertical("box");
-            EditorGUILayout.LabelField("Visual Feedback", EditorStyles.boldLabel);
-            EditorGUILayout.Space(3);
-            
-            EditorGUILayout.PropertyField(showPromptUI);
-            if (showPromptUI.boolValue)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(promptOffset);
-                EditorGUI.indentLevel--;
-            }
-            EditorGUILayout.PropertyField(gizmoColor);
-            
-            EditorGUILayout.EndVertical();
+            // Visual Feedback section removed - using default gizmo only
             
             EditorGUILayout.Space(10);
             
@@ -236,17 +179,13 @@ namespace NeonLadder.Editor.ProceduralGeneration
             }
             
             // Check for manual destination without scene name
-            if (destinationType.enumValueIndex == 1 && string.IsNullOrEmpty(overrideSceneName.stringValue))
+            if (destinationType.enumValueIndex == 2 && string.IsNullOrEmpty(overrideSceneName.stringValue))
             {
                 EditorGUILayout.HelpBox("Manual destination type selected but no scene name specified!", MessageType.Error);
                 hasErrors = true;
             }
             
-            // Check for key requirement without key ID
-            if (requiresKey.boolValue && string.IsNullOrEmpty(requiredKeyId.stringValue))
-            {
-                EditorGUILayout.HelpBox("Requires key is checked but no key ID specified!", MessageType.Warning);
-            }
+            // Key requirement validation removed
             
             if (!hasErrors && triggerColliderObject.objectReferenceValue != null)
             {
@@ -293,6 +232,76 @@ namespace NeonLadder.Editor.ProceduralGeneration
             EditorUtility.SetDirty(trigger);
             
             Debug.Log($"Created trigger collider object: {triggerObj.name}");
+        }
+
+        /// <summary>
+        /// Generate smart name based on destination type
+        /// </summary>
+        private string GetSmartNameForDestinationType(SceneTransitionTrigger trigger, string currentName)
+        {
+            // Smart naming logic - enum: None=0, Procedural=1, Manual=2
+            switch (destinationType.enumValueIndex)
+            {
+                case 0: // None
+                    // No scene transition - this is just an entry point
+                    Debug.Log($"[SceneTransitionTriggerEditor] Renaming to SceneEntry (None type)");
+                    return GetUniqueSceneName("SceneEntry", currentName);
+                    
+                case 1: // Procedural
+                case 2: // Manual
+                    // Has scene transition - this is both entry and exit
+                    Debug.Log($"[SceneTransitionTriggerEditor] Renaming to SceneEntryExit ({(destinationType.enumValueIndex == 1 ? "Procedural" : "Manual")} type)");
+                    return GetUniqueSceneName("SceneEntryExit", currentName);
+                    
+                default:
+                    Debug.LogWarning($"[SceneTransitionTriggerEditor] Unknown destination type index: {destinationType.enumValueIndex}");
+                    return currentName;
+            }
+        }
+
+        /// <summary>
+        /// Generate unique scene name with numbering if necessary
+        /// </summary>
+        private string GetUniqueSceneName(string baseName, string currentName)
+        {
+            // Check if current name exactly matches the target pattern (not just starts with)
+            if (currentName.Equals(baseName) || currentName.StartsWith(baseName + " ("))
+            {
+                return currentName;
+            }
+
+            // Find existing objects with same base name
+            var existingObjects = FindObjectsOfType<SceneTransitionTrigger>();
+            var existingNames = new System.Collections.Generic.HashSet<string>();
+            
+            foreach (var obj in existingObjects)
+            {
+                // Check both the trigger object name and its root parent name
+                GameObject rootObj = obj.GetComponentInParent<SceneTransitionPrefabRoot>()?.gameObject ?? obj.gameObject;
+                if (rootObj.name.StartsWith(baseName))
+                {
+                    existingNames.Add(rootObj.name);
+                }
+            }
+
+            // Try base name first
+            if (!existingNames.Contains(baseName))
+            {
+                return baseName;
+            }
+
+            // Add numbering if base name is taken
+            for (int i = 1; i <= 99; i++)
+            {
+                string numberedName = $"{baseName} ({i})";
+                if (!existingNames.Contains(numberedName))
+                {
+                    return numberedName;
+                }
+            }
+
+            // Fallback - should never happen
+            return $"{baseName} ({System.DateTime.Now.Ticks})";
         }
         
         private void InitializeStyles()

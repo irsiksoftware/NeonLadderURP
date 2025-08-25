@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using NeonLadderURP.DataManagement;
 using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
+using NeonLadder.Core;
+using NeonLadder.Events;
 
 namespace NeonLadder.ProceduralGeneration
 {
@@ -42,14 +45,18 @@ namespace NeonLadder.ProceduralGeneration
         #region Configuration
         
         [Header("Transition Settings")]
+        [SerializeField] private bool enableFadeOut = true;
         [SerializeField] private float fadeInDuration = 0.5f;
         [SerializeField] private float fadeOutDuration = 0.5f;
+        [Tooltip("Minimum time the screen stays the fade color between fade out and fade in")]
+        [SerializeField] private float minimumFadeDuration = 0.5f;
         [SerializeField] private Color fadeColor = Color.black;
         [SerializeField] private AnimationCurve fadeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         
         [Header("Loading Screen")]
         [SerializeField] private bool useLoadingScreen = true;
-        [SerializeField] private float minimumLoadingTime = 1f;
+        [Tooltip("Minimum time for actual loading operations")]
+        [SerializeField] private float minimumLoadDuration = 1f;
         [SerializeField] private GameObject loadingScreenPrefab;
         
         [Header("State Preservation")]
@@ -67,10 +74,15 @@ namespace NeonLadder.ProceduralGeneration
         private Image fadeImage;
         private GameObject loadingScreen;
         private bool isTransitioning = false;
+        private bool isHandlingSpawn = false;
         private TransitionData currentTransition;
         
         // Player state preservation
         private PlayerStateSnapshot playerSnapshot;
+        
+        // Spawn point management
+        private SpawnPointType pendingSpawnType = SpawnPointType.Auto;
+        private string pendingCustomSpawnName = "";
         
         #endregion
         
@@ -156,6 +168,32 @@ namespace NeonLadder.ProceduralGeneration
         #endregion
         
         #region Public API
+        
+        /// <summary>
+        /// Set spawn context for the next scene transition
+        /// </summary>
+        public void SetSpawnContext(SpawnPointType spawnType = SpawnPointType.Auto, string customSpawnName = "")
+        {
+            pendingSpawnType = spawnType;
+            pendingCustomSpawnName = customSpawnName;
+            
+            LogDebug($"Spawn context set: type={spawnType}, custom='{customSpawnName}'");
+        }
+        
+        /// <summary>
+        /// Transition to a scene with spawn context
+        /// </summary>
+        public void TransitionToScene(string sceneName, SpawnPointType spawnType = SpawnPointType.Auto, string customSpawnName = "")
+        {
+            if (isTransitioning)
+            {
+                LogDebug("Transition already in progress");
+                return;
+            }
+            
+            SetSpawnContext(spawnType, customSpawnName);
+            TransitionToScene(sceneName);
+        }
         
         /// <summary>
         /// Transition to a procedurally generated scene
@@ -248,11 +286,14 @@ namespace NeonLadder.ProceduralGeneration
                 PerformAutoSave();
             }
             
-            // Fade out
-            yield return StartCoroutine(FadeOut());
+            // Fade out (if enabled)
+            if (enableFadeOut)
+            {
+                yield return StartCoroutine(FadeOut());
+            }
             
-            // Show loading screen
-            if (useLoadingScreen)
+            // Show loading screen (if fade enabled)
+            if (useLoadingScreen && enableFadeOut)
             {
                 ShowLoadingScreen();
             }
@@ -266,18 +307,28 @@ namespace NeonLadder.ProceduralGeneration
                 transition.PathType
             );
             
-            // Wait for minimum loading time
-            float elapsedTime = Time.time - loadStartTime;
-            if (elapsedTime < minimumLoadingTime)
-            {
-                yield return new WaitForSeconds(minimumLoadingTime - elapsedTime);
-            }
-            
             // Wait for scene to actually load
             yield return new WaitUntil(() => !ProceduralSceneLoader.Instance.IsLoading());
             
-            // Hide loading screen
-            if (useLoadingScreen)
+            // Handle player spawning while screen is still black
+            yield return new WaitForSeconds(0.1f); // Small delay to ensure scene is ready
+            HandlePlayerSpawning();
+            
+            // Wait a moment for spawning to complete
+            yield return new WaitForSeconds(0.1f);
+            
+            // Wait for minimum fade duration (time screen stays black) - only if fade enabled
+            if (enableFadeOut)
+            {
+                float elapsedTime = Time.time - loadStartTime;
+                if (elapsedTime < minimumFadeDuration)
+                {
+                    yield return new WaitForSeconds(minimumFadeDuration - elapsedTime);
+                }
+            }
+            
+            // Hide loading screen (if fade enabled)
+            if (useLoadingScreen && enableFadeOut)
             {
                 HideLoadingScreen();
             }
@@ -285,12 +336,15 @@ namespace NeonLadder.ProceduralGeneration
             // Restore player state
             if (preservePlayerState)
             {
-                yield return new WaitForSeconds(0.1f); // Small delay to ensure scene is ready
                 RestorePlayerState();
             }
             
             // Fade in
-            yield return StartCoroutine(FadeIn());
+            // Fade in (if enabled)
+            if (enableFadeOut)
+            {
+                yield return StartCoroutine(FadeIn());
+            }
             
             transition.EndTime = Time.time;
             OnTransitionCompleted?.Invoke(transition);
@@ -318,14 +372,19 @@ namespace NeonLadder.ProceduralGeneration
                 PerformAutoSave();
             }
             
-            // Fade out
-            yield return StartCoroutine(FadeOut());
+            // Fade out (if enabled)
+            if (enableFadeOut)
+            {
+                yield return StartCoroutine(FadeOut());
+            }
             
-            // Show loading screen
-            if (useLoadingScreen)
+            // Show loading screen (if fade enabled)
+            if (useLoadingScreen && enableFadeOut)
             {
                 ShowLoadingScreen();
             }
+            
+            float loadingStartTime = Time.time;
             
             // Load the scene
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(transition.TargetSceneName);
@@ -337,21 +396,50 @@ namespace NeonLadder.ProceduralGeneration
                 yield return null;
             }
             
-            // Hide loading screen
-            if (useLoadingScreen)
+            // Handle player spawning while screen is still black
+            yield return new WaitForSeconds(0.1f);
+            HandlePlayerSpawning();
+            
+            // Wait a moment for spawning to complete
+            yield return new WaitForSeconds(0.1f);
+            
+            // Ensure minimum fade duration has passed (time screen stays black) - only if fade enabled
+            if (enableFadeOut)
+            {
+                float elapsedTime = Time.time - loadingStartTime;
+                if (elapsedTime < minimumFadeDuration)
+                {
+                    LogDebug($"Scene loaded quickly ({elapsedTime:F1}s), waiting additional {minimumFadeDuration - elapsedTime:F1}s for minimum fade duration");
+                    yield return new WaitForSeconds(minimumFadeDuration - elapsedTime);
+                }
+            }
+            
+            // Hide loading screen (if fade enabled)
+            if (useLoadingScreen && enableFadeOut)
             {
                 HideLoadingScreen();
+            }
+            
+            // Wait a frame and check if position stuck
+            yield return new WaitForSeconds(0.1f);
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                LogDebug($"Player position after spawn delay: {player.transform.position}");
             }
             
             // Restore player state
             if (preservePlayerState)
             {
-                yield return new WaitForSeconds(0.1f);
                 RestorePlayerState();
             }
             
             // Fade in
-            yield return StartCoroutine(FadeIn());
+            // Fade in (if enabled)
+            if (enableFadeOut)
+            {
+                yield return StartCoroutine(FadeIn());
+            }
             
             transition.EndTime = Time.time;
             OnTransitionCompleted?.Invoke(transition);
@@ -553,6 +641,157 @@ namespace NeonLadder.ProceduralGeneration
         
         #endregion
         
+        #region Spawn Point Management
+        
+        public List<string> CutScenes = new List<string>
+        {
+            Scenes.ReturnToStaging.ToString()
+        };
+
+        public List<string> DefaultSpawnScenes = new List<string>
+        {
+            Scenes.Staging.ToString()
+        };
+
+        private bool isExcludedCutscene(string scene)
+        {
+            return CutScenes.Contains(scene);
+        }
+
+        private bool isDefaultSpawnScene(string scene)
+        {
+            return DefaultSpawnScenes.Contains(scene);
+        }
+        private void HandlePlayerSpawning()
+        {
+            if (isExcludedCutscene(SceneManager.GetActiveScene().name))
+            {
+                LogDebug($"Skipping spawn point handling for excluded cutscene: {SceneManager.GetActiveScene().name}");
+                return;
+            }
+
+            // Special handling for scenes that always use Auto spawn (like Staging)
+            if (isDefaultSpawnScene(SceneManager.GetActiveScene().name))
+            {
+                LogDebug($"Using default Auto spawn for scene: {SceneManager.GetActiveScene().name}");
+                pendingSpawnType = SpawnPointType.Auto;
+                pendingCustomSpawnName = "";
+            }
+
+            // Find all spawn point configurations in the scene
+            var spawnConfigs = FindObjectsOfType<SpawnPointConfiguration>();
+
+            if (spawnConfigs.Length == 0)
+            {
+                LogError("CRITICAL: No SpawnPointConfiguration components found in scene! Cannot spawn player.");
+                Debug.LogError("[SceneTransitionManager] CRITICAL: No spawn points in scene. Halting.");
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPaused = true;
+                #endif
+                return;
+            }
+            
+            LogDebug($"Found {spawnConfigs.Length} spawn points in scene");
+            
+            // Log all spawn points for debugging
+            for (int i = 0; i < spawnConfigs.Length; i++)
+            {
+                var sp = spawnConfigs[i];
+                LogDebug($"  Spawn Point {i}: {sp.name} (mode: {sp.SpawnMode}) at position {sp.transform.position}");
+            }
+            
+            // Find the appropriate spawn point based on context
+            SpawnPointConfiguration targetSpawn = null;
+            
+            // If we have a specific spawn type requested
+            if (pendingSpawnType != SpawnPointType.Auto)
+            {
+                if (pendingSpawnType == SpawnPointType.Custom && !string.IsNullOrEmpty(pendingCustomSpawnName))
+                {
+                    // Look for custom named spawn point
+                    targetSpawn = System.Array.Find(spawnConfigs, sp => 
+                        sp.SpawnMode == SpawnPointType.Custom && 
+                        sp.CustomSpawnName.Equals(pendingCustomSpawnName, System.StringComparison.OrdinalIgnoreCase));
+                        
+                    if (targetSpawn == null)
+                    {
+                        LogError($"CRITICAL: Custom spawn point '{pendingCustomSpawnName}' not found!");
+                    }
+                }
+                else
+                {
+                    // Look for specific spawn type
+                    targetSpawn = System.Array.Find(spawnConfigs, sp => sp.SpawnMode == pendingSpawnType);
+                    
+                    if (targetSpawn == null)
+                    {
+                        LogError($"CRITICAL: Spawn point of type '{pendingSpawnType}' not found!");
+                    }
+                }
+            }
+            
+            // Auto mode: find any matching Auto spawn point
+            if (targetSpawn == null && pendingSpawnType == SpawnPointType.Auto)
+            {
+                // For Auto mode, just find any Auto spawn point
+                targetSpawn = System.Array.Find(spawnConfigs, sp => sp.SpawnMode == SpawnPointType.Auto);
+                
+                if (targetSpawn == null)
+                {
+                    LogDebug($"No Auto spawn point found, trying Default");
+                    
+                    // Last resort: try Default spawn point
+                    targetSpawn = System.Array.Find(spawnConfigs, sp => sp.SpawnMode == SpawnPointType.Default);
+                }
+            }
+            
+            // Critical error if no spawn point found
+            if (targetSpawn == null)
+            {
+                LogError($"CRITICAL: No valid spawn point found! Type={pendingSpawnType}");
+                Debug.LogError("[SceneTransitionManager] CRITICAL: Failed to find any valid spawn point. Halting.");
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPaused = true;
+                #endif
+                return;
+            }
+            
+            // Get spawn position
+            Vector3 spawnPosition = targetSpawn.GetSpawnWorldPosition();
+            LogDebug($"Spawning player at {targetSpawn.name} (type: {targetSpawn.SpawnMode}) position: {spawnPosition}");
+            
+            // Find the player
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
+            {
+                LogError("CRITICAL: Player GameObject with tag 'Player' not found!");
+                Debug.LogError("[SceneTransitionManager] CRITICAL: No player found. Halting.");
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPaused = true;
+                #endif
+                return;
+            }
+            
+            // Use the PlayerSpawn event to properly spawn the player
+            // Add delay to ensure scene is fully loaded and initialized
+            
+            // Debug: Check player position before scheduling spawn event
+            LogDebug($"About to schedule PlayerSpawn at {spawnPosition}");
+            LogDebug($"Player current position before spawn event: {player.transform.position}");
+            
+            var spawnEvent = Simulation.Schedule<PlayerSpawn>(1.5f);
+            spawnEvent.spawnPosition = spawnPosition;
+            
+            LogDebug($"PlayerSpawn event scheduled at position {spawnPosition} with 1.5s delay");
+            LogDebug($"Player position immediately after scheduling: {player.transform.position}");
+            
+            // Reset spawn context for next transition
+            pendingSpawnType = SpawnPointType.Auto;
+            pendingCustomSpawnName = "";
+        }
+        
+        #endregion
+        
         #region Helper Classes
         
         [Serializable]
@@ -593,6 +832,6 @@ namespace NeonLadder.ProceduralGeneration
             // This would check internal loading state
             // For now, return false as placeholder
             return false;
-        }
+        } 
     }
 }

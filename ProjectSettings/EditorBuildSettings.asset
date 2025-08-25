@@ -71,6 +71,102 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PackageScenes/StandardizedOstrichBar.unity
     guid: d3311d03a42a300488aabe218b762407
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Banquet.unity
+    guid: 5ddca82a4405cc741918c163d831bca4
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Cathedral.unity
+    guid: 5fd4a5d8ebec52943ae94a20ca3618a1
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Finale.unity
+    guid: 27f2410d48329b046af578990f3591f1
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Garden.unity
+    guid: dbdcb836d82d5bf4983d71bb3e04ca38
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Lounge.unity
+    guid: 319a1b00c66b24543902e962a92a48f6
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Mirage.unity
+    guid: c7c4da7fe0d9d284ebbe76761968f642
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Necropolis.unity
+    guid: 41dd078a1e575a24f9d9e5af4b817a3a
+  - enabled: 1
+    path: Assets/Scenes/Generated/BossArenas/Vault.unity
+    guid: 933e32b274bff2345b6a1a5412e6954c
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Banquet_Connection1.unity
+    guid: 750d5f726a5bc9e419865211f295268c
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Banquet_Connection2.unity
+    guid: 4f14335c7a2df9c4ba1e0e68eb68a375
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Cathedral_Connection1.unity
+    guid: 59a85b1cacb4a4c44a4ff0fdf3360c57
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Cathedral_Connection2.unity
+    guid: 0636c9123420fab45876de14a7800f30
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Finale_Connection1.unity
+    guid: 71c67986eebcf1d42b86df2fe32f2eb4
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Finale_Connection2.unity
+    guid: dbdcdd25320eccc4988a03d457e66cfa
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Garden_Connection1.unity
+    guid: 47bbc8eada0ba7149be6f471ae6365c7
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Garden_Connection2.unity
+    guid: 92f3aa8f9f2469a498a943ec3052dc61
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Lounge_Connection1.unity
+    guid: 81b024030ce3f66488109d41da324e96
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Lounge_Connection2.unity
+    guid: 381fae045e03d0d4b8d253c8347ddbd5
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Mirage_Connection1.unity
+    guid: b08db80bdbdf24e42b6e39954e110340
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Mirage_Connection2.unity
+    guid: ca58aee2e77813c47a8cf1408ac5ddfb
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Necropolis_Connection1.unity
+    guid: ba458a50ad374664986bd36366f54653
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Necropolis_Connection2.unity
+    guid: 09554c881d26d2c438405b4c238d1f0b
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Vault_Connection1.unity
+    guid: e9a0b44f0826eff45b7e6de48c42a2dc
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Vault_Connection2.unity
+    guid: 8265d02000009624d88262cca9c2306d
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/Merchant.unity
+    guid: b5d1aa7aa11e70c47baff7215799a042
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/MysteriousAltar.unity
+    guid: 3af76c9bcb72dc44381220430d87ad9d
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/Portal.unity
+    guid: fe61d97c697f3574f8fbb02e1d2a47a2
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/RestArea.unity
+    guid: afcb84261e156be4184d4bc1e1dbb84d
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/RiddleRoom.unity
+    guid: 4dec0113e8f8348478c1d38488d84724
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/Shop.unity
+    guid: 4ea3409467755e843b62811c2514e3a0
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/Shrine.unity
+    guid: 8be03f0cd3410884caffa817a2a9611c
+  - enabled: 1
+    path: Assets/Scenes/Generated/Services/TreasureRoom.unity
+    guid: 867432aac0e067746b26e170ecf68e64
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 23395aab919772a4b9b1c36df08e4851,
       type: 2}

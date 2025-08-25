@@ -81,6 +81,12 @@ crashlytics-build.properties
 !/Assets/Packages/**/*.pdf
 !/Assets/Packages/**/*.asmdef
 
+# DamageNumbersPro - allow code and shader files with their meta files
+!/Assets/Packages/DamageNumbersPro/**/*.cs
+!/Assets/Packages/DamageNumbersPro/**/*.cs.meta
+!/Assets/Packages/DamageNumbersPro/**/*.shader
+!/Assets/Packages/DamageNumbersPro/**/*.shader.meta
+
 # Temporary asset folders (should be properly imported or removed)
 /Assets/Packages/*_TEMP/
 

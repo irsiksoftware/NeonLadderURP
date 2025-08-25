@@ -1,55 +1,72 @@
+using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using NeonLadder.Gameplay;
-using NeonLadder.Mechanics.Controllers;
-using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.ProceduralGeneration
 {
+    /// <summary>
+    /// Simplified scene transition trigger that handles scene changes in NeonLadder.
+    /// Supports both procedural (seed-based) and manual scene selection.
+    /// Also acts as its own event when scheduled through the Simulation system.
+    /// </summary>
     public class SceneTransitionTrigger : MonoBehaviour
     {
+        public enum DestinationType
+        {
+            None,       // No scene transition - trigger does nothing
+            Procedural, // Use seed-based scene selection
+            Manual      // Use manually specified scene name
+        }
+        
         [Header("Transition Configuration")]
-        [SerializeField] private EventType transitionType = EventType.Portal;
+        [Tooltip("The GameObject with a trigger collider that detects player entry")]
         [SerializeField] private GameObject triggerColliderObject;
         
-        [Header("Transition Settings")]
-        [SerializeField] private TransitionMode mode = TransitionMode.Automatic;
-        [SerializeField] private string interactionPrompt = "Press E to Enter";
-        [SerializeField] private KeyCode interactionKey = KeyCode.E;
-        [SerializeField] private float activationDelay = 0f;
-        
-        [Header("Destination")]
+        [Header("Destination Settings")]
+        [Tooltip("How to determine the destination scene")]
         [SerializeField] private DestinationType destinationType = DestinationType.Procedural;
-        [SerializeField] private string overrideSceneName;
+        
+        [Tooltip("Scene name to load when using Manual destination type")]
+        [SerializeField] private string overrideSceneName = ""; // Match editor property name
+        
+        [Header("Player Movement Settings")]
+        [Tooltip("Reset player velocity after scene transition")]
+        [SerializeField] private bool resetPlayerVelocity = true;
+        
+        [Tooltip("Lock player to Z=0 for 2.5D movement")]
+        [SerializeField] private bool lockPlayerZAxis = true;
+        
+        [Header("Spawn Point Settings")]
+        [Tooltip("Player Should Spawn At: In the destination scene, use spawn point with this type")]
         [SerializeField] private SpawnPointType spawnPointType = SpawnPointType.Auto;
-        [SerializeField] private string customSpawnPointName;
         
-        [Header("Direction")]
-        [SerializeField] private TransitionDirection direction = TransitionDirection.Forward;
+        [Tooltip("Custom spawn point name (only used when spawnPointType is Custom)")]
+        [SerializeField] private string customSpawnPointName = "";
         
-        [Header("Restrictions")]
+        [Header("Debug")]
+        [SerializeField] private bool enableDebugLogs = false;
+        
+        // Minimal remaining fields for editor compatibility
+        [SerializeField] private EventType transitionType = EventType.Portal;
         [SerializeField] private bool oneWayOnly = false;
-        [SerializeField] private bool requiresKey = false;
-        [SerializeField] private string requiredKeyId;
-        
-        [Header("Visual Feedback")]
-        [SerializeField] private bool showPromptUI = true;
-        [SerializeField] private Vector3 promptOffset = new Vector3(0, 2, 0);
-        [SerializeField] private Color gizmoColor = Color.green;
         
         // Runtime state
-        private bool playerInTrigger = false;
         private bool isTransitioning = false;
         private GameObject currentPlayer;
-        private Coroutine activationCoroutine;
-        private GameObject promptUIInstance;
         
         // Events
         public static event Action<SceneTransitionTrigger> OnTransitionStarted;
         public static event Action<SceneTransitionTrigger> OnTransitionCompleted;
         public static event Action<SceneTransitionTrigger, string> OnTransitionFailed;
+        
+        // Public properties for compatibility
+        public bool CanExitHere => true;  // All triggers can exit
+        public bool CanSpawnHere => spawnPointType != SpawnPointType.None; // Can spawn unless explicitly disabled
+        public Vector3 SpawnPosition => transform.position;
+        public SpawnPointType SpawnType => spawnPointType;
+        public string CustomSpawnName => customSpawnPointName;
         
         private void Awake()
         {
@@ -80,103 +97,74 @@ namespace NeonLadder.ProceduralGeneration
         
         private void Start()
         {
-            // Set up trigger detection on the assigned collider object
+            // Set up event-based trigger detection on the assigned collider object
             if (triggerColliderObject != null)
             {
-                // Add this script's trigger detection to the collider object if needed
-                var triggerDetector = triggerColliderObject.GetComponent<SceneTransitionTriggerDetector>();
-                if (triggerDetector == null)
+                // Replace old detector with new event-based trigger
+                var oldDetector = triggerColliderObject.GetComponent<SceneTransitionTriggerDetector>();
+                if (oldDetector != null)
                 {
-                    triggerDetector = triggerColliderObject.AddComponent<SceneTransitionTriggerDetector>();
+                    DestroyImmediate(oldDetector);
                 }
-                triggerDetector.Initialize(this);
+                
+                // Add original trigger detector
+                var detector = triggerColliderObject.GetComponent<SceneTransitionTriggerDetector>();
+                if (detector == null)
+                {
+                    detector = triggerColliderObject.AddComponent<SceneTransitionTriggerDetector>();
+                }
+                detector.Initialize(this);
             }
         }
         
+        /// <summary>
+        /// Called when player enters the trigger area
+        /// </summary>
         public void OnPlayerEnterTrigger(Collider playerCollider)
         {
-            if (isTransitioning || !IsPlayer(playerCollider)) return;
+            if (isTransitioning || !IsPlayer(playerCollider)) 
+                return;
             
-            playerInTrigger = true;
             currentPlayer = playerCollider.gameObject;
             
-            if (mode == TransitionMode.Automatic)
+            // CRITICAL: Immediately disable Z movement to stop auto-walk
+            // This prevents the player from continuing to walk forward during/after transition
+            var player = currentPlayer.GetComponentInChildren<Player>();
+            if (player != null)
             {
-                if (activationDelay > 0)
-                {
-                    activationCoroutine = StartCoroutine(DelayedActivation());
-                }
-                else
-                {
-                    TriggerTransition();
-                }
+                //player.DisableZMovement();
+                //player.velocity = Vector3.zero; // Stop all movement
+                //UnityEngine.Debug.Log("[SceneTransitionTrigger] Disabled Z movement and stopped player velocity");
             }
-            else if (mode == TransitionMode.Interactive)
-            {
-                ShowInteractionPrompt();
-            }
+            
+            // Immediately trigger the transition
+            TriggerTransition();
         }
         
+        /// <summary>
+        /// Called when player exits the trigger area
+        /// </summary>
         public void OnPlayerExitTrigger(Collider playerCollider)
         {
-            if (!IsPlayer(playerCollider)) return;
+            if (!IsPlayer(playerCollider)) 
+                return;
             
-            playerInTrigger = false;
             currentPlayer = null;
-            
-            if (activationCoroutine != null)
-            {
-                StopCoroutine(activationCoroutine);
-                activationCoroutine = null;
-            }
-            
-            if (mode == TransitionMode.Interactive)
-            {
-                HideInteractionPrompt();
-            }
         }
         
-        private void Update()
-        {
-            if (mode == TransitionMode.Interactive && playerInTrigger && !isTransitioning)
-            {
-                if (Input.GetKeyDown(interactionKey))
-                {
-                    TriggerTransition();
-                }
-            }
-        }
-        
-        private IEnumerator DelayedActivation()
-        {
-            yield return new WaitForSeconds(activationDelay);
-            if (playerInTrigger)
-            {
-                TriggerTransition();
-            }
-        }
-        
+        /// <summary>
+        /// Triggers the scene transition
+        /// </summary>
         private void TriggerTransition()
         {
-            if (isTransitioning) return;
-            
-            // Check restrictions
-            if (requiresKey && !HasRequiredKey())
-            {
-                OnTransitionFailed?.Invoke(this, $"Missing required key: {requiredKeyId}");
-                ShowKeyRequiredFeedback();
+            if (isTransitioning) 
                 return;
-            }
             
             isTransitioning = true;
             OnTransitionStarted?.Invoke(this);
             
-            // Store transition context for spawn system
-            if (SpawnPointManager.Instance != null)
-            {
-                string spawnPointName = GetTargetSpawnPointName();
-                SpawnPointManager.Instance.SetTransitionContext(direction, spawnPointName);
-            }
+            // Store transition context for the next scene
+            SceneTransitionContext.SetTransitioned(true);
             
             // Determine destination scene
             string destinationScene = GetDestinationScene();
@@ -188,265 +176,147 @@ namespace NeonLadder.ProceduralGeneration
                 return;
             }
             
-            // Start scene transition
-            StartCoroutine(LoadSceneAsync(destinationScene));
+            if (enableDebugLogs)
+                Debug.Log($"[SceneTransitionTrigger] Transitioning to: {destinationScene}");
+            
+            // Set spawn context in SceneTransitionManager - just pass the spawn type to match
+            SceneTransitionManager.Instance.SetSpawnContext(spawnPointType, customSpawnPointName);
+            
+            // Use SceneTransitionManager for the transition
+            SceneTransitionManager.Instance.TransitionToScene(destinationScene);
+            
+            // Reset transitioning flag after a delay (manager handles the actual transition)
+            StartCoroutine(ResetTransitioningFlag());
         }
         
+        /// <summary>
+        /// Reset the transitioning flag after the manager takes over
+        /// </summary>
+        private IEnumerator ResetTransitioningFlag()
+        {
+            yield return new WaitForSeconds(0.5f);
+            isTransitioning = false;
+            OnTransitionCompleted?.Invoke(this);
+        }
+        
+        /// <summary>
+        /// Gets the destination scene based on configuration
+        /// </summary>
         private string GetDestinationScene()
         {
             switch (destinationType)
             {
+                case DestinationType.None:
+                    return null; // No transition
+                    
                 case DestinationType.Manual:
-                    return overrideSceneName;
+                    return overrideSceneName; // Use the editor-compatible field name
                     
                 case DestinationType.Procedural:
-                    // Use SceneRouter to get next procedural scene
-                    if (SceneRouter.Instance != null)
-                    {
-                        var nextNode = GetNextProceduralNode();
-                        if (nextNode != null)
-                        {
-                            return SceneRouter.Instance.GetSceneNameFromMapNode(nextNode);
-                        }
-                    }
-                    break;
+                    return GetProceduralDestination();
                     
-                case DestinationType.NextInPath:
-                    // Get next scene from current path context
-                    if (SceneRoutingContext.Instance != null)
-                    {
-                        return SceneRoutingContext.Instance.GetNextSceneInPath();
-                    }
-                    break;
-            }
-            
-            return null;
-        }
-        
-        private MapNode GetNextProceduralNode()
-        {
-            // This would integrate with PathGenerator to get the next node
-            // For now, return null - will be implemented when PathGenerator integration is complete
-            if (SceneRoutingContext.Instance != null)
-            {
-                return SceneRoutingContext.Instance.GetNextNode();
-            }
-            return null;
-        }
-        
-        private IEnumerator LoadSceneAsync(string sceneName)
-        {
-            // Fade out or show loading screen
-            yield return ShowLoadingTransition();
-            
-            // Load the scene
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-            
-            while (!asyncLoad.isDone)
-            {
-                float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
-                UpdateLoadingProgress(progress);
-                yield return null;
-            }
-            
-            OnTransitionCompleted?.Invoke(this);
-            isTransitioning = false;
-        }
-        
-        private bool IsPlayer(Collider collider)
-        {
-            // Check for Player component or tag
-            return collider.CompareTag("Player") || 
-                   collider.GetComponent<Player>() != null ||
-                   collider.GetComponentInParent<Player>() != null;
-        }
-        
-        private bool HasRequiredKey()
-        {
-            // Check inventory or game state for required key
-            // This would integrate with inventory system
-            // For now, return true if no key required
-            if (!requiresKey) return true;
-            
-            // TODO: Integrate with inventory system
-            // Example: return InventoryManager.Instance.HasItem(requiredKeyId);
-            
-            return false;
-        }
-        
-        private void ShowInteractionPrompt()
-        {
-            if (!showPromptUI) return;
-            
-            // Create UI prompt above trigger
-            // This would integrate with UI system
-            // For now, just log
-            Debug.Log($"[SceneTransitionTrigger] {interactionPrompt}");
-        }
-        
-        private void HideInteractionPrompt()
-        {
-            if (promptUIInstance != null)
-            {
-                Destroy(promptUIInstance);
-                promptUIInstance = null;
-            }
-        }
-        
-        private void ShowKeyRequiredFeedback()
-        {
-            Debug.LogWarning($"[SceneTransitionTrigger] Key required: {requiredKeyId}");
-            // TODO: Show UI feedback
-        }
-        
-        private IEnumerator ShowLoadingTransition()
-        {
-            // TODO: Integrate with loading screen system
-            yield return new WaitForSeconds(0.5f);
-        }
-        
-        private void UpdateLoadingProgress(float progress)
-        {
-            // TODO: Update loading bar
-        }
-        
-        private string GetTargetSpawnPointName()
-        {
-            switch (spawnPointType)
-            {
-                case SpawnPointType.Auto:
-                    return null; // Let SpawnPointManager decide based on direction
-                case SpawnPointType.Default:
-                    return "Default";
-                case SpawnPointType.FromLeft:
-                    return "FromLeft";
-                case SpawnPointType.FromRight:
-                    return "FromRight";
-                case SpawnPointType.BossArena:
-                    return "BossArena";
-                case SpawnPointType.Custom:
-                    return customSpawnPointName;
                 default:
                     return null;
             }
+        }
+        
+        /// <summary>
+        /// Gets procedurally generated destination based on seed
+        /// </summary>
+        private string GetProceduralDestination()
+        {
+            // Get the current seed from Game instance
+            string seed = "default_seed";
+            if (Game.Instance != null && !string.IsNullOrEmpty(Game.Instance.ProceduralMap.Seed))
+            {
+                seed = Game.Instance.ProceduralMap.Seed;
+            }
+            
+            // Create deterministic random based on seed
+            var random = new System.Random(seed.GetHashCode());
+            
+            // Available scenes (simplified for now)
+            string[] possibleScenes = new string[]
+            {
+                "Banquet_Connection1",
+                "Cathedral_Connection1", 
+                "Necropolis_Connection1",
+                "Vault_Connection1",
+                "Garden_Connection1",
+                "Mirage_Connection1",
+                "Lounge_Connection1"
+            };
+            
+            // Pick a random scene based on seed
+            int index = random.Next(possibleScenes.Length);
+            return possibleScenes[index];
+        }
+        
+        // Note: LoadSceneAsync method removed - SceneTransitionManager handles all scene loading now
+        
+        // Note: GetSpawnKeyFromSpawnType method removed - no longer needed as SceneTransitionManager handles spawn logic
+        
+        /// <summary>
+        /// Checks if the collider belongs to the player
+        /// </summary>
+        private bool IsPlayer(Collider collider)
+        {
+            return collider.CompareTag("Player") || 
+                   collider.GetComponent<Player>() != null ||
+                   collider.GetComponentInParent<Player>() != null;
         }
         
         #region Editor Visualization
         
         private void OnDrawGizmos()
         {
-            DrawGizmoVisualization(0.5f);
+            DrawGizmo(0.5f);
         }
         
         private void OnDrawGizmosSelected()
         {
-            DrawGizmoVisualization(1f);
+            DrawGizmo(1f);
         }
         
-        private void DrawGizmoVisualization(float alpha)
+        private void DrawGizmo(float alpha)
         {
-            // Use the assigned trigger collider object for visualization
-            Collider collider = null;
-            if (triggerColliderObject != null)
-            {
-                collider = triggerColliderObject.GetComponent<Collider>();
-            }
+            if (triggerColliderObject == null)
+                return;
+                
+            Collider collider = triggerColliderObject.GetComponent<Collider>();
+            if (collider == null)
+                return;
             
-            if (collider == null) return;
+            // Draw trigger area
+            Color gizmoColor = Color.green;
+            gizmoColor.a = alpha;
+            Gizmos.color = gizmoColor;
             
-            // Set color based on state
-            Color drawColor = gizmoColor;
-            if (requiresKey) drawColor = Color.yellow;
-            if (oneWayOnly) drawColor = Color.red;
-            drawColor.a = alpha;
-            
-            Gizmos.color = drawColor;
-            
-            // Draw collider bounds using the trigger object's transform
-            Transform triggerTransform = triggerColliderObject.transform;
+            Transform t = triggerColliderObject.transform;
             if (collider is BoxCollider box)
             {
                 Matrix4x4 oldMatrix = Gizmos.matrix;
-                Gizmos.matrix = Matrix4x4.TRS(triggerTransform.position, triggerTransform.rotation, triggerTransform.localScale);
+                Gizmos.matrix = Matrix4x4.TRS(t.position, t.rotation, t.localScale);
                 Gizmos.DrawWireCube(box.center, box.size);
-                Gizmos.color = new Color(drawColor.r, drawColor.g, drawColor.b, 0.1f * alpha);
+                gizmoColor.a = 0.1f * alpha;
+                Gizmos.color = gizmoColor;
                 Gizmos.DrawCube(box.center, box.size);
                 Gizmos.matrix = oldMatrix;
             }
             else if (collider is SphereCollider sphere)
             {
-                Vector3 center = triggerTransform.position + sphere.center;
-                Gizmos.DrawWireSphere(center, sphere.radius * triggerTransform.localScale.x);
-                Gizmos.color = new Color(drawColor.r, drawColor.g, drawColor.b, 0.1f * alpha);
-                Gizmos.DrawSphere(center, sphere.radius * triggerTransform.localScale.x);
+                Vector3 center = t.position + sphere.center;
+                Gizmos.DrawWireSphere(center, sphere.radius * t.localScale.x);
             }
             
-            // Draw direction arrow
-            DrawDirectionArrow();
-            
-            // Draw labels
-            DrawGizmoLabels();
-        }
-        
-        private void DrawDirectionArrow()
-        {
-            Vector3 center = transform.position;
-            Vector3 arrowEnd = center;
-            
-            switch (direction)
-            {
-                case TransitionDirection.Left:
-                    arrowEnd += Vector3.left * 2f;
-                    break;
-                case TransitionDirection.Right:
-                    arrowEnd += Vector3.right * 2f;
-                    break;
-                case TransitionDirection.Up:
-                    arrowEnd += Vector3.up * 2f;
-                    break;
-                case TransitionDirection.Down:
-                    arrowEnd += Vector3.down * 2f;
-                    break;
-                case TransitionDirection.Forward:
-                    arrowEnd += Vector3.forward * 2f;
-                    break;
-                case TransitionDirection.Backward:
-                    arrowEnd += Vector3.back * 2f;
-                    break;
-            }
-            
-            if (direction != TransitionDirection.Any)
-            {
-                Gizmos.color = Color.white;
-                Gizmos.DrawLine(center, arrowEnd);
-                
-                // Draw arrowhead
-                Vector3 arrowDir = (arrowEnd - center).normalized;
-                Vector3 arrowRight = Vector3.Cross(arrowDir, Vector3.forward).normalized;
-                Gizmos.DrawLine(arrowEnd, arrowEnd - arrowDir * 0.3f + arrowRight * 0.2f);
-                Gizmos.DrawLine(arrowEnd, arrowEnd - arrowDir * 0.3f - arrowRight * 0.2f);
-            }
-        }
-        
-        private void DrawGizmoLabels()
-        {
+            // Draw label
             #if UNITY_EDITOR
-            Vector3 labelPos = transform.position + Vector3.up * 2.5f;
-            
+            Vector3 labelPos = transform.position + Vector3.up * 2f;
             string label = gameObject.name;
-            if (mode == TransitionMode.Interactive)
-            {
-                label += $"\n[{interactionKey}]";
-            }
-            if (requiresKey)
-            {
-                label += $"\n🔑 {requiredKeyId}";
-            }
             if (destinationType == DestinationType.Manual && !string.IsNullOrEmpty(overrideSceneName))
             {
                 label += $"\n→ {overrideSceneName}";
             }
-            
             UnityEditor.Handles.Label(labelPos, label);
             #endif
         }
@@ -455,84 +325,48 @@ namespace NeonLadder.ProceduralGeneration
         
         #region Public API
         
-        public void SetDestination(string sceneName, SpawnPointType spawnType = SpawnPointType.Auto, string customSpawnPoint = null)
-        {
-            destinationType = DestinationType.Manual;
-            overrideSceneName = sceneName;
-            spawnPointType = spawnType;
-            if (spawnType == SpawnPointType.Custom && !string.IsNullOrEmpty(customSpawnPoint))
-            {
-                customSpawnPointName = customSpawnPoint;
-            }
-        }
-        
-        // Backward compatibility overload for existing code
-        public void SetDestination(string sceneName, string spawnPointName)
-        {
-            destinationType = DestinationType.Manual;
-            overrideSceneName = sceneName;
-            
-            // Convert string spawn point name to enum
-            if (string.IsNullOrEmpty(spawnPointName))
-            {
-                spawnPointType = SpawnPointType.Auto;
-            }
-            else
-            {
-                switch (spawnPointName.ToLowerInvariant())
-                {
-                    case "default":
-                        spawnPointType = SpawnPointType.Default;
-                        break;
-                    case "fromleft":
-                        spawnPointType = SpawnPointType.FromLeft;
-                        break;
-                    case "fromright":
-                        spawnPointType = SpawnPointType.FromRight;
-                        break;
-                    case "bossarena":
-                        spawnPointType = SpawnPointType.BossArena;
-                        break;
-                    default:
-                        spawnPointType = SpawnPointType.Custom;
-                        customSpawnPointName = spawnPointName;
-                        break;
-                }
-            }
-        }
-        
-        public void SetDirection(TransitionDirection newDirection)
-        {
-            direction = newDirection;
-        }
-        
-        public void SetInteractive(bool interactive, string prompt = null)
-        {
-            mode = interactive ? TransitionMode.Interactive : TransitionMode.Automatic;
-            if (!string.IsNullOrEmpty(prompt))
-            {
-                interactionPrompt = prompt;
-            }
-        }
-        
-        public void ForceTransition()
-        {
-            TriggerTransition();
-        }
-        
-        public TransitionDirection GetDirection() => direction;
-        public bool IsOneWay() => oneWayOnly;
-        public bool RequiresKey() => requiresKey;
-        public string GetRequiredKey() => requiredKeyId;
-        public EventType GetTransitionType() => transitionType;
+        /// <summary>
+        /// Gets the assigned trigger collider object
+        /// </summary>
         public GameObject GetTriggerColliderObject() => triggerColliderObject;
         
+        /// <summary>
+        /// Sets the trigger collider object and validates configuration
+        /// </summary>
         public void SetTriggerColliderObject(GameObject colliderObject)
         {
             triggerColliderObject = colliderObject;
             ValidateConfiguration();
         }
         
+        /// <summary>
+        /// Forces a transition to occur immediately
+        /// </summary>
+        public void ForceTransition()
+        {
+            TriggerTransition();
+        }
+        
         #endregion
+    }
+    
+    /// <summary>
+    /// Simple static class to track scene transition context
+    /// </summary>
+    public static class SceneTransitionContext
+    {
+        private static bool hasTransitioned = false;
+        
+        public static bool HasTransitioned => hasTransitioned;
+        
+        public static void SetTransitioned(bool value)
+        {
+            hasTransitioned = value;
+        }
+        
+        public static void Clear()
+        {
+            hasTransitioned = false;
+        }
     }
 }

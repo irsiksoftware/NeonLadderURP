@@ -249,7 +249,7 @@ namespace NeonLadder.Tests.Runtime
             const int generationCount = 100;
             
             // Act - Generate many maps
-            var maps = new List<MysticalMap>();
+            var maps = new List<ProceduralMap>();
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             
             for (int i = 0; i < generationCount; i++)
@@ -314,7 +314,7 @@ namespace NeonLadder.Tests.Runtime
         /// <summary>
         /// Asserts that two maps are absolutely identical down to every property
         /// </summary>
-        private void AssertMapsArePixelPerfect(MysticalMap map1, MysticalMap map2, string context)
+        private void AssertMapsArePixelPerfect(ProceduralMap map1, ProceduralMap map2, string context)
         {
             Assert.AreEqual(map1.Seed, map2.Seed, $"{context}: Seeds must match");
             Assert.AreEqual(map1.Layers.Count, map2.Layers.Count, $"{context}: Layer counts must match");

@@ -15,13 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelCrushers", "PixelCrush
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Michsky.MUIP", "Michsky.MUIP.csproj", "{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Editor", "NeonLadder.Editor.csproj", "{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Tests.Runtime", "NeonLadder.Tests.Runtime.csproj", "{DFF72330-1879-B153-DC36-8A047CEF02B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamageNumbersPro", "DamageNumbersPro.csproj", "{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Tests.Editor.UI", "NeonLadder.Tests.Editor.UI.csproj", "{855FE7EB-AFB1-6F0E-92E0-5A91C01363BB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonLadder.Editor", "NeonLadder.Editor.csproj", "{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelCrushersEditor", "PixelCrushersEditor.csproj", "{47AB043D-11AA-52F6-6203-A5342F4ABD3B}"
 EndProject
@@ -71,6 +71,10 @@ Global
 		{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DFF72330-1879-B153-DC36-8A047CEF02B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DFF72330-1879-B153-DC36-8A047CEF02B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFF72330-1879-B153-DC36-8A047CEF02B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,10 +87,6 @@ Global
 		{855FE7EB-AFB1-6F0E-92E0-5A91C01363BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{855FE7EB-AFB1-6F0E-92E0-5A91C01363BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{855FE7EB-AFB1-6F0E-92E0-5A91C01363BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{47AB043D-11AA-52F6-6203-A5342F4ABD3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{47AB043D-11AA-52F6-6203-A5342F4ABD3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47AB043D-11AA-52F6-6203-A5342F4ABD3B}.Release|Any CPU.ActiveCfg = Release|Any CPU

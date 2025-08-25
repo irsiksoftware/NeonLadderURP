@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246f495e266bff34193259378b17c2be, type: 3}
+  m_Name: New Save State Config
+  m_EditorClassIdentifier: 
+  configurationName: Default Save State
+  description: Describe this save state configuration...
+  isTestingConfiguration: 0
+  playerSetup:
+    playerLevel: 8
+    experiencePoints: 425.76193
+    maxHealth: 313
+    currentHealth: 185
+    maxStamina: 151.46338
+    currentStamina: 124.400505
+    attackDamage: 10
+    attackSpeed: 1
+    movementSpeed: 5
+    jumpCount: 1
+  currencySetup:
+    startingMetaCurrency: 1248
+    startingPermaCurrency: 24868
+    totalMetaEarned: 0
+    totalPermaEarned: 115611
+  sceneSetPresets: []
+  currentSceneSet:
+    setName: Twisted Sanctum
+    description: Describe this scene configuration...
+    seed: 94564
+    pathType: maze
+    maxDepth: 10
+    sceneConfigurations:
+    - sceneName: Proc_94564_1_LostGardenCore
+      depth: 1
+      pathType: main
+      spawnPosition: {x: -5.997074, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    - sceneName: Proc_94564_2_BurningTowerDepths
+      depth: 2
+      pathType: main
+      spawnPosition: {x: -6.0058117, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    - sceneName: Proc_94564_3_TwistedTowerPortal
+      depth: 3
+      pathType: main
+      spawnPosition: {x: -4.16109, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    - sceneName: Proc_94564_4_FrozenTemplePassage
+      depth: 4
+      pathType: boss
+      spawnPosition: {x: -8.232201, y: 0, z: 0}
+      isPreCompleted: 0
+      sceneSpecificData: []
+    availableBossScenes: []
+    guaranteedBossSpawns: []
+  preUnlockedAbilities: []
+  prePurchasedItems: []
+  worldSetup:
+    currentSceneName: DarkRuinsDomain
+    playerPosition: {x: 45.10069, y: -8.364298, z: 0}
+    currentCheckpoint: 
+    currentDepth: 16
+    runNumber: 1
+    isActiveRun: 1
+    completedScenes:
+    - ThirdLevel
+    - HiddenArea
+    discoveredAreas:
+    - DeepCaves
+    defeatedBosses:
+    - IceGolem
+    - StormTitan
+  enableDebugMode: 0
+  testingScenarios: []

@@ -86,17 +86,11 @@ namespace NeonLadder.Editor
         private GUIStyle warningStyle;
         private GUIStyle errorStyle;
         
-        [MenuItem("Tools/Neon Ladder/Scene Connection Validator", priority = 100)]
-        public static void ShowWindow()
-        {
-            var window = GetWindow<SceneConnectionValidatorWindow>("Scene Validator");
-            window.Show();
-        }
-        
         [MenuItem("Tools/Neon Ladder/Scene Connection Validator %&v", priority = 100)]
         public static void ShowWindowWithShortcut()
         {
-            ShowWindow();
+            var window = GetWindow<SceneConnectionValidatorWindow>("Scene Validator");
+            window.Show();
         }
         
         private void OnEnable()
@@ -332,8 +326,8 @@ namespace NeonLadder.Editor
                     {
                         foreach (var trigger in sceneTriggers[scene])
                         {
-                            var direction = trigger.GetDirection().ToString();
-                            EditorGUILayout.LabelField($"  ├─ {direction} → ?", EditorStyles.miniLabel);
+                            var spawnType = trigger.SpawnType.ToString();
+                            EditorGUILayout.LabelField($"  ├─ {spawnType} → ?", EditorStyles.miniLabel);
                         }
                     }
                     
@@ -482,11 +476,11 @@ namespace NeonLadder.Editor
             
             var objName = trigger.name;
             
-            // Check if trigger has valid direction
-            if (trigger.GetDirection() == TransitionDirection.Any)
+            // Check if trigger has valid spawn type
+            if (trigger.SpawnType == SpawnPointType.None)
             {
                 validationResults.Add(new ValidationResult(sceneName, objName, ValidationSeverity.Warning,
-                    "Trigger has no specific direction"));
+                    "Trigger has no spawn type configured"));
             }
             
             // Check for collider
@@ -496,12 +490,6 @@ namespace NeonLadder.Editor
                     "Trigger missing Collider2D component", "Add Collider2D"));
             }
             
-            // Check for key requirements
-            if (trigger.RequiresKey() && string.IsNullOrEmpty(trigger.GetRequiredKey()))
-            {
-                validationResults.Add(new ValidationResult(sceneName, objName, ValidationSeverity.Warning,
-                    "Key required but no key ID specified"));
-            }
         }
         
         private void ValidateOverride(string sceneName, SceneConnectionOverride override_)
@@ -725,7 +713,7 @@ namespace NeonLadder.Editor
                 {
                     foreach (var trigger in sceneTriggers[scene])
                     {
-                        Debug.Log($"  - Trigger: {trigger.name} ({trigger.GetDirection()})");
+                        Debug.Log($"  - Trigger: {trigger.name} ({trigger.SpawnType})");
                     }
                 }
                 
@@ -861,7 +849,7 @@ namespace NeonLadder.Editor
                 {
                     foreach (var trigger in sceneTriggers[scene])
                     {
-                        graph.AppendLine($"  ├─ Trigger: {trigger.name} ({trigger.GetDirection()})");
+                        graph.AppendLine($"  ├─ Trigger: {trigger.name} ({trigger.SpawnType})");
                     }
                 }
                 

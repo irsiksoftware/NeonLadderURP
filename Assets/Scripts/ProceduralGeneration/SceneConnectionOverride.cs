@@ -247,12 +247,9 @@ namespace NeonLadder.ProceduralGeneration
         
         private void ApplyDestination(string sceneName, string spawnPoint)
         {
-            if (transitionTrigger != null)
-            {
-                transitionTrigger.SetDestination(sceneName, spawnPoint);
-            }
+            //TODO store where we came from inside of scheduled event along with player info, after loading new scene, spawn player at correct location based on direction we came from.
         }
-        
+
         private string GetDestinationScene()
         {
             switch (selectionMode)
@@ -371,20 +368,7 @@ namespace NeonLadder.ProceduralGeneration
             
             return false;
         }
-        
-        public void RestoreOriginalDestination()
-        {
-            if (transitionTrigger != null && !string.IsNullOrEmpty(originalDestination))
-            {
-                transitionTrigger.SetDestination(originalDestination, originalSpawnPoint);
-                
-                if (debugLogging)
-                {
-                    Debug.Log($"[SceneConnectionOverride] Restored original destination: {originalDestination}");
-                }
-            }
-        }
-        
+    
         #region Editor Helpers
         
         public static List<string> GetAllScenesInBuildSettings()

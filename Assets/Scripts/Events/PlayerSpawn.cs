@@ -2,6 +2,7 @@ using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using System.Collections;
+using UnityEngine;
 
 namespace NeonLadder.Events
 {
@@ -10,8 +11,30 @@ namespace NeonLadder.Events
     /// </summary>
     public class PlayerSpawn : BaseGameEvent<PlayerSpawn>
     {
+        public Vector3? spawnPosition;
+        
         public override void Execute()
         {
+            // Disable Z movement to restore X/Y movement and stop auto-walk
+            model.Player.DisableZMovement();
+            
+            // Zero out velocity to stop any residual movement
+            model.Player.velocity = Vector3.zero;
+            model.Player.TargetVelocity = Vector3.zero;
+
+            if (spawnPosition.HasValue)
+            {
+                var rigidbody = model.Player.GetComponent<Rigidbody>();
+                if (rigidbody != null)
+                {
+                    rigidbody.linearVelocity = Vector3.zero;
+                    rigidbody.angularVelocity = Vector3.zero;
+                }
+                
+                model.Player.velocity = Vector2.zero;
+                model.Player.Teleport(spawnPosition.Value);
+            }
+            
             if (model.Player.audioSource && model.Player.respawnAudio)
             {
                 // Schedule respawn audio through event system

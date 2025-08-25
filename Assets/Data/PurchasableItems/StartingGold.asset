@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdef123456789abcadef789ef8904bc, type: 3}
+  m_Name: StartingGold
+  m_EditorClassIdentifier: 
+  itemId: starting_gold
+  itemName: Inheritance
+  description: Start each run with +50 Meta currency
+  flavorText: '"My rich uncle finally paid up!" - Wade Wilson'
+  icon: {fileID: 0}
+  shopIcon: {fileID: 0}
+  currencyType: 1
+  baseCost: 200
+  canPurchaseMultiple: 1
+  maxPurchases: 5
+  itemType: 2
+  effects:
+  - effectType: 4
+    value: 50
+    targetProperty: starting_meta_currency
+    isPermanent: 1
+    duration: 0
+  requiredUnlocks: []
+  isAvailableInMetaShop: 1
+  isAvailableInPermaShop: 1
+  purchaseVFX: {fileID: 0}
+  purchaseSound: {fileID: 0}
+  rarityColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

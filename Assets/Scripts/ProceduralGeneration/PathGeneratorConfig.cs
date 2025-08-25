@@ -62,7 +62,7 @@ namespace NeonLadder.ProceduralGeneration
         [NonSerialized]
         private PathGenerator generator;
         [NonSerialized] 
-        private List<MysticalMap> previewMaps = new List<MysticalMap>();
+        private List<ProceduralMap> previewMaps = new List<ProceduralMap>();
         [NonSerialized]
         private List<ValidationResult> validationResults = new List<ValidationResult>();
 
@@ -298,7 +298,7 @@ namespace NeonLadder.ProceduralGeneration
         /// <summary>
         /// Logs a detailed map preview
         /// </summary>
-        private void LogMapPreview(MysticalMap map, int previewIndex)
+        private void LogMapPreview(ProceduralMap map, int previewIndex)
         {
             Debugger.Log($"🗺️ <color=cyan>Preview Map #{previewIndex} (Seed: {map.Seed})</color>");
             

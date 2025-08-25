@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdef123456789abcadef789ef8904bc, type: 3}
+  m_Name: DamageBoost
+  m_EditorClassIdentifier: 
+  itemId: damage_boost
+  itemName: Berserker's Might
+  description: Increases damage by 15% for this run
+  flavorText: '"More damage equals more fun. It''s simple math!" - Wade Wilson'
+  icon: {fileID: 0}
+  shopIcon: {fileID: 0}
+  currencyType: 0
+  baseCost: 75
+  canPurchaseMultiple: 0
+  maxPurchases: 3
+  itemType: 2
+  effects:
+  - effectType: 3
+    value: 15
+    targetProperty: damage
+    isPermanent: 1
+    duration: 0
+  requiredUnlocks: []
+  isAvailableInMetaShop: 1
+  isAvailableInPermaShop: 0
+  purchaseVFX: {fileID: 0}
+  purchaseSound: {fileID: 0}
+  rarityColor: {r: 1, g: 0, b: 0, a: 1}
