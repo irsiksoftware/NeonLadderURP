@@ -653,14 +653,15 @@ namespace NeonLadder.ProceduralGeneration
         {
             Debugger.LogError($"[SceneTransitionManager] {message}");
         }
-        
+
         #endregion
-        
+
         #region Spawn Point Management
-        
+
         public List<string> CutScenes = new List<string>
         {
-            Scenes.ReturnToStaging.ToString()
+            Scenes.Death.ToString(),
+            Scenes.BossDefeated.ToString()
         };
 
         public List<string> DefaultSpawnScenes = new List<string>

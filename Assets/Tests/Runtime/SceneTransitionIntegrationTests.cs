@@ -159,29 +159,6 @@ namespace NeonLadder.Tests.Runtime.SceneTransition
             Assert.IsTrue(actualDuration >= 1.8f && actualDuration <= 2.5f, 
                 $"Dance animation duration should be ~2 seconds, was {actualDuration:F2}s");
         }
-
-        [UnityTest]
-        public IEnumerator BossVictorySequence_ReturnToStaging_After5SecondDelay()
-        {
-            // Arrange
-            var startTime = Time.time;
-
-            // Act - Simulate full victory sequence timing
-            yield return new WaitForSeconds(5.0f); // Boss victory delay
-            
-            if (transitionManager != null)
-            {
-                transitionManager.TransitionToScene("Staging", SpawnPointType.Default);
-            }
-
-            var endTime = Time.time;
-            var actualDelay = endTime - startTime;
-
-            // Assert - Should have waited approximately 5 seconds
-            Assert.IsTrue(actualDelay >= 4.8f && actualDelay <= 5.5f, 
-                $"Return delay should be ~5 seconds, was {actualDelay:F2}s");
-        }
-
         #endregion
 
         #region Spawn Point Fallback Tests

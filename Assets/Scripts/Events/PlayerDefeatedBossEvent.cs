@@ -50,7 +50,7 @@ namespace NeonLadder.Events
 
             // 3. Schedule scene transition after 5 seconds using Simulation system
             Debug.Log("[PlayerDefeatedBossEvent] Scheduling scene transition to ReturnToStaging in 5 seconds");
-            var transitionEvent = Simulation.Schedule<ReturnToStagingEvent>(5f);
+            var transitionEvent = Simulation.Schedule<BossDefeatedCutsceneEvent>(5f);
         }
     }
 }
