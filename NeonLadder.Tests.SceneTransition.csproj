@@ -9,11 +9,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>NeonLadder.Tests.Runtime</RootNamespace>
-    <ProjectGuid>{DFF72330-1879-B153-DC36-8A047CEF02B9}</ProjectGuid>
+    <RootNamespace>NeonLadder.Tests.Runtime.SceneTransition</RootNamespace>
+    <ProjectGuid>{447C7902-ABA6-F311-413D-0EF1750209E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>NeonLadder.Tests.Runtime</AssemblyName>
+    <AssemblyName>NeonLadder.Tests.SceneTransition</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -61,52 +61,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Tests\Runtime\Mocks\MockStatsAndAchievements.cs" />
-    <Compile Include="Assets\Tests\Runtime\SaveStateConfigurationTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\UpgradeSystemTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\ControllerMappingTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\CircularDependencyTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\SaveSystemIntegrationTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\MeleeCombatSystemTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\SceneTransitionIntegrationTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\LoggingSystemConfigTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\SceneChangeDetector_UnitTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\MeleeCombatBugFixTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\ManagerController_PerformanceTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamManager.cs" />
-    <Compile Include="Assets\Tests\Runtime\Steam\SteamIntegrationTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\ComboSystemTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\MockInfrastructure.cs" />
-    <Compile Include="Assets\Tests\Runtime\DialogueChoiceDatabaseTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\EnhancedPurchaseManagerTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\SceneTransitionPrefabRootTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\DebugToolsTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\DialogSystemTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\ProceduralSceneLoadingTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\SceneTransitionManagerTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\PurchasableItemTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\BatchCurrencyEventTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\EulerAngleCacheTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\OptimizedSceneEnumResolverTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\PathGeneratorTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\EventDrivenPlayerMovementTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\Steam\SteamPresenceTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\SpawnPointConfigurationTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\Mocks\MockGameStates.cs" />
-    <Compile Include="Assets\Tests\Runtime\DialogueSceneConfigurationTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\EventDrivenEnemyAITests.cs" />
-    <Compile Include="Assets\Tests\Runtime\DeterministicHashingTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\ProtagonistDialogueSystemTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\KinematicObjectTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\EnhancedSaveSystemTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\Steam\RealSteamAchievementE2ETests.cs" />
-    <Compile Include="Assets\Tests\Runtime\PlayerTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\EventDrivenStatsTests.cs" />
-    <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamworksAPI.cs" />
-    <Compile Include="Assets\Tests\Runtime\BossBanterSystemTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\MockInfrastructure.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SpawnPointConfigurationTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\DebugToolsTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SceneTransitionIntegrationTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SceneTransitionPrefabRootTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SceneTransitionManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Tests\Runtime\NeonLadder.Tests.Runtime.asmdef" />
+    <None Include="Assets\Tests\Runtime\SceneTransition\NeonLadder.Tests.SceneTransition.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1081,22 +1044,6 @@
       <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="com.rlabrecque.steamworks.net">
-      <HintPath>Library\ScriptAssemblies\com.rlabrecque.steamworks.net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
@@ -1111,17 +1058,9 @@
       <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
       <Name>NeonLadder.Scripts</Name>
     </ProjectReference>
-    <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
-      <Name>Michsky.MUIP</Name>
-    </ProjectReference>
-    <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
-      <Name>PixelCrushers</Name>
-    </ProjectReference>
-    <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
-      <Name>DialogueSystem</Name>
+    <ProjectReference Include="NeonLadder.Tests.Runtime.csproj">
+      <Project>{DFF72330-1879-B153-DC36-8A047CEF02B9}</Project>
+      <Name>NeonLadder.Tests.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

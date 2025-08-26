@@ -396,6 +396,14 @@ namespace NeonLadder.ProceduralGeneration
             // Load the scene
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(transition.TargetSceneName);
             
+            // Check if scene load failed
+            if (asyncLoad == null)
+            {
+                Debug.LogError($"[SceneTransitionManager] Failed to load scene '{transition.TargetSceneName}' - scene not found in build settings or build profile");
+                isTransitioning = false;
+                yield break;
+            }
+            
             // Wait for scene to load
             while (!asyncLoad.isDone)
             {
