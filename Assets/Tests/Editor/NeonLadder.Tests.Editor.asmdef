@@ -6,7 +6,11 @@
         "UnityEditor.TestRunner",
         "NeonLadder.Scripts",
         "NeonLadder.ProceduralGeneration",
-        "NeonLadder.Editor"
+        "NeonLadder.Editor",
+        "DialogueSystem",
+        "DialogueSystemEditor",
+        "PixelCrushers",
+        "PixelCrushersEditor"
     ],
     "includePlatforms": [
         "Editor"
@@ -18,7 +22,9 @@
         "nunit.framework.dll"
     ],
     "autoReferenced": false,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
     "versionDefines": [],
     "noEngineReferences": false
 }

@@ -318,8 +318,8 @@
     <Compile Include="Assets\Scripts\Mechanics\Enums\Scenes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\MetaCurrencyController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PortalSpawnController.cs" />
-    <Compile Include="Assets\Scripts\Cameras\DynamicCameraAdjustment.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointMonitor.cs" />
+    <Compile Include="Assets\Scripts\Cameras\DynamicCameraAdjustment.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\DropGroup.cs" />
     <Compile Include="Assets\Scripts\Models\Platformer.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyDefeatedManager.cs" />

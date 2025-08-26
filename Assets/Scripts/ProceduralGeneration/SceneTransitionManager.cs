@@ -246,6 +246,13 @@ namespace NeonLadder.ProceduralGeneration
                 return;
             }
             
+            // Check if this component is still valid before starting coroutine
+            if (this == null)
+            {
+                Debug.LogWarning("[SceneTransitionManager] Component destroyed, cannot start transition");
+                return;
+            }
+            
             var transition = new TransitionData
             {
                 TargetSceneName = sceneName,
@@ -683,9 +690,28 @@ namespace NeonLadder.ProceduralGeneration
 
             if (spawnConfigs.Length == 0)
             {
-                LogError("CRITICAL: No SpawnPointConfiguration components found in scene! Cannot spawn player.");
-                Debug.LogError("[SceneTransitionManager] CRITICAL: No spawn points in scene. Halting.");
-                #if UNITY_EDITOR
+                string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                
+                // Create highly visible error messages
+                Debug.LogError("════════════════════════════════════════════════════════════════════════");
+                Debug.LogError("║                          BLACK SCREEN WARNING                         ║");
+                Debug.LogError("════════════════════════════════════════════════════════════════════════");
+                Debug.LogError($"║ CRITICAL: No SpawnPointConfiguration found in scene '{sceneName}'");
+                Debug.LogError("║");
+                Debug.LogError("║ REASON: Cannot spawn player without spawn points!");
+                Debug.LogError("║");
+                Debug.LogError("║ TO FIX THIS:");
+                Debug.LogError("║   1. Add a GameObject with SpawnPointConfiguration component");
+                Debug.LogError("║   2. Set the spawn direction (Left, Right, Up, Down, or Default)");
+                Debug.LogError("║   3. Position it where the player should spawn");
+                Debug.LogError("║");
+                Debug.LogError("║ TEST MODE: Scene will continue but player won't spawn");
+                Debug.LogError("════════════════════════════════════════════════════════════════════════");
+                
+                LogError($"CRITICAL: No SpawnPointConfiguration components found in scene '{sceneName}'! Cannot spawn player.");
+                
+                // Don't pause in tests, just log the error
+                #if UNITY_EDITOR && !UNITY_INCLUDE_TESTS
                 UnityEditor.EditorApplication.isPaused = true;
                 #endif
                 return;

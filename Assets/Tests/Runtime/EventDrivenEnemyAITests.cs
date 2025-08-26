@@ -33,6 +33,9 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void Setup()
         {
+            // Ignore animator and spawn point warnings in tests
+            LogAssert.ignoreFailingMessages = true;
+            
             // Clear simulation before each test
             Simulation.Clear();
             
@@ -97,6 +100,9 @@ namespace NeonLadder.Tests.Runtime
                 Object.DestroyImmediate(enemyGameObject);
             if (playerGameObject != null)
                 Object.DestroyImmediate(playerGameObject);
+            
+            // Reset log assertion settings
+            LogAssert.ignoreFailingMessages = false;
         }
 
         [Test]

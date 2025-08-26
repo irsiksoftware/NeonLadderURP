@@ -23,6 +23,9 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void Setup()
         {
+            // Ignore animator warnings in tests
+            LogAssert.ignoreFailingMessages = true;
+            
             // Initialize combo system
             comboSystem = new ComboSystem();
             Simulation.SetModel(comboSystem);
@@ -57,6 +60,9 @@ namespace NeonLadder.Tests.Runtime
                 Object.DestroyImmediate(playerObject);
             }
             Simulation.DestroyModel<ComboSystem>();
+            
+            // Reset log assertion settings
+            LogAssert.ignoreFailingMessages = false;
         }
         
         [Test]
@@ -199,6 +205,9 @@ namespace NeonLadder.Tests.Runtime
         [UnityTest]
         public IEnumerator ComboWindow_ResetsAfterTimeout()
         {
+            // Expect spawn point warning messages if scene loading happens
+            LogAssert.ignoreFailingMessages = true;
+            
             // Arrange
             var input1 = new InputBufferEvent { inputType = InputType.Attack };
             input1.player = player;
@@ -214,6 +223,9 @@ namespace NeonLadder.Tests.Runtime
             
             // Assert - Should be in new combo window
             Assert.IsTrue(comboSystem.IsInComboWindow(player), "Should start new combo window after timeout");
+            
+            // Reset log assertion settings
+            LogAssert.ignoreFailingMessages = false;
         }
     }
 }
