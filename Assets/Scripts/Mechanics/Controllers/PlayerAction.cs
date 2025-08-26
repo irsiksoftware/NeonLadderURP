@@ -182,7 +182,10 @@ namespace NeonLadder.Mechanics.Controllers
                     }
                 }
 
-                playerActionMap.Enable();
+                if (playerActionMap != null)
+                {
+                    playerActionMap.Enable();
+                }
             }
         }
 
@@ -234,28 +237,53 @@ namespace NeonLadder.Mechanics.Controllers
         protected override void ConfigureControls(Player player)
         {
             playerActionMap = player?.Controls?.FindActionMap("Player");
+            
+            if (playerActionMap == null)
+            {
+                Debugger.LogWarning("PlayerActionMap not found - Controls may not be initialized");
+                return;
+            }
+            
             playerActionMap.Enable();
 
             var sprintAction = playerActionMap.FindAction("Sprint");
-            sprintAction.performed += OnSprintPerformed;
-            sprintAction.canceled += OnSprintCanceled;
+            if (sprintAction != null)
+            {
+                sprintAction.performed += OnSprintPerformed;
+                sprintAction.canceled += OnSprintCanceled;
+            }
 
             var moveAction = playerActionMap.FindAction("Move");
-            moveAction.performed += OnMovePerformed;
-            moveAction.canceled += OnMoveCanceled;
+            if (moveAction != null)
+            {
+                moveAction.performed += OnMovePerformed;
+                moveAction.canceled += OnMoveCanceled;
+            }
 
             var attack = playerActionMap.FindAction("Attack");
-            attack.performed += OnAttackPerformed;
-            attack.canceled += OnAttackCanceled;
+            if (attack != null)
+            {
+                attack.performed += OnAttackPerformed;
+                attack.canceled += OnAttackCanceled;
+            }
 
             var weaponSwapAction = playerActionMap.FindAction("WeaponSwap");
-            weaponSwapAction.performed += OnWeaponSwap;
+            if (weaponSwapAction != null)
+            {
+                weaponSwapAction.performed += OnWeaponSwap;
+            }
 
             var jumpAction = playerActionMap.FindAction("Jump");
-            jumpAction.performed += OnJumpPerformed;
+            if (jumpAction != null)
+            {
+                jumpAction.performed += OnJumpPerformed;
+            }
 
             var upAction = playerActionMap.FindAction("Up");
-            upAction.performed += OnUpPerformed;
+            if (upAction != null)
+            {
+                upAction.performed += OnUpPerformed;
+            }
 
             ControllerDebugging.PrintDebugControlConfiguration(player);
         }

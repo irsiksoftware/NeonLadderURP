@@ -9,7 +9,11 @@
         "NeonLadder.Editor",
         "NeonLadder.Editor.InputSystem",
         "NeonLadder.Debug.Editor",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "DialogueSystem",
+        "DialogueSystemEditor",
+        "PixelCrushers",
+        "PixelCrushersEditor"
     ],
     "includePlatforms": [
         "Editor"

@@ -96,6 +96,10 @@ crashlytics-build.properties
 /HeroEditor_BACKUP
 console.log
 
+# Unity Test Runner temporary scenes
+/Assets/InitTestScene*.unity
+/Assets/InitTestScene*.unity.meta
+
 Assets/Audio/Background/**
 !Assets/Audio/Background/**/DownloadInstructions.txt
 

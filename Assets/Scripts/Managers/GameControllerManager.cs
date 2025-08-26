@@ -113,7 +113,8 @@ namespace NeonLadder.Managers
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = false;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = true;
                 break;
-            case Scenes.ReturnToStaging:
+            case Scenes.BossDefeated:
+            case Scenes.Death:
                 player.transform.parent.GetComponentInChildren<Canvas>().enabled = false;
                 break;
             case Scenes.Start:

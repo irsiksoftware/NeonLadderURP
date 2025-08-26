@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: eb9e1970fe9cd68408a74d41c5d152f8
   - enabled: 1
+    path: Assets/Scenes/Cutscenes/ReturnToStaging.unity
+    guid: ef2d04767cc6ce340ab093ddb480c506
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Death.unity
+    guid: cde56aa006f1d434bb0a31684b415e9c
+  - enabled: 1
     path: Assets/Scenes/Staging.unity
     guid: c357e0a859db8c44e8af73efc2d8436f
   - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/ReturnToStaging.unity
-    guid: ef2d04767cc6ce340ab093ddb480c506
   - enabled: 1
     path: Assets/Scenes/PermaShop.unity
     guid: a3c0000dfdb95c149a2855d5c6470f72

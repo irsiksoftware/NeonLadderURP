@@ -8,22 +8,22 @@ namespace NeonLadder.Events
     /// <summary>
     /// Event to handle returning to the Staging scene after boss victory
     /// </summary>
-    public class ReturnToStagingEvent : BaseGameEvent<ReturnToStagingEvent>
+    public class BossDefeatedCutsceneEvent : BaseGameEvent<BossDefeatedCutsceneEvent>
     {
         public Boss completedBoss;
 
         public override void Execute()
         {
-            Debug.Log($"[ReturnToStagingEvent] Transitioning to ReturnToStaging after defeating: {completedBoss?.gameObject?.name ?? "NULL"}");
+            Debug.Log($"[BossDefeatedCutsceneEvent] Transitioning to ReturnToStaging after defeating: {completedBoss?.gameObject?.name ?? "NULL"}");
             
             if (SceneTransitionManager.Instance != null)
             {
-                SceneTransitionManager.Instance.TransitionToScene("ReturnToStaging");
-                Debug.Log("[ReturnToStagingEvent] Scene transition initiated successfully");
+                SceneTransitionManager.Instance.TransitionToScene("BossDefeated");
+                Debug.Log("[ReturnToSBossDefeatedCutsceneEventtagingEvent] Scene transition initiated successfully");
             }
             else
             {
-                Debug.LogError("[ReturnToStagingEvent] SceneTransitionManager.Instance is null!");
+                Debug.LogError("[BossDefeatedCutsceneEvent] SceneTransitionManager.Instance is null!");
             }
         }
     }

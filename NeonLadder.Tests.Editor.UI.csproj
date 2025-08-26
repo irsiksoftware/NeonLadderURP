@@ -1124,6 +1124,22 @@
       <Project>{F8B20563-4C10-E96D-AE18-E94229571DBC}</Project>
       <Name>NeonLadder.Debug.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="DialogueSystem.csproj">
+      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
+      <Name>DialogueSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="DialogueSystemEditor.csproj">
+      <Project>{E8321E92-7314-26E0-8CFC-554106D8124B}</Project>
+      <Name>DialogueSystemEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PixelCrushers.csproj">
+      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
+      <Name>PixelCrushers</Name>
+    </ProjectReference>
+    <ProjectReference Include="PixelCrushersEditor.csproj">
+      <Project>{47AB043D-11AA-52F6-6203-A5342F4ABD3B}</Project>
+      <Name>PixelCrushersEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

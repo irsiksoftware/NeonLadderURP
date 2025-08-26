@@ -9,11 +9,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
-    <ProjectGuid>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</ProjectGuid>
+    <RootNamespace>NeonLadder.Tests.Runtime.SceneTransition</RootNamespace>
+    <ProjectGuid>{447C7902-ABA6-F311-413D-0EF1750209E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>NeonLadder.Scripts</AssemblyName>
+    <AssemblyName>NeonLadder.Tests.SceneTransition</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -61,279 +61,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Mechanics\Currency\BaseCurrency.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\GameTimer.cs" />
-    <Compile Include="Assets\Scripts\Utilities\WebGLExclude.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Stats\BaseStat.cs" />
-    <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneConnectionOverride.cs" />
-    <Compile Include="Assets\Scripts\Items\Collectible.cs" />
-    <Compile Include="Assets\Scripts\Utilities\ChildObjectsAnimationSynchronization.cs" />
-    <Compile Include="Assets\Scripts\Debug\PlayerActionDebugging.cs" />
-    <Compile Include="Assets\Scripts\Events\ReturnToStagingEvent.cs" />
-    <Compile Include="Assets\Scripts\Debug\ControllerDebugging.cs" />
-    <Compile Include="Assets\Scripts\Models\MeleeWeapons.cs" />
-    <Compile Include="Assets\Scripts\Models\Firearms.cs" />
-    <Compile Include="Assets\Scripts\Integrations\DamageNumberProRenderer.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Minor.cs" />
-    <Compile Include="Assets\Scripts\Items\PermaCurrencyReplenishment.cs" />
-    <Compile Include="Assets\Scripts\Events\HealthRegenerationEvent.cs" />
-    <Compile Include="Assets\Scripts\Events\HealthDamageEvent.cs" />
-    <Compile Include="Assets\Scripts\Trackers\PlayerStateTracker.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeSystem.cs" />
-    <Compile Include="Assets\Scripts\Cameras\CameraConfiguration.cs" />
-    <Compile Include="Assets\Scripts\Items\Loot\LootItem.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseCurrencyController.cs" />
-    <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
-    <Compile Include="Assets\Scripts\Debug\LoggingSystemConfig.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneEndController.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\TimeTrackerUI.cs" />
-    <Compile Include="Assets\Scripts\UI\BossesDefeatedUIDisplayManager.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\ActionStates.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgrade.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointConfiguration.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\RangedAttackController.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionManager.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.Mover.cs" />
-    <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterController.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Zones\VictoryZone.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\SaveSystem.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerSpawn.cs" />
-    <Compile Include="Assets\Scripts\Models\Unlock.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\GenerationRules.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\PermaCurrencyController.cs" />
-    <Compile Include="Assets\Scripts\Common\Constants.cs" />
-    <Compile Include="Assets\Scripts\Managers\RestartSceneManager.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneManagement.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyAttackValidationEvent.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\AllowZMovementController.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\ConsolidatedSaveData.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeData.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\Examples\ExampleSaveConfigurations.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Currency.cs" />
-    <Compile Include="Assets\Scripts\Steam\Achievement.cs" />
-    <Compile Include="Assets\Scripts\UI\MainUIController.cs" />
-    <Compile Include="Assets\Scripts\Models\PurchasableItem.cs" />
-    <Compile Include="Assets\Scripts\Events\StaminaContinuousRegenerationEvent.cs" />
-    <Compile Include="Assets\Scripts\Dialog\BossBanterManager.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerGroundedStateChangeEvent.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SceneTransitionTriggerTests.cs" />
-    <Compile Include="Assets\Scripts\Dialog\Editor\DialogueSceneGenerator.cs" />
-    <Compile Include="Assets\Scripts\Events\InstantiateEvent.cs" />
-    <Compile Include="Assets\Scripts\Managers\EventManager.cs" />
-    <Compile Include="Assets\Scripts\Core\Fuzzy.cs" />
-    <Compile Include="Assets\Scripts\Models\ActionPlatformerConstants.cs" />
-    <Compile Include="Assets\Scripts\Events\BossStopJump.cs" />
-    <Compile Include="Assets\Scripts\UI\AutoVerticalScrollText.cs" />
-    <Compile Include="Assets\Scripts\Utilities\CoroutineRunner.cs" />
-    <Compile Include="Assets\Scripts\Effects\Visual\DashAfterImage.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\Achievements.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\Layers.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Currency\Meta.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\SpawnPoint.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\FlyingMinor.cs" />
-    <Compile Include="Assets\Scripts\Events\BossTransformationEvent.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerJumpValidationEvent.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\SpawnPointTypes.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\CollisionController.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\SaveStateConfiguration.cs" />
-    <Compile Include="Assets\Scripts\Steam\StatsAndAchievements.cs" />
-    <Compile Include="Assets\Scripts\Effects\Text\FollowCharacter.cs" />
-    <Compile Include="Assets\Scripts\Core\Simulation.Event.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionTrigger.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\EnhancedSaveSystem.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\PlayerAnimationLayers.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerUnlock.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerTerrainCollision.cs" />
-    <Compile Include="Assets\Scripts\WebRequests\WebRequestHandler.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IPlayerActions.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerExhaustedEvent.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\PathExtensions.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Player.cs" />
-    <Compile Include="Assets\Scripts\Dialog\ConversationManager.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerCurrencyCollision.cs" />
-    <Compile Include="Assets\Scripts\Events\StaminaChangeEvent.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerDefeatedBossEvent.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseAction.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\LoadSystem.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\SaveSystemConfig.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Major.cs" />
-    <Compile Include="Assets\Scripts\Cameras\CameraRotationProvider.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\Animations.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Loot\LootHelper.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\ProceduralSceneLoader.cs" />
-    <Compile Include="Assets\Scripts\Utilities\OptimizedSceneEnumResolver.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerAttackEvent.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />
-    <Compile Include="Assets\Scripts\Dialog\CharacterPersonalitySystem.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Currency\Perma.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SpawnPointManagerTests.cs" />
-    <Compile Include="Assets\Scripts\Events\SaveGame.cs" />
-    <Compile Include="Assets\Scripts\Events\BatchCurrencyEvent.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\KinematicObject.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyTerrainCollision.cs" />
-    <Compile Include="Assets\Scripts\Managers\Optimization\UnitySceneProvider.cs" />
-    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
-    <Compile Include="Assets\Scripts\Managers\ManagerController.cs" />
-    <Compile Include="Assets\Scripts\Managers\PlayerStaminaUIManager.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionPrefabRoot.cs" />
-    <Compile Include="Assets\Scripts\Utilities\TimedLogger.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SceneConnectionOverrideTests.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgradeSystem.cs" />
-    <Compile Include="Assets\Scripts\Events\FadeInCamera.cs" />
-    <Compile Include="Assets\Scripts\Models\UnlockScriptableObject.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Colliders\ParentCollider.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyAnimationEvent.cs" />
-    <Compile Include="Assets\Scripts\Optimization\EulerAngleCache.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\ShopKeeperWindow.cs" />
-    <Compile Include="Assets\Scripts\Dialog\DialogSystemConfig.cs" />
-    <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
-    <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\SaveFormatConverter.cs" />
-    <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
-    <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
-    <Compile Include="Assets\Scripts\Events\RestartScene.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\PlayerData.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\Tags.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerAudioEvent.cs" />
-    <Compile Include="Assets\Scripts\Dialog\ConversationPointTracker.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerStopJump.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeCategory.cs" />
-    <Compile Include="Assets\Scripts\Debug\LoggingManager.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\TransitionDirections.cs" />
-    <Compile Include="Assets\Scripts\Events\LoadGame.cs" />
-    <Compile Include="Assets\Scripts\UI\StatUI.cs" />
-    <Compile Include="Assets\Scripts\Dialog\EnhancedLocalizationManager.cs" />
-    <Compile Include="Assets\Scripts\Dialog\DialogueChoiceDatabase.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneRoutingContext.cs" />
-    <Compile Include="Assets\Scripts\Items\Loot\LootTable.cs" />
-    <Compile Include="Assets\Scripts\Items\MetaCurrencyReplenishment.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\BossTransformations.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyDistanceEvaluationEvent.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerEnemyCollision.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerLanded.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Boss.cs" />
-    <Compile Include="Assets\Scripts\Core\ComboSystem.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\PathGenerator.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SceneRouterTests.cs" />
-    <Compile Include="Assets\Scripts\Utilities\ButtonHelper.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Managers\EnhancedPurchaseManager.cs" />
-    <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
-    <Compile Include="Assets\Scripts\Dialog\BossBanterContent.cs" />
-    <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Progression\CurrencyType.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyPeriodicReassessmentEvent.cs" />
-    <Compile Include="Assets\Scripts\Core\Simulation.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Stats\Stamina.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Zones\DeathZone.cs" />
-    <Compile Include="Assets\Scripts\Managers\DamageNumberManager.cs" />
-    <Compile Include="Assets\Scripts\Events\ComboAttackEvent.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Collectibles\Buff.cs" />
-    <Compile Include="Assets\Scripts\Items\HealthReplenishment.cs" />
-    <Compile Include="Assets\Scripts\Events\CurrencyChangeEvent.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyStateTransitionEvent.cs" />
-    <Compile Include="Assets\Scripts\Debug\DebugLogOverlayUI.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerEnteredVictoryZone.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\DamageNumberController.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerEnteredDeathZone.cs" />
-    <Compile Include="Assets\Scripts\Events\WeaponBossCollision.cs" />
-    <Compile Include="Assets\Scripts\Events\WeaponSwapEvent.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerExhausted.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\PlayerSettings.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Collectibles\CurrencyInstance.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IControllable.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Do\DoFlyAway.cs" />
-    <Compile Include="Assets\Scripts\Managers\CameraTransformManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\RaycastManager.cs" />
-    <Compile Include="Assets\Scripts\Core\DamageNumberSystem.cs" />
-    <Compile Include="Assets\Scripts\Documentation\MarvelSquadPersona.cs" />
-    <Compile Include="Assets\Scripts\Models\MonsterGroups.cs" />
-    <Compile Include="Assets\Scripts\Utilities\AchevementResolver.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneNameMapper.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\GameStates.cs" />
-    <Compile Include="Assets\Scripts\Events\InputBufferEvent.cs" />
-    <Compile Include="Assets\Scripts\Dialog\Editor\DialogueSystemMenuItems.cs" />
-    <Compile Include="Assets\Scripts\Utilities\PlatformVisibilityController.cs" />
-    <Compile Include="Assets\Scripts\Cameras\DemoSceneCloseness.cs" />
-    <Compile Include="Assets\Scripts\Managers\LootDropManager.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Do\ActorCutsceneMovement.cs" />
-    <Compile Include="Assets\Scripts\DataManagement\SaveData.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerStateMediator.cs" />
-    <Compile Include="Assets\Scripts\Events\BaseGameEvent.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnTester.cs" />
-    <Compile Include="Assets\Scripts\UI\MetaGameController.cs" />
-    <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterCamera.cs" />
-    <Compile Include="Assets\Scripts\Events\BossJumped.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\ControlDisabler.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionTriggerDetector.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyDeath.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\TransitionModes.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\PathGeneratorConfig.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Game.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerJumped.cs" />
-    <Compile Include="Assets\Scripts\Events\FadeOutCamera.cs" />
-    <Compile Include="Assets\Scripts\Utilities\SceneEnumResolver.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\MonsterStates.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\BossLocationData.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Audio\PlayAudioClip.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameControllerManager.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\MeleeController.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\MapAndSeedDataPopulation.cs" />
-    <Compile Include="Assets\Scripts\Managers\SteamManager.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\ProjectileController.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerAction.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\UnlockTypes.cs" />
-    <Compile Include="Assets\Scripts\Performance\PerformanceProfiler.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneRouter.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IPlayerState.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\SceneSizes.cs" />
-    <Compile Include="Assets\Scripts\Dialog\BossBanterTrigger.cs" />
-    <Compile Include="Assets\Scripts\Cameras\CameraActivator.cs" />
-    <Compile Include="Assets\Scripts\UI\TitleScreen.cs" />
-    <Compile Include="Assets\Scripts\Managers\Optimization\SceneChangeDetector.cs" />
-    <Compile Include="Assets\Scripts\Debug\NLDebug.cs" />
-    <Compile Include="Assets\Scripts\Cameras\RotationController.cs" />
-    <Compile Include="Assets\Scripts\Events\BossDeath.cs" />
-    <Compile Include="Assets\Scripts\Managers\PlayerHealthUIManager.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerBossCollision.cs" />
-    <Compile Include="Assets\Scripts\Debug\AnimationDebugging.cs" />
-    <Compile Include="Assets\Scripts\Managers\LootPurchaseManager.cs" />
-    <Compile Include="Assets\Scripts\Events\DamageNumberEvent.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\DestinationTypes.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerDeath.cs" />
-    <Compile Include="Assets\Scripts\Managers\DialogueManager.cs" />
-    <Compile Include="Assets\Scripts\Effects\Text\Typewriter.cs" />
-    <Compile Include="Assets\Scripts\Events\StaminaIsZero.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerSprintValidationEvent.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\FlyingMajor.cs" />
-    <Compile Include="Assets\Scripts\Managers\MonsterGroupActivationManager.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\BuffTypes.cs" />
-    <Compile Include="Assets\Scripts\Events\HealthIsZero.cs" />
-    <Compile Include="Assets\Scripts\Dialog\ProtagonistDialogueSystem.cs" />
-    <Compile Include="Assets\Scripts\Optimization\EulerAngleCacheBenchmark.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Stats\Health.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\Bosses.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\Scenes.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\MetaCurrencyController.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Controllers\PortalSpawnController.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointMonitor.cs" />
-    <Compile Include="Assets\Scripts\Cameras\DynamicCameraAdjustment.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointMonitor.cs" />
-    <Compile Include="Assets\Scripts\Items\Loot\DropGroup.cs" />
-    <Compile Include="Assets\Scripts\Models\Platformer.cs" />
-    <Compile Include="Assets\Scripts\Managers\EnemyDefeatedManager.cs" />
-    <Compile Include="Assets\Scripts\Events\BossLanded.cs" />
-    <Compile Include="Assets\Scripts\Managers\PlayerCameraPositionManager.cs" />
-    <Compile Include="Assets\Scripts\Dialog\DialogueSceneConfiguration.cs" />
-    <Compile Include="Assets\Scripts\Events\PlayerVelocityValidationEvent.cs" />
-    <Compile Include="Assets\Scripts\Dialog\DialogSystemTypes.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\Enums\Directions.cs" />
-    <Compile Include="Assets\Scripts\Events\StaminaRegenerationEvent.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\MockInfrastructure.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SpawnPointConfigurationTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\DebugToolsTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SceneTransitionIntegrationTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SceneTransitionPrefabRootTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransition\SceneTransitionManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\NeonLadder.Scripts.asmdef" />
+    <None Include="Assets\Tests\Runtime\SceneTransition\NeonLadder.Tests.SceneTransition.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -800,128 +536,8 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="HeroEditor.Common.Editor">
-      <HintPath>Assets\Packages\HeroEditor\Common\Scripts\Editor\HeroEditor.Common.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>Library\PackageCache\com.unity.collections\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Tracker.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="EasyRoads3Dv3Editor">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="EasyRoads3Dv3">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.VersionHandlerImpl">
-      <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandlerImpl.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="log4netPlastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.IonicZip">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="HeroEditor.Common">
-      <HintPath>Assets\Packages\HeroEditor\Common\Scripts\EditorScripts\HeroEditor.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.JarResolver">
-      <HintPath>Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DelaunayER">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.VersionHandler">
-      <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AssetStoreTools">
-      <HintPath>Assets\Packages\LeartesStudios\AssetStoreTools\Editor\AssetStoreTools.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json\Runtime\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>Library\PackageCache\com.unity.analytics\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1420,24 +1036,12 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Localization">
-      <HintPath>Library\ScriptAssemblies\Unity.Localization.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="com.rlabrecque.steamworks.net">
-      <HintPath>Library\ScriptAssemblies\com.rlabrecque.steamworks.net.dll</HintPath>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">
@@ -1450,21 +1054,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
-      <Name>Michsky.MUIP</Name>
+    <ProjectReference Include="NeonLadder.Scripts.csproj">
+      <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
+      <Name>NeonLadder.Scripts</Name>
     </ProjectReference>
-    <ProjectReference Include="DamageNumbersPro.csproj">
-      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
-      <Name>DamageNumbersPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
-      <Name>PixelCrushers</Name>
-    </ProjectReference>
-    <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
-      <Name>DialogueSystem</Name>
+    <ProjectReference Include="NeonLadder.Tests.Runtime.csproj">
+      <Project>{DFF72330-1879-B153-DC36-8A047CEF02B9}</Project>
+      <Name>NeonLadder.Tests.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

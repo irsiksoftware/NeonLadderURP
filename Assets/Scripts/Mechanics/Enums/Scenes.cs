@@ -8,7 +8,6 @@ namespace NeonLadder.Mechanics.Enums
         Start,
         MetaShop,
         PermaShop,
-        ReturnToStaging,
         Credits,
         Test,
         
@@ -56,6 +55,11 @@ namespace NeonLadder.Mechanics.Enums
         SidePath1,
         MainPath3,
         MainPath2,
-        MainPath1
+        MainPath1,
+
+
+        // Cutscene scenes
+        BossDefeated,
+        Death
     }
 }

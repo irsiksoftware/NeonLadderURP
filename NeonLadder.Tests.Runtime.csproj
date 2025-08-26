@@ -68,6 +68,7 @@
     <Compile Include="Assets\Tests\Runtime\CircularDependencyTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SaveSystemIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\MeleeCombatSystemTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransitionIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\LoggingSystemConfigTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SceneChangeDetector_UnitTests.cs" />
     <Compile Include="Assets\Tests\Runtime\MeleeCombatBugFixTests.cs" />
@@ -75,10 +76,14 @@
     <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamManager.cs" />
     <Compile Include="Assets\Tests\Runtime\Steam\SteamIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ComboSystemTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\MockInfrastructure.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogueChoiceDatabaseTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EnhancedPurchaseManagerTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransitionPrefabRootTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\DebugToolsTests.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ProceduralSceneLoadingTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SceneTransitionManagerTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PurchasableItemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\BatchCurrencyEventTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EulerAngleCacheTests.cs" />
@@ -86,6 +91,7 @@
     <Compile Include="Assets\Tests\Runtime\PathGeneratorTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenPlayerMovementTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Steam\SteamPresenceTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\SpawnPointConfigurationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Mocks\MockGameStates.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogueSceneConfigurationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenEnemyAITests.cs" />

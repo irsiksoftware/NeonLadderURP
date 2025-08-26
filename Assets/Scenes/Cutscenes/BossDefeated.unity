@@ -348,6 +348,20 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6622722360991453877, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: m_text
+      value: "\n\n\n\n\n\n\n\n\n\n\n\nVisuals: We see our spaceship approach from
+        overhead.\n\nSounds: Whirring noises as the ship activates the emergency
+        protocol.\n\nShip Dialogue:\"RRTS target terminated. Commander retrieval
+        protocol activated..... \nAudible: More whirring noises...\n\n\nVisuals:
+        We see the ship pick up the Commander and take them back to staging area.\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622722360991453877, guid: 45a5343220e19c34ab9dec7d2f5566de,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 8535418843696218278, guid: 45a5343220e19c34ab9dec7d2f5566de,
         type: 3}
       propertyPath: m_Pivot.x

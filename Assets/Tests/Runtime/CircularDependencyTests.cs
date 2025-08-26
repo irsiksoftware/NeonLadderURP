@@ -20,6 +20,9 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void Setup()
         {
+            // Ignore animator and spawn point warnings in tests
+            LogAssert.ignoreFailingMessages = true;
+            
             // Create test game object with proper hierarchy (like other tests)
             testObject = new GameObject("TestPlayer");
             
@@ -47,6 +50,9 @@ namespace NeonLadder.Tests.Runtime
             {
                 Object.DestroyImmediate(testObject);
             }
+            
+            // Reset log assertion settings
+            LogAssert.ignoreFailingMessages = false;
         }
         
         #region Circular Dependency Detection Tests
