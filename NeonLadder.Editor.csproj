@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>NeonLadder.Editor</RootNamespace>
-    <ProjectGuid>{50EBD1F2-C618-5B5C-3106-45F2DBDB5A45}</ProjectGuid>
+    <ProjectGuid>{197542A1-50CC-02B9-4499-7EE2CD9D0782}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>NeonLadder.Editor</AssemblyName>
@@ -565,32 +565,12 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">
@@ -1116,15 +1096,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NeonLadder.Scripts.csproj">
-      <Project>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</Project>
+      <Project>{8C1333FE-EE30-ECE3-4825-F9C3A1A4C674}</Project>
       <Name>NeonLadder.Scripts</Name>
     </ProjectReference>
     <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
+      <Project>{84967CA0-0A9C-86A7-15E8-0182DA83392B}</Project>
       <Name>PixelCrushers</Name>
     </ProjectReference>
     <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
+      <Project>{0C752152-CAA4-0B1C-7BDD-4CF4EFB62981}</Project>
       <Name>DialogueSystem</Name>
     </ProjectReference>
   </ItemGroup>

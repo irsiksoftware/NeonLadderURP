@@ -221,7 +221,7 @@ namespace NeonLadder.ProceduralGeneration
         }
         
         /// <summary>
-        /// Gets procedurally generated destination based on seed
+        /// Gets procedurally generated destination based on seed and current scene context
         /// </summary>
         private string GetProceduralDestination()
         {
@@ -232,24 +232,82 @@ namespace NeonLadder.ProceduralGeneration
                 seed = Game.Instance.ProceduralMap.Seed;
             }
             
+            // Determine current scene context to know where we are in the path
+            string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            
+            if (enableDebugLogs)
+                Debug.Log($"[SceneTransitionTrigger] Current scene: {currentScene}, Seed: {seed}");
+            
+            // Handle path progression logic
+            return GetNextSceneInPath(currentScene, seed);
+        }
+        
+        /// <summary>
+        /// Determines the next scene in the procedural path based on current location
+        /// </summary>
+        private string GetNextSceneInPath(string currentScene, string seed)
+        {
             // Create deterministic random based on seed
             var random = new System.Random(seed.GetHashCode());
             
-            // Available scenes (simplified for now)
-            string[] possibleScenes = new string[]
+            // All 8 boss destinations (7 Deadly Sins + Devil Finale)
+            string[] bossDestinations = new string[]
             {
-                "Banquet_Connection1",
-                "Cathedral_Connection1", 
-                "Necropolis_Connection1",
-                "Vault_Connection1",
-                "Garden_Connection1",
-                "Mirage_Connection1",
-                "Lounge_Connection1"
+                "Cathedral",     // Pride
+                "Necropolis",    // Wrath  
+                "Vault",         // Greed
+                "Mirage",        // Envy
+                "Garden",        // Lust
+                "Banquet",       // Gluttony
+                "Lounge",        // Sloth
+                "Finale"         // Devil (final boss)
             };
             
-            // Pick a random scene based on seed
-            int index = random.Next(possibleScenes.Length);
-            return possibleScenes[index];
+            // Pick a boss destination deterministically
+            int bossIndex = random.Next(bossDestinations.Length);
+            string selectedBoss = bossDestinations[bossIndex];
+            
+            if (enableDebugLogs)
+                Debug.Log($"[SceneTransitionTrigger] Selected boss path: {selectedBoss}");
+            
+            // Handle different stages of the path
+            if (currentScene == "Start")
+            {
+                // From Start, go to Connection1 of selected boss
+                return $"{selectedBoss}_Connection1";
+            }
+            else if (currentScene.EndsWith("_Connection1"))
+            {
+                // From Connection1, go to Connection2 of same boss
+                string bossName = currentScene.Replace("_Connection1", "");
+                return $"{bossName}_Connection2";
+            }
+            else if (currentScene.EndsWith("_Connection2"))
+            {
+                // From Connection2, go to Boss Arena
+                string bossName = currentScene.Replace("_Connection2", "");
+                return bossName; // Boss arena scene name
+            }
+            else if (IsBossArena(currentScene))
+            {
+                // From Boss Arena, return to staging
+                return "ReturnToStaging";
+            }
+            
+            // Fallback: if we can't determine context, pick a random Connection1 scene
+            if (enableDebugLogs)
+                Debug.LogWarning($"[SceneTransitionTrigger] Unknown scene context: {currentScene}, using fallback");
+            
+            return $"{selectedBoss}_Connection1";
+        }
+        
+        /// <summary>
+        /// Checks if the current scene is a boss arena
+        /// </summary>
+        private bool IsBossArena(string sceneName)
+        {
+            string[] bossScenes = { "Cathedral", "Necropolis", "Vault", "Mirage", "Garden", "Banquet", "Lounge", "Finale" };
+            return System.Array.Exists(bossScenes, boss => boss == sceneName);
         }
         
         // Note: LoadSceneAsync method removed - SceneTransitionManager handles all scene loading now

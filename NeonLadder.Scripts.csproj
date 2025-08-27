@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BBF7E593-47DC-FA76-65BA-2C57D4221EBA}</ProjectGuid>
+    <ProjectGuid>{8C1333FE-EE30-ECE3-4825-F9C3A1A4C674}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>NeonLadder.Scripts</AssemblyName>
@@ -221,9 +221,9 @@
     <Compile Include="Assets\Scripts\Managers\EnhancedPurchaseManager.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterContent.cs" />
+    <Compile Include="Assets\Scripts\Events\EnemyPeriodicReassessmentEvent.cs" />
     <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\CurrencyType.cs" />
-    <Compile Include="Assets\Scripts\Events\EnemyPeriodicReassessmentEvent.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Stamina.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Zones\DeathZone.cs" />
@@ -273,8 +273,8 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Game.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerJumped.cs" />
     <Compile Include="Assets\Scripts\Events\FadeOutCamera.cs" />
-    <Compile Include="Assets\Scripts\Utilities\SceneEnumResolver.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\MonsterStates.cs" />
+    <Compile Include="Assets\Scripts\Utilities\SceneEnumResolver.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\BossLocationData.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Audio\PlayAudioClip.cs" />
@@ -289,6 +289,7 @@
     <Compile Include="Assets\Scripts\ProceduralGeneration\SceneRouter.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IPlayerState.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\SceneSizes.cs" />
+    <Compile Include="Assets\Scripts\Tests\Runtime\ProceduralPathTransitionsTests.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterTrigger.cs" />
     <Compile Include="Assets\Scripts\Cameras\CameraActivator.cs" />
     <Compile Include="Assets\Scripts\UI\TitleScreen.cs" />
@@ -312,14 +313,14 @@
     <Compile Include="Assets\Scripts\Mechanics\Enums\BuffTypes.cs" />
     <Compile Include="Assets\Scripts\Events\HealthIsZero.cs" />
     <Compile Include="Assets\Scripts\Dialog\ProtagonistDialogueSystem.cs" />
-    <Compile Include="Assets\Scripts\Optimization\EulerAngleCacheBenchmark.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Health.cs" />
+    <Compile Include="Assets\Scripts\Optimization\EulerAngleCacheBenchmark.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Bosses.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Scenes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\MetaCurrencyController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PortalSpawnController.cs" />
-    <Compile Include="Assets\Scripts\Cameras\DynamicCameraAdjustment.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointMonitor.cs" />
+    <Compile Include="Assets\Scripts\Cameras\DynamicCameraAdjustment.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\DropGroup.cs" />
     <Compile Include="Assets\Scripts\Models\Platformer.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyDefeatedManager.cs" />
@@ -803,20 +804,8 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HeroEditor.Common.Editor">
@@ -843,10 +832,6 @@
       <HintPath>Library\PackageCache\com.unity.analytics\Unity.Analytics.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="EasyRoads3Dv3Editor">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\Editor\EasyRoads3Dv3Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -861,10 +846,6 @@
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="EasyRoads3Dv3">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\EasyRoads3Dv3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.VersionHandlerImpl">
@@ -887,10 +868,6 @@
       <HintPath>Assets\MobileDependencyResolver\Editor\Google.JarResolver.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DelaunayER">
-      <HintPath>Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
       <Private>False</Private>
@@ -901,10 +878,6 @@
     </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets\MobileDependencyResolver\Editor\Google.VersionHandler.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AssetStoreTools">
-      <HintPath>Assets\Packages\LeartesStudios\AssetStoreTools\Editor\AssetStoreTools.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -921,14 +894,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1450,19 +1415,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Michsky.MUIP.csproj">
-      <Project>{86BFBBD4-47E4-89DB-6C1D-D6D03AC51099}</Project>
+      <Project>{82979875-7A34-37F1-0A40-AB73C17F3003}</Project>
       <Name>Michsky.MUIP</Name>
     </ProjectReference>
     <ProjectReference Include="DamageNumbersPro.csproj">
-      <Project>{53E2F9E2-4ACB-60D8-7EAA-FE927922B31A}</Project>
+      <Project>{4F71A4DC-5659-3E35-E59E-AB49A3113F87}</Project>
       <Name>DamageNumbersPro</Name>
     </ProjectReference>
     <ProjectReference Include="PixelCrushers.csproj">
-      <Project>{593AD235-A2CB-4250-4FCF-3A81385694D2}</Project>
+      <Project>{84967CA0-0A9C-86A7-15E8-0182DA83392B}</Project>
       <Name>PixelCrushers</Name>
     </ProjectReference>
     <ProjectReference Include="DialogueSystem.csproj">
-      <Project>{B1D59832-693F-83BC-4269-F785D1339DA7}</Project>
+      <Project>{0C752152-CAA4-0B1C-7BDD-4CF4EFB62981}</Project>
       <Name>DialogueSystem</Name>
     </ProjectReference>
   </ItemGroup>
