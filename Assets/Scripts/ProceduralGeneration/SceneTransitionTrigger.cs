@@ -19,60 +19,60 @@ namespace NeonLadder.ProceduralGeneration
             Procedural, // Use seed-based scene selection
             Manual      // Use manually specified scene name
         }
-        
+
         [Header("Transition Configuration")]
         [Tooltip("The GameObject with a trigger collider that detects player entry")]
         [SerializeField] private GameObject triggerColliderObject;
-        
+
         [Header("Destination Settings")]
         [Tooltip("How to determine the destination scene")]
         [SerializeField] private DestinationType destinationType = DestinationType.Procedural;
-        
+
         [Tooltip("Scene name to load when using Manual destination type")]
         [SerializeField] private string overrideSceneName = ""; // Match editor property name
-        
+
         [Header("Player Movement Settings")]
         [Tooltip("Reset player velocity after scene transition")]
         [SerializeField] private bool resetPlayerVelocity = true;
-        
+
         [Tooltip("Lock player to Z=0 for 2.5D movement")]
         [SerializeField] private bool lockPlayerZAxis = true;
-        
+
         [Header("Spawn Point Settings")]
         [Tooltip("Player Should Spawn At: In the destination scene, use spawn point with this type")]
         [SerializeField] private SpawnPointType spawnPointType = SpawnPointType.Auto;
-        
+
         [Tooltip("Custom spawn point name (only used when spawnPointType is Custom)")]
         [SerializeField] private string customSpawnPointName = "";
-        
+
         [Header("Debug")]
         [SerializeField] private bool enableDebugLogs = false;
-        
+
         // Minimal remaining fields for editor compatibility
         [SerializeField] private EventType transitionType = EventType.Portal;
         [SerializeField] private bool oneWayOnly = false;
-        
+
         // Runtime state
         private bool isTransitioning = false;
         private GameObject currentPlayer;
-        
+
         // Events
         public static event Action<SceneTransitionTrigger> OnTransitionStarted;
         public static event Action<SceneTransitionTrigger> OnTransitionCompleted;
         public static event Action<SceneTransitionTrigger, string> OnTransitionFailed;
-        
+
         // Public properties for compatibility
         public bool CanExitHere => true;  // All triggers can exit
         public bool CanSpawnHere => spawnPointType != SpawnPointType.None; // Can spawn unless explicitly disabled
         public Vector3 SpawnPosition => transform.position;
         public SpawnPointType SpawnType => spawnPointType;
         public string CustomSpawnName => customSpawnPointName;
-        
+
         private void Awake()
         {
             ValidateConfiguration();
         }
-        
+
         private void ValidateConfiguration()
         {
             if (triggerColliderObject == null)
@@ -80,21 +80,21 @@ namespace NeonLadder.ProceduralGeneration
                 Debug.LogError($"[SceneTransitionTrigger] {gameObject.name}: No trigger collider object assigned!", this);
                 return;
             }
-            
+
             var collider = triggerColliderObject.GetComponent<Collider>();
             if (collider == null)
             {
                 Debug.LogError($"[SceneTransitionTrigger] {gameObject.name}: Assigned trigger object '{triggerColliderObject.name}' has no Collider component!", this);
                 return;
             }
-            
+
             if (!collider.isTrigger)
             {
                 Debug.LogWarning($"[SceneTransitionTrigger] {gameObject.name}: Collider on '{triggerColliderObject.name}' is not set as trigger. Auto-fixing...", this);
                 collider.isTrigger = true;
             }
         }
-        
+
         private void Start()
         {
             // Set up event-based trigger detection on the assigned collider object
@@ -106,7 +106,7 @@ namespace NeonLadder.ProceduralGeneration
                 {
                     DestroyImmediate(oldDetector);
                 }
-                
+
                 // Add original trigger detector
                 var detector = triggerColliderObject.GetComponent<SceneTransitionTriggerDetector>();
                 if (detector == null)
@@ -116,17 +116,17 @@ namespace NeonLadder.ProceduralGeneration
                 detector.Initialize(this);
             }
         }
-        
+
         /// <summary>
         /// Called when player enters the trigger area
         /// </summary>
         public void OnPlayerEnterTrigger(Collider playerCollider)
         {
-            if (isTransitioning || !IsPlayer(playerCollider)) 
+            if (isTransitioning || !IsPlayer(playerCollider))
                 return;
-            
+
             currentPlayer = playerCollider.gameObject;
-            
+
             // CRITICAL: Immediately disable Z movement to stop auto-walk
             // This prevents the player from continuing to walk forward during/after transition
             var player = currentPlayer.GetComponentInChildren<Player>();
@@ -136,59 +136,59 @@ namespace NeonLadder.ProceduralGeneration
                 //player.velocity = Vector3.zero; // Stop all movement
                 //UnityEngine.Debug.Log("[SceneTransitionTrigger] Disabled Z movement and stopped player velocity");
             }
-            
+
             // Immediately trigger the transition
             TriggerTransition();
         }
-        
+
         /// <summary>
         /// Called when player exits the trigger area
         /// </summary>
         public void OnPlayerExitTrigger(Collider playerCollider)
         {
-            if (!IsPlayer(playerCollider)) 
+            if (!IsPlayer(playerCollider))
                 return;
-            
+
             currentPlayer = null;
         }
-        
+
         /// <summary>
         /// Triggers the scene transition
         /// </summary>
         private void TriggerTransition()
         {
-            if (isTransitioning) 
+            if (isTransitioning)
                 return;
-            
+
             isTransitioning = true;
             OnTransitionStarted?.Invoke(this);
-            
+
             // Store transition context for the next scene
             SceneTransitionContext.SetTransitioned(true);
-            
+
             // Determine destination scene
             string destinationScene = GetDestinationScene();
-            
+
             if (string.IsNullOrEmpty(destinationScene))
             {
                 OnTransitionFailed?.Invoke(this, "No valid destination scene");
                 isTransitioning = false;
                 return;
             }
-            
+
             if (enableDebugLogs)
                 Debug.Log($"[SceneTransitionTrigger] Transitioning to: {destinationScene}");
-            
+
             // Set spawn context in SceneTransitionManager - just pass the spawn type to match
             SceneTransitionManager.Instance.SetSpawnContext(spawnPointType, customSpawnPointName);
-            
+
             // Use SceneTransitionManager for the transition
             SceneTransitionManager.Instance.TransitionToScene(destinationScene);
-            
+
             // Reset transitioning flag after a delay (manager handles the actual transition)
             StartCoroutine(ResetTransitioningFlag());
         }
-        
+
         /// <summary>
         /// Reset the transitioning flag after the manager takes over
         /// </summary>
@@ -198,7 +198,7 @@ namespace NeonLadder.ProceduralGeneration
             isTransitioning = false;
             OnTransitionCompleted?.Invoke(this);
         }
-        
+
         /// <summary>
         /// Gets the destination scene based on configuration
         /// </summary>
@@ -208,20 +208,20 @@ namespace NeonLadder.ProceduralGeneration
             {
                 case DestinationType.None:
                     return null; // No transition
-                    
+
                 case DestinationType.Manual:
                     return overrideSceneName; // Use the editor-compatible field name
-                    
+
                 case DestinationType.Procedural:
                     return GetProceduralDestination();
-                    
+
                 default:
                     return null;
             }
         }
-        
+
         /// <summary>
-        /// Gets procedurally generated destination based on seed and current scene context
+        /// Gets procedurally generated destination based on seed
         /// </summary>
         private string GetProceduralDestination()
         {
@@ -231,125 +231,67 @@ namespace NeonLadder.ProceduralGeneration
             {
                 seed = Game.Instance.ProceduralMap.Seed;
             }
-            
-            // Determine current scene context to know where we are in the path
-            string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-            
-            if (enableDebugLogs)
-                Debug.Log($"[SceneTransitionTrigger] Current scene: {currentScene}, Seed: {seed}");
-            
-            // Handle path progression logic
-            return GetNextSceneInPath(currentScene, seed);
-        }
-        
-        /// <summary>
-        /// Determines the next scene in the procedural path based on current location
-        /// </summary>
-        private string GetNextSceneInPath(string currentScene, string seed)
-        {
+
             // Create deterministic random based on seed
             var random = new System.Random(seed.GetHashCode());
-            
-            // All 8 boss destinations (7 Deadly Sins + Devil Finale)
-            string[] bossDestinations = new string[]
+
+            // Available scenes (simplified for now)
+            string[] possibleScenes = new string[]
             {
-                "Cathedral",     // Pride
-                "Necropolis",    // Wrath  
-                "Vault",         // Greed
-                "Mirage",        // Envy
-                "Garden",        // Lust
-                "Banquet",       // Gluttony
-                "Lounge",        // Sloth
-                "Finale"         // Devil (final boss)
+                "Banquet_Connection1",
+                "Cathedral_Connection1",
+                "Necropolis_Connection1",
+                "Vault_Connection1",
+                "Garden_Connection1",
+                "Mirage_Connection1",
+                "Lounge_Connection1"
             };
-            
-            // Pick a boss destination deterministically
-            int bossIndex = random.Next(bossDestinations.Length);
-            string selectedBoss = bossDestinations[bossIndex];
-            
-            if (enableDebugLogs)
-                Debug.Log($"[SceneTransitionTrigger] Selected boss path: {selectedBoss}");
-            
-            // Handle different stages of the path
-            if (currentScene == "Start")
-            {
-                // From Start, go to Connection1 of selected boss
-                return $"{selectedBoss}_Connection1";
-            }
-            else if (currentScene.EndsWith("_Connection1"))
-            {
-                // From Connection1, go to Connection2 of same boss
-                string bossName = currentScene.Replace("_Connection1", "");
-                return $"{bossName}_Connection2";
-            }
-            else if (currentScene.EndsWith("_Connection2"))
-            {
-                // From Connection2, go to Boss Arena
-                string bossName = currentScene.Replace("_Connection2", "");
-                return bossName; // Boss arena scene name
-            }
-            else if (IsBossArena(currentScene))
-            {
-                // From Boss Arena, return to staging
-                return "ReturnToStaging";
-            }
-            
-            // Fallback: if we can't determine context, pick a random Connection1 scene
-            if (enableDebugLogs)
-                Debug.LogWarning($"[SceneTransitionTrigger] Unknown scene context: {currentScene}, using fallback");
-            
-            return $"{selectedBoss}_Connection1";
+
+            // Pick a random scene based on seed
+            int index = random.Next(possibleScenes.Length);
+            return possibleScenes[index];
         }
-        
-        /// <summary>
-        /// Checks if the current scene is a boss arena
-        /// </summary>
-        private bool IsBossArena(string sceneName)
-        {
-            string[] bossScenes = { "Cathedral", "Necropolis", "Vault", "Mirage", "Garden", "Banquet", "Lounge", "Finale" };
-            return System.Array.Exists(bossScenes, boss => boss == sceneName);
-        }
-        
+
         // Note: LoadSceneAsync method removed - SceneTransitionManager handles all scene loading now
-        
+
         // Note: GetSpawnKeyFromSpawnType method removed - no longer needed as SceneTransitionManager handles spawn logic
-        
+
         /// <summary>
         /// Checks if the collider belongs to the player
         /// </summary>
         private bool IsPlayer(Collider collider)
         {
-            return collider.CompareTag("Player") || 
+            return collider.CompareTag("Player") ||
                    collider.GetComponent<Player>() != null ||
                    collider.GetComponentInParent<Player>() != null;
         }
-        
+
         #region Editor Visualization
-        
+
         private void OnDrawGizmos()
         {
             DrawGizmo(0.5f);
         }
-        
+
         private void OnDrawGizmosSelected()
         {
             DrawGizmo(1f);
         }
-        
+
         private void DrawGizmo(float alpha)
         {
             if (triggerColliderObject == null)
                 return;
-                
+
             Collider collider = triggerColliderObject.GetComponent<Collider>();
             if (collider == null)
                 return;
-            
+
             // Draw trigger area
             Color gizmoColor = Color.green;
             gizmoColor.a = alpha;
             Gizmos.color = gizmoColor;
-            
+
             Transform t = triggerColliderObject.transform;
             if (collider is BoxCollider box)
             {
@@ -366,9 +308,9 @@ namespace NeonLadder.ProceduralGeneration
                 Vector3 center = t.position + sphere.center;
                 Gizmos.DrawWireSphere(center, sphere.radius * t.localScale.x);
             }
-            
+
             // Draw label
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Vector3 labelPos = transform.position + Vector3.up * 2f;
             string label = gameObject.name;
             if (destinationType == DestinationType.Manual && !string.IsNullOrEmpty(overrideSceneName))
@@ -376,18 +318,18 @@ namespace NeonLadder.ProceduralGeneration
                 label += $"\n→ {overrideSceneName}";
             }
             UnityEditor.Handles.Label(labelPos, label);
-            #endif
+#endif
         }
-        
+
         #endregion
-        
+
         #region Public API
-        
+
         /// <summary>
         /// Gets the assigned trigger collider object
         /// </summary>
         public GameObject GetTriggerColliderObject() => triggerColliderObject;
-        
+
         /// <summary>
         /// Sets the trigger collider object and validates configuration
         /// </summary>
@@ -396,7 +338,7 @@ namespace NeonLadder.ProceduralGeneration
             triggerColliderObject = colliderObject;
             ValidateConfiguration();
         }
-        
+
         /// <summary>
         /// Forces a transition to occur immediately
         /// </summary>
@@ -404,24 +346,24 @@ namespace NeonLadder.ProceduralGeneration
         {
             TriggerTransition();
         }
-        
+
         #endregion
     }
-    
+
     /// <summary>
     /// Simple static class to track scene transition context
     /// </summary>
     public static class SceneTransitionContext
     {
         private static bool hasTransitioned = false;
-        
+
         public static bool HasTransitioned => hasTransitioned;
-        
+
         public static void SetTransitioned(bool value)
         {
             hasTransitioned = value;
         }
-        
+
         public static void Clear()
         {
             hasTransitioned = false;
