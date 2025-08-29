@@ -58,6 +58,7 @@ namespace NeonLadder.Events
         Attack,
         Respawn,
         Healing,
+        PlayerFall,
         Custom
     }
 }

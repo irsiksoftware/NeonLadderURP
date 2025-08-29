@@ -190,6 +190,7 @@
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveFormatConverter.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\CheckpointManager.cs" />
     <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
     <Compile Include="Assets\Scripts\Events\RestartScene.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Assets\Scripts\Items\Loot\LootTable.cs" />
     <Compile Include="Assets\Scripts\Items\MetaCurrencyReplenishment.cs" />
     <Compile Include="Assets\Scripts\Mechanics\BossTransformations.cs" />
+    <Compile Include="Assets\Scripts\Events\PlayerRespawnRequest.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyDistanceEvaluationEvent.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerEnemyCollision.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerLanded.cs" />
@@ -226,6 +228,7 @@
     <Compile Include="Assets\Scripts\Events\EnemyPeriodicReassessmentEvent.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Stats\Stamina.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Zones\FallDeathTrigger.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Zones\DeathZone.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageNumberManager.cs" />
     <Compile Include="Assets\Scripts\Events\ComboAttackEvent.cs" />
@@ -320,7 +323,6 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PortalSpawnController.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointMonitor.cs" />
     <Compile Include="Assets\Scripts\Cameras\DynamicCameraAdjustment.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointMonitor.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\DropGroup.cs" />
     <Compile Include="Assets\Scripts\Models\Platformer.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyDefeatedManager.cs" />

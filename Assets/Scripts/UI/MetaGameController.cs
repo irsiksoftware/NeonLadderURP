@@ -33,24 +33,95 @@ namespace NeonLadder.UI
 
         void Awake()
         {
+            // Validate required references
+            if (inputActions == null)
+            {
+                Debug.LogError($"[MetaGameController] inputActions is null on {gameObject.name}! Menu functionality will not work.");
+                enabled = false;
+                return;
+            }
+
             // Find the Player and UI action maps
             playerActionMap = inputActions.FindActionMap("Player");
             uiActionMap = inputActions.FindActionMap("UI");
-            gamePlayCanvasii[0] = GetComponentInChildren<StatUI>().gameObject.GetComponent<Canvas>();
+            
+            if (playerActionMap == null)
+            {
+                Debug.LogError($"[MetaGameController] 'Player' action map not found in {inputActions.name}! Menu functionality will not work.");
+                enabled = false;
+                return;
+            }
+            
+            if (uiActionMap == null)
+            {
+                Debug.LogError($"[MetaGameController] 'UI' action map not found in {inputActions.name}! Menu functionality will not work.");
+                enabled = false;
+                return;
+            }
+
+            // Safely find StatUI canvas
+            var statUI = GetComponentInChildren<StatUI>();
+            if (statUI != null)
+            {
+                var canvas = statUI.gameObject.GetComponent<Canvas>();
+                if (canvas != null && gamePlayCanvasii != null && gamePlayCanvasii.Length > 0)
+                {
+                    gamePlayCanvasii[0] = canvas;
+                }
+                else
+                {
+                    Debug.LogWarning($"[MetaGameController] Could not find Canvas on StatUI or gamePlayCanvasii is not properly configured on {gameObject.name}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[MetaGameController] StatUI component not found in children of {gameObject.name}");
+            }
         }
 
         void OnEnable()
         {
+            // Validate references before enabling
+            if (uiActionMap == null)
+            {
+                Debug.LogError($"[MetaGameController] uiActionMap is null on {gameObject.name}! Cannot enable menu functionality.");
+                return;
+            }
+            
+            if (toggleMenuAction == null)
+            {
+                Debug.LogError($"[MetaGameController] toggleMenuAction is null on {gameObject.name}! Menu toggle will not work.");
+                return;
+            }
+
             // Enable the UI action map which includes the ToggleMenu action
-            uiActionMap.Enable();
-            toggleMenuAction.action.performed += OnToggleMenu;
-            _ToggleMainMenu(showMainCanvas);
+            try
+            {
+                uiActionMap.Enable();
+                toggleMenuAction.action.performed += OnToggleMenu;
+                _ToggleMainMenu(showMainCanvas);
+                Debug.Log($"[MetaGameController] Successfully enabled on {gameObject.name}");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[MetaGameController] Failed to enable on {gameObject.name}: {e.Message}");
+            }
         }
 
         void OnDisable()
         {
-            toggleMenuAction.action.performed -= OnToggleMenu;
-            uiActionMap.Disable();
+            // Safely unsubscribe and disable
+            if (toggleMenuAction?.action != null)
+            {
+                toggleMenuAction.action.performed -= OnToggleMenu;
+            }
+            
+            if (uiActionMap != null)
+            {
+                uiActionMap.Disable();
+            }
+            
+            Debug.Log($"[MetaGameController] Disabled on {gameObject.name}");
         }
 
         void OnToggleMenu(InputAction.CallbackContext context)

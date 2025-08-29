@@ -1,6 +1,7 @@
 using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.ProceduralGeneration;
 using System.Collections;
 using UnityEngine;
 
@@ -50,6 +51,12 @@ namespace NeonLadder.Events
 
             // Start the coroutine to reset the Animator - THIS MUST be done inside of a coroutine for WebGL to function properly.
             model.Player.StartCoroutine(ResetAnimatorDelayed(model.Player));
+            
+            // Auto-save checkpoint at successful spawn location
+            if (spawnPosition.HasValue && CheckpointManager.Instance != null)
+            {
+                CheckpointManager.Instance.OnPlayerSpawnCompleted(spawnPosition.Value);
+            }
         }
 
         private IEnumerator ResetAnimatorDelayed(Player player)

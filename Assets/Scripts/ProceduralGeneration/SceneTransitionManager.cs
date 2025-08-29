@@ -119,6 +119,9 @@ namespace NeonLadder.ProceduralGeneration
             ProceduralSceneLoader.OnSceneLoadCompleted += HandleSceneLoadCompleted;
             ProceduralSceneLoader.OnSceneLoadError += HandleSceneLoadError;
             
+            // Subscribe to scene loading for MetaGameController reset hack
+            SceneManager.sceneLoaded += OnSceneLoadedForMetaGameReset;
+            
             LogDebug("SceneTransitionManager initialized");
         }
         
@@ -163,6 +166,7 @@ namespace NeonLadder.ProceduralGeneration
             ProceduralSceneLoader.OnSceneLoadStarted -= HandleSceneLoadStarted;
             ProceduralSceneLoader.OnSceneLoadCompleted -= HandleSceneLoadCompleted;
             ProceduralSceneLoader.OnSceneLoadError -= HandleSceneLoadError;
+            SceneManager.sceneLoaded -= OnSceneLoadedForMetaGameReset;
         }
         
         #endregion
@@ -823,6 +827,36 @@ namespace NeonLadder.ProceduralGeneration
             // Reset spawn context for next transition
             pendingSpawnType = SpawnPointType.Auto;
             pendingCustomSpawnName = "";
+        }
+        
+        #endregion
+        
+        #region MetaGameController Reset Hack
+        
+        /// <summary>
+        /// TODO: Hack to reset MetaGameController on scene load
+        /// MetaGameController gets silently disabled during scene transitions,
+        /// this forces a reset to restore menu functionality
+        /// </summary>
+        private void OnSceneLoadedForMetaGameReset(Scene scene, LoadSceneMode mode)
+        {
+            if (mode != LoadSceneMode.Single)
+                return;
+                
+            // Find the MetaGameController (should be on persistent GameController object)
+            var metaGameController = FindObjectOfType<NeonLadder.UI.MetaGameController>();
+            if (metaGameController != null)
+            {
+                LogDebug($"Resetting MetaGameController in scene {scene.name}");
+                
+                // Disable and re-enable to reset the component
+                metaGameController.enabled = false;
+                metaGameController.enabled = true;
+            }
+            else
+            {
+                LogDebug($"No MetaGameController found in scene {scene.name}");
+            }
         }
         
         #endregion
