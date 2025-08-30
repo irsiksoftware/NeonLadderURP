@@ -314,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 6832862306280234208, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
       propertyPath: overrideSceneName
-      value: Mirage_Connection2
+      value: Lounge_Connection2
       objectReference: {fileID: 0}
     - target: {fileID: 7140753903173163707, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
@@ -406,13 +406,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6832862306280234208, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
+      propertyPath: spawnPointType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6832862306280234208, guid: a723fe71f0950c74bbc518227267dd34,
+        type: 3}
       propertyPath: destinationType
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6832862306280234208, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
       propertyPath: overrideSceneName
-      value: Lounge_Connection2
+      value: Mirage
       objectReference: {fileID: 0}
     - target: {fileID: 7140753903173163707, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
