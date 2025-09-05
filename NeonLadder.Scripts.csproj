@@ -156,6 +156,8 @@
     <Compile Include="Assets\Scripts\Events\PlayerDefeatedBossEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseAction.cs" />
     <Compile Include="Assets\Scripts\DataManagement\LoadSystem.cs" />
+    <Compile Include="Assets\Scripts\Managers\ImprovedLootDropManager.cs" />
+    <Compile Include="Assets\Scripts\Items\Shop\MonsterLootSource.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Major.cs" />
     <Compile Include="Assets\Scripts\Cameras\CameraRotationProvider.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\KinematicObject.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyTerrainCollision.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\UnitySceneProvider.cs" />
+    <Compile Include="Assets\Scripts\Items\Shop\ILootSource.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Managers\ManagerController.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerStaminaUIManager.cs" />
@@ -221,7 +224,9 @@
     <Compile Include="Assets\Scripts\Utilities\ButtonHelper.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
     <Compile Include="Assets\Scripts\Managers\EnhancedPurchaseManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Shop\ShopWindowUI.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
+    <Compile Include="Assets\Scripts\Items\Shop\ShopInventory.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterContent.cs" />
     <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\CurrencyType.cs" />
@@ -255,7 +260,9 @@
     <Compile Include="Assets\Scripts\Utilities\AchevementResolver.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SceneNameMapper.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\GameStates.cs" />
+    <Compile Include="Assets\Scripts\Items\Core\ItemInstance.cs" />
     <Compile Include="Assets\Scripts\Events\InputBufferEvent.cs" />
+    <Compile Include="Assets\Scripts\UI\Shop\ShopUI_Setup_Guide.cs" />
     <Compile Include="Assets\Scripts\Dialog\Editor\DialogueSystemMenuItems.cs" />
     <Compile Include="Assets\Scripts\Utilities\PlatformVisibilityController.cs" />
     <Compile Include="Assets\Scripts\Cameras\DemoSceneCloseness.cs" />
@@ -279,6 +286,7 @@
     <Compile Include="Assets\Scripts\Utilities\SceneEnumResolver.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\MonsterStates.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.cs" />
+    <Compile Include="Assets\Scripts\UI\Shop\ShopItemUI.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\BossLocationData.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Audio\PlayAudioClip.cs" />
     <Compile Include="Assets\Scripts\Managers\GameControllerManager.cs" />
@@ -288,6 +296,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\ProjectileController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\UnlockTypes.cs" />
+    <Compile Include="Assets\Scripts\Events\ItemSpawnEvent.cs" />
     <Compile Include="Assets\Scripts\Performance\PerformanceProfiler.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SceneRouter.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Interfaces\IPlayerState.cs" />
@@ -296,6 +305,7 @@
     <Compile Include="Assets\Scripts\Cameras\CameraActivator.cs" />
     <Compile Include="Assets\Scripts\UI\TitleScreen.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\SceneChangeDetector.cs" />
+    <Compile Include="Assets\Scripts\Items\Core\ItemDefinition.cs" />
     <Compile Include="Assets\Scripts\Debug\NLDebug.cs" />
     <Compile Include="Assets\Scripts\Cameras\RotationController.cs" />
     <Compile Include="Assets\Scripts\Events\BossDeath.cs" />
@@ -320,6 +330,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Enums\Bosses.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Scenes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\MetaCurrencyController.cs" />
+    <Compile Include="Assets\Scripts\Items\Shop\NPCShopSource.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\PortalSpawnController.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointMonitor.cs" />
     <Compile Include="Assets\Scripts\Cameras\DynamicCameraAdjustment.cs" />
@@ -329,7 +340,9 @@
     <Compile Include="Assets\Scripts\Events\BossLanded.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerCameraPositionManager.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogueSceneConfiguration.cs" />
+    <Compile Include="Assets\Scripts\Items\Loot\ImprovedLootTable.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerVelocityValidationEvent.cs" />
+    <Compile Include="Assets\Scripts\Items\Enums\ItemEnums.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogSystemTypes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Directions.cs" />
     <Compile Include="Assets\Scripts\Events\StaminaRegenerationEvent.cs" />

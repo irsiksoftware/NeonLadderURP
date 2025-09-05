@@ -30,9 +30,24 @@ namespace NeonLadder.Events
                 attackComponent.gameObject.layer = LayerMask.NameToLayer(nameof(Layers.Dead));
             }
 
-            GameObject.FindGameObjectWithTag(Tags.Managers.ToString())
-                      .GetComponentInChildren<NeonLadder.Managers.LootDropManager>()
-                      .DropLoot(model.Player, enemy);
+            // Try new loot system first, fall back to legacy if needed
+            var improvedLootManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString())
+                      .GetComponentInChildren<NeonLadder.Managers.ImprovedLootDropManager>();
+            
+            if (improvedLootManager != null)
+            {
+                improvedLootManager.DropLegacyLoot(model.Player, enemy);
+            }
+            else
+            {
+                // Fall back to old system if new manager not found
+                var legacyLootManager = GameObject.FindGameObjectWithTag(Tags.Managers.ToString())
+                          .GetComponentInChildren<NeonLadder.Managers.LootDropManager>();
+                if (legacyLootManager != null)
+                {
+                    legacyLootManager.DropLoot(model.Player, enemy);
+                }
+            }
 
             var achievement = AchievementResolver.Resolve(enemy.transform.parent.name);
             if (achievement.HasValue)

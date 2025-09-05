@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913a197988ec30549adaf675ac3b6e64, type: 3}
+  m_Name: DispensableGoodsShop
+  m_EditorClassIdentifier: 
+  shopId: dispensable_goods
+  shopName: Dispensable Goods
+  shopDescription: Your one-stop shop for all your combat and survival needs!
+  shopBanner: {fileID: 0}
+  acceptedCurrency: 0
+  buyPriceMultiplier: 1.2
+  sellPriceMultiplier: 0.5
+  stockedItems:
+  - itemDefinition: {fileID: 11400000, guid: 6f569bdf062cb6143868a2dc5a27ae37, type: 2}
+    baseStock: 10
+    restockAmount: 5
+    priceOverride: 75
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 1
+  - itemDefinition: {fileID: 11400000, guid: 6b6bb724808a2db4aac44470207952fe, type: 2}
+    baseStock: 10
+    restockAmount: 5
+    priceOverride: 60
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 1
+  - itemDefinition: {fileID: 11400000, guid: 42b4d8d875b8ca74fbae6346327ce291, type: 2}
+    baseStock: 5
+    restockAmount: 2
+    priceOverride: 100
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 1
+  - itemDefinition: {fileID: 11400000, guid: 38ee4727956a0dc4c8aed7509e852c5a, type: 2}
+    baseStock: 3
+    restockAmount: 1
+    priceOverride: 200
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 1
+  - itemDefinition: {fileID: 11400000, guid: 6cebffd9c4a31b041b89720f9a981d12, type: 2}
+    baseStock: 5
+    restockAmount: 2
+    priceOverride: 120
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 1
+  - itemDefinition: {fileID: 11400000, guid: 7203a1b46fbe6f7498b70124a4f0bcf3, type: 2}
+    baseStock: 1
+    restockAmount: 0
+    priceOverride: 600
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 2
+  - itemDefinition: {fileID: 11400000, guid: f96ad54a05f8b834c80a916573e8fe9b, type: 2}
+    baseStock: 1
+    restockAmount: 0
+    priceOverride: 550
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 2
+  - itemDefinition: {fileID: 11400000, guid: f25c1255740aefb4992bf75b81e120a6, type: 2}
+    baseStock: 1
+    restockAmount: 0
+    priceOverride: 1000
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 50
+    requiredPlayerTier: 3
+  - itemDefinition: {fileID: 11400000, guid: 4b8063e077f9d884e87ad8d6aa16023c, type: 2}
+    baseStock: -1
+    restockAmount: 1
+    priceOverride: 0
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 0
+    availabilityChance: 100
+    requiredPlayerTier: 1
+  - itemDefinition: {fileID: 11400000, guid: 6031bb741a2ce4b4592f3eb8147362da, type: 2}
+    baseStock: 2
+    restockAmount: 1
+    priceOverride: 400
+    requiresUnlock: 0
+    unlockId: 
+    alwaysAvailable: 1
+    availabilityChance: 100
+    requiredPlayerTier: 2
+  restockOnRun: 1
+  restockOnFloor: 0
+  minTierRequired: 1
+  maxTierAllowed: 5
+  scaleWithProgression: 1
