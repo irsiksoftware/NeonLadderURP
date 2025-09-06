@@ -280,6 +280,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3690295689797485038, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -344,6 +349,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439663405200563838, guid: dc08c1230b5ad794196a9aba8b090723,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
@@ -494,6 +504,79 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &4088764379271731532
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.310335
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.6238213
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.225483
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381810536635715340, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167109573443731965, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: m_Name
+      value: TwoExitTransition-Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321417785219159781, guid: aee7e6a01d0b93f4ba75a7c76da4a99c,
+        type: 3}
+      propertyPath: overrideSceneName
+      value: Garden_Connection2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aee7e6a01d0b93f4ba75a7c76da4a99c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -502,3 +585,4 @@ SceneRoots:
   - {fileID: 5678901235}
   - {fileID: 3456789012}
   - {fileID: 4567890123}
+  - {fileID: 4088764379271731532}
