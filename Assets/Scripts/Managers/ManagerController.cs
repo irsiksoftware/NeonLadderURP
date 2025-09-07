@@ -27,6 +27,7 @@ public class ManagerController : MonoBehaviour
         public MonsterGroupActivationManager monsterGroupActivationManager;
         public PlayerCameraPositionManager playerCameraPositionManager;
         public GameControllerManager gameControllerManager;
+        public SceneCycleManager sceneCycleManager;
         public EventManager eventManager;
         // public SteamManager steamManager;
 
@@ -110,8 +111,9 @@ public class ManagerController : MonoBehaviour
             dialogueManager = GetComponentInChildren<DialogueManager>();
             eventManager = GetComponentInChildren<EventManager>();
             monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
-            //steamManager = GetComponentInChildren<SteamManager>();
-        }
+            sceneCycleManager = GetComponentInChildren<SceneCycleManager>();
+        //steamManager = GetComponentInChildren<SteamManager>();
+    }
 
         public void ToggleManagers()
         {
@@ -123,7 +125,9 @@ public class ManagerController : MonoBehaviour
                 case Scenes.Title:
                     if (gameControllerManager != null)
                         gameControllerManager.enabled = true;
-                    break;
+                    if (sceneCycleManager != null)
+                        sceneCycleManager.enabled = true;
+                break;
                 case Scenes.Staging:
                     if (lootPurchaseManager != null)
                         lootPurchaseManager.enabled = true;

@@ -352,8 +352,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneCycleManager, Assembly-CSharp
+      - m_Target: {fileID: 803766023}
+        m_TargetAssemblyTypeName: SceneCycleManager, NeonLadder.Scripts
         m_MethodName: CycleThroughScenesFromMainMenu
         m_Mode: 1
         m_Arguments:
@@ -844,6 +844,16 @@ PrefabInstance:
       propertyPath: 'ScenesToIterateFromMainMenu.Array.data[14]'
       value: URP_RomanStreet
       objectReference: {fileID: 0}
+    - target: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      propertyPath: MinSceneDuration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      propertyPath: ScenesToIterateFromMainMenu.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2906993245619631821, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
       propertyPath: m_IsActive
@@ -894,6 +904,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8b18ae9755e8e049882d3cd0ec10307, type: 3}
+--- !u!114 &803766023 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,
+    type: 3}
+  m_PrefabInstance: {fileID: 615923715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d1ce590e1f358438fd578683e345a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &837438360
 GameObject:
   m_ObjectHideFlags: 0

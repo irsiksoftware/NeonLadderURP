@@ -50,13 +50,27 @@ namespace NeonLadder.Mechanics.Enums
         TreasureRoom,
         
         // Legacy scenes (testing - not-ready)
-        Recife_2050_Final,
         BossBrawl,
         SidePath1,
         MainPath3,
         MainPath2,
         MainPath1,
 
+        // Package Scenes (Purchased from Unity Asset Store - Assets/Scenes/PackageScenes/)
+        URP_SiegeOfPonthus,
+        URP_AncientCathedral,
+        Medievil_Tavern,
+        SpaceBurgers,
+        AbandonedFactory,
+        AbandonedPoolURP,
+        Cyberpunk_Room,
+        CyberpunkURPScene,
+        URP_Rooftop_Market,
+        URP_RomanStreet,
+        Showcase,
+        FC_URP_Scene,
+        StandardizedOstrichBar,
+        Recife_2050_Final,
 
         // Cutscene scenes
         BossDefeated,

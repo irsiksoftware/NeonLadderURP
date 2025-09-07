@@ -180,6 +180,7 @@
     <Compile Include="Assets\Scripts\Utilities\TimedLogger.cs" />
     <Compile Include="Assets\Scripts\Tests\Runtime\SceneConnectionOverrideTests.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgradeSystem.cs" />
+    <Compile Include="Assets\Scripts\Managers\SceneCycleManager.cs" />
     <Compile Include="Assets\Scripts\Events\FadeInCamera.cs" />
     <Compile Include="Assets\Scripts\Models\UnlockScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Colliders\ParentCollider.cs" />
