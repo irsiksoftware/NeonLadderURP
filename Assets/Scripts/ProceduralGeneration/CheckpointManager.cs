@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using NeonLadder.Core;
 using NeonLadder.Events;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.ProceduralGeneration
 {
@@ -38,7 +39,6 @@ namespace NeonLadder.ProceduralGeneration
         #region Configuration
         
         [Header("Checkpoint Settings")]
-        [SerializeField] private bool debugLogging = true;
         
         [Header("Visual Feedback")]
         [SerializeField] private bool showCheckpointFeedback = true;
@@ -84,10 +84,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             SaveCheckpoint(spawnPosition);
             
-            if (debugLogging)
-            {
-                Debug.Log($"CheckpointManager: Auto-saved checkpoint from PlayerSpawn at {spawnPosition}");
-            }
+            Debugger.Log(LogCategory.SaveSystem, $"CheckpointManager: Auto-saved checkpoint from PlayerSpawn at {spawnPosition}");
         }
         
         #endregion
@@ -104,10 +101,7 @@ namespace NeonLadder.ProceduralGeneration
             lastCheckpointTime = Time.time;
             hasCheckpoint = true;
             
-            if (debugLogging)
-            {
-                Debug.Log($"CheckpointManager: Saved checkpoint at {position} in scene {lastCheckpointScene}");
-            }
+            Debugger.Log(LogCategory.SaveSystem, $"CheckpointManager: Saved checkpoint at {position} in scene {lastCheckpointScene}");
             
             OnCheckpointSaved?.Invoke(position, lastCheckpointScene);
         }
@@ -122,9 +116,9 @@ namespace NeonLadder.ProceduralGeneration
             {
                 SaveCheckpoint(player.transform.position);
             }
-            else if (debugLogging)
+            else
             {
-                Debug.LogWarning("CheckpointManager: Cannot save checkpoint - Player not found");
+                Debugger.LogWarning(LogCategory.SaveSystem, "CheckpointManager: Cannot save checkpoint - Player not found");
             }
         }
         
@@ -135,10 +129,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (!hasCheckpoint)
             {
-                if (debugLogging)
-                {
-                    Debug.LogWarning("CheckpointManager: No checkpoint saved, returning Vector3.zero");
-                }
+                Debugger.LogWarning(LogCategory.SaveSystem, "CheckpointManager: No checkpoint saved, returning Vector3.zero");
                 return Vector3.zero;
             }
             
@@ -178,10 +169,7 @@ namespace NeonLadder.ProceduralGeneration
             lastCheckpointPosition = Vector3.zero;
             lastCheckpointScene = "";
             
-            if (debugLogging)
-            {
-                Debug.Log("CheckpointManager: Checkpoint cleared");
-            }
+            Debugger.Log(LogCategory.SaveSystem, "CheckpointManager: Checkpoint cleared");
         }
         
         /// <summary>
@@ -193,10 +181,7 @@ namespace NeonLadder.ProceduralGeneration
             {
                 OnCheckpointRestored?.Invoke(lastCheckpointPosition);
                 
-                if (debugLogging)
-                {
-                    Debug.Log($"CheckpointManager: Restored to checkpoint at {lastCheckpointPosition}");
-                }
+                Debugger.Log(LogCategory.SaveSystem, $"CheckpointManager: Restored to checkpoint at {lastCheckpointPosition}");
             }
         }
         
@@ -221,10 +206,10 @@ namespace NeonLadder.ProceduralGeneration
         [ContextMenu("Debug: Log Checkpoint Info")]
         private void DebugLogCheckpointInfo()
         {
-            Debug.Log($"Has Checkpoint: {hasCheckpoint}");
-            Debug.Log($"Position: {lastCheckpointPosition}");
-            Debug.Log($"Scene: {lastCheckpointScene}");
-            Debug.Log($"Time Since Save: {GetTimeSinceCheckpoint()}s");
+            Debugger.Log($"Has Checkpoint: {hasCheckpoint}");
+            Debugger.Log($"Position: {lastCheckpointPosition}");
+            Debugger.Log($"Scene: {lastCheckpointScene}");
+            Debugger.Log($"Time Since Save: {GetTimeSinceCheckpoint()}s");
         }
         
         #endregion

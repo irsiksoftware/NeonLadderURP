@@ -64,7 +64,6 @@ namespace NeonLadder.ProceduralGeneration
         [SerializeField] private bool autoSaveOnTransition = true;
         
         [Header("Debug")]
-        [SerializeField] private bool enableDebugLogs = true;
         
         #endregion
         
@@ -180,8 +179,8 @@ namespace NeonLadder.ProceduralGeneration
         {
             pendingSpawnType = spawnType;
             pendingCustomSpawnName = customSpawnName;
-            
-            LogDebug($"Spawn context set: type={spawnType}, custom='{customSpawnName}'");
+
+            Debugger.LogError(LogCategory.ProceduralGeneration, $"Spawn context set: type={spawnType}, custom='{customSpawnName}'");
         }
         
         /// <summary>
@@ -246,14 +245,14 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (isTransitioning)
             {
-                LogDebug("Transition already in progress");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "Transition already in progress");
                 return;
             }
             
             // Check if this component is still valid before starting coroutine
             if (this == null)
             {
-                Debug.LogWarning("[SceneTransitionManager] Component destroyed, cannot start transition");
+                Debugger.LogWarning(LogCategory.ProceduralGeneration, "[SceneTransitionManager] Component destroyed, cannot start transition");
                 return;
             }
             
@@ -403,7 +402,7 @@ namespace NeonLadder.ProceduralGeneration
             // Check if scene load failed
             if (asyncLoad == null)
             {
-                Debug.LogError($"[SceneTransitionManager] Failed to load scene '{transition.TargetSceneName}' - scene not found in build settings or build profile");
+                Debugger.LogError(LogCategory.ProceduralGeneration, $"[SceneTransitionManager] Failed to load scene '{transition.TargetSceneName}' - scene not found in build settings or build profile");
                 isTransitioning = false;
                 yield break;
             }
@@ -647,15 +646,12 @@ namespace NeonLadder.ProceduralGeneration
         
         private void LogDebug(string message)
         {
-            if (enableDebugLogs)
-            {
-                Debugger.Log($"[SceneTransitionManager] {message}");
-            }
+            Debugger.Log(LogCategory.SaveSystem, $"[SceneTransitionManager] {message}");
         }
         
         private void LogError(string message)
         {
-            Debugger.LogError($"[SceneTransitionManager] {message}");
+            Debugger.LogError(LogCategory.SaveSystem, $"[SceneTransitionManager] {message}");
         }
 
         #endregion
@@ -706,20 +702,20 @@ namespace NeonLadder.ProceduralGeneration
                 string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
                 
                 // Create highly visible error messages
-                Debug.LogError("════════════════════════════════════════════════════════════════════════");
-                Debug.LogError("║                          BLACK SCREEN WARNING                         ║");
-                Debug.LogError("════════════════════════════════════════════════════════════════════════");
-                Debug.LogError($"║ CRITICAL: No SpawnPointConfiguration found in scene '{sceneName}'");
-                Debug.LogError("║");
-                Debug.LogError("║ REASON: Cannot spawn player without spawn points!");
-                Debug.LogError("║");
-                Debug.LogError("║ TO FIX THIS:");
-                Debug.LogError("║   1. Add a GameObject with SpawnPointConfiguration component");
-                Debug.LogError("║   2. Set the spawn direction (Left, Right, Up, Down, or Default)");
-                Debug.LogError("║   3. Position it where the player should spawn");
-                Debug.LogError("║");
-                Debug.LogError("║ TEST MODE: Scene will continue but player won't spawn");
-                Debug.LogError("════════════════════════════════════════════════════════════════════════");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "════════════════════════════════════════════════════════════════════════");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║                          BLACK SCREEN WARNING                         ║");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "════════════════════════════════════════════════════════════════════════");
+                Debugger.LogError(LogCategory.ProceduralGeneration, $"║ CRITICAL: No SpawnPointConfiguration found in scene '{sceneName}'");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║ REASON: Cannot spawn player without spawn points!");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║ TO FIX THIS:");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║   1. Add a GameObject with SpawnPointConfiguration component");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║   2. Set the spawn direction (Left, Right, Up, Down, or Default)");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║   3. Position it where the player should spawn");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "║ TEST MODE: Scene will continue but player won't spawn");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "════════════════════════════════════════════════════════════════════════");
                 
                 LogError($"CRITICAL: No SpawnPointConfiguration components found in scene '{sceneName}'! Cannot spawn player.");
                 
@@ -788,7 +784,7 @@ namespace NeonLadder.ProceduralGeneration
             if (targetSpawn == null)
             {
                 LogError($"CRITICAL: No valid spawn point found! Type={pendingSpawnType}");
-                Debug.LogError("[SceneTransitionManager] CRITICAL: Failed to find any valid spawn point. Halting.");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "[SceneTransitionManager] CRITICAL: Failed to find any valid spawn point. Halting.");
                 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPaused = true;
                 #endif
@@ -804,7 +800,7 @@ namespace NeonLadder.ProceduralGeneration
             if (player == null)
             {
                 LogError("CRITICAL: Player GameObject with tag 'Player' not found!");
-                Debug.LogError("[SceneTransitionManager] CRITICAL: No player found. Halting.");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "[SceneTransitionManager] CRITICAL: No player found. Halting.");
                 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPaused = true;
                 #endif

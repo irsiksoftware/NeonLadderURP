@@ -99,10 +99,10 @@ namespace NeonLadder.DataManagement
                 {
                     System.IO.Directory.CreateDirectory(gameDataPath);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     // Fall back to base path if GameData creation fails
-                    Debug.LogWarning($"Could not create GameData directory: {ex.Message}. Using base path instead.");
+                    Debugger.LogWarning($"Could not create GameData directory: {ex.Message}. Using base path instead.");
                     return System.IO.Path.Combine(basePath, saveFileName + extension);
                 }
             }

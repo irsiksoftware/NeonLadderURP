@@ -1,3 +1,4 @@
+using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Controllers;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace NeonLadder.Events
         {
             var playerLandedEvent = Schedule<PlayerLanded>();
             playerLandedEvent.Player = player;
-            Debug.Log("Player collided with terrain.");
+            Debugger.Log(LogCategory.Player, "Player collided with terrain.");
         }
     }
 }

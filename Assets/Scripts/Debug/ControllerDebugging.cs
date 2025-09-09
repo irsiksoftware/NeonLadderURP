@@ -41,7 +41,6 @@ public static class ControllerDebugging
             }
 
             bindingOutput = string.Join("\n", fullBindings);
-            //Debug.Log(bindingOutput);
         }
     }
 

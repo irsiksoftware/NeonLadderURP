@@ -2,6 +2,7 @@ using UnityEngine;
 using NeonLadder.Core;
 using NeonLadder.Integrations;
 using DamageNumbersPro;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Managers
 {
@@ -14,19 +15,20 @@ namespace NeonLadder.Managers
         [Header("Configuration")]
         [SerializeField] private bool useDamageNumbersPro = true;
         [SerializeField] private DamageNumber damageNumberProPrefab;
-        
+        private LogCategory logCategory = LogCategory.Packages;
+
         private DamageNumberProRenderer proRenderer;
         
-        private void Awake()
+        void Awake()
         {
             // Check if another DamageNumberManager already exists
-            if (FindObjectsOfType<DamageNumberManager>().Length > 1)
+            if (FindObjectsByType<DamageNumberManager>(FindObjectsSortMode.None).Length > 1)
             {
-                Debug.LogWarning("Multiple DamageNumberManagers found in scene");
+                Debugger.LogError(logCategory, "Multiple DamageNumberManagers found in scene");
                 Destroy(gameObject);
                 return;
             }
-            
+
             InitializeDamageNumberSystem();
         }
         
@@ -38,11 +40,11 @@ namespace NeonLadder.Managers
                 proRenderer = gameObject.AddComponent<DamageNumberProRenderer>();
                 proRenderer.damageNumberPrefab = damageNumberProPrefab;
                 
-                Debug.Log("DamageNumberManager: DamageNumbersPro renderer initialized");
+                Debugger.Log(logCategory, "DamageNumbersPro renderer initialized");
             }
             else
             {
-                Debug.LogWarning("DamageNumberManager: DamageNumbersPro not configured, using debug renderer");
+                Debugger.LogWarning(logCategory, "DamageNumbersPro not configured, using debug renderer");
             }
         }
         

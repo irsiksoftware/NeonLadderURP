@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Progression;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Debugging;
 using System;
 
 namespace NeonLadder.Models
@@ -76,7 +77,7 @@ namespace NeonLadder.Models
         {
             if (!CanPurchase)
             {
-                Debug.LogWarning($"Cannot purchase {ItemName} - already at max purchases ({timesPurchased}/{maxPurchases})");
+                Debugger.LogWarning(LogCategory.Progression, $"Cannot purchase {ItemName} - already at max purchases ({timesPurchased}/{maxPurchases})");
                 return;
             }
             
@@ -95,16 +96,16 @@ namespace NeonLadder.Models
             if (purchaseVFX != null)
             {
                 // Could schedule a VFX event here
-                Debug.Log($"Playing purchase VFX for {ItemName}");
+                Debugger.Log(LogCategory.Progression, $"Playing purchase VFX for {ItemName}");
             }
             
             if (purchaseSound != null)
             {
                 // Could schedule an audio event here
-                Debug.Log($"Playing purchase sound for {ItemName}");
+                Debugger.Log(LogCategory.Progression, $"Playing purchase sound for {ItemName}");
             }
             
-            Debug.Log($"Purchased {ItemName} (Purchase #{timesPurchased})");
+            Debugger.Log(LogCategory.Progression, $"Purchased {ItemName} (Purchase #{timesPurchased})");
         }
         
         public void ResetPurchases()
@@ -182,11 +183,11 @@ namespace NeonLadder.Models
                     
                 case "dash":
                     // Enable dash ability
-                    Debug.Log("Granting dash ability");
+                    Debugger.Log(LogCategory.Progression, "Granting dash ability");
                     break;
                     
                 default:
-                    Debug.LogWarning($"Unknown ability effect: {targetProperty}");
+                    Debugger.LogWarning(LogCategory.Progression, $"Unknown ability effect: {targetProperty}");
                     break;
             }
         }
@@ -194,7 +195,7 @@ namespace NeonLadder.Models
         private void ApplyStatBoost(Player player)
         {
             // This would integrate with your stat system
-            Debug.Log($"Applying stat boost: {targetProperty} += {value}");
+            Debugger.Log(LogCategory.Progression, $"Applying stat boost: {targetProperty} += {value}");
             
             // Example implementations:
             switch (targetProperty.ToLower())
@@ -202,19 +203,19 @@ namespace NeonLadder.Models
                 case "health":
                 case "maxhealth":
                     // Increase max health
-                    Debug.Log($"Increasing max health by {value}");
+                    Debugger.Log(LogCategory.Progression, $"Increasing max health by {value}");
                     break;
                     
                 case "speed":
                 case "movespeed":
                     // Increase movement speed
-                    Debug.Log($"Increasing move speed by {value}");
+                    Debugger.Log(LogCategory.Progression, $"Increasing move speed by {value}");
                     break;
                     
                 case "damage":
                 case "attackdamage":
                     // Increase attack damage
-                    Debug.Log($"Increasing attack damage by {value}");
+                    Debugger.Log(LogCategory.Progression, $"Increasing attack damage by {value}");
                     break;
             }
         }
@@ -222,7 +223,7 @@ namespace NeonLadder.Models
         private void ApplyCustomEffect(Player player)
         {
             // Custom effect logic based on targetProperty
-            Debug.Log($"Applying custom effect: {targetProperty}");
+            Debugger.Log(LogCategory.Progression, $"Applying custom effect: {targetProperty}");
         }
     }
     

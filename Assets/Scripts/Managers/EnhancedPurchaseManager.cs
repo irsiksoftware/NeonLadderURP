@@ -7,6 +7,7 @@ using NeonLadder.Mechanics.Progression;
 using NeonLadder.Core;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Currency;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Managers
 {
@@ -48,8 +49,8 @@ namespace NeonLadder.Managers
         
         private void InitializeDatabases()
         {
-            Debug.Log($"InitializeDatabases called from: {System.Environment.StackTrace.Split('\n')[1]}");
-            Debug.Log($"availableItems is {(availableItems == null ? "null" : $"array with {availableItems.Length} items")}");
+            Debugger.Log($"InitializeDatabases called from: {System.Environment.StackTrace.Split('\n')[1]}");
+            Debugger.Log($"availableItems is {(availableItems == null ? "null" : $"array with {availableItems.Length} items")}");
             
             // Initialize item database
             itemDatabase = new Dictionary<string, PurchasableItem>();
@@ -77,7 +78,7 @@ namespace NeonLadder.Managers
                 }
             }
             
-            Debug.Log($"Initialized purchase manager with {itemDatabase.Count} items and {upgradeDatabase.Count} upgrades");
+            Debugger.Log($"Initialized purchase manager with {itemDatabase.Count} items and {upgradeDatabase.Count} upgrades");
         }
         
         #region Item Purchases
@@ -89,7 +90,7 @@ namespace NeonLadder.Managers
         {
             if (!itemDatabase.TryGetValue(itemId, out var item))
             {
-                Debug.LogWarning($"Item '{itemId}' not found in database");
+                Debugger.LogWarning($"Item '{itemId}' not found in database");
                 OnPurchaseFailed?.Invoke($"Item '{itemId}' not found");
                 return false;
             }
@@ -110,7 +111,7 @@ namespace NeonLadder.Managers
             
             if (player == null)
             {
-                Debug.LogWarning("Player reference is null");
+                Debugger.LogWarning("Player reference is null");
                 OnPurchaseFailed?.Invoke("Player not found");
                 return false;
             }
@@ -147,7 +148,7 @@ namespace NeonLadder.Managers
             // Fire event
             OnItemPurchased?.Invoke(item);
             
-            Debug.Log($"Successfully purchased {item.ItemName} for {item.Cost} {item.CurrencyType} currency");
+            Debugger.Log($"Successfully purchased {item.ItemName} for {item.Cost} {item.CurrencyType} currency");
             return true;
         }
         
@@ -162,7 +163,7 @@ namespace NeonLadder.Managers
         {
             if (upgradeSystem == null)
             {
-                Debug.LogWarning("UpgradeSystem not found");
+                Debugger.LogWarning("UpgradeSystem not found");
                 OnPurchaseFailed?.Invoke("Upgrade system not available");
                 return false;
             }
@@ -226,23 +227,23 @@ namespace NeonLadder.Managers
         /// </summary>
         public bool CanAffordItem(string itemId)
         {
-            Debug.Log($"CanAffordItem called with itemId: {itemId}, itemDatabase.Count: {itemDatabase?.Count ?? -1}");
+            Debugger.Log($"CanAffordItem called with itemId: {itemId}, itemDatabase.Count: {itemDatabase?.Count ?? -1}");
             
             if (!itemDatabase.TryGetValue(itemId, out var item))
             {
-                Debug.Log($"Item '{itemId}' not found in database. Available items: {(itemDatabase != null ? string.Join(", ", itemDatabase.Keys) : "null")}");
+                Debugger.Log($"Item '{itemId}' not found in database. Available items: {(itemDatabase != null ? string.Join(", ", itemDatabase.Keys) : "null")}");
                 return false;
             }
                 
             var currency = GetCurrency(ConvertCurrencyType(item.CurrencyType));
             if (currency == null)
             {
-                Debug.Log($"Currency is null for item {itemId}");
+                Debugger.Log($"Currency is null for item {itemId}");
                 return false;
             }
             
             bool canAfford = item.CanAfford(currency.current);
-            Debug.Log($"Item {itemId}: currency.current={currency.current}, item.Cost={item.Cost}, item.CanPurchase={item.CanPurchase}, result={canAfford}");
+            Debugger.Log($"Item {itemId}: currency.current={currency.current}, item.Cost={item.Cost}, item.CanPurchase={item.CanPurchase}, result={canAfford}");
             
             return canAfford;
         }
@@ -276,7 +277,7 @@ namespace NeonLadder.Managers
             // Also reset upgrade system meta upgrades
             upgradeSystem?.ResetMetaUpgrades();
             
-            Debug.Log("Reset all meta purchases");
+            Debugger.Log("Reset all meta purchases");
         }
         
         /// <summary>
@@ -299,7 +300,7 @@ namespace NeonLadder.Managers
                 }
             }
             
-            Debug.Log("Applied all persistent effects");
+            Debugger.Log("Applied all persistent effects");
         }
         
         #endregion
@@ -314,7 +315,7 @@ namespace NeonLadder.Managers
                 {
                     // Check if prerequisite is met (would integrate with your unlock system)
                     // For now, assume all prerequisites are met
-                    Debug.Log($"Checking prerequisite: {requiredUnlock}");
+                    Debugger.Log($"Checking prerequisite: {requiredUnlock}");
                 }
             }
             return true;
@@ -337,22 +338,22 @@ namespace NeonLadder.Managers
         {
             if (player == null) 
             {
-                Debug.Log("GetCurrency: player is null");
+                Debugger.Log("GetCurrency: player is null");
                 return null;
             }
             
-            Debug.Log($"GetCurrency: currencyType={currencyType}, player.MetaCurrency={player.MetaCurrency}, player.PermaCurrency={player.PermaCurrency}");
+            Debugger.Log($"GetCurrency: currencyType={currencyType}, player.MetaCurrency={player.MetaCurrency}, player.PermaCurrency={player.PermaCurrency}");
             
             BaseCurrency result = null;
             switch (currencyType)
             {
                 case NeonLadder.Events.CurrencyType.Meta:
                     result = player.MetaCurrency;
-                    Debug.Log($"Meta currency: {(result != null ? $"current={result.current}" : "null")}");
+                    Debugger.Log($"Meta currency: {(result != null ? $"current={result.current}" : "null")}");
                     break;
                 case NeonLadder.Events.CurrencyType.Perma:
                     result = player.PermaCurrency;
-                    Debug.Log($"Perma currency: {(result != null ? $"current={result.current}" : "null")}");
+                    Debugger.Log($"Perma currency: {(result != null ? $"current={result.current}" : "null")}");
                     break;
                 default:
                     result = null;
@@ -375,16 +376,16 @@ namespace NeonLadder.Managers
         /// </summary>
         public void SetTestData(PurchasableItem[] items, UpgradeData[] upgrades, Player testPlayer, UpgradeSystem testUpgradeSystem)
         {
-            Debug.Log($"SetTestData called: items.Length={items?.Length ?? -1}, upgrades.Length={upgrades?.Length ?? -1}");
+            Debugger.Log($"SetTestData called: items.Length={items?.Length ?? -1}, upgrades.Length={upgrades?.Length ?? -1}");
             
             availableItems = items;
             availableUpgrades = upgrades;
             player = testPlayer;
             upgradeSystem = testUpgradeSystem;
             
-            Debug.Log($"Before InitializeDatabases: availableItems.Length={availableItems?.Length ?? -1}");
+            Debugger.Log($"Before InitializeDatabases: availableItems.Length={availableItems?.Length ?? -1}");
             InitializeDatabases();
-            Debug.Log($"After InitializeDatabases: itemDatabase.Count={itemDatabase?.Count ?? -1}");
+            Debugger.Log($"After InitializeDatabases: itemDatabase.Count={itemDatabase?.Count ?? -1}");
         }
         
         #endregion
@@ -395,19 +396,19 @@ namespace NeonLadder.Managers
         [ContextMenu("Debug: List All Items")]
         private void DebugListItems()
         {
-            Debug.Log("=== Purchase Manager Debug ===");
-            Debug.Log($"Items ({itemDatabase.Count}):");
+            Debugger.Log("=== Purchase Manager Debug ===");
+            Debugger.Log($"Items ({itemDatabase.Count}):");
             foreach (var kvp in itemDatabase)
             {
                 var item = kvp.Value;
-                Debug.Log($"  {item.ItemName} ({item.ItemId}): {item.Cost} {item.CurrencyType} - Purchased {item.TimesPurchased}/{item.MaxPurchases} times");
+                Debugger.Log($"  {item.ItemName} ({item.ItemId}): {item.Cost} {item.CurrencyType} - Purchased {item.TimesPurchased}/{item.MaxPurchases} times");
             }
             
-            Debug.Log($"Upgrades ({upgradeDatabase.Count}):");
+            Debugger.Log($"Upgrades ({upgradeDatabase.Count}):");
             foreach (var kvp in upgradeDatabase)
             {
                 var upgrade = kvp.Value;
-                Debug.Log($"  {upgrade.Name} ({upgrade.Id}): {upgrade.Cost} {upgrade.CurrencyType}");
+                Debugger.Log($"  {upgrade.Name} ({upgrade.Id}): {upgrade.Cost} {upgrade.CurrencyType}");
             }
         }
         
@@ -417,7 +418,7 @@ namespace NeonLadder.Managers
             if (Application.isPlaying && itemDatabase.Count > 0)
             {
                 var firstItem = itemDatabase.Values.First();
-                Debug.Log($"Testing purchase of: {firstItem.ItemName}");
+                Debugger.Log($"Testing purchase of: {firstItem.ItemName}");
                 PurchaseItem(firstItem);
             }
         }

@@ -1,3 +1,4 @@
+using NeonLadder.Debugging;
 using NeonLadderURP.DataManagement;
 using UnityEngine;
 
@@ -21,11 +22,11 @@ namespace NeonLadder.Events
                 model.Player.PermaCurrency.current = playerData.PermaCurrency;
                 model.Player.Unlocks.Set(playerData.Unlocks);
                 ApplyPlayerSettings(playerData.Settings);
-                Debug.Log("Player data loaded.");
+                Debugger.Log(LogCategory.Player, "Player data loaded.");
             }
             else
             {
-                Debug.LogWarning("No save data found.");
+                Debugger.LogWarning(LogCategory.Player, "No save data found.");
             }
         }
 

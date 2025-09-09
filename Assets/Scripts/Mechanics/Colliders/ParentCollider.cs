@@ -1,3 +1,4 @@
+using NeonLadder.Debugging;
 using UnityEngine;
 
 public class ParentCollider : MonoBehaviour
@@ -6,7 +7,7 @@ public class ParentCollider : MonoBehaviour
     {
         if (ManagerController.Instance == null)
         {
-            Debug.Log("Managers prefab is missing, or it's instance is missing an implementaiton.");
+            Debugger.Log("Managers prefab is missing, or it's instance is missing an implementaiton.");
         }
         else
         {
@@ -19,7 +20,7 @@ public class ParentCollider : MonoBehaviour
         {
             ManagerController.Instance.eventManager.TriggerEvent("OnTriggerEnter", gameObject, collision.collider);
             // We just hit the floor
-            Debug.Log("Ground collision detected!");
+            Debugger.Log("Ground collision detected!");
             // Possibly schedule an event
             // e.g. Schedule<PlayerTerrainCollision>();
         }

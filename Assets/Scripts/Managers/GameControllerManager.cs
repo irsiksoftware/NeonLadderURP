@@ -1,10 +1,10 @@
-using Unity.Cinemachine;
+using NeonLadder.Debugging;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.UI;
 using NeonLadder.Utilities;
-using NeonLadder.Cameras;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static NeonLadder.Core.Simulation;
@@ -50,7 +50,7 @@ namespace NeonLadder.Managers
                 player = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).GetComponentInChildren<Player>();
                 if (player == null)
                 {
-                    Debug.LogError("Player not found in scene.");
+                    Debugger.LogError("Player not found in scene.");
                 }
             }
 
@@ -59,7 +59,7 @@ namespace NeonLadder.Managers
                 playerActions = player.GetComponent<PlayerAction>();
                 if (playerActions == null)
                 {
-                    Debug.LogError("PlayerAction not found in scene.");
+                    Debugger.LogError("PlayerAction not found in scene.");
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace NeonLadder.Managers
                 }
                 if (gameController == null)
                 {
-                    Debug.LogError("GameController not found in scene.");
+                    Debugger.LogError("GameController not found in scene.");
                 }
             }
 
@@ -84,7 +84,7 @@ namespace NeonLadder.Managers
                 player = gameController.GetComponentInChildren<Player>();
                 if (player == null)
                 {
-                    Debug.LogError("Player not found in scene.");
+                    Debugger.LogError("Player not found in scene.");
                 }
             }
 
@@ -93,7 +93,7 @@ namespace NeonLadder.Managers
                 playerActions = player.GetComponent<PlayerAction>();
                 if (playerActions == null)
                 {
-                    Debug.LogError("PlayerAction not found in scene.");
+                    Debugger.LogError("PlayerAction not found in scene.");
                 }
             }
         }
@@ -143,14 +143,14 @@ namespace NeonLadder.Managers
         var virtualCamera = Game.Instance.model.VirtualCamera;
         if (virtualCamera == null)
         {
-            Debug.LogWarning($"No VirtualCamera found to apply configuration for scene: {scene}");
+            Debugger.LogWarning($"No VirtualCamera found to apply configuration for scene: {scene}");
             return;
         }
         
         var composer = virtualCamera.GetComponent<CinemachinePositionComposer>();
         if (composer == null)
         {
-            Debug.LogWarning($"No CinemachinePositionComposer found on VirtualCamera for scene: {scene}");
+            Debugger.LogWarning($"No CinemachinePositionComposer found on VirtualCamera for scene: {scene}");
             return;
         }
         
@@ -158,7 +158,7 @@ namespace NeonLadder.Managers
         var config = NeonLadder.Cameras.CameraSettings.GetConfigForScene(scene);
         NeonLadder.Cameras.CameraSettings.ApplyConfig(composer, config);
         
-        Debug.Log($"Applied camera config for {scene}: Distance={config.cameraDistance}, Offset={config.targetOffset}");
+        Debugger.Log($"Applied camera config for {scene}: Distance={config.cameraDistance}, Offset={config.targetOffset}");
     }
 }
 }

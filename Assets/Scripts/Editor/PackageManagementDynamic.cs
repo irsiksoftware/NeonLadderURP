@@ -1,6 +1,6 @@
+using NeonLadder.Debugging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -19,7 +19,8 @@ namespace NeonLadder.Editor
         private const string PACKAGES_PATH = "Assets/Packages";
         private const int BASE_PRIORITY = 60;
         private static List<string> discoveredPackages = new List<string>();
-        
+        private static LogCategory logCategory = LogCategory.Packages;
+
         static PackageManagementDynamic()
         {
             // Discover packages on load
@@ -36,8 +37,7 @@ namespace NeonLadder.Editor
             
             if (!Directory.Exists(PACKAGES_PATH))
             {
-                Debug.LogWarning($"Packages directory not found at: {PACKAGES_PATH}");
-                return;
+                throw new DirectoryNotFoundException($"Packages directory not found at path: {PACKAGES_PATH}");
             }
             
             var directories = Directory.GetDirectories(PACKAGES_PATH);
@@ -46,8 +46,7 @@ namespace NeonLadder.Editor
                 var packageName = Path.GetFileName(dir);
                 discoveredPackages.Add(packageName);
             }
-            
-            Debug.Log($"Discovered {discoveredPackages.Count} packages in {PACKAGES_PATH}");
+
         }
         
         private static void GenerateMenuItems()

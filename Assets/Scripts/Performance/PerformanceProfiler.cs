@@ -3,7 +3,6 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System;
 using NeonLadder.Debugging;
 
@@ -75,7 +74,7 @@ public class PerformanceProfiler : MonoBehaviour
             }
             else
             {
-                UnityEngine.Debug.LogError("Error initializing PerformanceProfiler: " + e.Message);
+                NeonLadder.Debugging.Debugger.LogError(LogCategory.Performance, "Error initializing PerformanceProfiler: " + e.Message);
             }
         }
     }
@@ -96,7 +95,7 @@ public class PerformanceProfiler : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.Log("Logging performance data to: " + filePath);
+            NeonLadder.Debugging.Debugger.Log(LogCategory.Performance, "Logging performance data to: " + filePath);
         }
 
         sessionID = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using NeonLadder.Managers;
+using NeonLadder.Debugging;
 
 public class ManagerController : MonoBehaviour
     {
@@ -29,6 +30,7 @@ public class ManagerController : MonoBehaviour
         public GameControllerManager gameControllerManager;
         public SceneCycleManager sceneCycleManager;
         public EventManager eventManager;
+        public LoggingManager loggingManager;
         // public SteamManager steamManager;
 
         void Awake()
@@ -112,13 +114,16 @@ public class ManagerController : MonoBehaviour
             eventManager = GetComponentInChildren<EventManager>();
             monsterGroupActivationManager = GetComponentInChildren<MonsterGroupActivationManager>();
             sceneCycleManager = GetComponentInChildren<SceneCycleManager>();
+            loggingManager = GetComponentInChildren<LoggingManager>();
         //steamManager = GetComponentInChildren<SteamManager>();
     }
 
         public void ToggleManagers()
         {
             if (eventManager != null)
-                eventManager.enabled = true; 
+                eventManager.enabled = true;
+            if (loggingManager != null)
+                loggingManager.enabled = true; // Always active across all scenes
             //steamManager.enabled = true;
             switch (scene)
             {

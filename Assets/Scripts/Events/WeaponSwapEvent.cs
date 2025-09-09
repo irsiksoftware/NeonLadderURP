@@ -36,7 +36,7 @@ namespace NeonLadder.Events
                     // Only retry if we haven't exceeded max attempts
                     if (retryCount < MaxRetries)
                     {
-                        Debugger.Log($"[WeaponSwap] Blocked: Attack in progress (state: {playerAction.attackState}). Retry {retryCount + 1}/{MaxRetries}");
+                        Debugger.Log(LogCategory.Combat, $"[WeaponSwap] Blocked: Attack in progress (state: {playerAction.attackState}). Retry {retryCount + 1}/{MaxRetries}");
                         
                         // Schedule a retry after attack should complete
                         var retrySwap = Simulation.Schedule<WeaponSwapEvent>(0.5f);
@@ -46,7 +46,7 @@ namespace NeonLadder.Events
                     }
                     else
                     {
-                        Debugger.LogWarning($"[WeaponSwap] Max retries exceeded. Attack state stuck at: {playerAction.attackState}. Forcing reset.");
+                        Debugger.LogWarning(LogCategory.Combat, $"[WeaponSwap] Max retries exceeded. Attack state stuck at: {playerAction.attackState}. Forcing reset.");
                         // Force reset the attack state if we've retried too many times
                         playerAction.attackState = ActionStates.Ready;
                         playerAction.stopAttack = false;
@@ -64,18 +64,18 @@ namespace NeonLadder.Events
             var playerAction = player.GetComponent<PlayerAction>();
             if (playerAction == null) 
             {
-                Debugger.LogError("[WeaponSwap] PlayerAction component not found!");
+                Debugger.LogError(LogCategory.Combat, "[WeaponSwap] PlayerAction component not found!");
                 return;
             }
             
             // Log current state for debugging
             bool wasUsingMelee = player.IsUsingMelee;
-            Debugger.Log($"[WeaponSwap] Starting swap: {(wasUsingMelee ? "Melee" : "Ranged")} -> {(!wasUsingMelee ? "Melee" : "Ranged")}");
+            Debugger.Log(LogCategory.Combat, $"[WeaponSwap] Starting swap: {(wasUsingMelee ? "Melee" : "Ranged")} -> {(!wasUsingMelee ? "Melee" : "Ranged")}");
             
             // Safety check: Reset stuck attack states
             if (playerAction.attackState == ActionStates.Acted)
             {
-                Debugger.LogWarning("[WeaponSwap] Found stuck 'Acted' state, resetting to Ready");
+                Debugger.LogWarning(LogCategory.Combat, "[WeaponSwap] Found stuck 'Acted' state, resetting to Ready");
                 playerAction.attackState = ActionStates.Ready;
             }
             
@@ -88,7 +88,7 @@ namespace NeonLadder.Events
             visualEvent.playerAction = playerAction;
             visualEvent.showMelee = player.IsUsingMelee;
             
-            Debugger.Log($"[WeaponSwap] Swap complete. Now using: {(player.IsUsingMelee ? "Melee" : "Ranged")}");
+            Debugger.Log(LogCategory.Combat, $"[WeaponSwap] Swap complete. Now using: {(player.IsUsingMelee ? "Melee" : "Ranged")}");
         }
 
         internal override void Cleanup()
@@ -109,7 +109,7 @@ namespace NeonLadder.Events
 
         public override void Execute()
         {
-            Debugger.Log($"[WeaponSwapVisual] Updating visuals to show {(showMelee ? "Melee" : "Ranged")} weapons");
+            Debugger.Log(LogCategory.Combat, $"[WeaponSwapVisual] Updating visuals to show {(showMelee ? "Melee" : "Ranged")} weapons");
             
             if (showMelee)
             {
@@ -132,7 +132,7 @@ namespace NeonLadder.Events
         {
             if (weaponGroups == null) 
             {
-                Debugger.LogWarning($"[WeaponSwapVisual] Weapon group list is null");
+                Debugger.LogWarning(LogCategory.Combat, $"[WeaponSwapVisual] Weapon group list is null");
                 return;
             }
             
@@ -147,7 +147,7 @@ namespace NeonLadder.Events
                 }
             }
             
-            Debugger.Log($"[WeaponSwapVisual] Set {count} weapon groups to {(active ? "active" : "inactive")}");
+            Debugger.Log(LogCategory.Combat, $"[WeaponSwapVisual] Set {count} weapon groups to {(active ? "active" : "inactive")}");
         }
 
         private void ResetWeaponColliders()
@@ -168,7 +168,7 @@ namespace NeonLadder.Events
             
             if (resetCount > 0)
             {
-                Debugger.LogWarning($"[WeaponSwapVisual] Reset {resetCount} colliders from Battle to Default layer");
+                Debugger.LogWarning(LogCategory.Combat, $"[WeaponSwapVisual] Reset {resetCount} colliders from Battle to Default layer");
             }
         }
 

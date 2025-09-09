@@ -122,6 +122,7 @@ public enum LogCategory
     Performance,          // FPS, memory, profiling
     Networking,           // Multiplayer, connections
     AI,                   // AI decisions, pathfinding
+    Packages,             // Third-party packages and plugins
     Physics,              // Physics interactions
     Animation,            // Animation events
     ProceduralGeneration, // Level generation

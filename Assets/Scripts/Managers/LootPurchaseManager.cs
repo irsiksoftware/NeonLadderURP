@@ -1,4 +1,5 @@
 using NeonLadder.Core;
+using NeonLadder.Debugging;
 using NeonLadder.Events;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Models;
@@ -30,7 +31,7 @@ public class LootPurchaseManager : MonoBehaviour
         {
             if (player == null)
             {
-                Debug.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchaseMetaItem)} -> Player reference magically disappeared.");
+                Debugger.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchaseMetaItem)} -> Player reference magically disappeared.");
             }
 
             if (player.MetaCurrency.current >= metaItemCost)
@@ -53,7 +54,7 @@ public class LootPurchaseManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not enough meta currency to purchase item.");
+                Debugger.Log("Not enough meta currency to purchase item.");
             }
         }
 
@@ -63,7 +64,7 @@ public class LootPurchaseManager : MonoBehaviour
             bool result = false;
             if (player == null)
             {
-                Debug.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchasePermaItem)} -> Player reference magically disappeared.");
+                Debugger.LogError($"{nameof(LootPurchaseManager)} -> {nameof(PurchasePermaItem)} -> Player reference magically disappeared.");
             }
 
             if (player.PermaCurrency.current >= permaItemCost)
@@ -83,7 +84,7 @@ public class LootPurchaseManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not enough meta currency to purchase item.");
+                Debugger.Log("Not enough meta currency to purchase item.");
             }
             return result;
         }

@@ -1,3 +1,4 @@
+using NeonLadder.Debugging;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.ProceduralGeneration;
 using System.Collections;
@@ -21,7 +22,7 @@ public class SceneCycleManager : MonoBehaviour
         {
             // If no scenes were manually specified in Inspector, use all package scenes
             ScenesToIterateFromMainMenu = GetPackageScenes();
-            Debug.Log($"SceneCycleManager: No scenes specified in Inspector. Using {ScenesToIterateFromMainMenu.Count} package scenes as default.");
+            Debugger.Log($"SceneCycleManager: No scenes specified in Inspector. Using {ScenesToIterateFromMainMenu.Count} package scenes as default.");
         }
     }
     
@@ -70,14 +71,14 @@ public class SceneCycleManager : MonoBehaviour
         // Validate we have scenes to cycle through
         if (ScenesToIterateFromMainMenu == null || ScenesToIterateFromMainMenu.Count == 0)
         {
-            Debug.LogWarning("SceneCycleManager: No scenes to iterate through!");
+            Debugger.LogWarning("SceneCycleManager: No scenes to iterate through!");
             return;
         }
         
         // Don't start if already cycling
         if (isCycling)
         {
-            Debug.Log("SceneCycleManager: Already cycling through scenes");
+            Debugger.Log("SceneCycleManager: Already cycling through scenes");
             return;
         }
         
@@ -95,7 +96,7 @@ public class SceneCycleManager : MonoBehaviour
             if (currentSceneIndex >= ScenesToIterateFromMainMenu.Count)
             {
                 // Loop back to Title scene when we've gone through all scenes
-                Debug.Log("SceneCycleManager: Completed all scenes, returning to Title");
+                Debugger.Log("SceneCycleManager: Completed all scenes, returning to Title");
                 
                 // Wait before returning to title
                 yield return new WaitForSeconds(MinSceneDuration);
@@ -119,7 +120,7 @@ public class SceneCycleManager : MonoBehaviour
             // Validate scene name
             if (string.IsNullOrEmpty(sceneToLoad))
             {
-                Debug.LogWarning($"SceneCycleManager: Skipping empty scene name at index {currentSceneIndex}");
+                Debugger.LogWarning($"SceneCycleManager: Skipping empty scene name at index {currentSceneIndex}");
                 currentSceneIndex++;
                 continue;
             }
@@ -127,12 +128,12 @@ public class SceneCycleManager : MonoBehaviour
             // Validate scene is in build settings
             if (!IsSceneInBuildSettings(sceneToLoad))
             {
-                Debug.LogWarning($"SceneCycleManager: Scene '{sceneToLoad}' not in build settings, skipping");
+                Debugger.LogWarning($"SceneCycleManager: Scene '{sceneToLoad}' not in build settings, skipping");
                 currentSceneIndex++;
                 continue;
             }
             
-            Debug.Log($"SceneCycleManager: Loading scene '{sceneToLoad}' ({currentSceneIndex + 1}/{ScenesToIterateFromMainMenu.Count})");
+            Debugger.Log($"SceneCycleManager: Loading scene '{sceneToLoad}' ({currentSceneIndex + 1}/{ScenesToIterateFromMainMenu.Count})");
             
             // Load the scene using SceneTransitionManager for smooth transitions
             if (SceneTransitionManager.Instance != null)
@@ -164,7 +165,7 @@ public class SceneCycleManager : MonoBehaviour
             StopCoroutine(cyclingCoroutine);
             cyclingCoroutine = null;
         }
-        Debug.Log("SceneCycleManager: Stopped cycling");
+        Debugger.Log("SceneCycleManager: Stopped cycling");
     }
 
     private bool IsSceneInBuildSettings(string sceneName)

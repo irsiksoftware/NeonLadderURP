@@ -261,7 +261,7 @@ PrefabInstance:
     - target: {fileID: 1234567890123456789, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
       propertyPath: m_Name
-      value: SceneEntry
+      value: RightTransition
       objectReference: {fileID: 0}
     - target: {fileID: 1234567890123456790, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
@@ -427,7 +427,12 @@ PrefabInstance:
     - target: {fileID: 1234567890123456789, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
       propertyPath: m_Name
-      value: RightTransition
+      value: LeftTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234567890123456789, guid: a723fe71f0950c74bbc518227267dd34,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1234567890123456790, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
@@ -507,7 +512,7 @@ PrefabInstance:
     - target: {fileID: 7140753903173163707, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
       propertyPath: spawnMode
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9007673190054622816, guid: a723fe71f0950c74bbc518227267dd34,
         type: 3}
@@ -750,6 +755,10 @@ PrefabInstance:
     - target: {fileID: 182886, guid: a5779502d2edcdc45941bf15e657cda4, type: 3}
       propertyPath: m_Name
       value: SM_Env_Track_Tunnel_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 182886, guid: a5779502d2edcdc45941bf15e657cda4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 444962, guid: a5779502d2edcdc45941bf15e657cda4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1191,7 +1200,7 @@ PrefabInstance:
     - target: {fileID: 7439663405200563838, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9168558185702093525, guid: dc08c1230b5ad794196a9aba8b090723,
         type: 3}

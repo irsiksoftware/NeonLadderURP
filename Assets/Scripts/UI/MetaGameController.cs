@@ -1,4 +1,5 @@
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Debugging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,7 +37,7 @@ namespace NeonLadder.UI
             // Validate required references
             if (inputActions == null)
             {
-                Debug.LogError($"[MetaGameController] inputActions is null on {gameObject.name}! Menu functionality will not work.");
+                Debugger.LogError(LogCategory.UI, $"[MetaGameController] inputActions is null on {gameObject.name}! Menu functionality will not work.");
                 enabled = false;
                 return;
             }
@@ -47,14 +48,14 @@ namespace NeonLadder.UI
             
             if (playerActionMap == null)
             {
-                Debug.LogError($"[MetaGameController] 'Player' action map not found in {inputActions.name}! Menu functionality will not work.");
+                Debugger.LogError(LogCategory.UI, $"[MetaGameController] 'Player' action map not found in {inputActions.name}! Menu functionality will not work.");
                 enabled = false;
                 return;
             }
             
             if (uiActionMap == null)
             {
-                Debug.LogError($"[MetaGameController] 'UI' action map not found in {inputActions.name}! Menu functionality will not work.");
+                Debugger.LogError(LogCategory.UI, $"[MetaGameController] 'UI' action map not found in {inputActions.name}! Menu functionality will not work.");
                 enabled = false;
                 return;
             }
@@ -70,12 +71,12 @@ namespace NeonLadder.UI
                 }
                 else
                 {
-                    Debug.LogWarning($"[MetaGameController] Could not find Canvas on StatUI or gamePlayCanvasii is not properly configured on {gameObject.name}");
+                    Debugger.LogWarning(LogCategory.UI, $"[MetaGameController] Could not find Canvas on StatUI or gamePlayCanvasii is not properly configured on {gameObject.name}");
                 }
             }
             else
             {
-                Debug.LogWarning($"[MetaGameController] StatUI component not found in children of {gameObject.name}");
+                Debugger.LogWarning(LogCategory.UI, $"[MetaGameController] StatUI component not found in children of {gameObject.name}");
             }
         }
 
@@ -84,13 +85,13 @@ namespace NeonLadder.UI
             // Validate references before enabling
             if (uiActionMap == null)
             {
-                Debug.LogError($"[MetaGameController] uiActionMap is null on {gameObject.name}! Cannot enable menu functionality.");
+                Debugger.LogError(LogCategory.UI, $"[MetaGameController] uiActionMap is null on {gameObject.name}! Cannot enable menu functionality.");
                 return;
             }
             
             if (toggleMenuAction == null)
             {
-                Debug.LogError($"[MetaGameController] toggleMenuAction is null on {gameObject.name}! Menu toggle will not work.");
+                Debugger.LogError(LogCategory.UI, $"[MetaGameController] toggleMenuAction is null on {gameObject.name}! Menu toggle will not work.");
                 return;
             }
 
@@ -100,11 +101,11 @@ namespace NeonLadder.UI
                 uiActionMap.Enable();
                 toggleMenuAction.action.performed += OnToggleMenu;
                 _ToggleMainMenu(showMainCanvas);
-                Debug.Log($"[MetaGameController] Successfully enabled on {gameObject.name}");
+                Debugger.Log(LogCategory.UI, $"[MetaGameController] Successfully enabled on {gameObject.name}");
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"[MetaGameController] Failed to enable on {gameObject.name}: {e.Message}");
+                Debugger.LogError(LogCategory.UI, $"[MetaGameController] Failed to enable on {gameObject.name}: {e.Message}");
             }
         }
 
@@ -121,7 +122,7 @@ namespace NeonLadder.UI
                 uiActionMap.Disable();
             }
             
-            Debug.Log($"[MetaGameController] Disabled on {gameObject.name}");
+            Debugger.Log(LogCategory.UI, $"[MetaGameController] Disabled on {gameObject.name}");
         }
 
         void OnToggleMenu(InputAction.CallbackContext context)

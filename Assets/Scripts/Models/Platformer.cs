@@ -4,6 +4,7 @@ using NeonLadder.Mechanics.Enums;
 using NeonLadder.Cameras;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Models
 {
@@ -20,22 +21,22 @@ namespace NeonLadder.Models
                 {
                     if (virtualCamera == null)
                     {
-                        Debug.Log($"[VirtualCamera] Looking for camera in scene: {SceneManager.GetActiveScene().name}");
+                        Debugger.Log($"[VirtualCamera] Looking for camera in scene: {SceneManager.GetActiveScene().name}");
                         
                         // First try to find by PlayerCamera tag (preferred)
                         var playerCameraObj = GameObject.FindGameObjectWithTag(Tags.PlayerCamera.ToString());
                         if (playerCameraObj != null)
                         {
-                            Debug.Log($"[VirtualCamera] Found object with PlayerCamera tag: {playerCameraObj.name}");
+                            Debugger.Log($"[VirtualCamera] Found object with PlayerCamera tag: {playerCameraObj.name}");
                             virtualCamera = playerCameraObj.GetComponent<CinemachineCamera>();
                             if (virtualCamera == null)
                             {
-                                Debug.LogError($"[VirtualCamera] Object '{playerCameraObj.name}' has PlayerCamera tag but no CinemachineCamera component!");
+                                Debugger.LogError($"[VirtualCamera] Object '{playerCameraObj.name}' has PlayerCamera tag but no CinemachineCamera component!");
                             }
                         }
                         else
                         {
-                            Debug.Log("[VirtualCamera] No object found with PlayerCamera tag");
+                            Debugger.Log("[VirtualCamera] No object found with PlayerCamera tag");
                         }
                         
                         // Fallback: try to find as child of GameController
@@ -44,30 +45,30 @@ namespace NeonLadder.Models
                             var gameControllerObj = GameObject.FindGameObjectWithTag(Tags.GameController.ToString());
                             if (gameControllerObj != null)
                             {
-                                Debug.Log($"[VirtualCamera] Found GameController: {gameControllerObj.name}");
+                                Debugger.Log($"[VirtualCamera] Found GameController: {gameControllerObj.name}");
                                 virtualCamera = gameControllerObj.GetComponentInChildren<CinemachineCamera>();
                                 if (virtualCamera == null)
                                 {
-                                    Debug.LogError($"[VirtualCamera] GameController '{gameControllerObj.name}' has no CinemachineCamera in children!");
+                                    Debugger.LogError($"[VirtualCamera] GameController '{gameControllerObj.name}' has no CinemachineCamera in children!");
                                 }
                             }
                             else
                             {
-                                Debug.LogError("[VirtualCamera] No object found with GameController tag!");
+                                Debugger.LogError("[VirtualCamera] No object found with GameController tag!");
                             }
                         }
                         
                         // Last resort: find any CinemachineCamera in scene
                         if (virtualCamera == null)
                         {
-                            virtualCamera = GameObject.FindObjectOfType<CinemachineCamera>();
+                            virtualCamera = Object.FindFirstObjectByType<CinemachineCamera>();
                             if (virtualCamera != null)
                             {
-                                Debug.LogWarning($"[VirtualCamera] Found CinemachineCamera by type search: {virtualCamera.name} (consider tagging it properly)");
+                                Debugger.LogWarning($"[VirtualCamera] Found CinemachineCamera by type search: {virtualCamera.name} (consider tagging it properly)");
                             }
                             else
                             {
-                                Debug.LogError("[VirtualCamera] No CinemachineCamera found anywhere in the scene!");
+                                Debugger.LogError("[VirtualCamera] No CinemachineCamera found anywhere in the scene!");
                             }
                         }
                     }

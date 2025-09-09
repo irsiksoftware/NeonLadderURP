@@ -23,17 +23,6 @@ namespace NeonLadder.Debugging
                 if (_instance == null)
                 {
                     _instance = FindObjectOfType<LoggingManager>();
-                    if (_instance == null)
-                    {
-                        GameObject go = new GameObject("LoggingManager");
-                        _instance = go.AddComponent<LoggingManager>();
-                        
-                        // Only use DontDestroyOnLoad in play mode (not in Editor tests)
-                        if (Application.isPlaying)
-                        {
-                            DontDestroyOnLoad(go);
-                        }
-                    }
                 }
                 return _instance;
             }
@@ -73,18 +62,12 @@ namespace NeonLadder.Debugging
             if (_instance == null)
             {
                 _instance = this;
-                
-                // Only use DontDestroyOnLoad in play mode (not in Editor tests)
-                if (Application.isPlaying)
-                {
-                    DontDestroyOnLoad(gameObject);
-                }
-                
                 Initialize();
             }
             else if (_instance != this)
             {
-                Destroy(gameObject);
+                // Another instance exists, disable this one
+                enabled = false;
             }
         }
 

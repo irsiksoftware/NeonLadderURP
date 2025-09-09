@@ -13,6 +13,7 @@ using UnityEngine;
 #if !DISABLESTEAMWORKS
 using System.Collections;
 using Steamworks;
+using NeonLadder.Debugging;
 #endif
 
 //
@@ -58,7 +59,7 @@ namespace NeonLadder.Managers
     [AOT.MonoPInvokeCallback(typeof(SteamAPIWarningMessageHook_t))]
     protected static void SteamAPIDebugTextHook(int nSeverity, System.Text.StringBuilder pchDebugText)
     {
-        Debug.LogWarning(pchDebugText);
+        Debugger.LogWarning(pchDebugText.ToString());
     }
 
 #if UNITY_2019_3_OR_NEWER
@@ -95,12 +96,12 @@ namespace NeonLadder.Managers
 
         if (!Packsize.Test())
         {
-            Debug.LogError("[Steamworks.NET] Packsize Test returned false, the wrong version of Steamworks.NET is being run in this platform.", this);
+            Debugger.LogError("[Steamworks.NET] Packsize Test returned false, the wrong version of Steamworks.NET is being run in this platform.", this);
         }
 
         if (!DllCheck.Test())
         {
-            Debug.LogError("[Steamworks.NET] DllCheck Test returned false, One or more of the Steamworks binaries seems to be the wrong version.", this);
+            Debugger.LogError("[Steamworks.NET] DllCheck Test returned false, One or more of the Steamworks binaries seems to be the wrong version.", this);
         }
 
         try
@@ -119,7 +120,7 @@ namespace NeonLadder.Managers
         }
         catch (System.DllNotFoundException e)
         { // We catch this exception here, as it will be the first occurrence of it.
-            Debug.LogError("[Steamworks.NET] Could not load [lib]steam_api.dll/so/dylib. It's likely not in the correct location. Refer to the README for more details.\n" + e, this);
+            Debugger.LogError("[Steamworks.NET] Could not load [lib]steam_api.dll/so/dylib. It's likely not in the correct location. Refer to the README for more details.\n" + e, this);
 
             Application.Quit();
             return;
@@ -137,13 +138,13 @@ namespace NeonLadder.Managers
         m_bInitialized = SteamAPI.Init();
         if (!m_bInitialized)
         {
-            Debug.LogError("[Steamworks.NET] SteamAPI_Init() failed. Refer to Valve's documentation or the comment above this line for more information.", this);
+            Debugger.LogError("[Steamworks.NET] SteamAPI_Init() failed. Refer to Valve's documentation or the comment above this line for more information.", this);
 
             return;
         }
         else
         {
-            Debug.Log("[Steamworks.NET] SteamAPI_Init() Succeeded!", this);
+            Debugger.Log("[Steamworks.NET] SteamAPI_Init() Succeeded!", this);
 
 #if UNITY_EDITOR
             ResetAchievements();
@@ -159,20 +160,20 @@ namespace NeonLadder.Managers
     {
         SteamUserStats.ResetAllStats(true); // Reset stats and achievements
         SteamUserStats.StoreStats(); // Ensure the reset is stored on Steam
-        Debug.Log("All achievements have been reset for testing purposes.");
+        Debugger.Log("All achievements have been reset for testing purposes.");
     }
 
     public void UnlockAchievement(string achievementID)
     {
         if (!Initialized)
         {
-            Debug.LogError("SteamManager not initialized.");
+            Debugger.LogError("SteamManager not initialized.");
             return;
         }
 
         SteamUserStats.SetAchievement(achievementID);
         SteamUserStats.StoreStats();
-        Debug.Log($"Achievement {achievementID} unlocked.");
+        Debugger.Log($"Achievement {achievementID} unlocked.");
     }
     // This should only ever get called on first load and after an Assembly reload, You should never Disable the Steamworks Manager yourself.
     protected virtual void OnEnable()

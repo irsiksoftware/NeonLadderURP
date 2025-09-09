@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using PixelCrushers.DialogueSystem;
 using NeonLadder.Mechanics.Enums;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Dialog
 {
@@ -67,10 +68,7 @@ namespace NeonLadder.Dialog
                 lastBanterTime[config.bossName.ToLower()] = 0f;
             }
 
-            if (enableDebugLogging)
-            {
-                Debug.Log($"BossBanterManager initialized with {bossConfigs.Count} boss configurations");
-            }
+                Debugger.Log($"BossBanterManager initialized with {bossConfigs.Count} boss configurations");
         }
 
         /// <summary>
@@ -81,8 +79,8 @@ namespace NeonLadder.Dialog
         {
             if (string.IsNullOrEmpty(bossName))
             {
-                if (enableDebugLogging)
-                    Debug.LogWarning("TriggerBossBanter called with null or empty boss name");
+
+                    Debugger.LogWarning("TriggerBossBanter called with null or empty boss name");
                 return false;
             }
             
@@ -90,8 +88,7 @@ namespace NeonLadder.Dialog
             
             if (!bossConfigMap.ContainsKey(normalizedName))
             {
-                if (enableDebugLogging)
-                    Debug.LogWarning($"Boss '{bossName}' not found in banter configuration");
+                    Debugger.LogWarning($"Boss '{bossName}' not found in banter configuration");
                 return false;
             }
 
@@ -100,8 +97,7 @@ namespace NeonLadder.Dialog
             // Check cooldown
             if (GetCurrentTime() - lastBanterTime[normalizedName] < config.cooldownSeconds)
             {
-                if (enableDebugLogging)
-                    Debug.Log($"Boss '{bossName}' banter on cooldown");
+                    Debugger.Log($"Boss '{bossName}' banter on cooldown");
                 return false;
             }
 
@@ -116,8 +112,7 @@ namespace NeonLadder.Dialog
             }
             catch
             {
-                if (enableDebugLogging)
-                    Debug.Log($"DialogueLua not available - would set {variableName} = {nextIndex}");
+                    Debugger.Log($"DialogueLua not available - would set {variableName} = {nextIndex}");
             }
             
             // Start the banter conversation (only if Dialogue Manager is available)
@@ -127,17 +122,15 @@ namespace NeonLadder.Dialog
             }
             else if (enableDebugLogging)
             {
-                Debug.Log($"DialogueManager not available - simulating conversation start for '{config.conversationName}'");
+                Debugger.Log($"DialogueManager not available - simulating conversation start for '{config.conversationName}'");
             }
             
             // Update tracking
             lastBanterIndex[normalizedName] = nextIndex;
             lastBanterTime[normalizedName] = GetCurrentTime();
 
-            if (enableDebugLogging)
-            {
-                Debug.Log($"Triggered banter for '{bossName}' - Line {nextIndex + 1}/{config.totalBanterLines}");
-            }
+
+                Debugger.Log($"Triggered banter for '{bossName}' - Line {nextIndex + 1}/{config.totalBanterLines}");
 
             return true;
         }
@@ -164,10 +157,8 @@ namespace NeonLadder.Dialog
             {
                 PixelCrushers.DialogueSystem.DialogueManager.instance.SetLanguage(languageCode);
                 
-                if (enableDebugLogging)
-                {
-                    Debug.Log($"Language set to: {languageCode}");
-                }
+
+                    Debugger.Log($"Language set to: {languageCode}");
             }
         }
 
@@ -206,7 +197,7 @@ namespace NeonLadder.Dialog
                 
                 if (enableDebugLogging)
                 {
-                    Debug.Log($"Reset banter rotation for '{bossName}'");
+                    Debugger.Log($"Reset banter rotation for '{bossName}'");
                 }
             }
         }
