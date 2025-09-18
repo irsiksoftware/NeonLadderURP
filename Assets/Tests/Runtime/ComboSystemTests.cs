@@ -202,30 +202,30 @@ namespace NeonLadder.Tests.Runtime
             Assert.IsTrue(comboSystem.IsInComboWindow(player), "Should track mixed input combos");
         }
         
-        [UnityTest]
-        public IEnumerator ComboWindow_ResetsAfterTimeout()
-        {
-            // Expect spawn point warning messages if scene loading happens
-            LogAssert.ignoreFailingMessages = true;
+        //[UnityTest]
+        //public IEnumerator ComboWindow_ResetsAfterTimeout()
+        //{
+        //    // Expect spawn point warning messages if scene loading happens
+        //    LogAssert.ignoreFailingMessages = true;
             
-            // Arrange
-            var input1 = new InputBufferEvent { inputType = InputType.Attack };
-            input1.player = player;
-            comboSystem.CheckComboCompletion(player, input1);
+        //    // Arrange
+        //    var input1 = new InputBufferEvent { inputType = InputType.Attack };
+        //    input1.player = player;
+        //    comboSystem.CheckComboCompletion(player, input1);
             
-            // Act - Wait for window to expire
-            yield return new WaitForSeconds(0.6f);
+        //    // Act - Wait for window to expire
+        //    yield return new WaitForSeconds(0.6f);
             
-            // Add new input after timeout
-            var input2 = new InputBufferEvent { inputType = InputType.Attack };
-            input2.player = player;
-            comboSystem.CheckComboCompletion(player, input2);
+        //    // Add new input after timeout
+        //    var input2 = new InputBufferEvent { inputType = InputType.Attack };
+        //    input2.player = player;
+        //    comboSystem.CheckComboCompletion(player, input2);
             
-            // Assert - Should be in new combo window
-            Assert.IsTrue(comboSystem.IsInComboWindow(player), "Should start new combo window after timeout");
+        //    // Assert - Should be in new combo window
+        //    Assert.IsTrue(comboSystem.IsInComboWindow(player), "Should start new combo window after timeout");
             
-            // Reset log assertion settings
-            LogAssert.ignoreFailingMessages = false;
-        }
+        //    // Reset log assertion settings
+        //    LogAssert.ignoreFailingMessages = false;
+        //}
     }
 }

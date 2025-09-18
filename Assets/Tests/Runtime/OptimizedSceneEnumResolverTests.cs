@@ -36,7 +36,7 @@ namespace NeonLadder.Tests.Runtime
             var result = OptimizedSceneEnumResolver.Resolve("Title");
             
             // Assert
-            Assert.AreEqual(Scenes.Title, result, "Should resolve Title scene correctly");
+            Assert.AreEqual(Scenes.Core.Title, result, "Should resolve Title scene correctly");
         }
         
         [Test]
@@ -48,9 +48,9 @@ namespace NeonLadder.Tests.Runtime
             var result3 = OptimizedSceneEnumResolver.Resolve("TiTlE");
             
             // Assert
-            Assert.AreEqual(Scenes.Title, result1, "Should resolve lowercase");
-            Assert.AreEqual(Scenes.Title, result2, "Should resolve uppercase");
-            Assert.AreEqual(Scenes.Title, result3, "Should resolve mixed case");
+            Assert.AreEqual(Scenes.Core.Title, result1, "Should resolve lowercase");
+            Assert.AreEqual(Scenes.Core.Title, result2, "Should resolve uppercase");
+            Assert.AreEqual(Scenes.Core.Title, result3, "Should resolve mixed case");
         }
         
         [Test]
@@ -62,9 +62,9 @@ namespace NeonLadder.Tests.Runtime
             var result3 = OptimizedSceneEnumResolver.Resolve("MyTestLevel");
             
             // Assert
-            Assert.AreEqual(Scenes.Test, result1, "Should identify test scenes");
-            Assert.AreEqual(Scenes.Test, result2, "Should identify test with underscore");
-            Assert.AreEqual(Scenes.Test, result3, "Should identify test in middle of name");
+            Assert.AreEqual(Scenes.Core.Test, result1, "Should identify test scenes");
+            Assert.AreEqual(Scenes.Core.Test, result2, "Should identify test with underscore");
+            Assert.AreEqual(Scenes.Core.Test, result3, "Should identify test in middle of name");
         }
         
         [Test]
@@ -116,18 +116,14 @@ namespace NeonLadder.Tests.Runtime
         }
         
         [Test]
-        public void GetCachedSceneName_ReturnsStringWithoutAllocation()
+        public void IsValidScene_ValidatesSceneNames()
         {
-            // Arrange
-            var scene = Scenes.MetaShop;
-            
-            // Act
-            var name1 = OptimizedSceneEnumResolver.GetCachedSceneName(scene);
-            var name2 = OptimizedSceneEnumResolver.GetCachedSceneName(scene);
-            
-            // Assert
-            Assert.AreEqual("MetaShop", name1, "Should return correct name");
-            Assert.AreSame(name1, name2, "Should return same string instance (no allocation)");
+            // Arrange & Act & Assert
+            Assert.IsTrue(OptimizedSceneEnumResolver.IsValidScene(Scenes.Core.MetaShop), "MetaShop should be valid");
+            Assert.IsTrue(OptimizedSceneEnumResolver.IsValidScene(Scenes.Core.Title), "Title should be valid");
+            Assert.IsFalse(OptimizedSceneEnumResolver.IsValidScene("NonExistentScene"), "NonExistentScene should be invalid");
+            Assert.IsFalse(OptimizedSceneEnumResolver.IsValidScene(null), "null should be invalid");
+            Assert.IsFalse(OptimizedSceneEnumResolver.IsValidScene(""), "empty string should be invalid");
         }
         
         [Test]
@@ -178,38 +174,32 @@ namespace NeonLadder.Tests.Runtime
         #region Performance Tests
         
         [Test]
-        public void Resolve_Performance_FasterThanStringComparison()
+        public void Resolve_Performance_CachedLookupsAreFast()
         {
             // Arrange
             const int iterations = 10000;
             var sceneName = "MetaShop";
-            var sceneEnum = Scenes.MetaShop;
-            
-            // Warm up caches
+
+            // Warm up caches - first call will be slower
             OptimizedSceneEnumResolver.Resolve(sceneName);
-            
-            // Act - Measure optimized resolver
-            var sw1 = Stopwatch.StartNew();
+
+            // Act - Measure cached lookups (should be very fast)
+            var sw = Stopwatch.StartNew();
             for (int i = 0; i < iterations; i++)
             {
                 var result = OptimizedSceneEnumResolver.Resolve(sceneName);
             }
-            sw1.Stop();
-            var optimizedTime = sw1.ElapsedMilliseconds;
-            
-            // Act - Measure string comparison
-            var sw2 = Stopwatch.StartNew();
-            for (int i = 0; i < iterations; i++)
-            {
-                var comparison = sceneName == sceneEnum.ToString();
-            }
-            sw2.Stop();
-            var stringComparisonTime = sw2.ElapsedMilliseconds;
-            
-            // Assert
-            UnityEngine.Debug.Log($"Optimized: {optimizedTime}ms, String comparison: {stringComparisonTime}ms");
-            Assert.LessOrEqual(optimizedTime, stringComparisonTime * 2, 
-                "Optimized resolver should be at least as fast as string comparison");
+            sw.Stop();
+            var cachedTime = sw.ElapsedMilliseconds;
+
+            // Assert - Cached lookups should be very fast
+            UnityEngine.Debug.Log($"Cached lookups for {iterations} iterations: {cachedTime}ms");
+            Assert.Less(cachedTime, 50,
+                "Cached lookups should be very fast (< 50ms for 10k iterations)");
+
+            // Verify cache efficiency
+            var stats = OptimizedSceneEnumResolver.GetCacheStatistics();
+            Assert.Greater(stats.hitRate, 0.9f, "Hit rate should be > 90% after warm-up");
         }
         
         [Test]
@@ -235,22 +225,19 @@ namespace NeonLadder.Tests.Runtime
         }
         
         [Test]
-        public void GetCachedSceneName_NoAllocation_Test()
+        public void ResolveByHash_WorksCorrectly()
         {
-            // This test verifies that GetCachedSceneName doesn't allocate
-            // In a real scenario, you'd use Unity Profiler to verify zero allocations
+            // This test verifies that ResolveByHash works correctly
             
             // Arrange
-            var scene = Scenes.PermaShop;
+            var sceneName = Scenes.Core.PermaShop;
+            var hash = sceneName.GetHashCode();
             
-            // Act - Get the same string multiple times
-            var name1 = OptimizedSceneEnumResolver.GetCachedSceneName(scene);
-            var name2 = OptimizedSceneEnumResolver.GetCachedSceneName(scene);
-            var name3 = OptimizedSceneEnumResolver.GetCachedSceneName(scene);
+            // Act - Resolve by hash
+            var result = OptimizedSceneEnumResolver.ResolveByHash(hash);
             
-            // Assert - All should be the same reference
-            Assert.AreSame(name1, name2, "Should return same instance");
-            Assert.AreSame(name2, name3, "Should return same instance");
+            // Assert
+            Assert.AreEqual(sceneName, result, "Should resolve to correct scene by hash");
         }
         
         #endregion

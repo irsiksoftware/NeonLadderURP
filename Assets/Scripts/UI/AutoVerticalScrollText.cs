@@ -27,7 +27,7 @@ public class AutoScrollText : MonoBehaviour
     public float textHeightMultiplier = 0.75f;
     public float initialTextOffset = 1.35f;
     private float bufferHeight;
-    public Scenes targetScene;
+    public string targetScene;
 
 
     void Awake()

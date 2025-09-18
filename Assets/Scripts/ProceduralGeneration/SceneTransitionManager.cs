@@ -658,25 +658,14 @@ namespace NeonLadder.ProceduralGeneration
 
         #region Spawn Point Management
 
-        public List<string> CutScenes = new List<string>
-        {
-            Scenes.Death.ToString(),
-            Scenes.BossDefeated.ToString()
-        };
-
-        public List<string> DefaultSpawnScenes = new List<string>
-        {
-            Scenes.Staging.ToString()
-        };
-
         private bool isExcludedCutscene(string scene)
         {
-            return CutScenes.Contains(scene);
+            return Scenes.SceneGroups.IsCutScene(scene);
         }
 
         private bool isDefaultSpawnScene(string scene)
         {
-            return DefaultSpawnScenes.Contains(scene);
+            return Scenes.SceneGroups.IsDefaultSpawnScene(scene);
         }
         private void HandlePlayerSpawning()
         {

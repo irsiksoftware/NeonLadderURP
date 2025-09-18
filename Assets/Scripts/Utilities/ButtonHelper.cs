@@ -32,7 +32,7 @@ namespace NeonLadder.Utilities
 
         public void LoadScene(string sceneName)
         {
-            if (SceneEnumResolver.Resolve(sceneName) == Scenes.Title)
+            if (SceneEnumResolver.Resolve(sceneName) == Scenes.Core.Title)
             {
                 SaveGameManager.Save(Game.Instance.model.Player);
                 Game.Instance.DestroyGameInstance();
@@ -43,7 +43,7 @@ namespace NeonLadder.Utilities
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (SceneEnumResolver.Resolve(scene.name) == Scenes.Title)
+            if (SceneEnumResolver.Resolve(scene.name) == Scenes.Core.Title)
             {
                 Time.timeScale = 1f;
             }

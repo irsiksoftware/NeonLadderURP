@@ -53,21 +53,21 @@ namespace NeonLadder.Cameras
         };
         
         // Scene-specific camera configurations
-        private static readonly Dictionary<Scenes, CameraPreset> scenePresets = new Dictionary<Scenes, CameraPreset>
+        private static readonly Dictionary<string, CameraPreset> scenePresets = new Dictionary<string, CameraPreset>
         {
             // Shop/Rest areas with close-up camera
-            { Scenes.MetaShop, CameraPreset.CloseUp },
-            { Scenes.PermaShop, CameraPreset.CloseUp },
+            { Scenes.Core.MetaShop, CameraPreset.CloseUp },
+            { Scenes.Core.PermaShop, CameraPreset.CloseUp },
             
             // Medium distance scenes
-            { Scenes.Staging, CameraPreset.Default },
-            { Scenes.Start, CameraPreset.Default },
-            { Scenes.SidePath1, CameraPreset.Default },
+            { Scenes.Core.Staging, CameraPreset.Default },
+            { Scenes.Core.Start, CameraPreset.Default },
+            { Scenes.Legacy.SidePath1, CameraPreset.Default },
             
             // Default gameplay distance
-            { Scenes.MainPath1, CameraPreset.Default },
-            { Scenes.MainPath2, CameraPreset.Default },
-            { Scenes.MainPath3, CameraPreset.Default },
+            { Scenes.Legacy.MainPath1, CameraPreset.Default },
+            { Scenes.Legacy.MainPath2, CameraPreset.Default },
+            { Scenes.Legacy.MainPath3, CameraPreset.Default },
             
             // Add more scene mappings as needed
         };
@@ -75,7 +75,7 @@ namespace NeonLadder.Cameras
         /// <summary>
         /// Get camera configuration for a specific scene
         /// </summary>
-        public static CameraConfig GetConfigForScene(Scenes scene)
+        public static CameraConfig GetConfigForScene(string scene)
         {
             if (scenePresets.TryGetValue(scene, out CameraPreset preset))
             {

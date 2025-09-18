@@ -17,7 +17,7 @@ namespace NeonLadder.Models
         {
             get
             {
-                if (SceneManager.GetActiveScene().name != Scenes.Title.ToString())
+                if (SceneManager.GetActiveScene().name != Scenes.Core.Title)
                 {
                     if (virtualCamera == null)
                     {

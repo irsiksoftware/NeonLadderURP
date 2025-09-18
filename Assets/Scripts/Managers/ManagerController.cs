@@ -11,7 +11,7 @@ public class ManagerController : MonoBehaviour
         public static ManagerController Instance;
         [SerializeField] private bool dontDestroyOnLoad = true;
 
-        private Scenes scene;
+        private string scene;
         
         // Performance optimization: Replace per-frame string comparisons with efficient scene detection
         private SceneChangeDetector sceneChangeDetector;
@@ -20,7 +20,7 @@ public class ManagerController : MonoBehaviour
         
         // Events for TDD testing
         public event Action OnStringComparisonPerformed;
-        public event Action<Scenes, Scenes> OnSceneChangeDetected;
+        public event Action<string, string> OnSceneChangeDetected;
         public EnemyDefeatedManager enemyDefeatedManager;
         public DialogueManager dialogueManager;
         public LootDropManager lootDropManager;
@@ -127,13 +127,13 @@ public class ManagerController : MonoBehaviour
             //steamManager.enabled = true;
             switch (scene)
             {
-                case Scenes.Title:
+                case var s when s == Scenes.Core.Title:
                     if (gameControllerManager != null)
                         gameControllerManager.enabled = true;
                     if (sceneCycleManager != null)
                         sceneCycleManager.enabled = true;
                 break;
-                case Scenes.Staging:
+                case var s when s == Scenes.Core.Staging:
                     if (lootPurchaseManager != null)
                         lootPurchaseManager.enabled = true;
                     if (playerCameraPositionManager != null)
@@ -146,8 +146,8 @@ public class ManagerController : MonoBehaviour
                         monsterGroupActivationManager.enabled = false;
                     }
                     break;
-                case Scenes.Start:
-                case Scenes.Recife_2050_Final:
+                case var s when s == Scenes.Core.Start:
+                case var s2 when s2 == Scenes.Packaged.Recife_2050_Final:
                     if (monsterGroupActivationManager != null)
                     {
                         monsterGroupActivationManager.enabled = true;
@@ -155,7 +155,7 @@ public class ManagerController : MonoBehaviour
                     if (lootDropManager != null)
                         lootDropManager.enabled = true;
                     break;
-                case Scenes.MetaShop:
+                case var s when s == Scenes.Core.MetaShop:
                     if (lootDropManager != null)
                         lootDropManager.enabled = false;
                     if (lootPurchaseManager != null)
@@ -165,7 +165,7 @@ public class ManagerController : MonoBehaviour
                         monsterGroupActivationManager.enabled = false;
                     }
                     break;
-                case Scenes.PermaShop:
+                case var s when s == Scenes.Core.PermaShop:
                     if (lootDropManager != null)
                         lootDropManager.enabled = false;
                     if (lootPurchaseManager != null)
@@ -210,15 +210,15 @@ public class ManagerController : MonoBehaviour
         /// <summary>
         /// Sets the current scene for testing purposes
         /// </summary>
-        public void SetCurrentScene(Scenes newScene)
+        public void SetCurrentScene(string newScene)
         {
             scene = newScene;
         }
         
         /// <summary>
-        /// Gets the current scene enum value
+        /// Gets the current scene name value
         /// </summary>
-        public Scenes GetCurrentScene()
+        public string GetCurrentScene()
         {
             return scene;
         }
@@ -226,7 +226,7 @@ public class ManagerController : MonoBehaviour
         /// <summary>
         /// Simulates a scene change for testing
         /// </summary>
-        public void SimulateSceneChange(Scenes fromScene, Scenes toScene)
+        public void SimulateSceneChange(string fromScene, string toScene)
         {
             var oldScene = scene;
             scene = toScene;

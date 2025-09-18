@@ -36,32 +36,14 @@ public class SceneCycleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Temporary method to get all package scenes from the Scenes enum.
-    /// This will be refactored when Scenes enum is converted to nested static classes (PBI #148)
+    /// Get all package scenes from the nested Scenes static class structure.
+    /// Uses the new nested static class pattern introduced in PBI #148.
     /// </summary>
     private List<string> GetPackageScenes()
     {
-        // Return all the package scenes that were added from Unity Asset Store
-        var packageScenes = new List<Scenes>
-        {
-            Scenes.URP_SiegeOfPonthus,
-            Scenes.URP_AncientCathedral,
-            Scenes.Medievil_Tavern,
-            Scenes.SpaceBurgers,
-            Scenes.AbandonedFactory,
-            Scenes.AbandonedPoolURP,
-            Scenes.Cyberpunk_Room,
-            Scenes.CyberpunkURPScene,
-            Scenes.URP_Rooftop_Market,
-            Scenes.URP_RomanStreet,
-            Scenes.Showcase,
-            Scenes.FC_URP_Scene,
-            Scenes.StandardizedOstrichBar
-        };
-
-        // Convert enum values to string names and filter by what's actually in build settings
-        return packageScenes
-            .Select(scene => scene.ToString())
+        // Return all the package scenes from the Packaged nested class
+        // Filter by what's actually in build settings
+        return Scenes.Packaged.All
             .Where(sceneName => IsSceneInBuildSettings(sceneName))
             .ToList();
     }

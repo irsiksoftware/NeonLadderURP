@@ -43,13 +43,13 @@ namespace NeonLadder.UI
         // Use SceneTransitionManager for proper scene transitions with fade effects
         if (SceneTransitionManager.Instance != null)
         {
-            SceneTransitionManager.Instance.TransitionToScene(Scenes.Staging.ToString());
+            SceneTransitionManager.Instance.TransitionToScene(Scenes.Core.Staging);
         }
         else
         {
             // Fallback to direct scene loading if transition manager not available
             Debug.LogWarning("SceneTransitionManager not found, using direct scene load");
-            SceneManager.LoadScene(Scenes.Staging.ToString());
+            SceneManager.LoadScene(Scenes.Core.Staging);
         }
     }
 

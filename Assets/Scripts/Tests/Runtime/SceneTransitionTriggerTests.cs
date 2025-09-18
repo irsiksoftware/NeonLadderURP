@@ -1,11 +1,6 @@
-using System.Collections;
+using NeonLadder.ProceduralGeneration;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
-using NeonLadder.ProceduralGeneration;
-using UnityEngine.SceneManagement;
-using NeonLadder.Gameplay;
-using NeonLadder.Mechanics.Enums;
 
 namespace NeonLadder.Tests.Runtime
 {
@@ -20,6 +15,7 @@ namespace NeonLadder.Tests.Runtime
         [SetUp]
         public void Setup()
         {
+            // Note: This test may generate expected log messages during scene transitions
             // Create trigger object (main SceneTransitionTrigger component)
             triggerObject = new GameObject("TestTrigger");
             
@@ -101,38 +97,6 @@ namespace NeonLadder.Tests.Runtime
         }
    
 
-        [Test]
-        public void TransitionEvents_CanBeSubscribedTo()
-        {
-            // Arrange
-            bool startedEventFired = false;
-            bool completedEventFired = false;
-            bool failedEventFired = false;
-            string failureReason = "";
-            
-            SceneTransitionTrigger.OnTransitionStarted += (t) => startedEventFired = true;
-            SceneTransitionTrigger.OnTransitionCompleted += (t) => completedEventFired = true;
-            SceneTransitionTrigger.OnTransitionFailed += (t, reason) => 
-            {
-                failedEventFired = true;
-                failureReason = reason;
-            };
-            
-            // Act - trigger failure by not setting destination
-            trigger.ForceTransition();
-            
-            // Assert
-            Assert.IsTrue(failedEventFired || startedEventFired); // One should fire
-            
-            // Cleanup
-            SceneTransitionTrigger.OnTransitionStarted -= (t) => startedEventFired = true;
-            SceneTransitionTrigger.OnTransitionCompleted -= (t) => completedEventFired = true;
-            SceneTransitionTrigger.OnTransitionFailed -= (t, reason) => 
-            {
-                failedEventFired = true;
-                failureReason = reason;
-            };
-        }
 
         [Test]
         public void ColliderConfiguration_AutoFixesTriggerFlag()

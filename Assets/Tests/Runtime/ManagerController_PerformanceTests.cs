@@ -103,7 +103,7 @@ namespace NeonLadder.Tests.Runtime
             
             // ACT: Simulate scene change
             // Note: This will fail initially as the event doesn't exist
-            managerController.SimulateSceneChange(Scenes.Title, Scenes.Staging);
+            managerController.SimulateSceneChange(Scenes.Core.Title, Scenes.Core.Staging);
             
             // ASSERT: Scene change should be detected exactly once
             Assert.That(sceneChangeCounter, Is.EqualTo(1), 
@@ -154,7 +154,7 @@ namespace NeonLadder.Tests.Runtime
             managerController.lootPurchaseManager = lootPurchaseManager;
             
             // ACT: Simulate scene change from Title to Staging
-            managerController.SimulateSceneChange(Scenes.Title, Scenes.Staging);
+            managerController.SimulateSceneChange(Scenes.Core.Title, Scenes.Core.Staging);
             yield return null; // Wait one frame
             
             // ASSERT: Correct managers should be enabled/disabled
@@ -259,22 +259,22 @@ namespace NeonLadder.Tests.Runtime
             };
         }
 
-        private void AssertManagerStatesForScene(Scenes scene)
+        private void AssertManagerStatesForScene(string scene)
         {
             switch (scene)
             {
-                case Scenes.Title:
+                case var s when s == Scenes.Core.Title:
                     Assert.That(managerController.gameControllerManager?.enabled, Is.True,
                         "GameControllerManager should be enabled in Title scene");
                     break;
-                case Scenes.Staging:
+                case var s when s == Scenes.Core.Staging:
                     Assert.That(managerController.lootPurchaseManager?.enabled, Is.True,
                         "LootPurchaseManager should be enabled in Staging scene");
                     Assert.That(managerController.playerCameraPositionManager?.enabled, Is.True,
                         "PlayerCameraPositionManager should be enabled in Staging scene");
                     break;
-                case Scenes.MetaShop:
-                case Scenes.PermaShop:
+                case var s when s == Scenes.Core.MetaShop:
+                case var s2 when s2 == Scenes.Core.PermaShop:
                     Assert.That(managerController.lootPurchaseManager?.enabled, Is.True,
                         "LootPurchaseManager should be enabled in shop scenes");
                     Assert.That(managerController.lootDropManager?.enabled, Is.False,

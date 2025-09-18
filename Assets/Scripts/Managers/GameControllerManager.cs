@@ -16,7 +16,7 @@ namespace NeonLadder.Managers
     private Game gameController;
     private Player player;
     private PlayerAction playerActions;
-    private Scenes scene;
+    private string scene;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ namespace NeonLadder.Managers
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != scene.ToString())
+        if (SceneManager.GetActiveScene().name != scene)
         {
             scene = SceneEnumResolver.Resolve(SceneManager.GetActiveScene().name);
             InitializeControllers();
@@ -43,7 +43,7 @@ namespace NeonLadder.Managers
 
     private void InitializeControllers()
     {
-        if (scene == Scenes.Title)
+        if (scene == Scenes.Core.Title)
         {
             if (player == null)
             {
@@ -64,7 +64,7 @@ namespace NeonLadder.Managers
             }
         }
 
-        else if (scene != Scenes.Credits)
+        else if (scene != Scenes.Core.Credits)
         {
             if (gameController == null)
             {
@@ -103,28 +103,28 @@ namespace NeonLadder.Managers
     {
         switch (scene)
         {
-            case Scenes.Title:
+            case var s when s == Scenes.Core.Title:
                 player.transform.parent.GetComponentInChildren<Canvas>().enabled = false;
                 playerActions.enabled = false;
                 break;
-            case Scenes.Staging:
+            case var s when s == Scenes.Core.Staging:
                 player.transform.parent.GetComponentInChildren<Canvas>().enabled = true;
                 Schedule<LoadGame>();
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = false;
                 gameController.gameObject.GetComponent<MetaGameController>().enabled = true;
                 break;
-            case Scenes.BossDefeated:
-            case Scenes.Death:
+            case var s when s == Scenes.Cutscene.BossDefeated:
+            case var s2 when s2 == Scenes.Cutscene.Death:
                 player.transform.parent.GetComponentInChildren<Canvas>().enabled = false;
                 break;
-            case Scenes.Start:
-            case Scenes.SidePath1:
+            case var s when s == Scenes.Core.Start:
+            case var s2 when s2 == Scenes.Legacy.SidePath1:
                 break;
-            case Scenes.MetaShop:
+            case var s when s == Scenes.Core.MetaShop:
                 break;
-            case Scenes.PermaShop:
+            case var s when s == Scenes.Core.PermaShop:
                 break;
-            case Scenes.Credits:
+            case var s when s == Scenes.Core.Credits:
                 break;
             default:
                 //playerActions.enabled = true;

@@ -1,24 +1,26 @@
 using NeonLadder.Mechanics.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NeonLadder.Utilities
 {
     /// <summary>
-    /// Optimized version of SceneEnumResolver that uses caching to avoid repeated string operations.
-    /// This class eliminates per-frame allocations and string comparisons for better performance.
+    /// Optimized version of SceneEnumResolver that uses caching to validate scene names.
+    /// This class eliminates repeated string operations for better performance.
+    /// Works with the new nested static class Scenes structure.
     /// </summary>
     public static class OptimizedSceneEnumResolver
     {
-        // Cache for resolved scene names to avoid repeated parsing
-        private static readonly Dictionary<string, Scenes> sceneCache = new Dictionary<string, Scenes>();
+        // Cache for valid scene names (stores the correctly cased scene name if valid, null if invalid)
+        private static readonly Dictionary<string, string> validationCache = new Dictionary<string, string>();
         
-        // Cache for enum to string conversions to avoid ToString() allocations
-        private static readonly Dictionary<Scenes, string> enumToStringCache = new Dictionary<Scenes, string>();
+        // Set of all valid scene names for fast lookup
+        private static readonly HashSet<string> validScenes = new HashSet<string>();
         
         // Pre-computed hash codes for faster lookups
-        private static readonly Dictionary<int, Scenes> hashToSceneCache = new Dictionary<int, Scenes>();
+        private static readonly Dictionary<int, string> hashToSceneCache = new Dictionary<int, string>();
         
         // Performance counters for monitoring
         private static int cacheHits = 0;
@@ -26,7 +28,7 @@ namespace NeonLadder.Utilities
         
         static OptimizedSceneEnumResolver()
         {
-            // Pre-populate caches with all known scene enums
+            // Pre-populate caches with all known scenes
             InitializeCaches();
         }
         
@@ -35,79 +37,90 @@ namespace NeonLadder.Utilities
         /// </summary>
         private static void InitializeCaches()
         {
-            // Pre-cache all enum values
-            foreach (Scenes scene in Enum.GetValues(typeof(Scenes)))
+            // Add all scenes to the valid set
+            AddScenesToSet(Scenes.Core.All);
+            AddScenesToSet(Scenes.Boss.All);
+            AddScenesToSet(Scenes.Connection.All);
+            AddScenesToSet(Scenes.Service.All);
+            AddScenesToSet(Scenes.Legacy.All);
+            AddScenesToSet(Scenes.Packaged.All);
+            AddScenesToSet(Scenes.Cutscene.All);
+            
+            // Pre-cache hash codes
+            foreach (var scene in validScenes)
             {
-                string sceneName = scene.ToString();
-                
-                // Cache enum to string
-                enumToStringCache[scene] = sceneName;
-                
-                // Cache string to enum
-                sceneCache[sceneName] = scene;
-                
-                // Cache hash codes
-                hashToSceneCache[sceneName.GetHashCode()] = scene;
-                
+                hashToSceneCache[scene.GetHashCode()] = scene;
+                validationCache[scene] = scene; // Cache exact case
+
                 // Also cache lowercase variants for case-insensitive lookups
-                string lowerName = sceneName.ToLower();
-                if (!sceneCache.ContainsKey(lowerName))
+                string lowerName = scene.ToLower();
+                if (!validationCache.ContainsKey(lowerName))
                 {
-                    sceneCache[lowerName] = scene;
+                    validationCache[lowerName] = scene; // Store the correctly cased version
                 }
             }
         }
         
+        private static void AddScenesToSet(string[] scenes)
+        {
+            foreach (var scene in scenes)
+            {
+                validScenes.Add(scene);
+            }
+        }
+        
         /// <summary>
-        /// Resolves a scene name to its enum value using optimized caching.
+        /// Resolves a scene name to a validated scene string using optimized caching.
         /// This method avoids repeated string operations and allocations.
         /// </summary>
         /// <param name="sceneName">The scene name to resolve</param>
-        /// <returns>The corresponding Scenes enum value</returns>
-        public static Scenes Resolve(string sceneName)
+        /// <returns>The validated scene name or null if invalid</returns>
+        public static string Resolve(string sceneName)
         {
-            if (string.IsNullOrEmpty(sceneName))
+            if (string.IsNullOrWhiteSpace(sceneName))
             {
-                return default(Scenes);
+                return null;
             }
-            
+
             // First, try direct cache lookup (fastest path)
-            if (sceneCache.TryGetValue(sceneName, out Scenes cachedScene))
+            if (validationCache.TryGetValue(sceneName, out string cachedResult))
             {
                 cacheHits++;
-                return cachedScene;
+                return cachedResult; // Returns correctly cased scene name or null
             }
-            
-            // Second, try case-insensitive lookup
-            string lowerName = sceneName.ToLower();
-            if (sceneCache.TryGetValue(lowerName, out Scenes lowerCachedScene))
+
+            // Second, check if it's a valid scene (exact match)
+            bool isValidScene = validScenes.Contains(sceneName);
+            if (isValidScene)
             {
-                // Cache the exact case for future lookups
-                sceneCache[sceneName] = lowerCachedScene;
+                validationCache[sceneName] = sceneName;
                 cacheHits++;
-                return lowerCachedScene;
+                return sceneName;
             }
-            
+
             // Third, check for test scenes (special case)
+            string lowerName = sceneName.ToLower();
             if (lowerName.Contains("test"))
             {
                 cacheMisses++;
-                return Scenes.Test;
+                validationCache[sceneName] = Scenes.Core.Test;
+                return Scenes.Core.Test;
             }
-            
-            // Finally, try enum parsing as last resort
-            if (Enum.TryParse(sceneName, out Scenes parsedScene))
+
+            // Fourth, try case-insensitive lookup
+            var matchingScene = validScenes.FirstOrDefault(s => s.Equals(sceneName, StringComparison.OrdinalIgnoreCase));
+            if (matchingScene != null)
             {
-                // Cache the result for future lookups
-                sceneCache[sceneName] = parsedScene;
+                validationCache[sceneName] = matchingScene; // Cache the correctly cased version
                 cacheMisses++;
-                return parsedScene;
+                return matchingScene; // Return the correctly cased version
             }
-            
-            // Unknown scene - log warning and return default
+
+            // Unknown scene - log warning and return null
             Debug.LogWarning($"Scene name '{sceneName}' is unaccounted for. Cache stats: {cacheHits} hits, {cacheMisses} misses");
+            validationCache[sceneName] = null;
             cacheMisses++;
-            return default(Scenes);
+            return null;
         }
         
         /// <summary>
@@ -115,35 +128,40 @@ namespace NeonLadder.Utilities
         /// This method is useful when the hash code is already computed.
         /// </summary>
         /// <param name="sceneNameHash">The hash code of the scene name</param>
-        /// <returns>The corresponding Scenes enum value</returns>
-        public static Scenes ResolveByHash(int sceneNameHash)
+        /// <returns>The corresponding scene name or null</returns>
+        public static string ResolveByHash(int sceneNameHash)
         {
-            if (hashToSceneCache.TryGetValue(sceneNameHash, out Scenes scene))
+            if (hashToSceneCache.TryGetValue(sceneNameHash, out string scene))
             {
                 cacheHits++;
                 return scene;
             }
-            
+
             cacheMisses++;
-            return default(Scenes);
+            return null;
         }
         
         /// <summary>
-        /// Gets the cached string representation of a scene enum without allocation.
+        /// Checks if a scene name is valid without allocating memory for Unknown returns.
         /// </summary>
-        /// <param name="scene">The scene enum value</param>
-        /// <returns>The cached string representation</returns>
-        public static string GetCachedSceneName(Scenes scene)
+        /// <param name="sceneName">The scene name to check</param>
+        /// <returns>True if the scene name is valid</returns>
+        public static bool IsValidScene(string sceneName)
         {
-            if (enumToStringCache.TryGetValue(scene, out string sceneName))
+            if (string.IsNullOrEmpty(sceneName))
             {
-                return sceneName;
+                return false;
             }
-            
-            // Cache miss - generate and cache
-            sceneName = scene.ToString();
-            enumToStringCache[scene] = sceneName;
-            return sceneName;
+
+            // Check cache first
+            if (validationCache.TryGetValue(sceneName, out string cachedResult))
+            {
+                return cachedResult != null;
+            }
+
+            // Check valid scenes
+            return validScenes.Contains(sceneName) ||
+                   validScenes.Any(s => s.Equals(sceneName, StringComparison.OrdinalIgnoreCase));
         }
         
         /// <summary>
@@ -151,8 +169,7 @@ namespace NeonLadder.Utilities
         /// </summary>
         public static void ClearCaches()
         {
-            sceneCache.Clear();
-            enumToStringCache.Clear();
+            validationCache.Clear();
             hashToSceneCache.Clear();
             cacheHits = 0;
             cacheMisses = 0;
@@ -179,7 +196,7 @@ namespace NeonLadder.Utilities
         /// <param name="sceneName">The scene name to cache</param>
         public static void PrewarmCache(string sceneName)
         {
-            if (!string.IsNullOrEmpty(sceneName) && !sceneCache.ContainsKey(sceneName))
+            if (!string.IsNullOrEmpty(sceneName) && !validationCache.ContainsKey(sceneName))
             {
                 Resolve(sceneName);
             }
