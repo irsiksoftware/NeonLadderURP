@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Events;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.Trackers
 {
@@ -15,7 +16,7 @@ namespace NeonLadder.Trackers
             player = GetComponent<Player>();
             playerAction = GetComponent<PlayerAction>();
             kinematicObject = GetComponent<KinematicObject>();
-            Debug.Log("PlayerStateTracker initialized.");
+            Debugger.LogInformation(LogCategory.Player, "PlayerStateTracker initialized.");
         }
 
         private void OnEnable()

@@ -16,6 +16,7 @@ MonoBehaviour:
   configurationName: Development (Verbose & Interactive)
   description: Development logging with full debugging features and overlay
   minimumLogLevel: 0
+  bulkCategoryAction: 0
   categorySettings:
   - category: 1
     enabled: 1
@@ -80,6 +81,18 @@ MonoBehaviour:
   - category: 16
     enabled: 1
     minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 17
+    enabled: 1
+    minimumLevel: 0
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 0
+    enabled: 1
+    minimumLevel: 0
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 18
+    enabled: 1
+    minimumLevel: 0
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   showStackTraces: 1
   includeTimestamp: 1

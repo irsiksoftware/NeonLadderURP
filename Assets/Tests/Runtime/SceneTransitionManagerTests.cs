@@ -73,28 +73,6 @@ namespace NeonLadder.Tests.Runtime.SceneTransition
             Assert.AreSame(instance1, instance2, "Both calls should return the same instance");
         }
 
-        [Test]
-        public void SceneTransitionManager_Singleton_CreatesInstanceIfNotFound()
-        {
-            // Arrange - Ensure no existing instance
-            var existingManager = Object.FindObjectOfType<SceneTransitionManager>();
-            if (existingManager != null)
-            {
-                Object.DestroyImmediate(existingManager.gameObject);
-            }
-
-            // Reset singleton
-            var instanceField = typeof(SceneTransitionManager).GetField("instance", 
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-            instanceField?.SetValue(null, null);
-
-            // Act
-            var instance = SceneTransitionManager.Instance;
-
-            // Assert
-            Assert.IsNotNull(instance, "Instance should be created automatically");
-            Assert.AreEqual("SceneTransitionManager", instance.gameObject.name, "GameObject should have correct name");
-        }
 
         #endregion
 

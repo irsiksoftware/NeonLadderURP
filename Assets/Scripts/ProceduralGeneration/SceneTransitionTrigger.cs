@@ -47,6 +47,10 @@ namespace NeonLadder.ProceduralGeneration
         
         [Header("Debug")]
         [SerializeField] private bool enableDebugLogs = false;
+
+        [Header("Path Visualization")]
+        [Tooltip("Show which boss will be selected in the editor gizmo")]
+        [SerializeField] private bool showPathPreview = true;
         
         // Minimal remaining fields for editor compatibility
         [SerializeField] private EventType transitionType = EventType.Portal;
@@ -77,20 +81,23 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (triggerColliderObject == null)
             {
-                Debug.LogError($"[SceneTransitionTrigger] {gameObject.name}: No trigger collider object assigned!", this);
+                if (enableDebugLogs)
+                    NeonLadder.Debugging.Debugger.LogError(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] {gameObject.name}: No trigger collider object assigned!", this);
                 return;
             }
             
             var collider = triggerColliderObject.GetComponent<Collider>();
             if (collider == null)
             {
-                Debug.LogError($"[SceneTransitionTrigger] {gameObject.name}: Assigned trigger object '{triggerColliderObject.name}' has no Collider component!", this);
+                if (enableDebugLogs)
+                    NeonLadder.Debugging.Debugger.LogError(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] {gameObject.name}: Assigned trigger object '{triggerColliderObject.name}' has no Collider component!", this);
                 return;
             }
             
             if (!collider.isTrigger)
             {
-                Debug.LogWarning($"[SceneTransitionTrigger] {gameObject.name}: Collider on '{triggerColliderObject.name}' is not set as trigger. Auto-fixing...", this);
+                if (enableDebugLogs)
+                    NeonLadder.Debugging.Debugger.LogWarning(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] {gameObject.name}: Collider on '{triggerColliderObject.name}' is not set as trigger. Auto-fixing...", this);
                 collider.isTrigger = true;
             }
         }
@@ -177,7 +184,7 @@ namespace NeonLadder.ProceduralGeneration
             }
             
             if (enableDebugLogs)
-                Debug.Log($"[SceneTransitionTrigger] Transitioning to: {destinationScene}");
+                NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Transitioning to: {destinationScene}");
             
             // Set spawn context in SceneTransitionManager - just pass the spawn type to match
             SceneTransitionManager.Instance.SetSpawnContext(spawnPointType, customSpawnPointName);
@@ -221,9 +228,79 @@ namespace NeonLadder.ProceduralGeneration
         }
         
         /// <summary>
-        /// Gets procedurally generated destination based on seed
+        /// Gets procedurally generated destination using the ProceduralPathTransitions system
         /// </summary>
         private string GetProceduralDestination()
+        {
+            // Get the ProceduralPathTransitions component from SceneTransitionManager
+            var pathTransitions = SceneTransitionManager.Instance?.GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions == null)
+            {
+                NeonLadder.Debugging.Debugger.LogError(NeonLadder.Debugging.LogCategory.ProceduralGeneration, "[SceneTransitionTrigger] ProceduralPathTransitions component not found on SceneTransitionManager! Using fallback selection.");
+                return GetFallbackDestination();
+            }
+
+            // Determine if this is a left or right path trigger based on trigger position or name
+            bool isLeftPath = DeterminePathDirection();
+
+            // Use the procedural system to select the next boss
+            var selectedBoss = pathTransitions.SelectNextBoss(isLeftPath);
+
+            if (selectedBoss == null)
+            {
+                NeonLadder.Debugging.Debugger.LogWarning(NeonLadder.Debugging.LogCategory.ProceduralGeneration, "[SceneTransitionTrigger] No boss selected by procedural system. All bosses may be defeated!");
+                return null;
+            }
+
+            // Route to Connection1 scene for the selected boss (not directly to boss arena)
+            string connection1Scene = $"{selectedBoss.Identifier}_Connection1";
+
+            if (enableDebugLogs)
+            {
+                string pathDirection = pathTransitions.IsPathsConverged ? "CONVERGED" : (isLeftPath ? "LEFT" : "RIGHT");
+                NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Path {pathDirection} selected boss: {selectedBoss.DisplayName} ({selectedBoss.Boss})");
+                NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Routing through connection scene: {connection1Scene}");
+            }
+
+            return connection1Scene;
+        }
+
+        /// <summary>
+        /// Determine if this trigger represents a left or right path
+        /// Based on trigger name, position, or explicit configuration
+        /// </summary>
+        private bool DeterminePathDirection()
+        {
+            // Check trigger name for direction hints
+            string triggerName = gameObject.name.ToLower();
+            if (triggerName.Contains("left"))
+                return true;
+            if (triggerName.Contains("right"))
+                return false;
+
+            // Check trigger collider object name
+            if (triggerColliderObject != null)
+            {
+                string colliderName = triggerColliderObject.name.ToLower();
+                if (colliderName.Contains("left"))
+                    return true;
+                if (colliderName.Contains("right"))
+                    return false;
+            }
+
+            // Check position relative to scene center (fallback)
+            // If X position is negative, assume left path
+            if (transform.position.x < 0)
+                return true;
+
+            // Default to right path if no clear indication
+            return false;
+        }
+
+        /// <summary>
+        /// Fallback destination selection when ProceduralPathTransitions is unavailable
+        /// </summary>
+        private string GetFallbackDestination()
         {
             // Get the current seed from Game instance
             string seed = "default_seed";
@@ -231,22 +308,22 @@ namespace NeonLadder.ProceduralGeneration
             {
                 seed = Game.Instance.ProceduralMap.Seed;
             }
-            
+
             // Create deterministic random based on seed
             var random = new System.Random(seed.GetHashCode());
-            
+
             // Available scenes (simplified for now)
             string[] possibleScenes = new string[]
             {
                 "Banquet_Connection1",
-                "Cathedral_Connection1", 
+                "Cathedral_Connection1",
                 "Necropolis_Connection1",
                 "Vault_Connection1",
                 "Garden_Connection1",
                 "Mirage_Connection1",
                 "Lounge_Connection1"
             };
-            
+
             // Pick a random scene based on seed
             int index = random.Next(possibleScenes.Length);
             return possibleScenes[index];
@@ -282,16 +359,16 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (triggerColliderObject == null)
                 return;
-                
+
             Collider collider = triggerColliderObject.GetComponent<Collider>();
             if (collider == null)
                 return;
-            
+
             // Draw trigger area
             Color gizmoColor = Color.green;
             gizmoColor.a = alpha;
             Gizmos.color = gizmoColor;
-            
+
             Transform t = triggerColliderObject.transform;
             if (collider is BoxCollider box)
             {
@@ -308,17 +385,74 @@ namespace NeonLadder.ProceduralGeneration
                 Vector3 center = t.position + sphere.center;
                 Gizmos.DrawWireSphere(center, sphere.radius * t.localScale.x);
             }
-            
-            // Draw label
+
+            // Draw label with path preview
             #if UNITY_EDITOR
             Vector3 labelPos = transform.position + Vector3.up * 2f;
             string label = gameObject.name;
+
             if (destinationType == DestinationType.Manual && !string.IsNullOrEmpty(overrideSceneName))
             {
                 label += $"\n→ {overrideSceneName}";
             }
+            else if (destinationType == DestinationType.Procedural && showPathPreview)
+            {
+                string preview = GetPathPreview();
+                if (!string.IsNullOrEmpty(preview))
+                {
+                    label += $"\n→ {preview}";
+                }
+            }
+
             UnityEditor.Handles.Label(labelPos, label);
             #endif
+        }
+
+        /// <summary>
+        /// Get path preview for editor visualization
+        /// </summary>
+        private string GetPathPreview()
+        {
+            try
+            {
+                // Try to get the procedural system for preview
+                var sceneTransitionManager = FindObjectOfType<SceneTransitionManager>();
+                if (sceneTransitionManager == null)
+                    return "STM Not Found";
+
+                var pathTransitions = sceneTransitionManager.GetComponent<ProceduralPathTransitions>();
+                if (pathTransitions == null)
+                    return "PPT Not Found";
+
+                bool isLeftPath = DeterminePathDirection();
+                string pathDirection = isLeftPath ? "LEFT" : "RIGHT";
+
+                // Check if paths are converged
+                if (pathTransitions.IsPathsConverged)
+                {
+                    return "CONVERGED (Final Boss)";
+                }
+
+                // Get preview of what would be selected
+                var (leftChoice, rightChoice) = pathTransitions.PreviewNextChoices();
+
+                if (isLeftPath && leftChoice != null)
+                {
+                    return $"{pathDirection}: {leftChoice.DisplayName}";
+                }
+                else if (!isLeftPath && rightChoice != null)
+                {
+                    return $"{pathDirection}: {rightChoice.DisplayName}";
+                }
+                else
+                {
+                    return $"{pathDirection}: No Boss Available";
+                }
+            }
+            catch (System.Exception)
+            {
+                return "Preview Unavailable";
+            }
         }
         
         #endregion

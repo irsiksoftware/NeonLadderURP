@@ -14,7 +14,7 @@ namespace NeonLadder.Events
         {
             var playerLandedEvent = Schedule<PlayerLanded>();
             playerLandedEvent.Player = player;
-            Debugger.Log(LogCategory.Player, "Player collided with terrain.");
+            Debugger.LogInformation(LogCategory.Player, "Player collided with terrain.");
         }
     }
 }

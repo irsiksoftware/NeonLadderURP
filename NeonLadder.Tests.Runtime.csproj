@@ -66,6 +66,7 @@
     <Compile Include="Assets\Tests\Runtime\UpgradeSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ControllerMappingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\CircularDependencyTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\UI\Loading3DNavigationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SaveSystemIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\MeleeCombatSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SceneTransitionIntegrationTests.cs" />
@@ -80,20 +81,25 @@
     <Compile Include="Assets\Tests\Runtime\DialogueChoiceDatabaseTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EnhancedPurchaseManagerTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SceneTransitionPrefabRootTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\UI\Loading3DNavigationStarterTests.cs" />
     <Compile Include="Assets\Tests\Runtime\DebugToolsTests.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ProceduralSceneLoadingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SceneTransitionManagerTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\ProceduralPathTransitionsIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PurchasableItemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\BatchCurrencyEventTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EulerAngleCacheTests.cs" />
     <Compile Include="Assets\Tests\Runtime\OptimizedSceneEnumResolverTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\UI\LoadingNavigationEdgeDetectionTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PathGeneratorTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenPlayerMovementTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Steam\SteamPresenceTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SpawnPointConfigurationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Mocks\MockGameStates.cs" />
+    <Compile Include="Assets\Tests\Runtime\Input\UIActionMapTests.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogueSceneConfigurationTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\ProceduralPathTransitionsTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenEnemyAITests.cs" />
     <Compile Include="Assets\Tests\Runtime\DeterministicHashingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ProtagonistDialogueSystemTests.cs" />
@@ -103,6 +109,7 @@
     <Compile Include="Assets\Tests\Runtime\PlayerTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenStatsTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Mocks\MockSteamworksAPI.cs" />
+    <Compile Include="Assets\Tests\Runtime\UI\TestMocks.cs" />
     <Compile Include="Assets\Tests\Runtime\BossBanterSystemTests.cs" />
   </ItemGroup>
   <ItemGroup>

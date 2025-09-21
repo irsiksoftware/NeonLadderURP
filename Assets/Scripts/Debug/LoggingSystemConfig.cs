@@ -26,7 +26,11 @@ namespace NeonLadder.Debugging
         [Header("📊 Log Level Settings")]
         [Tooltip("Minimum log level to display/record")]
         public LogLevel minimumLogLevel = LogLevel.Info;
-        
+
+        [Space(5)]
+        [Tooltip("Quick presets for bulk category management")]
+        public BulkCategoryAction bulkCategoryAction = BulkCategoryAction.NoChange;
+
         [Tooltip("Enable different log categories")]
         public List<LogCategorySettings> categorySettings = new List<LogCategorySettings>();
         
@@ -297,27 +301,87 @@ namespace NeonLadder.Debugging
                 new LogCategorySettings { category = LogCategory.Animation, enabled = true, minimumLevel = LogLevel.Warning },
                 new LogCategorySettings { category = LogCategory.ProceduralGeneration, enabled = true, minimumLevel = LogLevel.Info },
                 new LogCategorySettings { category = LogCategory.Steam, enabled = true, minimumLevel = LogLevel.Info },
-                new LogCategorySettings { category = LogCategory.Dialog, enabled = true, minimumLevel = LogLevel.Info }
+                new LogCategorySettings { category = LogCategory.Dialog, enabled = true, minimumLevel = LogLevel.Info },
+                new LogCategorySettings { category = LogCategory.Spawn, enabled = true, minimumLevel = LogLevel.Debug },
+                new LogCategorySettings { category = LogCategory.Loading, enabled = true, minimumLevel = LogLevel.Debug }
             });
             
             UnityEngine.Debug.Log("🏗️ Initialized default logging categories for NeonLadder systems");
         }
 
+
         private void OnValidate()
         {
+            // Handle bulk category actions from dropdown
+            if (bulkCategoryAction != BulkCategoryAction.NoChange)
+            {
+                ApplyBulkCategoryAction(bulkCategoryAction);
+                bulkCategoryAction = BulkCategoryAction.NoChange; // Reset to prevent repeated application
+            }
+
             // Clamp values to reasonable ranges
             maxOverlayEntries = Mathf.Clamp(maxOverlayEntries, 10, 200);
             maxLogFileSizeMB = Mathf.Clamp(maxLogFileSizeMB, 1, 100);
             logFileRotationCount = Mathf.Clamp(logFileRotationCount, 1, 10);
             logBufferSize = Mathf.Clamp(logBufferSize, 1, 100);
             maxBufferTime = Mathf.Clamp(maxBufferTime, 1f, 60f);
-            
+
             // Auto-generate config name if empty
             if (string.IsNullOrEmpty(configurationName))
             {
                 configurationName = name;
             }
         }
+
+        /// <summary>
+        /// Apply bulk category action based on dropdown selection
+        /// </summary>
+        private void ApplyBulkCategoryAction(BulkCategoryAction action)
+        {
+            switch (action)
+            {
+                case BulkCategoryAction.EnableAll:
+                    foreach (var category in categorySettings)
+                        category.enabled = true;
+                    UnityEngine.Debug.Log("✅ All logging categories enabled");
+                    break;
+
+                case BulkCategoryAction.DisableAll:
+                    foreach (var category in categorySettings)
+                        category.enabled = false;
+                    UnityEngine.Debug.Log("❌ All logging categories disabled");
+                    break;
+
+                case BulkCategoryAction.EssentialOnly:
+                    foreach (var category in categorySettings)
+                    {
+                        category.enabled = category.category == LogCategory.General ||
+                                           category.category == LogCategory.Performance ||
+                                           category.category == LogCategory.Spawn;
+                    }
+                    UnityEngine.Debug.Log("🎯 Essential logging categories enabled (General, Performance, Spawn)");
+                    break;
+
+                case BulkCategoryAction.SpawnDebugMode:
+                    foreach (var category in categorySettings)
+                    {
+                        category.enabled = category.category == LogCategory.Spawn ||
+                                           category.category == LogCategory.ProceduralGeneration;
+                    }
+                    UnityEngine.Debug.Log("🚀 Spawn debug mode enabled (Spawn + ProceduralGeneration only)");
+                    break;
+            }
+        }
+    }
+
+    [Serializable]
+    public enum BulkCategoryAction
+    {
+        NoChange,           // Keep current settings
+        EnableAll,          // Enable all categories
+        DisableAll,         // Disable all categories
+        EssentialOnly,      // General + Performance + Spawn
+        SpawnDebugMode     // Spawn + ProceduralGeneration only
     }
 
     [Serializable]
@@ -349,7 +413,9 @@ namespace NeonLadder.Debugging
         Animation,
         ProceduralGeneration,
         Steam,
-        Dialog
+        Dialog,
+        Spawn,
+        Loading
     }
 
     [Serializable]

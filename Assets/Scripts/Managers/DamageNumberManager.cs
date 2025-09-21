@@ -22,10 +22,13 @@ namespace NeonLadder.Managers
         void Awake()
         {
             // Check if another DamageNumberManager already exists
-            if (FindObjectsByType<DamageNumberManager>(FindObjectsSortMode.None).Length > 1)
+            var managers = FindObjectsByType<DamageNumberManager>(FindObjectsSortMode.None);
+            if (managers.Length > 1)
             {
-                Debugger.LogError(logCategory, "Multiple DamageNumberManagers found in scene");
-                Destroy(gameObject);
+                // Since DamageNumberManager is part of the Managers singleton,
+                // destroy this component, not the entire GameObject
+                Debugger.LogInformation(logCategory, "Duplicate DamageNumberManager found - removing duplicate component");
+                Destroy(this);
                 return;
             }
 
@@ -40,7 +43,7 @@ namespace NeonLadder.Managers
                 proRenderer = gameObject.AddComponent<DamageNumberProRenderer>();
                 proRenderer.damageNumberPrefab = damageNumberProPrefab;
                 
-                Debugger.Log(logCategory, "DamageNumbersPro renderer initialized");
+                Debugger.LogInformation(logCategory, "DamageNumbersPro renderer initialized");
             }
             else
             {

@@ -67,6 +67,7 @@ MonoBehaviour:
   gameControllerManager: {fileID: 0}
   sceneCycleManager: {fileID: 0}
   eventManager: {fileID: 0}
+  loggingManager: {fileID: 0}
 --- !u!1001 &343989195600815385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,11 +575,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: fadeInDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: fadeOutDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: use3DLoadingScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: loadingScreenPrefab
+      value: 
+      objectReference: {fileID: 7543210987654321098, guid: 870a414e64b9dcf4cb00d7a61203f0f4,
+        type: 3}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: minimumFadeDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: minimumLoadDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: specific3DModelIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: loading3DScreenPrefab
+      value: 
+      objectReference: {fileID: 1234567890123456789, guid: bd9c136e4a5e5d74e9ac02694c71bccd,
+        type: 3}
+    - target: {fileID: 5077704484694110629, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: debugLoadingDurationOverride
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6648775047006514080, guid: 89141eabf3842754bac20435471bad2a,
         type: 3}
       propertyPath: m_Name
       value: SceneTransitionManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7965970095879588445, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: useLoadingScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965970095879588445, guid: 89141eabf3842754bac20435471bad2a,
+        type: 3}
+      propertyPath: loadingScreenPrefab
+      value: 
+      objectReference: {fileID: 7543210987654321098, guid: 870a414e64b9dcf4cb00d7a61203f0f4,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -871,6 +930,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoggingManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6089062537790417243, guid: 9b15b3282dee1f741bb7e33e505484c0,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b42da7ea7c22644392632b70ee87391,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1024,6 +1089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8415833803925380637, guid: 434f9ac1e5c57dd4c81babd4387fd223,
+        type: 3}
+      propertyPath: MinSceneDuration
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

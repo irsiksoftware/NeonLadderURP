@@ -101,7 +101,7 @@ namespace NeonLadder.UI
                 uiActionMap.Enable();
                 toggleMenuAction.action.performed += OnToggleMenu;
                 _ToggleMainMenu(showMainCanvas);
-                Debugger.Log(LogCategory.UI, $"[MetaGameController] Successfully enabled on {gameObject.name}");
+                Debugger.LogInformation(LogCategory.UI, $"[MetaGameController] Successfully enabled on {gameObject.name}");
             }
             catch (System.Exception e)
             {
@@ -122,7 +122,7 @@ namespace NeonLadder.UI
                 uiActionMap.Disable();
             }
             
-            Debugger.Log(LogCategory.UI, $"[MetaGameController] Disabled on {gameObject.name}");
+            Debugger.LogInformation(LogCategory.UI, $"[MetaGameController] Disabled on {gameObject.name}");
         }
 
         void OnToggleMenu(InputAction.CallbackContext context)

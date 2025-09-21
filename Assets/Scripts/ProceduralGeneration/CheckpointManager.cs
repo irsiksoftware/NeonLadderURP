@@ -71,9 +71,9 @@ namespace NeonLadder.ProceduralGeneration
                 Destroy(gameObject);
                 return;
             }
-            
+
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            // Note: DontDestroyOnLoad handled by parent Managers GameObject singleton
         }
         
         /// <summary>
@@ -84,7 +84,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             SaveCheckpoint(spawnPosition);
             
-            Debugger.Log(LogCategory.SaveSystem, $"CheckpointManager: Auto-saved checkpoint from PlayerSpawn at {spawnPosition}");
+            Debugger.LogInformation(LogCategory.SaveSystem, $"CheckpointManager: Auto-saved checkpoint from PlayerSpawn at {spawnPosition}");
         }
         
         #endregion
@@ -101,7 +101,7 @@ namespace NeonLadder.ProceduralGeneration
             lastCheckpointTime = Time.time;
             hasCheckpoint = true;
             
-            Debugger.Log(LogCategory.SaveSystem, $"CheckpointManager: Saved checkpoint at {position} in scene {lastCheckpointScene}");
+            Debugger.LogInformation(LogCategory.SaveSystem, $"CheckpointManager: Saved checkpoint at {position} in scene {lastCheckpointScene}");
             
             OnCheckpointSaved?.Invoke(position, lastCheckpointScene);
         }
@@ -169,7 +169,7 @@ namespace NeonLadder.ProceduralGeneration
             lastCheckpointPosition = Vector3.zero;
             lastCheckpointScene = "";
             
-            Debugger.Log(LogCategory.SaveSystem, "CheckpointManager: Checkpoint cleared");
+            Debugger.LogInformation(LogCategory.SaveSystem, "CheckpointManager: Checkpoint cleared");
         }
         
         /// <summary>
@@ -181,7 +181,7 @@ namespace NeonLadder.ProceduralGeneration
             {
                 OnCheckpointRestored?.Invoke(lastCheckpointPosition);
                 
-                Debugger.Log(LogCategory.SaveSystem, $"CheckpointManager: Restored to checkpoint at {lastCheckpointPosition}");
+                Debugger.LogInformation(LogCategory.SaveSystem, $"CheckpointManager: Restored to checkpoint at {lastCheckpointPosition}");
             }
         }
         

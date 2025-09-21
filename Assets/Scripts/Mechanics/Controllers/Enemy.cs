@@ -140,6 +140,10 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
+            // Skip enemy logic if no player exists (e.g., during loading screens)
+            if (player == null)
+                return;
+
             float distanceToTarget = Vector3.Distance(transform.parent.position, player.transform.parent.position);
             IsFacingLeft = player.transform.parent.position.x < transform.parent.position.x;
             if (health.IsAlive)

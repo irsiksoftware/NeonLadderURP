@@ -754,130 +754,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: MinSceneDuration
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: StartLoadingNewSceneAfterXSeconds
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: ScenesToIterateFromMainMenu.Array.size
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[0]'
-      value: URP_SiegeOfPonthus
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[1]'
-      value: URP_AncientCathedral
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[2]'
-      value: Medievil Tavern
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[3]'
-      value: SpaceBurgers
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[4]'
-      value: AbandonedFactory
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[5]'
-      value: AbandonedPoolURP
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[6]'
-      value: Cyberpunk_Room
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[7]'
-      value: CyberpunkURPScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[8]'
-      value: URP_Rooftop_Market
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[9]'
-      value: URP_RomanStreet
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[10]'
-      value: Showcase
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[11]'
-      value: FC_URP_Scene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[12]'
-      value: StandardizedOstrichBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[13]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006828953678336800, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[14]'
-      value: URP_RomanStreet
-      objectReference: {fileID: 0}
-    - target: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: MinSceneDuration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: ScenesToIterateFromMainMenu.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2906993245619631821, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3690295689797485038, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
       propertyPath: m_Name
       value: Managers
-      objectReference: {fileID: 0}
-    - target: {fileID: 4704939463758648633, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7166523996690187507, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7706410409643228021, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: fadeDuration
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7706410409643228021, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
@@ -886,24 +766,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7706410409643228021, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: useLoadingScreen
-      value: 0
+      propertyPath: specific3DModelIndex
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7706410409643228021, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
-      propertyPath: minimumLoadingTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7706410409643228021, guid: d8b18ae9755e8e049882d3cd0ec10307,
-        type: 3}
-      propertyPath: minimumFadeDuration
-      value: 4.75
+      propertyPath: debugLoadingDurationOverride
+      value: 3.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124559222554517872, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 768880025}
   m_SourcePrefab: {fileID: 100100000, guid: d8b18ae9755e8e049882d3cd0ec10307, type: 3}
+--- !u!1 &768880019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124559222554517872, guid: d8b18ae9755e8e049882d3cd0ec10307,
+    type: 3}
+  m_PrefabInstance: {fileID: 615923715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &768880025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768880019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2803c92425cc1234e927374db5888851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableNavigation: 1
+  showDebugMessages: 1
+  spawnTestScreen: 0
+  loading3DScreenPrefab: {fileID: 0}
 --- !u!114 &803766023 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,

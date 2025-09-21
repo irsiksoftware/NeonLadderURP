@@ -10,6 +10,7 @@ using NeonLadder.Mechanics.Controllers;
 using NeonLadder.Mechanics.Enums;
 using NeonLadder.Core;
 using NeonLadder.Events;
+using NeonLadder.UI;
 
 namespace NeonLadder.ProceduralGeneration
 {
@@ -28,12 +29,10 @@ namespace NeonLadder.ProceduralGeneration
             {
                 if (instance == null)
                 {
-                    instance = FindObjectOfType<SceneTransitionManager>();
+                    instance = FindFirstObjectByType<SceneTransitionManager>();
                     if (instance == null)
                     {
-                        GameObject go = new GameObject("SceneTransitionManager");
-                        instance = go.AddComponent<SceneTransitionManager>();
-                        DontDestroyOnLoad(go);
+                        Debugger.LogError(LogCategory.General, "No SceneTransitionManager found! Managers prefab may be missing from scene.");
                     }
                 }
                 return instance;
@@ -53,11 +52,24 @@ namespace NeonLadder.ProceduralGeneration
         [SerializeField] private Color fadeColor = Color.black;
         [SerializeField] private AnimationCurve fadeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         
-        [Header("Loading Screen")]
+        [Header("Loading Screen - Basic")]
         [SerializeField] private bool useLoadingScreen = true;
         [Tooltip("Minimum time for actual loading operations")]
         [SerializeField] private float minimumLoadDuration = 1f;
         [SerializeField] private GameObject loadingScreenPrefab;
+
+        [Header("Loading Screen - 3D")]
+        [SerializeField] private bool use3DLoadingScreen = false;
+        [Tooltip("Prefab containing Loading3DController and UI setup")]
+        [SerializeField] private GameObject loading3DScreenPrefab;
+        [Tooltip("If true, randomly selects from available 3D models")]
+        [SerializeField] private bool randomize3DModel = true;
+        [Tooltip("Specific model index to show (-1 for random)")]
+        [SerializeField] private int specific3DModelIndex = -1;
+
+        [Header("Debug")]
+        [Tooltip("Override minimum fade duration for testing (0 = use normal duration)")]
+        [SerializeField] private float debugLoadingDurationOverride = 0f;
         
         [Header("State Preservation")]
         [SerializeField] private bool preservePlayerState = true;
@@ -72,8 +84,11 @@ namespace NeonLadder.ProceduralGeneration
         private Canvas transitionCanvas;
         private Image fadeImage;
         private GameObject loadingScreen;
+        private GameObject loading3DScreen;
+        private Loading3DController loading3DController;
         private bool isTransitioning = false;
         private bool isHandlingSpawn = false;
+        private bool isSpawnEventCompleted = false;
         private TransitionData currentTransition;
         
         // Player state preservation
@@ -102,62 +117,113 @@ namespace NeonLadder.ProceduralGeneration
                 Destroy(gameObject);
                 return;
             }
-            
+
             instance = this;
-            DontDestroyOnLoad(gameObject);
-            
+            // Note: DontDestroyOnLoad handled by parent Managers GameObject singleton
+
             Initialize();
         }
         
         private void Initialize()
         {
-            CreateTransitionCanvas();
-            
+            Debugger.LogInformation(LogCategory.Loading, "SceneTransitionManager.Initialize() called");
+            Debugger.LogInformation(LogCategory.Loading, $"useLoadingScreen: {useLoadingScreen}, use3DLoadingScreen: {use3DLoadingScreen}");
+
+            // Create appropriate children based on checkbox settings
+            if (useLoadingScreen && !use3DLoadingScreen)
+            {
+                // Basic 2D loading screen - create transition canvas
+                Debugger.LogInformation(LogCategory.Loading, "Creating transition canvas for basic 2D loading screen");
+                CreateTransitionCanvas();
+            }
+            else if (use3DLoadingScreen)
+            {
+                // 3D loading screen - create fade canvas AND 3D children
+                Debugger.LogInformation(LogCategory.Loading, "Creating fade canvas and 3D loading screen children");
+                CreateTransitionCanvas(); // Still need fade canvas for fade out/in
+                Create3DLoadingScreenChildren();
+            }
+            else
+            {
+                // Both unchecked - no loading screen children created
+                Debugger.LogInformation(LogCategory.Loading, "No loading screen enabled - no children created");
+            }
+
             // Subscribe to procedural loader events
             ProceduralSceneLoader.OnSceneLoadStarted += HandleSceneLoadStarted;
             ProceduralSceneLoader.OnSceneLoadCompleted += HandleSceneLoadCompleted;
             ProceduralSceneLoader.OnSceneLoadError += HandleSceneLoadError;
-            
+
             // Subscribe to scene loading for MetaGameController reset hack
             SceneManager.sceneLoaded += OnSceneLoadedForMetaGameReset;
-            
-            LogDebug("SceneTransitionManager initialized");
+
+            // Subscribe to PlayerSpawn event completion
+            PlayerSpawn.OnExecute += OnPlayerSpawnCompleted;
+
+            Debugger.LogInformation(LogCategory.Loading, "SceneTransitionManager initialization complete");
         }
         
         private void CreateTransitionCanvas()
         {
+            Debugger.LogInformation(LogCategory.Loading, "Creating TransitionCanvas for basic 2D loading screen");
+
             // Create persistent canvas for transitions
             GameObject canvasGO = new GameObject("TransitionCanvas");
             canvasGO.transform.SetParent(transform);
-            
+
             transitionCanvas = canvasGO.AddComponent<Canvas>();
             transitionCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
             transitionCanvas.sortingOrder = 9999; // Ensure it's on top
-            
+
             // Add canvas scaler for responsive UI
             var scaler = canvasGO.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
-            
+
             // Add raycaster for UI interaction
             canvasGO.AddComponent<GraphicRaycaster>();
-            
+
             // Create fade image
             GameObject fadeGO = new GameObject("FadeImage");
             fadeGO.transform.SetParent(canvasGO.transform, false);
-            
+
             fadeImage = fadeGO.AddComponent<Image>();
             fadeImage.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 0);
-            
+
             // Make it fill the screen
             RectTransform rect = fadeGO.GetComponent<RectTransform>();
             rect.anchorMin = Vector2.zero;
             rect.anchorMax = Vector2.one;
             rect.sizeDelta = Vector2.zero;
             rect.anchoredPosition = Vector2.zero;
-            
+
             // Start with fade invisible
             fadeImage.gameObject.SetActive(false);
+
+            Debugger.LogInformation(LogCategory.Loading, "TransitionCanvas created successfully");
+        }
+
+        private void Create3DLoadingScreenChildren()
+        {
+            Debugger.LogInformation(LogCategory.Loading, "Creating 3D loading screen children (always spawned when enabled)");
+
+            if (loading3DScreenPrefab != null)
+            {
+                Debugger.LogInformation(LogCategory.Loading, "Instantiating 3D loading screen prefab");
+                loading3DScreen = Instantiate(loading3DScreenPrefab, transform);
+
+                // Get the controller component
+                loading3DController = loading3DScreen.GetComponentInChildren<Loading3DController>();
+                Debugger.LogInformation(LogCategory.Loading, $"Loading3DController found: {loading3DController != null}");
+
+                // Start deactivated - will be activated during transitions
+                loading3DScreen.SetActive(false);
+                Debugger.LogInformation(LogCategory.Loading, "3D loading screen instantiated and deactivated (ready for transitions)");
+            }
+            else
+            {
+                Debugger.LogError(LogCategory.Loading, "3D Loading Screen enabled but loading3DScreenPrefab is not assigned!");
+            }
         }
         
         private void OnDestroy()
@@ -166,21 +232,83 @@ namespace NeonLadder.ProceduralGeneration
             ProceduralSceneLoader.OnSceneLoadCompleted -= HandleSceneLoadCompleted;
             ProceduralSceneLoader.OnSceneLoadError -= HandleSceneLoadError;
             SceneManager.sceneLoaded -= OnSceneLoadedForMetaGameReset;
+            PlayerSpawn.OnExecute -= OnPlayerSpawnCompleted;
         }
         
         #endregion
-        
+
+        #region ProceduralPathTransitions Integration
+
+        /// <summary>
+        /// Mark a boss as defeated in the procedural path system
+        /// Call this when a boss is actually defeated in gameplay
+        /// </summary>
+        public void MarkBossAsDefeated(string bossIdentifier)
+        {
+            var pathTransitions = GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions != null)
+            {
+                pathTransitions.MarkBossAsDefeated(bossIdentifier);
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Boss marked as defeated: {bossIdentifier}");
+            }
+            else
+            {
+                Debugger.LogError(LogCategory.ProceduralGeneration, "ProceduralPathTransitions component not found! Cannot mark boss as defeated.");
+            }
+        }
+
+        /// <summary>
+        /// Get the current procedural path state for debugging
+        /// </summary>
+        public string GetPathVisualization()
+        {
+            var pathTransitions = GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions != null)
+            {
+                return pathTransitions.GetPathTreeVisualization();
+            }
+            return "ProceduralPathTransitions not available";
+        }
+
+        /// <summary>
+        /// Reset the procedural path system with a new seed
+        /// </summary>
+        public void ResetProceduralPaths(string newSeed = null)
+        {
+            var pathTransitions = GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions != null)
+            {
+                pathTransitions.ResetWithNewSeed(newSeed);
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Procedural paths reset with seed: {pathTransitions.CurrentSeed}");
+            }
+            else
+            {
+                Debugger.LogError(LogCategory.ProceduralGeneration, "ProceduralPathTransitions component not found! Cannot reset paths.");
+            }
+        }
+
+        #endregion
+
         #region Public API
         
         /// <summary>
         /// Set spawn context for the next scene transition
+        /// Prevents overwriting during active transitions to maintain spawn point integrity
         /// </summary>
         public void SetSpawnContext(SpawnPointType spawnType = SpawnPointType.Auto, string customSpawnName = "")
         {
+            // Prevent overwriting spawn context during active transitions
+            // This preserves the original spawn intent from the triggering scene
+            if (isTransitioning && pendingSpawnType != SpawnPointType.Auto)
+            {
+                Debugger.LogInformation(LogCategory.Spawn, $"Spawn context already set to {pendingSpawnType} during transition, ignoring override to {spawnType}");
+                return;
+            }
+
             pendingSpawnType = spawnType;
             pendingCustomSpawnName = customSpawnName;
 
-            Debugger.LogError(LogCategory.ProceduralGeneration, $"Spawn context set: type={spawnType}, custom='{customSpawnName}'");
+            Debugger.LogInformation(LogCategory.Spawn, $"Spawn context set: type={spawnType}, custom='{customSpawnName}'");
         }
         
         /// <summary>
@@ -190,7 +318,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (isTransitioning)
             {
-                LogDebug("Transition already in progress");
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, "Transition already in progress");
                 return;
             }
             
@@ -205,7 +333,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (isTransitioning)
             {
-                LogDebug("Transition already in progress");
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, "Transition already in progress");
                 return;
             }
             
@@ -230,7 +358,7 @@ namespace NeonLadder.ProceduralGeneration
             
             if (currentMap == null || currentScene == null)
             {
-                LogError("Cannot transition: No current procedural map or scene data");
+                Debugger.LogError(LogCategory.ProceduralGeneration, "Cannot transition: No current procedural map or scene data");
                 return;
             }
             
@@ -245,7 +373,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (isTransitioning)
             {
-                Debugger.LogError(LogCategory.ProceduralGeneration, "Transition already in progress");
+                Debugger.LogInformation(LogCategory.Loading, "Transition already in progress - ignoring duplicate request");
                 return;
             }
             
@@ -302,8 +430,8 @@ namespace NeonLadder.ProceduralGeneration
                 yield return StartCoroutine(FadeOut());
             }
             
-            // Show loading screen (if fade enabled)
-            if (useLoadingScreen && enableFadeOut)
+            // Show loading screen (if any loading screen enabled and fade enabled)
+            if ((useLoadingScreen || use3DLoadingScreen) && enableFadeOut)
             {
                 ShowLoadingScreen();
             }
@@ -322,23 +450,28 @@ namespace NeonLadder.ProceduralGeneration
             
             // Handle player spawning while screen is still black
             yield return new WaitForSeconds(0.1f); // Small delay to ensure scene is ready
+
+            // Reset spawn completion flag and trigger spawning
+            isSpawnEventCompleted = false;
             HandlePlayerSpawning();
-            
-            // Wait a moment for spawning to complete
-            yield return new WaitForSeconds(0.1f);
-            
+
+            // Wait for PlayerSpawn event to actually complete
+            yield return new WaitUntil(() => isSpawnEventCompleted);
+
             // Wait for minimum fade duration (time screen stays black) - only if fade enabled
             if (enableFadeOut)
             {
+                float targetDuration = debugLoadingDurationOverride > 0 ? debugLoadingDurationOverride : minimumFadeDuration;
                 float elapsedTime = Time.time - loadStartTime;
-                if (elapsedTime < minimumFadeDuration)
+                if (elapsedTime < targetDuration)
                 {
-                    yield return new WaitForSeconds(minimumFadeDuration - elapsedTime);
+                    Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Waiting additional {targetDuration - elapsedTime:F1}s for fade duration (debug override: {debugLoadingDurationOverride > 0})");
+                    yield return new WaitForSeconds(targetDuration - elapsedTime);
                 }
             }
             
-            // Hide loading screen (if fade enabled)
-            if (useLoadingScreen && enableFadeOut)
+            // Hide loading screen (if any loading screen enabled and fade enabled)
+            if ((useLoadingScreen || use3DLoadingScreen) && enableFadeOut)
             {
                 HideLoadingScreen();
             }
@@ -388,8 +521,8 @@ namespace NeonLadder.ProceduralGeneration
                 yield return StartCoroutine(FadeOut());
             }
             
-            // Show loading screen (if fade enabled)
-            if (useLoadingScreen && enableFadeOut)
+            // Show loading screen (if any loading screen enabled and fade enabled)
+            if ((useLoadingScreen || use3DLoadingScreen) && enableFadeOut)
             {
                 ShowLoadingScreen();
             }
@@ -416,24 +549,37 @@ namespace NeonLadder.ProceduralGeneration
             
             // Handle player spawning while screen is still black
             yield return new WaitForSeconds(0.1f);
-            HandlePlayerSpawning();
-            
-            // Wait a moment for spawning to complete
-            yield return new WaitForSeconds(0.1f);
-            
+
+            // Reset spawn completion flag and trigger spawning
+            isSpawnEventCompleted = false;
+
+            // Check if this is a cutscene that doesn't need player spawning
+            if (isExcludedCutscene(transition.TargetSceneName))
+            {
+                Debugger.LogInformation(LogCategory.Spawn, $"Skipping PlayerSpawn wait for cutscene: {transition.TargetSceneName}");
+                isSpawnEventCompleted = true; // Mark as completed immediately for cutscenes
+            }
+            else
+            {
+                HandlePlayerSpawning();
+                // Wait for PlayerSpawn event to actually complete
+                yield return new WaitUntil(() => isSpawnEventCompleted);
+            }
+
             // Ensure minimum fade duration has passed (time screen stays black) - only if fade enabled
             if (enableFadeOut)
             {
+                float targetDuration = debugLoadingDurationOverride > 0 ? debugLoadingDurationOverride : minimumFadeDuration;
                 float elapsedTime = Time.time - loadingStartTime;
-                if (elapsedTime < minimumFadeDuration)
+                if (elapsedTime < targetDuration)
                 {
-                    LogDebug($"Scene loaded quickly ({elapsedTime:F1}s), waiting additional {minimumFadeDuration - elapsedTime:F1}s for minimum fade duration");
-                    yield return new WaitForSeconds(minimumFadeDuration - elapsedTime);
+                    Debugger.LogInformation(LogCategory.Loading, $"Scene loaded quickly ({elapsedTime:F1}s), waiting additional {targetDuration - elapsedTime:F1}s for fade duration (debug override: {debugLoadingDurationOverride > 0})");
+                    yield return new WaitForSeconds(targetDuration - elapsedTime);
                 }
             }
             
-            // Hide loading screen (if fade enabled)
-            if (useLoadingScreen && enableFadeOut)
+            // Hide loading screen (if any loading screen enabled and fade enabled)
+            if ((useLoadingScreen || use3DLoadingScreen) && enableFadeOut)
             {
                 HideLoadingScreen();
             }
@@ -443,7 +589,7 @@ namespace NeonLadder.ProceduralGeneration
             var player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {
-                LogDebug($"Player position after spawn delay: {player.transform.position}");
+                Debugger.LogInformation(LogCategory.Spawn, $"Player position after spawn delay: {player.transform.position}");
             }
             
             // Restore player state
@@ -472,36 +618,57 @@ namespace NeonLadder.ProceduralGeneration
         
         private IEnumerator FadeOut()
         {
+            if (fadeImage == null)
+            {
+                Debugger.LogInformation(LogCategory.Loading, "No fadeImage available (3D loading screen mode), skipping fade out");
+                yield break;
+            }
+
             fadeImage.gameObject.SetActive(true);
             float elapsedTime = 0;
-            
+
             while (elapsedTime < fadeOutDuration)
             {
                 elapsedTime += Time.deltaTime;
                 float progress = elapsedTime / fadeOutDuration;
                 float alpha = fadeCurve.Evaluate(progress);
-                
+
                 fadeImage.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alpha);
                 yield return null;
             }
-            
+
             fadeImage.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 1);
+
+            // Deactivate fadeImage after fade out completes - let the loading screen content show
+            fadeImage.gameObject.SetActive(false);
+            Debugger.LogInformation(LogCategory.Loading, "Fade out complete - fadeImage deactivated, loading screen content now visible");
         }
         
         private IEnumerator FadeIn()
         {
+            if (fadeImage == null)
+            {
+                Debugger.LogInformation(LogCategory.Loading, "No fadeImage available (3D loading screen mode), skipping fade in");
+                yield break;
+            }
+
+            // Reactivate fadeImage for fade in transition
+            fadeImage.gameObject.SetActive(true);
+            fadeImage.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 1); // Start fully black
+            Debugger.LogInformation(LogCategory.Loading, "Fade in starting - fadeImage reactivated");
+
             float elapsedTime = 0;
-            
+
             while (elapsedTime < fadeInDuration)
             {
                 elapsedTime += Time.deltaTime;
                 float progress = elapsedTime / fadeInDuration;
                 float alpha = 1 - fadeCurve.Evaluate(progress);
-                
+
                 fadeImage.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alpha);
                 yield return null;
             }
-            
+
             fadeImage.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 0);
             fadeImage.gameObject.SetActive(false);
         }
@@ -512,10 +679,48 @@ namespace NeonLadder.ProceduralGeneration
         
         private void ShowLoadingScreen()
         {
+            Debugger.LogInformation(LogCategory.Loading, $"ShowLoadingScreen called - useLoadingScreen: {useLoadingScreen}, use3DLoadingScreen: {use3DLoadingScreen}");
+
+            // Check if ANY loading screen is enabled
+            if (!useLoadingScreen && !use3DLoadingScreen)
+            {
+                Debugger.LogInformation(LogCategory.Loading, "No loading screens enabled - skipping loading screen display");
+                return;
+            }
+
+            // Boolean is the source of truth!
+            if (use3DLoadingScreen)
+            {
+                if (loading3DScreenPrefab != null)
+                {
+                    Debugger.LogInformation(LogCategory.Loading, "Showing 3D loading screen");
+                    Show3DLoadingScreen();
+                }
+                else
+                {
+                    Debugger.LogError(LogCategory.Loading, "3D Loading Screen enabled but loading3DScreenPrefab is not assigned!");
+                }
+            }
+            else if (useLoadingScreen)
+            {
+                if (loadingScreenPrefab != null)
+                {
+                    Debugger.LogInformation(LogCategory.Loading, "Showing basic loading screen");
+                    ShowBasicLoadingScreen();
+                }
+                else
+                {
+                    Debugger.LogInformation(LogCategory.Loading, "Basic loading screen enabled but no prefab assigned");
+                }
+            }
+        }
+
+        private void ShowBasicLoadingScreen()
+        {
             if (loadingScreenPrefab != null && loadingScreen == null)
             {
                 loadingScreen = Instantiate(loadingScreenPrefab, transitionCanvas.transform);
-                
+
                 // Make it fill the screen
                 RectTransform rect = loadingScreen.GetComponent<RectTransform>();
                 if (rect != null)
@@ -531,13 +736,59 @@ namespace NeonLadder.ProceduralGeneration
                 loadingScreen.SetActive(true);
             }
         }
+
+        private void Show3DLoadingScreen()
+        {
+            Debugger.LogInformation(LogCategory.Loading, $"Show3DLoadingScreen called - existing screen: {loading3DScreen != null}, controller: {loading3DController != null}");
+
+            // Screen should already be created in Initialize() - just activate and show
+            if (loading3DScreen != null)
+            {
+                Debugger.LogInformation(LogCategory.Loading, "Activating pre-created 3D loading screen");
+                loading3DScreen.SetActive(true);
+
+                if (loading3DController != null)
+                {
+                    // Show with specific model or random based on settings
+                    int modelIndex = randomize3DModel ? -1 : specific3DModelIndex;
+                    Debugger.LogInformation(LogCategory.Loading, $"Calling Loading3DController.Show with modelIndex: {modelIndex}");
+                    loading3DController.Show(modelIndex);
+                }
+                else
+                {
+                    Debugger.LogError(LogCategory.Loading, "3D loading screen activated but no Loading3DController found!");
+                }
+            }
+            else
+            {
+                Debugger.LogError(LogCategory.Loading, "CRITICAL: 3D loading screen not pre-created! Initialize() logic may have failed.");
+            }
+        }
         
         private void HideLoadingScreen()
         {
+            Debugger.LogInformation(LogCategory.Loading, "HideLoadingScreen called");
+
+            // Hide basic loading screen
             if (loadingScreen != null)
             {
+                Debugger.LogInformation(LogCategory.Loading, "Hiding basic loading screen");
                 loadingScreen.SetActive(false);
             }
+
+            // Hide 3D loading screen
+            if (loading3DController != null)
+            {
+                Debugger.LogInformation(LogCategory.Loading, "Hiding 3D loading screen via controller");
+                loading3DController.Hide();
+            }
+            else if (loading3DScreen != null)
+            {
+                Debugger.LogInformation(LogCategory.Loading, "Hiding 3D loading screen directly");
+                loading3DScreen.SetActive(false);
+            }
+
+            Debugger.LogInformation(LogCategory.Loading, "HideLoadingScreen complete");
         }
         
         #endregion
@@ -565,7 +816,7 @@ namespace NeonLadder.ProceduralGeneration
                 playerSnapshot.velocity = playerComponent.velocity;
             }
             
-            LogDebug("Player state saved for transition");
+            Debugger.LogInformation(LogCategory.ProceduralGeneration, "Player state saved for transition");
         }
         
         private void RestorePlayerState()
@@ -586,7 +837,7 @@ namespace NeonLadder.ProceduralGeneration
                 // Note: Position is set by ProceduralSceneLoader spawn position
             }
             
-            LogDebug("Player state restored after transition");
+            Debugger.LogInformation(LogCategory.ProceduralGeneration, "Player state restored after transition");
         }
         
         private void PerformAutoSave()
@@ -599,26 +850,32 @@ namespace NeonLadder.ProceduralGeneration
             // Save
             EnhancedSaveSystem.Save(saveData);
             
-            LogDebug("Auto-save performed during transition");
+            Debugger.LogInformation(LogCategory.ProceduralGeneration, "Auto-save performed during transition");
         }
         
         #endregion
         
         #region Event Handlers
-        
+
+        private void OnPlayerSpawnCompleted(PlayerSpawn spawn)
+        {
+            isSpawnEventCompleted = true;
+            Debugger.LogInformation(LogCategory.Spawn, $"PlayerSpawn event completed at position: {spawn.spawnPosition}");
+        }
+
         private void HandleSceneLoadStarted(string sceneName)
         {
-            LogDebug($"Scene load started: {sceneName}");
+            Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Scene load started: {sceneName}");
         }
         
         private void HandleSceneLoadCompleted(string sceneName)
         {
-            LogDebug($"Scene load completed: {sceneName}");
+            Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Scene load completed: {sceneName}");
         }
         
         private void HandleSceneLoadError(string error)
         {
-            LogError($"Scene load error: {error}");
+            Debugger.LogError(LogCategory.ProceduralGeneration, $"Scene load error: {error}");
             OnTransitionError?.Invoke(error);
             
             // Clean up transition state
@@ -644,15 +901,7 @@ namespace NeonLadder.ProceduralGeneration
             return currentTransition;
         }
         
-        private void LogDebug(string message)
-        {
-            Debugger.Log(LogCategory.SaveSystem, $"[SceneTransitionManager] {message}");
-        }
-        
-        private void LogError(string message)
-        {
-            Debugger.LogError(LogCategory.SaveSystem, $"[SceneTransitionManager] {message}");
-        }
+
 
         #endregion
 
@@ -671,14 +920,14 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (isExcludedCutscene(SceneManager.GetActiveScene().name))
             {
-                LogDebug($"Skipping spawn point handling for excluded cutscene: {SceneManager.GetActiveScene().name}");
+                Debugger.LogInformation(LogCategory.Spawn, $"Skipping spawn point handling for excluded cutscene: {SceneManager.GetActiveScene().name}");
                 return;
             }
 
             // Special handling for scenes that always use Auto spawn (like Staging)
             if (isDefaultSpawnScene(SceneManager.GetActiveScene().name))
             {
-                LogDebug($"Using default Auto spawn for scene: {SceneManager.GetActiveScene().name}");
+                Debugger.LogInformation(LogCategory.Spawn, $"Using default Auto spawn for scene: {SceneManager.GetActiveScene().name}");
                 pendingSpawnType = SpawnPointType.Auto;
                 pendingCustomSpawnName = "";
             }
@@ -706,7 +955,7 @@ namespace NeonLadder.ProceduralGeneration
                 Debugger.LogError(LogCategory.ProceduralGeneration, "║ TEST MODE: Scene will continue but player won't spawn");
                 Debugger.LogError(LogCategory.ProceduralGeneration, "════════════════════════════════════════════════════════════════════════");
                 
-                LogError($"CRITICAL: No SpawnPointConfiguration components found in scene '{sceneName}'! Cannot spawn player.");
+                Debugger.LogError(LogCategory.Spawn, $"CRITICAL: No SpawnPointConfiguration components found in scene '{sceneName}'! Cannot spawn player.");
                 
                 // Don't pause in tests, just log the error
                 #if UNITY_EDITOR && !UNITY_INCLUDE_TESTS
@@ -715,13 +964,13 @@ namespace NeonLadder.ProceduralGeneration
                 return;
             }
             
-            LogDebug($"Found {spawnConfigs.Length} spawn points in scene");
+            Debugger.LogInformation(LogCategory.Spawn, $"Found {spawnConfigs.Length} spawn points in scene");
             
             // Log all spawn points for debugging
             for (int i = 0; i < spawnConfigs.Length; i++)
             {
                 var sp = spawnConfigs[i];
-                LogDebug($"  Spawn Point {i}: {sp.name} (mode: {sp.SpawnMode}) at position {sp.transform.position}");
+                Debugger.LogInformation(LogCategory.Spawn, $"  Spawn Point {i}: {sp.name} (mode: {sp.SpawnMode}) at position {sp.transform.position}");
             }
             
             // Find the appropriate spawn point based on context
@@ -733,23 +982,34 @@ namespace NeonLadder.ProceduralGeneration
                 if (pendingSpawnType == SpawnPointType.Custom && !string.IsNullOrEmpty(pendingCustomSpawnName))
                 {
                     // Look for custom named spawn point
-                    targetSpawn = System.Array.Find(spawnConfigs, sp => 
-                        sp.SpawnMode == SpawnPointType.Custom && 
+                    targetSpawn = System.Array.Find(spawnConfigs, sp =>
+                        sp.SpawnMode == SpawnPointType.Custom &&
                         sp.CustomSpawnName.Equals(pendingCustomSpawnName, System.StringComparison.OrdinalIgnoreCase));
-                        
+
                     if (targetSpawn == null)
                     {
-                        LogError($"CRITICAL: Custom spawn point '{pendingCustomSpawnName}' not found!");
+                        Debugger.LogError(LogCategory.Spawn, $"CRITICAL: Custom spawn point '{pendingCustomSpawnName}' not found!");
                     }
                 }
                 else
                 {
                     // Look for specific spawn type
-                    targetSpawn = System.Array.Find(spawnConfigs, sp => sp.SpawnMode == pendingSpawnType);
-                    
+                    Debugger.LogInformation(LogCategory.Spawn, $"Looking for spawn point of type: {pendingSpawnType}");
+
+                    // Find all spawn points of the requested type
+                    var matchingSpawns = System.Array.FindAll(spawnConfigs, sp => sp.SpawnMode == pendingSpawnType);
+                    if (matchingSpawns.Length > 0)
+                    {
+                        targetSpawn = matchingSpawns[0];
+                        if (matchingSpawns.Length > 1)
+                        {
+                            Debugger.LogInformation(LogCategory.Spawn, $"Multiple spawn points of type '{pendingSpawnType}' found ({matchingSpawns.Length}). Using first: {targetSpawn.name}");
+                        }
+                    }
+
                     if (targetSpawn == null)
                     {
-                        LogError($"CRITICAL: Spawn point of type '{pendingSpawnType}' not found!");
+                        Debugger.LogError(LogCategory.Spawn, $"CRITICAL: Spawn point of type '{pendingSpawnType}' not found!");
                     }
                 }
             }
@@ -762,7 +1022,7 @@ namespace NeonLadder.ProceduralGeneration
                 
                 if (targetSpawn == null)
                 {
-                    LogDebug($"No Auto spawn point found, trying Default");
+                    Debugger.LogInformation(LogCategory.Spawn, $"No Auto spawn point found, trying Default");
                     
                     // Last resort: try Default spawn point
                     targetSpawn = System.Array.Find(spawnConfigs, sp => sp.SpawnMode == SpawnPointType.Default);
@@ -772,7 +1032,7 @@ namespace NeonLadder.ProceduralGeneration
             // Critical error if no spawn point found
             if (targetSpawn == null)
             {
-                LogError($"CRITICAL: No valid spawn point found! Type={pendingSpawnType}");
+                Debugger.LogError(LogCategory.Spawn, $"CRITICAL: No valid spawn point found! Type={pendingSpawnType}");
                 Debugger.LogError(LogCategory.ProceduralGeneration, "[SceneTransitionManager] CRITICAL: Failed to find any valid spawn point. Halting.");
                 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPaused = true;
@@ -782,13 +1042,13 @@ namespace NeonLadder.ProceduralGeneration
             
             // Get spawn position
             Vector3 spawnPosition = targetSpawn.GetSpawnWorldPosition();
-            LogDebug($"Spawning player at {targetSpawn.name} (type: {targetSpawn.SpawnMode}) position: {spawnPosition}");
+            Debugger.LogInformation(LogCategory.Spawn, $"Spawning player at {targetSpawn.name} (type: {targetSpawn.SpawnMode}) position: {spawnPosition}");
             
             // Find the player
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player == null)
             {
-                LogError("CRITICAL: Player GameObject with tag 'Player' not found!");
+                Debugger.LogError(LogCategory.Spawn, "CRITICAL: Player GameObject with tag 'Player' not found!");
                 Debugger.LogError(LogCategory.ProceduralGeneration, "[SceneTransitionManager] CRITICAL: No player found. Halting.");
                 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPaused = true;
@@ -800,14 +1060,14 @@ namespace NeonLadder.ProceduralGeneration
             // Add delay to ensure scene is fully loaded and initialized
             
             // Debug: Check player position before scheduling spawn event
-            LogDebug($"About to schedule PlayerSpawn at {spawnPosition}");
-            LogDebug($"Player current position before spawn event: {player.transform.position}");
+            Debugger.LogInformation(LogCategory.Spawn, $"About to schedule PlayerSpawn at {spawnPosition}");
+            Debugger.LogInformation(LogCategory.Spawn, $"Player current position before spawn event: {player.transform.position}");
             
-            var spawnEvent = Simulation.Schedule<PlayerSpawn>(1.5f);
+            var spawnEvent = Simulation.Schedule<PlayerSpawn>(0.1f);
             spawnEvent.spawnPosition = spawnPosition;
-            
-            LogDebug($"PlayerSpawn event scheduled at position {spawnPosition} with 1.5s delay");
-            LogDebug($"Player position immediately after scheduling: {player.transform.position}");
+
+            Debugger.LogInformation(LogCategory.Spawn, $"PlayerSpawn event scheduled at position {spawnPosition}");
+            Debugger.LogInformation(LogCategory.Spawn, $"Player position immediately after scheduling: {player.transform.position}");
             
             // Reset spawn context for next transition
             pendingSpawnType = SpawnPointType.Auto;
@@ -832,7 +1092,7 @@ namespace NeonLadder.ProceduralGeneration
             var metaGameController = FindObjectOfType<NeonLadder.UI.MetaGameController>();
             if (metaGameController != null)
             {
-                LogDebug($"Resetting MetaGameController in scene {scene.name}");
+                Debugger.LogInformation(LogCategory.UI, $"Resetting MetaGameController in scene {scene.name}");
                 
                 // Disable and re-enable to reset the component
                 metaGameController.enabled = false;
@@ -840,7 +1100,7 @@ namespace NeonLadder.ProceduralGeneration
             }
             else
             {
-                LogDebug($"No MetaGameController found in scene {scene.name}");
+                Debugger.LogInformation(LogCategory.UI, $"No MetaGameController found in scene {scene.name}");
             }
         }
         

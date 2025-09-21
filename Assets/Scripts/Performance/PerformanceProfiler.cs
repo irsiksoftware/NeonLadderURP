@@ -95,7 +95,7 @@ public class PerformanceProfiler : MonoBehaviour
         }
         else
         {
-            NeonLadder.Debugging.Debugger.Log(LogCategory.Performance, "Logging performance data to: " + filePath);
+            NeonLadder.Debugging.Debugger.LogInformation(LogCategory.Performance, "Logging performance data to: " + filePath);
         }
 
         sessionID = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
@@ -175,6 +175,12 @@ public class PerformanceProfiler : MonoBehaviour
 
     private void WriteDataToFile()
     {
+        // Skip if filePath was never initialized (e.g., destroyed before Start)
+        if (string.IsNullOrEmpty(filePath))
+        {
+            return;
+        }
+
         //try
         //{
             using (StreamWriter writer = new StreamWriter(filePath, true))
