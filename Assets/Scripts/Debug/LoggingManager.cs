@@ -73,15 +73,27 @@ namespace NeonLadder.Debugging
 
         private void Initialize()
         {
+            UnityEngine.Debug.Log("🔧 LoggingManager.Initialize() called");
+
             // Load default config if none assigned
             if (config == null)
             {
+                UnityEngine.Debug.Log("🔍 Config is null, attempting to load from Resources...");
                 config = Resources.Load<LoggingSystemConfig>("Default Logging Config");
+
                 if (config == null)
                 {
-                    UnityEngine.Debug.LogWarning("⚠️ No LoggingSystemConfig found. Creating default configuration.");
+                    UnityEngine.Debug.LogWarning("⚠️ No LoggingSystemConfig found at 'Default Logging Config'. Creating default configuration.");
                     CreateDefaultConfig();
                 }
+                else
+                {
+                    UnityEngine.Debug.Log($"✅ Successfully loaded config from Resources: {config.name}");
+                }
+            }
+            else
+            {
+                UnityEngine.Debug.Log($"✅ Config already assigned: {config.name}");
             }
 
             // Early exit if logging is disabled

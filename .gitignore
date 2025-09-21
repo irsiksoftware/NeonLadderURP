@@ -64,8 +64,15 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# Packed Addressables
+# Unity Addressables - enhanced for Steam launch
+# Keep configuration files (.asset files, AssetGroups/, DataBuilders/) in source control
+# Ignore generated build data and bundles
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.json
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/catalog_*
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bundle*
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/Build/
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.buildlogs
 
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta

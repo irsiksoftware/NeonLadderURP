@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Cameras\CameraConfiguration.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\LootItem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\BaseCurrencyController.cs" />
+    <Compile Include="Assets\Scripts\UI\Loading3DController.cs" />
     <Compile Include="Assets\Scripts\Core\Simulation.InstanceRegister.cs" />
     <Compile Include="Assets\Scripts\Debug\LoggingSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\SceneEndController.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Assets\Scripts\Events\EnemyAttackValidationEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\AllowZMovementController.cs" />
     <Compile Include="Assets\Scripts\DataManagement\ConsolidatedSaveData.cs" />
+    <Compile Include="Assets\Scripts\UI\LoadingScreenContentDatabase.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeData.cs" />
     <Compile Include="Assets\Scripts\DataManagement\Examples\ExampleSaveConfigurations.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Currency.cs" />
@@ -117,7 +119,6 @@
     <Compile Include="Assets\Scripts\Events\StaminaContinuousRegenerationEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterManager.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerGroundedStateChangeEvent.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SceneTransitionTriggerTests.cs" />
     <Compile Include="Assets\Scripts\Dialog\Editor\DialogueSceneGenerator.cs" />
     <Compile Include="Assets\Scripts\Events\InstantiateEvent.cs" />
     <Compile Include="Assets\Scripts\Managers\EventManager.cs" />
@@ -168,7 +169,6 @@
     <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\CharacterPersonalitySystem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Currency\Perma.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SpawnPointManagerTests.cs" />
     <Compile Include="Assets\Scripts\Events\SaveGame.cs" />
     <Compile Include="Assets\Scripts\Events\BatchCurrencyEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\KinematicObject.cs" />
@@ -179,7 +179,6 @@
     <Compile Include="Assets\Scripts\Managers\PlayerStaminaUIManager.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionPrefabRoot.cs" />
     <Compile Include="Assets\Scripts\Utilities\TimedLogger.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SceneConnectionOverrideTests.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgradeSystem.cs" />
     <Compile Include="Assets\Scripts\Managers\SceneCycleManager.cs" />
     <Compile Include="Assets\Scripts\Events\FadeInCamera.cs" />
@@ -219,10 +218,10 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Boss.cs" />
     <Compile Include="Assets\Scripts\Core\ComboSystem.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\PathGenerator.cs" />
-    <Compile Include="Assets\Scripts\Tests\Runtime\SceneRouterTests.cs" />
     <Compile Include="Assets\Scripts\Utilities\ButtonHelper.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\Enemy.cs" />
     <Compile Include="Assets\Scripts\Managers\EnhancedPurchaseManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Loading3DNavigationStarter.cs" />
     <Compile Include="Assets\Scripts\Events\AudioEvent.cs" />
     <Compile Include="Assets\Scripts\Dialog\BossBanterContent.cs" />
     <Compile Include="Assets\Scripts\Cameras\SimpleCameraController.cs" />
@@ -313,6 +312,7 @@
     <Compile Include="Assets\Scripts\Events\StaminaIsZero.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerSprintValidationEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Controllers\FlyingMajor.cs" />
+    <Compile Include="Assets\Scripts\UI\Loading3DNavigation.cs" />
     <Compile Include="Assets\Scripts\Managers\MonsterGroupActivationManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\BuffTypes.cs" />
     <Compile Include="Assets\Scripts\Events\HealthIsZero.cs" />

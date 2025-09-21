@@ -302,7 +302,8 @@ namespace NeonLadder.Debugging
                 new LogCategorySettings { category = LogCategory.ProceduralGeneration, enabled = true, minimumLevel = LogLevel.Info },
                 new LogCategorySettings { category = LogCategory.Steam, enabled = true, minimumLevel = LogLevel.Info },
                 new LogCategorySettings { category = LogCategory.Dialog, enabled = true, minimumLevel = LogLevel.Info },
-                new LogCategorySettings { category = LogCategory.Spawn, enabled = true, minimumLevel = LogLevel.Debug }
+                new LogCategorySettings { category = LogCategory.Spawn, enabled = true, minimumLevel = LogLevel.Debug },
+                new LogCategorySettings { category = LogCategory.Loading, enabled = true, minimumLevel = LogLevel.Debug }
             });
             
             UnityEngine.Debug.Log("🏗️ Initialized default logging categories for NeonLadder systems");
@@ -413,7 +414,8 @@ namespace NeonLadder.Debugging
         ProceduralGeneration,
         Steam,
         Dialog,
-        Spawn
+        Spawn,
+        Loading
     }
 
     [Serializable]

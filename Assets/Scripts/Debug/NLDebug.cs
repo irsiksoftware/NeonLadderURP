@@ -58,13 +58,14 @@ namespace NeonLadder.Debugging
         /// </summary>
         public static void LogInformation(LogCategory category, string message, Object context = null)
         {
-            if (LoggingManager.Instance != null)
+            if (LoggingManager.Instance != null && LoggingManager.Instance.enabled)
             {
                 LoggingManager.LogInfo(category, message, context);
             }
             else
             {
-                UnityEngine.Debug.Log($"[NL-{category}] {message}", context);
+                // Always log to Unity console with clear category formatting
+                UnityEngine.Debug.Log($"[{category}] {message}", context);
             }
         }
 
@@ -88,13 +89,14 @@ namespace NeonLadder.Debugging
         /// </summary>
         public static void LogError(LogCategory category, string message, Object context = null)
         {
-            if (LoggingManager.Instance != null)
+            if (LoggingManager.Instance != null && LoggingManager.Instance.enabled)
             {
                 LoggingManager.LogError(category, message, context);
             }
             else
             {
-                UnityEngine.Debug.LogError($"[NL-{category}] {message}", context);
+                // Always log to Unity console with clear category formatting
+                UnityEngine.Debug.LogError($"[{category}] {message}", context);
             }
         }
 

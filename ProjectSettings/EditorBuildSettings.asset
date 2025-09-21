@@ -171,6 +171,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Generated/Services/TreasureRoom.unity
     guid: 867432aac0e067746b26e170ecf68e64
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 1b8ccc1fc0f091445bafbecd2cb83625,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 23395aab919772a4b9b1c36df08e4851,
       type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e175689d4ebccc649a1eac37c7607673,
+      type: 3}
   m_UseUCBPForAssetBundles: 0
