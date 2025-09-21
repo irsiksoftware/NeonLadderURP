@@ -162,6 +162,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Enums\Animations.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Loot\LootHelper.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\ProceduralSceneLoader.cs" />
+    <Compile Include="Assets\Scripts\ProceduralGeneration\ProceduralPathTransitions.cs" />
     <Compile Include="Assets\Scripts\Utilities\OptimizedSceneEnumResolver.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerAttackEvent.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />

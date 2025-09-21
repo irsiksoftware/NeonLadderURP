@@ -28,7 +28,7 @@ namespace NeonLadder.ProceduralGeneration
             {
                 if (instance == null)
                 {
-                    instance = FindObjectOfType<SceneTransitionManager>();
+                    instance = FindFirstObjectByType<SceneTransitionManager>();
                     if (instance == null)
                     {
                         GameObject go = new GameObject("SceneTransitionManager");
@@ -102,10 +102,10 @@ namespace NeonLadder.ProceduralGeneration
                 Destroy(gameObject);
                 return;
             }
-            
+
             instance = this;
-            DontDestroyOnLoad(gameObject);
-            
+            // Note: DontDestroyOnLoad handled by parent Managers GameObject singleton
+
             Initialize();
         }
         
@@ -169,18 +169,79 @@ namespace NeonLadder.ProceduralGeneration
         }
         
         #endregion
-        
+
+        #region ProceduralPathTransitions Integration
+
+        /// <summary>
+        /// Mark a boss as defeated in the procedural path system
+        /// Call this when a boss is actually defeated in gameplay
+        /// </summary>
+        public void MarkBossAsDefeated(string bossIdentifier)
+        {
+            var pathTransitions = GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions != null)
+            {
+                pathTransitions.MarkBossAsDefeated(bossIdentifier);
+                LogDebug($"Boss marked as defeated: {bossIdentifier}");
+            }
+            else
+            {
+                LogError("ProceduralPathTransitions component not found! Cannot mark boss as defeated.");
+            }
+        }
+
+        /// <summary>
+        /// Get the current procedural path state for debugging
+        /// </summary>
+        public string GetPathVisualization()
+        {
+            var pathTransitions = GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions != null)
+            {
+                return pathTransitions.GetPathTreeVisualization();
+            }
+            return "ProceduralPathTransitions not available";
+        }
+
+        /// <summary>
+        /// Reset the procedural path system with a new seed
+        /// </summary>
+        public void ResetProceduralPaths(string newSeed = null)
+        {
+            var pathTransitions = GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions != null)
+            {
+                pathTransitions.ResetWithNewSeed(newSeed);
+                LogDebug($"Procedural paths reset with seed: {pathTransitions.CurrentSeed}");
+            }
+            else
+            {
+                LogError("ProceduralPathTransitions component not found! Cannot reset paths.");
+            }
+        }
+
+        #endregion
+
         #region Public API
         
         /// <summary>
         /// Set spawn context for the next scene transition
+        /// Prevents overwriting during active transitions to maintain spawn point integrity
         /// </summary>
         public void SetSpawnContext(SpawnPointType spawnType = SpawnPointType.Auto, string customSpawnName = "")
         {
+            // Prevent overwriting spawn context during active transitions
+            // This preserves the original spawn intent from the triggering scene
+            if (isTransitioning && pendingSpawnType != SpawnPointType.Auto)
+            {
+                Debugger.LogInformation(LogCategory.Spawn, $"Spawn context already set to {pendingSpawnType} during transition, ignoring override to {spawnType}");
+                return;
+            }
+
             pendingSpawnType = spawnType;
             pendingCustomSpawnName = customSpawnName;
 
-            Debugger.LogError(LogCategory.ProceduralGeneration, $"Spawn context set: type={spawnType}, custom='{customSpawnName}'");
+            Debugger.LogInformation(LogCategory.Spawn, $"Spawn context set: type={spawnType}, custom='{customSpawnName}'");
         }
         
         /// <summary>
@@ -245,7 +306,7 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (isTransitioning)
             {
-                Debugger.LogError(LogCategory.ProceduralGeneration, "Transition already in progress");
+                LogDebug("Transition already in progress - ignoring duplicate request");
                 return;
             }
             
@@ -646,13 +707,14 @@ namespace NeonLadder.ProceduralGeneration
         
         private void LogDebug(string message)
         {
-            Debugger.Log(LogCategory.SaveSystem, $"[SceneTransitionManager] {message}");
+            Debugger.LogInformation(LogCategory.ProceduralGeneration, $"[SceneTransitionManager] {message}");
         }
-        
+
         private void LogError(string message)
         {
-            Debugger.LogError(LogCategory.SaveSystem, $"[SceneTransitionManager] {message}");
+            Debugger.LogError(LogCategory.ProceduralGeneration, $"[SceneTransitionManager] {message}");
         }
+
 
         #endregion
 
@@ -671,14 +733,14 @@ namespace NeonLadder.ProceduralGeneration
         {
             if (isExcludedCutscene(SceneManager.GetActiveScene().name))
             {
-                LogDebug($"Skipping spawn point handling for excluded cutscene: {SceneManager.GetActiveScene().name}");
+                Debugger.LogInformation(LogCategory.Spawn, $"Skipping spawn point handling for excluded cutscene: {SceneManager.GetActiveScene().name}");
                 return;
             }
 
             // Special handling for scenes that always use Auto spawn (like Staging)
             if (isDefaultSpawnScene(SceneManager.GetActiveScene().name))
             {
-                LogDebug($"Using default Auto spawn for scene: {SceneManager.GetActiveScene().name}");
+                Debugger.LogInformation(LogCategory.Spawn, $"Using default Auto spawn for scene: {SceneManager.GetActiveScene().name}");
                 pendingSpawnType = SpawnPointType.Auto;
                 pendingCustomSpawnName = "";
             }
@@ -715,13 +777,13 @@ namespace NeonLadder.ProceduralGeneration
                 return;
             }
             
-            LogDebug($"Found {spawnConfigs.Length} spawn points in scene");
+            Debugger.LogInformation(LogCategory.Spawn, $"Found {spawnConfigs.Length} spawn points in scene");
             
             // Log all spawn points for debugging
             for (int i = 0; i < spawnConfigs.Length; i++)
             {
                 var sp = spawnConfigs[i];
-                LogDebug($"  Spawn Point {i}: {sp.name} (mode: {sp.SpawnMode}) at position {sp.transform.position}");
+                Debugger.LogInformation(LogCategory.Spawn, $"  Spawn Point {i}: {sp.name} (mode: {sp.SpawnMode}) at position {sp.transform.position}");
             }
             
             // Find the appropriate spawn point based on context
@@ -733,10 +795,10 @@ namespace NeonLadder.ProceduralGeneration
                 if (pendingSpawnType == SpawnPointType.Custom && !string.IsNullOrEmpty(pendingCustomSpawnName))
                 {
                     // Look for custom named spawn point
-                    targetSpawn = System.Array.Find(spawnConfigs, sp => 
-                        sp.SpawnMode == SpawnPointType.Custom && 
+                    targetSpawn = System.Array.Find(spawnConfigs, sp =>
+                        sp.SpawnMode == SpawnPointType.Custom &&
                         sp.CustomSpawnName.Equals(pendingCustomSpawnName, System.StringComparison.OrdinalIgnoreCase));
-                        
+
                     if (targetSpawn == null)
                     {
                         LogError($"CRITICAL: Custom spawn point '{pendingCustomSpawnName}' not found!");
@@ -745,8 +807,19 @@ namespace NeonLadder.ProceduralGeneration
                 else
                 {
                     // Look for specific spawn type
-                    targetSpawn = System.Array.Find(spawnConfigs, sp => sp.SpawnMode == pendingSpawnType);
-                    
+                    Debugger.LogInformation(LogCategory.Spawn, $"Looking for spawn point of type: {pendingSpawnType}");
+
+                    // Find all spawn points of the requested type
+                    var matchingSpawns = System.Array.FindAll(spawnConfigs, sp => sp.SpawnMode == pendingSpawnType);
+                    if (matchingSpawns.Length > 0)
+                    {
+                        targetSpawn = matchingSpawns[0];
+                        if (matchingSpawns.Length > 1)
+                        {
+                            Debugger.LogInformation(LogCategory.Spawn, $"Multiple spawn points of type '{pendingSpawnType}' found ({matchingSpawns.Length}). Using first: {targetSpawn.name}");
+                        }
+                    }
+
                     if (targetSpawn == null)
                     {
                         LogError($"CRITICAL: Spawn point of type '{pendingSpawnType}' not found!");
@@ -762,7 +835,7 @@ namespace NeonLadder.ProceduralGeneration
                 
                 if (targetSpawn == null)
                 {
-                    LogDebug($"No Auto spawn point found, trying Default");
+                    Debugger.LogInformation(LogCategory.Spawn, $"No Auto spawn point found, trying Default");
                     
                     // Last resort: try Default spawn point
                     targetSpawn = System.Array.Find(spawnConfigs, sp => sp.SpawnMode == SpawnPointType.Default);
@@ -782,7 +855,7 @@ namespace NeonLadder.ProceduralGeneration
             
             // Get spawn position
             Vector3 spawnPosition = targetSpawn.GetSpawnWorldPosition();
-            LogDebug($"Spawning player at {targetSpawn.name} (type: {targetSpawn.SpawnMode}) position: {spawnPosition}");
+            Debugger.LogInformation(LogCategory.Spawn, $"Spawning player at {targetSpawn.name} (type: {targetSpawn.SpawnMode}) position: {spawnPosition}");
             
             // Find the player
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -800,14 +873,14 @@ namespace NeonLadder.ProceduralGeneration
             // Add delay to ensure scene is fully loaded and initialized
             
             // Debug: Check player position before scheduling spawn event
-            LogDebug($"About to schedule PlayerSpawn at {spawnPosition}");
-            LogDebug($"Player current position before spawn event: {player.transform.position}");
+            Debugger.LogInformation(LogCategory.Spawn, $"About to schedule PlayerSpawn at {spawnPosition}");
+            Debugger.LogInformation(LogCategory.Spawn, $"Player current position before spawn event: {player.transform.position}");
             
             var spawnEvent = Simulation.Schedule<PlayerSpawn>(1.5f);
             spawnEvent.spawnPosition = spawnPosition;
             
-            LogDebug($"PlayerSpawn event scheduled at position {spawnPosition} with 1.5s delay");
-            LogDebug($"Player position immediately after scheduling: {player.transform.position}");
+            Debugger.LogInformation(LogCategory.Spawn, $"PlayerSpawn event scheduled at position {spawnPosition} with 1.5s delay");
+            Debugger.LogInformation(LogCategory.Spawn, $"Player position immediately after scheduling: {player.transform.position}");
             
             // Reset spawn context for next transition
             pendingSpawnType = SpawnPointType.Auto;

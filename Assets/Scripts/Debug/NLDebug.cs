@@ -56,7 +56,7 @@ namespace NeonLadder.Debugging
         /// <summary>
         /// Log with specific category
         /// </summary>
-        public static void Log(LogCategory category, string message, Object context = null)
+        public static void LogInformation(LogCategory category, string message, Object context = null)
         {
             if (LoggingManager.Instance != null)
             {

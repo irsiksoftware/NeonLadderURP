@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5077704484694110629}
   - component: {fileID: 8523456789012345680}
   - component: {fileID: 7523456789012345681}
+  - component: {fileID: 8985188533717514048}
   m_Layer: 0
   m_Name: SceneTransitionManager
   m_TagString: Untagged
@@ -46,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29ed1e44723db3419f919bf3fb43731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableFadeOut: 1
   fadeInDuration: 0.5
   fadeOutDuration: 0.5
+  minimumFadeDuration: 4.75
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeCurve:
     serializedVersion: 2
@@ -73,12 +76,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  useLoadingScreen: 1
-  minimumLoadingTime: 1
+  useLoadingScreen: 0
+  minimumLoadDuration: 1
   loadingScreenPrefab: {fileID: 0}
   preservePlayerState: 1
   autoSaveOnTransition: 1
-  enableDebugLogs: 1
 --- !u!114 &8523456789012345680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,11 +88,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6648775047006514080}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8d9a7f5e2b4a4e4a9f7c6b5d3a1e9f0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
 --- !u!114 &7523456789012345681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,9 +104,28 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7e8f6a5c3b2e4f4b8a7d6c5e4f3a2b2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   autoRefresh: 1
   refreshInterval: 0.5
   spawnPoints: []
-  playerPosition: {x: 0, y: 0, z: 0}
+  playerWorldPosition: {x: 0, y: 0, z: 0}
+  playerLocalPosition: {x: 0, y: 0, z: 0}
+  playerParentName: None
   playerStatus: Not Found
+--- !u!114 &8985188533717514048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648775047006514080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96d719c327ed48438501e572b88d528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSeed: 
+  useRandomSeed: 1
+  defeatedBosses: []
+  enableDebugLogging: 1
+  showPathPrediction: 1

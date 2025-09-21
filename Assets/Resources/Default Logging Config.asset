@@ -16,57 +16,58 @@ MonoBehaviour:
   configurationName: Development (Verbose & Interactive)
   description: Development logging with full debugging features and overlay
   minimumLogLevel: 0
+  bulkCategoryAction: 0
   categorySettings:
   - category: 1
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 2
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 3
-    enabled: 1
+    enabled: 0
     minimumLevel: 3
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 4
-    enabled: 1
+    enabled: 0
     minimumLevel: 2
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 5
-    enabled: 1
+    enabled: 0
     minimumLevel: 2
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 6
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 7
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 8
-    enabled: 1
+    enabled: 0
     minimumLevel: 0
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 9
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 10
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 11
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 12
-    enabled: 1
+    enabled: 0
     minimumLevel: 2
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 13
-    enabled: 1
+    enabled: 0
     minimumLevel: 2
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 14
@@ -74,12 +75,20 @@ MonoBehaviour:
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 15
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   - category: 16
-    enabled: 1
+    enabled: 0
     minimumLevel: 1
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 17
+    enabled: 0
+    minimumLevel: 0
+    categoryColor: {r: 1, g: 1, b: 1, a: 1}
+  - category: 0
+    enabled: 0
+    minimumLevel: 0
     categoryColor: {r: 1, g: 1, b: 1, a: 1}
   showStackTraces: 1
   includeTimestamp: 1

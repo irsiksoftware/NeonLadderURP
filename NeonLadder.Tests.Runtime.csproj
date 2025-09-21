@@ -84,6 +84,7 @@
     <Compile Include="Assets\Tests\Runtime\DialogSystemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ProceduralSceneLoadingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\SceneTransitionManagerTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\ProceduralPathTransitionsIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\PurchasableItemTests.cs" />
     <Compile Include="Assets\Tests\Runtime\BatchCurrencyEventTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EulerAngleCacheTests.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Assets\Tests\Runtime\SpawnPointConfigurationTests.cs" />
     <Compile Include="Assets\Tests\Runtime\Mocks\MockGameStates.cs" />
     <Compile Include="Assets\Tests\Runtime\DialogueSceneConfigurationTests.cs" />
+    <Compile Include="Assets\Tests\Runtime\ProceduralPathTransitionsTests.cs" />
     <Compile Include="Assets\Tests\Runtime\EventDrivenEnemyAITests.cs" />
     <Compile Include="Assets\Tests\Runtime\DeterministicHashingTests.cs" />
     <Compile Include="Assets\Tests\Runtime\ProtagonistDialogueSystemTests.cs" />

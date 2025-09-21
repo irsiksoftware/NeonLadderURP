@@ -96,16 +96,16 @@ namespace NeonLadder.Models
             if (purchaseVFX != null)
             {
                 // Could schedule a VFX event here
-                Debugger.Log(LogCategory.Progression, $"Playing purchase VFX for {ItemName}");
+                Debugger.LogInformation(LogCategory.Progression, $"Playing purchase VFX for {ItemName}");
             }
             
             if (purchaseSound != null)
             {
                 // Could schedule an audio event here
-                Debugger.Log(LogCategory.Progression, $"Playing purchase sound for {ItemName}");
+                Debugger.LogInformation(LogCategory.Progression, $"Playing purchase sound for {ItemName}");
             }
             
-            Debugger.Log(LogCategory.Progression, $"Purchased {ItemName} (Purchase #{timesPurchased})");
+            Debugger.LogInformation(LogCategory.Progression, $"Purchased {ItemName} (Purchase #{timesPurchased})");
         }
         
         public void ResetPurchases()
@@ -183,7 +183,7 @@ namespace NeonLadder.Models
                     
                 case "dash":
                     // Enable dash ability
-                    Debugger.Log(LogCategory.Progression, "Granting dash ability");
+                    Debugger.LogInformation(LogCategory.Progression, "Granting dash ability");
                     break;
                     
                 default:
@@ -195,7 +195,7 @@ namespace NeonLadder.Models
         private void ApplyStatBoost(Player player)
         {
             // This would integrate with your stat system
-            Debugger.Log(LogCategory.Progression, $"Applying stat boost: {targetProperty} += {value}");
+            Debugger.LogInformation(LogCategory.Progression, $"Applying stat boost: {targetProperty} += {value}");
             
             // Example implementations:
             switch (targetProperty.ToLower())
@@ -203,19 +203,19 @@ namespace NeonLadder.Models
                 case "health":
                 case "maxhealth":
                     // Increase max health
-                    Debugger.Log(LogCategory.Progression, $"Increasing max health by {value}");
+                    Debugger.LogInformation(LogCategory.Progression, $"Increasing max health by {value}");
                     break;
                     
                 case "speed":
                 case "movespeed":
                     // Increase movement speed
-                    Debugger.Log(LogCategory.Progression, $"Increasing move speed by {value}");
+                    Debugger.LogInformation(LogCategory.Progression, $"Increasing move speed by {value}");
                     break;
                     
                 case "damage":
                 case "attackdamage":
                     // Increase attack damage
-                    Debugger.Log(LogCategory.Progression, $"Increasing attack damage by {value}");
+                    Debugger.LogInformation(LogCategory.Progression, $"Increasing attack damage by {value}");
                     break;
             }
         }
@@ -223,7 +223,7 @@ namespace NeonLadder.Models
         private void ApplyCustomEffect(Player player)
         {
             // Custom effect logic based on targetProperty
-            Debugger.Log(LogCategory.Progression, $"Applying custom effect: {targetProperty}");
+            Debugger.LogInformation(LogCategory.Progression, $"Applying custom effect: {targetProperty}");
         }
     }
     

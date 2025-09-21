@@ -258,6 +258,12 @@ namespace NeonLadder.Debugging
         /// </summary>
         public static void LogPerformance(string metric, float value, string unit = "")
         {
+            // Check if Instance exists before accessing it
+            if (Instance == null || Instance.config == null)
+            {
+                return;
+            }
+
             if (Instance.config.performanceSettings.enableProfilerIntegration)
             {
                 LogDebug(LogCategory.Performance, $"📊 {metric}: {value:F2}{unit}");

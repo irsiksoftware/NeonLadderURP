@@ -22,7 +22,7 @@ namespace NeonLadder.Events
                 model.Player.PermaCurrency.current = playerData.PermaCurrency;
                 model.Player.Unlocks.Set(playerData.Unlocks);
                 ApplyPlayerSettings(playerData.Settings);
-                Debugger.Log(LogCategory.Player, "Player data loaded.");
+                Debugger.LogInformation(LogCategory.Player, "Player data loaded.");
             }
             else
             {
