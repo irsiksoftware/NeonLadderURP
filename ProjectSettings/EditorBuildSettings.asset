@@ -99,52 +99,52 @@ EditorBuildSettings:
     path: Assets/Scenes/Generated/BossArenas/Vault.unity
     guid: 933e32b274bff2345b6a1a5412e6954c
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Banquet_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Banquet_Connection1.unity
     guid: 750d5f726a5bc9e419865211f295268c
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Banquet_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Banquet_Connection2.unity
     guid: 4f14335c7a2df9c4ba1e0e68eb68a375
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Cathedral_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Cathedral_Connection1.unity
     guid: 59a85b1cacb4a4c44a4ff0fdf3360c57
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Cathedral_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Cathedral_Connection2.unity
     guid: 0636c9123420fab45876de14a7800f30
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Finale_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Finale_Connection1.unity
     guid: 71c67986eebcf1d42b86df2fe32f2eb4
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Finale_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Finale_Connection2.unity
     guid: dbdcdd25320eccc4988a03d457e66cfa
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Garden_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Garden_Connection1.unity
     guid: 47bbc8eada0ba7149be6f471ae6365c7
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Garden_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Garden_Connection2.unity
     guid: 92f3aa8f9f2469a498a943ec3052dc61
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Lounge_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Lounge_Connection1.unity
     guid: 81b024030ce3f66488109d41da324e96
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Lounge_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Lounge_Connection2.unity
     guid: 381fae045e03d0d4b8d253c8347ddbd5
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Mirage_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Mirage_Connection1.unity
     guid: b08db80bdbdf24e42b6e39954e110340
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Mirage_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Mirage_Connection2.unity
     guid: ca58aee2e77813c47a8cf1408ac5ddfb
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Necropolis_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Necropolis_Connection1.unity
     guid: ba458a50ad374664986bd36366f54653
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Necropolis_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Necropolis_Connection2.unity
     guid: 09554c881d26d2c438405b4c238d1f0b
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Vault_Connection1.unity
+    path: Assets/Scenes/Generated/Connections/Left/Vault_Connection1.unity
     guid: e9a0b44f0826eff45b7e6de48c42a2dc
   - enabled: 1
-    path: Assets/Scenes/Generated/Connections/Vault_Connection2.unity
+    path: Assets/Scenes/Generated/Connections/Left/Vault_Connection2.unity
     guid: 8265d02000009624d88262cca9c2306d
   - enabled: 1
     path: Assets/Scenes/Generated/Services/Merchant.unity
@@ -170,6 +170,51 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Generated/Services/TreasureRoom.unity
     guid: 867432aac0e067746b26e170ecf68e64
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Banquet_Connection1.unity
+    guid: 6eecf91bd0dfce145a1522ac5daa8513
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Banquet_Connection2.unity
+    guid: d76b2fea097251646bda27bf22d6ca0e
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Cathedral_Connection1.unity
+    guid: 60771411c5e318e4c94c496122908e0c
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Cathedral_Connection2.unity
+    guid: 9542694d2e17a2c4e86d0207af607be8
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Finale_Connection1.unity
+    guid: 5cea026d61a8d6d4a83578f30f172239
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Finale_Connection2.unity
+    guid: b7fcdae1492bf554a80ba100dbcca503
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Garden_Connection1.unity
+    guid: c649f1902ec374d43a646ea6cc935dea
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Garden_Connection2.unity
+    guid: 3f2ee1a313f6ce948ac339f1cb382f7a
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Lounge_Connection1.unity
+    guid: 95a114333fb529748aad28362e338966
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Lounge_Connection2.unity
+    guid: 9632294404c15e44394c089505f2d54c
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Mirage_Connection1.unity
+    guid: c388c7a61954fc14cb3829cbd083fe41
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Mirage_Connection2.unity
+    guid: ad5b348a6355e4544b8be8a56a4414e9
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Necropolis_Connection1.unity
+    guid: c49e464a825f78549916eecd7826948e
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Vault_Connection1.unity
+    guid: 8e919be94e9dd91449a5c6124ce165cf
+  - enabled: 1
+    path: Assets/Scenes/Generated/Connections/Right/Vault_Connection2.unity
+    guid: d61742788b5b2cb418fc0351b69ebdf5
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 1b8ccc1fc0f091445bafbecd2cb83625,
       type: 2}

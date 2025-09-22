@@ -76,10 +76,17 @@ namespace NeonLadder.ProceduralGeneration
 
         [Header("Boss Pool Configuration")]
         [SerializeField] private List<string> defeatedBosses = new List<string>();
+        [SerializeField] private int selectionCounter = 0; // Tracks how many times bosses have been selected
 
         [Header("Debug Settings")]
         [SerializeField] private bool enableDebugLogging = true;
         [SerializeField] private bool showPathPrediction = true;
+
+        [Header("Testing Settings")]
+        [Tooltip("Skip connection scenes and go directly to boss arenas for faster testing")]
+        [SerializeField] private bool fastForwardConnections = false;
+
+        private bool originalDebugLoggingState; // Store original state for restoration
 
         #endregion
 
@@ -90,6 +97,7 @@ namespace NeonLadder.ProceduralGeneration
         private List<BossLocationData> _leftPathBosses;
         private List<BossLocationData> _rightPathBosses;
         private List<BossLocationData> _availableBosses;
+        private List<BossLocationData> _orderedBossSequence; // Deterministic boss order for this run
         private bool _isInitialized = false;
 
         #endregion
@@ -115,6 +123,11 @@ namespace NeonLadder.ProceduralGeneration
         /// Gets the current available boss pool
         /// </summary>
         public List<BossLocationData> AvailableBosses => new List<BossLocationData>(_availableBosses ?? new List<BossLocationData>());
+
+        /// <summary>
+        /// Whether to fast forward connections for testing (skip connection scenes, go directly to boss arenas)
+        /// </summary>
+        public bool FastForwardConnections => fastForwardConnections;
 
         #endregion
 
@@ -180,31 +193,53 @@ namespace NeonLadder.ProceduralGeneration
         }
 
         /// <summary>
-        /// Initialize boss pools with left/right path separation
+        /// Initialize boss pools - all bosses can now be selected from either direction
         /// </summary>
         private void InitializeBossPools()
         {
             var allBosses = BossLocationData.Locations.ToList();
 
-            // Split bosses into left and right paths as specified in PBI
-            _leftPathBosses = new List<BossLocationData>
-            {
-                allBosses.First(b => b.Boss == "Pride"),    // Cathedral
-                allBosses.First(b => b.Boss == "Greed"),   // Vault
-                allBosses.First(b => b.Boss == "Lust"),    // Garden
-                allBosses.First(b => b.Boss == "Sloth")    // Lounge
-            };
+            // NEW: All bosses are now available from both paths for truly dynamic runs
+            // This change enables procedural selection across all bosses regardless of path
+            _leftPathBosses = allBosses.ToList();
+            _rightPathBosses = allBosses.ToList();
 
-            _rightPathBosses = new List<BossLocationData>
-            {
-                allBosses.First(b => b.Boss == "Wrath"),   // Necropolis
-                allBosses.First(b => b.Boss == "Envy"),    // Mirage
-                allBosses.First(b => b.Boss == "Gluttony"), // Banquet
-                allBosses.First(b => b.Boss == "Devil")    // Finale
-            };
+            // Generate deterministic boss order for this run (excluding Devil who is always last)
+            GenerateOrderedBossSequence();
 
             // Initialize available bosses (remove defeated ones)
             UpdateAvailableBosses();
+        }
+
+        /// <summary>
+        /// Generate a deterministic boss order for this run using the seed
+        /// </summary>
+        private void GenerateOrderedBossSequence()
+        {
+            // Get all 7 Deadly Sin bosses (excluding Devil who is always last)
+            var sevenSins = BossLocationData.Locations
+                .Where(boss => boss.Boss != "Devil")
+                .ToList();
+
+            // Create deterministic random with seed
+            var random = new System.Random(gameSeed.GetHashCode());
+
+            // Shuffle the 7 sins to create our ordered sequence for this run
+            _orderedBossSequence = new List<BossLocationData>();
+            var tempList = sevenSins.ToList();
+
+            while (tempList.Count > 0)
+            {
+                int index = random.Next(tempList.Count);
+                _orderedBossSequence.Add(tempList[index]);
+                tempList.RemoveAt(index);
+            }
+
+            if (enableDebugLogging)
+            {
+                var sequence = string.Join(" → ", _orderedBossSequence.Select(b => b.Boss));
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Boss sequence for this run: {sequence} → Devil");
+            }
         }
 
         /// <summary>
@@ -301,11 +336,22 @@ namespace NeonLadder.ProceduralGeneration
             if (!defeatedBosses.Contains(bossIdentifier))
             {
                 defeatedBosses.Add(bossIdentifier);
+
+                if (enableDebugLogging)
+                {
+                    Debugger.LogInformation(LogCategory.ProceduralGeneration, $"MarkBossAsDefeated called with: '{bossIdentifier}'");
+                    Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Current defeated list: [{string.Join(", ", defeatedBosses)}]");
+                }
+
                 UpdateAvailableBosses();
 
                 if (enableDebugLogging)
                 {
-                    Debugger.LogInformation(LogCategory.ProceduralGeneration, $"[PROCEDURAL] Boss defeated: {bossIdentifier}. Remaining: {_availableBosses.Count}");
+                    Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Boss defeated: {bossIdentifier}. Remaining: {_availableBosses.Count}. Total defeated: {defeatedBosses.Count}");
+
+                    // Debug: Show which bosses are still available
+                    var availableNames = _availableBosses.Select(b => $"{b.Identifier}({b.Boss})").ToArray();
+                    Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Available bosses: [{string.Join(", ", availableNames)}]");
                 }
 
                 // Check for path convergence
@@ -317,15 +363,35 @@ namespace NeonLadder.ProceduralGeneration
                     }
                 }
             }
+            else
+            {
+                if (enableDebugLogging)
+                {
+                    Debugger.LogWarning(LogCategory.ProceduralGeneration, $"[PROCEDURAL] Boss '{bossIdentifier}' was already marked as defeated!");
+                }
+            }
         }
 
         /// <summary>
         /// Get available bosses for a specific path (left or right)
+        /// With new bidirectional scenes, all bosses are available from both paths
+        /// IMPORTANT: Finale boss is reserved for last and only available when it's the only boss remaining
         /// </summary>
         public List<BossLocationData> GetAvailableBossesForPath(bool isLeftPath)
         {
-            var pathBosses = isLeftPath ? _leftPathBosses : _rightPathBosses;
-            return pathBosses.Where(boss => _availableBosses.Contains(boss)).ToList();
+            // Filter out the Finale boss unless it's the only one left
+            var availableNonFinale = _availableBosses
+                .Where(boss => !boss.Boss.Equals("Devil", System.StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            // If there are still non-finale bosses available, return only those
+            if (availableNonFinale.Count > 0)
+            {
+                return availableNonFinale;
+            }
+
+            // If only finale boss is left, return it
+            return _availableBosses.ToList();
         }
 
         #endregion
@@ -334,86 +400,133 @@ namespace NeonLadder.ProceduralGeneration
 
         /// <summary>
         /// Select next boss based on path direction and current game state
+        /// Uses dynamic selection that advances through available bosses deterministically
         /// </summary>
         public BossLocationData SelectNextBoss(bool isLeftPath)
         {
-            if (!_isInitialized)
+            // Get both choices using consistent logic, then return the requested path
+            var (leftChoice, rightChoice) = SelectNextChoices();
+
+            var selectedBoss = isLeftPath ? leftChoice : rightChoice;
+
+            if (enableDebugLogging && selectedBoss != null)
             {
-                InitializeComponent();
-            }
-
-            // If paths converged, return the final boss regardless of direction
-            if (IsPathsConverged)
-            {
-                return _availableBosses.FirstOrDefault();
-            }
-
-            // Get available bosses for the chosen path
-            var availableForPath = GetAvailableBossesForPath(isLeftPath);
-
-            // If chosen path is exhausted, use the other path
-            if (availableForPath.Count == 0)
-            {
-                availableForPath = GetAvailableBossesForPath(!isLeftPath);
-            }
-
-            // If no bosses available, return null
-            if (availableForPath.Count == 0)
-            {
-                return null;
-            }
-
-            // Use seeded random to select deterministically
-            var selectedIndex = _seededRandom.Next(availableForPath.Count);
-            var selectedBoss = availableForPath[selectedIndex];
-
-            if (enableDebugLogging)
-            {
-                string pathDirection = IsPathsConverged ? "CONVERGED" : (isLeftPath ? "LEFT" : "RIGHT");
-                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"[PROCEDURAL] Path {pathDirection} selected: {selectedBoss.DisplayName} ({selectedBoss.Boss})");
+                string pathDirection = IsPathsConverged ? "CONVERGED" : (!isLeftPath ? "LEFT" : "RIGHT");
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Path {pathDirection} selected: {selectedBoss.DisplayName} ({selectedBoss.Boss})");
             }
 
             return selectedBoss;
         }
 
         /// <summary>
-        /// Preview what boss would be selected for each path without actually selecting
+        /// Select next boss choices for both paths simultaneously to ensure they're different
+        /// This ensures left and right paths get different bosses on the same visit
         /// </summary>
-        public (BossLocationData leftChoice, BossLocationData rightChoice) PreviewNextChoices()
+        public (BossLocationData leftChoice, BossLocationData rightChoice) SelectNextChoices()
         {
             if (!_isInitialized)
             {
                 InitializeComponent();
             }
 
-            // If converged, both paths lead to same boss
-            if (IsPathsConverged)
+            // Get remaining bosses from our ordered sequence (excluding defeated ones)
+            var remainingBosses = _orderedBossSequence
+                .Where(boss => !defeatedBosses.Contains(boss.Boss))
+                .ToList();
+
+            if (enableDebugLogging)
             {
-                var finalBoss = _availableBosses.FirstOrDefault();
-                return (finalBoss, finalBoss);
+                var remaining = string.Join(", ", remainingBosses.Select(b => b.Boss));
+                var defeated = string.Join(", ", defeatedBosses);
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Defeated: [{defeated}]");
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Remaining: [{remaining}]");
             }
 
-            // Create temporary random instance with same seed for preview
-            var tempRandom = new System.Random(gameSeed.GetHashCode());
-
-            // Preview left path
-            var leftAvailable = GetAvailableBossesForPath(true);
-            if (leftAvailable.Count == 0)
+            // Add Devil at the end if needed
+            if (remainingBosses.Count == 0)
             {
-                leftAvailable = GetAvailableBossesForPath(false);
+                var devil = BossLocationData.Locations.FirstOrDefault(b => b.Boss == "Devil");
+                if (devil != null && !defeatedBosses.Contains("Devil"))
+                {
+                    return (devil, devil); // Force final boss
+                }
+                return (null, null); // All bosses defeated
             }
-            var leftChoice = leftAvailable.Count > 0 ? leftAvailable[tempRandom.Next(leftAvailable.Count)] : null;
 
-            // Reset temp random for right path
-            tempRandom = new System.Random(gameSeed.GetHashCode());
-            var rightAvailable = GetAvailableBossesForPath(false);
-            if (rightAvailable.Count == 0)
+            // If only 2 bosses left, converge paths (block one path)
+            if (remainingBosses.Count == 2)
             {
-                rightAvailable = GetAvailableBossesForPath(true);
+                var finalChoice = remainingBosses[0]; // Force first remaining boss
+                if (enableDebugLogging)
+                {
+                    Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Paths converged - Final choice: {finalChoice.Boss}");
+                }
+                return (finalChoice, finalChoice);
             }
-            var rightChoice = rightAvailable.Count > 0 ? rightAvailable[tempRandom.Next(rightAvailable.Count)] : null;
+
+            // If only 1 boss left before Devil, force it
+            if (remainingBosses.Count == 1)
+            {
+                var lastBoss = remainingBosses[0];
+                return (lastBoss, lastBoss);
+            }
+
+            // Normal case: Show next 2 bosses from our ordered sequence
+            var leftChoice = remainingBosses[0];
+            var rightChoice = remainingBosses[1];
+
+            if (enableDebugLogging)
+            {
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Remaining bosses: {remainingBosses.Count}, Defeated: {defeatedBosses.Count}");
+                Debugger.LogInformation(LogCategory.ProceduralGeneration, $"Path choices: LEFT={rightChoice.Boss}, RIGHT={leftChoice.Boss}");
+            }
 
             return (leftChoice, rightChoice);
+        }
+
+        /// <summary>
+        /// Preview what boss would be selected for each path without actually selecting
+        /// Uses the same dynamic logic as SelectNextBoss for consistent previews
+        /// </summary>
+        public (BossLocationData leftChoice, BossLocationData rightChoice) PreviewNextChoices()
+        {
+            // Use exact same logic as SelectNextChoices for consistent preview
+            return SelectNextChoices();
+        }
+
+        /// <summary>
+        /// Shuffle available bosses deterministically based on seed
+        /// </summary>
+        private List<BossLocationData> ShuffleAvailableBosses(List<BossLocationData> bosses, int seed)
+        {
+            var shuffled = new List<BossLocationData>(bosses);
+            var random = new System.Random(seed);
+
+            // Fisher-Yates shuffle
+            for (int i = shuffled.Count - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+                var temp = shuffled[i];
+                shuffled[i] = shuffled[j];
+                shuffled[j] = temp;
+            }
+
+            return shuffled;
+        }
+
+        /// <summary>
+        /// Get two different bosses from the pool for left and right paths
+        /// </summary>
+        private (BossLocationData leftBoss, BossLocationData rightBoss) GetDifferentBossesFromPool(List<BossLocationData> shuffledPool, int seed)
+        {
+            if (shuffledPool.Count == 0)
+                return (null, null);
+
+            if (shuffledPool.Count == 1)
+                return (shuffledPool[0], shuffledPool[0]); // Only one boss left
+
+            // Take first two from shuffled pool to ensure they're different
+            return (shuffledPool[0], shuffledPool[1]);
         }
 
         #endregion
@@ -539,6 +652,7 @@ namespace NeonLadder.ProceduralGeneration
             }
 
             defeatedBosses.Clear();
+            selectionCounter = 0; // Reset selection counter for consistent deterministic behavior
             _isInitialized = false;
             InitializeComponent();
             LogSeedToConsole();
@@ -567,6 +681,23 @@ namespace NeonLadder.ProceduralGeneration
             useRandomSeed = false;
             _isInitialized = false;
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Temporarily disable debug logging for performance-critical operations
+        /// </summary>
+        public void DisableDebugLoggingTemporarily()
+        {
+            originalDebugLoggingState = enableDebugLogging;
+            enableDebugLogging = false;
+        }
+
+        /// <summary>
+        /// Restore debug logging to its original state
+        /// </summary>
+        public void RestoreDebugLogging()
+        {
+            enableDebugLogging = originalDebugLoggingState;
         }
 
         #endregion

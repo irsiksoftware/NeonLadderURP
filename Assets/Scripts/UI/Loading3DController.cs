@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using NeonLadder.Debugging;
 using Random = UnityEngine.Random;
 
 namespace NeonLadder.UI
@@ -126,7 +127,7 @@ namespace NeonLadder.UI
 
             // Get the active model list (manual or auto-generated)
             var activeModels = GetActiveModelList();
-            Debug.Log($"[Loading3DController] Show called with modelIndex {modelIndex}, randomizeModel={randomizeModel}, activeModels.Count={activeModels.Count}");
+            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Show called with modelIndex {modelIndex}, randomizeModel={randomizeModel}, activeModels.Count={activeModels.Count}");
 
             // Get list of enabled models
             var enabledModels = new List<int>();
@@ -140,27 +141,27 @@ namespace NeonLadder.UI
 
             if (enabledModels.Count == 0)
             {
-                Debug.LogWarning("[Loading3DController] No enabled models found!");
+                Debugger.LogWarning(LogCategory.Loading, "[Loading3DController] No enabled models found!");
                 return;
             }
 
             // Always select a model to ensure rotation restarts
             if (modelIndex >= 0 && modelIndex < activeModels.Count && activeModels[modelIndex].enabled)
             {
-                Debug.Log($"[Loading3DController] Using specified model index {modelIndex}");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Using specified model index {modelIndex}");
                 SelectModel(modelIndex, activeModels);
             }
             else if (randomizeModel)
             {
                 int randomEnabledIndex = GetRandomModelIndexAvoidingRepeat(enabledModels);
-                Debug.Log($"[Loading3DController] Using random enabled model index {randomEnabledIndex} (from {enabledModels.Count} enabled models, avoiding repeat of {lastUsedModelIndex})");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Using random enabled model index {randomEnabledIndex} (from {enabledModels.Count} enabled models, avoiding repeat of {lastUsedModelIndex})");
                 SelectModel(randomEnabledIndex, activeModels);
             }
             else
             {
                 // Use first enabled model or clamp default to enabled models
                 int modelToUse = enabledModels.Contains(defaultModelIndex) ? defaultModelIndex : enabledModels[0];
-                Debug.Log($"[Loading3DController] Using default/first enabled model index {modelToUse}");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Using default/first enabled model index {modelToUse}");
                 SelectModel(modelToUse, activeModels);
             }
 
@@ -284,7 +285,7 @@ namespace NeonLadder.UI
             // If manual models are specified, use them
             if (loadingModels != null && loadingModels.Count > 0)
             {
-                Debug.Log($"[Loading3DController] Using {loadingModels.Count} manually specified models");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Using {loadingModels.Count} manually specified models");
                 return loadingModels;
             }
 
@@ -292,7 +293,7 @@ namespace NeonLadder.UI
             if (contentDatabase != null)
             {
                 var autoModels = contentDatabase.GetAllModels();
-                Debug.Log($"[Loading3DController] Using {autoModels.Count} auto-generated models from assigned database");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Using {autoModels.Count} auto-generated models from assigned database");
                 return autoModels;
             }
 
@@ -301,12 +302,12 @@ namespace NeonLadder.UI
             if (contentDatabase != null)
             {
                 var autoModels = contentDatabase.GetAllModels();
-                Debug.Log($"[Loading3DController] Loaded database from Resources with {autoModels.Count} models");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Loaded database from Resources with {autoModels.Count} models");
                 return autoModels;
             }
 
             // Fallback to empty list
-            Debug.LogWarning("[Loading3DController] No models available - neither manual models nor LoadingScreenContentDatabase found in Resources");
+            Debugger.LogWarning(LogCategory.Loading, "[Loading3DController] No models available - neither manual models nor LoadingScreenContentDatabase found in Resources");
             return new List<Loading3DModel>();
         }
 
@@ -325,7 +326,7 @@ namespace NeonLadder.UI
             if (lastUsedModelIndex >= 0 && availableModels.Contains(lastUsedModelIndex))
             {
                 availableModels.Remove(lastUsedModelIndex);
-                Debug.Log($"[Loading3DController] Removed last used model {lastUsedModelIndex} from selection to avoid repeat");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Removed last used model {lastUsedModelIndex} from selection to avoid repeat");
             }
 
             // Select from remaining models
@@ -335,19 +336,19 @@ namespace NeonLadder.UI
 
         private void SelectModel(int index, List<Loading3DModel> activeModels)
         {
-            Debug.Log($"[Loading3DController] SelectModel called with index {index}");
+            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] SelectModel called with index {index}");
 
             // Clean up previous model
             if (currentModelInstance != null)
             {
-                Debug.Log($"[Loading3DController] Destroying existing model instance");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Destroying existing model instance");
                 Destroy(currentModelInstance);
             }
 
             // Stop any existing rotation
             if (rotationCoroutine != null)
             {
-                Debug.Log($"[Loading3DController] Stopping existing rotation coroutine");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Stopping existing rotation coroutine");
                 StopCoroutine(rotationCoroutine);
                 rotationCoroutine = null;
             }
@@ -385,11 +386,11 @@ namespace NeonLadder.UI
                 if (autoRotate)
                 {
                     rotationCoroutine = StartCoroutine(RotateModel());
-                    Debug.Log($"[Loading3DController] Started rotation for model '{currentModel.modelName}' using prefab '{currentModel.modelPrefab?.name}' -> instance '{currentModelInstance?.name}'");
+                    Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Started rotation for model '{currentModel.modelName}' using prefab '{currentModel.modelPrefab?.name}' -> instance '{currentModelInstance?.name}'");
                 }
                 else
                 {
-                    Debug.Log($"[Loading3DController] AutoRotate disabled, no rotation started");
+                    Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] AutoRotate disabled, no rotation started");
                 }
             }
 
@@ -414,7 +415,7 @@ namespace NeonLadder.UI
             {
                 rb.isKinematic = true; // Make kinematic to disable all physics
                 rb.useGravity = false; // Extra safety
-                Debug.Log($"[Loading3DController] Set rigidbody to kinematic on '{rb.gameObject.name}' - physics disabled, transform rotation allowed");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Set rigidbody to kinematic on '{rb.gameObject.name}' - physics disabled, transform rotation allowed");
             }
 
             // Disable Enemy AI components that might interfere with loading screen display
@@ -431,7 +432,7 @@ namespace NeonLadder.UI
             foreach (var enemy in enemies)
             {
                 enemy.enabled = false;
-                Debug.Log($"[Loading3DController] Disabled Enemy component on '{enemy.gameObject.name}' to prevent AI interference");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Disabled Enemy component on '{enemy.gameObject.name}' to prevent AI interference");
             }
 
             // Disable any other gameplay controllers that might interfere
@@ -442,7 +443,7 @@ namespace NeonLadder.UI
                 if (kinematic.GetComponent<NeonLadder.Mechanics.Controllers.Enemy>() == null)
                 {
                     kinematic.enabled = false;
-                    Debug.Log($"[Loading3DController] Disabled KinematicObject component on '{kinematic.gameObject.name}' to prevent movement interference");
+                    Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Disabled KinematicObject component on '{kinematic.gameObject.name}' to prevent movement interference");
                 }
             }
 
@@ -451,17 +452,17 @@ namespace NeonLadder.UI
             foreach (var collider in colliders)
             {
                 collider.enabled = false;
-                Debug.Log($"[Loading3DController] Disabled Collider on '{collider.gameObject.name}' to prevent collision interference");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Disabled Collider on '{collider.gameObject.name}' to prevent collision interference");
             }
         }
 
         private void AnalyzeModelComponents(GameObject obj)
         {
-            Debug.Log($"[Loading3DController] === Component Analysis for '{obj.name}' ===");
+            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] === Component Analysis for '{obj.name}' ===");
 
             // Check root object components
             Component[] rootComponents = obj.GetComponents<Component>();
-            Debug.Log($"[Loading3DController] Root components: {string.Join(", ", System.Array.ConvertAll(rootComponents, c => c.GetType().Name))}");
+            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Root components: {string.Join(", ", System.Array.ConvertAll(rootComponents, c => c.GetType().Name))}");
 
             // Check for constraints that might prevent rotation
             FixedJoint[] fixedJoints = obj.GetComponentsInChildren<FixedJoint>();
@@ -469,15 +470,15 @@ namespace NeonLadder.UI
             SpringJoint[] springJoints = obj.GetComponentsInChildren<SpringJoint>();
 
             if (fixedJoints.Length > 0)
-                Debug.Log($"[Loading3DController] Found {fixedJoints.Length} FixedJoint(s): {string.Join(", ", System.Array.ConvertAll(fixedJoints, j => j.gameObject.name))}");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Found {fixedJoints.Length} FixedJoint(s): {string.Join(", ", System.Array.ConvertAll(fixedJoints, j => j.gameObject.name))}");
             if (configurableJoints.Length > 0)
-                Debug.Log($"[Loading3DController] Found {configurableJoints.Length} ConfigurableJoint(s): {string.Join(", ", System.Array.ConvertAll(configurableJoints, j => j.gameObject.name))}");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Found {configurableJoints.Length} ConfigurableJoint(s): {string.Join(", ", System.Array.ConvertAll(configurableJoints, j => j.gameObject.name))}");
             if (springJoints.Length > 0)
-                Debug.Log($"[Loading3DController] Found {springJoints.Length} SpringJoint(s): {string.Join(", ", System.Array.ConvertAll(springJoints, j => j.gameObject.name))}");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Found {springJoints.Length} SpringJoint(s): {string.Join(", ", System.Array.ConvertAll(springJoints, j => j.gameObject.name))}");
 
             // Check for colliders that might have weird constraints
             Collider[] colliders = obj.GetComponentsInChildren<Collider>();
-            Debug.Log($"[Loading3DController] Found {colliders.Length} collider(s): {string.Join(", ", System.Array.ConvertAll(colliders, c => $"{c.gameObject.name}({c.GetType().Name})"))}");
+            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Found {colliders.Length} collider(s): {string.Join(", ", System.Array.ConvertAll(colliders, c => $"{c.gameObject.name}({c.GetType().Name})"))}");
         }
 
         private void PositionCamera()
@@ -529,13 +530,13 @@ namespace NeonLadder.UI
 
         private IEnumerator RotateModel()
         {
-            Debug.Log($"[Loading3DController] RotateModel coroutine started");
+            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] RotateModel coroutine started");
             int frameCount = 0;
 
             // Check initial state
             if (currentModelInstance != null)
             {
-                Debug.Log($"[Loading3DController] Initial rotation before any changes: {currentModelInstance.transform.rotation.eulerAngles}");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Initial rotation before any changes: {currentModelInstance.transform.rotation.eulerAngles}");
             }
 
             while (currentModelInstance != null)
@@ -556,7 +557,7 @@ namespace NeonLadder.UI
                     float yRotationChange = Mathf.Abs(rotationAfter.y - rotationBefore.y);
                     if (yRotationChange < 0.1f)
                     {
-                        Debug.LogWarning($"[Loading3DController] Rotation appears stuck! Y rotation only changed by {yRotationChange:F4}°");
+                        Debugger.LogWarning(LogCategory.Loading, $"[Loading3DController] Rotation appears stuck! Y rotation only changed by {yRotationChange:F4}°");
 
                         // Try to force rotation
                         currentModelInstance.transform.rotation = Quaternion.Euler(0, rotationAfter.y + 1f, 0);
@@ -566,7 +567,7 @@ namespace NeonLadder.UI
                 frameCount++;
                 yield return null;
             }
-            Debug.Log($"[Loading3DController] RotateModel coroutine ended");
+            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] RotateModel coroutine ended");
         }
 
         private void SetAnimatorParameter()
@@ -579,7 +580,7 @@ namespace NeonLadder.UI
             if (animator == null)
             {
                 // No animator found - that's okay, just log for debugging
-                Debug.Log($"[Loading3DController] No Animator found on model '{currentModel.modelName}'");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] No Animator found on model '{currentModel.modelName}'");
                 return;
             }
 
@@ -587,7 +588,7 @@ namespace NeonLadder.UI
             if (currentModel.disableAnimator)
             {
                 animator.enabled = false;
-                Debug.Log($"[Loading3DController] Animator disabled for model '{currentModel.modelName}' (frozen appearance)");
+                Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Animator disabled for model '{currentModel.modelName}' (frozen appearance)");
                 return;
             }
 
@@ -597,11 +598,11 @@ namespace NeonLadder.UI
                 try
                 {
                     animator.SetInteger(currentModel.animatorParameterName, currentModel.animationValue);
-                    Debug.Log($"[Loading3DController] Set animator parameter '{currentModel.animatorParameterName}' = {currentModel.animationValue} for model '{currentModel.modelName}'");
+                    Debugger.LogInformation(LogCategory.Loading, $"[Loading3DController] Set animator parameter '{currentModel.animatorParameterName}' = {currentModel.animationValue} for model '{currentModel.modelName}'");
                 }
                 catch (System.Exception e)
                 {
-                    Debug.LogWarning($"[Loading3DController] Failed to set animator parameter '{currentModel.animatorParameterName}' on model '{currentModel.modelName}': {e.Message}");
+                    Debugger.LogWarning(LogCategory.Loading, $"[Loading3DController] Failed to set animator parameter '{currentModel.animatorParameterName}' on model '{currentModel.modelName}': {e.Message}");
                 }
             }
         }

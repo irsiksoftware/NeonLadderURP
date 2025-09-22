@@ -109,21 +109,30 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        public void Integration_CompleteSceneFlow_LeftPath_AllBosses()
+        public void Integration_CompleteSceneFlow_LeftPath_DynamicSelection()
         {
-            // Tests complete flow for all LEFT path bosses
-            string[] leftPathBosses = { "Pride", "Greed", "Lust", "Sloth" };
-
+            // Tests dynamic boss selection for left path (no repeats, any boss can be selected)
             pathTransitions.ResetWithNewSeed("LEFT_PATH_TEST");
 
-            foreach (var expectedBoss in leftPathBosses)
+            var selectedBosses = new List<string>();
+            var allAvailableBosses = new List<string>(pathTransitions.AvailableBosses.Select(b => b.Boss));
+
+            // Test selecting 4 different bosses using left path
+            for (int i = 0; i < 4; i++)
             {
                 // Simulate player choosing left path from Start
                 var selectedBoss = pathTransitions.SelectNextBoss(true);
 
-                // Verify we get a left path boss
-                Assert.Contains(selectedBoss.Boss, leftPathBosses,
-                    $"Expected left path boss, got: {selectedBoss.Boss}");
+                // Verify we get a valid boss
+                Assert.IsNotNull(selectedBoss, $"Should get a boss on selection {i + 1}");
+                Assert.Contains(selectedBoss.Boss, allAvailableBosses,
+                    $"Selected boss {selectedBoss.Boss} should be from available pool");
+
+                // Verify no repeats
+                Assert.IsFalse(selectedBosses.Contains(selectedBoss.Boss),
+                    $"Boss {selectedBoss.Boss} was already selected - should not repeat");
+
+                selectedBosses.Add(selectedBoss.Boss);
 
                 // Verify scene flow sequence
                 string connection1 = $"{selectedBoss.Identifier}_Connection1";
@@ -132,34 +141,47 @@ namespace NeonLadder.Tests.Runtime
                 string cutscene = "BossDefeated";
                 string staging = "Staging";
 
-                // Log the expected flow
-                Debug.Log($"Scene Flow: Start → {connection1} → {connection2} → {bossArena} → {cutscene} → {staging}");
+                // Log the flow
+                Debug.Log($"Scene Flow {i + 1}: Start → {connection1} → {connection2} → {bossArena} → {cutscene} → {staging}");
 
                 // Mark boss as defeated
                 pathTransitions.MarkBossAsDefeated(selectedBoss.Boss);
             }
 
-            // After defeating all left bosses, available pool should be reduced
+            // After defeating 4 bosses, available pool should be reduced by 4
             Assert.AreEqual(4, pathTransitions.AvailableBosses.Count,
-                "Should have 4 bosses remaining (right path bosses)");
+                "Should have 4 bosses remaining after defeating 4");
+
+            // Verify all selected bosses are unique
+            Assert.AreEqual(4, selectedBosses.Distinct().Count(),
+                "All 4 selected bosses should be unique");
         }
 
         [Test]
-        public void Integration_CompleteSceneFlow_RightPath_AllBosses()
+        public void Integration_CompleteSceneFlow_RightPath_DynamicSelection()
         {
-            // Tests complete flow for all RIGHT path bosses
-            string[] rightPathBosses = { "Wrath", "Envy", "Gluttony", "Devil" };
-
+            // Tests dynamic boss selection for right path (no repeats, any boss can be selected)
             pathTransitions.ResetWithNewSeed("RIGHT_PATH_TEST");
 
-            foreach (var expectedBoss in rightPathBosses)
+            var selectedBosses = new List<string>();
+            var allAvailableBosses = new List<string>(pathTransitions.AvailableBosses.Select(b => b.Boss));
+
+            // Test selecting 4 different bosses using right path
+            for (int i = 0; i < 4; i++)
             {
                 // Simulate player choosing right path from Start
                 var selectedBoss = pathTransitions.SelectNextBoss(false);
 
-                // Verify we get a right path boss
-                Assert.Contains(selectedBoss.Boss, rightPathBosses,
-                    $"Expected right path boss, got: {selectedBoss.Boss}");
+                // Verify we get a valid boss
+                Assert.IsNotNull(selectedBoss, $"Should get a boss on selection {i + 1}");
+                Assert.Contains(selectedBoss.Boss, allAvailableBosses,
+                    $"Selected boss {selectedBoss.Boss} should be from available pool");
+
+                // Verify no repeats
+                Assert.IsFalse(selectedBosses.Contains(selectedBoss.Boss),
+                    $"Boss {selectedBoss.Boss} was already selected - should not repeat");
+
+                selectedBosses.Add(selectedBoss.Boss);
 
                 // Verify scene flow sequence
                 string connection1 = $"{selectedBoss.Identifier}_Connection1";
@@ -168,16 +190,20 @@ namespace NeonLadder.Tests.Runtime
                 string cutscene = "BossDefeated";
                 string staging = "Staging";
 
-                // Log the expected flow
-                Debug.Log($"Scene Flow: Start → {connection1} → {connection2} → {bossArena} → {cutscene} → {staging}");
+                // Log the flow
+                Debug.Log($"Scene Flow {i + 1}: Start → {connection1} → {connection2} → {bossArena} → {cutscene} → {staging}");
 
                 // Mark boss as defeated
                 pathTransitions.MarkBossAsDefeated(selectedBoss.Boss);
             }
 
-            // After defeating all right bosses, available pool should be reduced
+            // After defeating 4 bosses, available pool should be reduced by 4
             Assert.AreEqual(4, pathTransitions.AvailableBosses.Count,
-                "Should have 4 bosses remaining (left path bosses)");
+                "Should have 4 bosses remaining after defeating 4");
+
+            // Verify all selected bosses are unique
+            Assert.AreEqual(4, selectedBosses.Distinct().Count(),
+                "All 4 selected bosses should be unique");
         }
 
         [Test]
@@ -390,17 +416,13 @@ namespace NeonLadder.Tests.Runtime
         }
 
         [Test]
-        public void Integration_PathSeparation_MatchesPBISpecification()
+        public void Integration_PathSeparation_DynamicDifferentiation()
         {
-            // Arrange
+            // Test new dynamic behavior: left and right paths give different bosses on same visit
             pathTransitions.ResetWithNewSeed("PATH_SEPARATION_TEST");
 
-            var expectedLeftBosses = new[] { "Pride", "Greed", "Lust", "Sloth" };
-            var expectedRightBosses = new[] { "Wrath", "Envy", "Gluttony", "Devil" };
-
-            // Act - Test multiple selections to verify path separation
-            var leftSelections = new List<string>();
-            var rightSelections = new List<string>();
+            var allValidBosses = new[] { "Pride", "Wrath", "Greed", "Envy", "Lust", "Gluttony", "Sloth", "Devil" };
+            var leftRightPairs = new List<(string left, string right)>();
 
             // Test multiple times with same seed to verify deterministic behavior
             for (int i = 0; i < 10; i++)
@@ -410,15 +432,24 @@ namespace NeonLadder.Tests.Runtime
                 var leftBoss = pathTransitions.SelectNextBoss(true);
                 var rightBoss = pathTransitions.SelectNextBoss(false);
 
-                if (leftBoss != null) leftSelections.Add(leftBoss.Boss);
-                if (rightBoss != null) rightSelections.Add(rightBoss.Boss);
+                Assert.IsNotNull(leftBoss, $"Left boss should not be null on iteration {i}");
+                Assert.IsNotNull(rightBoss, $"Right boss should not be null on iteration {i}");
+
+                // Verify both bosses are valid
+                Assert.Contains(leftBoss.Boss, allValidBosses, $"Left boss {leftBoss.Boss} should be valid");
+                Assert.Contains(rightBoss.Boss, allValidBosses, $"Right boss {rightBoss.Boss} should be valid");
+
+                // Key requirement: left and right should be different on the same visit
+                Assert.AreNotEqual(leftBoss.Boss, rightBoss.Boss,
+                    $"Left and right paths should give different bosses on same visit (got {leftBoss.Boss} for both)");
+
+                leftRightPairs.Add((leftBoss.Boss, rightBoss.Boss));
             }
 
-            // Assert
-            Assert.IsTrue(leftSelections.All(b => expectedLeftBosses.Contains(b)),
-                "All left path selections should be from left boss pool");
-            Assert.IsTrue(rightSelections.All(b => expectedRightBosses.Contains(b)),
-                "All right path selections should be from right boss pool");
+            // Verify deterministic behavior - all pairs should be identical across iterations
+            var firstPair = leftRightPairs[0];
+            Assert.IsTrue(leftRightPairs.All(pair => pair.left == firstPair.left && pair.right == firstPair.right),
+                "Same seed should produce identical left/right boss pairs across multiple runs");
         }
 
         #endregion
@@ -430,6 +461,7 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             pathTransitions.ResetWithNewSeed("PERFORMANCE_TEST");
+            pathTransitions.DisableDebugLoggingTemporarily(); // Disable debug logging for performance
             var startTime = Time.realtimeSinceStartup;
 
             // Act - Perform many selections
@@ -441,6 +473,7 @@ namespace NeonLadder.Tests.Runtime
 
             // Assert
             var elapsed = Time.realtimeSinceStartup - startTime;
+            pathTransitions.RestoreDebugLogging(); // Restore debug logging
             Assert.Less(elapsed, 1.0f, "1000 selections should complete in under 1 second");
         }
 

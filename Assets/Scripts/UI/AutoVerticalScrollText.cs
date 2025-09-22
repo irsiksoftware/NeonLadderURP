@@ -60,8 +60,6 @@ public class AutoScrollText : MonoBehaviour
 
         // Subscribe to scene transition completion event
         SceneTransitionManager.OnTransitionCompleted += OnSceneTransitionCompleted;
-
-        Debug.Log("[AutoScrollText] Waiting for scene transition to complete before starting scroll");
     }
 
     void OnDestroy()
@@ -75,7 +73,6 @@ public class AutoScrollText : MonoBehaviour
         // Only start scrolling if we transitioned TO this scene (BossDefeated)
         if (transitionData.TargetSceneName == "BossDefeated")
         {
-            Debug.Log($"[AutoScrollText] Scene transition to {transitionData.TargetSceneName} completed, starting scroll");
             StartScrolling();
         }
     }
@@ -107,17 +104,12 @@ public class AutoScrollText : MonoBehaviour
 
     private void OnScrollFinished()
     {
-        Debug.Log($"[AutoScrollText] Scroll finished, transitioning to: {targetScene}");
-
-        // Use SceneTransitionManager for proper spawn handling
         if (SceneTransitionManager.Instance != null)
         {
-            Debug.Log($"[AutoScrollText] Using SceneTransitionManager to transition to: {targetScene}");
             SceneTransitionManager.Instance.TransitionToScene(targetScene, SpawnPointType.Auto);
         }
         else
         {
-            Debug.LogWarning($"[AutoScrollText] SceneTransitionManager not found, falling back to direct load of: {targetScene}");
             SceneManager.LoadScene(targetScene);
         }
     }

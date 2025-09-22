@@ -189,6 +189,7 @@
     <Compile Include="Assets\Scripts\Mechanics\Controllers\ShopKeeperWindow.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogSystemConfig.cs" />
     <Compile Include="Assets\Scripts\Core\HeapQueue.cs" />
+    <Compile Include="Assets\Scripts\Testing\FastForwardTest.cs" />
     <Compile Include="Assets\Scripts\Managers\Optimization\ISceneProvider.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveFormatConverter.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\CheckpointManager.cs" />
@@ -206,10 +207,13 @@
     <Compile Include="Assets\Scripts\Events\LoadGame.cs" />
     <Compile Include="Assets\Scripts\UI\StatUI.cs" />
     <Compile Include="Assets\Scripts\Dialog\EnhancedLocalizationManager.cs" />
+    <Compile Include="Assets\Scripts\Testing\BossSelectionTest.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogueChoiceDatabase.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SceneRoutingContext.cs" />
     <Compile Include="Assets\Scripts\Items\Loot\LootTable.cs" />
     <Compile Include="Assets\Scripts\Items\MetaCurrencyReplenishment.cs" />
+    <Compile Include="Assets\Scripts\Testing\BarrierControlTest.cs" />
+    <Compile Include="Assets\Scripts\Managers\LogicalObjectManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\BossTransformations.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerRespawnRequest.cs" />
     <Compile Include="Assets\Scripts\Events\EnemyDistanceEvaluationEvent.cs" />
@@ -334,6 +338,7 @@
     <Compile Include="Assets\Scripts\Dialog\DialogSystemTypes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Enums\Directions.cs" />
     <Compile Include="Assets\Scripts\Events\StaminaRegenerationEvent.cs" />
+    <Compile Include="Assets\Scripts\Managers\ProceduralObjectManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\NeonLadder.Scripts.asmdef" />

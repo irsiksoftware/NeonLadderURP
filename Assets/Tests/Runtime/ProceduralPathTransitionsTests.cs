@@ -143,33 +143,33 @@ namespace NeonLadder.Tests.Runtime
         #region Path Selection Tests
 
         [Test]
-        public void LeftPath_SelectsFromCorrectBossPool()
+        public void LeftPath_SelectsFromAvailableBossPool()
         {
             // Arrange
             pathTransitions.ResetWithNewSeed("LEFTTEST");
-            var leftPathBosses = new[] { "Pride", "Greed", "Lust", "Sloth" };
+            var allAvailableBosses = BossLocationData.Locations.Select(b => b.Boss).ToArray();
 
             // Act
             var selectedBoss = pathTransitions.SelectNextBoss(true);
 
             // Assert
             Assert.IsNotNull(selectedBoss);
-            Assert.Contains(selectedBoss.Boss, leftPathBosses);
+            Assert.Contains(selectedBoss.Boss, allAvailableBosses, "Left path should select from all available bosses in dynamic system");
         }
 
         [Test]
-        public void RightPath_SelectsFromCorrectBossPool()
+        public void RightPath_SelectsFromAvailableBossPool()
         {
             // Arrange
             pathTransitions.ResetWithNewSeed("RIGHTTEST");
-            var rightPathBosses = new[] { "Wrath", "Envy", "Gluttony", "Devil" };
+            var allAvailableBosses = BossLocationData.Locations.Select(b => b.Boss).ToArray();
 
             // Act
             var selectedBoss = pathTransitions.SelectNextBoss(false);
 
             // Assert
             Assert.IsNotNull(selectedBoss);
-            Assert.Contains(selectedBoss.Boss, rightPathBosses);
+            Assert.Contains(selectedBoss.Boss, allAvailableBosses, "Right path should select from all available bosses in dynamic system");
         }
 
         [Test]
@@ -226,6 +226,7 @@ namespace NeonLadder.Tests.Runtime
         {
             // Arrange
             pathTransitions.ResetWithNewSeed("PREVIEW");
+            var allAvailableBosses = BossLocationData.Locations.Where(b => b.Boss != "Devil").Select(b => b.Boss).ToArray();
 
             // Act
             var (leftChoice, rightChoice) = pathTransitions.PreviewNextChoices();
@@ -234,11 +235,12 @@ namespace NeonLadder.Tests.Runtime
             Assert.IsNotNull(leftChoice);
             Assert.IsNotNull(rightChoice);
 
-            var leftPathBosses = new[] { "Pride", "Greed", "Lust", "Sloth" };
-            var rightPathBosses = new[] { "Wrath", "Envy", "Gluttony", "Devil" };
+            // In dynamic system, both choices should be from available bosses
+            Assert.Contains(leftChoice.Boss, allAvailableBosses, "Left choice should be from available bosses");
+            Assert.Contains(rightChoice.Boss, allAvailableBosses, "Right choice should be from available bosses");
 
-            Assert.Contains(leftChoice.Boss, leftPathBosses);
-            Assert.Contains(rightChoice.Boss, rightPathBosses);
+            // Choices should be different (unless only one boss remains)
+            Assert.AreNotEqual(leftChoice.Boss, rightChoice.Boss, "Left and right choices should be different");
         }
 
         [Test]

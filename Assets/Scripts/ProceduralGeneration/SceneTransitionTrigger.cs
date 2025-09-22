@@ -252,17 +252,37 @@ namespace NeonLadder.ProceduralGeneration
                 return null;
             }
 
-            // Route to Connection1 scene for the selected boss (not directly to boss arena)
-            string connection1Scene = $"{selectedBoss.Identifier}_Connection1";
-
-            if (enableDebugLogs)
+            // Check if fast forward connections is enabled for testing
+            if (pathTransitions.FastForwardConnections)
             {
-                string pathDirection = pathTransitions.IsPathsConverged ? "CONVERGED" : (isLeftPath ? "LEFT" : "RIGHT");
-                NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Path {pathDirection} selected boss: {selectedBoss.DisplayName} ({selectedBoss.Boss})");
-                NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Routing through connection scene: {connection1Scene}");
-            }
+                // Fast forward: Route directly to boss arena instead of connection scene
+                string bossArenaScene = selectedBoss.Identifier;
 
-            return connection1Scene;
+                if (enableDebugLogs)
+                {
+                    string pathDirection = pathTransitions.IsPathsConverged ? "CONVERGED" : (isLeftPath ? "LEFT" : "RIGHT");
+                    NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Path {pathDirection} selected boss: {selectedBoss.DisplayName} ({selectedBoss.Boss})");
+                    NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] FAST FORWARD: Going directly to boss arena: {bossArenaScene}");
+                }
+
+                return bossArenaScene;
+            }
+            else
+            {
+                // Normal flow: Route to Connection1 scene with new Left/Right folder structure
+                // Now all bosses have both Left and Right versions of connection scenes
+                string pathFolder = isLeftPath ? "Left" : "Right";
+                string connection1Scene = $"{pathFolder}/{selectedBoss.Identifier}_Connection1";
+
+                if (enableDebugLogs)
+                {
+                    string pathDirection = pathTransitions.IsPathsConverged ? "CONVERGED" : (isLeftPath ? "LEFT" : "RIGHT");
+                    NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Path {pathDirection} selected boss: {selectedBoss.DisplayName} ({selectedBoss.Boss})");
+                    NeonLadder.Debugging.Debugger.LogInformation(NeonLadder.Debugging.LogCategory.ProceduralGeneration, $"[SceneTransitionTrigger] Routing through connection scene: {connection1Scene}");
+                }
+
+                return connection1Scene;
+            }
         }
 
         /// <summary>
@@ -312,17 +332,49 @@ namespace NeonLadder.ProceduralGeneration
             // Create deterministic random based on seed
             var random = new System.Random(seed.GetHashCode());
 
-            // Available scenes (simplified for now)
-            string[] possibleScenes = new string[]
+            // Check if we should fast forward (try to get setting from SceneTransitionManager)
+            bool shouldFastForward = false;
+            var pathTransitions = SceneTransitionManager.Instance?.GetComponent<ProceduralPathTransitions>();
+            if (pathTransitions != null)
             {
-                "Banquet_Connection1",
-                "Cathedral_Connection1",
-                "Necropolis_Connection1",
-                "Vault_Connection1",
-                "Garden_Connection1",
-                "Mirage_Connection1",
-                "Lounge_Connection1"
-            };
+                shouldFastForward = pathTransitions.FastForwardConnections;
+            }
+
+            string[] possibleScenes;
+
+            if (shouldFastForward)
+            {
+                // Fast forward: Go directly to boss arenas
+                possibleScenes = new string[]
+                {
+                    "Banquet",
+                    "Cathedral",
+                    "Necropolis",
+                    "Vault",
+                    "Garden",
+                    "Mirage",
+                    "Lounge",
+                    "Finale"
+                };
+            }
+            else
+            {
+                // Normal flow: Use connection scenes with folder structure
+                bool isLeftPath = DeterminePathDirection();
+                string pathFolder = isLeftPath ? "Left" : "Right";
+
+                possibleScenes = new string[]
+                {
+                    $"{pathFolder}/Banquet_Connection1",
+                    $"{pathFolder}/Cathedral_Connection1",
+                    $"{pathFolder}/Necropolis_Connection1",
+                    $"{pathFolder}/Vault_Connection1",
+                    $"{pathFolder}/Garden_Connection1",
+                    $"{pathFolder}/Mirage_Connection1",
+                    $"{pathFolder}/Lounge_Connection1",
+                    $"{pathFolder}/Finale_Connection1"
+                };
+            }
 
             // Pick a random scene based on seed
             int index = random.Next(possibleScenes.Length);
@@ -436,18 +488,23 @@ namespace NeonLadder.ProceduralGeneration
                 // Get preview of what would be selected
                 var (leftChoice, rightChoice) = pathTransitions.PreviewNextChoices();
 
+                string bossName = "";
                 if (isLeftPath && leftChoice != null)
                 {
-                    return $"{pathDirection}: {leftChoice.DisplayName}";
+                    bossName = leftChoice.DisplayName;
                 }
                 else if (!isLeftPath && rightChoice != null)
                 {
-                    return $"{pathDirection}: {rightChoice.DisplayName}";
+                    bossName = rightChoice.DisplayName;
                 }
                 else
                 {
-                    return $"{pathDirection}: No Boss Available";
+                    bossName = "No Boss Available";
                 }
+
+                // Add fast forward indicator if enabled
+                string fastForwardIndicator = pathTransitions.FastForwardConnections ? " [FAST FORWARD]" : "";
+                return $"{pathDirection}: {bossName}{fastForwardIndicator}";
             }
             catch (System.Exception)
             {

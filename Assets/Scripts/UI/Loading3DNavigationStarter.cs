@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.UI
 {
@@ -52,7 +53,7 @@ namespace NeonLadder.UI
         {
             if (showDebugMessages)
             {
-                Debug.Log("[Loading3DNavigationStarter] Waiting for SceneTransitionManager to spawn Loading3DController...");
+                Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Waiting for SceneTransitionManager to spawn Loading3DController...");
             }
 
             while (true)
@@ -77,7 +78,7 @@ namespace NeonLadder.UI
 
                     if (showDebugMessages)
                     {
-                        Debug.Log("[Loading3DNavigationStarter] Found Loading3DController and set up navigation! Ready for A/D or movement controls.");
+                        Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Found Loading3DController and set up navigation! Ready for A/D or movement controls.");
                     }
                     yield break;
                 }
@@ -101,7 +102,7 @@ namespace NeonLadder.UI
             {
                 if (showDebugMessages)
                 {
-                    Debug.LogError("[Loading3DNavigationStarter] Loading3DScreen prefab not assigned. Please drag the prefab from Assets/Prefabs/UI/Loading3DScreen.prefab into the inspector.");
+                    Debugger.LogError(LogCategory.Loading, "[Loading3DNavigationStarter] Loading3DScreen prefab not assigned. Please drag the prefab from Assets/Prefabs/UI/Loading3DScreen.prefab into the inspector.");
                 }
                 return;
             }
@@ -130,14 +131,14 @@ namespace NeonLadder.UI
 
                 if (showDebugMessages)
                 {
-                    Debug.Log("[Loading3DNavigationStarter] Spawned Loading3DScreen for testing. Use Left/Right arrows or A/D to navigate models.");
+                    Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Spawned Loading3DScreen for testing. Use Left/Right arrows or A/D to navigate models.");
                 }
             }
             else
             {
                 if (showDebugMessages)
                 {
-                    Debug.LogError("[Loading3DNavigationStarter] Could not find Loading3DController component in spawned prefab.");
+                    Debugger.LogError(LogCategory.Loading, "[Loading3DNavigationStarter] Could not find Loading3DController component in spawned prefab.");
                 }
             }
         }
@@ -165,7 +166,7 @@ namespace NeonLadder.UI
 
                 if (showDebugMessages)
                 {
-                    Debug.Log("[Loading3DNavigationStarter] Added Loading3DNavigation component and set controller reference. Navigation ready! Use A/D or Arrow keys.");
+                    Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Added Loading3DNavigation component and set controller reference. Navigation ready! Use A/D or Arrow keys.");
                 }
             }
             else
@@ -173,7 +174,7 @@ namespace NeonLadder.UI
                 hasSetupNavigation = true;
                 if (showDebugMessages)
                 {
-                    Debug.Log("[Loading3DNavigationStarter] Loading3DNavigation component already exists.");
+                    Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Loading3DNavigation component already exists.");
                 }
             }
         }
@@ -198,7 +199,7 @@ namespace NeonLadder.UI
                     if (showDebugMessages)
                     {
                         var enabledModels = contentDatabase.GetEnabledModels();
-                        Debug.Log($"[Loading3DNavigationStarter] Loaded content database with {enabledModels.Count} enabled models. Triggering loading screen refresh...");
+                        Debugger.LogInformation(LogCategory.Loading, $"[Loading3DNavigationStarter] Loaded content database with {enabledModels.Count} enabled models. Triggering loading screen refresh...");
                     }
 
                     // Force the loading controller to refresh and use the database
@@ -206,12 +207,12 @@ namespace NeonLadder.UI
                 }
                 else if (showDebugMessages)
                 {
-                    Debug.LogWarning("[Loading3DNavigationStarter] Could not find contentDatabase field in Loading3DController.");
+                    Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigationStarter] Could not find contentDatabase field in Loading3DController.");
                 }
             }
             else if (showDebugMessages)
             {
-                Debug.LogWarning("[Loading3DNavigationStarter] Could not load LoadingScreenContentDatabase from Resources.");
+                Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigationStarter] Could not load LoadingScreenContentDatabase from Resources.");
             }
         }
 
@@ -238,7 +239,7 @@ namespace NeonLadder.UI
                     DestroyImmediate(navigation);
                     if (showDebugMessages)
                     {
-                        Debug.Log("[Loading3DNavigationStarter] Removed Loading3DNavigation component.");
+                        Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Removed Loading3DNavigation component.");
                     }
                 }
             }
@@ -282,12 +283,12 @@ namespace NeonLadder.UI
 
                         if (showDebugMessages)
                         {
-                            Debug.Log($"[Loading3DNavigationStarter] Disabled Player action map on {playerObject.name}. Actions in map: {playerActionMap.actions.Count}");
+                            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DNavigationStarter] Disabled Player action map on {playerObject.name}. Actions in map: {playerActionMap.actions.Count}");
 
                             // Debug individual actions
                             var moveAction = playerActionMap.FindAction("Move");
                             var attackAction = playerActionMap.FindAction("Attack");
-                            Debug.Log($"[Loading3DNavigationStarter] Found Move action: {moveAction != null}, Found Attack action: {attackAction != null}");
+                            Debugger.LogInformation(LogCategory.Loading, $"[Loading3DNavigationStarter] Found Move action: {moveAction != null}, Found Attack action: {attackAction != null}");
                         }
                         return;
                     }
@@ -309,7 +310,7 @@ namespace NeonLadder.UI
 
                         if (showDebugMessages)
                         {
-                            Debug.Log("[Loading3DNavigationStarter] Disabled Player action map via PlayerControls asset");
+                            Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Disabled Player action map via PlayerControls asset");
                         }
                         return;
                     }
@@ -318,7 +319,7 @@ namespace NeonLadder.UI
 
             if (showDebugMessages)
             {
-                Debug.LogWarning("[Loading3DNavigationStarter] Could not find player object or PlayerInput component to disable controls");
+                Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigationStarter] Could not find player object or PlayerInput component to disable controls");
             }
         }
 
@@ -331,17 +332,17 @@ namespace NeonLadder.UI
 
                 if (showDebugMessages)
                 {
-                    Debug.Log($"[Loading3DNavigationStarter] Re-enabled Player action map after loading screen. Enabled: {playerActionMap.enabled}");
+                    Debugger.LogInformation(LogCategory.Loading, $"[Loading3DNavigationStarter] Re-enabled Player action map after loading screen. Enabled: {playerActionMap.enabled}");
 
                     // Debug individual actions
                     var moveAction = playerActionMap.FindAction("Move");
                     var attackAction = playerActionMap.FindAction("Attack");
-                    Debug.Log($"[Loading3DNavigationStarter] Move action enabled: {moveAction?.enabled}, Attack action enabled: {attackAction?.enabled}");
+                    Debugger.LogInformation(LogCategory.Loading, $"[Loading3DNavigationStarter] Move action enabled: {moveAction?.enabled}, Attack action enabled: {attackAction?.enabled}");
                 }
             }
             else if (showDebugMessages)
             {
-                Debug.LogWarning($"[Loading3DNavigationStarter] Could not re-enable controls. ActionMap null: {playerActionMap == null}, Were disabled: {playerControlsWereDisabled}");
+                Debugger.LogWarning(LogCategory.Loading, $"[Loading3DNavigationStarter] Could not re-enable controls. ActionMap null: {playerActionMap == null}, Were disabled: {playerControlsWereDisabled}");
             }
         }
 
@@ -376,7 +377,7 @@ namespace NeonLadder.UI
 
             if (showDebugMessages)
             {
-                Debug.Log("[Loading3DNavigationStarter] Loading complete - cleaned up navigation and restored player controls");
+                Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigationStarter] Loading complete - cleaned up navigation and restored player controls");
             }
         }
 

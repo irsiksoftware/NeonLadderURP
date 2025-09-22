@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using NeonLadder.Debugging;
 
 namespace NeonLadder.UI
 {
@@ -55,21 +56,21 @@ namespace NeonLadder.UI
                         if (uiNavigateAction != null)
                         {
                             uiNavigateAction.Enable();
-                            Debug.Log("[Loading3DNavigation] Connected to UI Move action for loading screen navigation");
+                            Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigation] Connected to UI Move action for loading screen navigation");
                         }
                         else
                         {
-                            Debug.LogWarning("[Loading3DNavigation] Could not find Move action in UI action map - please add Move action to UI action map for controller menu navigation");
+                            Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigation] Could not find Move action in UI action map - please add Move action to UI action map for controller menu navigation");
                         }
                     }
                     else
                     {
-                        Debug.LogWarning("[Loading3DNavigation] Could not find UI action map in PlayerControls");
+                        Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigation] Could not find UI action map in PlayerControls");
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("[Loading3DNavigation] Could not load PlayerControls from Resources");
+                    Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigation] Could not load PlayerControls from Resources");
                 }
             }
 
@@ -120,12 +121,12 @@ namespace NeonLadder.UI
                 // Detect left/right input changes (edge detection)
                 if (navigateInput.x > 0.5f && lastNavigateInput.x <= 0.5f)
                 {
-                    Debug.Log("[Loading3DNavigation] UI Move Right detected - navigating to next model");
+                    Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigation] UI Move Right detected - navigating to next model");
                     NavigateNext();
                 }
                 else if (navigateInput.x < -0.5f && lastNavigateInput.x >= -0.5f)
                 {
-                    Debug.Log("[Loading3DNavigation] UI Move Left detected - navigating to previous model");
+                    Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigation] UI Move Left detected - navigating to previous model");
                     NavigatePrevious();
                 }
 
@@ -136,12 +137,12 @@ namespace NeonLadder.UI
             {
                 if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
                 {
-                    Debug.Log("[Loading3DNavigation] Left/A key pressed - navigating to previous model");
+                    Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigation] Left/A key pressed - navigating to previous model");
                     NavigatePrevious();
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
                 {
-                    Debug.Log("[Loading3DNavigation] Right/D key pressed - navigating to next model");
+                    Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigation] Right/D key pressed - navigating to next model");
                     NavigateNext();
                 }
             }
@@ -161,12 +162,12 @@ namespace NeonLadder.UI
         {
             if (loading3DController != null)
             {
-                Debug.Log("[Loading3DNavigation] Calling NavigateToPreviousModel()");
+                Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigation] Calling NavigateToPreviousModel()");
                 loading3DController.NavigateToPreviousModel();
             }
             else
             {
-                Debug.LogWarning("[Loading3DNavigation] loading3DController is null!");
+                Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigation] loading3DController is null!");
             }
         }
 
@@ -174,12 +175,12 @@ namespace NeonLadder.UI
         {
             if (loading3DController != null)
             {
-                Debug.Log("[Loading3DNavigation] Calling NavigateToNextModel()");
+                Debugger.LogInformation(LogCategory.Loading, "[Loading3DNavigation] Calling NavigateToNextModel()");
                 loading3DController.NavigateToNextModel();
             }
             else
             {
-                Debug.LogWarning("[Loading3DNavigation] loading3DController is null!");
+                Debugger.LogWarning(LogCategory.Loading, "[Loading3DNavigation] loading3DController is null!");
             }
         }
 
