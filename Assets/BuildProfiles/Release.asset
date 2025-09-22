@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587164dbae2d4ad46b0009b55ea1144b, type: 3}
+  m_Name: Release
+  m_EditorClassIdentifier: 
+  profileName: Release
+  profileColor: {r: 1, g: 1, b: 1, a: 1}
+  description: 
+  buildTarget: 19
+  targetGroup: 1
+  buildOptions: 0
+  outputFolder: Builds/{ProfileName}/{Version}/
+  executableName: NeonLadder
+  timestampBuilds: 0
+  sceneMode: 0
+  customScenes: []
+  scenePatterns: []
+  excludedScenes: []
+  overrideCompanyName: 0
+  companyName: ShorelineGames, LLC
+  overrideProductName: 0
+  productName: NeonLadder
+  overrideVersion: 0
+  version: 0.1.0
+  overrideIcon: 0
+  icon: {fileID: 0}
+  overrideGraphicsAPIs: 0
+  graphicsAPIs: 020000001200000015000000
+  overrideColorSpace: 0
+  colorSpace: 1
+  scriptingDefines: []
+  scriptingBackend: 1
+  il2cppCompilerConfig: 1
+  apiLevel: 6
+  useIncrementalGC: 1
+  strippingLevel: 3
+  stripEngineCode: 1
+  stripLevel: 0
+  overrideCompression: 0
+  compressionMethod: 1
+  allowDebugging: 0
+  enableHeadlessMode: 0
+  developmentBuild: 0
+  connectProfiler: 0
+  buildScriptsOnly: 0
+  steamBuild: 0
+  steamAppId: 
+  runPreBuildScript: 0
+  preBuildScript: 
+  runPostBuildScript: 0
+  postBuildScript: 
+  openBuildFolderAfterBuild: 1

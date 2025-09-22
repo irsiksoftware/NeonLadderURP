@@ -10,7 +10,7 @@ namespace NeonLadder.Editor
     /// </summary>
     public class Loading3DNavigationSetup : MonoBehaviour
     {
-        [MenuItem("NeonLadder/Setup Loading3D Navigation in Current Scene")]
+        [MenuItem("NeonLadder/Loading/Setup Loading3D Navigation in Current Scene")]
         public static void SetupNavigationInCurrentScene()
         {
             // Check if we already have a Loading3DNavigationStarter in the scene
@@ -40,7 +40,7 @@ namespace NeonLadder.Editor
             Selection.activeGameObject = navigationStarter;
         }
 
-        [MenuItem("NeonLadder/Remove Loading3D Navigation from Current Scene")]
+        [MenuItem("NeonLadder/Loading/Remove Loading3D Navigation from Current Scene")]
         public static void RemoveNavigationFromCurrentScene()
         {
             var existingStarter = FindFirstObjectByType<Loading3DNavigationStarter>();

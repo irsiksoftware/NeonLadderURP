@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf107aca4bc5db47bd7efe1c78cc78d, type: 3}
+  m_Name: BuildProfileManager
+  m_EditorClassIdentifier: 
+  activeProfile: {fileID: 11400000, guid: 1b277aab0ede0fa4ca17ad54018101bd, type: 2}
+  profiles:
+  - {fileID: 11400000, guid: 9e9b60f3bb37a454990441ba43c8aaec, type: 2}
+  - {fileID: 11400000, guid: ce6d4398a35bfe04eae525c6293296b1, type: 2}
+  - {fileID: 11400000, guid: 5152f1b9ceaca8646a7c109cb7989f18, type: 2}
+  - {fileID: 11400000, guid: 1b277aab0ede0fa4ca17ad54018101bd, type: 2}
+  lastBuildNumber: 2
+  lastBuildDate: 2025-09-22 00:12:41
+  lastBuildProfile: Ultra Fast - MVP
+  autoIncrementBuildNumber: 1
+  showBuildNotifications: 1
+  validateBeforeBuild: 1

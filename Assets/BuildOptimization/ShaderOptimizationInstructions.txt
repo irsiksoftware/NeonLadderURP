@@ -1,0 +1,25 @@
+SHADER OPTIMIZATION INSTRUCTIONS:
+
+1. MANUAL APPROACH (Recommended):
+   - Go to Project Settings → Graphics
+   - At bottom, find 'Shader Stripping'
+   - Enable 'Strip Unused' and configure variants
+
+2. QUALITY SETTINGS:
+   - Go to Project Settings → Quality
+   - Create a 'Development' quality level with minimal settings
+
+3. SHADER VARIANT COLLECTION:
+   - Window → Rendering → Shader Variant Collection
+   - Create new collection, add only shaders you use
+
+4. GRAPHICS SETTINGS:
+   - Project Settings → Graphics → Built-in Shader Settings
+   - Disable shaders you don't use (like terrain, speedtree, etc.)
+
+Your project has ~200 shaders. For a Title scene, you probably need <10.
+
+FASTEST APPROACH:
+1. Run 'NeonLadder → Build → Shader Analysis → Find ARTnGAME Shaders'
+2. Consider removing ARTnGAME packages you don't use
+3. Use 'Ultra Fast Development Build' with 1 scene

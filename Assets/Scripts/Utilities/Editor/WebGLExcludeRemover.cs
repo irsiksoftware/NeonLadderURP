@@ -6,7 +6,7 @@ namespace NeonLadder.Utilities.Editor
 {
     public class WebGLExcludeEditor : MonoBehaviour
     {
-        [MenuItem("Tools/Remove WebGL Excluded Objects")]
+        [MenuItem("NeonLadder/Tools/WebGL/Remove WebGL Excluded Objects")]
         public static void RemoveWebGLExcludedObjects()
         {
             // Find all objects in the scene with the WebGLExclude component

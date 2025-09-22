@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class RecalculateObjectNames : Editor
 {
-    [MenuItem("Tools/RenameHelper/Recalculate Object Names")]
+    [MenuItem("NeonLadder/Tools/Rename Helpers/Recalculate Object Names")]
     static void RecalculateNames()
     {
         GameObject selectedPrefab = Selection.activeObject as GameObject;

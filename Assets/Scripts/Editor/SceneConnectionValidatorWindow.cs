@@ -86,7 +86,7 @@ namespace NeonLadder.Editor
         private GUIStyle warningStyle;
         private GUIStyle errorStyle;
         
-        [MenuItem("Tools/Neon Ladder/Scene Connection Validator %&v", priority = 100)]
+        [MenuItem("NeonLadder/Tools/Scene Management/Scene Connection Validator %&v", priority = 100)]
         public static void ShowWindowWithShortcut()
         {
             var window = GetWindow<SceneConnectionValidatorWindow>("Scene Validator");

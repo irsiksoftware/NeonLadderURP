@@ -342,7 +342,7 @@ namespace NeonLadder.Dialog.Editor
             }
         }
 
-        [MenuItem("Tools/NeonLadder/Generate Dialogue Scene")]
+        [MenuItem("NeonLadder/Dialogue/Generate Dialogue Scene")]
         public static void GenerateDialogueSceneFromMenu()
         {
             // Find selected DialogueSceneConfiguration

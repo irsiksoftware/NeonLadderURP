@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class RemoveAppendedCounts : Editor
 {
-    [MenuItem("Tools/RenameHelper/Remove Appended Counts")]
+    [MenuItem("NeonLadder/Tools/Rename Helpers/Remove Appended Counts")]
     static void RemoveAppendedCountsFromScene()
     {
         GameObject selectedPrefab = Selection.activeObject as GameObject;

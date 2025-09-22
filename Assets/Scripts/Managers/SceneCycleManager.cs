@@ -9,20 +9,31 @@ using UnityEngine.SceneManagement;
 
 public class SceneCycleManager : MonoBehaviour
 {
+    [Header("Scene Configuration")]
     public List<string> ScenesToIterateFromMainMenu = new();
+
+    [Tooltip("When checked, if no scenes are specified above, iterate through all package scenes")]
+    public bool IterateAllPackagesIfNoneSpecified = true;
+
+    [Header("Timing Settings")]
     public float StartLoadingNewSceneAfterXSeconds = 3f;
     public float MinSceneDuration = 5f; // Minimum time a scene must be displayed
+
     private int currentSceneIndex = 0;
     private bool isCycling = false;
     private Coroutine cyclingCoroutine;
 
     void Start()
     {
-        if (ScenesToIterateFromMainMenu.Count == 0)
+        if (ScenesToIterateFromMainMenu.Count == 0 && IterateAllPackagesIfNoneSpecified)
         {
-            // If no scenes were manually specified in Inspector, use all package scenes
+            // If no scenes were manually specified in Inspector and checkbox is enabled, use all package scenes
             ScenesToIterateFromMainMenu = GetPackageScenes();
-            Debugger.Log($"SceneCycleManager: No scenes specified in Inspector. Using {ScenesToIterateFromMainMenu.Count} package scenes as default.");
+            Debugger.Log($"SceneCycleManager: No scenes specified in Inspector and IterateAllPackagesIfNoneSpecified is enabled. Using {ScenesToIterateFromMainMenu.Count} package scenes as default.");
+        }
+        else if (ScenesToIterateFromMainMenu.Count == 0)
+        {
+            Debugger.LogWarning("SceneCycleManager: No scenes specified and IterateAllPackagesIfNoneSpecified is disabled. Scene cycling will not work.");
         }
     }
     
@@ -53,7 +64,14 @@ public class SceneCycleManager : MonoBehaviour
         // Validate we have scenes to cycle through
         if (ScenesToIterateFromMainMenu == null || ScenesToIterateFromMainMenu.Count == 0)
         {
-            Debugger.LogWarning("SceneCycleManager: No scenes to iterate through!");
+            if (IterateAllPackagesIfNoneSpecified)
+            {
+                Debugger.LogWarning("SceneCycleManager: No scenes to iterate through! IterateAllPackagesIfNoneSpecified is enabled but no package scenes were found.");
+            }
+            else
+            {
+                Debugger.LogWarning("SceneCycleManager: No scenes to iterate through! Add scenes to the list or enable 'IterateAllPackagesIfNoneSpecified'.");
+            }
             return;
         }
         

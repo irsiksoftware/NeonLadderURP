@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 public class RemoveNumericSuffix : Editor
 {
-    [MenuItem("Tools/RenameHelper/Remove Numeric Suffix")]
+    [MenuItem("NeonLadder/Tools/Rename Helpers/Remove Numeric Suffix")]
     static void RemoveNumericSuffixFromScene()
     {
         GameObject selectedPrefab = Selection.activeObject as GameObject;

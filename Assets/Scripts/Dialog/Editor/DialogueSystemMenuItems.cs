@@ -308,7 +308,7 @@ namespace NeonLadder.Dialog.Editor
             Debug.Log("✅ Populated sample NPC dialogue configuration");
         }
 
-        [MenuItem("Tools/NeonLadder/Validate All Dialogue Assets")]
+        [MenuItem("NeonLadder/Dialogue/Validate All Dialogue Assets")]
         public static void ValidateAllDialogueAssets()
         {
             // Find all DialogueChoiceDatabase assets
@@ -352,7 +352,7 @@ namespace NeonLadder.Dialog.Editor
             Debug.Log($"🔍 Validated {validatedCount} dialogue assets");
         }
 
-        [MenuItem("Tools/NeonLadder/Open Dialogue System Documentation")]
+        [MenuItem("NeonLadder/Dialogue/Open Dialogue System Documentation")]
         public static void OpenDocumentation()
         {
             string docPath = System.IO.Path.Combine(Application.dataPath, "..", "documentation", "DialogueSystemSetupGuide.html");

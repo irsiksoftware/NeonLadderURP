@@ -4,7 +4,7 @@ using UnityEditor.Animations;
 
 public class AnimatorTransitionChanger : MonoBehaviour
 {
-    [MenuItem("Tools/Change Animator Transitions")]
+    [MenuItem("NeonLadder/Tools/Animation/Change Animator Transitions")]
     public static void ChangeAnimatorTransitions()
     {
         // Get the selected object in the Editor

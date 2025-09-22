@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeleteAllTransitions : ScriptableObject
 {
-    [MenuItem("Tools/Delete All Transitions")]
+    [MenuItem("NeonLadder/Tools/Animation/Delete All Transitions")]
     static void DeleteAllTransitionsFromSelectedController()
     {
         Object selectedObject = Selection.activeObject;

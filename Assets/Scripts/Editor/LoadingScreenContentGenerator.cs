@@ -16,7 +16,7 @@ namespace NeonLadder.Editor
         private const string NPCS_PATH = ACTORS_PATH + "/NPCs";
         private const string PLAYERS_PATH = ACTORS_PATH + "/Players";
 
-        [MenuItem("Tools/NeonLadder/Generate Loading Screen Content")]
+        [MenuItem("NeonLadder/Loading/Generate Loading Screen Content")]
         public static void GenerateLoadingScreenContent()
         {
             // Find or create the database

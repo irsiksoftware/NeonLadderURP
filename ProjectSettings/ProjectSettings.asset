@@ -149,6 +149,7 @@ PlayerSettings:
   bundleVersion: 0.1.0
   preloadedAssets:
   - {fileID: 11400000, guid: 23395aab919772a4b9b1c36df08e4851, type: 2}
+  - {fileID: -944628639613478452, guid: e175689d4ebccc649a1eac37c7607673, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -184,7 +185,7 @@ PlayerSettings:
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
-  stripEngineCode: 1
+  stripEngineCode: 0
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
   ForceInternetPermission: 0
@@ -532,7 +533,9 @@ PlayerSettings:
       m_SubKind: 
   m_BuildTargetBatching: []
   m_BuildTargetShaderSettings: []
-  m_BuildTargetGraphicsJobs: []
+  m_BuildTargetGraphicsJobs:
+  - m_BuildTarget: WindowsStandaloneSupport
+    m_GraphicsJobs: 0
   m_BuildTargetGraphicsJobMode: []
   m_BuildTargetGraphicsAPIs:
   - m_BuildTarget: iOSSupport
@@ -847,7 +850,7 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     ReservedCFE: DOTWEEN
-    Standalone: STEAMWORKS_NET;CROSS_PLATFORM_INPUT;EASYROADS3D_PRO;DOTWEEN;TMP_PRESENT;USE_NEW_INPUT;UNITY_PIPELINE_URP
+    Standalone: 
     VisionOS: DOTWEEN
     WebGL: UNITY_PIPELINE_URP;DOTWEEN;TMP_PRESENT;USE_NEW_INPUT
     Windows Store Apps: MOBILE_INPUT;DOTWEEN
@@ -856,8 +859,10 @@ PlayerSettings:
     tvOS: DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
-  il2cppCompilerConfiguration: {}
+  scriptingBackend:
+    Standalone: 0
+  il2cppCompilerConfiguration:
+    Standalone: 1
   il2cppCodeGeneration:
     WebGL: 1
   il2cppStacktraceInformation: {}
@@ -870,13 +875,15 @@ PlayerSettings:
     PS5: 1
     QNX: 1
     Stadia: 1
+    Standalone: 0
     VisionOS: 1
     WebGL: 1
     Windows Store Apps: 1
     XboxOne: 1
     iPhone: 1
     tvOS: 1
-  incrementalIl2cppBuild: {}
+  incrementalIl2cppBuild:
+    Standalone: 1
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
   useDeterministicCompilation: 1

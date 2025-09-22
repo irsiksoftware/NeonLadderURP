@@ -67,7 +67,7 @@ namespace NeonLadder.Editor
             public int animationValue = 0;
         }
 
-        [MenuItem("Tools/NeonLadder/Generate Loading Screen Content (Advanced)")]
+        [MenuItem("NeonLadder/Loading/Generate Loading Screen Content (Advanced)")]
         public static void ShowWindow()
         {
             var window = GetWindow<LoadingScreenGenerationWindow>("Loading Screen Generator");

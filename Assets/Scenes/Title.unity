@@ -754,6 +754,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      propertyPath: ScenesToIterateFromMainMenu.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258097360220702871, guid: d8b18ae9755e8e049882d3cd0ec10307,
+        type: 3}
+      propertyPath: 'ScenesToIterateFromMainMenu.Array.data[0]'
+      value: URP_SiegeOfPonthus
+      objectReference: {fileID: 0}
     - target: {fileID: 3690295689797485038, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
       propertyPath: m_Name
@@ -762,7 +772,7 @@ PrefabInstance:
     - target: {fileID: 5779463441996889488, guid: d8b18ae9755e8e049882d3cd0ec10307,
         type: 3}
       propertyPath: fastForwardConnections
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
