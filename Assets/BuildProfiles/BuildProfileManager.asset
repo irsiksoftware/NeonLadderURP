@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf107aca4bc5db47bd7efe1c78cc78d, type: 3}
   m_Name: BuildProfileManager
   m_EditorClassIdentifier: 
-  activeProfile: {fileID: 11400000, guid: 1b277aab0ede0fa4ca17ad54018101bd, type: 2}
+  activeProfile: {fileID: 11400000, guid: 6825b715bbdf32c49afa32b059fd94ac, type: 2}
   profiles:
   - {fileID: 11400000, guid: 9e9b60f3bb37a454990441ba43c8aaec, type: 2}
   - {fileID: 11400000, guid: ce6d4398a35bfe04eae525c6293296b1, type: 2}
+  - {fileID: 11400000, guid: 6825b715bbdf32c49afa32b059fd94ac, type: 2}
   - {fileID: 11400000, guid: 5152f1b9ceaca8646a7c109cb7989f18, type: 2}
   - {fileID: 11400000, guid: 1b277aab0ede0fa4ca17ad54018101bd, type: 2}
-  lastBuildNumber: 2
-  lastBuildDate: 2025-09-22 00:12:41
-  lastBuildProfile: Ultra Fast - MVP
+  lastBuildNumber: 3
+  lastBuildDate: 2025-09-22 02:33:11
+  lastBuildProfile: Steam Early Access
   autoIncrementBuildNumber: 1
   showBuildNotifications: 1
   validateBeforeBuild: 1

@@ -89,8 +89,8 @@
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveStateConfigurationEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\ManualShaderOptimizer.cs" />
     <Compile Include="Assets\Scripts\Editor\PackageManagementDynamic.cs" />
-    <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildSystemTester.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\SimpleShaderTools.cs" />
+    <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildSystemTester.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\FastBuildShaderStripper.cs" />
     <Compile Include="Assets\Scripts\Editor\Loading3DNavigationSetup.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveSystem\SaveSystemCommandCenter.cs" />

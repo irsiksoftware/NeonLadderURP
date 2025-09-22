@@ -458,10 +458,34 @@ namespace NeonLadder.BuildSystem
             }
 
             // Validate Steam settings if Steam build
-            if (profile.steamBuild && string.IsNullOrEmpty(profile.steamAppId))
+            if (profile.steamBuild)
             {
-                Debug.LogError("[BuildProfileManager] Steam build enabled but no App ID specified!");
-                valid = false;
+                // Check for steam_appid.txt file (Steam's standard location)
+                string steamAppIdPath = "steam_appid.txt";
+                if (!System.IO.File.Exists(steamAppIdPath))
+                {
+                    Debug.LogWarning("[BuildProfileManager] Steam build enabled but steam_appid.txt file not found in project root!");
+                    Debug.LogWarning("[BuildProfileManager] Create steam_appid.txt with your Steam App ID for proper Steam integration");
+                }
+                else
+                {
+                    try
+                    {
+                        string appId = System.IO.File.ReadAllText(steamAppIdPath).Trim();
+                        if (string.IsNullOrEmpty(appId))
+                        {
+                            Debug.LogWarning("[BuildProfileManager] steam_appid.txt exists but is empty!");
+                        }
+                        else
+                        {
+                            Debug.Log($"[BuildProfileManager] Steam App ID loaded from steam_appid.txt: {appId}");
+                        }
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.LogError($"[BuildProfileManager] Error reading steam_appid.txt: {e.Message}");
+                    }
+                }
             }
 
             return valid;
@@ -546,6 +570,10 @@ namespace NeonLadder.BuildSystem
             if (FindExistingProfile("Ultra Fast - MVP") == null)
             {
                 CreateUltraFastMVPProfile();
+            }
+            if (FindExistingProfile("Steam Early Access") == null)
+            {
+                CreateSteamEarlyAccessProfile();
             }
         }
 
@@ -760,6 +788,118 @@ namespace NeonLadder.BuildSystem
             AssetDatabase.SaveAssets();
 
             Debug.Log($"[BuildProfileManager] Created Ultra Fast - MVP profile with {profile.customScenes.Count} scenes for complete gameplay testing");
+        }
+
+        private static void CreateSteamEarlyAccessProfile()
+        {
+            var manager = Instance;
+            var profile = manager.CreateProfile("Steam Early Access");
+
+            // Release-quality settings for Steam distribution with IL2CPP
+            profile.developmentBuild = false;
+            profile.allowDebugging = false;
+            profile.connectProfiler = false;
+            profile.scriptingBackend = ScriptingImplementation.IL2CPP; // Using IL2CPP for production performance
+            profile.il2cppCompilerConfig = Il2CppCompilerConfiguration.Release; // Release configuration for optimized builds
+            profile.strippingLevel = ManagedStrippingLevel.High; // High stripping for smaller build size
+            profile.stripEngineCode = true; // Enable engine code stripping for production
+            profile.buildOptions = BuildOptions.None;
+
+            // Same MVP scene list as Ultra Fast MVP
+            profile.sceneMode = BuildProfile.SceneListMode.Custom;
+            profile.customScenes = new List<UnityEditor.SceneAsset>();
+
+            // Core scenes (same as MVP)
+            string[] mvpScenePaths = {
+                "Assets/Scenes/Title.unity",
+                "Assets/Scenes/Staging.unity",
+                "Assets/Scenes/Start.unity",
+                "Assets/Scenes/Credits.unity",
+                "Assets/Scenes/Cutscenes/BossDefeated.unity",
+                "Assets/Scenes/Cutscenes/Death.unity",
+                "Assets/Scenes/PackageScenes/URP_SiegeOfPonthus.unity"
+            };
+
+            // Add core scenes
+            foreach (string scenePath in mvpScenePaths)
+            {
+                var sceneAsset = AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(scenePath);
+                if (sceneAsset != null)
+                {
+                    profile.customScenes.Add(sceneAsset);
+                    Debug.Log($"[BuildProfileManager] Added Steam EA scene: {scenePath}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[BuildProfileManager] Steam EA scene not found: {scenePath}");
+
+                    // Special handling for URP_SiegeOfPonthus - try alternative path
+                    if (scenePath.Contains("URP_SiegeOfPonthus"))
+                    {
+                        string altPath = "Assets/Packages/LeartesStudios/SiegeOfPonthus/Scene/URP_SiegeOfPonthus.unity";
+                        var altSceneAsset = AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(altPath);
+                        if (altSceneAsset != null)
+                        {
+                            profile.customScenes.Add(altSceneAsset);
+                            Debug.Log($"[BuildProfileManager] Added Steam EA scene from alternative path: {altPath}");
+                        }
+                        else
+                        {
+                            Debug.LogError($"[BuildProfileManager] URP_SiegeOfPonthus not found in either location!");
+                        }
+                    }
+                }
+            }
+
+            // Add all Generated/Connections scenes
+            string[] connectionGuids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Generated/Connections" });
+            foreach (string guid in connectionGuids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var sceneAsset = AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(path);
+                if (sceneAsset != null)
+                {
+                    profile.customScenes.Add(sceneAsset);
+                }
+            }
+
+            // Add all Generated/BossArenas scenes
+            string[] bossArenaGuids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Generated/BossArenas" });
+            foreach (string guid in bossArenaGuids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var sceneAsset = AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(path);
+                if (sceneAsset != null)
+                {
+                    profile.customScenes.Add(sceneAsset);
+                }
+            }
+
+            // Steam Early Access output location
+            profile.outputFolder = "Builds/Windows/steam-early-access-{Date}-{Timestamp}/";
+            profile.executableName = "NeonLadder";
+            profile.timestampBuilds = true;
+
+            // Steam-specific settings
+            profile.steamBuild = true;
+            profile.steamAppId = ""; // Set your Steam App ID here
+
+            // Release optimization settings
+            profile.overrideCompression = true;
+            profile.compressionMethod = BuildProfile.Compression.LZ4HC;
+            profile.overrideColorSpace = true;
+            profile.colorSpace = ColorSpace.Linear;
+
+            // Quality settings - disable Fast Build Shader Stripping for release
+            profile.openBuildFolderAfterBuild = true;
+
+            EditorUtility.SetDirty(profile);
+            AssetDatabase.SaveAssets();
+
+            Debug.Log($"[BuildProfileManager] Created Steam Early Access profile with {profile.customScenes.Count} scenes for release distribution");
+            Debug.Log("[BuildProfileManager] Note: Using IL2CPP backend for optimized production performance");
+            Debug.Log("[BuildProfileManager] Note: Ensure VC++ build tools are installed for IL2CPP compilation");
+            Debug.Log("[BuildProfileManager] Note: Fast Build Shader Stripping should be DISABLED for this profile to include all shaders");
         }
     }
 }
