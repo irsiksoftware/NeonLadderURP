@@ -20,7 +20,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <NoWarn>0169;USG0001</NoWarn>
-    <DefineConstants>UNITY_6000_0_26;UNITY_6000_0;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_6000_0_26;UNITY_6000_0;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;STEAMWORKS_NET;UNITY_PIPELINE_URP;EASYROADS3D_PRO;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -68,6 +68,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\HELPER SCRIPTS\manageParticleRotationSM.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\Serializer.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\FoliageGenerator.cs" />
+    <Compile Include="Assets\Packages\SeedMesh\Jungle-Tropical Vegetation\FPS\CharacterControllerSeedMesh.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\V5.1 Scripts\controlWeatherTOD_SM_URP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Timer and Weather Controllers\TimerSKYMASTER.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\ControlGIPROXY_ATTRIUM1.cs" />
@@ -104,8 +105,10 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\SkyMaster.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Common Tools\MobileSSPR\ReusableCore\MobileSSPRRendererFeature.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\_Shared\SceneControl.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\UI\Popup.cs" />
     <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ItemSlot.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Particle Dynamics\DragRigidbodySKYMASTER.cs" />
+    <Compile Include="Assets\Packages\SeedMesh\Shader_graph\Manager\SeedMesh_Shaders_Manager.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\Scripts\Clouds\GlobalShaderVariablesTORNADO.cs" />
     <Compile Include="Assets\Packages\HeroEditor\FantasyHeroes\TestRoom\Scripts\StateHandler.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 3.3\River\River Scripts\RiverHandlerSM.cs" />
@@ -143,6 +146,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Runtime\Scripts\VolumetricConfig.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\Projectile.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Scripts\URP\connectSuntoVolumeCloudsURP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\UI\Links.cs" />
     <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\ItemCollection.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V1.0 Scripts\Helper scripts\MoveItemOverGroundSM.cs" />
     <Compile Include="Assets\Packages\LeartesStudios\CyberpunkMegapack\Scripts\HoverCarController.cs" />
@@ -175,6 +179,7 @@
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\PivotBasedCameraRigSM.cs" />
     <Compile Include="Assets\Packages\Suriyun\MobileControllerSystem\_Examples\Example4\ThirdPersonCameraSystem.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\V3.4 Scripts\CloudHandlerSM_SRP.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\UI\Dialog.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\ARTnGAME GI PROXY\Scripts\HELPER SCRIPTS\ProceduralNoiseGIPROXY.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\BlitPassVolumeFogSRP.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\TestRoom.cs" />
@@ -256,10 +261,12 @@
     <Compile Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\BlitFullVolumeCloudsSRP.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Scripts\Water\WaterBaseSM.cs" />
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
+    <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\Common\Tweens\Tween.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Planet.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\BrunetonsImprovedAtmosphere\TextureBuffer.cs" />
     <Compile Include="Assets\Packages\HeroEditor\InventorySystem\Scripts\Elements\ScrollInventoryFilter.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\CharacterScripts\CharacterExtensions.cs" />
+    <Compile Include="Assets\Packages\SeedMesh\Jungle-Tropical Vegetation\FPS\MouseLook.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\DepthNormalsByLayerSMURPFeature.cs" />
     <Compile Include="Assets\Packages\HeroEditor\Common\Scripts\ExampleScripts\MovementExample.cs" />
     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
@@ -565,6 +572,7 @@
     <None Include="Assets\Packages\Mixamo\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\Resources\FullVolumeCloudsSRP_FORWARD_URP LAYERS_FOGWAR.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.0\Shaders\SkyMaster_SM_Additive_Soft_LOWCLOUDS.shader" />
+    <None Include="Assets\Packages\SeedMesh\Jungle-Tropical Vegetation\Read Me.txt" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\Resources\custom prefabs\_custom prefabs.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\VolumeFogSRP_FORWARD_URP.shader" />
     <None Include="Assets\Packages\Synty\SimpleApocalypse\ReadMe.txt" />
@@ -606,7 +614,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Packages\EasyRoads3D\DownloadInstructions.txt" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\Release - Install Notes.txt" />
-    <None Include="Assets\AddressableAssetsData\link.xml" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\VolumeFogSRP_FORWARD_URP Legacy1 Before added ifninite Lights NEW IMPOSTOR.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Skybox shaders\Skybox-Procedural_SkyMaster MAIN U5 MOBILE.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\WaterIncludeSM30.cginc" />
@@ -656,6 +663,7 @@
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\Shader\Resources\TAA.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Assets\Version 2.2\VolumetricShader\VolumeLitParticlesPDM.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\SkyMaster Vortex Clouds\Scripts\V3.4 Scripts\ShaderVolumeClouds\ShaderVolumeCloudsSMV3.4b SM30 v3.4.4 VORTEX Shader Only Mode.shader" />
+    <None Include="Assets\Packages\SeedMesh\Jungle-Tropical Vegetation\Tutorials\Read Me.txt" />
     <None Include="Assets\Packages\F3_Corvette\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\BlitEthereal.hlsl" />
     <None Include="Assets\Packages\Modern UI Pack\Read Me.txt" />
@@ -682,6 +690,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\ClassicNoise3D.hlsl" />
     <None Include="Assets\Packages\LeartesStudios\NovaSpaceBurgers\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\SeedMesh\Ruined Atrium - Sample Scene\URP\READ_ME_URP.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\PRO\MainLight InfiniSNOW.hlsl" />
     <None Include="Assets\Packages\LeartesStudios\RomanStreet\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\Resources\FullVolumeCloudsSRP_FORWARD_URP LAYERS_FOGWAR Test RING WORLD.shader" />
@@ -694,6 +703,7 @@
     <None Include="Assets\Packages\ILRanch\CyberRoom\ReadMe.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.0\Shaders\InvisibleShadowCaster.shader" />
     <None Include="Assets\Packages\Synty\SimpleRacer\Materials\UnlitVertexColour_Alpha.shader" />
+    <None Include="Assets\Packages\SeedMesh\Ground Foliage Vol.2\Read Me.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\Scatter Shaded Clouds\ScatterShadedCloud.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\RiverWater.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\TEMPORAL 2\Resources\TemporalAAShader.shader" />
@@ -725,6 +735,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 5.0\Trees CC0\FoliageShader\SurfaceShaderBasic.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Packages\SeedMesh\Ruined Atrium - Sample Scene\Read Me.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\BrunetonsImprovedAtmosphere\AtmosSRP_FORWARD_URP.shader" />
     <None Include="Assets\Packages\LeartesStudios\FantasyCastle\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2021\Scripts - Shaders\URP\Resources\VolumeFogSRP_FORWARD_URP Legacy1 Before added ifninite Lights and Cookies.shader" />
@@ -733,6 +744,7 @@
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\AURORA_NEBULA_BLACKHOLE\AuroraRenderer\Earth\EarthCloudShader.shader" />
     <None Include="Assets\Packages\LeartesStudios\AbandonedPool\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\GrassShaderShadows URP.shader" />
+    <None Include="Assets\Packages\SeedMesh\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.6\WIP DEMOS\Shaders\Grass\TEM GRASS A.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\TEMPORAL 2\Resources\SEGI_TEMPORAL_ENABLE.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
@@ -747,6 +759,7 @@
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\AURORA_NEBULA_BLACKHOLE\AuroraRenderer\Earth\EarthCloudShader 1.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\ShurikenCloud.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Temporal AA\LICENSE.txt" />
+    <None Include="Assets\Packages\SeedMesh\Tropical Plants Package\Read Me.txt" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\_URP &amp; HDRP Readme.txt" />
     <None Include="Assets\Packages\Piloto Studio\Shaders\VFX_Piloto\Opaque UberFX.shader" />
     <None Include="Assets\Packages\HeroEditor\DownloadInstructions.txt" />
@@ -780,6 +793,7 @@
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Licences\license_fastnoise.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumetricLightingInput.hlsl" />
     <None Include="Assets\Packages\49Wares\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\SeedMesh\Ferns_Package\Read Me.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 2.2\TerrainShading\Resources\TreeSoftOcclusionLeavesRendertex.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Assets\Snow Shader HDRP\SnowShaderSM5.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\ShaderLibs\Framework3D_Terrain.cginc" />
@@ -807,6 +821,7 @@
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\PINE TREES\MainLight_Custom_Node_SM 1.hlsl" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\Unity-Tornado-Simulator\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\PlanetErosionVortexGPU\LICENSE 1.TXT" />
+    <None Include="Assets\Packages\SeedMesh\Shader_graph\Manager\READ_ME.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.0\Shaders\Water\Refraction 2_FADE SM.shader" />
     <None Include="Assets\Packages\ARTnGAME\EXTRAS\Orion Space Framework\PLANET GENERATION\Fluid Planets\SkyMasterFLUID\Materials\SimpleFluidShaderURP.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\BrunetonsImprovedAtmosphere\BlitAtmos.hlsl" />

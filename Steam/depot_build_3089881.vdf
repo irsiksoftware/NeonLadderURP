@@ -1,0 +1,36 @@
+"DepotBuild"
+{
+	"DepotID" "3089881" // NeonLadder Demo Depot ID
+
+	// Set the content root to the builds folder
+	"ContentRoot" "..\..\Builds\Windows\"
+
+	// Files to include in this depot
+	"FileMapping"
+	{
+		// Map everything from the steam-demo build folder
+		"LocalPath" "steam-demo-*\*"
+		"DepotPath" "."
+		"Recursive" "1"
+	}
+
+	// Files to exclude from the depot
+	"FileExclusion" "*.pdb"
+	"FileExclusion" "*.log"
+	"FileExclusion" "*_BurstDebugInformation_*"
+	"FileExclusion" "*_BackUpThisFolder_*"
+	"FileExclusion" "steam_appid.txt"
+	"FileExclusion" "Thumbs.db"
+	"FileExclusion" ".DS_Store"
+
+	// File properties
+	"FileProperties"
+	{
+		// Mark the main executable
+		"NeonLadder.exe"
+		{
+			"oslist" "windows"
+			"osarch" "64"
+		}
+	}
+}

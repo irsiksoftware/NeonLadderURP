@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587164dbae2d4ad46b0009b55ea1144b, type: 3}
+  m_Name: Steam Demo
+  m_EditorClassIdentifier: 
+  profileName: Steam Demo
+  profileColor: {r: 1, g: 1, b: 1, a: 1}
+  description: 
+  buildTarget: 19
+  targetGroup: 1
+  buildOptions: 0
+  outputFolder: Builds/Windows/steam-demo-{Date}-{Timestamp}/
+  executableName: NeonLadder
+  timestampBuilds: 1
+  sceneMode: 1
+  customScenes:
+  - {fileID: 102900000, guid: eb9e1970fe9cd68408a74d41c5d152f8, type: 3}
+  - {fileID: 102900000, guid: c357e0a859db8c44e8af73efc2d8436f, type: 3}
+  - {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+  - {fileID: 102900000, guid: eaf61b0a4889b2542b103c1f5c531704, type: 3}
+  - {fileID: 102900000, guid: ef2d04767cc6ce340ab093ddb480c506, type: 3}
+  - {fileID: 102900000, guid: cde56aa006f1d434bb0a31684b415e9c, type: 3}
+  - {fileID: 102900000, guid: dd3114da7d15df645bcca7a66231af39, type: 3}
+  - {fileID: 102900000, guid: 750d5f726a5bc9e419865211f295268c, type: 3}
+  - {fileID: 102900000, guid: 4f14335c7a2df9c4ba1e0e68eb68a375, type: 3}
+  - {fileID: 102900000, guid: 59a85b1cacb4a4c44a4ff0fdf3360c57, type: 3}
+  - {fileID: 102900000, guid: 0636c9123420fab45876de14a7800f30, type: 3}
+  - {fileID: 102900000, guid: 71c67986eebcf1d42b86df2fe32f2eb4, type: 3}
+  - {fileID: 102900000, guid: dbdcdd25320eccc4988a03d457e66cfa, type: 3}
+  - {fileID: 102900000, guid: 47bbc8eada0ba7149be6f471ae6365c7, type: 3}
+  - {fileID: 102900000, guid: 92f3aa8f9f2469a498a943ec3052dc61, type: 3}
+  - {fileID: 102900000, guid: 81b024030ce3f66488109d41da324e96, type: 3}
+  - {fileID: 102900000, guid: 381fae045e03d0d4b8d253c8347ddbd5, type: 3}
+  - {fileID: 102900000, guid: b08db80bdbdf24e42b6e39954e110340, type: 3}
+  - {fileID: 102900000, guid: ca58aee2e77813c47a8cf1408ac5ddfb, type: 3}
+  - {fileID: 102900000, guid: ba458a50ad374664986bd36366f54653, type: 3}
+  - {fileID: 102900000, guid: 09554c881d26d2c438405b4c238d1f0b, type: 3}
+  - {fileID: 102900000, guid: e9a0b44f0826eff45b7e6de48c42a2dc, type: 3}
+  - {fileID: 102900000, guid: 8265d02000009624d88262cca9c2306d, type: 3}
+  - {fileID: 102900000, guid: 6eecf91bd0dfce145a1522ac5daa8513, type: 3}
+  - {fileID: 102900000, guid: d76b2fea097251646bda27bf22d6ca0e, type: 3}
+  - {fileID: 102900000, guid: 60771411c5e318e4c94c496122908e0c, type: 3}
+  - {fileID: 102900000, guid: 9542694d2e17a2c4e86d0207af607be8, type: 3}
+  - {fileID: 102900000, guid: 5cea026d61a8d6d4a83578f30f172239, type: 3}
+  - {fileID: 102900000, guid: b7fcdae1492bf554a80ba100dbcca503, type: 3}
+  - {fileID: 102900000, guid: c649f1902ec374d43a646ea6cc935dea, type: 3}
+  - {fileID: 102900000, guid: 3f2ee1a313f6ce948ac339f1cb382f7a, type: 3}
+  - {fileID: 102900000, guid: 95a114333fb529748aad28362e338966, type: 3}
+  - {fileID: 102900000, guid: 9632294404c15e44394c089505f2d54c, type: 3}
+  - {fileID: 102900000, guid: c388c7a61954fc14cb3829cbd083fe41, type: 3}
+  - {fileID: 102900000, guid: ad5b348a6355e4544b8be8a56a4414e9, type: 3}
+  - {fileID: 102900000, guid: c49e464a825f78549916eecd7826948e, type: 3}
+  - {fileID: 102900000, guid: 09d1003b8877e594b938cf22d488fe40, type: 3}
+  - {fileID: 102900000, guid: 8e919be94e9dd91449a5c6124ce165cf, type: 3}
+  - {fileID: 102900000, guid: d61742788b5b2cb418fc0351b69ebdf5, type: 3}
+  - {fileID: 102900000, guid: 5ddca82a4405cc741918c163d831bca4, type: 3}
+  - {fileID: 102900000, guid: 5fd4a5d8ebec52943ae94a20ca3618a1, type: 3}
+  - {fileID: 102900000, guid: 27f2410d48329b046af578990f3591f1, type: 3}
+  - {fileID: 102900000, guid: dbdcb836d82d5bf4983d71bb3e04ca38, type: 3}
+  - {fileID: 102900000, guid: 319a1b00c66b24543902e962a92a48f6, type: 3}
+  - {fileID: 102900000, guid: c7c4da7fe0d9d284ebbe76761968f642, type: 3}
+  - {fileID: 102900000, guid: 41dd078a1e575a24f9d9e5af4b817a3a, type: 3}
+  - {fileID: 102900000, guid: 933e32b274bff2345b6a1a5412e6954c, type: 3}
+  scenePatterns: []
+  excludedScenes: []
+  overrideCompanyName: 0
+  companyName: ShorelineGames, LLC
+  overrideProductName: 0
+  productName: NeonLadder
+  overrideVersion: 0
+  version: 0.1.0
+  overrideIcon: 0
+  icon: {fileID: 0}
+  overrideGraphicsAPIs: 0
+  graphicsAPIs: 020000001200000015000000
+  overrideColorSpace: 1
+  colorSpace: 1
+  scriptingDefines: []
+  scriptingBackend: 1
+  il2cppCompilerConfig: 1
+  apiLevel: 6
+  useIncrementalGC: 1
+  strippingLevel: 3
+  stripEngineCode: 1
+  stripLevel: 0
+  overrideCompression: 1
+  compressionMethod: 2
+  allowDebugging: 0
+  enableHeadlessMode: 0
+  developmentBuild: 0
+  connectProfiler: 0
+  buildScriptsOnly: 0
+  steamBuild: 1
+  steamAppId: 3089980
+  runPreBuildScript: 0
+  preBuildScript: 
+  runPostBuildScript: 0
+  postBuildScript: 
+  openBuildFolderAfterBuild: 1

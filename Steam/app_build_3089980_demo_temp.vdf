@@ -1,0 +1,32 @@
+"AppBuild"
+{
+	"AppID" "3089980" // NeonLadder Demo App ID
+	"Desc" "NeonLadder Steam Demo Build" // Description for this build
+	"ContentRoot" "..\..\Builds\Windows\" // Path to builds folder relative to steamcmd location
+	"BuildOutput" "..\..\output\" // Build logs and cache output
+	"Preview" "0" // Set to 1 for testing without uploading
+	"Local" "0" // Set to 1 for LAN testing only
+	"SetLive" "default" // Automatically set this build live on default branch after upload
+
+	"Depots"
+	{
+		"3089881" // NeonLadder Demo Depot (Windows 64-bit)
+		{
+			"FileMapping"
+			{
+				// Point to the most recent steam-demo build folder
+				// You'll need to update this path to match your actual build output
+				"LocalPath" "steam-demo-2025-09-22-20250922-090741\*" // All files from the latest steam-demo build
+				"DepotPath" "." // Map to root of depot
+				"Recursive" "1" // Include all subfolders
+			}
+
+			// Exclude files we don't want in the depot
+			"FileExclusion" "*.pdb" // Exclude debug symbols
+			"FileExclusion" "*.log" // Exclude log files
+			"FileExclusion" "*_BurstDebugInformation_*" // Exclude Unity burst debug info
+			"FileExclusion" "*_BackUpThisFolder_*" // Exclude Unity backup folders
+			"FileExclusion" "steam_appid.txt" // Don't upload local steam_appid file
+		}
+	}
+}

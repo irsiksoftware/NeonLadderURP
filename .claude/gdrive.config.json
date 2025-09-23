@@ -1,0 +1,90 @@
+{
+  "gdrive_integration": {
+    "description": "Google Drive CLI Integration for NeonLadder External Documentation",
+    "version": "1.0",
+    "tool_path": "C:\\tools\\gdrive",
+    "created": "2025-09-22",
+    "purpose": "Centralized external documentation access and settings synchronization"
+  },
+  "key_folder_ids": {
+    "claude_folder": "1PfhnfbV6jvi-eh46z4s3yzxnd0TfDpj8",
+    "main_documentation": "19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z",
+    "core_game_systems": "1XfJYJPJY7faWladzLX0w8MUaMxE7fIBB",
+    "development_infrastructure": "1yyAvATMVTFCv74-v2N-FbRlvHK7KWgbD",
+    "project_management": "18Ifv4Yg0WmBeivDyQEC7hW65rdKrtsQp",
+    "systems_documentation": "1XWBuGJ8-fGrjaglG2aYiYp-8Vn1byb8o"
+  },
+  "key_file_ids": {
+    "settings_local": "1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ",
+    "procedural_gen_string": "15jasDIc2fzVR8Sa2iQSjLtZGXoINvRC0",
+    "procedural_gen_visual": "1gjcZF9z8mhFZmnQUtDHCSQQsdY315P2n",
+    "upgrade_system": "1QAu5SAcOwGeg_SbN1CQ4lRgUt9CyXSmE",
+    "logging_system": "1O_uooLcz9vaq_faDGz5J1y8C_KfQQHkz",
+    "unity_menu_system": "1hGIrIdAXSTY_srBK4BqSfx04M7rG9_Kc",
+    "menu_pbi_status": "1Aok8HVtdgsetGUjswGe0O65SKysjX41S",
+    "complete_access_guide": "1ra4LEwNrYOXlBgPY2su0DopuxdU7IEz6"
+  },
+  "valid_commands": {
+    "authentication": {
+      "check_auth": "\"C:\\tools\\gdrive\" about",
+      "description": "Verify Google Drive authentication and quota"
+    },
+    "settings_sync": {
+      "download_settings": "\"C:\\tools\\gdrive\" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --overwrite",
+      "sync_command": "\"C:\\tools\\gdrive\" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --overwrite && mv settings.local.json .claude/",
+      "description": "Download and sync Claude settings from Google Drive"
+    },
+    "list_operations": {
+      "list_main_docs": "\"C:\\tools\\gdrive\" files list --parent 19_CR6EWMjzs5u4o5_ch6UNddoN-LNf7z",
+      "list_systems_docs": "\"C:\\tools\\gdrive\" files list --parent 1XWBuGJ8-fGrjaglG2aYiYp-8Vn1byb8o",
+      "list_core_systems": "\"C:\\tools\\gdrive\" files list --parent 1XfJYJPJY7faWladzLX0w8MUaMxE7fIBB",
+      "list_infrastructure": "\"C:\\tools\\gdrive\" files list --parent 1yyAvATMVTFCv74-v2N-FbRlvHK7KWgbD",
+      "list_project_mgmt": "\"C:\\tools\\gdrive\" files list --parent 18Ifv4Yg0WmBeivDyQEC7hW65rdKrtsQp",
+      "description": "List files in various documentation folders"
+    },
+    "download_operations": {
+      "download_upgrade_system": "\"C:\\tools\\gdrive\" files download 1QAu5SAcOwGeg_SbN1CQ4lRgUt9CyXSmE",
+      "download_logging_system": "\"C:\\tools\\gdrive\" files download 1O_uooLcz9vaq_faDGz5J1y8C_KfQQHkz",
+      "download_procedural_gen": "\"C:\\tools\\gdrive\" files download 15jasDIc2fzVR8Sa2iQSjLtZGXoINvRC0",
+      "download_unity_menu": "\"C:\\tools\\gdrive\" files download 1hGIrIdAXSTY_srBK4BqSfx04M7rG9_Kc",
+      "download_access_guide": "\"C:\\tools\\gdrive\" files download 1ra4LEwNrYOXlBgPY2su0DopuxdU7IEz6",
+      "description": "Download specific documentation files"
+    },
+    "upload_operations": {
+      "upload_file": "\"C:\\tools\\gdrive\" files upload --parent [FOLDER_ID] [FILE_PATH]",
+      "update_file": "\"C:\\tools\\gdrive\" files update [FILE_ID] [FILE_PATH]",
+      "description": "Upload or update files to Google Drive"
+    },
+    "search_operations": {
+      "search_by_name": "\"C:\\tools\\gdrive\" files list --query \"name contains '[SEARCH_TERM]'\"",
+      "search_in_folder": "\"C:\\tools\\gdrive\" files list --parent [FOLDER_ID] --query \"name contains '[SEARCH_TERM]'\"",
+      "description": "Search for files by name or within specific folders"
+    }
+  },
+  "permissions": {
+    "allow_patterns": [
+      "Bash(\"C:\\\\tools\\\\gdrive\":*)",
+      "Bash(\"C:\\\\tools\\\\gdrive\" about)",
+      "Bash(\"C:\\\\tools\\\\gdrive\" files list:*)",
+      "Bash(\"C:\\\\tools\\\\gdrive\" files download:*)",
+      "Bash(\"C:\\\\tools\\\\gdrive\" files upload:*)",
+      "Bash(\"C:\\\\tools\\\\gdrive\" files update:*)"
+    ],
+    "description": "Pre-approved gdrive commands in .claude/settings.local.json"
+  },
+  "quick_reference": {
+    "startup_sequence": [
+      "1. Check .claude folder: ls .claude",
+      "2. Download settings: gdrive files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --overwrite",
+      "3. Move to .claude: mv settings.local.json .claude/",
+      "4. Verify: cat .claude/settings.local.json | head -20"
+    ],
+    "one_liner": "mkdir -p .claude && \"C:\\tools\\gdrive\" files download 1yhlUpLoL7FvI2rcQ6B1y9pcUfZKlk0aJ --overwrite && mv settings.local.json .claude/"
+  },
+  "notes": {
+    "authentication": "gdrive CLI must be authenticated before use",
+    "overwrite_flag": "Always use --overwrite when downloading settings to ensure latest version",
+    "file_ids": "File IDs are stable and can be used directly for downloads",
+    "folder_structure": "External docs organized by system type for easy navigation"
+  }
+}

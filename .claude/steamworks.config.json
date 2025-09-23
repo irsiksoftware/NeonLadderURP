@@ -1,0 +1,135 @@
+{
+  "steamworks_integration": {
+    "description": "Steamworks SDK Integration for NeonLadder",
+    "version": "1.0",
+    "sdk_version": "1.62",
+    "sdk_date": "2025-03-14",
+    "tool_path": "C:\\Tools\\steamworks",
+    "created": "2025-09-22",
+    "purpose": "Steam Demo and Early Access deployment configuration"
+  },
+  "app_info": {
+    "app_id": "3089870",
+    "app_name": "NeonLadder",
+    "demo_app_id": "TBD - Will be assigned by Steam for demo",
+    "app_id_file": "steam_appid.txt",
+    "developer": "Shoreline Games, LLC",
+    "publisher": "Irsik Software",
+    "release_strategy": "Demo -> Early Access -> Full Release"
+  },
+  "deployment_info": {
+    "content_root": "Builds/Windows/steam-demo-{Date}-{Timestamp}/",
+    "depot_id": "TBD - Will be assigned by Steam",
+    "branch": "default",
+    "demo_limitations": {
+      "achievements": false,
+      "steam_cloud": false,
+      "save_transfer": "Manual implementation required",
+      "content_caps": "Full roguelite loop (may limit meta-progression)"
+    }
+  },
+  "paths": {
+    "sdk_root": "C:\\Tools\\steamworks",
+    "content_builder": "C:\\Tools\\steamworks\\tools\\ContentBuilder",
+    "steamcmd": "C:\\Tools\\steamworks\\tools\\ContentBuilder\\builder\\steamcmd.exe",
+    "scripts": "C:\\Tools\\steamworks\\tools\\ContentBuilder\\scripts",
+    "output": "C:\\Tools\\steamworks\\tools\\ContentBuilder\\output",
+    "content": "C:\\Tools\\steamworks\\tools\\ContentBuilder\\content",
+    "redistributables": "C:\\Tools\\steamworks\\redistributable_bin",
+    "goldmaster": "C:\\Tools\\steamworks\\tools\\goldmaster"
+  },
+  "build_commands": {
+    "login": "steamcmd +login [STEAM_USERNAME] [STEAM_PASSWORD]",
+    "build_app": "steamcmd +login [STEAM_USERNAME] +run_app_build [BUILD_SCRIPT] +quit",
+    "build_script_template": "app_build_[APPID].vdf",
+    "depot_script_template": "depot_build_[DEPOTID].vdf",
+    "run_build_bat": "C:\\Tools\\steamworks\\tools\\ContentBuilder\\run_build.bat"
+  },
+  "vdf_templates": {
+    "app_build": {
+      "AppID": "[APP_ID]",
+      "Desc": "NeonLadder [BUILD_TYPE] Build",
+      "verbose": "1",
+      "preview": "0",
+      "ContentRoot": "..\\content\\",
+      "BuildOutput": "..\\output\\",
+      "Depots": {
+        "[DEPOT_ID]": {
+          "FileMapping": {
+            "LocalPath": "*",
+            "DepotPath": ".",
+            "recursive": "1"
+          }
+        }
+      }
+    },
+    "depot_build": {
+      "DepotID": "[DEPOT_ID]",
+      "ContentRoot": "..\\content\\",
+      "FileMapping": {
+        "LocalPath": "*",
+        "DepotPath": ".",
+        "recursive": "1"
+      },
+      "FileExclusion": "*.pdb"
+    }
+  },
+  "demo_specific": {
+    "store_page": "Separate demo store page (as of 2024 Steam update)",
+    "reviews": "Demo can have its own reviews",
+    "wishlists": "Demo drives wishlists for main game",
+    "visibility": "Demos behave like free games in charts/discovery",
+    "library_behavior": "Can be added to library without installing",
+    "conversion": "Players must buy Early Access after demo"
+  },
+  "early_access_specific": {
+    "initial_price": "TBD - Set when ready for Early Access",
+    "ownership": "Players who claim during free period keep forever",
+    "transition": "Demo players need to purchase separately",
+    "save_migration": "Manual implementation if desired"
+  },
+  "steam_features": {
+    "achievements": {
+      "demo": false,
+      "early_access": true,
+      "full_release": true
+    },
+    "cloud_saves": {
+      "demo": false,
+      "early_access": true,
+      "full_release": true
+    },
+    "workshop": {
+      "demo": false,
+      "early_access": false,
+      "full_release": "TBD"
+    },
+    "trading_cards": {
+      "demo": false,
+      "early_access": false,
+      "full_release": true
+    }
+  },
+  "authentication": {
+    "required_env_vars": [
+      "STEAM_USERNAME",
+      "STEAM_PASSWORD",
+      "STEAM_GUARD_CODE"
+    ],
+    "partner_site": "https://partner.steamgames.com",
+    "documentation": "https://partner.steamgames.com/doc/features/demo"
+  },
+  "notes": {
+    "sdk_location": "SDK v1.62 installed at C:\\Tools\\steamworks",
+    "demo_workflow": "Full game as demo -> test/feedback -> transition to paid EA",
+    "app_id": "Current AppID 3089870 is for main game, demo needs separate ID",
+    "depot_setup": "Each build target needs its own depot configuration",
+    "build_automation": "Can automate with steamcmd or use SteamPipeGUI for manual"
+  },
+  "quick_reference": {
+    "check_sdk": "dir C:\\Tools\\steamworks",
+    "view_scripts": "dir C:\\Tools\\steamworks\\tools\\ContentBuilder\\scripts",
+    "run_build": "cd C:\\Tools\\steamworks\\tools\\ContentBuilder && run_build.bat [SCRIPT]",
+    "steam_appid": "Located at C:\\Users\\Ender\\NeonLadder\\steam_appid.txt"
+  }
+}
