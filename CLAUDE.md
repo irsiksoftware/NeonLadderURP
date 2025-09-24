@@ -97,7 +97,7 @@ powershell -Command "& {cd 'C:\Users\Ender\NeonLadder'; .\sync-claude-settings.b
 **Status**: Steam launch ready - Q1 2025
 **Test Coverage**: 631/645 tests passing (97.8% pass rate)
 **Revenue Potential**: $500K+ mobile expansion identified
-**Unity Version**: 6000.0.26f1
+**Unity Version**: 6000.2.5f1
 
 ## Important Guidelines
 
@@ -498,7 +498,7 @@ The user has granted broad permissions for:
 
 **Direct Unity CLI (2-minute execution):**
 ```bash
-"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests -logFile "TestOutput/cli_test_execution.txt"
+"C:\Program Files\Unity\Hub\Editor\6000.2.5f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests -logFile "TestOutput/cli_test_execution.txt"
 ```
 
 **Quick Reference:**
@@ -507,7 +507,7 @@ The user has granted broad permissions for:
 powershell -Command "Stop-Process -Name Unity -Force"
 
 # Run tests directly
-"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
+"C:\Program Files\Unity\Hub\Editor\6000.2.5f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
 ```
 
 ### **📁 Required Files (Already Created)**
@@ -570,7 +570,7 @@ powershell -Command "Stop-Process -Name Unity -Force"
 powershell -Command "Stop-Process -Name Unity -Force"
 
 # 2. Run tests (2-minute execution)
-"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Code\NeonLadderURP" -executeMethod CLITestRunner.RunPlayModeTests -logFile "TestOutput/cli_test_latest.txt"
+"C:\Program Files\Unity\Hub\Editor\6000.2.5f1\Editor\Unity.exe" -batchmode -projectPath "C:\Code\NeonLadderURP" -executeMethod CLITestRunner.RunPlayModeTests -logFile "TestOutput/cli_test_latest.txt"
 
 # 3. After 2-3 minutes, kill Unity if it hasn't exited
 powershell -Command "Stop-Process -Name Unity -Force"
@@ -581,7 +581,7 @@ dir "C:/Users/Ender/AppData/LocalLow/ShorelineGames, LLC/NeonLadder/TestResults.
 
 **Direct Unity Test Execution:**
 ```bash
-"C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
+"C:\Program Files\Unity\Hub\Editor\6000.2.5f1\Editor\Unity.exe" -batchmode -projectPath "C:\Users\Ender\NeonLadder" -executeMethod CLITestRunner.RunPlayModeTests
 ```
 
 ✅ **Guaranteed Working Solution** - This workaround has been validated with intentional test failures and passes all CI/CD requirements.
@@ -716,7 +716,7 @@ Claude Code has several operational modes that can be toggled:
 - **Package Managers**: npm (v11.5.1), chocolatey (v2.4.3) both available
 - **Version Control**: git (v2.47.1) fully functional
 - **PowerShell**: All PowerShell commands execute successfully
-- **Unity Versions**: 6000.0.26f1 and 6000.0.37f1 both installed
+- **Unity Versions**: 6000.2.5f1 installed
 
 **❌ KNOWN ISSUES:**
 - `taskkill` commands fail (non-admin VS Code launch from Unity)
