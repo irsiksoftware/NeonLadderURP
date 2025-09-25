@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\UpgradeSystemEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Performance\PerformanceMenuItems.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\FastDevelopmentBuilder.cs" />
+    <Compile Include="Assets\Scripts\Editor\AnalogAimingTestWindow.cs" />
     <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\SceneConnectionOverrideEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\MenuConsolidation.cs" />

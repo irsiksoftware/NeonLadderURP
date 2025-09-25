@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\ProceduralGeneration\ProceduralPathTransitions.cs" />
     <Compile Include="Assets\Scripts\Utilities\OptimizedSceneEnumResolver.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerAttackEvent.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Controllers\AnalogAim180.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerMovementStateChangeEvent.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Currency\Perma.cs" />
     <Compile Include="Assets\Scripts\Events\BatchCurrencyEvent.cs" />
