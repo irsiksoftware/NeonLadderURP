@@ -2,7 +2,7 @@
 
 ## 🎮 Game Overview
 
-**NeonLadder** is a 2.5D action platformer with roguelite elements, featuring procedural level generation and a seven deadly sins theme. The game combines classic platforming mechanics with modern roguelite progression systems in a visually striking neon-lit world. Currently in mature development with most core systems implemented and functional, targeting Steam launch Q1 2025.
+**NeonLadder** is a 2.5D action platformer with roguelite elements, featuring procedural level generation and a seven deadly sins theme. The game combines classic platforming mechanics with modern roguelite progression systems in a visually striking neon-lit world. Currently in mature development with most core systems implemented and functional, targeting Steam launch Q4 2025.
 
 ### Key Features Implemented ✅
 - **Player System**: Full-featured character with health, stamina, dual currency systems
@@ -172,13 +172,12 @@ Business Analyst personas can read Google Drive initiative documents and automat
 - **Total PBIs**: 73+ issues with full traceability
 - **Critical blockers**: Resolved (Issue #32 fixed)
 - **Sprint velocity**: 15-20 story points per sprint
-- **Target launch**: Q1 2025
+- **Target launch**: Q4 2025
 
 **Key Epic Status:**
-1. **Steam Platform Integration** - Q1 2025 launch ready
-2. **Technical Debt Reduction** - Performance optimization ongoing  
+1. **Steam Platform Integration** - Q4 2025 launch ready
+2. **Technical Debt Reduction** - Performance optimization ongoing
 3. **Dialog System Integration** - Enhanced narrative features
-4. **Mobile Platform Expansion** - Future revenue opportunity
 
 ### **Development Infrastructure Status**
 - ✅ **CLI Testing**: Fully operational with 36/36 tests passing

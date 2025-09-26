@@ -75,7 +75,7 @@ namespace NeonLadder.Tests.Runtime
             if (missingBindings.Any())
             {
                 Assert.Fail($"{platformName} controller missing bindings for: {string.Join(", ", missingBindings)}\n" +
-                           $"Critical for Q1 2025 Steam launch - all platforms must have complete coverage!");
+                           $"Critical for Q4 2025 Steam launch - all platforms must have complete coverage!");
             }
         }
 

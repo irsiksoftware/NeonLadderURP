@@ -94,9 +94,8 @@ powershell -Command "& {cd 'C:\Users\Ender\NeonLadder'; .\sync-claude-settings.b
 ## 🎯 Project Context
 
 **NeonLadder**: Unity 2.5D action platformer with roguelite elements
-**Status**: Steam launch ready - Q1 2025
+**Status**: Steam launch ready - Q4 2025
 **Test Coverage**: 631/645 tests passing (97.8% pass rate)
-**Revenue Potential**: $500K+ mobile expansion identified
 **Unity Version**: 6000.2.5f1
 
 ## Important Guidelines
@@ -350,7 +349,7 @@ gh issue create --label "PBI,P2-Medium,5-points"              # New PBI
 **Quick Access:**
 - **[View All PBIs](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3APBI)** - Complete product backlog
 - **[Critical Issues](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3APBI+label%3AP0-Critical)** - Immediate priorities
-- **[Steam Launch Items](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3Asteam-launch)** - Q1 2025 launch requirements
+- **[Steam Launch Items](https://github.com/irsiksoftware/NeonLadderURP/issues?q=is%3Aissue+label%3Asteam-launch)** - Q4 2025 launch requirements
 
 ## 🚀 Current Scene System Implementation (August 2025)
 
