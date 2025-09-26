@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Title.unity
+    path: Assets/Scenes/Cutscenes/Title.unity
     guid: eb9e1970fe9cd68408a74d41c5d152f8
   - enabled: 1
     path: Assets/Scenes/Staging.unity
@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Credits.unity
+    path: Assets/Scenes/Cutscenes/Credits.unity
     guid: eaf61b0a4889b2542b103c1f5c531704
   - enabled: 1
     path: Assets/Scenes/Cutscenes/BossDefeated.unity
@@ -146,6 +146,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Generated/BossArenas/Vault.unity
     guid: 933e32b274bff2345b6a1a5412e6954c
+  - enabled: 1
+    path: Assets/Scenes/Test/MobFight.unity
+    guid: 447b5b9230c3d15479ffde1b9853e00b
+  - enabled: 1
+    path: Assets/Scenes/Test/BossBrawl.unity
+    guid: 0f10a9c7c85e4264cbaa27074320087a
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 1b8ccc1fc0f091445bafbecd2cb83625,
       type: 2}

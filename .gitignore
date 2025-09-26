@@ -181,3 +181,18 @@ UNITY-EDITOR-SCRIPTS-ACCESS.md
 /Assets/Packages/Piloto Studio/PILOTO README.pdf
 /Assets/Packages/AmplifyShaderEditor/Readme.txt
 /Assets/Packages/AmplifyShaderEditor/AmplifyShaderEditor.asmdef
+
+# Steam build and deployment files
+/Steam/
+
+# But keep configuration files for deployment history
+!/Steam/deployment-configurations/
+!/Steam/deployment-configurations/**/*.vdf
+!/Steam/deployment-configurations/**/*.cmd
+!/Steam/deployment-configurations/**/*.bat
+!/Steam/*.bat
+!/Steam/setup-steamcmd.bat
+
+# Steam build output and logs
+/output/
+

@@ -1,24 +1,23 @@
+using NeonLadder.Core;
+using NeonLadder.Debugging;
+using NeonLadder.Events;
+using NeonLadder.Mechanics.Controllers;
+using NeonLadder.Mechanics.Enums;
+using NeonLadder.ProceduralGeneration;
+using NeonLadder.UI;
+using NeonLadderURP.DataManagement;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using NeonLadderURP.DataManagement;
-using NeonLadder.Debugging;
-using NeonLadder.Mechanics.Controllers;
-using NeonLadder.Mechanics.Enums;
-using NeonLadder.Core;
-using NeonLadder.Events;
-using NeonLadder.UI;
 
-namespace NeonLadder.ProceduralGeneration
-{
-    /// <summary>
-    /// Manages scene transitions for procedural content
-    /// Handles fade effects, loading screens, and state preservation during transitions
-    /// </summary>
-    public class SceneTransitionManager : MonoBehaviour
+
+/// <summary>
+/// Manages scene transitions for procedural content
+/// Handles fade effects, loading screens, and state preservation during transitions
+/// </summary>
+public class SceneTransitionManager : MonoBehaviour
     {
         #region Singleton
         
@@ -1148,4 +1147,3 @@ namespace NeonLadder.ProceduralGeneration
             return false;
         } 
     }
-}

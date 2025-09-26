@@ -41,6 +41,7 @@ namespace NeonLadder.Utilities
                    Scenes.Service.All.Contains(sceneName) ||
                    Scenes.Legacy.All.Contains(sceneName) ||
                    Scenes.Packaged.All.Contains(sceneName) ||
+                   Scenes.Test.All.Contains(sceneName) ||
                    Scenes.Cutscene.All.Contains(sceneName);
         }
     }

@@ -1,15 +1,15 @@
 "DepotBuild"
 {
-	"DepotID" "3089881" // NeonLadder Demo Depot ID
+	"DepotID" "3089981" // NeonLadder Demo Depot ID
 
-	// Set the content root to the builds folder
-	"ContentRoot" "..\..\Builds\Windows\"
+	// Set the content root to the specific build folder
+	"ContentRoot" "C:\\Users\\Ender\\NeonLadder\\Builds\\Windows\\steam-demo-2025-09-25-20250925-174624"
 
 	// Files to include in this depot
 	"FileMapping"
 	{
-		// Map everything from the steam-demo build folder
-		"LocalPath" "steam-demo-*\*"
+		// Map everything from this build folder
+		"LocalPath" "*"
 		"DepotPath" "."
 		"Recursive" "1"
 	}

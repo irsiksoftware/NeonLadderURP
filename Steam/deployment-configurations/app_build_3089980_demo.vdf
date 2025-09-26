@@ -1,16 +1,16 @@
 "AppBuild"
 {
 	"AppID" "3089980" // NeonLadder Demo App ID
-	"Desc" "NeonLadder Steam Demo Build - 2025-09-25 00:33:30" // Description for this build
-	"ContentRoot" "C:\Users\Ender\NeonLadder\Builds\Windows\steam-demo-2025-09-24-20250924-234306" // Absolute path to the specific build folder
-	"BuildOutput" "..\output\" // Build logs and cache output
+	"Desc" "NeonLadder Steam Demo Build - 2025-09-25 17:55:10" // Description for this build
+	"ContentRoot" "C:\\Users\\Ender\\NeonLadder\\Builds\\Windows\\steam-demo-2025-09-25-20250925-174624" // Absolute path to the specific build folder
+	"BuildOutput" "..\..\output\" // Build logs and cache output (one level deeper now)
 	"Preview" "0" // Set to 1 for testing without uploading
-	"Local" "0" // Set to 1 for LAN testing only
-	"SetLive" "default" // Automatically set this build live on default branch after upload
+	// Local key removed - including it forces LCS mode even when set to "0"
+	"SetLive" "" // Don't automatically set live - do it manually in Steamworks
 
 	"Depots"
 	{
-		"3089881" // NeonLadder Demo Depot (Windows 64-bit)
+		"3089981" // NeonLadder Demo Depot (Windows 64-bit)
 		{
 			"FileMapping"
 			{

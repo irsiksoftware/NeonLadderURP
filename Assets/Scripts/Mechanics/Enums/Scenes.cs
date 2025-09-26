@@ -33,7 +33,21 @@ namespace NeonLadder.Mechanics.Enums
                 Test
             };
         }
-        
+        /// <summary>
+        /// Test scenes
+        /// </summary>
+        public static class Test
+        {
+            public const string BossBrawl = "BossBrawl";
+            public const string MobFight = "MobFight";
+
+            public static readonly string[] All = new[]
+            {
+                MobFight,
+                BossBrawl
+            };
+        }
+
         /// <summary>
         /// Boss arena scenes (Generated/BossArenas/)
         /// </summary>
@@ -198,11 +212,15 @@ namespace NeonLadder.Mechanics.Enums
         {
             public const string BossDefeated = "BossDefeated";
             public const string Death = "Death";
-            
+            public const string Credits = "Credits";
+            public const string Title = "Title";
+
             public static readonly string[] All = new[]
             {
                 BossDefeated,
-                Death
+                Death,
+                Credits,
+                Title
             };
         }
         
@@ -233,7 +251,9 @@ namespace NeonLadder.Mechanics.Enums
             public static readonly string[] CutScenes = new[]
             {
                 Cutscene.Death,
-                Cutscene.BossDefeated
+                Cutscene.BossDefeated,
+                Cutscene.Credits,
+                Cutscene.Title
             };
             
             /// <summary>

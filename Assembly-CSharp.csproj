@@ -434,6 +434,7 @@
     <Compile Include="Assets\Packages\GabrielAguiarProductions\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Audio\AudioTrigger.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.0 Scripts\Airplane\Scripts\AbstractTargetFollowerSM.cs" />
+    <Compile Include="Assets\Packages\LeartesStudios\FutureCity\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\Math\Math.cs" />
     <Compile Include="Assets\Packages\LeartesStudios\CyberpunkMegapack\Scripts\WaypointManager.cs" />
     <Compile Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V3.5 Scripts\Full volume clouds\Prefabs\lightningCameraVolumeCloudsSM_URP.cs" />
@@ -528,6 +529,7 @@
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.6\WIP DEMOS\Shaders\Grass\TEM GRASS A TRANSP.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\PlanetFadeShaderBumpSM.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Scripts\ShaderVolumeClouds\ShaderVolumeCloudsSMV3.4b SM30 v3.4.4 SHADOWED.shader" />
+    <None Include="Assets\Packages\LeartesStudios\Asian_Fishing_Village\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\URP RAIN SNOW\RaindropMINE TUT STAGE3 TRANSP A MASKED URP WIPE.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\SkyMaster Vortex Clouds\Scripts\V3.4 Scripts\ShaderVolumeClouds\ShaderVolumeCloudsSMV3.4b SM30 v3.4.4_VORTEX.shader" />
@@ -619,6 +621,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\WaterIncludeSM30.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD\Assets\Version 2.2\Scatter Shaded Clouds\SM_Cloud_Dome_Shader.shader" />
+    <None Include="Assets\Packages\LeartesStudios\Asian_Fishing_Village\HDRP\Scene\HDRP_Asian_Fishing_Village\Night- Sky and Fog Volume\README_About_ExtraFogs.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Scripts\ComputeShaders\NoiseOperatorsGPU.compute" />
     <None Include="Assets\Packages\LeartesStudios\Ancient Cathedral\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\PlanetFadeShaderBumpSM_URP.shader" />
@@ -643,6 +646,7 @@
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Graphics\Shaders\PlanetSurfaceShaderBump.shader" />
     <None Include="Assets\Packages\ARTnGAME\Orion Space Framework\PLANET GENERATION\PlanetaryTerrain\Licences\license_atmoscattering.txt" />
     <None Include="Assets\Packages\LeartesStudios\CyberpunkRooftop\DownloadInstructions.txt" />
+    <None Include="Assets\Packages\LeartesStudios\CrystalandCrafting\HDRP\Scene\HDRP_Showcase\README_About_ExtraFogs.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Turbulence-Library\Resources\shader.template" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\SkyShading\Skybox-Procedural_SkyMaster MAIN U5 TEXTURED v4.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -673,6 +677,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\Scatter Shaded Clouds\ScatterShadedCloud MOTION Less Registers.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\DROPLETS\DropletsSKYMASTER.shader" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Terrain Shaders\Mesh Terrain\SM_Foggy_Terrain.shader" />
+    <None Include="Assets\Packages\LeartesStudios\Asian_Fishing_Village\HDRP\Scene\HDRP_Asian_Fishing_Village\Day- Sky and Fog Volume\README_About_ExtraFogs.txt" />
     <None Include="Assets\Packages\Piloto Studio\Stylized Powerups &amp; Powered Auras\Shaders\UnlitAdditive.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\Resources\FOG WAR\Fog Of War Creator.shader" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\MobileSSPR\ReusableCore\Resources\MobileSSPRComputeShader.compute" />
@@ -712,6 +717,7 @@
     <None Include="Assets\Packages\ARTnGAME\SkyMasterURP\Scripts\URP\Snow-Tracks-ShaderGraph-Unity-2019.1\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\Shaders\Resources\noiseSimplex.cginc" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Assets\Version 2.2\Scatter Shaded Clouds\ScatterShadedCloud MOTION Soft v3.3.shader" />
+    <None Include="Assets\Packages\LeartesStudios\Fighting Stage\Readme.txt" />
     <None Include="Assets\Packages\LeartesStudios\Cyberpunk City\DownloadInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniTREE\Version 1.8\Shaders InfiniGRASS\InfiniTREE_Wind_Circular.shader" />
     <None Include="Assets\Packages\EasyRoads3D\EasyRoads3D\lib\DelaunayER.dll" />
@@ -840,11 +846,13 @@
     <None Include="Assets\Packages\Synty\SimpleMilitary\Old\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\Full Volumetric URP\0 URP CLOUDS\URP\Resources\FullVolumeCloudsSRP_FORWARD_URP LAYERS_FOGWAR Test RING WORLD GRAPH.shader" />
+    <None Include="Assets\Packages\LeartesStudios\CyberpunkRooftop\HDRP\Scene\HDRP_Cyberpunk_Rooftop_Market\README_About_ExtraFogs.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\Scripts\V6.0 Scripts\Aurora Borealis\Curves-And-Gradients-To-Texture\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Unity 5 Scene\Shaders\Water\FXWater4Advanced SM30.shader" />
     <None Include="Assets\BuildOptimization\ShaderOptimizationInstructions.txt" />
     <None Include="Assets\Packages\ARTnGAME\VolumeFogSRP\Ethereal2024\Shaders\VolumeVoxelization.compute" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\ShurikenMaster.shader" />
+    <None Include="Assets\Packages\LeartesStudios\Cyberpunk Port City\Readme.txt" />
     <None Include="Assets\Packages\ARTnGAME\InfiniCLOUD PRO\VOLUME LIT PARTICLES\ShurikenMaster\VFX\Shaders\Shuriken\ShurikenLiquid.shader" />
     <None Include="Assets\Packages\ARTnGAME\Common Tools\MobileSSPR\LICENSE.txt" />
     <None Include="Assets\Packages\ARTnGAME\SkyMaster\EXTRA SM DEMOS AND ASSETS\Assets\Version 1.5\Prefabs\README.txt" />

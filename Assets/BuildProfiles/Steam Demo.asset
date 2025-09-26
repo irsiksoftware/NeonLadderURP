@@ -80,17 +80,17 @@ MonoBehaviour:
   version: 0.1.0
   overrideIcon: 0
   icon: {fileID: 0}
-  overrideGraphicsAPIs: 0
-  graphicsAPIs: 020000001200000015000000
+  overrideGraphicsAPIs: 1
+  graphicsAPIs: 0200000012000000
   overrideColorSpace: 1
   colorSpace: 1
   scriptingDefines: []
   scriptingBackend: 1
-  il2cppCompilerConfig: 1
+  il2cppCompilerConfig: 3
   apiLevel: 6
   useIncrementalGC: 1
-  strippingLevel: 3
-  stripEngineCode: 1
+  strippingLevel: 1
+  stripEngineCode: 0
   stripLevel: 0
   overrideCompression: 1
   compressionMethod: 2

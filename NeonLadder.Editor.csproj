@@ -61,6 +61,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.5f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Editor\BuildSystem\TestSteamVDF.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\ShaderFixUtility.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\BuildPostProcessMonitor.cs" />
     <Compile Include="Assets\Scripts\Editor\ProceduralGeneration\SpawnTesterEditor.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\Editor\UpgradeSystem\UpgradeSystemEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Performance\PerformanceMenuItems.cs" />
     <Compile Include="Assets\Scripts\Editor\BuildSystem\FastDevelopmentBuilder.cs" />
+    <Compile Include="Assets\Scripts\Editor\BuildSystem\SteamVDFGenerator.cs" />
     <Compile Include="Assets\Scripts\Editor\TestAnalysisMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\SceneConnectionOverrideEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\MenuConsolidation.cs" />

@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\ProceduralGeneration\CheckpointManager.cs" />
     <Compile Include="Assets\Scripts\UI\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogChoiceValidator.cs" />
+    <Compile Include="Assets\Scripts\Managers\SceneTransitionManager.cs" />
     <Compile Include="Assets\Scripts\Dialog\ConversationPointTracker.cs" />
     <Compile Include="Assets\Scripts\Events\PlayerStopJump.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\UpgradeCategory.cs" />
@@ -209,7 +210,6 @@
     <Compile Include="Assets\Scripts\UI\BossesDefeatedUIDisplayManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Progression\IUpgrade.cs" />
     <Compile Include="Assets\Scripts\ProceduralGeneration\SpawnPointConfiguration.cs" />
-    <Compile Include="Assets\Scripts\ProceduralGeneration\SceneTransitionManager.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Patrol\PatrolPath.Mover.cs" />
     <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterController.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveSystem.cs" />
@@ -303,6 +303,7 @@
     <Compile Include="Assets\Scripts\Utilities\PlatformVisibilityController.cs" />
     <Compile Include="Assets\Scripts\Cameras\DemoSceneCloseness.cs" />
     <Compile Include="Assets\Scripts\DataManagement\SaveData.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\DemoComplete.cs" />
     <Compile Include="Assets\Scripts\Events\BaseGameEvent.cs" />
     <Compile Include="Assets\Scripts\UI\MetaGameController.cs" />
     <Compile Include="Assets\Scripts\Effects\Text\FollowCharacterCamera.cs" />

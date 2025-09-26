@@ -32,8 +32,23 @@ namespace NeonLadder.Mechanics.Controllers
         public int MaxJumps => maxJumps;
         #endregion
 
+
         public InputActionMap playerActionMap;
         public InputActionMap uiActionMap;
+
+        [Header("Action Map Controls (Inspector Debug)")]
+        [SerializeField]
+        [Tooltip("Check to enable Player Action Map, uncheck to disable")]
+        private bool enablePlayerActionMap = true;
+        [SerializeField]
+        [Tooltip("Check to enable UI Action Map, uncheck to disable")]
+        private bool enableUIActionMap = true;
+        [SerializeField]
+        [Tooltip("READ ONLY: Shows if Player Action Map is currently enabled")]
+        private bool playerActionMapEnabled;
+        [SerializeField]
+        [Tooltip("READ ONLY: Shows if UI Action Map is currently enabled")]
+        private bool uiActionMapEnabled;
 
         #region Sprinting  
         [SerializeField]
@@ -107,6 +122,9 @@ namespace NeonLadder.Mechanics.Controllers
 
         protected override void Update()
         {
+            // Update action map control and monitoring
+            UpdateActionMapControls();
+
             // Only proceed if both mediator and input system are properly initialized
             if (mediator == null || playerActionMap == null) return;
             
@@ -707,6 +725,52 @@ namespace NeonLadder.Mechanics.Controllers
             sprintState = ActionStates.Ready;
         }
         
+        #endregion
+
+        #region Action Map Inspector Controls
+
+        /// <summary>
+        /// Updates action map controls based on inspector checkboxes and monitors current state
+        /// </summary>
+        private void UpdateActionMapControls()
+        {
+            // Control Player Action Map based on inspector checkbox
+            if (playerActionMap != null)
+            {
+                if (enablePlayerActionMap && !playerActionMap.enabled)
+                {
+                    playerActionMap.Enable();
+                    Debug.Log("[PlayerAction] Player Action Map enabled via inspector checkbox");
+                }
+                else if (!enablePlayerActionMap && playerActionMap.enabled)
+                {
+                    playerActionMap.Disable();
+                    Debug.Log("[PlayerAction] Player Action Map disabled via inspector checkbox");
+                }
+
+                // Update read-only status display
+                playerActionMapEnabled = playerActionMap.enabled;
+            }
+
+            // Control UI Action Map based on inspector checkbox
+            if (uiActionMap != null)
+            {
+                if (enableUIActionMap && !uiActionMap.enabled)
+                {
+                    uiActionMap.Enable();
+                    Debug.Log("[PlayerAction] UI Action Map enabled via inspector checkbox");
+                }
+                else if (!enableUIActionMap && uiActionMap.enabled)
+                {
+                    uiActionMap.Disable();
+                    Debug.Log("[PlayerAction] UI Action Map disabled via inspector checkbox");
+                }
+
+                // Update read-only status display
+                uiActionMapEnabled = uiActionMap.enabled;
+            }
+        }
+
         #endregion
     }
 }

@@ -328,6 +328,35 @@ namespace NeonLadder.BuildSystem
 
             EditorGUILayout.EndHorizontal();
 
+            // Steam deployment section
+            if (selectedProfile != null && selectedProfile.steamBuild)
+            {
+                EditorGUILayout.Space(5);
+
+                EditorGUILayout.BeginHorizontal();
+
+                GUI.backgroundColor = new Color(0.8f, 0.4f, 0.1f); // Orange color for Steam
+                if (GUILayout.Button("Generate VDF and CMD for Steam Deploy", GUILayout.Height(25)))
+                {
+                    bool success = SteamVDFGenerator.GenerateVDFFiles(selectedProfile);
+                    if (success)
+                    {
+                        EditorUtility.DisplayDialog("Steam Files Generated",
+                            "VDF and CMD files have been generated successfully!\n\n" +
+                            "Files created in Steam/ folder:\n" +
+                            "• app_build_3089980_demo.vdf\n" +
+                            "• depot_build_3089881.vdf\n" +
+                            "• deploy_steam_demo.cmd\n\n" +
+                            "Update your Steam username in deploy_steam_demo.cmd before using.",
+                            "OK");
+                    }
+                }
+
+                GUI.backgroundColor = Color.white;
+
+                EditorGUILayout.EndHorizontal();
+            }
+
             EditorGUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Save Current Settings to Profile"))

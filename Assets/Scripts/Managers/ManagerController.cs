@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using System;
 using NeonLadder.Managers;
 using NeonLadder.Debugging;
+using NeonLadder.Mechanics.Controllers;
+using Unity.Cinemachine;
 
 public class ManagerController : MonoBehaviour
     {
@@ -39,16 +41,19 @@ public class ManagerController : MonoBehaviour
 
             if (Instance != null && Instance != this)
             {
+                Debug.LogWarning($"[ManagerController] Duplicate ManagerController detected! Destroying duplicate instance on GameObject: {gameObject.name}");
                 Destroy(gameObject);
+                return;
             }
             else
             {
                 Instance = this;
+                Debug.Log($"[ManagerController] Singleton established on GameObject: {gameObject.name} in scene: {SceneManager.GetActiveScene().name}");
                 if (dontDestroyOnLoad)
                 {
                     DontDestroyOnLoad(gameObject);
+                    Debug.Log($"[ManagerController] DontDestroyOnLoad applied - this instance will persist across scene transitions");
                 }
-
             }
         }
 
@@ -143,14 +148,15 @@ public class ManagerController : MonoBehaviour
                     }
                     if (monsterGroupActivationManager != null)
                     {
-                        monsterGroupActivationManager.enabled = false;
+                        //monsterGroupActivationManager.enabled = false;
                     }
-                    break;
+
+                break;
                 case var s when s == Scenes.Core.Start:
                 case var s2 when s2 == Scenes.Packaged.Recife_2050_Final:
                     if (monsterGroupActivationManager != null)
                     {
-                        monsterGroupActivationManager.enabled = true;
+                        //monsterGroupActivationManager.enabled = true;
                     }
                     if (lootDropManager != null)
                         lootDropManager.enabled = true;
@@ -162,7 +168,7 @@ public class ManagerController : MonoBehaviour
                         lootPurchaseManager.enabled = true;
                     if (monsterGroupActivationManager != null)
                     {
-                        monsterGroupActivationManager.enabled = false;
+                    //    monsterGroupActivationManager.enabled = false;
                     }
                     break;
                 case var s when s == Scenes.Core.PermaShop:
@@ -172,10 +178,16 @@ public class ManagerController : MonoBehaviour
                         lootPurchaseManager.enabled = true;
                     if (monsterGroupActivationManager != null)
                     {
-                        monsterGroupActivationManager.enabled = false;
+                  //      monsterGroupActivationManager.enabled = false;
                     }
                     break;
-                default:
+            case var s when s == Scenes.Test.MobFight:
+                if (monsterGroupActivationManager != null)
+                {
+                    monsterGroupActivationManager.enabled = true;
+                }
+                break;
+            default:
                     break;
             }
         }
